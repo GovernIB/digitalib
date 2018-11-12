@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<persistence version="1.0"
+        xmlns="http://java.sun.com/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+    <persistence-unit name="digitalibDBStandalone" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+         		
+		
+		<class>es.caib.digitalib.jpa.ConfiguracioGrupJPA</class>
+		<class>es.caib.digitalib.jpa.EstadisticaJPA</class>
+		<class>es.caib.digitalib.jpa.FitxerJPA</class>
+		<class>es.caib.digitalib.jpa.IdiomaJPA</class>
+		<class>es.caib.digitalib.jpa.PerfilJPA</class>
+		<class>es.caib.digitalib.jpa.PerfilUsuariAplicacioJPA</class>
+		<class>es.caib.digitalib.jpa.PluginJPA</class>
+		<class>es.caib.digitalib.jpa.PluginCridadaJPA</class>
+		<class>es.caib.digitalib.jpa.TraduccioJPA</class>
+		<class>es.caib.digitalib.jpa.TraduccioMapJPA</class>
+		<class>es.caib.digitalib.jpa.TransaccioJPA</class>
+		<class>es.caib.digitalib.jpa.UsuariAplicacioJPA</class>
+		<class>es.caib.digitalib.jpa.UsuariPersonaJPA</class>
+
+        <properties>
+
+        </properties>
+    </persistence-unit>
+</persistence>

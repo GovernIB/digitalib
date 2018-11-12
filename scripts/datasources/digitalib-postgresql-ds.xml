@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<datasources>
+    <local-tx-datasource>
+        <jndi-name>es.caib.digitalib.db</jndi-name>
+        <connection-url>jdbc:postgresql://localhost:5432/digitalib</connection-url>
+        <driver-class>org.postgresql.Driver</driver-class>
+        <user-name>digitalib</user-name>
+        <password>digitalib</password>
+    </local-tx-datasource>
+</datasources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<server>
+  <mbean code="org.jboss.varia.property.SystemPropertiesService" name="jboss:type=Service,name=digitalibSystemProperties">
+    <attribute name="Properties">
+	  <!-- Propietat que indica als projectes que activins les caracteristiques
+      especials requerides en l'entorn de la CAIB (Govern Balear) si es true -->
+	  es.caib.digitalib.iscaib=false
+	
+	
+      # Dialecte de Hibernate
+      es.caib.digitalib.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+      # es.caib.digitalib.hibernate.dialect=org.hibernate.dialect.MySQLDialect      
+      # es.caib.digitalib.hibernate.dialect=org.hibernate.dialect.DB2Dialect
+      # es.caib.digitalib.hibernate.dialect=org.hibernate.dialect.SQLServerDialect
+      # es.caib.digitalib.hibernate.dialect=net.sf.hibernate.dialect.Oracle9Dialect
+      # es.caib.digitalib.hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+      # es.caib.digitalib.hibernate.query.substitutions=true 1, false 0
+
+      <!-- Directori on es guardaran tots els fitxers de DigitalIB-->
+      es.caib.digitalib.filesdirectory=D:\\dades\\dades\\CarpetesPersonals\\ProgramacioPortaFIB2\\digitalib-files
+      <!-- Accés HTTP a l'aplicació (Important que sigui http, no https)  -->
+      es.caib.digitalib.url=http://localhost:8080/digitalib
+      es.caib.digitalib.email.from=digitalib@digitalib.org
+      es.caib.digitalib.defaultlanguage=ca
+      es.caib.digitalib.development=false
+      <!-- Tamany màxim de pujada de fitxers en bytes. No definit significa sense límit -->
+      es.caib.digitalib.maxuploadsizeinbytes=
+
+      <!-- Clau per encriptar l'identificador del fitxers a descarregar (IMPORTANT tamany de 16 caràcters) -->
+      es.caib.digitalib.encryptkey=1234567890123456
+      es.caib.digitalib.name=DigitalIB
+    </attribute>
+  </mbean>
+</server>

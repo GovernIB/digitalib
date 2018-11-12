@@ -1,0 +1,43 @@
+package es.caib.digitalib.jpa.validator;
+
+import es.caib.digitalib.jpa.ConfiguracioGrupJPA;
+import org.fundaciobit.genapp.common.validation.BeanValidatorResult;
+import java.util.List;
+import org.fundaciobit.genapp.common.i18n.I18NFieldError;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.validation.AbstractBeanValidator;
+
+/**
+ *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
+ * @author GenApp
+ * @author anadal
+ */
+public class ConfiguracioGrupBeanValidator 
+      extends AbstractBeanValidator<ConfiguracioGrupJPA> {
+
+
+  // EJB's
+  protected final es.caib.digitalib.model.dao.IConfiguracioGrupManager __configuracioGrupManager;
+
+
+  public final ConfiguracioGrupValidator<ConfiguracioGrupJPA> _validator;
+
+
+  public ConfiguracioGrupBeanValidator(es.caib.digitalib.model.dao.IConfiguracioGrupManager __configuracioGrupManager) { 
+    this.__configuracioGrupManager = __configuracioGrupManager;
+    _validator = new ConfiguracioGrupValidator<ConfiguracioGrupJPA>();
+  }
+
+  public ConfiguracioGrupBeanValidator(ConfiguracioGrupValidator<ConfiguracioGrupJPA> _validator,
+     es.caib.digitalib.model.dao.IConfiguracioGrupManager __configuracioGrupManager) {
+    this.__configuracioGrupManager = __configuracioGrupManager;
+    this._validator = _validator;
+  }
+
+  @Override
+  public List<I18NFieldError> validate(ConfiguracioGrupJPA target, boolean isNou) throws I18NException {
+    BeanValidatorResult<ConfiguracioGrupJPA> _bvr_ = new BeanValidatorResult<ConfiguracioGrupJPA>();
+    _validator.validate(_bvr_, target, isNou, __configuracioGrupManager);
+    return _bvr_.getErrors();
+  }
+}
