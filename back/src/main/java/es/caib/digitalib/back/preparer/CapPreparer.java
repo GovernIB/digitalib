@@ -1,10 +1,8 @@
 package es.caib.digitalib.back.preparer;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.security.RunAs;
-import javax.ejb.EJB;
 
 import org.apache.log4j.Logger;
 import org.apache.tiles.AttributeContext;

@@ -15,7 +15,6 @@ import org.apache.tiles.preparer.ViewPreparerSupport;
 import es.caib.digitalib.back.security.LoginInfo;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
-import es.caib.digitalib.back.security.LoginInfo;
 
 import es.caib.digitalib.utils.Constants;
 

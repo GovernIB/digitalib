@@ -1,7 +1,5 @@
 package es.caib.digitalib.back.utils;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.annotation.security.RunAs;
 import javax.servlet.ServletConfig;
@@ -13,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.crypt.AlgorithmEncrypter;
 import org.fundaciobit.genapp.common.crypt.FileIDEncrypter;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
-import org.fundaciobit.genapp.common.web.exportdata.DataExporterManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
