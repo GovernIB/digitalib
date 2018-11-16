@@ -17,8 +17,17 @@ public interface Perfil extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public long getPluginScanWebID();
 	public void setPluginScanWebID(long _pluginScanWebID_);
 
+	public int getTipusFirma();
+	public void setTipusFirma(int _tipusFirma_);
+
 	public java.lang.Long getPluginFirmaServidorID();
 	public void setPluginFirmaServidorID(java.lang.Long _pluginFirmaServidorID_);
+
+	public java.lang.Long getApiSimpleID();
+	public void setApiSimpleID(java.lang.Long _apiSimpleID_);
+
+	public int getTipusCustodia();
+	public void setTipusCustodia(int _tipusCustodia_);
 
 	public java.lang.Long getPluginArxiuID();
 	public void setPluginArxiuID(java.lang.Long _pluginArxiuID_);

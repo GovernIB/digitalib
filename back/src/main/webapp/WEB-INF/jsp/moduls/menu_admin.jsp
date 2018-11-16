@@ -26,11 +26,35 @@
 
     <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/admin/option2"/>">
-        <span style="${(fn:contains(url, 'option2'))? "font-weight: bold;" : ""}">Menú ADMIN Option 2</span>
+      <a href="<c:url value="/admin/pluginscanweb/list"/>">
+        <span style="${(fn:contains(url, 'pluginscanweb/list'))? "font-weight: bold;" : ""}"><fmt:message key="scanwebplugin.menu" /></span>
+        
       </a>
     </li>
-   
+    
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/pluginfirmaenservidor/list"/>">
+        <span style="${(fn:contains(url, 'pluginfirmaenservidor/list'))? "font-weight: bold;" : ""}"><fmt:message key="firmaenservidorplugin.menu" /></span>
+        
+      </a>
+    </li>
+    
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/perfil/list"/>">
+        <span style="${(fn:contains(url, 'perfil/list'))? "font-weight: bold;" : ""}"><fmt:message key="perfil.menu" /></span>
+        
+      </a>
+    </li>
+    
+    
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/usuariAplicacio/list"/>">
+        <span style="${(fn:contains(url, '/usuariAplicacio/list'))? "font-weight: bold;" : ""}"><fmt:message key="usuariAplicacio.usuariAplicacio.plural" /></span>
+        
+      </a>
+    </li>
+    
+
   </ul>
 </div>
 

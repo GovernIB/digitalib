@@ -3,6 +3,7 @@ package es.caib.digitalib.model;
 import es.caib.digitalib.model.dao.*;
 
 public interface IDigitalIBDaoManagers {
+	public IApiSimpleManager getApiSimpleManager();
 	public IConfiguracioGrupManager getConfiguracioGrupManager();
 	public IEstadisticaManager getEstadisticaManager();
 	public IFitxerManager getFitxerManager();

@@ -52,11 +52,35 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.TIPUSFIRMA)}">
+          <td>
+          <c:set var="tmp">${perfil.tipusFirma}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForTipusFirma[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.PLUGINFIRMASERVIDORID)}">
           <td>
           <c:set var="tmp">${perfil.pluginFirmaServidorID}</c:set>
           <c:if test="${not empty tmp}">
           ${__theFilterForm.mapOfPluginForPluginFirmaServidorID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.APISIMPLEID)}">
+          <td>
+          <c:set var="tmp">${perfil.apiSimpleID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfApiSimpleForApiSimpleID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.TIPUSCUSTODIA)}">
+          <td>
+          <c:set var="tmp">${perfil.tipusCustodia}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForTipusCustodia[tmp]}
           </c:if>
           </td>
         </c:if>

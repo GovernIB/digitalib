@@ -19,6 +19,10 @@
         <put-attribute name="peu" value="base.peu" />
     </definition>
 
+    
+    <definition name="base.definition.fullview" template="/WEB-INF/jsp/layout/onlycontentlayout.jsp" preparer="basePreparer">
+    </definition>
+    
 
     <definition name="principal.body" template="/WEB-INF/web/tiles/principal/principal.jsp"/>
  
@@ -37,6 +41,9 @@
         <put-attribute name="menu" value="/WEB-INF/jsp/moduls/menu_inici.jsp" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/principal.jsp" />
     </definition>
+    
+    <definition name="common.fullview" extends="base.definition.fullview">
+    </definition>
 
     <definition name="principal" extends="common">
         <put-attribute name="contingut" value="/WEB-INF/jsp/principal.jsp" />
@@ -49,6 +56,29 @@
     <definition name="option2Common" extends="common">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/option.jsp" />
     </definition>
+    
+    
+    
+    <definition name="scanWebForm" extends="common">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/scanWebForm.jsp" />
+    </definition>
+    
+    <definition name="scanWebFinal" extends="common">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/scanWebFinal.jsp" />
+    </definition>
+
+    <definition name="plugindescan_seleccio" extends="common.fullview">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_seleccio.jsp" />
+    </definition>
+
+    <definition name="plugindescan_final" extends="common.fullview">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_final.jsp" />
+    </definition>
+    
+    <definition name="plugindescan_contenidor" extends="common.fullview">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_contenidor.jsp" />
+    </definition>
+    
 
     <!--  ===========  USER  ================== -->
         
@@ -79,6 +109,51 @@
     <definition name="option2Admin" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/admin/admin.jsp" />
     </definition>
+    
+    
+    <definition name="pluginScanWebFormAdmin" extends="admin">
+        <put-attribute name="titol" value="plugin.plugin" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginForm.jsp" />
+    </definition>
+    
+    <definition name="pluginScanWebListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginList.jsp" />
+    </definition>
+    
+    
+    <definition name="pluginFirmaEnServidorFormAdmin" extends="admin">
+        <put-attribute name="titol" value="plugin.plugin" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginForm.jsp" />
+    </definition>
+    
+    <definition name="pluginFirmaEnServidorListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginList.jsp" />
+    </definition>
+    
+   <definition name="perfilFormAdmin" extends="admin">
+        <put-attribute name="titol" value="perfil.perfil" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
+    </definition>
+    
+    <definition name="perfilListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
+    </definition>
+    
+    
+   <definition name="usuariAplicacioFormAdmin" extends="admin">
+        <put-attribute name="titol" value="usuariAplicacio.usuariAplicacio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariAplicacioForm.jsp" />
+    </definition>
+    
+    <definition name="usuariAplicacioListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariAplicacioList.jsp" />
+    </definition>
+    
+    <definition name="perfilUsuariAplicacioFormAdmin" extends="admin">
+        <put-attribute name="titol" value="perfilUsuariAplicacio.perfilUsuariAplicacio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilUsuariAplicacioForm.jsp" />
+    </definition>
+    
     
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
@@ -113,6 +188,16 @@
     </definition>
 
 <!-- ==== GENAPP MARK START -->
+
+
+    <definition name="apiSimpleFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="apiSimple.apiSimple" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/apiSimpleForm.jsp" />
+    </definition>
+    
+    <definition name="apiSimpleListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/apiSimpleList.jsp" />
+    </definition>
 
 
     <definition name="configuracioGrupFormWebDB" extends="webdb">

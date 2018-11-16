@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 public final class DigitalIBJPADaoManagers implements IDigitalIBDaoManagers{
 
+   private final ApiSimpleJPAManager dib_apisimple;
    private final ConfiguracioGrupJPAManager dib_configuraciogrup;
    private final EstadisticaJPAManager dib_estadistica;
    private final FitxerJPAManager dib_fitxer;
@@ -20,6 +21,7 @@ public final class DigitalIBJPADaoManagers implements IDigitalIBDaoManagers{
    private final UsuariPersonaJPAManager dib_usuaripersona;
 
   public  DigitalIBJPADaoManagers(EntityManager __em) {
+    this.dib_apisimple = new ApiSimpleJPAManager(__em);
     this.dib_configuraciogrup = new ConfiguracioGrupJPAManager(__em);
     this.dib_estadistica = new EstadisticaJPAManager(__em);
     this.dib_fitxer = new FitxerJPAManager(__em);
@@ -33,6 +35,10 @@ public final class DigitalIBJPADaoManagers implements IDigitalIBDaoManagers{
     this.dib_usuariaplicacio = new UsuariAplicacioJPAManager(__em);
     this.dib_usuaripersona = new UsuariPersonaJPAManager(__em);
   }
+
+	public IApiSimpleManager getApiSimpleManager() {
+	  return this.dib_apisimple;
+	};
 
 	public IConfiguracioGrupManager getConfiguracioGrupManager() {
 	  return this.dib_configuraciogrup;

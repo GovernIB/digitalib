@@ -11,9 +11,9 @@
        <module>model</module>
        <module>jpa</module>
        <module>ejb</module>
-       <module>logic</module>
        <module>persistence</module>
        <module>utils</module>
+       <module>logic</module>
        <module>back</module>
        <module>ear</module>
        <module>scripts</module>

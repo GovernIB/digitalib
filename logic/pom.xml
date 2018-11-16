@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>es.caib.digitalib</groupId>
-  <artifactId>digitalib-logic</artifactId>  
+  <artifactId>digitalib-logic</artifactId>
   <version>1.0.0</version>
   <packaging>ejb</packaging>
 
@@ -90,6 +90,26 @@
       <version>2.2</version>
       <scope>provided</scope>
     </dependency>
+    
+    <!--  =====  PLUGINS IB  -->
+
+    <dependency>
+      <groupId>org.fundaciobit.pluginsib.core</groupId>
+      <artifactId>pluginsib-core</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
+      <artifactId>pluginsib-scanweb-api</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    
+    <dependency>
+      <artifactId>pluginsib-signatureserver-api</artifactId>
+      <groupId>org.fundaciobit.pluginsib.signatureserver</groupId>
+      <version>3.0.0</version>
+    </dependency>
 
   </dependencies>
 
@@ -136,7 +156,7 @@
             </goals>
             <configuration>
               <outputDirectory>${basedir}/src/main/resources</outputDirectory>
-              <resources>          
+              <resources>
                 <resource>
                   <directory>${basedir}/../ejb/src/main/resources</directory>
                   <includes>
@@ -147,7 +167,7 @@
                 </resource>
               </resources>
               <overwrite>true</overwrite>
-            </configuration>            
+            </configuration>
           </execution>
         </executions>
       </plugin>

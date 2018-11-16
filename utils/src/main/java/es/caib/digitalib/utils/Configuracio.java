@@ -48,8 +48,5 @@ public class Configuracio implements Constants {
     return Long.getLong(DIGITALIB_PROPERTY_BASE + "maxuploadsizeinbytes");
   }
 
-  public static Long getMaxFitxerAdaptatSizeInBytes() {
-    return Long.getLong(DIGITALIB_PROPERTY_BASE + "maxfitxeradaptatsizeinbytes");
-  }
 
 }

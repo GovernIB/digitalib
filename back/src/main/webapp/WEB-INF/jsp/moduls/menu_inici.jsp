@@ -31,8 +31,8 @@
 
     <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/common/option2"/>">
-        <span style="${(fn:contains(url, 'option2'))? "font-weight: bold;" : ""}">Menú Option 2</span>
+      <a href="<c:url value="/common/scan/form"/>">
+        <span style="${(fn:contains(url, '/common/scan/form'))? "font-weight: bold;" : ""}"><fmt:message key="escanejar" /></span>
       </a>
     </li>
    

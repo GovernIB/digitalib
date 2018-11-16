@@ -103,6 +103,8 @@ public class DigitalIBCommonsMultipartResolver extends
     return maxUploadSize;
   }
 
+  
+  /*
   private Long getMaxFitxerAdaptatSize() {
     Long maxFitxerAdaptatSizeGlobal = Configuracio.getMaxFitxerAdaptatSizeInBytes();
     if (log.isDebugEnabled()) {
@@ -113,7 +115,7 @@ public class DigitalIBCommonsMultipartResolver extends
             + maxFitxerAdaptatSizeGlobal + " bytes");
       }
     }
-/*
+
     Long maxFitxerAdaptatSizeEntitat;
     try {
       maxFitxerAdaptatSizeEntitat = LoginInfo.getInstance().getEntitat()
@@ -124,9 +126,9 @@ public class DigitalIBCommonsMultipartResolver extends
 
     Long maxFitxerAdaptatSize = PdfUtils.selectMin(maxFitxerAdaptatSizeGlobal,
         maxFitxerAdaptatSizeEntitat);
-*/
+
     Long maxFitxerAdaptatSize = maxFitxerAdaptatSizeGlobal;
     return maxFitxerAdaptatSize;
   }
-
+*/
 }

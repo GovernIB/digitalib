@@ -23,6 +23,31 @@ public interface Constants {
   // ROLE ADMIN 
   public static final String ROLE_ADMIN = "ROLE_ADMIN";
   // ROLE USER
-  public static final String ROLE_USER = "ROLE_USER";  
+  public static final String ROLE_USER = "ROLE_USER"; 
+  
+  
+  
+  public static final int TIPUS_PLUGIN_SCANWEB = 0;
+  
+  public static final int TIPUS_PLUGIN_FIRMA_EN_SERVIDOR = 1;
+  
+  public static final int TIPUS_PLUGIN_DOCUMENT_CUSTODY = 2;
+  
+  public static final int TIPUS_PLUGIN_ARXIU = 3;
+  
+  
+  public static final int TIPUS_CUSTODIA_SENSE = 0;
+  public static final int TIPUS_CUSTODIA_ARXIU = 1;
+  public static final int TIPUS_CUSTODIA_DOCUMENTCUSTODY = 2;
+  
+  public static final int TIPUS_FIRMA_EN_SERVIDOR_SENSE = 0;
+  public static final int TIPUS_FIRMA_EN_SERVIDOR_PLUGIN = 1;
+  public static final int TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE = 2;
+  
+  public static final int[] TIPUS_FIRMA_EN_SERVIDOR = {
+    TIPUS_FIRMA_EN_SERVIDOR_SENSE,
+    TIPUS_FIRMA_EN_SERVIDOR_PLUGIN,
+    TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE
+  };
 
 }

@@ -63,6 +63,10 @@ public class PerfilController
   @Autowired
   protected PluginRefList pluginRefList;
 
+  // References 
+  @Autowired
+  protected ApiSimpleRefList apiSimpleRefList;
+
   /**
    * Llistat de totes Perfil
    */
@@ -193,6 +197,16 @@ public class PerfilController
       };
     }
 
+    // Field tipusFirma
+    {
+      _listSKV = getReferenceListForTipusFirma(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForTipusFirma(_tmp);
+      if (filterForm.getGroupByFields().contains(TIPUSFIRMA)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUSFIRMA, false);
+      };
+    }
+
     // Field pluginFirmaServidorID
     {
       _listSKV = getReferenceListForPluginFirmaServidorID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -200,6 +214,26 @@ public class PerfilController
       filterForm.setMapOfPluginForPluginFirmaServidorID(_tmp);
       if (filterForm.getGroupByFields().contains(PLUGINFIRMASERVIDORID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, PLUGINFIRMASERVIDORID, false);
+      };
+    }
+
+    // Field apiSimpleID
+    {
+      _listSKV = getReferenceListForApiSimpleID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfApiSimpleForApiSimpleID(_tmp);
+      if (filterForm.getGroupByFields().contains(APISIMPLEID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, APISIMPLEID, false);
+      };
+    }
+
+    // Field tipusCustodia
+    {
+      _listSKV = getReferenceListForTipusCustodia(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForTipusCustodia(_tmp);
+      if (filterForm.getGroupByFields().contains(TIPUSCUSTODIA)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUSCUSTODIA, false);
       };
     }
 
@@ -239,7 +273,10 @@ public class PerfilController
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(PLUGINSCANWEBID, filterForm.getMapOfPluginForPluginScanWebID());
+    __mapping.put(TIPUSFIRMA, filterForm.getMapOfValuesForTipusFirma());
     __mapping.put(PLUGINFIRMASERVIDORID, filterForm.getMapOfPluginForPluginFirmaServidorID());
+    __mapping.put(APISIMPLEID, filterForm.getMapOfApiSimpleForApiSimpleID());
+    __mapping.put(TIPUSCUSTODIA, filterForm.getMapOfValuesForTipusCustodia());
     __mapping.put(PLUGINARXIUID, filterForm.getMapOfPluginForPluginArxiuID());
     __mapping.put(PLUGINDOCCUSTODYID, filterForm.getMapOfPluginForPluginDocCustodyID());
     exportData(request, response, dataExporterID, filterForm,
@@ -297,11 +334,32 @@ public class PerfilController
       perfilForm.setListOfPluginForPluginScanWebID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
+    if (perfilForm.getListOfValuesForTipusFirma() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForTipusFirma(request, mav, perfilForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      perfilForm.setListOfValuesForTipusFirma(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfPluginForPluginFirmaServidorID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPluginFirmaServidorID(request, mav, perfilForm, null);
 
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       perfilForm.setListOfPluginForPluginFirmaServidorID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (perfilForm.getListOfApiSimpleForApiSimpleID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForApiSimpleID(request, mav, perfilForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      perfilForm.setListOfApiSimpleForApiSimpleID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (perfilForm.getListOfValuesForTipusCustodia() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForTipusCustodia(request, mav, perfilForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      perfilForm.setListOfValuesForTipusCustodia(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfPluginForPluginArxiuID() == null) {
@@ -657,6 +715,36 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  public List<StringKeyValue> getReferenceListForTipusFirma(HttpServletRequest request,
+       ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
+    if (perfilForm.isHiddenField(TIPUSFIRMA)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForTipusFirma(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipusFirma(HttpServletRequest request,
+       ModelAndView mav, PerfilFilterForm perfilFilterForm,
+       List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (perfilFilterForm.isHiddenField(TIPUSFIRMA)
+      && !perfilFilterForm.isGroupByField(TIPUSFIRMA)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForTipusFirma(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipusFirma(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("0" , "0"));
+    __tmp.add(new StringKeyValue("1" , "1"));
+    return __tmp;
+  }
+
+
   public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(PLUGINFIRMASERVIDORID)) {
@@ -694,6 +782,76 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForApiSimpleID(HttpServletRequest request,
+       ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
+    if (perfilForm.isHiddenField(APISIMPLEID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (perfilForm.isReadOnlyField(APISIMPLEID)) {
+      _where = ApiSimpleFields.APISIMPLEID.equal(perfilForm.getPerfil().getApiSimpleID());
+    }
+    return getReferenceListForApiSimpleID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForApiSimpleID(HttpServletRequest request,
+       ModelAndView mav, PerfilFilterForm perfilFilterForm,
+       List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (perfilFilterForm.isHiddenField(APISIMPLEID)
+      && !perfilFilterForm.isGroupByField(APISIMPLEID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(APISIMPLEID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Perfil _item : list) {
+        if(_item.getApiSimpleID() == null) { continue; };
+        _pkList.add(_item.getApiSimpleID());
+        }
+        _w = ApiSimpleFields.APISIMPLEID.in(_pkList);
+      }
+    return getReferenceListForApiSimpleID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForApiSimpleID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return apiSimpleRefList.getReferenceList(ApiSimpleFields.APISIMPLEID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipusCustodia(HttpServletRequest request,
+       ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
+    if (perfilForm.isHiddenField(TIPUSCUSTODIA)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForTipusCustodia(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipusCustodia(HttpServletRequest request,
+       ModelAndView mav, PerfilFilterForm perfilFilterForm,
+       List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (perfilFilterForm.isHiddenField(TIPUSCUSTODIA)
+      && !perfilFilterForm.isGroupByField(TIPUSCUSTODIA)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForTipusCustodia(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipusCustodia(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("0" , "0"));
+    __tmp.add(new StringKeyValue("1" , "1"));
+    return __tmp;
   }
 
 

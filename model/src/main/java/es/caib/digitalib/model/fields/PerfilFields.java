@@ -17,7 +17,10 @@ public interface PerfilFields extends java.io.Serializable {
 	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");
 	 public static final StringField DESCRIPCIO = new StringField(_TABLE_MODEL, "descripcio", "descripcio");
 	 public static final LongField PLUGINSCANWEBID = new LongField(_TABLE_MODEL, "pluginScanWebID", "pluginscanwebid");
+	 public static final IntegerField TIPUSFIRMA = new IntegerField(_TABLE_MODEL, "tipusFirma", "tipusfirma");
 	 public static final LongField PLUGINFIRMASERVIDORID = new LongField(_TABLE_MODEL, "pluginFirmaServidorID", "pluginfirmaservidorid");
+	 public static final LongField APISIMPLEID = new LongField(_TABLE_MODEL, "apiSimpleID", "apisimpleid");
+	 public static final IntegerField TIPUSCUSTODIA = new IntegerField(_TABLE_MODEL, "tipusCustodia", "tipuscustodia");
 	 public static final LongField PLUGINARXIUID = new LongField(_TABLE_MODEL, "pluginArxiuID", "pluginarxiuid");
 	 public static final LongField PLUGINDOCCUSTODYID = new LongField(_TABLE_MODEL, "pluginDocCustodyID", "plugindoccustodyid");
 
@@ -28,7 +31,10 @@ public interface PerfilFields extends java.io.Serializable {
     NOM,
     DESCRIPCIO,
     PLUGINSCANWEBID,
+    TIPUSFIRMA,
     PLUGINFIRMASERVIDORID,
+    APISIMPLEID,
+    TIPUSCUSTODIA,
     PLUGINARXIUID,
     PLUGINDOCCUSTODYID
   };

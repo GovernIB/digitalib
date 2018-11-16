@@ -8,16 +8,18 @@
 				http://www.springframework.org/schema/security
 				http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
- 	<sec:http create-session="never" use-expressions="true" auto-config="false" entry-point-ref="preAuthenticatedProcessingFilterEntryPoint">
+ 	  <sec:http create-session="never" use-expressions="true" auto-config="false" entry-point-ref="preAuthenticatedProcessingFilterEntryPoint">
         
-        <sec:logout logout-success-url="/index.jsp" />
+    <sec:logout logout-success-url="/index.jsp" />
 
-  		<sec:intercept-url pattern="/js/**" access="permitAll"/>
+    <sec:intercept-url pattern="/js/**" access="permitAll"/>
 		<sec:intercept-url pattern="/doc/**" access="permitAll"/>
 		<sec:intercept-url pattern="/img/**" access="permitAll"/>
 		<sec:intercept-url pattern="/css/**" access="permitAll"/>
 		<sec:intercept-url pattern="/error.jsp" access="permitAll"/>
 		<sec:intercept-url pattern="/index.jsp" access="permitAll"/>
+    
+     <sec:intercept-url pattern="/common/scanwebmodule/requestPlugin/**" access="permitAll"/>
 	
         <sec:intercept-url pattern="/common/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         

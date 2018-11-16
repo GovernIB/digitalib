@@ -20,7 +20,10 @@ public class PerfilForm extends DigitalIBBaseForm {
     super(__toClone);
       this.perfil = __toClone.perfil;
     this.listOfPluginForPluginScanWebID = __toClone.listOfPluginForPluginScanWebID;
+    this.listOfValuesForTipusFirma = __toClone.listOfValuesForTipusFirma;
     this.listOfPluginForPluginFirmaServidorID = __toClone.listOfPluginForPluginFirmaServidorID;
+    this.listOfApiSimpleForApiSimpleID = __toClone.listOfApiSimpleForApiSimpleID;
+    this.listOfValuesForTipusCustodia = __toClone.listOfValuesForTipusCustodia;
     this.listOfPluginForPluginArxiuID = __toClone.listOfPluginForPluginArxiuID;
     this.listOfPluginForPluginDocCustodyID = __toClone.listOfPluginForPluginDocCustodyID;
   }
@@ -50,6 +53,18 @@ public class PerfilForm extends DigitalIBBaseForm {
 
 
 
+  private List<StringKeyValue> listOfValuesForTipusFirma;
+
+  public List<StringKeyValue> getListOfValuesForTipusFirma() {
+    return this.listOfValuesForTipusFirma;
+  }
+
+  public void setListOfValuesForTipusFirma(List<StringKeyValue> listOfValuesForTipusFirma) {
+    this.listOfValuesForTipusFirma = listOfValuesForTipusFirma;
+  }
+
+
+
   private List<StringKeyValue> listOfPluginForPluginFirmaServidorID;
 
   public List<StringKeyValue> getListOfPluginForPluginFirmaServidorID() {
@@ -58,6 +73,30 @@ public class PerfilForm extends DigitalIBBaseForm {
 
   public void setListOfPluginForPluginFirmaServidorID(List<StringKeyValue> listOfPluginForPluginFirmaServidorID) {
     this.listOfPluginForPluginFirmaServidorID = listOfPluginForPluginFirmaServidorID;
+  }
+
+
+
+  private List<StringKeyValue> listOfApiSimpleForApiSimpleID;
+
+  public List<StringKeyValue> getListOfApiSimpleForApiSimpleID() {
+    return this.listOfApiSimpleForApiSimpleID;
+  }
+
+  public void setListOfApiSimpleForApiSimpleID(List<StringKeyValue> listOfApiSimpleForApiSimpleID) {
+    this.listOfApiSimpleForApiSimpleID = listOfApiSimpleForApiSimpleID;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForTipusCustodia;
+
+  public List<StringKeyValue> getListOfValuesForTipusCustodia() {
+    return this.listOfValuesForTipusCustodia;
+  }
+
+  public void setListOfValuesForTipusCustodia(List<StringKeyValue> listOfValuesForTipusCustodia) {
+    this.listOfValuesForTipusCustodia = listOfValuesForTipusCustodia;
   }
 
 

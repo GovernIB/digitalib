@@ -66,8 +66,8 @@ public class PerfilJPAManager
 		return list.toArray(new Perfil[list.size()]);
 	};
 
-	public synchronized Perfil create( java.lang.String _codi_, java.lang.String _nom_, java.lang.String _descripcio_, long _pluginScanWebID_, java.lang.Long _pluginFirmaServidorID_, java.lang.Long _pluginArxiuID_, java.lang.Long _pluginDocCustodyID_) throws I18NException {
-		PerfilJPA __bean =  new PerfilJPA(_codi_,_nom_,_descripcio_,_pluginScanWebID_,_pluginFirmaServidorID_,_pluginArxiuID_,_pluginDocCustodyID_);
+	public synchronized Perfil create( java.lang.String _codi_, java.lang.String _nom_, java.lang.String _descripcio_, long _pluginScanWebID_, int _tipusFirma_, java.lang.Long _pluginFirmaServidorID_, java.lang.Long _apiSimpleID_, int _tipusCustodia_, java.lang.Long _pluginArxiuID_, java.lang.Long _pluginDocCustodyID_) throws I18NException {
+		PerfilJPA __bean =  new PerfilJPA(_codi_,_nom_,_descripcio_,_pluginScanWebID_,_tipusFirma_,_pluginFirmaServidorID_,_apiSimpleID_,_tipusCustodia_,_pluginArxiuID_,_pluginDocCustodyID_);
 		return create(__bean);
 	}
 

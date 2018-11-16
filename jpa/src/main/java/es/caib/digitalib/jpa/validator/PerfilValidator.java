@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import org.fundaciobit.genapp.common.query.Field;
 import es.caib.digitalib.model.fields.PerfilFields;
+import es.caib.digitalib.model.fields.ApiSimpleFields;
 import es.caib.digitalib.model.fields.PluginFields;
 
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
@@ -26,6 +27,7 @@ public class PerfilValidator<T> implements PerfilFields {
 
   /** Constructor */
   public void validate(IValidatorResult<T> __vr, T __target__, boolean __isNou__
+    ,es.caib.digitalib.model.dao.IApiSimpleManager __apiSimpleManager
     ,es.caib.digitalib.model.dao.IPerfilManager __perfilManager
     ,es.caib.digitalib.model.dao.IPluginManager __pluginManager) {
 
@@ -41,6 +43,14 @@ public class PerfilValidator<T> implements PerfilFields {
     __vr.rejectIfEmptyOrWhitespace(__target__,PLUGINSCANWEBID, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PLUGINSCANWEBID)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,TIPUSFIRMA, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUSFIRMA)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,TIPUSCUSTODIA, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUSCUSTODIA)));
 
     // Check size
     if (__vr.getFieldErrorCount(CODI) == 0) {
@@ -139,6 +149,20 @@ public class PerfilValidator<T> implements PerfilFields {
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginfirmaservidorid)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(APISIMPLEID) == 0) {
+      java.lang.Long __apisimpleid = (java.lang.Long)__vr.getFieldValue(__target__,APISIMPLEID);
+      if (__apisimpleid != null ) {
+        Long __count_ = null;
+        try { __count_ = __apiSimpleManager.count(ApiSimpleFields.APISIMPLEID.equal(__apisimpleid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(APISIMPLEID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("apiSimple.apiSimple"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("apiSimple.apiSimpleID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__apisimpleid)));
         }
       }
     }

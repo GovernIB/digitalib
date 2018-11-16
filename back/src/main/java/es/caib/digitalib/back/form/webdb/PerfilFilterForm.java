@@ -98,6 +98,28 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
   }
 
 
+  private java.lang.Integer tipusFirmaDesde;
+
+  public java.lang.Integer getTipusFirmaDesde() {
+    return this.tipusFirmaDesde;
+  }
+
+  public void setTipusFirmaDesde(java.lang.Integer tipusFirmaDesde) {
+    this.tipusFirmaDesde = tipusFirmaDesde;
+  }
+
+
+  private java.lang.Integer tipusFirmaFins;
+
+  public java.lang.Integer getTipusFirmaFins() {
+    return this.tipusFirmaFins;
+  }
+
+  public void setTipusFirmaFins(java.lang.Integer tipusFirmaFins) {
+    this.tipusFirmaFins = tipusFirmaFins;
+  }
+
+
   private java.lang.Long pluginFirmaServidorIDDesde;
 
   public java.lang.Long getPluginFirmaServidorIDDesde() {
@@ -117,6 +139,50 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
   public void setPluginFirmaServidorIDFins(java.lang.Long pluginFirmaServidorIDFins) {
     this.pluginFirmaServidorIDFins = pluginFirmaServidorIDFins;
+  }
+
+
+  private java.lang.Long apiSimpleIDDesde;
+
+  public java.lang.Long getApiSimpleIDDesde() {
+    return this.apiSimpleIDDesde;
+  }
+
+  public void setApiSimpleIDDesde(java.lang.Long apiSimpleIDDesde) {
+    this.apiSimpleIDDesde = apiSimpleIDDesde;
+  }
+
+
+  private java.lang.Long apiSimpleIDFins;
+
+  public java.lang.Long getApiSimpleIDFins() {
+    return this.apiSimpleIDFins;
+  }
+
+  public void setApiSimpleIDFins(java.lang.Long apiSimpleIDFins) {
+    this.apiSimpleIDFins = apiSimpleIDFins;
+  }
+
+
+  private java.lang.Integer tipusCustodiaDesde;
+
+  public java.lang.Integer getTipusCustodiaDesde() {
+    return this.tipusCustodiaDesde;
+  }
+
+  public void setTipusCustodiaDesde(java.lang.Integer tipusCustodiaDesde) {
+    this.tipusCustodiaDesde = tipusCustodiaDesde;
+  }
+
+
+  private java.lang.Integer tipusCustodiaFins;
+
+  public java.lang.Integer getTipusCustodiaFins() {
+    return this.tipusCustodiaFins;
+  }
+
+  public void setTipusCustodiaFins(java.lang.Integer tipusCustodiaFins) {
+    this.tipusCustodiaFins = tipusCustodiaFins;
   }
 
 
@@ -176,14 +242,23 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.descripcio = __toClone.descripcio;
     this.pluginScanWebIDDesde = __toClone.pluginScanWebIDDesde;
     this.pluginScanWebIDFins = __toClone.pluginScanWebIDFins;
+    this.tipusFirmaDesde = __toClone.tipusFirmaDesde;
+    this.tipusFirmaFins = __toClone.tipusFirmaFins;
     this.pluginFirmaServidorIDDesde = __toClone.pluginFirmaServidorIDDesde;
     this.pluginFirmaServidorIDFins = __toClone.pluginFirmaServidorIDFins;
+    this.apiSimpleIDDesde = __toClone.apiSimpleIDDesde;
+    this.apiSimpleIDFins = __toClone.apiSimpleIDFins;
+    this.tipusCustodiaDesde = __toClone.tipusCustodiaDesde;
+    this.tipusCustodiaFins = __toClone.tipusCustodiaFins;
     this.pluginArxiuIDDesde = __toClone.pluginArxiuIDDesde;
     this.pluginArxiuIDFins = __toClone.pluginArxiuIDFins;
     this.pluginDocCustodyIDDesde = __toClone.pluginDocCustodyIDDesde;
     this.pluginDocCustodyIDFins = __toClone.pluginDocCustodyIDFins;
     this.mapOfPluginForPluginScanWebID = __toClone.mapOfPluginForPluginScanWebID;
+    this.mapOfValuesForTipusFirma = __toClone.mapOfValuesForTipusFirma;
     this.mapOfPluginForPluginFirmaServidorID = __toClone.mapOfPluginForPluginFirmaServidorID;
+    this.mapOfApiSimpleForApiSimpleID = __toClone.mapOfApiSimpleForApiSimpleID;
+    this.mapOfValuesForTipusCustodia = __toClone.mapOfValuesForTipusCustodia;
     this.mapOfPluginForPluginArxiuID = __toClone.mapOfPluginForPluginArxiuID;
     this.mapOfPluginForPluginDocCustodyID = __toClone.mapOfPluginForPluginDocCustodyID;
   }
@@ -192,12 +267,12 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM }));
   }
 
   @Override
   public List<Field<?>> getDefaultGroupByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { PLUGINSCANWEBID ,TIPUSFIRMA ,TIPUSCUSTODIA ,PLUGINARXIUID ,PLUGINDOCCUSTODYID }));
   }
 
 
@@ -232,6 +307,18 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
 
 
+  private Map<String, String> mapOfValuesForTipusFirma;
+
+  public Map<String, String> getMapOfValuesForTipusFirma() {
+    return this.mapOfValuesForTipusFirma;
+  }
+
+  public void setMapOfValuesForTipusFirma(Map<String, String> mapOfValuesForTipusFirma) {
+    this.mapOfValuesForTipusFirma = mapOfValuesForTipusFirma;
+  }
+
+
+
   private Map<String, String> mapOfPluginForPluginFirmaServidorID;
 
   public Map<String, String> getMapOfPluginForPluginFirmaServidorID() {
@@ -240,6 +327,30 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
   public void setMapOfPluginForPluginFirmaServidorID(Map<String, String> mapOfPluginForPluginFirmaServidorID) {
     this.mapOfPluginForPluginFirmaServidorID = mapOfPluginForPluginFirmaServidorID;
+  }
+
+
+
+  private Map<String, String> mapOfApiSimpleForApiSimpleID;
+
+  public Map<String, String> getMapOfApiSimpleForApiSimpleID() {
+    return this.mapOfApiSimpleForApiSimpleID;
+  }
+
+  public void setMapOfApiSimpleForApiSimpleID(Map<String, String> mapOfApiSimpleForApiSimpleID) {
+    this.mapOfApiSimpleForApiSimpleID = mapOfApiSimpleForApiSimpleID;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForTipusCustodia;
+
+  public Map<String, String> getMapOfValuesForTipusCustodia() {
+    return this.mapOfValuesForTipusCustodia;
+  }
+
+  public void setMapOfValuesForTipusCustodia(Map<String, String> mapOfValuesForTipusCustodia) {
+    this.mapOfValuesForTipusCustodia = mapOfValuesForTipusCustodia;
   }
 
 
