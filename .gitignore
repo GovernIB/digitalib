@@ -40,7 +40,6 @@
 /logic/src/main/resources/genapp_ca.properties
 /logic/src/main/resources/genapp_es.properties
 /genapp/genapp.log
-<<<<<<< .mine
 /scanwebsimple/apiscanwebsimple/.classpath
 /scanwebsimple/apiscanwebsimple/.gitignore
 /scanwebsimple/apiscanwebsimple/.project
@@ -50,14 +49,7 @@
 /scanwebsimple/compil.bat
 /scanwebsimple/doc
 /scanwebsimple/exempleapiscanwebsimple-war
-=======
 /.project
 /.settings/org.eclipse.m2e.core.prefs
 /back/.tern-project
 
-
-
-
-
-
->>>>>>> .theirs
