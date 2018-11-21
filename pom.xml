@@ -7,30 +7,8 @@
 
 
   <name>DigitalIB</name>
-	
-	
-    <repositories>
-      <repository>
-            <id>maven-nuxeo</id>
-            <name>Maven Nuxeo Repository</name>
-            <url>https://maven.nuxeo.org/nexus/content/groups/public/</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
-      </repository>
-	
-		  <repository>
-		    <id>org.fundaciobit.genapp</id>
-		    <name>GenApp Maven Repository</name>
-		    <url>https://governib.github.io/maven/maven/</url>
-	    </repository>
-    </repositories>
+
+
 
 
   <modules>	
@@ -43,7 +21,6 @@
     <module>utils</module>
     <module>logic</module>
     <module>scripts</module>
-
     <module>back</module>
     <module>ear</module>
   </modules>
@@ -66,11 +43,12 @@
     </repository>
 
     <repository>
-      <id>github_governib_maven</id>
-      <name>GitHub GovernIB Maven Repository</name>
+      <id>org.fundaciobit.genapp</id>
+      <name>GenApp Maven Repository</name>
       <url>https://governib.github.io/maven/maven/</url>
     </repository>
   </repositories>
+
 
   <dependencies>
     <dependency>
