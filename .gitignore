@@ -40,3 +40,6 @@
 /logic/src/main/resources/genapp_ca.properties
 /logic/src/main/resources/genapp_es.properties
 /genapp/genapp.log
+/.project
+/.settings/org.eclipse.m2e.core.prefs
+/back/.tern-project

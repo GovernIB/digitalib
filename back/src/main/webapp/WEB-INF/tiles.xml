@@ -101,7 +101,7 @@
         <put-attribute name="menu" value="/WEB-INF/jsp/moduls/menu_admin.jsp" />
         <put-attribute name="pipella" value="admin" />
     </definition>
-    
+   
     <definition name="option1Admin" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/admin/admin.jsp" />
     </definition>
@@ -154,6 +154,23 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilUsuariAplicacioForm.jsp" />
     </definition>
     
+    <definition name="configuracioGrupFormAdmin" extends="admin">
+        <put-attribute name="titol" value="configuracioGrup.configuracioGrup" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioGrupForm.jsp" />
+    </definition>
+    
+    <definition name="configuracioGrupListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioGrupList.jsp" />
+    </definition>
+    
+    <definition name="usuariPersonaFormAdmin" extends="admin">
+        <put-attribute name="titol" value="usuariPersona.usuariPersona" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariPersonaForm.jsp" />
+    </definition>
+    
+    <definition name="usuariPersonaListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariPersonaList.jsp" />
+    </definition>
     
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
