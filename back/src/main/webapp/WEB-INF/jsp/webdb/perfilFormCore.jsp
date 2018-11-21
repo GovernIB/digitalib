@@ -253,3 +253,30 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.USPERFIL)}">
+        <tr id="perfil_usPerfil_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.USPERFIL])?'perfil.usPerfil':__theForm.labels[PerfilFields.USPERFIL]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[PerfilFields.USPERFIL]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.USPERFIL]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="perfil.usPerfil" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.USPERFIL)}" >
+          <form:hidden path="perfil.usPerfil"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.perfil.usPerfil,__theForm.listOfValuesForUsPerfil)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.USPERFIL)}" >
+          <form:select id="perfil_usPerfil"  onchange="if(typeof onChangeUsPerfil == 'function') {  onChangeUsPerfil(this); };"  cssClass="input-xxlarge" path="perfil.usPerfil">
+            <c:forEach items="${__theForm.listOfValuesForUsPerfil}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        

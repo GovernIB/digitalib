@@ -100,6 +100,14 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.USPERFIL)}">
+          <td>
+          <c:set var="tmp">${perfil.usPerfil}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForUsPerfil[tmp]}
+          </c:if>
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

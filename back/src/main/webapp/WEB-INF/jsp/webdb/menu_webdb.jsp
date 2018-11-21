@@ -102,6 +102,44 @@
       </ul>
     </li>
 
+    <%-- InfoCustody --%>
+    <li>
+      <a href="#" role="branch" class="tree-toggle ${fn:contains(url, 'infoCustody/')? "" : "closed"}" data-toggle="branch" data-value="suportada"><span style="${fn:contains(url, 'infoCustody/')? "font-weight: bold;" : ""}"><fmt:message key="infoCustody.infoCustody"/></span></a>
+      <ul class="${fn:contains(url, 'infoCustody/')? "branch in" : "branch"}">
+        <li style="list-style-type: disc; list-style-position: inside;" ><a href="<c:url value="/webdb/infoCustody/new"/>" ><span style="${(fn:contains(url, 'infoCustody/') && fn:contains(url, '/new'))? "font-weight: bold;" : ""}" >
+       <fmt:message var="entityname" key="infoCustody.infoCustody"/>
+       <fmt:message key="genapp.createtitle" >
+         <fmt:param value="${entityname}"/>
+       </fmt:message>
+       </span></a></li>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/infoCustody/list/1"/>" ><span style="${(fn:contains(url, 'infoCustody/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+        <fmt:message key="genapp.listtitle" >
+         <fmt:param value="${entityname}"/>
+       </fmt:message>
+        </span></a>
+        </li>
+      </ul>
+    </li>
+
+    <%-- InfoSignatura --%>
+    <li>
+      <a href="#" role="branch" class="tree-toggle ${fn:contains(url, 'infoSignatura/')? "" : "closed"}" data-toggle="branch" data-value="suportada"><span style="${fn:contains(url, 'infoSignatura/')? "font-weight: bold;" : ""}"><fmt:message key="infoSignatura.infoSignatura"/></span></a>
+      <ul class="${fn:contains(url, 'infoSignatura/')? "branch in" : "branch"}">
+        <li style="list-style-type: disc; list-style-position: inside;" ><a href="<c:url value="/webdb/infoSignatura/new"/>" ><span style="${(fn:contains(url, 'infoSignatura/') && fn:contains(url, '/new'))? "font-weight: bold;" : ""}" >
+       <fmt:message var="entityname" key="infoSignatura.infoSignatura"/>
+       <fmt:message key="genapp.createtitle" >
+         <fmt:param value="${entityname}"/>
+       </fmt:message>
+       </span></a></li>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/infoSignatura/list/1"/>" ><span style="${(fn:contains(url, 'infoSignatura/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+        <fmt:message key="genapp.listtitle" >
+         <fmt:param value="${entityname}"/>
+       </fmt:message>
+        </span></a>
+        </li>
+      </ul>
+    </li>
+
     <%-- Perfil --%>
     <li>
       <a href="#" role="branch" class="tree-toggle ${fn:contains(url, 'perfil/')? "" : "closed"}" data-toggle="branch" data-value="suportada"><span style="${fn:contains(url, 'perfil/')? "font-weight: bold;" : ""}"><fmt:message key="perfil.perfil"/></span></a>

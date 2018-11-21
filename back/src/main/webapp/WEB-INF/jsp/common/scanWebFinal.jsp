@@ -14,7 +14,7 @@
 <b>Configuraci&oacute;:</b>
 &nbsp;&nbsp;&nbsp;* Tipus: ${LAST_CONFIG.scanType}
 &nbsp;&nbsp;&nbsp;* Caracter&iacute;stiques: 
-<c:forEach var="flag" items="${LAST_CONFIG.flags}" >
+<c:forEach var="flag" items="${LAST_CONFIG.flags}">
 ${flag},
 </c:forEach>
 &nbsp;&nbsp;&nbsp;* Mode: ${LAST_CONFIG.mode}<br/>
@@ -91,6 +91,6 @@ ${flag},
 
 <br/>
 
-<a href="<c:url value="/common/scan/form" />" class="btn"><fmt:message key="tornar"/></a>
+<a href="javascript:window.parent.location.href='${urlRetorn}';" class="btn"><fmt:message key="tornar"/></a>
 </center>
 

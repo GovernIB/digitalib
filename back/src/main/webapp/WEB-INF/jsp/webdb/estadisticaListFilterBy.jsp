@@ -166,16 +166,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.USUARIAPLICACIOID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="estadistica.usuariaplicacioid" />:</span>
+              <span class="add-on"><fmt:message key="estadistica.usuariAplicacioID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="usuariaplicacioidDesde" />
+              <form:input cssClass="input-append input-small" path="usuariAplicacioIDDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="usuariaplicacioidFins" />
+              <form:input cssClass="input-append input-small search-query" path="usuariAplicacioIDFins" />
 
             </div>
 
@@ -184,16 +184,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.USUARIPERSONAID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="estadistica.usuaripersonaid" />:</span>
+              <span class="add-on"><fmt:message key="estadistica.usuariPersonaID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="usuaripersonaidDesde" />
+              <form:input cssClass="input-append input-small" path="usuariPersonaIDDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="usuaripersonaidFins" />
+              <form:input cssClass="input-append input-small search-query" path="usuariPersonaIDFins" />
 
             </div>
 

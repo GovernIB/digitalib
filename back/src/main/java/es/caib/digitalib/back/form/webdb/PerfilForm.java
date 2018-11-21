@@ -26,6 +26,7 @@ public class PerfilForm extends DigitalIBBaseForm {
     this.listOfValuesForTipusCustodia = __toClone.listOfValuesForTipusCustodia;
     this.listOfPluginForPluginArxiuID = __toClone.listOfPluginForPluginArxiuID;
     this.listOfPluginForPluginDocCustodyID = __toClone.listOfPluginForPluginDocCustodyID;
+    this.listOfValuesForUsPerfil = __toClone.listOfValuesForUsPerfil;
   }
   
   public PerfilForm(PerfilJPA perfil, boolean nou) {
@@ -121,6 +122,18 @@ public class PerfilForm extends DigitalIBBaseForm {
 
   public void setListOfPluginForPluginDocCustodyID(List<StringKeyValue> listOfPluginForPluginDocCustodyID) {
     this.listOfPluginForPluginDocCustodyID = listOfPluginForPluginDocCustodyID;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForUsPerfil;
+
+  public List<StringKeyValue> getListOfValuesForUsPerfil() {
+    return this.listOfValuesForUsPerfil;
+  }
+
+  public void setListOfValuesForUsPerfil(List<StringKeyValue> listOfValuesForUsPerfil) {
+    this.listOfValuesForUsPerfil = listOfValuesForUsPerfil;
   }
 
 

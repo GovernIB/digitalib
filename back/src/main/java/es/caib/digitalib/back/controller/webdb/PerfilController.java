@@ -257,6 +257,16 @@ public class PerfilController
       };
     }
 
+    // Field usPerfil
+    {
+      _listSKV = getReferenceListForUsPerfil(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForUsPerfil(_tmp);
+      if (filterForm.getGroupByFields().contains(USPERFIL)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, USPERFIL, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -279,6 +289,7 @@ public class PerfilController
     __mapping.put(TIPUSCUSTODIA, filterForm.getMapOfValuesForTipusCustodia());
     __mapping.put(PLUGINARXIUID, filterForm.getMapOfPluginForPluginArxiuID());
     __mapping.put(PLUGINDOCCUSTODYID, filterForm.getMapOfPluginForPluginDocCustodyID());
+    __mapping.put(USPERFIL, filterForm.getMapOfValuesForUsPerfil());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -374,6 +385,13 @@ public class PerfilController
 
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       perfilForm.setListOfPluginForPluginDocCustodyID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (perfilForm.getListOfValuesForUsPerfil() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForUsPerfil(request, mav, perfilForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      perfilForm.setListOfValuesForUsPerfil(_listSKV);
     }
     
   }
@@ -932,6 +950,36 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPluginDocCustodyID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsPerfil(HttpServletRequest request,
+       ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
+    if (perfilForm.isHiddenField(USPERFIL)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForUsPerfil(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsPerfil(HttpServletRequest request,
+       ModelAndView mav, PerfilFilterForm perfilFilterForm,
+       List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (perfilFilterForm.isHiddenField(USPERFIL)
+      && !perfilFilterForm.isGroupByField(USPERFIL)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForUsPerfil(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsPerfil(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("0" , "0"));
+    __tmp.add(new StringKeyValue("1" , "1"));
+    return __tmp;
   }
 
 

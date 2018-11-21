@@ -20,6 +20,7 @@
 		<sec:intercept-url pattern="/index.jsp" access="permitAll"/>
     
      <sec:intercept-url pattern="/common/scanwebmodule/requestPlugin/**" access="permitAll"/>
+     <sec:intercept-url pattern="/common/rest/apiscanwebsimple/v1/**" access="permitAll"/>
 	
         <sec:intercept-url pattern="/common/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         

@@ -21,6 +21,7 @@ private static final long serialVersionUID = -449640516L;
 	int tipusCustodia;
 	java.lang.Long pluginArxiuID;
 	java.lang.Long pluginDocCustodyID;
+	int usPerfil;
 
 
   /** Constructor Buit */
@@ -28,7 +29,7 @@ private static final long serialVersionUID = -449640516L;
   }
 
   /** Constructor amb tots els camps  */
-  public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID) {
+  public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
@@ -40,9 +41,10 @@ private static final long serialVersionUID = -449640516L;
     this.tipusCustodia=tipusCustodia;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
+    this.usPerfil=usPerfil;
 }
   /** Constructor sense valors autoincrementals */
-  public PerfilBean(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID) {
+  public PerfilBean(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
     this.codi=codi;
     this.nom=nom;
     this.descripcio=descripcio;
@@ -53,15 +55,17 @@ private static final long serialVersionUID = -449640516L;
     this.tipusCustodia=tipusCustodia;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
+    this.usPerfil=usPerfil;
 }
   /** Constructor dels valors Not Null */
-  public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , long pluginScanWebID , int tipusFirma , int tipusCustodia) {
+  public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
     this.pluginScanWebID=pluginScanWebID;
     this.tipusFirma=tipusFirma;
     this.tipusCustodia=tipusCustodia;
+    this.usPerfil=usPerfil;
 }
   public PerfilBean(Perfil __bean) {
     this.setPerfilID(__bean.getPerfilID());
@@ -75,6 +79,7 @@ private static final long serialVersionUID = -449640516L;
     this.setTipusCustodia(__bean.getTipusCustodia());
     this.setPluginArxiuID(__bean.getPluginArxiuID());
     this.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
+    this.setUsPerfil(__bean.getUsPerfil());
 	}
 
 	public long getPerfilID() {
@@ -154,6 +159,13 @@ private static final long serialVersionUID = -449640516L;
 		this.pluginDocCustodyID = _pluginDocCustodyID_;
 	};
 
+	public int getUsPerfil() {
+		return(usPerfil);
+	};
+	public void setUsPerfil(int _usPerfil_) {
+		this.usPerfil = _usPerfil_;
+	};
+
 
 
   // ======================================
@@ -172,6 +184,7 @@ private static final long serialVersionUID = -449640516L;
     __tmp.setTipusCustodia(__bean.getTipusCustodia());
     __tmp.setPluginArxiuID(__bean.getPluginArxiuID());
     __tmp.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
+    __tmp.setUsPerfil(__bean.getUsPerfil());
 		return __tmp;
 	}
 

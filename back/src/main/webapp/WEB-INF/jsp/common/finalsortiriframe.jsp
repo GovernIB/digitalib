@@ -4,7 +4,7 @@
 <html>
 <body>
 <script>
-    top.window.location.href='${URL_FINAL}';
+   window.parent.location.href='${urlRetorn}';
 </script>
 </body>
 </html>

@@ -11,6 +11,8 @@ public final class DigitalIBJPADaoManagers implements IDigitalIBDaoManagers{
    private final EstadisticaJPAManager dib_estadistica;
    private final FitxerJPAManager dib_fitxer;
    private final IdiomaJPAManager dib_idioma;
+   private final InfoCustodyJPAManager dib_infocustody;
+   private final InfoSignaturaJPAManager dib_infosignatura;
    private final PerfilJPAManager dib_perfil;
    private final PerfilUsuariAplicacioJPAManager dib_perfilusrapp;
    private final PluginJPAManager dib_plugin;
@@ -26,6 +28,8 @@ public final class DigitalIBJPADaoManagers implements IDigitalIBDaoManagers{
     this.dib_estadistica = new EstadisticaJPAManager(__em);
     this.dib_fitxer = new FitxerJPAManager(__em);
     this.dib_idioma = new IdiomaJPAManager(__em);
+    this.dib_infocustody = new InfoCustodyJPAManager(__em);
+    this.dib_infosignatura = new InfoSignaturaJPAManager(__em);
     this.dib_perfil = new PerfilJPAManager(__em);
     this.dib_perfilusrapp = new PerfilUsuariAplicacioJPAManager(__em);
     this.dib_plugin = new PluginJPAManager(__em);
@@ -54,6 +58,14 @@ public final class DigitalIBJPADaoManagers implements IDigitalIBDaoManagers{
 
 	public IIdiomaManager getIdiomaManager() {
 	  return this.dib_idioma;
+	};
+
+	public IInfoCustodyManager getInfoCustodyManager() {
+	  return this.dib_infocustody;
+	};
+
+	public IInfoSignaturaManager getInfoSignaturaManager() {
+	  return this.dib_infosignatura;
 	};
 
 	public IPerfilManager getPerfilManager() {

@@ -28,7 +28,7 @@ This page is generated automatically. Please edit.
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">
 <a href="http://blog.fundaciobit.org/category/admindigital/" target="_blank">
-<img src="<c:url value="/img/fundaciobit.jpg"/>"  alt="Fundació Bit" title="Fundació Bit"/>
+<img src="<c:url value="/img/fundaciobit.jpg"/>"  alt="Fundaci&ograve; Bit" title="Fundaci&ograve; Bit"/>
 </a>
 </td>
 </tr>
@@ -39,7 +39,7 @@ This page is generated automatically. Please edit.
 </div>
 
 <br/>
-Username: ${loginInfo.username}<br/>
+<%-- Username: ${loginInfo.username}<br/> 
 &#36;{dib:hasRole(ROLE_ADMIN)}= ${dib:hasRole('ROLE_ADMIN')}<br/>
 &#36;{dib:hasRole(ROLE_USER) }= ${dib:hasRole('ROLE_USER') }<br/>
 <br/>
@@ -47,3 +47,4 @@ Username: ${loginInfo.username}<br/>
 <c:if test="${dib:isDesenvolupament()}">
 Only in Development Mode
 </c:if>
+--%>

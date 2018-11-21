@@ -11,13 +11,14 @@
       </a>
     </li>
 
+<%-- 
     <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/common/option1"/>">
         <span style="${(fn:contains(url, 'option1'))? "font-weight: bold;" : ""}">Menú Option 1</span>
       </a>
     </li>
-
+-->
    <%-- Example with security: virtual roles  --%>
    <%--
    <sec:authorize access="hasAnyRole('ROLE_SOLI', 'ROLE_DEST', 'ROLE_COLA', 'ROLE_DELE')">

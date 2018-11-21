@@ -52,12 +52,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.USUARIAPLICACIOID)}">
           <td>
-          ${estadistica.usuariaplicacioid}
+          ${estadistica.usuariAplicacioID}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.USUARIPERSONAID)}">
           <td>
-          ${estadistica.usuaripersonaid}
+          ${estadistica.usuariPersonaID}
           </td>
         </c:if>
 

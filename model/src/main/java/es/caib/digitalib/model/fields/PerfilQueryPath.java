@@ -55,6 +55,10 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), PerfilFields.PLUGINDOCCUSTODYID);
   }
 
+  public IntegerField USPERFIL() {
+    return new IntegerField(getQueryPath(), PerfilFields.USPERFIL);
+  }
+
 
 
   @Override
@@ -73,6 +77,20 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new PerfilUsuariAplicacioQueryPath(new QueryPath() {
       public String getQueryPath() {
           return PerfilQueryPath.this.getQueryPath() + "perfilUsuariAplicacios" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public TransaccioQueryPath TRANSACCIOS() {
+    return new TransaccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PerfilQueryPath.this.getQueryPath() + "transaccios" + ".";
       }
     });
   }

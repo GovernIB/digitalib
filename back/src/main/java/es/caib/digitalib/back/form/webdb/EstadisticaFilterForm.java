@@ -120,47 +120,47 @@ public class EstadisticaFilterForm extends DigitalIBBaseFilterForm implements Es
   }
 
 
-  private java.lang.Long usuariaplicacioidDesde;
+  private java.lang.Long usuariAplicacioIDDesde;
 
-  public java.lang.Long getUsuariaplicacioidDesde() {
-    return this.usuariaplicacioidDesde;
+  public java.lang.Long getUsuariAplicacioIDDesde() {
+    return this.usuariAplicacioIDDesde;
   }
 
-  public void setUsuariaplicacioidDesde(java.lang.Long usuariaplicacioidDesde) {
-    this.usuariaplicacioidDesde = usuariaplicacioidDesde;
-  }
-
-
-  private java.lang.Long usuariaplicacioidFins;
-
-  public java.lang.Long getUsuariaplicacioidFins() {
-    return this.usuariaplicacioidFins;
-  }
-
-  public void setUsuariaplicacioidFins(java.lang.Long usuariaplicacioidFins) {
-    this.usuariaplicacioidFins = usuariaplicacioidFins;
+  public void setUsuariAplicacioIDDesde(java.lang.Long usuariAplicacioIDDesde) {
+    this.usuariAplicacioIDDesde = usuariAplicacioIDDesde;
   }
 
 
-  private java.lang.Long usuaripersonaidDesde;
+  private java.lang.Long usuariAplicacioIDFins;
 
-  public java.lang.Long getUsuaripersonaidDesde() {
-    return this.usuaripersonaidDesde;
+  public java.lang.Long getUsuariAplicacioIDFins() {
+    return this.usuariAplicacioIDFins;
   }
 
-  public void setUsuaripersonaidDesde(java.lang.Long usuaripersonaidDesde) {
-    this.usuaripersonaidDesde = usuaripersonaidDesde;
+  public void setUsuariAplicacioIDFins(java.lang.Long usuariAplicacioIDFins) {
+    this.usuariAplicacioIDFins = usuariAplicacioIDFins;
   }
 
 
-  private java.lang.Long usuaripersonaidFins;
+  private java.lang.Long usuariPersonaIDDesde;
 
-  public java.lang.Long getUsuaripersonaidFins() {
-    return this.usuaripersonaidFins;
+  public java.lang.Long getUsuariPersonaIDDesde() {
+    return this.usuariPersonaIDDesde;
   }
 
-  public void setUsuaripersonaidFins(java.lang.Long usuaripersonaidFins) {
-    this.usuaripersonaidFins = usuaripersonaidFins;
+  public void setUsuariPersonaIDDesde(java.lang.Long usuariPersonaIDDesde) {
+    this.usuariPersonaIDDesde = usuariPersonaIDDesde;
+  }
+
+
+  private java.lang.Long usuariPersonaIDFins;
+
+  public java.lang.Long getUsuariPersonaIDFins() {
+    return this.usuariPersonaIDFins;
+  }
+
+  public void setUsuariPersonaIDFins(java.lang.Long usuariPersonaIDFins) {
+    this.usuariPersonaIDFins = usuariPersonaIDFins;
   }
 
 
@@ -178,10 +178,10 @@ public class EstadisticaFilterForm extends DigitalIBBaseFilterForm implements Es
     this.valorDesde = __toClone.valorDesde;
     this.valorFins = __toClone.valorFins;
     this.parametres = __toClone.parametres;
-    this.usuariaplicacioidDesde = __toClone.usuariaplicacioidDesde;
-    this.usuariaplicacioidFins = __toClone.usuariaplicacioidFins;
-    this.usuaripersonaidDesde = __toClone.usuaripersonaidDesde;
-    this.usuaripersonaidFins = __toClone.usuaripersonaidFins;
+    this.usuariAplicacioIDDesde = __toClone.usuariAplicacioIDDesde;
+    this.usuariAplicacioIDFins = __toClone.usuariAplicacioIDFins;
+    this.usuariPersonaIDDesde = __toClone.usuariPersonaIDDesde;
+    this.usuariPersonaIDFins = __toClone.usuariPersonaIDFins;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
   }
   

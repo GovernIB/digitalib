@@ -230,6 +230,28 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
   }
 
 
+  private java.lang.Integer usPerfilDesde;
+
+  public java.lang.Integer getUsPerfilDesde() {
+    return this.usPerfilDesde;
+  }
+
+  public void setUsPerfilDesde(java.lang.Integer usPerfilDesde) {
+    this.usPerfilDesde = usPerfilDesde;
+  }
+
+
+  private java.lang.Integer usPerfilFins;
+
+  public java.lang.Integer getUsPerfilFins() {
+    return this.usPerfilFins;
+  }
+
+  public void setUsPerfilFins(java.lang.Integer usPerfilFins) {
+    this.usPerfilFins = usPerfilFins;
+  }
+
+
   public PerfilFilterForm() {
   }
   
@@ -254,6 +276,8 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.pluginArxiuIDFins = __toClone.pluginArxiuIDFins;
     this.pluginDocCustodyIDDesde = __toClone.pluginDocCustodyIDDesde;
     this.pluginDocCustodyIDFins = __toClone.pluginDocCustodyIDFins;
+    this.usPerfilDesde = __toClone.usPerfilDesde;
+    this.usPerfilFins = __toClone.usPerfilFins;
     this.mapOfPluginForPluginScanWebID = __toClone.mapOfPluginForPluginScanWebID;
     this.mapOfValuesForTipusFirma = __toClone.mapOfValuesForTipusFirma;
     this.mapOfPluginForPluginFirmaServidorID = __toClone.mapOfPluginForPluginFirmaServidorID;
@@ -261,6 +285,7 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.mapOfValuesForTipusCustodia = __toClone.mapOfValuesForTipusCustodia;
     this.mapOfPluginForPluginArxiuID = __toClone.mapOfPluginForPluginArxiuID;
     this.mapOfPluginForPluginDocCustodyID = __toClone.mapOfPluginForPluginDocCustodyID;
+    this.mapOfValuesForUsPerfil = __toClone.mapOfValuesForUsPerfil;
   }
   
   /* ========= UTILS ========== */
@@ -375,6 +400,18 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
   public void setMapOfPluginForPluginDocCustodyID(Map<String, String> mapOfPluginForPluginDocCustodyID) {
     this.mapOfPluginForPluginDocCustodyID = mapOfPluginForPluginDocCustodyID;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForUsPerfil;
+
+  public Map<String, String> getMapOfValuesForUsPerfil() {
+    return this.mapOfValuesForUsPerfil;
+  }
+
+  public void setMapOfValuesForUsPerfil(Map<String, String> mapOfValuesForUsPerfil) {
+    this.mapOfValuesForUsPerfil = mapOfValuesForUsPerfil;
   }
 
 

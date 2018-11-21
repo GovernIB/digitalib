@@ -9,7 +9,7 @@
     <definition name="base.menu" template="/WEB-INF/jsp/moduls/blanc.jsp"/>
     <definition name="base.contingut" template="/WEB-INF/jsp/moduls/blanc.jsp"/>
     <definition name="base.peu" template="/WEB-INF/jsp/moduls/peu.jsp" preparer="peuPreparer"/>
- <definition name="base.contingut" template="/WEB-INF/jsp/moduls/blanc.jsp"/>
+    <definition name="base.contingut" template="/WEB-INF/jsp/moduls/blanc.jsp"/>
 
     <definition name="base.definition" template="/WEB-INF/jsp/layout/layout.jsp" preparer="basePreparer">
         <put-attribute name="cap" value="base.cap" />
@@ -19,13 +19,13 @@
         <put-attribute name="peu" value="base.peu" />
     </definition>
 
-    
     <definition name="base.definition.fullview" template="/WEB-INF/jsp/layout/onlycontentlayout.jsp" preparer="basePreparer">
     </definition>
     
+    <definition name="base.definition.emptylayout" template="/WEB-INF/jsp/layout/emptylayout.jsp" preparer="basePreparer">
+    </definition>
 
     <definition name="principal.body" template="/WEB-INF/web/tiles/principal/principal.jsp"/>
- 
 
     <definition name="sense_enllaz" extends="base.definition">
         <put-attribute name="enlaces" value="" />
@@ -43,6 +43,9 @@
     </definition>
     
     <definition name="common.fullview" extends="base.definition.fullview">
+    </definition>
+    
+    <definition name="common.emptylayout" extends="base.definition.emptylayout">
     </definition>
 
     <definition name="principal" extends="common">
@@ -63,7 +66,7 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/scanWebForm.jsp" />
     </definition>
     
-    <definition name="scanWebFinal" extends="common">
+    <definition name="scanWebFinal" extends="common.fullview">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/scanWebFinal.jsp" />
     </definition>
 
@@ -71,11 +74,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_seleccio.jsp" />
     </definition>
 
-    <definition name="plugindescan_final" extends="common.fullview">
+    <definition name="finalsortiriframe" extends="common.emptylayout">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/finalsortiriframe.jsp" />
+    </definition>
+    
+    <definition name="plugindescan_final" extends="common">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_final.jsp" />
     </definition>
     
-    <definition name="plugindescan_contenidor" extends="common.fullview">
+    <definition name="plugindescan_contenidor" extends="common">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_contenidor.jsp" />
     </definition>
     
@@ -237,6 +244,26 @@
     
     <definition name="idiomaListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/idiomaList.jsp" />
+    </definition>
+
+
+    <definition name="infoCustodyFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="infoCustody.infoCustody" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/infoCustodyForm.jsp" />
+    </definition>
+    
+    <definition name="infoCustodyListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/infoCustodyList.jsp" />
+    </definition>
+
+
+    <definition name="infoSignaturaFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="infoSignatura.infoSignatura" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/infoSignaturaForm.jsp" />
+    </definition>
+    
+    <definition name="infoSignaturaListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/infoSignaturaList.jsp" />
     </definition>
 
 

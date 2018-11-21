@@ -23,6 +23,7 @@ public interface PerfilFields extends java.io.Serializable {
 	 public static final IntegerField TIPUSCUSTODIA = new IntegerField(_TABLE_MODEL, "tipusCustodia", "tipuscustodia");
 	 public static final LongField PLUGINARXIUID = new LongField(_TABLE_MODEL, "pluginArxiuID", "pluginarxiuid");
 	 public static final LongField PLUGINDOCCUSTODYID = new LongField(_TABLE_MODEL, "pluginDocCustodyID", "plugindoccustodyid");
+	 public static final IntegerField USPERFIL = new IntegerField(_TABLE_MODEL, "usPerfil", "usperfil");
 
 
   public static final Field<?>[] ALL_PERFIL_FIELDS = {
@@ -36,7 +37,8 @@ public interface PerfilFields extends java.io.Serializable {
     APISIMPLEID,
     TIPUSCUSTODIA,
     PLUGINARXIUID,
-    PLUGINDOCCUSTODYID
+    PLUGINDOCCUSTODYID,
+    USPERFIL
   };
 
 

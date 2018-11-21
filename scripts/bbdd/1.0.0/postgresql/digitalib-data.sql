@@ -15,6 +15,16 @@ SET client_min_messages = warning;
 
 SET search_path = digitalib, pg_catalog;
 
+
+--
+-- TOC entry 1991 (class 0 OID 97838)
+-- Dependencies: 173
+-- Data for Name: dib_idioma; Type: TABLE DATA; Schema: digitalib; Owner: digitalib
+--
+
+INSERT INTO dib_idioma VALUES ('ca', 'Català', true, 0);
+INSERT INTO dib_idioma VALUES ('es', 'Castellano', true, 1);
+
 --
 -- TOC entry 2005 (class 0 OID 98194)
 -- Dependencies: 185

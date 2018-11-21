@@ -1,5 +1,7 @@
 package es.caib.digitalib.back.controller.webdb;
 
+import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.utils.Utils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.GroupByItem;
@@ -56,6 +58,18 @@ public class TransaccioController
 
   @Autowired
   protected TransaccioRefList transaccioRefList;
+
+  // References 
+  @Autowired
+  protected InfoSignaturaRefList infoSignaturaRefList;
+
+  // References 
+  @Autowired
+  protected InfoCustodyRefList infoCustodyRefList;
+
+  // References 
+  @Autowired
+  protected PerfilRefList perfilRefList;
 
   /**
    * Llistat de totes Transaccio
@@ -174,6 +188,42 @@ public class TransaccioController
       groupByItemsMap.put(groupByItem.getField(),groupByItem);
     }
 
+    Map<String, String> _tmp;
+    List<StringKeyValue> _listSKV;
+
+
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, INFOSCANOCR);
+
+    // Field infosignaturaid
+    {
+      _listSKV = getReferenceListForInfosignaturaid(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfInfoSignaturaForInfosignaturaid(_tmp);
+      if (filterForm.getGroupByFields().contains(INFOSIGNATURAID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, INFOSIGNATURAID, false);
+      };
+    }
+
+    // Field infocustodyid
+    {
+      _listSKV = getReferenceListForInfocustodyid(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfInfoCustodyForInfocustodyid(_tmp);
+      if (filterForm.getGroupByFields().contains(INFOCUSTODYID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, INFOCUSTODYID, false);
+      };
+    }
+
+    // Field perfilid
+    {
+      _listSKV = getReferenceListForPerfilid(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfPerfilForPerfilid(_tmp);
+      if (filterForm.getGroupByFields().contains(PERFILID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, PERFILID, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -189,6 +239,9 @@ public class TransaccioController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
+    __mapping.put(INFOSIGNATURAID, filterForm.getMapOfInfoSignaturaForInfosignaturaid());
+    __mapping.put(INFOCUSTODYID, filterForm.getMapOfInfoCustodyForInfocustodyid());
+    __mapping.put(PERFILID, filterForm.getMapOfPerfilForPerfilid());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -236,6 +289,27 @@ public class TransaccioController
 
   public void fillReferencesForForm(TransaccioForm transaccioForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
+    // Comprovam si ja esta definida la llista
+    if (transaccioForm.getListOfInfoSignaturaForInfosignaturaid() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForInfosignaturaid(request, mav, transaccioForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      transaccioForm.setListOfInfoSignaturaForInfosignaturaid(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (transaccioForm.getListOfInfoCustodyForInfocustodyid() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForInfocustodyid(request, mav, transaccioForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      transaccioForm.setListOfInfoCustodyForInfocustodyid(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (transaccioForm.getListOfPerfilForPerfilid() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForPerfilid(request, mav, transaccioForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      transaccioForm.setListOfPerfilForPerfilid(_listSKV);
+    }
     
   }
 
@@ -534,6 +608,125 @@ public java.lang.Long stringToPK(String value) {
 
   public boolean isActiveFormView() {
     return isActiveFormEdit();
+  }
+
+
+  public List<StringKeyValue> getReferenceListForInfosignaturaid(HttpServletRequest request,
+       ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
+    if (transaccioForm.isHiddenField(INFOSIGNATURAID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (transaccioForm.isReadOnlyField(INFOSIGNATURAID)) {
+      _where = InfoSignaturaFields.INFOSIGNATURAID.equal(transaccioForm.getTransaccio().getInfosignaturaid());
+    }
+    return getReferenceListForInfosignaturaid(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForInfosignaturaid(HttpServletRequest request,
+       ModelAndView mav, TransaccioFilterForm transaccioFilterForm,
+       List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (transaccioFilterForm.isHiddenField(INFOSIGNATURAID)
+      && !transaccioFilterForm.isGroupByField(INFOSIGNATURAID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(INFOSIGNATURAID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Transaccio _item : list) {
+        if(_item.getInfosignaturaid() == null) { continue; };
+        _pkList.add(_item.getInfosignaturaid());
+        }
+        _w = InfoSignaturaFields.INFOSIGNATURAID.in(_pkList);
+      }
+    return getReferenceListForInfosignaturaid(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForInfosignaturaid(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return infoSignaturaRefList.getReferenceList(InfoSignaturaFields.INFOSIGNATURAID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForInfocustodyid(HttpServletRequest request,
+       ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
+    if (transaccioForm.isHiddenField(INFOCUSTODYID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (transaccioForm.isReadOnlyField(INFOCUSTODYID)) {
+      _where = InfoCustodyFields.INFOCUSTODYID.equal(transaccioForm.getTransaccio().getInfocustodyid());
+    }
+    return getReferenceListForInfocustodyid(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForInfocustodyid(HttpServletRequest request,
+       ModelAndView mav, TransaccioFilterForm transaccioFilterForm,
+       List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (transaccioFilterForm.isHiddenField(INFOCUSTODYID)
+      && !transaccioFilterForm.isGroupByField(INFOCUSTODYID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(INFOCUSTODYID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Transaccio _item : list) {
+        if(_item.getInfocustodyid() == null) { continue; };
+        _pkList.add(_item.getInfocustodyid());
+        }
+        _w = InfoCustodyFields.INFOCUSTODYID.in(_pkList);
+      }
+    return getReferenceListForInfocustodyid(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForInfocustodyid(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return infoCustodyRefList.getReferenceList(InfoCustodyFields.INFOCUSTODYID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPerfilid(HttpServletRequest request,
+       ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
+    if (transaccioForm.isHiddenField(PERFILID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (transaccioForm.isReadOnlyField(PERFILID)) {
+      _where = PerfilFields.PERFILID.equal(transaccioForm.getTransaccio().getPerfilid());
+    }
+    return getReferenceListForPerfilid(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPerfilid(HttpServletRequest request,
+       ModelAndView mav, TransaccioFilterForm transaccioFilterForm,
+       List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (transaccioFilterForm.isHiddenField(PERFILID)
+      && !transaccioFilterForm.isGroupByField(PERFILID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(PERFILID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Transaccio _item : list) {
+        _pkList.add(_item.getPerfilid());
+        }
+        _w = PerfilFields.PERFILID.in(_pkList);
+      }
+    return getReferenceListForPerfilid(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPerfilid(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return perfilRefList.getReferenceList(PerfilFields.PERFILID, where );
   }
 
 

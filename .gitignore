@@ -40,3 +40,12 @@
 /logic/src/main/resources/genapp_ca.properties
 /logic/src/main/resources/genapp_es.properties
 /genapp/genapp.log
+/scanwebsimple/apiscanwebsimple/.classpath
+/scanwebsimple/apiscanwebsimple/.gitignore
+/scanwebsimple/apiscanwebsimple/.project
+/scanwebsimple/apiscanwebsimple/.settings/org.eclipse.core.resources.prefs
+/scanwebsimple/apiscanwebsimple/.settings/org.eclipse.jdt.core.prefs
+/scanwebsimple/apiscanwebsimple/.settings/org.eclipse.m2e.core.prefs
+/scanwebsimple/compil.bat
+/scanwebsimple/doc
+/scanwebsimple/exempleapiscanwebsimple-war

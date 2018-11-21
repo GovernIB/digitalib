@@ -7,7 +7,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 public interface IEstadisticaManager extends org.fundaciobit.genapp.common.query.ITableManager<Estadistica, Long> {
 
 
-	public Estadistica create( int _tipus_, java.sql.Timestamp _data_, double _valor_, java.lang.String _parametres_, java.lang.Long _usuariaplicacioid_, java.lang.Long _usuaripersonaid_) throws I18NException;
+	public Estadistica create( int _tipus_, java.sql.Timestamp _data_, double _valor_, java.lang.String _parametres_, java.lang.Long _usuariAplicacioID_, java.lang.Long _usuariPersonaID_) throws I18NException;
 
 	public Estadistica findByPrimaryKey(long _estadisticaID_);
 

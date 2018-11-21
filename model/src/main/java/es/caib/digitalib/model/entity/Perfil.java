@@ -35,6 +35,9 @@ public interface Perfil extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.Long getPluginDocCustodyID();
 	public void setPluginDocCustodyID(java.lang.Long _pluginDocCustodyID_);
 
+	public int getUsPerfil();
+	public void setUsPerfil(int _usPerfil_);
+
 
 
   // ======================================

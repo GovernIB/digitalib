@@ -109,36 +109,36 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.USUARIAPLICACIOID)}">
-        <tr id="estadistica_usuariaplicacioid_rowid">
+        <tr id="estadistica_usuariAplicacioID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.USUARIAPLICACIOID])?'estadistica.usuariaplicacioid':__theForm.labels[EstadisticaFields.USUARIAPLICACIOID]}" />
+              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.USUARIAPLICACIOID])?'estadistica.usuariAplicacioID':__theForm.labels[EstadisticaFields.USUARIAPLICACIOID]}" />
               <c:if test="${not empty __theForm.help[EstadisticaFields.USUARIAPLICACIOID]}">
               <i class="icon-info-sign" title="${__theForm.help[EstadisticaFields.USUARIAPLICACIOID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="estadistica.usuariaplicacioid" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.USUARIAPLICACIOID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.USUARIAPLICACIOID)? 'input-mini uneditable-input' : 'input-mini'}"   path="estadistica.usuariaplicacioid"   />
+            <form:errors path="estadistica.usuariAplicacioID" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.USUARIAPLICACIOID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.USUARIAPLICACIOID)? 'input-mini uneditable-input' : 'input-mini'}"   path="estadistica.usuariAplicacioID"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.USUARIPERSONAID)}">
-        <tr id="estadistica_usuaripersonaid_rowid">
+        <tr id="estadistica_usuariPersonaID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.USUARIPERSONAID])?'estadistica.usuaripersonaid':__theForm.labels[EstadisticaFields.USUARIPERSONAID]}" />
+              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.USUARIPERSONAID])?'estadistica.usuariPersonaID':__theForm.labels[EstadisticaFields.USUARIPERSONAID]}" />
               <c:if test="${not empty __theForm.help[EstadisticaFields.USUARIPERSONAID]}">
               <i class="icon-info-sign" title="${__theForm.help[EstadisticaFields.USUARIPERSONAID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="estadistica.usuaripersonaid" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.USUARIPERSONAID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.USUARIPERSONAID)? 'input-mini uneditable-input' : 'input-mini'}"   path="estadistica.usuaripersonaid"   />
+            <form:errors path="estadistica.usuariPersonaID" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.USUARIPERSONAID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.USUARIPERSONAID)? 'input-mini uneditable-input' : 'input-mini'}"   path="estadistica.usuariPersonaID"   />
 
            </td>
         </tr>

@@ -29,6 +29,11 @@
           ${transaccio.transaccioID}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.TRANSACTIONWEBID)}">
+          <td>
+          ${transaccio.transactionWebId}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.DATAINICI)}">
           <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${transaccio.datainici}" /></td>
         </c:if>
@@ -43,6 +48,117 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USUARIPERSONAID)}">
           <td>
           ${transaccio.usuaripersonaid}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATCODI)}">
+          <td>
+          ${transaccio.estatcodi}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATMISSATGE)}">
+          <td>
+          ${transaccio.estatmissatge}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATEXCEPCIO)}">
+          <td>
+          ${transaccio.estatexcepcio}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FITXERESCANEJATID)}">
+          <td>
+          ${transaccio.fitxerescanejatid}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FITXERSIGNATURAID)}">
+          <td>
+          ${transaccio.fitxersignaturaid}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANPIXELTYPE)}">
+          <td>
+          ${transaccio.infoscanpixeltype}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANRESOLUCIOPPP)}">
+          <td>
+          ${transaccio.infoscanresolucioppp}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANFORMATFITXER)}">
+          <td>
+          ${transaccio.infoscanformatfitxer}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANOCR)}">
+          <td>
+            &nbsp;<c:if test="${not empty transaccio.infoscanocr}">
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${transaccio.infoscanocr?'success':'error'}.png"/>">
+            </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSIGNATURAID)}">
+          <td>
+          <c:set var="tmp">${transaccio.infosignaturaid}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfInfoSignaturaForInfosignaturaid[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOCUSTODYID)}">
+          <td>
+          <c:set var="tmp">${transaccio.infocustodyid}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfInfoCustodyForInfocustodyid[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.LANGUAGEUI)}">
+          <td>
+          ${transaccio.languageui}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.LANGUAGEDOC)}">
+          <td>
+          ${transaccio.languagedoc}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.CIUTADANIF)}">
+          <td>
+          ${transaccio.ciutadanif}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.CIUTADANOM)}">
+          <td>
+          ${transaccio.ciutadanom}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FUNCIONARIUSERNAME)}">
+          <td>
+          ${transaccio.funcionariusername}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FUNCIONARINOM)}">
+          <td>
+          ${transaccio.funcionarinom}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.EXPEDIENT)}">
+          <td>
+          ${transaccio.expedient}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.PERFILID)}">
+          <td>
+          <c:set var="tmp">${transaccio.perfilid}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfPerfilForPerfilid[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USERNAMEREQUEST)}">
+          <td>
+          ${transaccio.usernameRequest}
           </td>
         </c:if>
 

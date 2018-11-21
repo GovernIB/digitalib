@@ -38,16 +38,9 @@
              </label>
             </td>
             <td>
-              <form:errors path="fitxer.mime" cssClass="errorField alert alert-error" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;" cssClass="input-xxlarge" readonly="${ gen:contains(__theForm.readOnlyFields ,FitxerFields.MIME)? 'true' : 'false'}" path="fitxer.mime"  />
-              <div class="btn-group" style="vertical-align: top;">
-              <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('fitxer.mime'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('fitxer.mime'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('fitxer.mime'); ta.wrap='hard';">Hard Wrap</a></li>
-              </ul>
-              </div>
+            <form:errors path="fitxer.mime" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,FitxerFields.MIME)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,FitxerFields.MIME)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="fitxer.mime"   />
+
            </td>
         </tr>
         </c:if>

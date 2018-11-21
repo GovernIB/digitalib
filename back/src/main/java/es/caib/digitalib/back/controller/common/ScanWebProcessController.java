@@ -156,6 +156,11 @@ public class ScanWebProcessController {
     return mav;
 
   }
+  
+  
+
+  
+  
 
   @RequestMapping(value = "/final/{scanWebID}")
   public ModelAndView finalProcesDeScan(HttpServletRequest request,
@@ -202,6 +207,8 @@ public class ScanWebProcessController {
 
     scanWebModuleEjb.closeScanWebProcess(request, scanWebID);
 
+    String urlRetorn = request.getContextPath() + CONTEXTWEB + "/form";
+        
     if (statusError != null) {
 
       if (statusError.getErrorMsg() == null) {
@@ -217,11 +224,15 @@ public class ScanWebProcessController {
 
       HtmlUtils.saveMessageError(request, statusError.getErrorMsg());
 
-      return new ModelAndView(new RedirectView(ScanWebProcessController.CONTEXTWEB + "/form",
-          true));
+      ModelAndView mav = new ModelAndView("finalsortiriframe");
+      mav.addObject("urlRetorn", urlRetorn);
+      return mav; 
+      
+      
     } else {
 
       ModelAndView mav = new ModelAndView("scanWebFinal");
+      mav.addObject("urlRetorn", urlRetorn);
 
       return mav;
     }

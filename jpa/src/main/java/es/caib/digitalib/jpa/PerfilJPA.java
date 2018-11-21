@@ -69,6 +69,10 @@ private static final long serialVersionUID = -1815612849L;
 	@Column(name="plugindoccustodyid",length = 19)
 	java.lang.Long pluginDocCustodyID;
 
+  /** Quin us es farà del perfil: plantilla o informacio perfil en transaccio */
+	@Column(name="usperfil",nullable = false,length = 10)
+	int usPerfil;
+
 
 
   /** Constructor Buit */
@@ -76,7 +80,7 @@ private static final long serialVersionUID = -1815612849L;
   }
 
   /** Constructor amb tots els camps  */
-  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID) {
+  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
@@ -88,9 +92,10 @@ private static final long serialVersionUID = -1815612849L;
     this.tipusCustodia=tipusCustodia;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
+    this.usPerfil=usPerfil;
 }
   /** Constructor sense valors autoincrementals */
-  public PerfilJPA(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID) {
+  public PerfilJPA(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
     this.codi=codi;
     this.nom=nom;
     this.descripcio=descripcio;
@@ -101,15 +106,17 @@ private static final long serialVersionUID = -1815612849L;
     this.tipusCustodia=tipusCustodia;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
+    this.usPerfil=usPerfil;
 }
   /** Constructor dels valors Not Null */
-  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , long pluginScanWebID , int tipusFirma , int tipusCustodia) {
+  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
     this.pluginScanWebID=pluginScanWebID;
     this.tipusFirma=tipusFirma;
     this.tipusCustodia=tipusCustodia;
+    this.usPerfil=usPerfil;
 }
   public PerfilJPA(Perfil __bean) {
     this.setPerfilID(__bean.getPerfilID());
@@ -123,6 +130,7 @@ private static final long serialVersionUID = -1815612849L;
     this.setTipusCustodia(__bean.getTipusCustodia());
     this.setPluginArxiuID(__bean.getPluginArxiuID());
     this.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
+    this.setUsPerfil(__bean.getUsPerfil());
 	}
 
 	public long getPerfilID() {
@@ -202,6 +210,13 @@ private static final long serialVersionUID = -1815612849L;
 		this.pluginDocCustodyID = _pluginDocCustodyID_;
 	};
 
+	public int getUsPerfil() {
+		return(usPerfil);
+	};
+	public void setUsPerfil(int _usPerfil_) {
+		this.usPerfil = _usPerfil_;
+	};
+
 
 
   @Override
@@ -227,6 +242,19 @@ private static final long serialVersionUID = -1815612849L;
 
 	public void setPerfilUsuariAplicacios(Set<PerfilUsuariAplicacioJPA> perfilUsuariAplicacios) {
 	  this.perfilUsuariAplicacios = perfilUsuariAplicacios;
+	}
+
+
+// EXP  Field:perfilid | Table: dib_transaccio | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfil")
+	private Set<TransaccioJPA> transaccios = new HashSet<TransaccioJPA>(0);
+	public  Set<TransaccioJPA> getTransaccios() {
+    return this.transaccios;
+  }
+
+	public void setTransaccios(Set<TransaccioJPA> transaccios) {
+	  this.transaccios = transaccios;
 	}
 
 
@@ -321,6 +349,7 @@ private static final long serialVersionUID = -1815612849L;
     __tmp.setTipusCustodia(__bean.getTipusCustodia());
     __tmp.setPluginArxiuID(__bean.getPluginArxiuID());
     __tmp.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
+    __tmp.setUsPerfil(__bean.getUsPerfil());
 		return __tmp;
 	}
 
@@ -353,6 +382,10 @@ private static final long serialVersionUID = -1815612849L;
     if(!"PerfilUsuariAplicacioJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.perfilUsuariAplicacios) || org.hibernate.Hibernate.isInitialized(__jpa.getPerfilUsuariAplicacios())) ) {
       __tmp.setPerfilUsuariAplicacios(PerfilUsuariAplicacioJPA.copyJPA(__jpa.getPerfilUsuariAplicacios(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"TransaccioJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.transaccios) || org.hibernate.Hibernate.isInitialized(__jpa.getTransaccios())) ) {
+      __tmp.setTransaccios(TransaccioJPA.copyJPA(__jpa.getTransaccios(), __alreadyCopied,"PerfilJPA"));
     }
     // Copia de beans complexes (IMP)
     if(!"PluginJPA".equals(origenJPA) && 

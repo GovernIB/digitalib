@@ -17,8 +17,8 @@ public interface EstadisticaFields extends java.io.Serializable {
 	 public static final TimestampField DATA = new TimestampField(_TABLE_MODEL, "data", "data");
 	 public static final DoubleField VALOR = new DoubleField(_TABLE_MODEL, "valor", "valor");
 	 public static final StringField PARAMETRES = new StringField(_TABLE_MODEL, "parametres", "parametres");
-	 public static final LongField USUARIAPLICACIOID = new LongField(_TABLE_MODEL, "usuariaplicacioid", "usuariaplicacioid");
-	 public static final LongField USUARIPERSONAID = new LongField(_TABLE_MODEL, "usuaripersonaid", "usuaripersonaid");
+	 public static final LongField USUARIAPLICACIOID = new LongField(_TABLE_MODEL, "usuariAplicacioID", "usuariaplicacioid");
+	 public static final LongField USUARIPERSONAID = new LongField(_TABLE_MODEL, "usuariPersonaID", "usuaripersonaid");
 
 
   public static final Field<?>[] ALL_ESTADISTICA_FIELDS = {

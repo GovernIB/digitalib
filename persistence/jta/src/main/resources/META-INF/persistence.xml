@@ -14,6 +14,8 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 		<class>es.caib.digitalib.jpa.EstadisticaJPA</class>
 		<class>es.caib.digitalib.jpa.FitxerJPA</class>
 		<class>es.caib.digitalib.jpa.IdiomaJPA</class>
+		<class>es.caib.digitalib.jpa.InfoCustodyJPA</class>
+		<class>es.caib.digitalib.jpa.InfoSignaturaJPA</class>
 		<class>es.caib.digitalib.jpa.PerfilJPA</class>
 		<class>es.caib.digitalib.jpa.PerfilUsuariAplicacioJPA</class>
 		<class>es.caib.digitalib.jpa.PluginJPA</class>

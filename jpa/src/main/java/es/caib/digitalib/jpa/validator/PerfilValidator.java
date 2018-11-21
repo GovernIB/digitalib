@@ -52,6 +52,10 @@ public class PerfilValidator<T> implements PerfilFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUSCUSTODIA)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,USPERFIL, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USPERFIL)));
+
     // Check size
     if (__vr.getFieldErrorCount(CODI) == 0) {
       java.lang.String __codi = (java.lang.String)__vr.getFieldValue(__target__,CODI);

@@ -2,14 +2,12 @@ package es.caib.digitalib.back.security;
 
 import java.util.Collection;
 import java.util.Comparator;
-
 import java.util.HashSet;
 
-
-
-
 import org.apache.log4j.Logger;
+
 import es.caib.digitalib.back.security.LoginInfo;
+
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
@@ -19,8 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-
-
+import es.caib.digitalib.jpa.UsuariPersonaJPA;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -70,8 +67,15 @@ public class AuthenticationSuccessListener implements
     // TODO GenApp Afegir el codi oportu despres del login
 
     LoginInfo loginInfo;
+    
+    
+    // XYZ ZZZ ZZZ  FALTA !!!!
+    UsuariPersonaJPA usrPersona = null;
+    // XYZ ZZZ ZZZ  FALTA !!!!
+    boolean needConfigUser = false;
+    
     // create a new authentication token
-    loginInfo = new LoginInfo(user, name, new HashSet<GrantedAuthority>(seyconAuthorities));
+    loginInfo = new LoginInfo(user, usrPersona, new HashSet<GrantedAuthority>(seyconAuthorities), needConfigUser);
 
     // and set the authentication of the current Session context
     SecurityContextHolder.getContext().setAuthentication(loginInfo.generateToken());

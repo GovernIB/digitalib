@@ -40,10 +40,10 @@ private static final long serialVersionUID = -2066559243L;
 	java.lang.String parametres;
 
 	@Column(name="usuariaplicacioid",length = 19)
-	java.lang.Long usuariaplicacioid;
+	java.lang.Long usuariAplicacioID;
 
 	@Column(name="usuaripersonaid",length = 19)
-	java.lang.Long usuaripersonaid;
+	java.lang.Long usuariPersonaID;
 
 
 
@@ -52,23 +52,23 @@ private static final long serialVersionUID = -2066559243L;
   }
 
   /** Constructor amb tots els camps  */
-  public EstadisticaJPA(long estadisticaID , int tipus , java.sql.Timestamp data , double valor , java.lang.String parametres , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid) {
+  public EstadisticaJPA(long estadisticaID , int tipus , java.sql.Timestamp data , double valor , java.lang.String parametres , java.lang.Long usuariAplicacioID , java.lang.Long usuariPersonaID) {
     this.estadisticaID=estadisticaID;
     this.tipus=tipus;
     this.data=data;
     this.valor=valor;
     this.parametres=parametres;
-    this.usuariaplicacioid=usuariaplicacioid;
-    this.usuaripersonaid=usuaripersonaid;
+    this.usuariAplicacioID=usuariAplicacioID;
+    this.usuariPersonaID=usuariPersonaID;
 }
   /** Constructor sense valors autoincrementals */
-  public EstadisticaJPA(int tipus , java.sql.Timestamp data , double valor , java.lang.String parametres , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid) {
+  public EstadisticaJPA(int tipus , java.sql.Timestamp data , double valor , java.lang.String parametres , java.lang.Long usuariAplicacioID , java.lang.Long usuariPersonaID) {
     this.tipus=tipus;
     this.data=data;
     this.valor=valor;
     this.parametres=parametres;
-    this.usuariaplicacioid=usuariaplicacioid;
-    this.usuaripersonaid=usuaripersonaid;
+    this.usuariAplicacioID=usuariAplicacioID;
+    this.usuariPersonaID=usuariPersonaID;
 }
   /** Constructor dels valors Not Null */
   public EstadisticaJPA(long estadisticaID , int tipus , java.sql.Timestamp data , double valor) {
@@ -83,8 +83,8 @@ private static final long serialVersionUID = -2066559243L;
     this.setData(__bean.getData());
     this.setValor(__bean.getValor());
     this.setParametres(__bean.getParametres());
-    this.setUsuariaplicacioid(__bean.getUsuariaplicacioid());
-    this.setUsuaripersonaid(__bean.getUsuaripersonaid());
+    this.setUsuariAplicacioID(__bean.getUsuariAplicacioID());
+    this.setUsuariPersonaID(__bean.getUsuariPersonaID());
 	}
 
 	public long getEstadisticaID() {
@@ -122,18 +122,18 @@ private static final long serialVersionUID = -2066559243L;
 		this.parametres = _parametres_;
 	};
 
-	public java.lang.Long getUsuariaplicacioid() {
-		return(usuariaplicacioid);
+	public java.lang.Long getUsuariAplicacioID() {
+		return(usuariAplicacioID);
 	};
-	public void setUsuariaplicacioid(java.lang.Long _usuariaplicacioid_) {
-		this.usuariaplicacioid = _usuariaplicacioid_;
+	public void setUsuariAplicacioID(java.lang.Long _usuariAplicacioID_) {
+		this.usuariAplicacioID = _usuariAplicacioID_;
 	};
 
-	public java.lang.Long getUsuaripersonaid() {
-		return(usuaripersonaid);
+	public java.lang.Long getUsuariPersonaID() {
+		return(usuariPersonaID);
 	};
-	public void setUsuaripersonaid(java.lang.Long _usuaripersonaid_) {
-		this.usuaripersonaid = _usuaripersonaid_;
+	public void setUsuariPersonaID(java.lang.Long _usuariPersonaID_) {
+		this.usuariPersonaID = _usuariPersonaID_;
 	};
 
 
@@ -161,8 +161,8 @@ private static final long serialVersionUID = -2066559243L;
     __tmp.setData(__bean.getData());
     __tmp.setValor(__bean.getValor());
     __tmp.setParametres(__bean.getParametres());
-    __tmp.setUsuariaplicacioid(__bean.getUsuariaplicacioid());
-    __tmp.setUsuaripersonaid(__bean.getUsuaripersonaid());
+    __tmp.setUsuariAplicacioID(__bean.getUsuariAplicacioID());
+    __tmp.setUsuariPersonaID(__bean.getUsuariPersonaID());
 		return __tmp;
 	}
 

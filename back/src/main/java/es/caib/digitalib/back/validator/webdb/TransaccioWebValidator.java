@@ -26,6 +26,15 @@ public class TransaccioWebValidator  implements Validator, TransaccioFields {
   protected TransaccioValidator<Object> validator = new TransaccioValidator<Object>();
 
   // EJB's
+  @javax.ejb.EJB(mappedName = "digitalib/InfoCustodyEJB/local")
+  protected es.caib.digitalib.ejb.InfoCustodyLocal infoCustodyEjb;
+
+  @javax.ejb.EJB(mappedName = "digitalib/InfoSignaturaEJB/local")
+  protected es.caib.digitalib.ejb.InfoSignaturaLocal infoSignaturaEjb;
+
+  @javax.ejb.EJB(mappedName = "digitalib/PerfilEJB/local")
+  protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
+
   @javax.ejb.EJB(mappedName = "digitalib/TransaccioEJB/local")
   protected es.caib.digitalib.ejb.TransaccioLocal transaccioEjb;
 
@@ -57,7 +66,7 @@ public class TransaccioWebValidator  implements Validator, TransaccioFields {
     WebValidationResult<Object> wvr, boolean isNou) {
 
     validator.validate(wvr, target,
-      isNou, transaccioEjb);
+      isNou, infoCustodyEjb, infoSignaturaEjb, perfilEjb, transaccioEjb);
 
   } // Final de metode
 

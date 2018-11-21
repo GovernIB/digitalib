@@ -8,6 +8,8 @@ public interface IDigitalIBDaoManagers {
 	public IEstadisticaManager getEstadisticaManager();
 	public IFitxerManager getFitxerManager();
 	public IIdiomaManager getIdiomaManager();
+	public IInfoCustodyManager getInfoCustodyManager();
+	public IInfoSignaturaManager getInfoSignaturaManager();
 	public IPerfilManager getPerfilManager();
 	public IPerfilUsuariAplicacioManager getPerfilUsuariAplicacioManager();
 	public IPluginManager getPluginManager();

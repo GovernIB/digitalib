@@ -35,7 +35,7 @@ public class PrincipalController {
     Boolean initialized = (Boolean)session.getAttribute("inicialitzat");
     
     if (initialized == null) {
-      HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a DigitalIB");      
+      HtmlUtils.saveMessageInfo(request, "Benvingut a DigitalIB");      
       session.setAttribute("inicialitzat", true);
     }
 
@@ -64,7 +64,7 @@ public class PrincipalController {
       */
       
       if ("admin".equals(pipella)) {
-        return new ModelAndView(new RedirectView("/admin/option1", true));
+        return new ModelAndView(new RedirectView("/admin/pluginscanweb/list", true));
       }
       
       if ("user".equals(pipella)) {

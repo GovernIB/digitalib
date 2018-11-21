@@ -44,13 +44,13 @@
     
     <sec:authorize access="hasRole('ROLE_USER')">
     <li ${(pipella eq 'user')?'class="active"' : '' }>
-       <a href="<c:url value="/canviarPipella/user"/>">ROLE_USER</a>
+       <a href="<c:url value="/canviarPipella/user"/>"><fmt:message key="usuari.rol" /></a>
     </li>
     </sec:authorize>
     
     <sec:authorize access="hasRole('ROLE_ADMIN')">
     <li ${(pipella eq 'admin')?'class="active"' : '' }>
-       <a href="<c:url value="/canviarPipella/admin"/>">ROLE_ADMIN</a>
+       <a href="<c:url value="/canviarPipella/admin"/>"><fmt:message key="administrador.rol" /></a>
     </li>
     </sec:authorize>
 
