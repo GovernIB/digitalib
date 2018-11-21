@@ -54,6 +54,20 @@
       </a>
     </li>
     
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/configuracioGrup/list"/>">
+        <span style="${(fn:contains(url, '/configuracioGrup/list'))? "font-weight: bold;" : ""}"><fmt:message key="configuracioGrup.configuracioGrup.plural" /></span>
+        
+      </a>
+    </li>
+    
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/usuariPersona/list"/>">
+        <span style="${(fn:contains(url, '/usuariPersona/list'))? "font-weight: bold;" : ""}"><fmt:message key="usuariPersona.usuariPersona.plural" /></span>
+        
+      </a>
+    </li>
+    
 
   </ul>
 </div>

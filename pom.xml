@@ -5,7 +5,79 @@
   <artifactId>digitalib</artifactId>
   <packaging>pom</packaging>
 
+<<<<<<< .mine
   <name>DigitalIB</name>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+    <modules>	
+       <module>model</module>
+       <module>jpa</module>
+       <module>ejb</module>
+       <module>persistence</module>
+       <module>utils</module>
+       <module>logic</module>
+       <module>back</module>
+       <module>ear</module>
+       <module>scripts</module>
+    </modules>
+	
+	
+    <repositories>
+      <repository>
+            <id>maven-nuxeo</id>
+            <name>Maven Nuxeo Repository</name>
+            <url>https://maven.nuxeo.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+      </repository>
+	
+		  <repository>
+		    <id>org.fundaciobit.genapp</id>
+		    <name>GenApp Maven Repository</name>
+		    <url>https://governib.github.io/maven/maven/</url>
+	    </repository>
+    </repositories>
+>>>>>>> .theirs
 
   <modules>	
     <!--       -->
