@@ -57,20 +57,19 @@ private static final long serialVersionUID = 760472444L;
   @Lob
 	java.lang.String estatexcepcio;
 
+	@Index(name="dib_transaccio_fileplain_fk_i")
 	@Column(name="fitxerescanejatid",length = 19)
-	java.lang.Long fitxerescanejatid;
+	java.lang.Long fitxerEscanejatID;
 
+	@Index(name="dib_transaccio_filesign_fk_i")
 	@Column(name="fitxersignaturaid",length = 19)
-	java.lang.Long fitxersignaturaid;
+	java.lang.Long fitxerSignaturaID;
 
 	@Column(name="infoscanpixeltype",length = 10)
 	java.lang.Integer infoscanpixeltype;
 
 	@Column(name="infoscanresolucioppp",length = 10)
 	java.lang.Integer infoscanresolucioppp;
-
-	@Column(name="infoscanformatfitxer",length = 100)
-	java.lang.String infoscanformatfitxer;
 
 	@Column(name="infoscanocr",length = 1)
 	boolean infoscanocr;
@@ -112,6 +111,12 @@ private static final long serialVersionUID = 760472444L;
 	@Column(name="usernamerequest",length = 255)
 	java.lang.String usernameRequest;
 
+	@Column(name="returnurl",length = 255)
+	java.lang.String returnUrl;
+
+	@Column(name="view",length = 10)
+	java.lang.Integer view;
+
 
 
   /** Constructor Buit */
@@ -119,7 +124,7 @@ private static final long serialVersionUID = 760472444L;
   }
 
   /** Constructor amb tots els camps  */
-  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp datainici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatcodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerescanejatid , java.lang.Long fitxersignaturaid , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , java.lang.String infoscanformatfitxer , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest) {
+  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp datainici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatcodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view) {
     this.transaccioID=transaccioID;
     this.transactionWebId=transactionWebId;
     this.datainici=datainici;
@@ -129,11 +134,10 @@ private static final long serialVersionUID = 760472444L;
     this.estatcodi=estatcodi;
     this.estatmissatge=estatmissatge;
     this.estatexcepcio=estatexcepcio;
-    this.fitxerescanejatid=fitxerescanejatid;
-    this.fitxersignaturaid=fitxersignaturaid;
+    this.fitxerEscanejatID=fitxerEscanejatID;
+    this.fitxerSignaturaID=fitxerSignaturaID;
     this.infoscanpixeltype=infoscanpixeltype;
     this.infoscanresolucioppp=infoscanresolucioppp;
-    this.infoscanformatfitxer=infoscanformatfitxer;
     this.infoscanocr=infoscanocr;
     this.infosignaturaid=infosignaturaid;
     this.infocustodyid=infocustodyid;
@@ -146,9 +150,11 @@ private static final long serialVersionUID = 760472444L;
     this.expedient=expedient;
     this.perfilid=perfilid;
     this.usernameRequest=usernameRequest;
+    this.returnUrl=returnUrl;
+    this.view=view;
 }
   /** Constructor sense valors autoincrementals */
-  public TransaccioJPA(java.lang.String transactionWebId , java.sql.Timestamp datainici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatcodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerescanejatid , java.lang.Long fitxersignaturaid , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , java.lang.String infoscanformatfitxer , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest) {
+  public TransaccioJPA(java.lang.String transactionWebId , java.sql.Timestamp datainici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatcodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view) {
     this.transactionWebId=transactionWebId;
     this.datainici=datainici;
     this.datafi=datafi;
@@ -157,11 +163,10 @@ private static final long serialVersionUID = 760472444L;
     this.estatcodi=estatcodi;
     this.estatmissatge=estatmissatge;
     this.estatexcepcio=estatexcepcio;
-    this.fitxerescanejatid=fitxerescanejatid;
-    this.fitxersignaturaid=fitxersignaturaid;
+    this.fitxerEscanejatID=fitxerEscanejatID;
+    this.fitxerSignaturaID=fitxerSignaturaID;
     this.infoscanpixeltype=infoscanpixeltype;
     this.infoscanresolucioppp=infoscanresolucioppp;
-    this.infoscanformatfitxer=infoscanformatfitxer;
     this.infoscanocr=infoscanocr;
     this.infosignaturaid=infosignaturaid;
     this.infocustodyid=infocustodyid;
@@ -174,6 +179,8 @@ private static final long serialVersionUID = 760472444L;
     this.expedient=expedient;
     this.perfilid=perfilid;
     this.usernameRequest=usernameRequest;
+    this.returnUrl=returnUrl;
+    this.view=view;
 }
   /** Constructor dels valors Not Null */
   public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp datainici , int estatcodi , long perfilid) {
@@ -193,11 +200,10 @@ private static final long serialVersionUID = 760472444L;
     this.setEstatcodi(__bean.getEstatcodi());
     this.setEstatmissatge(__bean.getEstatmissatge());
     this.setEstatexcepcio(__bean.getEstatexcepcio());
-    this.setFitxerescanejatid(__bean.getFitxerescanejatid());
-    this.setFitxersignaturaid(__bean.getFitxersignaturaid());
+    this.setFitxerEscanejatID(__bean.getFitxerEscanejatID());
+    this.setFitxerSignaturaID(__bean.getFitxerSignaturaID());
     this.setInfoscanpixeltype(__bean.getInfoscanpixeltype());
     this.setInfoscanresolucioppp(__bean.getInfoscanresolucioppp());
-    this.setInfoscanformatfitxer(__bean.getInfoscanformatfitxer());
     this.setInfoscanocr(__bean.isInfoscanocr());
     this.setInfosignaturaid(__bean.getInfosignaturaid());
     this.setInfocustodyid(__bean.getInfocustodyid());
@@ -210,6 +216,12 @@ private static final long serialVersionUID = 760472444L;
     this.setExpedient(__bean.getExpedient());
     this.setPerfilid(__bean.getPerfilid());
     this.setUsernameRequest(__bean.getUsernameRequest());
+    this.setReturnUrl(__bean.getReturnUrl());
+    this.setView(__bean.getView());
+    // Fitxer
+    this.setFitxerEscanejat(FitxerJPA.toJPA(__bean.getFitxerEscanejat()));
+    // Fitxer
+    this.setFitxerSignatura(FitxerJPA.toJPA(__bean.getFitxerSignatura()));
 	}
 
 	public long getTransaccioID() {
@@ -275,18 +287,18 @@ private static final long serialVersionUID = 760472444L;
 		this.estatexcepcio = _estatexcepcio_;
 	};
 
-	public java.lang.Long getFitxerescanejatid() {
-		return(fitxerescanejatid);
+	public java.lang.Long getFitxerEscanejatID() {
+		return(fitxerEscanejatID);
 	};
-	public void setFitxerescanejatid(java.lang.Long _fitxerescanejatid_) {
-		this.fitxerescanejatid = _fitxerescanejatid_;
+	public void setFitxerEscanejatID(java.lang.Long _fitxerEscanejatID_) {
+		this.fitxerEscanejatID = _fitxerEscanejatID_;
 	};
 
-	public java.lang.Long getFitxersignaturaid() {
-		return(fitxersignaturaid);
+	public java.lang.Long getFitxerSignaturaID() {
+		return(fitxerSignaturaID);
 	};
-	public void setFitxersignaturaid(java.lang.Long _fitxersignaturaid_) {
-		this.fitxersignaturaid = _fitxersignaturaid_;
+	public void setFitxerSignaturaID(java.lang.Long _fitxerSignaturaID_) {
+		this.fitxerSignaturaID = _fitxerSignaturaID_;
 	};
 
 	public java.lang.Integer getInfoscanpixeltype() {
@@ -301,13 +313,6 @@ private static final long serialVersionUID = 760472444L;
 	};
 	public void setInfoscanresolucioppp(java.lang.Integer _infoscanresolucioppp_) {
 		this.infoscanresolucioppp = _infoscanresolucioppp_;
-	};
-
-	public java.lang.String getInfoscanformatfitxer() {
-		return(infoscanformatfitxer);
-	};
-	public void setInfoscanformatfitxer(java.lang.String _infoscanformatfitxer_) {
-		this.infoscanformatfitxer = _infoscanformatfitxer_;
 	};
 
 	public boolean isInfoscanocr() {
@@ -394,6 +399,20 @@ private static final long serialVersionUID = 760472444L;
 		this.usernameRequest = _usernameRequest_;
 	};
 
+	public java.lang.String getReturnUrl() {
+		return(returnUrl);
+	};
+	public void setReturnUrl(java.lang.String _returnUrl_) {
+		this.returnUrl = _returnUrl_;
+	};
+
+	public java.lang.Integer getView() {
+		return(view);
+	};
+	public void setView(java.lang.Integer _view_) {
+		this.view = _view_;
+	};
+
 
 
   @Override
@@ -407,6 +426,36 @@ private static final long serialVersionUID = 760472444L;
       __result = false;
     }
     return __result;
+  }
+
+// IMP Field:fitxerid | Table: dib_fitxer | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@ForeignKey(name="dib_transaccio_fitxer_pla_fk")
+	@JoinColumn(name = "fitxerescanejatid", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+	private FitxerJPA fitxerEscanejat;
+
+	public FitxerJPA getFitxerEscanejat() {
+    return this.fitxerEscanejat;
+  }
+
+	public  void setFitxerEscanejat(FitxerJPA fitxerEscanejat) {
+    this.fitxerEscanejat = fitxerEscanejat;
+  }
+
+// IMP Field:fitxerid | Table: dib_fitxer | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@ForeignKey(name="dib_transaccio_fitxer_sign_fk")
+	@JoinColumn(name = "fitxersignaturaid", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+	private FitxerJPA fitxerSignatura;
+
+	public FitxerJPA getFitxerSignatura() {
+    return this.fitxerSignatura;
+  }
+
+	public  void setFitxerSignatura(FitxerJPA fitxerSignatura) {
+    this.fitxerSignatura = fitxerSignatura;
   }
 
 // IMP Field:infosignaturaid | Table: dib_infosignatura | Type: 1  
@@ -468,11 +517,10 @@ private static final long serialVersionUID = 760472444L;
     __tmp.setEstatcodi(__bean.getEstatcodi());
     __tmp.setEstatmissatge(__bean.getEstatmissatge());
     __tmp.setEstatexcepcio(__bean.getEstatexcepcio());
-    __tmp.setFitxerescanejatid(__bean.getFitxerescanejatid());
-    __tmp.setFitxersignaturaid(__bean.getFitxersignaturaid());
+    __tmp.setFitxerEscanejatID(__bean.getFitxerEscanejatID());
+    __tmp.setFitxerSignaturaID(__bean.getFitxerSignaturaID());
     __tmp.setInfoscanpixeltype(__bean.getInfoscanpixeltype());
     __tmp.setInfoscanresolucioppp(__bean.getInfoscanresolucioppp());
-    __tmp.setInfoscanformatfitxer(__bean.getInfoscanformatfitxer());
     __tmp.setInfoscanocr(__bean.isInfoscanocr());
     __tmp.setInfosignaturaid(__bean.getInfosignaturaid());
     __tmp.setInfocustodyid(__bean.getInfocustodyid());
@@ -485,6 +533,12 @@ private static final long serialVersionUID = 760472444L;
     __tmp.setExpedient(__bean.getExpedient());
     __tmp.setPerfilid(__bean.getPerfilid());
     __tmp.setUsernameRequest(__bean.getUsernameRequest());
+    __tmp.setReturnUrl(__bean.getReturnUrl());
+    __tmp.setView(__bean.getView());
+    // Fitxer
+    __tmp.setFitxerEscanejat(FitxerJPA.toJPA(__bean.getFitxerEscanejat()));
+    // Fitxer
+    __tmp.setFitxerSignatura(FitxerJPA.toJPA(__bean.getFitxerSignatura()));
 		return __tmp;
 	}
 

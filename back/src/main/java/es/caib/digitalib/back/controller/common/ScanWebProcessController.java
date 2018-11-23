@@ -31,8 +31,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
+import es.caib.digitalib.back.controller.ScanWebModuleController;
 import es.caib.digitalib.back.form.ScanWebConfigForm;
 import es.caib.digitalib.back.form.ScanWebConfigValidator;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
@@ -81,7 +81,7 @@ public class ScanWebProcessController {
     Set<String> flags = new HashSet<String>();
     form.setFlags(flags);
 
-    form.setId(ScanWebModuleController.generateUniqueScanWebID());
+    form.setId(String.valueOf(ScanWebModuleController.generateUniqueScanWebID()));
 
     List<String> supportedTypes = new ArrayList<String>();
     supportedTypes.add(IScanWebPlugin.SCANTYPE_PDF);
@@ -118,7 +118,7 @@ public class ScanWebProcessController {
       return mav;
     }
 
-    final long scanWebID = form.getId();
+    final String scanWebID = form.getId();
 
     final String scanType = form.getType();
 
@@ -148,10 +148,14 @@ public class ScanWebProcessController {
     ScanWebConfigTester swc = new ScanWebConfigTester(scanWebID, scanType, flags, metadades,
         mode, languageUI, urlFinal, expiryTransaction);
 
+    String urlBase = ScanWebModuleController.getAbsoluteURLBase(request);
+    
+    final boolean isPublic = false;
+    
     // /WEB-INF/views/plugindescan_contenidor.jsp
     final String view = "plugindescan_contenidor";
     ModelAndView mav = ScanWebModuleController.startScanWebProcess(request, view,
-        scanWebModuleEjb, swc);
+        scanWebModuleEjb, swc, urlBase, isPublic);
 
     return mav;
 
@@ -164,7 +168,7 @@ public class ScanWebProcessController {
 
   @RequestMapping(value = "/final/{scanWebID}")
   public ModelAndView finalProcesDeScan(HttpServletRequest request,
-      HttpServletResponse response, @PathVariable("scanWebID") long scanWebID)
+      HttpServletResponse response, @PathVariable("scanWebID") String scanWebID)
       throws Exception {
 
     ScanWebConfig swc;

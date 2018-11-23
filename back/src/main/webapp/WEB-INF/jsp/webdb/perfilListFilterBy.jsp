@@ -107,6 +107,73 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,PerfilFields.URLBASE)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="perfil.urlBase" var="urlBase" />
+              <fmt:message key="genapp.form.searchby" var="cercaperurlBase" >                
+                 <fmt:param value="${urlBase}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${urlBase}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperurlBase}" path="urlBase" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,PerfilFields.SCANFORMATFITXER)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="perfil.scanFormatFitxer" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="scanFormatFitxerDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="scanFormatFitxerFins" />
+
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,PerfilFields.SCANMINIMARESOLUCIO)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="perfil.scanMinimaResolucio" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="scanMinimaResolucioDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="scanMinimaResolucioFins" />
+
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,PerfilFields.SCANPIXELTYPE)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="perfil.scanPixelType" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="scanPixelTypeDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="scanPixelTypeFins" />
+
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PerfilFields.PLUGINSCANWEBID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">

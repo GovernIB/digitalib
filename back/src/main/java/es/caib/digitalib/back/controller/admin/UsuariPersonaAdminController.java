@@ -1,11 +1,9 @@
 package es.caib.digitalib.back.controller.admin;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -16,12 +14,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.digitalib.back.controller.webdb.UsuariPersonaController;
-import es.caib.digitalib.back.form.webdb.UsuariAplicacioFilterForm;
-import es.caib.digitalib.back.form.webdb.UsuariAplicacioForm;
 import es.caib.digitalib.back.form.webdb.UsuariPersonaFilterForm;
 import es.caib.digitalib.back.form.webdb.UsuariPersonaForm;
 import es.caib.digitalib.jpa.UsuariPersonaJPA;
-import es.caib.digitalib.model.fields.ConfiguracioGrupFields;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
 
 /**

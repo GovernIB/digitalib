@@ -22,7 +22,7 @@
     <definition name="base.definition.fullview" template="/WEB-INF/jsp/layout/onlycontentlayout.jsp" preparer="basePreparer">
     </definition>
     
-    <definition name="base.definition.emptylayout" template="/WEB-INF/jsp/layout/emptylayout.jsp" preparer="basePreparer">
+    <definition name="base.definition.emptylayout" template="/WEB-INF/jsp/layout/emptylayout.jsp" >
     </definition>
 
     <definition name="principal.body" template="/WEB-INF/web/tiles/principal/principal.jsp"/>
@@ -34,6 +34,40 @@
     <definition name="exceptionTile" extends="base.definition">
         <put-attribute name="contingut" value="/error.jsp" />
     </definition>
+    
+    
+    
+    <!--  ===========  PUBLIC  ================== -->
+    
+    <!-- 
+    <definition name="public_scanWebForm" extends="common">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/scanWebForm.jsp" />
+    </definition>
+     
+    
+    <definition name="public_scanWebFinal" extends="common.emptylayout">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/scanWebFinal.jsp" />
+    </definition>
+    -->
+
+    <definition name="public_plugindescan_seleccio" extends="common.emptylayout">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_seleccio.jsp" />
+    </definition>
+
+    <definition name="public_finalsortiriframe" extends="common.emptylayout">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/finalsortiriframe.jsp" />
+    </definition>
+    
+    <definition name="public_plugindescan_final" extends="common.emptylayout">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_final.jsp" />
+    </definition>
+    
+    <definition name="public_plugindescan_contenidor" extends="common.emptylayout">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_contenidor.jsp" />
+    </definition>
+    
+    
+    
 
     <!--  ===========  COMMON  ================== -->
 

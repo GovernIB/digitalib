@@ -4,10 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<c:out value="${pageContext.response.locale.language}"/>"  lang="<c:out value="${pageContext.response.locale.language}"/>">
 <head>
 
-<c:if test="${not empty favicon}">
-<link href="<c:url value="${dib:fileUrl(favicon)}"/>" rel="shortcut icon" type="image/x-icon" />
-</c:if>
-
 <%@ include file="/WEB-INF/jsp/moduls/imports.jsp"%>
 </head>
 <body>

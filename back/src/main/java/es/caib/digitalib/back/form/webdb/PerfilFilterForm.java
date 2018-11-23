@@ -76,6 +76,83 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
   }
 
 
+  private java.lang.String urlBase;
+
+  public java.lang.String getUrlBase() {
+    return this.urlBase;
+  }
+
+  public void setUrlBase(java.lang.String urlBase) {
+    this.urlBase = urlBase;
+  }
+
+
+  private java.lang.Integer scanFormatFitxerDesde;
+
+  public java.lang.Integer getScanFormatFitxerDesde() {
+    return this.scanFormatFitxerDesde;
+  }
+
+  public void setScanFormatFitxerDesde(java.lang.Integer scanFormatFitxerDesde) {
+    this.scanFormatFitxerDesde = scanFormatFitxerDesde;
+  }
+
+
+  private java.lang.Integer scanFormatFitxerFins;
+
+  public java.lang.Integer getScanFormatFitxerFins() {
+    return this.scanFormatFitxerFins;
+  }
+
+  public void setScanFormatFitxerFins(java.lang.Integer scanFormatFitxerFins) {
+    this.scanFormatFitxerFins = scanFormatFitxerFins;
+  }
+
+
+  private java.lang.Integer scanMinimaResolucioDesde;
+
+  public java.lang.Integer getScanMinimaResolucioDesde() {
+    return this.scanMinimaResolucioDesde;
+  }
+
+  public void setScanMinimaResolucioDesde(java.lang.Integer scanMinimaResolucioDesde) {
+    this.scanMinimaResolucioDesde = scanMinimaResolucioDesde;
+  }
+
+
+  private java.lang.Integer scanMinimaResolucioFins;
+
+  public java.lang.Integer getScanMinimaResolucioFins() {
+    return this.scanMinimaResolucioFins;
+  }
+
+  public void setScanMinimaResolucioFins(java.lang.Integer scanMinimaResolucioFins) {
+    this.scanMinimaResolucioFins = scanMinimaResolucioFins;
+  }
+
+
+  private java.lang.Integer scanPixelTypeDesde;
+
+  public java.lang.Integer getScanPixelTypeDesde() {
+    return this.scanPixelTypeDesde;
+  }
+
+  public void setScanPixelTypeDesde(java.lang.Integer scanPixelTypeDesde) {
+    this.scanPixelTypeDesde = scanPixelTypeDesde;
+  }
+
+
+  private java.lang.Integer scanPixelTypeFins;
+
+  public java.lang.Integer getScanPixelTypeFins() {
+    return this.scanPixelTypeFins;
+  }
+
+  public void setScanPixelTypeFins(java.lang.Integer scanPixelTypeFins) {
+    this.scanPixelTypeFins = scanPixelTypeFins;
+  }
+
+
   private java.lang.Long pluginScanWebIDDesde;
 
   public java.lang.Long getPluginScanWebIDDesde() {
@@ -262,6 +339,13 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.codi = __toClone.codi;
     this.nom = __toClone.nom;
     this.descripcio = __toClone.descripcio;
+    this.urlBase = __toClone.urlBase;
+    this.scanFormatFitxerDesde = __toClone.scanFormatFitxerDesde;
+    this.scanFormatFitxerFins = __toClone.scanFormatFitxerFins;
+    this.scanMinimaResolucioDesde = __toClone.scanMinimaResolucioDesde;
+    this.scanMinimaResolucioFins = __toClone.scanMinimaResolucioFins;
+    this.scanPixelTypeDesde = __toClone.scanPixelTypeDesde;
+    this.scanPixelTypeFins = __toClone.scanPixelTypeFins;
     this.pluginScanWebIDDesde = __toClone.pluginScanWebIDDesde;
     this.pluginScanWebIDFins = __toClone.pluginScanWebIDFins;
     this.tipusFirmaDesde = __toClone.tipusFirmaDesde;
@@ -278,6 +362,9 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.pluginDocCustodyIDFins = __toClone.pluginDocCustodyIDFins;
     this.usPerfilDesde = __toClone.usPerfilDesde;
     this.usPerfilFins = __toClone.usPerfilFins;
+    this.mapOfValuesForScanFormatFitxer = __toClone.mapOfValuesForScanFormatFitxer;
+    this.mapOfValuesForScanMinimaResolucio = __toClone.mapOfValuesForScanMinimaResolucio;
+    this.mapOfValuesForScanPixelType = __toClone.mapOfValuesForScanPixelType;
     this.mapOfPluginForPluginScanWebID = __toClone.mapOfPluginForPluginScanWebID;
     this.mapOfValuesForTipusFirma = __toClone.mapOfValuesForTipusFirma;
     this.mapOfPluginForPluginFirmaServidorID = __toClone.mapOfPluginForPluginFirmaServidorID;
@@ -297,7 +384,7 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
   @Override
   public List<Field<?>> getDefaultGroupByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { PLUGINSCANWEBID ,TIPUSFIRMA ,TIPUSCUSTODIA ,PLUGINARXIUID ,PLUGINDOCCUSTODYID }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { SCANFORMATFITXER ,PLUGINSCANWEBID ,TIPUSFIRMA ,TIPUSCUSTODIA ,PLUGINARXIUID ,PLUGINDOCCUSTODYID }));
   }
 
 
@@ -320,6 +407,42 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
    // -----------------------
    // Maps de referencies.
    // -----------------------
+  private Map<String, String> mapOfValuesForScanFormatFitxer;
+
+  public Map<String, String> getMapOfValuesForScanFormatFitxer() {
+    return this.mapOfValuesForScanFormatFitxer;
+  }
+
+  public void setMapOfValuesForScanFormatFitxer(Map<String, String> mapOfValuesForScanFormatFitxer) {
+    this.mapOfValuesForScanFormatFitxer = mapOfValuesForScanFormatFitxer;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForScanMinimaResolucio;
+
+  public Map<String, String> getMapOfValuesForScanMinimaResolucio() {
+    return this.mapOfValuesForScanMinimaResolucio;
+  }
+
+  public void setMapOfValuesForScanMinimaResolucio(Map<String, String> mapOfValuesForScanMinimaResolucio) {
+    this.mapOfValuesForScanMinimaResolucio = mapOfValuesForScanMinimaResolucio;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForScanPixelType;
+
+  public Map<String, String> getMapOfValuesForScanPixelType() {
+    return this.mapOfValuesForScanPixelType;
+  }
+
+  public void setMapOfValuesForScanPixelType(Map<String, String> mapOfValuesForScanPixelType) {
+    this.mapOfValuesForScanPixelType = mapOfValuesForScanPixelType;
+  }
+
+
+
   private Map<String, String> mapOfPluginForPluginScanWebID;
 
   public Map<String, String> getMapOfPluginForPluginScanWebID() {

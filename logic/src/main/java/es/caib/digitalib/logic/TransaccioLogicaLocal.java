@@ -24,4 +24,12 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
    * @throws I18NException
    */
   public Transaccio createWithProfile(TransaccioJPA transaccio) throws I18NException;
+  
+  /**
+   * 
+   * @param transactionWebID
+   * @return
+   * @throws I18NException
+   */
+  public TransaccioJPA searchTransaccioByTransactionWebID(String transactionWebID) throws I18NException;
 }

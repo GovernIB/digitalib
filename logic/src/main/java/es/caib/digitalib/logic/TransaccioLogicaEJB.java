@@ -1,16 +1,21 @@
 package es.caib.digitalib.logic;
 
+import java.util.List;
+
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.hibernate.Hibernate;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import es.caib.digitalib.ejb.TransaccioEJB;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.Transaccio;
+import es.caib.digitalib.model.fields.TransaccioFields;
 
 /**
  *
@@ -42,5 +47,30 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     return this.create(transaccio);
 
   }
+  
+  
+  @Override
+  public TransaccioJPA searchTransaccioByTransactionWebID(String transactionWebID) throws I18NException {
+    List<Transaccio> list = select(TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
+
+    if (list == null || list.size() == 0) {
+      return null;
+    }
+
+    TransaccioJPA transaccio = (TransaccioJPA)list.get(0);
+    
+    Hibernate.initialize(transaccio.getPerfil());
+    
+    return transaccio;
+    
+  }
+  
+  
+  @Override
+  @PermitAll
+  public Transaccio update(Transaccio instance) throws I18NException {
+     return super.update(instance);
+  }
+  
 
 }

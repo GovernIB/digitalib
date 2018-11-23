@@ -20,7 +20,7 @@ public class ScanWebConfigTester extends ScanWebConfig {
   protected final long expiryTransaction; 
 
 
-  public ScanWebConfigTester(long scanWebID, String scanType, Set<String> flags, List<Metadata> metadades,
+  public ScanWebConfigTester(String scanWebID, String scanType, Set<String> flags, List<Metadata> metadades,
       ScanWebMode mode, String languageUI, String urlFinal, long expiryTransaction) {
     super(scanWebID, scanType, flags, metadades, mode, languageUI, urlFinal);
     this.expiryTransaction = expiryTransaction;

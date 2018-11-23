@@ -49,5 +49,28 @@ public interface Constants {
     TIPUS_FIRMA_EN_SERVIDOR_PLUGIN,
     TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE
   };
+  
+  
+  public static final int FORMAT_FILE_PDF = 0; // "pdf";
+  
+  public static final int FORMAT_FILE_JPG = 1; // "jpg";
+  
+  public static final int FORMAT_FILE_TIFF = 2; // "tif";
+
+  public static final int FORMAT_FILE_PNG = 3; // "png";
+
+  public static final int FORMAT_FILE_GIF = 4; // "gif";
+  
+  
+  // 15 minuts
+  public static final long EXPIRATION_TIME_MS = 900000L;
+  
+  
+  
+  public static final int PERFIL_US_PLANTILLA = 0; 
+  
+  public static final int PERFIL_US_TRANSACCIO_INFO = 1;
+  
+  
 
 }

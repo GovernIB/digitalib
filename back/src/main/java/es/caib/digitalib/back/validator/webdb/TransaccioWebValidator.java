@@ -65,6 +65,10 @@ public class TransaccioWebValidator  implements Validator, TransaccioFields {
   public void validate(Object target, Errors errors,
     WebValidationResult<Object> wvr, boolean isNou) {
 
+    if (isNou) { // Creacio
+      // ================ CREATION
+      // Fitxers 
+    }
     validator.validate(wvr, target,
       isNou, infoCustodyEjb, infoSignaturaEjb, perfilEjb, transaccioEjb);
 

@@ -39,7 +39,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
   
   
   @Override
-  public List<Plugin> getAllPluginsFiltered(HttpServletRequest request, long scanWebID)
+  public List<Plugin> getAllPluginsFiltered(HttpServletRequest request, String scanWebID)
       throws Exception, I18NException {
 
     ScanWebConfigTester scanWebConfig = getScanWebConfig(request, scanWebID);
@@ -82,7 +82,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
 
   @Override
   public String scanDocument(HttpServletRequest request, String absolutePluginRequestPath,
-      String relativePluginRequestPath, long scanWebID) throws Exception, I18NException {
+      String relativePluginRequestPath, String scanWebID) throws Exception, I18NException {
 
     ScanWebConfigTester scanWebConfig = getScanWebConfig(request, scanWebID);
 
@@ -114,7 +114,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
    */
   public void requestPlugin(HttpServletRequest request, HttpServletResponse response,
       String absoluteRequestPluginBasePath, String relativeRequestPluginBasePath,
-      long scanWebID, String query, boolean isPost) throws Exception, I18NException {
+      String scanWebID, String query, boolean isPost) throws Exception, I18NException {
 
     ScanWebConfigTester ss = getScanWebConfig(request, scanWebID);
     
@@ -159,7 +159,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
   // -------------------------------------------------------------------------
 
   @Override
-  public void closeScanWebProcess(HttpServletRequest request, long scanWebID) {
+  public void closeScanWebProcess(HttpServletRequest request, String scanWebID) {
 
     ScanWebConfigTester pss = getScanWebConfig(request, scanWebID);
 
@@ -171,7 +171,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
     closeScanWebProcess(request, scanWebID, pss);
   }
 
-  private void closeScanWebProcess(HttpServletRequest request, long scanWebID,
+  private void closeScanWebProcess(HttpServletRequest request, String scanWebID,
       ScanWebConfigTester pss) {
 
     Long pluginID = pss.getPluginID();
@@ -203,7 +203,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
     scanWebConfigMap.remove(scanWebID);
   }
 
-  private static final Map<Long, ScanWebConfigTester> scanWebConfigMap = new HashMap<Long, ScanWebConfigTester>();
+  private static final Map<String, ScanWebConfigTester> scanWebConfigMap = new HashMap<String, ScanWebConfigTester>();
 
   private static long lastCheckScanProcessCaducades = 0;
 
@@ -213,7 +213,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
    * @param scanWebID
    * @return
    */
-  public ScanWebConfigTester getScanWebConfig(HttpServletRequest request, long scanWebID) {
+  public ScanWebConfigTester getScanWebConfig(HttpServletRequest request, String scanWebID) {
     // Fer net peticions caducades
     // Check si existeix algun proces de escaneig caducat s'ha d'esborrar
     // Com a mínim cada minut es revisa si hi ha caducats
@@ -223,10 +223,10 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
 
     if (now + un_minut_en_ms > lastCheckScanProcessCaducades) {
       lastCheckScanProcessCaducades = now;
-      Map<Long, ScanWebConfigTester> keysToDelete = new HashMap<Long, ScanWebConfigTester>();
+      Map<String, ScanWebConfigTester> keysToDelete = new HashMap<String, ScanWebConfigTester>();
 
-      Set<Long> ids = scanWebConfigMap.keySet();
-      for (Long id : ids) {
+      Set<String> ids = scanWebConfigMap.keySet();
+      for (String id : ids) {
         ScanWebConfigTester ss = scanWebConfigMap.get(id);
         if (now > ss.getExpiryTransaction()) {
           keysToDelete.put(id, ss);
@@ -240,7 +240,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
       if (keysToDelete.size() != 0) {
         synchronized (scanWebConfigMap) {
 
-          for (Entry<Long, ScanWebConfigTester> pss : keysToDelete.entrySet()) {
+          for (Entry<String, ScanWebConfigTester> pss : keysToDelete.entrySet()) {
             closeScanWebProcess(request, pss.getKey(), pss.getValue());
           }
         }
@@ -252,7 +252,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
 
   @Override
   public void startScanWebProcess(ScanWebConfigTester scanWebConfig) {
-    final long scanWebID = scanWebConfig.getScanWebID();
+    final String scanWebID = scanWebConfig.getScanWebID();
     synchronized (scanWebConfigMap) {
       scanWebConfigMap.put(scanWebID, scanWebConfig);
     }

@@ -21,11 +21,10 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final IntegerField ESTATCODI = new IntegerField(_TABLE_MODEL, "estatcodi", "estatcodi");
 	 public static final StringField ESTATMISSATGE = new StringField(_TABLE_MODEL, "estatmissatge", "estatmissatge");
 	 public static final StringField ESTATEXCEPCIO = new StringField(_TABLE_MODEL, "estatexcepcio", "estatexcepcio");
-	 public static final LongField FITXERESCANEJATID = new LongField(_TABLE_MODEL, "fitxerescanejatid", "fitxerescanejatid");
-	 public static final LongField FITXERSIGNATURAID = new LongField(_TABLE_MODEL, "fitxersignaturaid", "fitxersignaturaid");
+	 public static final LongField FITXERESCANEJATID = new LongField(_TABLE_MODEL, "fitxerEscanejatID", "fitxerescanejatid");
+	 public static final LongField FITXERSIGNATURAID = new LongField(_TABLE_MODEL, "fitxerSignaturaID", "fitxersignaturaid");
 	 public static final IntegerField INFOSCANPIXELTYPE = new IntegerField(_TABLE_MODEL, "infoscanpixeltype", "infoscanpixeltype");
 	 public static final IntegerField INFOSCANRESOLUCIOPPP = new IntegerField(_TABLE_MODEL, "infoscanresolucioppp", "infoscanresolucioppp");
-	 public static final StringField INFOSCANFORMATFITXER = new StringField(_TABLE_MODEL, "infoscanformatfitxer", "infoscanformatfitxer");
 	 public static final BooleanField INFOSCANOCR = new BooleanField(_TABLE_MODEL, "infoscanocr", "infoscanocr");
 	 public static final LongField INFOSIGNATURAID = new LongField(_TABLE_MODEL, "infosignaturaid", "infosignaturaid");
 	 public static final LongField INFOCUSTODYID = new LongField(_TABLE_MODEL, "infocustodyid", "infocustodyid");
@@ -38,6 +37,8 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final StringField EXPEDIENT = new StringField(_TABLE_MODEL, "expedient", "expedient");
 	 public static final LongField PERFILID = new LongField(_TABLE_MODEL, "perfilid", "perfilid");
 	 public static final StringField USERNAMEREQUEST = new StringField(_TABLE_MODEL, "usernameRequest", "usernamerequest");
+	 public static final StringField RETURNURL = new StringField(_TABLE_MODEL, "returnUrl", "returnurl");
+	 public static final IntegerField VIEW = new IntegerField(_TABLE_MODEL, "view", "view");
 
 
   public static final Field<?>[] ALL_TRANSACCIO_FIELDS = {
@@ -54,7 +55,6 @@ public interface TransaccioFields extends java.io.Serializable {
     FITXERSIGNATURAID,
     INFOSCANPIXELTYPE,
     INFOSCANRESOLUCIOPPP,
-    INFOSCANFORMATFITXER,
     INFOSCANOCR,
     INFOSIGNATURAID,
     INFOCUSTODYID,
@@ -66,7 +66,9 @@ public interface TransaccioFields extends java.io.Serializable {
     FUNCIONARINOM,
     EXPEDIENT,
     PERFILID,
-    USERNAMEREQUEST
+    USERNAMEREQUEST,
+    RETURNURL,
+    VIEW
   };
 
 

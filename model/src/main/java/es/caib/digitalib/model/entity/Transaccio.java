@@ -29,20 +29,17 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.String getEstatexcepcio();
 	public void setEstatexcepcio(java.lang.String _estatexcepcio_);
 
-	public java.lang.Long getFitxerescanejatid();
-	public void setFitxerescanejatid(java.lang.Long _fitxerescanejatid_);
+	public java.lang.Long getFitxerEscanejatID();
+	public void setFitxerEscanejatID(java.lang.Long _fitxerEscanejatID_);
 
-	public java.lang.Long getFitxersignaturaid();
-	public void setFitxersignaturaid(java.lang.Long _fitxersignaturaid_);
+	public java.lang.Long getFitxerSignaturaID();
+	public void setFitxerSignaturaID(java.lang.Long _fitxerSignaturaID_);
 
 	public java.lang.Integer getInfoscanpixeltype();
 	public void setInfoscanpixeltype(java.lang.Integer _infoscanpixeltype_);
 
 	public java.lang.Integer getInfoscanresolucioppp();
 	public void setInfoscanresolucioppp(java.lang.Integer _infoscanresolucioppp_);
-
-	public java.lang.String getInfoscanformatfitxer();
-	public void setInfoscanformatfitxer(java.lang.String _infoscanformatfitxer_);
 
 	public boolean isInfoscanocr();
 	public void setInfoscanocr(boolean _infoscanocr_);
@@ -80,6 +77,16 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.String getUsernameRequest();
 	public void setUsernameRequest(java.lang.String _usernameRequest_);
 
+	public java.lang.String getReturnUrl();
+	public void setReturnUrl(java.lang.String _returnUrl_);
+
+	public java.lang.Integer getView();
+	public void setView(java.lang.Integer _view_);
+
+  // Fitxer
+  public <F extends Fitxer> F getFitxerEscanejat();
+  // Fitxer
+  public <F extends Fitxer> F getFitxerSignatura();
 
 
   // ======================================

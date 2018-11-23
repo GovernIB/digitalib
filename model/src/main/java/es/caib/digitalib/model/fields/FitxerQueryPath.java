@@ -96,4 +96,32 @@ public class FitxerQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
   }
 */
 
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public TransaccioQueryPath TRANSACCIO_FITXERESCANEJATIDS() {
+    return new TransaccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return FitxerQueryPath.this.getQueryPath() + "transaccio_fitxerescanejatids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public TransaccioQueryPath TRANSACCIO_FITXERSIGNATURAIDS() {
+    return new TransaccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return FitxerQueryPath.this.getQueryPath() + "transaccio_fitxersignaturaids" + ".";
+      }
+    });
+  }
+*/
+
 }

@@ -40,6 +40,10 @@ public class PerfilValidator<T> implements PerfilFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,SCANFORMATFITXER, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SCANFORMATFITXER)));
+
     __vr.rejectIfEmptyOrWhitespace(__target__,PLUGINSCANWEBID, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PLUGINSCANWEBID)));
@@ -59,9 +63,9 @@ public class PerfilValidator<T> implements PerfilFields {
     // Check size
     if (__vr.getFieldErrorCount(CODI) == 0) {
       java.lang.String __codi = (java.lang.String)__vr.getFieldValue(__target__,CODI);
-      if (__codi!= null && __codi.length() > 25) {
+      if (__codi!= null && __codi.length() > 255) {
         __vr.rejectValue(CODI, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CODI)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(25)));
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CODI)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     
@@ -89,6 +93,14 @@ public class PerfilValidator<T> implements PerfilFields {
       if (__descripcio!= null && __descripcio.length() > 255) {
         __vr.rejectValue(DESCRIPCIO, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DESCRIPCIO)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(URLBASE) == 0) {
+      java.lang.String __urlbase = (java.lang.String)__vr.getFieldValue(__target__,URLBASE);
+      if (__urlbase!= null && __urlbase.length() > 255) {
+        __vr.rejectValue(URLBASE, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(URLBASE)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     

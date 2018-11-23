@@ -44,6 +44,38 @@
           ${perfil.descripcio}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.URLBASE)}">
+          <td>
+                       <c:if test="${ not empty perfil.urlBase}">
+               <a href="${perfil.urlBase}" target="_blank">${perfil.urlBase}</a>
+             </c:if>
+
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.SCANFORMATFITXER)}">
+          <td>
+          <c:set var="tmp">${perfil.scanFormatFitxer}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForScanFormatFitxer[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.SCANMINIMARESOLUCIO)}">
+          <td>
+          <c:set var="tmp">${perfil.scanMinimaResolucio}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForScanMinimaResolucio[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.SCANPIXELTYPE)}">
+          <td>
+          <c:set var="tmp">${perfil.scanPixelType}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForScanPixelType[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.PLUGINSCANWEBID)}">
           <td>
           <c:set var="tmp">${perfil.pluginScanWebID}</c:set>

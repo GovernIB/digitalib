@@ -14,6 +14,18 @@ public interface Perfil extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getDescripcio();
 	public void setDescripcio(java.lang.String _descripcio_);
 
+	public java.lang.String getUrlBase();
+	public void setUrlBase(java.lang.String _urlBase_);
+
+	public int getScanFormatFitxer();
+	public void setScanFormatFitxer(int _scanFormatFitxer_);
+
+	public java.lang.Integer getScanMinimaResolucio();
+	public void setScanMinimaResolucio(java.lang.Integer _scanMinimaResolucio_);
+
+	public int getScanPixelType();
+	public void setScanPixelType(int _scanPixelType_);
+
 	public long getPluginScanWebID();
 	public void setPluginScanWebID(long _pluginScanWebID_);
 

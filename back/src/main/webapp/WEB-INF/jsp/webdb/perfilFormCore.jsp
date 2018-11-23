@@ -14,7 +14,7 @@
             </td>
             <td>
             <form:errors path="perfil.codi" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PerfilFields.CODI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PerfilFields.CODI)? 'input-large uneditable-input' : 'input-large'}"  maxlength="25" path="perfil.codi"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PerfilFields.CODI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PerfilFields.CODI)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="perfil.codi"   />
 
            </td>
         </tr>
@@ -52,6 +52,121 @@
             <form:errors path="perfil.descripcio" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PerfilFields.DESCRIPCIO)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PerfilFields.DESCRIPCIO)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="perfil.descripcio"   />
 
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.URLBASE)}">
+        <tr id="perfil_urlBase_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.URLBASE])?'perfil.urlBase':__theForm.labels[PerfilFields.URLBASE]}" />
+              <c:if test="${not empty __theForm.help[PerfilFields.URLBASE]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.URLBASE]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+           <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.URLBASE)}">
+
+             <c:if test="${ not empty __theForm.perfil.urlBase}">
+               <a href="${__theForm.perfil.urlBase}" target="_blank">${__theForm.perfil.urlBase}</a>
+
+             </c:if>
+           </c:if>
+
+           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,PerfilFields.URLBASE))}">
+
+            <form:errors path="perfil.urlBase" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PerfilFields.URLBASE)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PerfilFields.URLBASE)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="perfil.urlBase"   />
+
+           </c:if>
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.SCANFORMATFITXER)}">
+        <tr id="perfil_scanFormatFitxer_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.SCANFORMATFITXER])?'perfil.scanFormatFitxer':__theForm.labels[PerfilFields.SCANFORMATFITXER]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[PerfilFields.SCANFORMATFITXER]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.SCANFORMATFITXER]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="perfil.scanFormatFitxer" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.SCANFORMATFITXER)}" >
+          <form:hidden path="perfil.scanFormatFitxer"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.perfil.scanFormatFitxer,__theForm.listOfValuesForScanFormatFitxer)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.SCANFORMATFITXER)}" >
+          <form:select id="perfil_scanFormatFitxer"  onchange="if(typeof onChangeScanFormatFitxer == 'function') {  onChangeScanFormatFitxer(this); };"  cssClass="input-xxlarge" path="perfil.scanFormatFitxer">
+            <c:forEach items="${__theForm.listOfValuesForScanFormatFitxer}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.SCANMINIMARESOLUCIO)}">
+        <tr id="perfil_scanMinimaResolucio_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.SCANMINIMARESOLUCIO])?'perfil.scanMinimaResolucio':__theForm.labels[PerfilFields.SCANMINIMARESOLUCIO]}" />
+              <c:if test="${not empty __theForm.help[PerfilFields.SCANMINIMARESOLUCIO]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.SCANMINIMARESOLUCIO]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="perfil.scanMinimaResolucio" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.SCANMINIMARESOLUCIO)}" >
+          <form:hidden path="perfil.scanMinimaResolucio"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.perfil.scanMinimaResolucio,__theForm.listOfValuesForScanMinimaResolucio)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.SCANMINIMARESOLUCIO)}" >
+          <form:select id="perfil_scanMinimaResolucio"  onchange="if(typeof onChangeScanMinimaResolucio == 'function') {  onChangeScanMinimaResolucio(this); };"  cssClass="input-xxlarge" path="perfil.scanMinimaResolucio">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForScanMinimaResolucio}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.SCANPIXELTYPE)}">
+        <tr id="perfil_scanPixelType_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.SCANPIXELTYPE])?'perfil.scanPixelType':__theForm.labels[PerfilFields.SCANPIXELTYPE]}" />
+              <c:if test="${not empty __theForm.help[PerfilFields.SCANPIXELTYPE]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.SCANPIXELTYPE]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="perfil.scanPixelType" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.SCANPIXELTYPE)}" >
+          <form:hidden path="perfil.scanPixelType"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.perfil.scanPixelType,__theForm.listOfValuesForScanPixelType)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.SCANPIXELTYPE)}" >
+          <form:select id="perfil_scanPixelType"  onchange="if(typeof onChangeScanPixelType == 'function') {  onChangeScanPixelType(this); };"  cssClass="input-xxlarge" path="perfil.scanPixelType">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForScanPixelType}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>

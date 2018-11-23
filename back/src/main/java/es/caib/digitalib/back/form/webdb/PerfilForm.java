@@ -19,6 +19,9 @@ public class PerfilForm extends DigitalIBBaseForm {
   public PerfilForm(PerfilForm __toClone) {
     super(__toClone);
       this.perfil = __toClone.perfil;
+    this.listOfValuesForScanFormatFitxer = __toClone.listOfValuesForScanFormatFitxer;
+    this.listOfValuesForScanMinimaResolucio = __toClone.listOfValuesForScanMinimaResolucio;
+    this.listOfValuesForScanPixelType = __toClone.listOfValuesForScanPixelType;
     this.listOfPluginForPluginScanWebID = __toClone.listOfPluginForPluginScanWebID;
     this.listOfValuesForTipusFirma = __toClone.listOfValuesForTipusFirma;
     this.listOfPluginForPluginFirmaServidorID = __toClone.listOfPluginForPluginFirmaServidorID;
@@ -42,6 +45,42 @@ public class PerfilForm extends DigitalIBBaseForm {
   }
   
   
+  private List<StringKeyValue> listOfValuesForScanFormatFitxer;
+
+  public List<StringKeyValue> getListOfValuesForScanFormatFitxer() {
+    return this.listOfValuesForScanFormatFitxer;
+  }
+
+  public void setListOfValuesForScanFormatFitxer(List<StringKeyValue> listOfValuesForScanFormatFitxer) {
+    this.listOfValuesForScanFormatFitxer = listOfValuesForScanFormatFitxer;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForScanMinimaResolucio;
+
+  public List<StringKeyValue> getListOfValuesForScanMinimaResolucio() {
+    return this.listOfValuesForScanMinimaResolucio;
+  }
+
+  public void setListOfValuesForScanMinimaResolucio(List<StringKeyValue> listOfValuesForScanMinimaResolucio) {
+    this.listOfValuesForScanMinimaResolucio = listOfValuesForScanMinimaResolucio;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForScanPixelType;
+
+  public List<StringKeyValue> getListOfValuesForScanPixelType() {
+    return this.listOfValuesForScanPixelType;
+  }
+
+  public void setListOfValuesForScanPixelType(List<StringKeyValue> listOfValuesForScanPixelType) {
+    this.listOfValuesForScanPixelType = listOfValuesForScanPixelType;
+  }
+
+
+
   private List<StringKeyValue> listOfPluginForPluginScanWebID;
 
   public List<StringKeyValue> getListOfPluginForPluginScanWebID() {

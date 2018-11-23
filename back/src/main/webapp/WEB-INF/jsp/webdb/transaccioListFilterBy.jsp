@@ -253,42 +253,6 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.FITXERESCANEJATID)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.fitxerescanejatid" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="fitxerescanejatidDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="fitxerescanejatidFins" />
-
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.FITXERSIGNATURAID)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.fitxersignaturaid" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="fitxersignaturaidDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="fitxersignaturaidFins" />
-
-            </div>
-
-
-        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANPIXELTYPE)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
@@ -321,19 +285,6 @@
 
               <form:input cssClass="input-append input-small search-query" path="infoscanresoluciopppFins" />
 
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANFORMATFITXER)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.infoscanformatfitxer" var="infoscanformatfitxer" />
-              <fmt:message key="genapp.form.searchby" var="cercaperinfoscanformatfitxer" >                
-                 <fmt:param value="${infoscanformatfitxer}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${infoscanformatfitxer}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperinfoscanformatfitxer}" path="infoscanformatfitxer" />
             </div>
 
 
@@ -510,6 +461,37 @@
               </fmt:message>
               <span class="add-on"><c:out value="${usernameRequest}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperusernameRequest}" path="usernameRequest" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.RETURNURL)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="transaccio.returnUrl" var="returnUrl" />
+              <fmt:message key="genapp.form.searchby" var="cercaperreturnUrl" >                
+                 <fmt:param value="${returnUrl}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${returnUrl}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperreturnUrl}" path="returnUrl" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.VIEW)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="transaccio.view" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="viewDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="viewFins" />
+
             </div>
 
 

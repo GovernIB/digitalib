@@ -1,154 +1,53 @@
 
 
 
-
--- Index: dib_transaccio_pk_i
-
--- DROP INDEX dib_transaccio_pk_i;
-
-CREATE INDEX dib_transaccio_pk_i
-  ON dib_transaccio
-  USING btree
-  (transaccioid);
-
-
-CREATE TABLE dib_infosignatura
-(
-  infosignaturaid bigint not null default nextval('dib_digitalib_seq'::regclass),
-  signoperation integer not null,
-  signtype character varying (255) not null,
-  signalgorithm character varying (255),
-  signmode integer,
-  signaturestablelocation integer,
-  timestampincluded boolean,
-  policyincluded boolean,
-  enitipofirma character varying (255), 
-  eniperfilfirma character varying (255),
-  enirolfirma character varying (255),
-  enisignername character varying (255),
-  enisigneradministrationid character varying (255),
-  enisignlevel character varying (255),
+ALTER TABLE dib_transaccio
+  ADD COLUMN returnurl character varying(255);
+ALTER TABLE dib_transaccio
+  ADD COLUMN view integer;
   
-);
-
-ALTER TABLE dib_infosignatura
-  ADD CONSTRAINT dib_infosignatura_pk PRIMARY KEY (infosignaturaid);
-
-ALTER TABLE dib_infosignatura
-  ADD COLUMN checkadministrationidofsigner boolean;
-ALTER TABLE dib_infosignatura
-  ADD COLUMN checkdocumentmodifications boolean;
-ALTER TABLE dib_infosignatura
-  ADD COLUMN checkvalidationsignature boolean;
-
-
-ALTER TABLE dib_transaccio
-  ADD COLUMN infosignaturaid bigint;
-ALTER TABLE dib_transaccio
-  ADD CONSTRAINT dib_transaccio_infosign_fk FOREIGN KEY (infosignaturaid) REFERENCES dib_infosignatura (infosignaturaid) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
   
-CREATE TABLE dib_infocustody
-(
-  infocustodyid bigint NOT NULL DEFAULT nextval('dib_digitalib_seq'::regclass),
-  custodyfileid character varying(255),
-  custodyfileurl character varying(255),
-  csv character varying(255),
-  csvgenerationdefinition character varying(255),
-  csvvalidationweb character varying(255),
-  CONSTRAINT dib_infocustody_pk PRIMARY KEY (infocustodyid)
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE dib_infocustody
-  OWNER TO digitalib;
   
-DROP TABLE dib_transaccio;
-
-CREATE TABLE dib_transaccio
-(
-  transaccioid bigint NOT NULL DEFAULT nextval('dib_digitalib_seq'::regclass),
-  datainici timestamp without time zone NOT NULL,
-  datafi timestamp without time zone,
-  usuariaplicacioid bigint,
-  usuaripersonaid bigint,
-  estatcodi integer NOT NULL,
-  estatmissatge character varying(3000),
-  estatexcepcio text,
-  fitxerescanejatid bigint,
-  fitxersignaturaid bigint,
-  infoscanpixeltype integer,
-  infoscanresolucioppp integer,
-  infoscanformatfitxer character varying(100),
-  infoscanocr boolean,
-  CONSTRAINT dib_transaccio_pk PRIMARY KEY (transaccioid),
-  CONSTRAINT dib_transaccio_infocust_fk FOREIGN KEY (infocustodyid)
-      REFERENCES dib_infocustody (infocustodyid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT dib_transaccio_infosign_fk FOREIGN KEY (infosignaturaid)
-      REFERENCES dib_infosignatura (infosignaturaid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-);
-
-
- -- Es recomanable tenir un index de la clau primaria.
- create index dib_infocustody_pk_i on dib_infocustody (infocustodyid);
-
- -- Es recomanable tenir un index de la clau primaria.
- create index dib_infosignatura_pk_i on dib_infosignatura (infosignaturaid);
-
- -- Es recomanable tenir un index de la clau forania.
- create index dib_transaccio_infosignid_fk_i on dib_transaccio (infosignaturaid);
-
- -- Es recomanable tenir un index de la clau forania.
- create index dib_transaccio_infocustid_fk_i on dib_transaccio (infocustodyid);
- 
- 
- ALTER TABLE dib_transaccio
-  ADD COLUMN webid character varying(100) NOT NULL;
+  ALTER TABLE dib_usuariaplicacio
+  ADD COLUMN urlbase character varying(255);
   
-  ALTER TABLE dib_transaccio
-  ADD CONSTRAINT dib_transaccio_webid_uk UNIQUE (webid);
- 
- 
- 
- 
- ALTER TABLE dib_transaccio
-  ADD COLUMN languageui character varying(10);
-ALTER TABLE dib_transaccio
-  ADD COLUMN languagedoc character varying(10);
-ALTER TABLE dib_transaccio
-  ADD COLUMN ciutadanif character varying(15);
-ALTER TABLE dib_transaccio
-  ADD COLUMN ciutadanom character varying(255);
-ALTER TABLE dib_transaccio
-  ADD COLUMN funcionariusername character varying(255);
-ALTER TABLE dib_transaccio
-  ADD COLUMN funcionarinom character varying(255);
-ALTER TABLE dib_transaccio
-  ADD COLUMN expedient character varying(255);
-ALTER TABLE dib_transaccio
-  ADD COLUMN perfilid bigint NOT NULL;
-ALTER TABLE dib_transaccio
-  ADD CONSTRAINT dib_transacccio_perfil_fk FOREIGN KEY (perfilid) REFERENCES dib_perfil (perfilid) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
   
-  -- La ForeignKey dib_transacccio_perfil_fk de la taula Transaccio no té un nom correcte (esperat dib_transaccio_perfil_*_fk )
-ALTER TABLE dib_transaccio DROP CONSTRAINT dib_transacccio_perfil_fk;
-ALTER TABLE dib_transaccio ADD CONSTRAINT dib_transaccio_perfil_perfi_fk  FOREIGN KEY (perfilid)  REFERENCES dib_perfil (perfilid);
-
+  ALTER TABLE dib_perfil
+  ADD COLUMN formatscanfile integer NOT NULL DEFAULT 0;
+  
+  ALTER TABLE dib_perfil RENAME formatscanfile TO scanformatfitxer;
+ALTER TABLE dib_perfil ADD COLUMN scanminimaresolucio integer;
 
 ALTER TABLE dib_perfil
-  ADD COLUMN usperfil integer NOT NULL default 0;
-COMMENT ON COLUMN dib_perfil.usperfil IS 'Quin us es farà del perfil: plantilla o informacio perfil en transaccio';
+  ADD COLUMN scanpixeltype integer;
+  
+  ALTER TABLE dib_perfil
+  ADD COLUMN urlbase character varying(255);
+COMMENT ON COLUMN dib_perfil.urlbase IS 'Opcional. Serveix per indicar la url que utilitzaran els client per connectar-se a DigitalIB. Si val null s''obtindrà de la propietat dels properties-service.xml';
 
 
--- Es recomanable tenir un index de la clau forania.
-create index dib_transaccio_perfilid_fk_i on dib_transaccio (perfilid);
+ALTER TABLE dib_usuariaplicacio
+  DROP COLUMN urlbase;
+  
+  ALTER TABLE dib_transaccio
+  DROP COLUMN infoscanformatfitxer;
+  
+  ALTER TABLE dib_perfil
+   ALTER COLUMN codi TYPE character varying(255);
 
+   ALTER TABLE dib_transaccio ADD CONSTRAINT dib_transaccio_fitxer_pla_fk FOREIGN KEY (fitxerescanejatid)
+      REFERENCES dib_fitxer (fitxerid) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+  ALTER TABLE dib_transaccio ADD CONSTRAINT dib_transaccio_fitxer_sign_fk FOREIGN KEY (fitxersignaturaid)
+      REFERENCES dib_fitxer (fitxerid) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+      
+      
+      
+       -- Es recomanable tenir un index de la clau forania.
+create index dib_transaccio_fileplain_fk_i on dib_transaccio (fitxerescanejatid);
 
-ALTER TABLE dib_transaccio
-  ADD COLUMN usernamerequest character varying(255);
-COMMENT ON COLUMN dib_transaccio.usernamerequest IS 'Nom d''usuari de la persona que està loguejada en una altre aplicació web quan es fa una cridada via REST';
-
+ -- Es recomanable tenir un index de la clau forania.
+create index dib_transaccio_filesign_fk_i on dib_transaccio (fitxersignaturaid);
+      
+      

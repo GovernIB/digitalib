@@ -1,4 +1,4 @@
-package es.caib.digitalib.back.controller.common;
+package es.caib.digitalib.back.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -16,7 +16,6 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.plugins.scanweb.api.ScanWebMode;
 import org.fundaciobit.plugins.scanweb.api.ScanWebStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,13 +31,13 @@ import es.caib.digitalib.model.entity.Plugin;
  * @author anadal
  *
  */
-@Controller
-@RequestMapping(value = ScanWebModuleController.CONTEXTWEB)
-public class ScanWebModuleController extends HttpServlet {
+public abstract class ScanWebModuleController extends HttpServlet {
 
   protected static Logger log = Logger.getLogger(ScanWebModuleController.class);
 
-  public static final String CONTEXTWEB = "/common/scanwebmodule";
+  public static final String CONTEXTWEB_COMMON = "/common/scanwebmodule";
+  
+  public static final String CONTEXTWEB_PUBLIC = "/public/scanwebmodule";
 
   public static final boolean stepSelectionWhenOnlyOnePlugin = false;
 
@@ -47,7 +46,7 @@ public class ScanWebModuleController extends HttpServlet {
 
   @RequestMapping(value = "/selectscanwebmodule/{scanWebID}")
   public ModelAndView selectScanWebModule(HttpServletRequest request,
-      HttpServletResponse response, @PathVariable("scanWebID") long scanWebID)
+      HttpServletResponse response, @PathVariable("scanWebID") String scanWebID)
       throws Exception, I18NException {
 
     List<Plugin> pluginsFiltered = scanWebModuleEjb.getAllPluginsFiltered(request, scanWebID);
@@ -57,7 +56,7 @@ public class ScanWebModuleController extends HttpServlet {
       if (pluginsFiltered.size() == 1) {
         Plugin modul = pluginsFiltered.get(0);
         long pluginID = modul.getPluginID();
-        String url = CONTEXTWEB + "/showscanwebmodule/" + pluginID + "/" + scanWebID;
+        String url = getContextWeb() + "/showscanwebmodule/" + pluginID + "/" + scanWebID;
         return new ModelAndView(new RedirectView(url, true));
       }
     }
@@ -69,9 +68,12 @@ public class ScanWebModuleController extends HttpServlet {
     }
 
     // /WEB-INF/views/plugindescan_seleccio.jsp
-    ModelAndView mav = new ModelAndView("plugindescan_seleccio");
+    boolean isPublic = (CONTEXTWEB_PUBLIC.equals(getContextWeb()));
+    
+    ModelAndView mav = new ModelAndView(isPublic? "public_plugindescan_seleccio" :  "plugindescan_seleccio");
     mav.addObject("scanWebID", scanWebID);
     mav.addObject("plugins", pluginsFiltered);
+    mav.addObject("scancontext", getContextWeb());
 
     return mav;
 
@@ -83,7 +85,10 @@ public class ScanWebModuleController extends HttpServlet {
       HttpServletResponse response, @RequestParam("URL_FINAL") String urlFinal)
       throws Exception {
 
-    ModelAndView mav = new ModelAndView("plugindescan_final");
+    boolean isPublic = (CONTEXTWEB_PUBLIC.equals(getContextWeb()));
+    
+    ModelAndView mav = new ModelAndView(isPublic? "public_plugindescan_final": "plugindescan_final");
+
     mav.addObject("URL_FINAL", urlFinal);
 
     return mav;
@@ -92,7 +97,7 @@ public class ScanWebModuleController extends HttpServlet {
   @RequestMapping(value = "/showscanwebmodule/{pluginID}/{scanWebID}")
   public ModelAndView showScanWebModule(HttpServletRequest request,
       HttpServletResponse response, @PathVariable("pluginID") Long pluginID,
-      @PathVariable("scanWebID") long scanWebID) throws Exception, I18NException {
+      @PathVariable("scanWebID") String scanWebID) throws Exception, I18NException {
 
     log.info("SMC :: showscanwebmodule: PluginID = " + pluginID);
     log.info("SMC :: showscanwebmodule: scanWebID = " + scanWebID);
@@ -108,11 +113,11 @@ public class ScanWebModuleController extends HttpServlet {
     }
     
 
-    String relativeControllerBase = getRelativeControllerBase(request, CONTEXTWEB);
+    String relativeControllerBase = getRelativeControllerBase(request, getContextWeb());
     String relativeRequestPluginBasePath = getRequestPluginBasePath(relativeControllerBase,
         scanWebID);
 
-    String absoluteControllerBase = getAbsoluteControllerBase(request, CONTEXTWEB);
+    String absoluteControllerBase = getAbsoluteControllerBase(request, getContextWeb());
     String absoluteRequestPluginBasePath = getRequestPluginBasePath(absoluteControllerBase,
         scanWebID);
 
@@ -194,7 +199,7 @@ public class ScanWebModuleController extends HttpServlet {
     if (debug) {
       log.debug(" uri = " + uri);
     }
-    final String BASE = CONTEXTWEB + "/requestPlugin";
+    final String BASE = getContextWeb() + "/requestPlugin";
     int index = uri.indexOf(BASE);
     
     if (index == -1) {
@@ -218,7 +223,7 @@ public class ScanWebModuleController extends HttpServlet {
       log.debug(" query = " + query);
     }
     
-    long scanWebID = Long.parseLong(idStr);
+    String scanWebID = idStr;
         
     try {
       requestPlugin(request, response, scanWebID, query, isPost);
@@ -232,13 +237,13 @@ public class ScanWebModuleController extends HttpServlet {
   
 
   protected void requestPlugin(HttpServletRequest request, HttpServletResponse response,
-      long scanWebID, String query, boolean isPost)
+      String scanWebID, String query, boolean isPost)
       throws Exception, I18NException {
 
     String absoluteRequestPluginBasePath = getAbsoluteRequestPluginBasePath(request,
-        CONTEXTWEB, scanWebID);
+        getContextWeb(), scanWebID);
     String relativeRequestPluginBasePath = getRelativeRequestPluginBasePath(request,
-        CONTEXTWEB, scanWebID);
+        getContextWeb(), scanWebID);
 
    // Map<String, IUploadedFile> uploadedFiles = getMultipartFiles(request);
 
@@ -253,7 +258,7 @@ public class ScanWebModuleController extends HttpServlet {
   // -------------------------------------------------------------------------
   // -------------------------------------------------------------------------
 
-  protected ModelAndView generateErrorMAV(HttpServletRequest request, long scanWebID,
+  protected ModelAndView generateErrorMAV(HttpServletRequest request, String scanWebID,
       String msg, Throwable th) {
     
     ScanWebConfigTester pss = scanWebModuleEjb.getScanWebConfig(request, scanWebID);
@@ -273,13 +278,13 @@ public class ScanWebModuleController extends HttpServlet {
   }
 
   protected static void generateErrorAndRedirect(HttpServletRequest request,
-      HttpServletResponse response, ScanWebConfigTester pss, String msg, Throwable th) {
+      HttpServletResponse response, ScanWebConfigTester pss, String msg, Throwable th, boolean isPublic) {
 
     String urlFinal = processError(request, pss, msg, th);
 
     try {
 
-      String r = request.getContextPath() + CONTEXTWEB + "/error?URL_FINAL="
+      String r = request.getContextPath() + getContextWeb(isPublic) + "/error?URL_FINAL="
           + URLEncoder.encode(urlFinal, "UTF8");
 
       response.sendRedirect(r);
@@ -324,14 +329,15 @@ public class ScanWebModuleController extends HttpServlet {
    * @throws Exception
    */
   public static ModelAndView startScanWebProcess(HttpServletRequest request, String view,
-      ScanWebModuleLocal scanWebModuleEjb, ScanWebConfigTester scanWebConfig)
+      ScanWebModuleLocal scanWebModuleEjb, ScanWebConfigTester scanWebConfig, String urlBase,
+      boolean isPublic)
       throws Exception {
 
-    final long scanWebID = scanWebConfig.getScanWebID();
+    final String scanWebID = scanWebConfig.getScanWebID();
     
     scanWebModuleEjb.startScanWebProcess(scanWebConfig);
 
-    final String urlToSelectPluginPage = getAbsoluteControllerBase(request, CONTEXTWEB)
+    final String urlToSelectPluginPage = urlBase + getContextWeb(isPublic)
         + "/selectscanwebmodule/" + scanWebID;
 
     ModelAndView mav = new ModelAndView(view);
@@ -346,8 +352,13 @@ public class ScanWebModuleController extends HttpServlet {
   }
 
 
+  protected abstract String getContextWeb();
+  
+  protected static String getContextWeb(boolean isPublic) {
+    return isPublic? CONTEXTWEB_PUBLIC : CONTEXTWEB_COMMON;  
+  }
 
-  protected static String getAbsoluteURLBase(HttpServletRequest request) {
+  public static String getAbsoluteURLBase(HttpServletRequest request) {
     return request.getScheme() + "://" + request.getServerName() + ":"
         + +request.getServerPort() + request.getContextPath();
   }
@@ -366,20 +377,20 @@ public class ScanWebModuleController extends HttpServlet {
   }
 
   protected static String getAbsoluteRequestPluginBasePath(HttpServletRequest request,
-      String webContext, long scanWebID) {
+      String webContext, String scanWebID) {
 
     String base = getAbsoluteControllerBase(request, webContext);
     return getRequestPluginBasePath(base, scanWebID);
   }
 
   public static String getRelativeRequestPluginBasePath(HttpServletRequest request,
-      String webContext, long scanWebID) {
+      String webContext, String scanWebID) {
 
     String base = getRelativeControllerBase(request, webContext);
     return getRequestPluginBasePath(base, scanWebID);
   }
 
-  private static String getRequestPluginBasePath(String base, long scanWebID) {
+  private static String getRequestPluginBasePath(String base, String scanWebID) {
     String absoluteRequestPluginBasePath = base + "/requestPlugin/" + scanWebID;
     return absoluteRequestPluginBasePath;
   }
@@ -390,7 +401,7 @@ public class ScanWebModuleController extends HttpServlet {
    */
   public static long generateUniqueScanWebID() {
     long id;
-    synchronized (CONTEXTWEB) {
+    synchronized (log) {
       id = (System.currentTimeMillis() * 1000000L) + System.nanoTime() % 1000000L;
       try {
         Thread.sleep(10);

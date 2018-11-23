@@ -1139,7 +1139,7 @@
            <int>0</int> 
           </void> 
           <void property="foreignKeys"> 
-           <array class="org.fundaciobit.genapp.ForeignKey" length="4"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="6"> 
             <void index="0"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
@@ -1189,6 +1189,32 @@
               </void> 
               <void property="table"> 
                <string>dib_plugincridada</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="4"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>fitxerescanejatid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_transaccio_fitxer_pla_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_transaccio</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="5"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>fitxersignaturaid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_transaccio_fitxer_sign_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_transaccio</string> 
               </void> 
              </object> 
             </void> 
@@ -2766,7 +2792,7 @@
     <void index="7"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
-       <array class="org.fundaciobit.genapp.FieldInfo" length="12"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="16"> 
         <void index="0"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="PK"> 
@@ -2886,7 +2912,7 @@
            <boolean>true</boolean> 
           </void> 
           <void property="size"> 
-           <int>25</int> 
+           <int>255</int> 
           </void> 
           <void property="sqlName"> 
            <string>codi</string> 
@@ -2995,6 +3021,192 @@
         </void> 
         <void index="4"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="descripcio"> 
+           <string>Opcional. Serveix per indicar la url que utilitzaran els client per connectar-se a DigitalIB. Si val null s&apos;obtindrà de la propietat dels properties-service.xml</string> 
+          </void> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>urlBase</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.String</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>urlbase</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>urlbase</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>255</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>urlbase</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>12</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>13</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="5"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="defaultValue"> 
+           <string>0</string> 
+          </void> 
+          <void property="descripcio"> 
+           <string>PDF,JPG,PNG, GIF, TIFF</string> 
+          </void> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="javaName"> 
+           <string>scanFormatFitxer</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>int</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>scanformatfitxer</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>scanformatfitxer</string> 
+           </void> 
+          </void> 
+          <void property="minAllowedValue"> 
+           <string>0,1,2,3,4</string> 
+          </void> 
+          <void property="notNullable"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="size"> 
+           <int>10</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>scanformatfitxer</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>4</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>16</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="6"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="descripcio"> 
+           <string>Punts per pulgada (ppp)</string> 
+          </void> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>scanMinimaResolucio</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Integer</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>scanminimaresolucio</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>scanminimaresolucio</string> 
+           </void> 
+          </void> 
+          <void property="minAllowedValue"> 
+           <string>100,150,200,300,400,600,1200,2400,4800,9600,19200</string> 
+          </void> 
+          <void property="size"> 
+           <int>10</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>scanminimaresolucio</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>4</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>16</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="7"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="defaultValue"> 
+           <string>0</string> 
+          </void> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>scanPixelType</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>int</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>scanpixeltype</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>scanpixeltype</string> 
+           </void> 
+          </void> 
+          <void property="minAllowedValue"> 
+           <string>1,2,3</string> 
+          </void> 
+          <void property="size"> 
+           <int>10</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>scanpixeltype</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>4</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>16</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="8"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
           </void> 
@@ -3077,7 +3289,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="5"> 
+        <void index="9"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="defaultValue"> 
            <string>0</string> 
@@ -3128,7 +3340,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="6"> 
+        <void index="10"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -3206,7 +3418,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="7"> 
+        <void index="11"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -3284,7 +3496,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="8"> 
+        <void index="12"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="defaultValue"> 
            <string>0</string> 
@@ -3335,7 +3547,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="9"> 
+        <void index="13"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -3416,7 +3628,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="10"> 
+        <void index="14"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -3497,7 +3709,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="11"> 
+        <void index="15"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="defaultValue"> 
            <string>0</string> 
@@ -5369,7 +5581,7 @@
     <void index="13"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
-       <array class="org.fundaciobit.genapp.FieldInfo" length="26"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="27"> 
         <void index="0"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="PK"> 
@@ -5758,8 +5970,31 @@
           <void property="digits"> 
            <int>0</int> 
           </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>fitxerid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_transaccio_fitxer_pla_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_fitxer</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_transaccio_fileplain_fk_i</string> 
+          </void> 
           <void property="javaName"> 
-           <string>fitxerescanejatid</string> 
+           <string>fitxerEscanejatID</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -5785,8 +6020,24 @@
           </void> 
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>fitxerid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_transaccio_fitxer_pla_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_fitxer</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
             <void property="webtype"> 
-             <int>14</int> 
+             <int>3</int> 
             </void> 
            </object> 
           </void> 
@@ -5797,8 +6048,31 @@
           <void property="digits"> 
            <int>0</int> 
           </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>fitxerid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_transaccio_fitxer_sign_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_fitxer</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_transaccio_filesign_fk_i</string> 
+          </void> 
           <void property="javaName"> 
-           <string>fitxersignaturaid</string> 
+           <string>fitxerSignaturaID</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -5824,8 +6098,24 @@
           </void> 
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>fitxerid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_transaccio_fitxer_sign_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_fitxer</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
             <void property="webtype"> 
-             <int>14</int> 
+             <int>3</int> 
             </void> 
            </object> 
           </void> 
@@ -5915,45 +6205,6 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>infoscanformatfitxer</string> 
-          </void> 
-          <void property="javaType"> 
-           <class>java.lang.String</class> 
-          </void> 
-          <void property="labels"> 
-           <void method="put"> 
-            <string>ca</string> 
-            <string>infoscanformatfitxer</string> 
-           </void> 
-           <void method="put"> 
-            <string>es</string> 
-            <string>infoscanformatfitxer</string> 
-           </void> 
-          </void> 
-          <void property="size"> 
-           <int>100</int> 
-          </void> 
-          <void property="sqlName"> 
-           <string>infoscanformatfitxer</string> 
-          </void> 
-          <void property="sqlType"> 
-           <int>12</int> 
-          </void> 
-          <void property="webFieldInfo"> 
-           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
-            <void property="webtype"> 
-             <int>1</int> 
-            </void> 
-           </object> 
-          </void> 
-         </object> 
-        </void> 
-        <void index="14"> 
-         <object class="org.fundaciobit.genapp.FieldInfo"> 
-          <void property="digits"> 
-           <int>0</int> 
-          </void> 
-          <void property="javaName"> 
            <string>infoscanocr</string> 
           </void> 
           <void property="javaType"> 
@@ -5987,7 +6238,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="15"> 
+        <void index="14"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -6065,7 +6316,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="16"> 
+        <void index="15"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -6143,7 +6394,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="17"> 
+        <void index="16"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -6169,6 +6420,45 @@
           </void> 
           <void property="sqlName"> 
            <string>languageui</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>12</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>1</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="17"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>languagedoc</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.String</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>languagedoc</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>languagedoc</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>10</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>languagedoc</string> 
           </void> 
           <void property="sqlType"> 
            <int>12</int> 
@@ -6183,45 +6473,6 @@
          </object> 
         </void> 
         <void index="18"> 
-         <object class="org.fundaciobit.genapp.FieldInfo"> 
-          <void property="digits"> 
-           <int>0</int> 
-          </void> 
-          <void property="javaName"> 
-           <string>languagedoc</string> 
-          </void> 
-          <void property="javaType"> 
-           <class>java.lang.String</class> 
-          </void> 
-          <void property="labels"> 
-           <void method="put"> 
-            <string>ca</string> 
-            <string>languagedoc</string> 
-           </void> 
-           <void method="put"> 
-            <string>es</string> 
-            <string>languagedoc</string> 
-           </void> 
-          </void> 
-          <void property="size"> 
-           <int>10</int> 
-          </void> 
-          <void property="sqlName"> 
-           <string>languagedoc</string> 
-          </void> 
-          <void property="sqlType"> 
-           <int>12</int> 
-          </void> 
-          <void property="webFieldInfo"> 
-           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
-            <void property="webtype"> 
-             <int>1</int> 
-            </void> 
-           </object> 
-          </void> 
-         </object> 
-        </void> 
-        <void index="19"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -6260,7 +6511,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="20"> 
+        <void index="19"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -6286,6 +6537,45 @@
           </void> 
           <void property="sqlName"> 
            <string>ciutadanom</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>12</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>1</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="20"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>funcionariusername</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.String</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>funcionariusername</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>funcionariusername</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>255</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>funcionariusername</string> 
           </void> 
           <void property="sqlType"> 
            <int>12</int> 
@@ -6305,7 +6595,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>funcionariusername</string> 
+           <string>funcionarinom</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -6313,18 +6603,18 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>funcionariusername</string> 
+            <string>funcionarinom</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>funcionariusername</string> 
+            <string>funcionarinom</string> 
            </void> 
           </void> 
           <void property="size"> 
            <int>255</int> 
           </void> 
           <void property="sqlName"> 
-           <string>funcionariusername</string> 
+           <string>funcionarinom</string> 
           </void> 
           <void property="sqlType"> 
            <int>12</int> 
@@ -6344,7 +6634,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>funcionarinom</string> 
+           <string>expedient</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -6352,18 +6642,18 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>funcionarinom</string> 
+            <string>expedient</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>funcionarinom</string> 
+            <string>expedient</string> 
            </void> 
           </void> 
           <void property="size"> 
            <int>255</int> 
           </void> 
           <void property="sqlName"> 
-           <string>funcionarinom</string> 
+           <string>expedient</string> 
           </void> 
           <void property="sqlType"> 
            <int>12</int> 
@@ -6378,45 +6668,6 @@
          </object> 
         </void> 
         <void index="23"> 
-         <object class="org.fundaciobit.genapp.FieldInfo"> 
-          <void property="digits"> 
-           <int>0</int> 
-          </void> 
-          <void property="javaName"> 
-           <string>expedient</string> 
-          </void> 
-          <void property="javaType"> 
-           <class>java.lang.String</class> 
-          </void> 
-          <void property="labels"> 
-           <void method="put"> 
-            <string>ca</string> 
-            <string>expedient</string> 
-           </void> 
-           <void method="put"> 
-            <string>es</string> 
-            <string>expedient</string> 
-           </void> 
-          </void> 
-          <void property="size"> 
-           <int>255</int> 
-          </void> 
-          <void property="sqlName"> 
-           <string>expedient</string> 
-          </void> 
-          <void property="sqlType"> 
-           <int>12</int> 
-          </void> 
-          <void property="webFieldInfo"> 
-           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
-            <void property="webtype"> 
-             <int>1</int> 
-            </void> 
-           </object> 
-          </void> 
-         </object> 
-        </void> 
-        <void index="24"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -6497,7 +6748,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="25"> 
+        <void index="24"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="descripcio"> 
            <string>Nom d&apos;usuari de la persona que està loguejada en una altre aplicació web quan es fa una cridada via REST</string> 
@@ -6537,6 +6788,90 @@
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="webtype"> 
              <int>1</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="25"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="filter"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="javaName"> 
+           <string>returnUrl</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.String</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>returnurl</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>returnurl</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>255</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>returnurl</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>12</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>1</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="26"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>view</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Integer</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>view</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>view</string> 
+           </void> 
+          </void> 
+          <void property="minAllowedValue"> 
+           <string>0,1</string> 
+          </void> 
+          <void property="size"> 
+           <int>10</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>view</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>4</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>16</int> 
             </void> 
            </object> 
           </void> 

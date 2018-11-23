@@ -27,6 +27,22 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new StringField(getQueryPath(), PerfilFields.DESCRIPCIO);
   }
 
+  public StringField URLBASE() {
+    return new StringField(getQueryPath(), PerfilFields.URLBASE);
+  }
+
+  public IntegerField SCANFORMATFITXER() {
+    return new IntegerField(getQueryPath(), PerfilFields.SCANFORMATFITXER);
+  }
+
+  public IntegerField SCANMINIMARESOLUCIO() {
+    return new IntegerField(getQueryPath(), PerfilFields.SCANMINIMARESOLUCIO);
+  }
+
+  public IntegerField SCANPIXELTYPE() {
+    return new IntegerField(getQueryPath(), PerfilFields.SCANPIXELTYPE);
+  }
+
   public LongField PLUGINSCANWEBID() {
     return new LongField(getQueryPath(), PerfilFields.PLUGINSCANWEBID);
   }

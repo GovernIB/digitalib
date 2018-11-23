@@ -1,14 +1,16 @@
 package es.caib.digitalib.back.controller.scanwebsimple.v1;
 
+import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.SubQuery;
 import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.ApiScanWebSimple;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfile;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfiles;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleFile;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleScanResult;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleScannedFileInfo;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStartTransactionRequest;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import es.caib.digitalib.back.controller.all.RestScanWebProcessController;
 import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
@@ -32,11 +35,12 @@ import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioQueryPath;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.utils.Configuracio;
+import es.caib.digitalib.utils.Constants;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.spi.SyncResolver;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -44,11 +48,8 @@ import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * Created 19/11/18 10:10
@@ -60,9 +61,6 @@ import java.util.Map;
 public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
   public static final String CONTEXT = "/common/rest/apiscanwebsimple/v1";
-
-  // 15 minuts
-  public static final long MAX_TIME = 900000L;
 
   @EJB(mappedName = es.caib.digitalib.ejb.UsuariAplicacioLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.UsuariAplicacioLocal usuariAplicacioEjb;
@@ -158,7 +156,9 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
   public ResponseEntity<?> getTransactionID(HttpServletRequest request,
       @RequestBody ScanWebSimpleGetTransactionIdRequest requestTransactionID) {
 
-    String error = autenticate(request, "ca", usuariAplicacioEjb);
+    String language = "ca";
+
+    String error = autenticate(request, language, usuariAplicacioEjb);
     if (error != null) {
       return generateServerError(error, HttpStatus.UNAUTHORIZED);
     }
@@ -167,10 +167,10 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     try {
       cleanExpiredTransactions();
     } catch (I18NException e2) {
-      // TODO Auto-generated catch block
-      e2.printStackTrace();
-      
-      // XYZ ZZZ ZZZ 
+      // XYZ ZZZ ZZZ
+      String msg = "Error fent neteja de transaccions caducades: "
+          + I18NLogicUtils.getMessage(e2, new Locale(language));
+      return generateServerError(msg, e2.getCause());
     }
 
     // Check de requestTransactionID
@@ -185,6 +185,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     }
 
     // XYZ ZZZ ZZZ Valida Idioma DOC
+    
+    final String transactionWebID = internalGetTransacction();
 
     // Valida Perfil
     String scanWebProfile = requestTransactionID.getScanWebProfile();
@@ -215,23 +217,23 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
     PerfilJPA perfil = perfilEjb.findByPrimaryKey(perfilID);
 
-    PerfilJPA clonedPerfil = PerfilJPA.copyJPA(perfil);
+    PerfilJPA clonedPerfil = PerfilJPA.toJPA(perfil);
 
-    clonedPerfil.setCodi(clonedPerfil.getCodi() + "-" + clonedPerfil.getPerfilID());
+    clonedPerfil.setCodi(clonedPerfil.getCodi() + "-" + transactionWebID);
     clonedPerfil.setPerfilID(0);
+    clonedPerfil.setUsPerfil(Constants.PERFIL_US_TRANSACCIO_INFO);
 
     // XYZ ZZZ ZZZ Falten altres comprovacions
 
-    String transactionID = internalGetTransacction();
 
     HttpHeaders headers = addAccessControllAllowOrigin();
-    ResponseEntity<?> res = new ResponseEntity<String>(transactionID, headers, HttpStatus.OK);
+    ResponseEntity<?> res = new ResponseEntity<String>(transactionWebID, headers, HttpStatus.OK);
 
     TransaccioJPA t = new TransaccioJPA();
 
     t.setDatainici(new Timestamp(System.currentTimeMillis()));
     t.setEstatcodi(ScanWebSimpleStatus.STATUS_REQUESTED_ID);
-    t.setTransactionWebId(transactionID);
+    t.setTransactionWebId(transactionWebID);
     t.setLanguageui(requestTransactionID.getLanguageUI());
     t.setLanguagedoc(requestTransactionID.getLanguageDoc());
 
@@ -250,7 +252,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     try {
       transaccioLogicaEjb.createWithProfile(t);
     } catch (I18NException e) {
-
+      return generateServerError("Error creant la transaccio amb Perfil");
     }
 
     return res;
@@ -264,6 +266,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
   public ResponseEntity<?> startTransaction(HttpServletRequest request,
       @RequestBody ScanWebSimpleStartTransactionRequest startTransactionRequest) {
 
+    String languageUI = "ca";
+
     log.info(" XYZ ZZZ eNTRA A startTransaction => ScanWebSimpleStartTransactionRequest: "
         + startTransactionRequest);
 
@@ -274,94 +278,125 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
     try {
       cleanExpiredTransactions();
-    } catch (I18NException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+    } catch (I18NException e2) {
       // XYZ ZZZ ZZZ
+      String msg = "Error fent neteja de transaccions caducades: "
+          + I18NLogicUtils.getMessage(e2, new Locale(languageUI));
+      return generateServerError(msg, e2.getCause());
     }
-
     // TODO XYZ ZZZ CHECKS DE LOGIN
 
     // CHECKS DE variable
-    final String transactionID = startTransactionRequest.getTransactionID();
+    final String transactionWebID = startTransactionRequest.getTransactionID();
 
-    /*
-     * 
-     
-         // XYZ ZZZ ZZZ
-    
-    log.info(" XYZ ZZZ startTransaction::transactionID => |" + transactionID + "|");
-    log.info(" XYZ ZZZ startTransaction::currentTransactions.size() => "
-        + currentTransactions.size());
-
-    // XYZ ZZZ BBDD
-    TransactionInfo ti = currentTransactions.get(transactionID);
-
-    if (ti == null) {
-      // TODO XYZ ZZZ Traduir
-      return generateServerError("No existeix cap transacció amb ID " + transactionID);
-    }
-
-    if (ti.getInternalStatus() != TransactionInfo.STATUS_RESERVED_ID) {
-      // TODO XYZ ZZZ Traduir
-      return generateServerError("La transacció " + transactionID + " ja s'ha iniciat.");
-    }
-
-    // XYZ ZZZ TODO
-    // Falta verificar estructura de
-
-    // XYZ ZZZ final String languageUI = ti.getCommonInfo().getLanguageUI();
-
-    Date dataCreacio = ti.getStartTime();
-
-    if (dataCreacio.getTime() + TransactionInfo.MAX_TIME < System.currentTimeMillis()) {
-      // TODO XYZ ZZZ Traduir
-      currentTransactions.remove(transactionID);
-      return generateServerError("La transacció amb ID " + transactionID + " ha expirat");
-    }
-
-*/
-    // TODO XYZ ZZZ VALIDAR ESTRUCTURA simpleSignaturesSet
+    log.info(" XYZ ZZZ startTransaction::transactionWebID => |" + transactionWebID + "|");
 
     try {
+      // XYZ ZZZ TREURE A METODE ????
+      TransaccioJPA transaccio = null;
+      {
+
+        transaccio = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
+        if (transaccio == null) {
+          // XYZ ZZZ ZZZ
+          String msg = "NO existeix la transacció amb ID " + transactionWebID;
+          return generateServerError(msg);
+        }
+
+        if (transaccio.getEstatcodi() < 0) {
+          // XYZ ZZZ ZZZ
+          String msg = "La transacció amb ID " + transactionWebID + " te un estat no vàlid ("
+              + transaccio.getEstatcodi() + ") per iniciar el proces d'escaneig.";
+          return generateServerError(msg);
+        }
+
+      }
+
+      languageUI = transaccio.getLanguageui();
+
+      // XYZ ZZZ TODO
+      // Falta verificar estructura de
+
+      // Date dataCreacio = ti.getStartTime();
+      //
+      // if (dataCreacio.getTime() + TransactionInfo.MAX_TIME < System.currentTimeMillis()) {
+      // // TODO XYZ ZZZ Traduir
+      // currentTransactions.remove(transactionID);
+      // return generateServerError("La transacció amb ID " + transactionID + " ha expirat");
+      // }
+
+      // TODO XYZ ZZZ VALIDAR ESTRUCTURA simpleSignaturesSet
 
       LoginInfo loginInfo = LoginInfo.getInstance();
 
       log.info(" XYZ ZZZ LOGININFO => " + loginInfo);
 
       // Checks Globals
-      if (loginInfo.getUsuariPersona() != null) {
-        throw new Exception("Aquest servei només el poden fer servir el usuariAPP XYZ ZZZ");
-      }
+      // if (loginInfo.getUsuariPersona() != null) {
+      // throw new Exception("Aquest servei només el poden fer servir el usuariAPP XYZ ZZZ");
+      // }
 
       // Checks usuari aplicacio
       UsuariAplicacioJPA usuariAplicacio = loginInfo.getUsuariAplicacio();
       log.info(" XYZ ZZZ Usuari-APP = " + usuariAplicacio);
       long usuariAplicacioID = usuariAplicacio.getUsuariAplicacioID();
-      log.info(" XYZ ZZZ Usuari-APP ID = " + usuariAplicacio);
+      log.info(" XYZ ZZZ Usuari-APP ID = " + usuariAplicacioID);
 
-      final String virtualTransactionID = internalGetTransacction();
+      transaccio.setReturnUrl(startTransactionRequest.getReturnUrl());
 
-      String urlFinal = startTransactionRequest.getReturnUrl();
+      int view = startTransactionRequest.getView();
 
-      // XYZ ZZZ ZZZ GUARDAR URL DINS BBDD
-      // pss.getCommonInfoSignature().setUrlFinal(urlFinal);
-      perfilEjb.count(null);
+      if (view == ScanWebSimpleStartTransactionRequest.VIEW_FULLSCREEN
+          || view == ScanWebSimpleStartTransactionRequest.VIEW_IFRAME) {
+        // OK
+        transaccio.setView(view);
+      } else {
+
+        // XYZ ZZZ ZZZ
+        String msg = "La transacció amb ID " + transactionWebID + " s'ha intentat iniciar"
+            + "amb un id de vista desconegut (" + view + ")";
+        return generateServerError(msg);
+
+      }
 
       // CRIDAR A START TRANSACION
-      final boolean fullView = ScanWebSimpleStartTransactionRequest.VIEW_FULLSCREEN
-          .equals(startTransactionRequest.getView());
 
-      // XYZ ZZZ ZZZ FA FALTA INICIAR TRANSACCIO !!!!!!!!
-      String redirectUrl = null; // passarelaDeFirmaWebEjb.startTransaction(pss, entitatID,
-                                 // fullView, usuariAplicacio);
+      // XYZ ZZZ ZZZ Validar
+      // SignaturesSetBeanValidator ssbv = new SignaturesSetBeanValidator(validator, this,
+      // entitatID);
+      // final boolean isNou = true;
+      // ssbv.throwValidationExceptionIfErrors(signaturesSet, isNou);
+
+      // Cercar plugin d'escaneig
+
+      Perfil p = transaccio.getPerfil();
+
+      // List<Long> filterPluginsByIDs = new ArrayList<Long>();
+      //
+      //
+      // filterPluginsByIDs.add(p.getPluginScanWebID());
+
+      String urlBase = p.getUrlBase();
+      if (urlBase == null) {
+        urlBase = Configuracio.getAppUrl();
+      }
+
+      // URL on Iniciar el proces de firma
+      // XYZ ZZZ TODO Això ho ha de collir de la propietat URL PortaFIB de
+      // UsuariApplicacioConfig
+      // XYZ ZZZ TODO Configurar que si getAppUrl val null llavors llanci excepció
+      final String redirectUrl = urlBase + RestScanWebProcessController.SCANWEB_CONTEXTPATH + "/start/"
+          + transaccio.getTransactionWebId();
+      if (log.isDebugEnabled()) {
+        log.debug("Inici de TRANSACCIO SCANWEB = " + redirectUrl);
+      }
 
       HttpHeaders headers = addAccessControllAllowOrigin();
       ResponseEntity<?> re = new ResponseEntity<String>(redirectUrl, headers, HttpStatus.OK);
       log.info(" XYZ ZZZ SURT DE startTransaction => FINAL OK");
 
-      //     // XYZ ZZZ ZZZ
-      // ti.setInternalStatus(TransactionInfo.STATUS_IN_PROGRESS);
+      transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_IN_PROGRESS);
+      transaccioLogicaEjb.update(transaccio);
 
       return re;
       /*
@@ -372,11 +407,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
        * generateServerError(msg);
        */
     } catch (I18NException i18ne) {
-      //     // XYZ ZZZ ZZZ
-      // String idioma = ti.getRequestTransactionID().getLanguageUI();
 
-      String idioma = "ca";
-      String msg = I18NLogicUtils.getMessage(i18ne, new Locale(idioma));
+      String msg = I18NLogicUtils.getMessage(i18ne, new Locale(languageUI));
 
       log.error(msg, i18ne);
 
@@ -384,6 +416,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
     } catch (Throwable th) {
 
+      // XYZ ZZZ ZZZ TRADUIR
       String msg = "Error desconegut iniciant el proces de Firma: " + th.getMessage();
 
       log.error(msg, th);
@@ -392,6 +425,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     }
 
   }
+
 
   @RequestMapping(value = "/" + ApiScanWebSimple.TRANSACTIONSTATUS, method = RequestMethod.POST)
   @ResponseBody
@@ -434,7 +468,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
   @ResponseBody
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ResponseEntity<?> getScanWebResult(@RequestBody String transactionID,
+  public ResponseEntity<?> getScanWebResult(@RequestBody String transactionWebID,
       HttpServletRequest request) {
 
     log.info(" XYZ ZZZ getSignaturesResult => ENTRA");
@@ -444,13 +478,16 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       return generateServerError(error, HttpStatus.UNAUTHORIZED);
     }
 
-    // Clean Transactions caducades
+    String languageUI = "ca";
+
     try {
+      // Clean Transactions caducades
       cleanExpiredTransactions();
-    } catch (I18NException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+    } catch (I18NException e2) {
       // XYZ ZZZ ZZZ
+      String msg = "Error fent neteja de transaccions caducades: "
+          + I18NLogicUtils.getMessage(e2, new Locale(languageUI));
+      return generateServerError(msg, e2.getCause());
     }
 
     // XYZ ZZZ
@@ -464,9 +501,52 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       // + "] de la transacció: " + transactionID;
       // return generateServerError(msg);
       // }
+      
+      TransaccioJPA transaccio = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
+      
+      
 
       // TODO XYZ ZZZ ZZZZ
       ScanWebSimpleScanResult fssr = new ScanWebSimpleScanResult();
+      
+      ScanWebSimpleStatus status = new ScanWebSimpleStatus();
+      status.setStatus(transaccio.getEstatcodi());
+      status.setErrorStackTrace(transaccio.getEstatexcepcio());
+      // XYZ ZZZ Recuperar una Excepcio a partir d'un stack trace
+      //status.setErrorException(errorException);
+      
+      fssr.setStatus(status);
+      
+      
+      if (status.getStatus() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
+      
+        fssr.setCustodyInfo(null);
+        
+        fssr.setDetachedSignatureFile(null);
+        
+        // Document escanejat
+        long scannedFileID= transaccio.getFitxerEscanejatID();
+        
+        byte[] data = FileSystemManager.getFileContent(scannedFileID);
+
+        String nom = transaccio.getFitxerEscanejat().getNom();
+        
+        // XYZ ZZZ Treure mime segons tipus format del perfil de Transaccio
+        String mime = transaccio.getFitxerEscanejat().getMime();
+        
+        fssr.setScannedFile(new ScanWebSimpleFile(nom, mime, data));
+        
+        // Informació de Document escanejat
+        Integer pixelType = null;
+        Integer pppResolution = null;
+        String formatFile =  RestScanWebProcessController.formatFileToScanWebApi(transaccio.getPerfil().getScanFormatFitxer()); // S'ha de treure de Perfil        
+        Boolean ocr = null;
+        ScanWebSimpleScannedFileInfo scannedFileInfo = new ScanWebSimpleScannedFileInfo(pixelType, pppResolution,
+            formatFile, ocr);
+
+        fssr.setScannedFileInfo(scannedFileInfo);
+
+      }
 
       // // TODO XYZ ZZZ ZZZZ
       // fssr.setStatus(status);
@@ -489,7 +569,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
       // TRADUIR
       final String msg = "Error desconegut intentant recuperar resultat de"
-          + " l'escaneig amb numero transacció: " + transactionID + ": " + th.getMessage();
+          + " l'escaneig amb numero transacció: " + transactionWebID + ": " + th.getMessage();
 
       log.error(msg, th);
 
@@ -517,58 +597,45 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       return;
     }
 
-    internalCloseTransaction(transactionID);
-
     log.info(" XYZ ZZZ closeTransaction => FINAL OK");
 
   }
 
-  protected void internalCloseTransaction(String transactionID) {
 
-    // TANCAR TRANSACCIO DE BBDD
-    // passarelaDeFirmaWebEjb.closeTransaction(transactionID);
-
-    // XYZ ZZZ ZZZ currentTransactions.remove(transactionID);
-
-  }
-
-  
   public static long lastCheckExpiredTransaccions = 0;
-  
+
   /**
    * Fer neteja de transaccions Obsoletes
    */
   protected synchronized void cleanExpiredTransactions() throws I18NException {
 
     final long now = System.currentTimeMillis();
-    
+
     if (lastCheckExpiredTransaccions + 5000 > now) {
-      return; // Esperam un poc entre 
+      return; // Esperam un poc entre
     }
-    
-    // 
-    Timestamp expired = new Timestamp(now - MAX_TIME);
-    
-    Where where = Where.AND(
-        TransaccioFields.DATAFI.isNull(),
-        TransaccioFields.DATAINICI.lessThan(expired)
-        );
-    
-    List<Long> caducades = transaccioLogicaEjb.executeQuery(TransaccioFields.TRANSACCIOID, where);
-    
-    
+
+    Timestamp expired = new Timestamp(now - Constants.EXPIRATION_TIME_MS);
+
+    Where where = Where.AND(TransaccioFields.DATAFI.isNull(),
+        TransaccioFields.DATAINICI.lessThan(expired));
+
+    List<Long> caducades = transaccioLogicaEjb.executeQuery(TransaccioFields.TRANSACCIOID,
+        where);
+
     for (Long tid : caducades) {
       try {
-        
+
         TransaccioJPA trans = transaccioLogicaEjb.findByPrimaryKey(tid);
-        
-        
-        
-        
-        
+        trans.setEstatcodi(ScanWebSimpleStatus.STATUS_EXPIRED);
+        trans.setDatafi(new Timestamp(now));
+
+        log.warn("Marcant transaccio com caducada: " + trans.getTransactionWebId());
+        transaccioLogicaEjb.update(trans);
+
       } catch (Exception e) {
         log.error("Error desconegut"
-            + " netejant transaccions expirades de l'APIFirmaSimple: " + e.getMessage(), e);
+            + " netejant transaccions expirades de l'APIScanWebSimple: " + e.getMessage(), e);
       }
     }
   }

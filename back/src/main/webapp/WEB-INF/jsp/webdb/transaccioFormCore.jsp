@@ -190,37 +190,91 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.FITXERESCANEJATID)}">
-        <tr id="transaccio_fitxerescanejatid_rowid">
+        <tr id="transaccio_fitxerEscanejatID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FITXERESCANEJATID])?'transaccio.fitxerescanejatid':__theForm.labels[TransaccioFields.FITXERESCANEJATID]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FITXERESCANEJATID])?'transaccio.fitxerEscanejatID':__theForm.labels[TransaccioFields.FITXERESCANEJATID]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.FITXERESCANEJATID]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.FITXERESCANEJATID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.fitxerescanejatid" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERESCANEJATID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERESCANEJATID)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.fitxerescanejatid"   />
-
+              <form:errors path="transaccio.fitxerEscanejatID" cssClass="errorField alert alert-error" />
+              <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0px">
+                <div class="input-append">
+                <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERESCANEJATID)}" >
+                    <div class="uneditable-input span3">
+                      <i class="icon-file fileupload-exists"></i>
+                      <span class="fileupload-preview"></span>
+                    </div>
+                    <span class="btn btn-file">
+                      <span class="fileupload-new"><fmt:message key="genapp.form.file.select"/></span>
+                      <span class="fileupload-exists"><fmt:message key="genapp.form.file.change"/></span>
+                      <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERESCANEJATID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERESCANEJATID)? 'input uneditable-input' : 'input'}"  path="fitxerEscanejatID" type="file" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload"><fmt:message key="genapp.form.file.unselect"/></a>
+                    <span class="add-on">&nbsp;</span>
+                </c:if>
+                <c:if test="${not empty __theForm.transaccio.fitxerEscanejat}">
+                <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERESCANEJATID)}" >
+                    <span class="add-on">
+                        <form:checkbox path="fitxerEscanejatIDDelete"/>
+                        <fmt:message key="genapp.form.file.delete"/>
+                    </span>
+                    <span class="add-on">&nbsp;</span>   
+                </c:if>
+                    <span class="add-on">
+                        <a target="_blank" href="<c:url value="${dib:fileUrl(__theForm.transaccio.fitxerEscanejat)}"/>">${__theForm.transaccio.fitxerEscanejat.nom}</a>
+                    </span>
+                </c:if>
+                </div>
+              </div>
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.FITXERSIGNATURAID)}">
-        <tr id="transaccio_fitxersignaturaid_rowid">
+        <tr id="transaccio_fitxerSignaturaID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FITXERSIGNATURAID])?'transaccio.fitxersignaturaid':__theForm.labels[TransaccioFields.FITXERSIGNATURAID]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FITXERSIGNATURAID])?'transaccio.fitxerSignaturaID':__theForm.labels[TransaccioFields.FITXERSIGNATURAID]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.FITXERSIGNATURAID]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.FITXERSIGNATURAID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.fitxersignaturaid" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERSIGNATURAID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERSIGNATURAID)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.fitxersignaturaid"   />
-
+              <form:errors path="transaccio.fitxerSignaturaID" cssClass="errorField alert alert-error" />
+              <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0px">
+                <div class="input-append">
+                <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERSIGNATURAID)}" >
+                    <div class="uneditable-input span3">
+                      <i class="icon-file fileupload-exists"></i>
+                      <span class="fileupload-preview"></span>
+                    </div>
+                    <span class="btn btn-file">
+                      <span class="fileupload-new"><fmt:message key="genapp.form.file.select"/></span>
+                      <span class="fileupload-exists"><fmt:message key="genapp.form.file.change"/></span>
+                      <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERSIGNATURAID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERSIGNATURAID)? 'input uneditable-input' : 'input'}"  path="fitxerSignaturaID" type="file" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload"><fmt:message key="genapp.form.file.unselect"/></a>
+                    <span class="add-on">&nbsp;</span>
+                </c:if>
+                <c:if test="${not empty __theForm.transaccio.fitxerSignatura}">
+                <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.FITXERSIGNATURAID)}" >
+                    <span class="add-on">
+                        <form:checkbox path="fitxerSignaturaIDDelete"/>
+                        <fmt:message key="genapp.form.file.delete"/>
+                    </span>
+                    <span class="add-on">&nbsp;</span>   
+                </c:if>
+                    <span class="add-on">
+                        <a target="_blank" href="<c:url value="${dib:fileUrl(__theForm.transaccio.fitxerSignatura)}"/>">${__theForm.transaccio.fitxerSignatura.nom}</a>
+                    </span>
+                </c:if>
+                </div>
+              </div>
            </td>
         </tr>
         </c:if>
@@ -256,24 +310,6 @@
             <td>
             <form:errors path="transaccio.infoscanresolucioppp" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANRESOLUCIOPPP)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANRESOLUCIOPPP)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.infoscanresolucioppp"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANFORMATFITXER)}">
-        <tr id="transaccio_infoscanformatfitxer_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANFORMATFITXER])?'transaccio.infoscanformatfitxer':__theForm.labels[TransaccioFields.INFOSCANFORMATFITXER]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.INFOSCANFORMATFITXER]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOSCANFORMATFITXER]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.infoscanformatfitxer" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANFORMATFITXER)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANFORMATFITXER)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="transaccio.infoscanformatfitxer"   />
 
            </td>
         </tr>
@@ -529,6 +565,53 @@
             <form:errors path="transaccio.usernameRequest" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.USERNAMEREQUEST)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.USERNAMEREQUEST)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.usernameRequest"   />
 
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.RETURNURL)}">
+        <tr id="transaccio_returnUrl_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.RETURNURL])?'transaccio.returnUrl':__theForm.labels[TransaccioFields.RETURNURL]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.RETURNURL]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.RETURNURL]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.returnUrl" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.RETURNURL)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.RETURNURL)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.returnUrl"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.VIEW)}">
+        <tr id="transaccio_view_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.VIEW])?'transaccio.view':__theForm.labels[TransaccioFields.VIEW]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.VIEW]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.VIEW]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.view" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.VIEW)}" >
+          <form:hidden path="transaccio.view"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.view,__theForm.listOfValuesForView)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.VIEW)}" >
+          <form:select id="transaccio_view"  onchange="if(typeof onChangeView == 'function') {  onChangeView(this); };"  cssClass="input-xxlarge" path="transaccio.view">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForView}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>

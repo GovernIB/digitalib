@@ -187,6 +187,36 @@ public class PerfilController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
+    // Field scanFormatFitxer
+    {
+      _listSKV = getReferenceListForScanFormatFitxer(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForScanFormatFitxer(_tmp);
+      if (filterForm.getGroupByFields().contains(SCANFORMATFITXER)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, SCANFORMATFITXER, false);
+      };
+    }
+
+    // Field scanMinimaResolucio
+    {
+      _listSKV = getReferenceListForScanMinimaResolucio(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForScanMinimaResolucio(_tmp);
+      if (filterForm.getGroupByFields().contains(SCANMINIMARESOLUCIO)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, SCANMINIMARESOLUCIO, false);
+      };
+    }
+
+    // Field scanPixelType
+    {
+      _listSKV = getReferenceListForScanPixelType(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForScanPixelType(_tmp);
+      if (filterForm.getGroupByFields().contains(SCANPIXELTYPE)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, SCANPIXELTYPE, false);
+      };
+    }
+
     // Field pluginScanWebID
     {
       _listSKV = getReferenceListForPluginScanWebID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -282,6 +312,9 @@ public class PerfilController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
+    __mapping.put(SCANFORMATFITXER, filterForm.getMapOfValuesForScanFormatFitxer());
+    __mapping.put(SCANMINIMARESOLUCIO, filterForm.getMapOfValuesForScanMinimaResolucio());
+    __mapping.put(SCANPIXELTYPE, filterForm.getMapOfValuesForScanPixelType());
     __mapping.put(PLUGINSCANWEBID, filterForm.getMapOfPluginForPluginScanWebID());
     __mapping.put(TIPUSFIRMA, filterForm.getMapOfValuesForTipusFirma());
     __mapping.put(PLUGINFIRMASERVIDORID, filterForm.getMapOfPluginForPluginFirmaServidorID());
@@ -337,6 +370,27 @@ public class PerfilController
 
   public void fillReferencesForForm(PerfilForm perfilForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
+    // Comprovam si ja esta definida la llista
+    if (perfilForm.getListOfValuesForScanFormatFitxer() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForScanFormatFitxer(request, mav, perfilForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      perfilForm.setListOfValuesForScanFormatFitxer(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (perfilForm.getListOfValuesForScanMinimaResolucio() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForScanMinimaResolucio(request, mav, perfilForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      perfilForm.setListOfValuesForScanMinimaResolucio(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (perfilForm.getListOfValuesForScanPixelType() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForScanPixelType(request, mav, perfilForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      perfilForm.setListOfValuesForScanPixelType(_listSKV);
+    }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfPluginForPluginScanWebID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPluginScanWebID(request, mav, perfilForm, null);
@@ -691,6 +745,109 @@ public java.lang.Long stringToPK(String value) {
 
   public boolean isActiveFormView() {
     return isActiveFormEdit();
+  }
+
+
+  public List<StringKeyValue> getReferenceListForScanFormatFitxer(HttpServletRequest request,
+       ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
+    if (perfilForm.isHiddenField(SCANFORMATFITXER)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForScanFormatFitxer(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForScanFormatFitxer(HttpServletRequest request,
+       ModelAndView mav, PerfilFilterForm perfilFilterForm,
+       List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (perfilFilterForm.isHiddenField(SCANFORMATFITXER)
+      && !perfilFilterForm.isGroupByField(SCANFORMATFITXER)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForScanFormatFitxer(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForScanFormatFitxer(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("0" , "0"));
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForScanMinimaResolucio(HttpServletRequest request,
+       ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
+    if (perfilForm.isHiddenField(SCANMINIMARESOLUCIO)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForScanMinimaResolucio(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForScanMinimaResolucio(HttpServletRequest request,
+       ModelAndView mav, PerfilFilterForm perfilFilterForm,
+       List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (perfilFilterForm.isHiddenField(SCANMINIMARESOLUCIO)
+      && !perfilFilterForm.isGroupByField(SCANMINIMARESOLUCIO)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForScanMinimaResolucio(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForScanMinimaResolucio(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("100" , "100"));
+    __tmp.add(new StringKeyValue("150" , "150"));
+    __tmp.add(new StringKeyValue("200" , "200"));
+    __tmp.add(new StringKeyValue("300" , "300"));
+    __tmp.add(new StringKeyValue("400" , "400"));
+    __tmp.add(new StringKeyValue("600" , "600"));
+    __tmp.add(new StringKeyValue("1200" , "1200"));
+    __tmp.add(new StringKeyValue("2400" , "2400"));
+    __tmp.add(new StringKeyValue("4800" , "4800"));
+    __tmp.add(new StringKeyValue("9600" , "9600"));
+    __tmp.add(new StringKeyValue("19200" , "19200"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForScanPixelType(HttpServletRequest request,
+       ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
+    if (perfilForm.isHiddenField(SCANPIXELTYPE)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForScanPixelType(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForScanPixelType(HttpServletRequest request,
+       ModelAndView mav, PerfilFilterForm perfilFilterForm,
+       List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (perfilFilterForm.isHiddenField(SCANPIXELTYPE)
+      && !perfilFilterForm.isGroupByField(SCANPIXELTYPE)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForScanPixelType(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForScanPixelType(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    return __tmp;
   }
 
 

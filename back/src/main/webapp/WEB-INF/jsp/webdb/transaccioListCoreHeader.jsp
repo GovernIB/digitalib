@@ -51,9 +51,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANRESOLUCIOPPP)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANRESOLUCIOPPP)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANFORMATFITXER)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANFORMATFITXER)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANOCR)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANOCR)}</th>
         </c:if>
@@ -89,6 +86,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USERNAMEREQUEST)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.USERNAMEREQUEST)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.RETURNURL)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.RETURNURL)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.VIEW)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.VIEW)}</th>
         </c:if>
 
 

@@ -178,6 +178,32 @@ private static final long serialVersionUID = -252813913L;
 	}
 
 
+// EXP  Field:fitxerescanejatid | Table: dib_transaccio | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxerEscanejatID")
+	private Set<TransaccioJPA> transaccio_fitxerescanejatids = new HashSet<TransaccioJPA>(0);
+	public  Set<TransaccioJPA> getTransaccio_fitxerescanejatids() {
+    return this.transaccio_fitxerescanejatids;
+  }
+
+	public void setTransaccio_fitxerescanejatids(Set<TransaccioJPA> transaccio_fitxerescanejatids) {
+	  this.transaccio_fitxerescanejatids = transaccio_fitxerescanejatids;
+	}
+
+
+// EXP  Field:fitxersignaturaid | Table: dib_transaccio | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxerSignaturaID")
+	private Set<TransaccioJPA> transaccio_fitxersignaturaids = new HashSet<TransaccioJPA>(0);
+	public  Set<TransaccioJPA> getTransaccio_fitxersignaturaids() {
+    return this.transaccio_fitxersignaturaids;
+  }
+
+	public void setTransaccio_fitxersignaturaids(Set<TransaccioJPA> transaccio_fitxersignaturaids) {
+	  this.transaccio_fitxersignaturaids = transaccio_fitxersignaturaids;
+	}
+
+
 
   @javax.persistence.Transient
   javax.activation.DataHandler data;
@@ -271,9 +297,17 @@ private static final long serialVersionUID = -252813913L;
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginCridada_parametresfitxerids) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginCridada_parametresfitxerids())) ) {
       __tmp.setPluginCridada_parametresfitxerids(PluginCridadaJPA.copyJPA(__jpa.getPluginCridada_parametresfitxerids(), __alreadyCopied,"FitxerJPA"));
     }
+    if(!"TransaccioJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.transaccio_fitxerescanejatids) || org.hibernate.Hibernate.isInitialized(__jpa.getTransaccio_fitxerescanejatids())) ) {
+      __tmp.setTransaccio_fitxerescanejatids(TransaccioJPA.copyJPA(__jpa.getTransaccio_fitxerescanejatids(), __alreadyCopied,"FitxerJPA"));
+    }
     if(!"ConfiguracioGrupJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_logofooterids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_logofooterids())) ) {
       __tmp.setConfiguracioGrup_logofooterids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_logofooterids(), __alreadyCopied,"FitxerJPA"));
+    }
+    if(!"TransaccioJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.transaccio_fitxersignaturaids) || org.hibernate.Hibernate.isInitialized(__jpa.getTransaccio_fitxersignaturaids())) ) {
+      __tmp.setTransaccio_fitxersignaturaids(TransaccioJPA.copyJPA(__jpa.getTransaccio_fitxersignaturaids(), __alreadyCopied,"FitxerJPA"));
     }
     if(!"ConfiguracioGrupJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_logoheaderids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_logoheaderids())) ) {

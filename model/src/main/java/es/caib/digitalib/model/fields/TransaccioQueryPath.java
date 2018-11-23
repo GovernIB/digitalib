@@ -63,10 +63,6 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new IntegerField(getQueryPath(), TransaccioFields.INFOSCANRESOLUCIOPPP);
   }
 
-  public StringField INFOSCANFORMATFITXER() {
-    return new StringField(getQueryPath(), TransaccioFields.INFOSCANFORMATFITXER);
-  }
-
   public BooleanField INFOSCANOCR() {
     return new BooleanField(getQueryPath(), TransaccioFields.INFOSCANOCR);
   }
@@ -115,6 +111,14 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new StringField(getQueryPath(), TransaccioFields.USERNAMEREQUEST);
   }
 
+  public StringField RETURNURL() {
+    return new StringField(getQueryPath(), TransaccioFields.RETURNURL);
+  }
+
+  public IntegerField VIEW() {
+    return new IntegerField(getQueryPath(), TransaccioFields.VIEW);
+  }
+
 
 
   @Override
@@ -123,6 +127,22 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
         : this.parentQueryPath.getQueryPath());
   }
 
+
+  public FitxerQueryPath FITXERESCANEJAT() {
+    return new FitxerQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return TransaccioQueryPath.this.getQueryPath() + "fitxerEscanejat" + ".";
+      }
+    });
+  }
+
+  public FitxerQueryPath FITXERSIGNATURA() {
+    return new FitxerQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return TransaccioQueryPath.this.getQueryPath() + "fitxerSignatura" + ".";
+      }
+    });
+  }
 
   public InfoSignaturaQueryPath INFOSIGNATURA() {
     return new InfoSignaturaQueryPath(new QueryPath() {

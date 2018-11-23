@@ -1,6 +1,13 @@
 <%@ page language="java" 
 %><%@ include file="/WEB-INF/jsp/moduls/includes.jsp" 
 %>
+<c:if test="${fullView}">
+<script type="text/javascript"> 
+  window.location.href='${urlToSelectPluginPage}';
+</script>
+</c:if>
+<c:if test="${not fullView}">
+
 <style>
     body{
         background-image: url("/img/bg.png");
@@ -26,6 +33,8 @@
 <div style="height: 100%">
 --%>
 <%--  frameborder='3' --%>
+
+
 <iframe src="${urlToSelectPluginPage}" style="background-color: white; min-height:200px" frameborder='0' width="100%" height="400px"  id="myiframe" scrolling="auto">
 <p>NO IFRAME</p>
 </iframe>
@@ -94,4 +103,4 @@
       });
 
 </script>
-
+</c:if>

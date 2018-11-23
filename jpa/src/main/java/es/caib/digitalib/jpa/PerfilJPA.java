@@ -34,7 +34,7 @@ private static final long serialVersionUID = -1815612849L;
 	@Column(name="perfilid",nullable = false,length = 19)
 	long perfilID;
 
-	@Column(name="codi",nullable = false,unique = true,length = 25)
+	@Column(name="codi",nullable = false,unique = true,length = 255)
 	java.lang.String codi;
 
 	@Column(name="nom",nullable = false,length = 100)
@@ -42,6 +42,21 @@ private static final long serialVersionUID = -1815612849L;
 
 	@Column(name="descripcio",length = 255)
 	java.lang.String descripcio;
+
+  /** Opcional. Serveix per indicar la url que utilitzaran els client per connectar-se a DigitalIB. Si val null s'obtindrà de la propietat dels properties-service.xml */
+	@Column(name="urlbase",length = 255)
+	java.lang.String urlBase;
+
+  /** PDF,JPG,PNG, GIF, TIFF */
+	@Column(name="scanformatfitxer",nullable = false,length = 10)
+	int scanFormatFitxer;
+
+  /** Punts per pulgada (ppp) */
+	@Column(name="scanminimaresolucio",length = 10)
+	java.lang.Integer scanMinimaResolucio;
+
+	@Column(name="scanpixeltype",length = 10)
+	int scanPixelType;
 
 	@Index(name="dib_perfil_plugscanwebid_fk_i")
 	@Column(name="pluginscanwebid",nullable = false,length = 19)
@@ -80,11 +95,15 @@ private static final long serialVersionUID = -1815612849L;
   }
 
   /** Constructor amb tots els camps  */
-  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
+  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
     this.descripcio=descripcio;
+    this.urlBase=urlBase;
+    this.scanFormatFitxer=scanFormatFitxer;
+    this.scanMinimaResolucio=scanMinimaResolucio;
+    this.scanPixelType=scanPixelType;
     this.pluginScanWebID=pluginScanWebID;
     this.tipusFirma=tipusFirma;
     this.pluginFirmaServidorID=pluginFirmaServidorID;
@@ -95,10 +114,14 @@ private static final long serialVersionUID = -1815612849L;
     this.usPerfil=usPerfil;
 }
   /** Constructor sense valors autoincrementals */
-  public PerfilJPA(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
+  public PerfilJPA(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
     this.codi=codi;
     this.nom=nom;
     this.descripcio=descripcio;
+    this.urlBase=urlBase;
+    this.scanFormatFitxer=scanFormatFitxer;
+    this.scanMinimaResolucio=scanMinimaResolucio;
+    this.scanPixelType=scanPixelType;
     this.pluginScanWebID=pluginScanWebID;
     this.tipusFirma=tipusFirma;
     this.pluginFirmaServidorID=pluginFirmaServidorID;
@@ -109,10 +132,11 @@ private static final long serialVersionUID = -1815612849L;
     this.usPerfil=usPerfil;
 }
   /** Constructor dels valors Not Null */
-  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
+  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
+    this.scanFormatFitxer=scanFormatFitxer;
     this.pluginScanWebID=pluginScanWebID;
     this.tipusFirma=tipusFirma;
     this.tipusCustodia=tipusCustodia;
@@ -123,6 +147,10 @@ private static final long serialVersionUID = -1815612849L;
     this.setCodi(__bean.getCodi());
     this.setNom(__bean.getNom());
     this.setDescripcio(__bean.getDescripcio());
+    this.setUrlBase(__bean.getUrlBase());
+    this.setScanFormatFitxer(__bean.getScanFormatFitxer());
+    this.setScanMinimaResolucio(__bean.getScanMinimaResolucio());
+    this.setScanPixelType(__bean.getScanPixelType());
     this.setPluginScanWebID(__bean.getPluginScanWebID());
     this.setTipusFirma(__bean.getTipusFirma());
     this.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
@@ -159,6 +187,34 @@ private static final long serialVersionUID = -1815612849L;
 	};
 	public void setDescripcio(java.lang.String _descripcio_) {
 		this.descripcio = _descripcio_;
+	};
+
+	public java.lang.String getUrlBase() {
+		return(urlBase);
+	};
+	public void setUrlBase(java.lang.String _urlBase_) {
+		this.urlBase = _urlBase_;
+	};
+
+	public int getScanFormatFitxer() {
+		return(scanFormatFitxer);
+	};
+	public void setScanFormatFitxer(int _scanFormatFitxer_) {
+		this.scanFormatFitxer = _scanFormatFitxer_;
+	};
+
+	public java.lang.Integer getScanMinimaResolucio() {
+		return(scanMinimaResolucio);
+	};
+	public void setScanMinimaResolucio(java.lang.Integer _scanMinimaResolucio_) {
+		this.scanMinimaResolucio = _scanMinimaResolucio_;
+	};
+
+	public int getScanPixelType() {
+		return(scanPixelType);
+	};
+	public void setScanPixelType(int _scanPixelType_) {
+		this.scanPixelType = _scanPixelType_;
 	};
 
 	public long getPluginScanWebID() {
@@ -342,6 +398,10 @@ private static final long serialVersionUID = -1815612849L;
     __tmp.setCodi(__bean.getCodi());
     __tmp.setNom(__bean.getNom());
     __tmp.setDescripcio(__bean.getDescripcio());
+    __tmp.setUrlBase(__bean.getUrlBase());
+    __tmp.setScanFormatFitxer(__bean.getScanFormatFitxer());
+    __tmp.setScanMinimaResolucio(__bean.getScanMinimaResolucio());
+    __tmp.setScanPixelType(__bean.getScanPixelType());
     __tmp.setPluginScanWebID(__bean.getPluginScanWebID());
     __tmp.setTipusFirma(__bean.getTipusFirma());
     __tmp.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());

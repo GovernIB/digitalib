@@ -34,6 +34,9 @@ import es.caib.digitalib.back.form.webdb.TransaccioForm;
 
 import es.caib.digitalib.back.validator.webdb.TransaccioWebValidator;
 
+import es.caib.digitalib.model.entity.Fitxer;
+import es.caib.digitalib.jpa.FitxerJPA;
+import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.*;
@@ -48,7 +51,7 @@ import es.caib.digitalib.model.fields.*;
 @RequestMapping(value = "/webdb/transaccio")
 @SessionAttributes(types = { TransaccioForm.class, TransaccioFilterForm.class })
 public class TransaccioController
-    extends es.caib.digitalib.back.controller.DigitalIBBaseController<Transaccio, java.lang.Long> implements TransaccioFields {
+    extends es.caib.digitalib.back.controller.DigitalIBFilesBaseController<Transaccio, java.lang.Long, TransaccioForm> implements TransaccioFields {
 
   @EJB(mappedName = es.caib.digitalib.ejb.TransaccioLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.TransaccioLocal transaccioEjb;
@@ -224,6 +227,16 @@ public class TransaccioController
       };
     }
 
+    // Field view
+    {
+      _listSKV = getReferenceListForView(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForView(_tmp);
+      if (filterForm.getGroupByFields().contains(VIEW)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, VIEW, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -242,6 +255,7 @@ public class TransaccioController
     __mapping.put(INFOSIGNATURAID, filterForm.getMapOfInfoSignaturaForInfosignaturaid());
     __mapping.put(INFOCUSTODYID, filterForm.getMapOfInfoCustodyForInfocustodyid());
     __mapping.put(PERFILID, filterForm.getMapOfPerfilForPerfilid());
+    __mapping.put(VIEW, filterForm.getMapOfValuesForView());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -310,6 +324,13 @@ public class TransaccioController
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       transaccioForm.setListOfPerfilForPerfilid(_listSKV);
     }
+    // Comprovam si ja esta definida la llista
+    if (transaccioForm.getListOfValuesForView() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForView(request, mav, transaccioForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      transaccioForm.setListOfValuesForView(_listSKV);
+    }
     
   }
 
@@ -327,20 +348,26 @@ public class TransaccioController
 
     TransaccioJPA transaccio = transaccioForm.getTransaccio();
 
+    FilesFormManager<Fitxer> afm = getFilesFormManager(); // FILE
+
     try {
+      this.setFilesFormToEntity(afm, transaccio, transaccioForm); // FILE
       preValidate(request, transaccioForm, result);
       getWebValidator().validate(transaccioForm, result);
       postValidate(request,transaccioForm, result);
 
       if (result.hasErrors()) {
+        afm.processErrorFilesWithoutThrowException(); // FILE
         return getTileForm();
       } else {
         transaccio = create(request, transaccio);
+        afm.postPersistFiles(); // FILE
         createMessageSuccess(request, "success.creation", transaccio.getTransaccioID());
         transaccioForm.setTransaccio(transaccio);
         return getRedirectWhenCreated(request, transaccioForm);
       }
     } catch (Throwable __e) {
+      afm.processErrorFilesWithoutThrowException(); // FILE
       if (__e instanceof I18NValidationException) {
         ValidationWebUtils.addFieldErrorsToBindingResult(result, (I18NValidationException)__e);
         return getTileForm();
@@ -421,20 +448,25 @@ public class TransaccioController
     }
     TransaccioJPA transaccio = transaccioForm.getTransaccio();
 
+    FilesFormManager<Fitxer> afm = getFilesFormManager(); // FILE
     try {
+      this.setFilesFormToEntity(afm, transaccio, transaccioForm); // FILE
       preValidate(request, transaccioForm, result);
       getWebValidator().validate(transaccio, result);
       postValidate(request, transaccioForm, result);
 
       if (result.hasErrors()) {
+        afm.processErrorFilesWithoutThrowException(); // FILE
         return getTileForm();
       } else {
         transaccio = update(request, transaccio);
+        afm.postPersistFiles(); // FILE
         createMessageSuccess(request, "success.modification", transaccio.getTransaccioID());
         status.setComplete();
         return getRedirectWhenModified(request, transaccioForm, null);
       }
     } catch (Throwable __e) {
+      afm.processErrorFilesWithoutThrowException(); // FILE
       if (__e instanceof I18NValidationException) {
         ValidationWebUtils.addFieldErrorsToBindingResult(result, (I18NValidationException)__e);
         return getTileForm();
@@ -584,6 +616,40 @@ public java.lang.Long stringToPK(String value) {
     return _TABLE_MODEL;
   }
 
+  // FILE
+  @Override
+  public void setFilesFormToEntity(FilesFormManager<Fitxer> afm, Transaccio transaccio,
+      TransaccioForm form) throws I18NException {
+
+    FitxerJPA f;
+    f = (FitxerJPA)afm.preProcessFile(form.getFitxerEscanejatID(), form.isFitxerEscanejatIDDelete(),
+        form.isNou()? null : transaccio.getFitxerEscanejat());
+    ((TransaccioJPA)transaccio).setFitxerEscanejat(f);
+    if (f != null) { 
+      transaccio.setFitxerEscanejatID(f.getFitxerID());
+    } else {
+      transaccio.setFitxerEscanejatID(null);
+    }
+
+
+    f = (FitxerJPA)afm.preProcessFile(form.getFitxerSignaturaID(), form.isFitxerSignaturaIDDelete(),
+        form.isNou()? null : transaccio.getFitxerSignatura());
+    ((TransaccioJPA)transaccio).setFitxerSignatura(f);
+    if (f != null) { 
+      transaccio.setFitxerSignaturaID(f.getFitxerID());
+    } else {
+      transaccio.setFitxerSignaturaID(null);
+    }
+
+
+  }
+
+  // FILE
+  @Override
+  public void deleteFiles(Transaccio transaccio) {
+    deleteFile(transaccio.getFitxerEscanejatID());
+    deleteFile(transaccio.getFitxerSignaturaID());
+  }
   // Mètodes a sobreescriure 
 
   public boolean isActiveList() {
@@ -727,6 +793,36 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPerfilid(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return perfilRefList.getReferenceList(PerfilFields.PERFILID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForView(HttpServletRequest request,
+       ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
+    if (transaccioForm.isHiddenField(VIEW)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForView(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForView(HttpServletRequest request,
+       ModelAndView mav, TransaccioFilterForm transaccioFilterForm,
+       List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (transaccioFilterForm.isHiddenField(VIEW)
+      && !transaccioFilterForm.isGroupByField(VIEW)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForView(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForView(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("0" , "0"));
+    __tmp.add(new StringKeyValue("1" , "1"));
+    return __tmp;
   }
 
 

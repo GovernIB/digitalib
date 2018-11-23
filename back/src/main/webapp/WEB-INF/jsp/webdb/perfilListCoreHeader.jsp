@@ -24,6 +24,18 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.DESCRIPCIO)}">
         <th>${dib:getSortIcons(__theFilterForm,PerfilFields.DESCRIPCIO)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.URLBASE)}">
+        <th>${dib:getSortIcons(__theFilterForm,PerfilFields.URLBASE)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.SCANFORMATFITXER)}">
+        <th>${dib:getSortIcons(__theFilterForm,PerfilFields.SCANFORMATFITXER)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.SCANMINIMARESOLUCIO)}">
+        <th>${dib:getSortIcons(__theFilterForm,PerfilFields.SCANMINIMARESOLUCIO)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.SCANPIXELTYPE)}">
+        <th>${dib:getSortIcons(__theFilterForm,PerfilFields.SCANPIXELTYPE)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.PLUGINSCANWEBID)}">
         <th>${dib:getSortIcons(__theFilterForm,PerfilFields.PLUGINSCANWEBID)}</th>
         </c:if>

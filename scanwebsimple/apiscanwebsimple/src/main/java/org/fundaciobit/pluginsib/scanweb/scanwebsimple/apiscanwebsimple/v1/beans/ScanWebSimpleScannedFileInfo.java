@@ -12,13 +12,13 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @XmlRootElement
 public class ScanWebSimpleScannedFileInfo {
 
+  public static final String FORMAT_FILE_PDF = "pdf";
+  
+  public static final String FORMAT_FILE_JPG = "jpg";
+  
   public static final String FORMAT_FILE_TIFF = "tif";
 
-  public static final String FORMAT_FILE_JPG = "jpg";
-
   public static final String FORMAT_FILE_PNG = "png";
-
-  public static final String FORMAT_FILE_PDF = "pdf";
 
   public static final String FORMAT_FILE_GIF = "gif";
 

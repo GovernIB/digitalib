@@ -67,13 +67,17 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FITXERESCANEJATID)}">
           <td>
-          ${transaccio.fitxerescanejatid}
-          </td>
+            <c:if test="${not empty transaccio.fitxerEscanejat}">
+              <a target="_blank" href="<c:url value="${dib:fileUrl(transaccio.fitxerEscanejat)}"/>">${transaccio.fitxerEscanejat.nom}</a>
+            </c:if>
+           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FITXERSIGNATURAID)}">
           <td>
-          ${transaccio.fitxersignaturaid}
-          </td>
+            <c:if test="${not empty transaccio.fitxerSignatura}">
+              <a target="_blank" href="<c:url value="${dib:fileUrl(transaccio.fitxerSignatura)}"/>">${transaccio.fitxerSignatura.nom}</a>
+            </c:if>
+           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANPIXELTYPE)}">
           <td>
@@ -83,11 +87,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANRESOLUCIOPPP)}">
           <td>
           ${transaccio.infoscanresolucioppp}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANFORMATFITXER)}">
-          <td>
-          ${transaccio.infoscanformatfitxer}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANOCR)}">
@@ -159,6 +158,19 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USERNAMEREQUEST)}">
           <td>
           ${transaccio.usernameRequest}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.RETURNURL)}">
+          <td>
+          ${transaccio.returnUrl}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.VIEW)}">
+          <td>
+          <c:set var="tmp">${transaccio.view}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForView[tmp]}
+          </c:if>
           </td>
         </c:if>
 

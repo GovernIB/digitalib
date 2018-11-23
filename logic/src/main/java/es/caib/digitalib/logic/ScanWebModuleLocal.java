@@ -24,7 +24,7 @@ public interface ScanWebModuleLocal {
   
   public static final String JNDI_NAME = "digitalib/ScanWebModuleEJB/local";
 
-  public void closeScanWebProcess(HttpServletRequest request, long scanWebID);
+  public void closeScanWebProcess(HttpServletRequest request, String scanWebID);
   
   
   public void startScanWebProcess(ScanWebConfigTester ess);
@@ -33,18 +33,18 @@ public interface ScanWebModuleLocal {
   public String scanDocument(
       HttpServletRequest request, String absoluteRequestPluginBasePath,
       String relativeRequestPluginBasePath,      
-      long scanWebID) throws Exception, I18NException;
+      String scanWebID) throws Exception, I18NException;
   
   
   public void requestPlugin(HttpServletRequest request, HttpServletResponse response,
       String absoluteRequestPluginBasePath, String relativeRequestPluginBasePath,
-      long scanWebID, String query, boolean isPost)  throws Exception, I18NException;
+      String scanWebID, String query, boolean isPost)  throws Exception, I18NException;
   
   
   public ScanWebConfigTester getScanWebConfig(HttpServletRequest request,
-      long scanWebID);
+      String scanWebID);
   
-  public List<Plugin> getAllPluginsFiltered(HttpServletRequest request, long scanWebID) throws Exception,I18NException;
+  public List<Plugin> getAllPluginsFiltered(HttpServletRequest request, String scanWebID) throws Exception,I18NException;
   
   
   public Set<String> getDefaultFlags(ScanWebConfigTester ss) throws Exception;

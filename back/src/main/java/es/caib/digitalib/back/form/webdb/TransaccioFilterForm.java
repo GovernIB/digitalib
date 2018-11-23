@@ -186,50 +186,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
-  private java.lang.Long fitxerescanejatidDesde;
-
-  public java.lang.Long getFitxerescanejatidDesde() {
-    return this.fitxerescanejatidDesde;
-  }
-
-  public void setFitxerescanejatidDesde(java.lang.Long fitxerescanejatidDesde) {
-    this.fitxerescanejatidDesde = fitxerescanejatidDesde;
-  }
-
-
-  private java.lang.Long fitxerescanejatidFins;
-
-  public java.lang.Long getFitxerescanejatidFins() {
-    return this.fitxerescanejatidFins;
-  }
-
-  public void setFitxerescanejatidFins(java.lang.Long fitxerescanejatidFins) {
-    this.fitxerescanejatidFins = fitxerescanejatidFins;
-  }
-
-
-  private java.lang.Long fitxersignaturaidDesde;
-
-  public java.lang.Long getFitxersignaturaidDesde() {
-    return this.fitxersignaturaidDesde;
-  }
-
-  public void setFitxersignaturaidDesde(java.lang.Long fitxersignaturaidDesde) {
-    this.fitxersignaturaidDesde = fitxersignaturaidDesde;
-  }
-
-
-  private java.lang.Long fitxersignaturaidFins;
-
-  public java.lang.Long getFitxersignaturaidFins() {
-    return this.fitxersignaturaidFins;
-  }
-
-  public void setFitxersignaturaidFins(java.lang.Long fitxersignaturaidFins) {
-    this.fitxersignaturaidFins = fitxersignaturaidFins;
-  }
-
-
   private java.lang.Integer infoscanpixeltypeDesde;
 
   public java.lang.Integer getInfoscanpixeltypeDesde() {
@@ -271,17 +227,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setInfoscanresoluciopppFins(java.lang.Integer infoscanresoluciopppFins) {
     this.infoscanresoluciopppFins = infoscanresoluciopppFins;
-  }
-
-
-  private java.lang.String infoscanformatfitxer;
-
-  public java.lang.String getInfoscanformatfitxer() {
-    return this.infoscanformatfitxer;
-  }
-
-  public void setInfoscanformatfitxer(java.lang.String infoscanformatfitxer) {
-    this.infoscanformatfitxer = infoscanformatfitxer;
   }
 
 
@@ -439,6 +384,39 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.String returnUrl;
+
+  public java.lang.String getReturnUrl() {
+    return this.returnUrl;
+  }
+
+  public void setReturnUrl(java.lang.String returnUrl) {
+    this.returnUrl = returnUrl;
+  }
+
+
+  private java.lang.Integer viewDesde;
+
+  public java.lang.Integer getViewDesde() {
+    return this.viewDesde;
+  }
+
+  public void setViewDesde(java.lang.Integer viewDesde) {
+    this.viewDesde = viewDesde;
+  }
+
+
+  private java.lang.Integer viewFins;
+
+  public java.lang.Integer getViewFins() {
+    return this.viewFins;
+  }
+
+  public void setViewFins(java.lang.Integer viewFins) {
+    this.viewFins = viewFins;
+  }
+
+
   public TransaccioFilterForm() {
   }
   
@@ -459,15 +437,10 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.estatcodiFins = __toClone.estatcodiFins;
     this.estatmissatge = __toClone.estatmissatge;
     this.estatexcepcio = __toClone.estatexcepcio;
-    this.fitxerescanejatidDesde = __toClone.fitxerescanejatidDesde;
-    this.fitxerescanejatidFins = __toClone.fitxerescanejatidFins;
-    this.fitxersignaturaidDesde = __toClone.fitxersignaturaidDesde;
-    this.fitxersignaturaidFins = __toClone.fitxersignaturaidFins;
     this.infoscanpixeltypeDesde = __toClone.infoscanpixeltypeDesde;
     this.infoscanpixeltypeFins = __toClone.infoscanpixeltypeFins;
     this.infoscanresoluciopppDesde = __toClone.infoscanresoluciopppDesde;
     this.infoscanresoluciopppFins = __toClone.infoscanresoluciopppFins;
-    this.infoscanformatfitxer = __toClone.infoscanformatfitxer;
     this.infosignaturaidDesde = __toClone.infosignaturaidDesde;
     this.infosignaturaidFins = __toClone.infosignaturaidFins;
     this.infocustodyidDesde = __toClone.infocustodyidDesde;
@@ -482,16 +455,20 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.perfilidDesde = __toClone.perfilidDesde;
     this.perfilidFins = __toClone.perfilidFins;
     this.usernameRequest = __toClone.usernameRequest;
+    this.returnUrl = __toClone.returnUrl;
+    this.viewDesde = __toClone.viewDesde;
+    this.viewFins = __toClone.viewFins;
     this.mapOfInfoSignaturaForInfosignaturaid = __toClone.mapOfInfoSignaturaForInfosignaturaid;
     this.mapOfInfoCustodyForInfocustodyid = __toClone.mapOfInfoCustodyForInfocustodyid;
     this.mapOfPerfilForPerfilid = __toClone.mapOfPerfilForPerfilid;
+    this.mapOfValuesForView = __toClone.mapOfValuesForView;
   }
   
   /* ========= UTILS ========== */
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TRANSACTIONWEBID ,USERNAMEREQUEST }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TRANSACTIONWEBID ,USERNAMEREQUEST ,RETURNURL }));
   }
 
   @Override
@@ -551,6 +528,18 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setMapOfPerfilForPerfilid(Map<String, String> mapOfPerfilForPerfilid) {
     this.mapOfPerfilForPerfilid = mapOfPerfilForPerfilid;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForView;
+
+  public Map<String, String> getMapOfValuesForView() {
+    return this.mapOfValuesForView;
+  }
+
+  public void setMapOfValuesForView(Map<String, String> mapOfValuesForView) {
+    this.mapOfValuesForView = mapOfValuesForView;
   }
 
 

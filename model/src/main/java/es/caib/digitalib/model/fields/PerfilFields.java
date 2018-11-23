@@ -16,6 +16,10 @@ public interface PerfilFields extends java.io.Serializable {
 	 public static final StringField CODI = new StringField(_TABLE_MODEL, "codi", "codi");
 	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");
 	 public static final StringField DESCRIPCIO = new StringField(_TABLE_MODEL, "descripcio", "descripcio");
+	 public static final StringField URLBASE = new StringField(_TABLE_MODEL, "urlBase", "urlbase");
+	 public static final IntegerField SCANFORMATFITXER = new IntegerField(_TABLE_MODEL, "scanFormatFitxer", "scanformatfitxer");
+	 public static final IntegerField SCANMINIMARESOLUCIO = new IntegerField(_TABLE_MODEL, "scanMinimaResolucio", "scanminimaresolucio");
+	 public static final IntegerField SCANPIXELTYPE = new IntegerField(_TABLE_MODEL, "scanPixelType", "scanpixeltype");
 	 public static final LongField PLUGINSCANWEBID = new LongField(_TABLE_MODEL, "pluginScanWebID", "pluginscanwebid");
 	 public static final IntegerField TIPUSFIRMA = new IntegerField(_TABLE_MODEL, "tipusFirma", "tipusfirma");
 	 public static final LongField PLUGINFIRMASERVIDORID = new LongField(_TABLE_MODEL, "pluginFirmaServidorID", "pluginfirmaservidorid");
@@ -31,6 +35,10 @@ public interface PerfilFields extends java.io.Serializable {
     CODI,
     NOM,
     DESCRIPCIO,
+    URLBASE,
+    SCANFORMATFITXER,
+    SCANMINIMARESOLUCIO,
+    SCANPIXELTYPE,
     PLUGINSCANWEBID,
     TIPUSFIRMA,
     PLUGINFIRMASERVIDORID,

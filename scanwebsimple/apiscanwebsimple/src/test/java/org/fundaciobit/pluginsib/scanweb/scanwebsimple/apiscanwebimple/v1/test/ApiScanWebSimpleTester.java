@@ -92,7 +92,7 @@ public class ApiScanWebSimpleTester {
       final int port = 1989;
       final String returnUrl = "http://localhost:" + port + "/returnurl/" + transactionID;
 
-      final String view = ScanWebSimpleStartTransactionRequest.VIEW_FULLSCREEN;
+      final int view = ScanWebSimpleStartTransactionRequest.VIEW_FULLSCREEN;
 
       ScanWebSimpleStartTransactionRequest startTransactionInfo;
       startTransactionInfo = new ScanWebSimpleStartTransactionRequest(transactionID,

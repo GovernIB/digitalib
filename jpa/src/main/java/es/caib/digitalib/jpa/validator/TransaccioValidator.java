@@ -75,14 +75,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
       }
     }
     
-    if (__vr.getFieldErrorCount(INFOSCANFORMATFITXER) == 0) {
-      java.lang.String __infoscanformatfitxer = (java.lang.String)__vr.getFieldValue(__target__,INFOSCANFORMATFITXER);
-      if (__infoscanformatfitxer!= null && __infoscanformatfitxer.length() > 100) {
-        __vr.rejectValue(INFOSCANFORMATFITXER, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(INFOSCANFORMATFITXER)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
-      }
-    }
-    
     if (__vr.getFieldErrorCount(LANGUAGEUI) == 0) {
       java.lang.String __languageui = (java.lang.String)__vr.getFieldValue(__target__,LANGUAGEUI);
       if (__languageui!= null && __languageui.length() > 10) {
@@ -144,6 +136,14 @@ public class TransaccioValidator<T> implements TransaccioFields {
       if (__usernamerequest!= null && __usernamerequest.length() > 255) {
         __vr.rejectValue(USERNAMEREQUEST, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAMEREQUEST)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(RETURNURL) == 0) {
+      java.lang.String __returnurl = (java.lang.String)__vr.getFieldValue(__target__,RETURNURL);
+      if (__returnurl!= null && __returnurl.length() > 255) {
+        __vr.rejectValue(RETURNURL, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RETURNURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     

@@ -1,9 +1,7 @@
 package es.caib.digitalib.back.controller.admin;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.webdb.ConfiguracioGrupController;
 import es.caib.digitalib.back.form.webdb.ConfiguracioGrupFilterForm;
 import es.caib.digitalib.back.form.webdb.ConfiguracioGrupForm;
-import es.caib.digitalib.back.form.webdb.UsuariAplicacioFilterForm;
-import es.caib.digitalib.back.form.webdb.UsuariAplicacioForm;
 import es.caib.digitalib.jpa.ConfiguracioGrupJPA;
 import es.caib.digitalib.model.fields.ConfiguracioGrupFields;
-import es.caib.digitalib.model.fields.PerfilFields;
 
 /**
  * 
