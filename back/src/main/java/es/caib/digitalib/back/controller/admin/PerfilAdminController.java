@@ -157,8 +157,30 @@ public class PerfilAdminController extends PerfilController {
 	public List<StringKeyValue> getReferenceListForUsPerfil(HttpServletRequest request,
 			ModelAndView mav, Where where)  throws I18NException {
 		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_PLANTILLA) , "Plantilla"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_TRANSACCIO_INFO) , "Transacció"));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_PLANTILLA), "Plantilla"));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_TRANSACCIO_INFO), "Transacció"));
+		return __tmp;
+	}
+
+	@Override
+	public List<StringKeyValue> getReferenceListForScanFormatFitxer(HttpServletRequest request,
+			ModelAndView mav, Where where)  throws I18NException {
+		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_PDF), "PDF"));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_JPG), "JPG"));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_PNG), "PNG"));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_GIF), "GIF"));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_TIFF), "TIF"));
+		return __tmp;
+	}
+
+	@Override
+	public List<StringKeyValue> getReferenceListForScanPixelType(HttpServletRequest request,
+			ModelAndView mav, Where where)  throws I18NException {
+		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_BLACK_WHITE), I18NUtils.tradueix("pixeltype.0")));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_GRAY), I18NUtils.tradueix("pixeltype.1")));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_COLOR), I18NUtils.tradueix("pixeltype.2")));
 		return __tmp;
 	}
 
