@@ -327,6 +327,11 @@ public class ScanWebSimpleSignedFileInfo {
   }
 
   public static String toString(ScanWebSimpleSignedFileInfo sfi) {
+    
+    if (sfi == null) {
+      return "";
+    }
+    
     StringBuffer str = new StringBuffer("  + INFORMACIO:");
 
     String operation;

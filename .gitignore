@@ -54,3 +54,5 @@
 /back/.tern-project
 
 /scanwebsimple/apiscanwebsimple/target
+/scanwebsimple/apiscanwebsimple/.settings
+/scanwebsimple/apiscanwebsimple/scanfile.pdf

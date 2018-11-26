@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
@@ -32,6 +33,8 @@ import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans
 public class ApiScanWebSimpleTester {
 
   public static void main(String[] args) {
+    
+
 
     final String languageUI = "ca";
     ApiScanWebSimple api = null;
@@ -88,9 +91,9 @@ public class ApiScanWebSimpleTester {
       
       
      // Servidor TEMPORAL
-
+      String host = Inet4Address.getLocalHost().getHostAddress();
       final int port = 1989;
-      final String returnUrl = "http://localhost:" + port + "/returnurl/" + transactionID;
+      final String returnUrl = "http://" + host + ":" + port + "/returnurl/" + transactionID;
 
       final int view = ScanWebSimpleStartTransactionRequest.VIEW_FULLSCREEN;
 
@@ -107,7 +110,6 @@ public class ApiScanWebSimpleTester {
       } else {
         System.out.println("Per favor obri un Navegador i copia-li la URL anterior ...");
       }
-      
 
       readFromSocket(port);
 

@@ -32,6 +32,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import es.caib.digitalib.back.controller.ScanWebModuleController;
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.logic.FitxerLogicaLocal;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.logic.utils.ScanWebConfigTester;
@@ -62,8 +63,8 @@ public class RestScanWebProcessController {
   @EJB(mappedName = ScanWebModuleLocal.JNDI_NAME)
   protected ScanWebModuleLocal scanWebModuleEjb;
 
-  @EJB(mappedName = es.caib.digitalib.ejb.FitxerLocal.JNDI_NAME)
-  protected es.caib.digitalib.ejb.FitxerLocal fitxerEjb;
+  @EJB(mappedName = FitxerLogicaLocal.JNDI_NAME)
+  protected FitxerLogicaLocal fitxerEjb;
 
   @RequestMapping(value = "/start/{transactionWebID}", method = RequestMethod.GET)
   public ModelAndView scanWebStart(HttpServletRequest request, HttpServletResponse response,

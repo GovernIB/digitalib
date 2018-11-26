@@ -125,7 +125,7 @@ public class ScanWebSimpleScanResult {
 
     String pixelType;
 
-    if (scannedFileInfo.getPixelType() < 0) {
+    if (scannedFileInfo.getPixelType() != null) {
 
       switch (scannedFileInfo.getPixelType()) {
 
@@ -146,7 +146,7 @@ public class ScanWebSimpleScanResult {
       pixelType = "--NO DEFINIT--";
     }
 
-    str.append("\n").append("      * FormatFile: " + pixelType);
+    str.append("\n").append("      * PixelType: " + pixelType);
     str.append("\n").append("      * Resolució(PPP): " + scannedFileInfo.getPppResolution());
     str.append("\n").append("      * OCR: " + scannedFileInfo.getOcr());
 
