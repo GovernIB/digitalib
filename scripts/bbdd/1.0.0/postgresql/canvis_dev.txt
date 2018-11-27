@@ -1,3 +1,4 @@
 
 ALTER TABLE dib_usuaripersona
    ALTER COLUMN configuraciogrupid DROP NOT NULL;
+

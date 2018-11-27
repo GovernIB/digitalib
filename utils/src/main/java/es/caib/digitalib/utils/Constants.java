@@ -39,6 +39,12 @@ public interface Constants {
 	public static final int TIPUS_CUSTODIA_SENSE = 0;
 	public static final int TIPUS_CUSTODIA_ARXIU = 1;
 	public static final int TIPUS_CUSTODIA_DOCUMENTCUSTODY = 2;
+	
+	public static final int[] TIPUS_CUSTODIA = {
+			TIPUS_CUSTODIA_SENSE,
+			TIPUS_CUSTODIA_ARXIU,
+			TIPUS_CUSTODIA_DOCUMENTCUSTODY
+	};
 
 	public static final int TIPUS_FIRMA_EN_SERVIDOR_SENSE = 0;
 	public static final int TIPUS_FIRMA_EN_SERVIDOR_PLUGIN = 1;
@@ -67,9 +73,9 @@ public interface Constants {
 
 
 
-	public static final int PERFIL_US_PLANTILLA = 0; 
-
-	public static final int PERFIL_US_TRANSACCIO_INFO = 1;
+//	public static final int PERFIL_US_PLANTILLA = 0; 
+//
+//	public static final int PERFIL_US_TRANSACCIO_INFO = 1;
 
 
 	public static final int PIXEL_TYPE_BLACK_WHITE = 0;
@@ -83,5 +89,17 @@ public interface Constants {
 			PIXEL_TYPE_GRAY,
 			PIXEL_TYPE_COLOR
 	};
-
+	
+	
+	public static final int PERFIL_US_TRANSACCIO_INFO = 0;
+	public static final int PERFIL_US_NOMES_ESCANEIG = 1;
+	public static final int PERFIL_US_COPIA_AUTENTICA = 2;
+	public static final int PERFIL_US_CUSTODIA = 3;
+	
+	public static final int[] PERFIL_US = {
+			PERFIL_US_TRANSACCIO_INFO,
+			PERFIL_US_NOMES_ESCANEIG,
+			PERFIL_US_COPIA_AUTENTICA,
+			PERFIL_US_CUSTODIA
+	};
 }
