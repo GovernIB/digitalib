@@ -123,7 +123,7 @@
         <tr id="usuariPersona_configuraciogrupid_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[UsuariPersonaFields.CONFIGURACIOGRUPID])?'usuariPersona.configuraciogrupid':__theForm.labels[UsuariPersonaFields.CONFIGURACIOGRUPID]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[UsuariPersonaFields.CONFIGURACIOGRUPID])?'usuariPersona.configuraciogrupid':__theForm.labels[UsuariPersonaFields.CONFIGURACIOGRUPID]}" />
               <c:if test="${not empty __theForm.help[UsuariPersonaFields.CONFIGURACIOGRUPID]}">
               <i class="icon-info-sign" title="${__theForm.help[UsuariPersonaFields.CONFIGURACIOGRUPID]}" ></i>
               </c:if>
@@ -137,6 +137,8 @@
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.CONFIGURACIOGRUPID)}" >
           <form:select id="usuariPersona_configuraciogrupid"  onchange="if(typeof onChangeConfiguraciogrupid == 'function') {  onChangeConfiguraciogrupid(this); };"  cssClass="input-xxlarge" path="usuariPersona.configuraciogrupid">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfConfiguracioGrupForConfiguraciogrupid}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>

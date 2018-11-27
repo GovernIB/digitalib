@@ -288,6 +288,45 @@ private static final long serialVersionUID = -1815612849L;
     return __result;
   }
 
+// EXP  Field:perfilnomesescaneigid | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilNomesEscaneigID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneigids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilnomesescaneigids() {
+    return this.configuracioGrup_perfilnomesescaneigids;
+  }
+
+	public void setConfiguracioGrup_perfilnomesescaneigids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneigids) {
+	  this.configuracioGrup_perfilnomesescaneigids = configuracioGrup_perfilnomesescaneigids;
+	}
+
+
+// EXP  Field:perfilcopiaautenticaid | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilCopiaAutenticaID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilcopiaautenticaids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilcopiaautenticaids() {
+    return this.configuracioGrup_perfilcopiaautenticaids;
+  }
+
+	public void setConfiguracioGrup_perfilcopiaautenticaids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilcopiaautenticaids) {
+	  this.configuracioGrup_perfilcopiaautenticaids = configuracioGrup_perfilcopiaautenticaids;
+	}
+
+
+// EXP  Field:perfilcustodiaid | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilCustodiaID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodiaids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilcustodiaids() {
+    return this.configuracioGrup_perfilcustodiaids;
+  }
+
+	public void setConfiguracioGrup_perfilcustodiaids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodiaids) {
+	  this.configuracioGrup_perfilcustodiaids = configuracioGrup_perfilcustodiaids;
+	}
+
+
 // EXP  Field:perfilid | Table: dib_perfilusrapp | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfil")
@@ -446,6 +485,18 @@ private static final long serialVersionUID = -1815612849L;
     if(!"TransaccioJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.transaccios) || org.hibernate.Hibernate.isInitialized(__jpa.getTransaccios())) ) {
       __tmp.setTransaccios(TransaccioJPA.copyJPA(__jpa.getTransaccios(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilcopiaautenticaids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilcopiaautenticaids())) ) {
+      __tmp.setConfiguracioGrup_perfilcopiaautenticaids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilcopiaautenticaids(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilcustodiaids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilcustodiaids())) ) {
+      __tmp.setConfiguracioGrup_perfilcustodiaids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilcustodiaids(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilnomesescaneigids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilnomesescaneigids())) ) {
+      __tmp.setConfiguracioGrup_perfilnomesescaneigids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilnomesescaneigids(), __alreadyCopied,"PerfilJPA"));
     }
     // Copia de beans complexes (IMP)
     if(!"PluginJPA".equals(origenJPA) && 

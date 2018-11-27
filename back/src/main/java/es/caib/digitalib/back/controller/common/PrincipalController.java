@@ -68,7 +68,7 @@ public class PrincipalController {
       }
       
       if ("user".equals(pipella)) {
-        return new ModelAndView(new RedirectView("/user/option1", true));
+        return new ModelAndView(new RedirectView("/user/llistatperfilsdisponibles", true));
       }
       
       if ("webdb".equals(pipella)) {

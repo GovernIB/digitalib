@@ -12,43 +12,58 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @XmlRootElement
 public class ScanWebSimpleGetTransactionIdRequest {
 
+  public static final int VIEW_FULLSCREEN = 0; // "fullview";
+
+  public static final int VIEW_IFRAME = 1; // "iframe";
+
   // Perfil d'Escaneig definit en el servidor intermig
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  String scanWebProfile;
+  protected String scanWebProfile;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  String languageUI;
+  protected int view;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  String languageDoc;
+  protected String languageUI;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  String usernameRequest;
+  protected String languageDoc;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  String ciutadaNif;
+  protected String usernameRequest;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  String ciutadaNom;
+  protected String ciutadaNif;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  String funcionariUsername;
+  protected String ciutadaNom;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  String funcionariNom;
+  protected String funcionariUsername;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  String expedientID;
+  protected String funcionariNom;
+
+  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+  protected String funcionariNif;
+
+  // XYZ ZZZ
+  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+  protected String expedientID;
 
   public ScanWebSimpleGetTransactionIdRequest() {
     super();
   }
 
-  public ScanWebSimpleGetTransactionIdRequest(String scanWebProfile, String languageUI,
-      String languageDoc, String usernameRequest, String ciutadaNif, String ciutadaNom,
-      String funcionariUsername, String funcionariNom, String expedientID) {
+  // XYZ ZZZ Fer constructors per escaneig, per copia autentic ai per custòdia
+
+  public ScanWebSimpleGetTransactionIdRequest(String scanWebProfile, int view,
+      String languageUI, String languageDoc, String usernameRequest, String ciutadaNif,
+      String ciutadaNom, String funcionariUsername, String funcionariNom,
+      String funcionariNif, String expedientID) {
     super();
     this.scanWebProfile = scanWebProfile;
+    this.view = view;
     this.languageUI = languageUI;
     this.languageDoc = languageDoc;
     this.usernameRequest = usernameRequest;
@@ -56,6 +71,7 @@ public class ScanWebSimpleGetTransactionIdRequest {
     this.ciutadaNom = ciutadaNom;
     this.funcionariUsername = funcionariUsername;
     this.funcionariNom = funcionariNom;
+    this.funcionariNif = funcionariNif;
     this.expedientID = expedientID;
   }
 
@@ -129,6 +145,22 @@ public class ScanWebSimpleGetTransactionIdRequest {
 
   public void setExpedientID(String expedientID) {
     this.expedientID = expedientID;
+  }
+
+  public int getView() {
+    return view;
+  }
+
+  public void setView(int view) {
+    this.view = view;
+  }
+
+  public String getFuncionariNif() {
+    return funcionariNif;
+  }
+
+  public void setFuncionariNif(String funcionariNif) {
+    this.funcionariNif = funcionariNif;
   }
 
 }

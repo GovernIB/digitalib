@@ -17,7 +17,7 @@ private static final long serialVersionUID = 1803901243L;
 	java.lang.String email;
 	java.lang.String nif;
 	java.lang.String idiomaID;
-	long configuraciogrupid;
+	java.lang.Long configuraciogrupid;
 
 
   /** Constructor Buit */
@@ -25,7 +25,7 @@ private static final long serialVersionUID = 1803901243L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariPersonaBean(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , long configuraciogrupid) {
+  public UsuariPersonaBean(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , java.lang.Long configuraciogrupid) {
     this.usuariPersonaID=usuariPersonaID;
     this.username=username;
     this.nom=nom;
@@ -36,7 +36,7 @@ private static final long serialVersionUID = 1803901243L;
     this.configuraciogrupid=configuraciogrupid;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariPersonaBean(java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , long configuraciogrupid) {
+  public UsuariPersonaBean(java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , java.lang.Long configuraciogrupid) {
     this.username=username;
     this.nom=nom;
     this.llinatges=llinatges;
@@ -105,10 +105,10 @@ private static final long serialVersionUID = 1803901243L;
 		this.idiomaID = _idiomaID_;
 	};
 
-	public long getConfiguraciogrupid() {
+	public java.lang.Long getConfiguraciogrupid() {
 		return(configuraciogrupid);
 	};
-	public void setConfiguraciogrupid(long _configuraciogrupid_) {
+	public void setConfiguraciogrupid(java.lang.Long _configuraciogrupid_) {
 		this.configuraciogrupid = _configuraciogrupid_;
 	};
 

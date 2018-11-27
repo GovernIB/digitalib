@@ -1,5 +1,6 @@
 package es.caib.digitalib.logic;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,10 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.plugins.scanweb.api.IScanWebPlugin;
+import org.fundaciobit.plugins.scanweb.api.ScanWebConfig;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
-import es.caib.digitalib.logic.utils.ScanWebConfigTester;
+import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.model.entity.Plugin;
+import es.caib.digitalib.model.fields.PluginFields;
+import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.utils.Constants;
 
 
 /**
@@ -37,20 +42,25 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
   @EJB(mappedName = PluginScanWebLogicaLocal.JNDI_NAME)
   protected PluginScanWebLogicaLocal pluginScanWebLogicaEjb;
   
+  @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
+  protected TransaccioLogicaLocal transaccioLogicaEjb;
+  
   
   @Override
-  public List<Plugin> getAllPluginsFiltered(HttpServletRequest request, String scanWebID)
+  public List<Plugin> getAllPluginsFiltered(HttpServletRequest request, String transactionWebID, Long[] pluginsID)
       throws Exception, I18NException {
 
-    ScanWebConfigTester scanWebConfig = getScanWebConfig(request, scanWebID);
+    //ScanWebConfig scanWebConfig = ScanWebUtils.generateScanWebConfig(
+    //    transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID), null);
+    ScanWebConfig scanWebConfig = getScanWebConfig(request, transactionWebID);
 
     // TODO CHECK scanWebConfig
-    List<Plugin> plugins = pluginScanWebLogicaEjb.getAllPlugins();
+    List<Plugin> plugins = pluginScanWebLogicaEjb.select(PluginFields.PLUGINID.in(pluginsID));
     if (plugins == null || plugins.size() == 0) {
       String msg = "S'ha produit un error llegint els plugins o no se n'han definit.";
       throw new Exception(msg);
     }
-
+    
     List<Plugin> pluginsFiltered = new ArrayList<Plugin>();
 
     IScanWebPlugin scanWebPlugin;
@@ -66,7 +76,6 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
       }
 
       // 2.- Passa el filtre ...
-
       if (scanWebPlugin.filter(request, scanWebConfig)) {
         pluginsFiltered.add(pluginDeScanWeb);
       } else {
@@ -79,17 +88,27 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
     return pluginsFiltered;
 
   }
+  
+  
+  
+  
+  
+  
 
   @Override
   public String scanDocument(HttpServletRequest request, String absolutePluginRequestPath,
-      String relativePluginRequestPath, String scanWebID) throws Exception, I18NException {
+      String relativePluginRequestPath, String transactionWebID) throws Exception, I18NException {
 
-    ScanWebConfigTester scanWebConfig = getScanWebConfig(request, scanWebID);
+    
+    
+    TransaccioJPA trans = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
+    
+    ScanWebConfig scanWebConfig = getScanWebConfig(request, transactionWebID);
 
-    Long pluginID = scanWebConfig.getPluginID();
+    Long pluginID = trans.getPerfil().getPluginScanWebID();
 
     log.info("SMC :: scanDocument: PluginID = " + pluginID);
-    log.info("SMC :: scanDocument: scanWebID = " + scanWebID);
+    log.info("SMC :: scanDocument: scanWebID = " + transactionWebID);
 
     // El plugin existeix?
     IScanWebPlugin scanWebPlugin;
@@ -114,17 +133,20 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
    */
   public void requestPlugin(HttpServletRequest request, HttpServletResponse response,
       String absoluteRequestPluginBasePath, String relativeRequestPluginBasePath,
-      String scanWebID, String query, boolean isPost) throws Exception, I18NException {
+      String transactionWebID, String query, boolean isPost) throws Exception, I18NException {
 
-    ScanWebConfigTester ss = getScanWebConfig(request, scanWebID);
     
-    if (ss == null) {
+    TransaccioJPA trans = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
+    
+    //ScanWebConfigTester ss = getScanWebConfig(request, scanWebID);
+    
+    if (trans == null) {
       response.sendRedirect("/index.jsp");
       return;
     }
     
 
-    long pluginID = ss.getPluginID();
+    long pluginID = trans.getPerfil().getPluginScanWebID();
 
     // log.info(" TesterScanWebConfig ss = " + ss);
     // log.info(" ScanWebConfig pluginID = ss.getPluginID(); =>  " + pluginID);
@@ -144,10 +166,10 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
 
     if (isPost) {
       scanWebPlugin.requestPOST(absoluteRequestPluginBasePath, relativeRequestPluginBasePath,
-          scanWebID, query, request, response);
+          transactionWebID, query, request, response);
     } else {
       scanWebPlugin.requestGET(absoluteRequestPluginBasePath, relativeRequestPluginBasePath,
-          scanWebID, query, request, response);
+          transactionWebID, query, request, response);
     }
 
   }
@@ -159,27 +181,22 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
   // -------------------------------------------------------------------------
 
   @Override
-  public void closeScanWebProcess(HttpServletRequest request, String scanWebID) {
+  public void closeScanWebProcess(HttpServletRequest request, String transactionWebID) throws I18NException {
 
-    ScanWebConfigTester pss = getScanWebConfig(request, scanWebID);
+    TransaccioJPA trans = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
+    
+    //XYZ ZZZ ScanWebConfigTester ss = getScanWebConfig(request, scanWebID);
 
-    if (pss == null) {
-      log.warn("NO Existeix scanWebID igual a " + scanWebID);
+    if (trans == null) {
+      log.warn("NO Existeix scanWebID igual a " + transactionWebID);
       return;
     }
 
-    closeScanWebProcess(request, scanWebID, pss);
-  }
 
-  private void closeScanWebProcess(HttpServletRequest request, String scanWebID,
-      ScanWebConfigTester pss) {
-
-    Long pluginID = pss.getPluginID();
+    long pluginID = trans.getPerfil().getPluginScanWebID();
 
     // final String scanWebID = pss.getscanWebID();
-    if (pluginID == null) {
-      // Encara no s'ha asignat plugin al proces d'escaneig
-    } else {
+    {
 
       IScanWebPlugin scanWebPlugin = null;
       try {
@@ -193,19 +210,25 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
       }
 
       try {
-        scanWebPlugin.endScanWebTransaction(scanWebID, request);
+        scanWebPlugin.endScanWebTransaction(transactionWebID, request);
       } catch (Exception e) {
         log.error(
-            "Error borrant dades d'un Proces d'escaneig " + scanWebID + ": " + e.getMessage(),
+            "Error borrant dades d'un Proces d'escaneig " + transactionWebID + ": " + e.getMessage(),
             e);
       }
     }
-    scanWebConfigMap.remove(scanWebID);
+    scanWebConfigMap.remove(transactionWebID);
+    
+    log.info(" XYZ ZZZ\n\n ESBORRAT TRANSACCIO " + transactionWebID + " \n\n\n ", new Exception());
+    
   }
 
-  private static final Map<String, ScanWebConfigTester> scanWebConfigMap = new HashMap<String, ScanWebConfigTester>();
+  
+  
+  private static final Map<String, ScanWebConfig> scanWebConfigMap = new HashMap<String, ScanWebConfig>();
 
   private static long lastCheckScanProcessCaducades = 0;
+  
 
   /**
    * Fa neteja
@@ -213,53 +236,75 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
    * @param scanWebID
    * @return
    */
-  public ScanWebConfigTester getScanWebConfig(HttpServletRequest request, String scanWebID) {
+  public ScanWebConfig getScanWebConfig(HttpServletRequest request, String scanWebID) {
     // Fer net peticions caducades
     // Check si existeix algun proces de escaneig caducat s'ha d'esborrar
     // Com a mínim cada minut es revisa si hi ha caducats
+    
     Long now = System.currentTimeMillis();
 
     final long un_minut_en_ms = 60 * 60 * 1000;
 
     if (now + un_minut_en_ms > lastCheckScanProcessCaducades) {
       lastCheckScanProcessCaducades = now;
-      Map<String, ScanWebConfigTester> keysToDelete = new HashMap<String, ScanWebConfigTester>();
-
+      Map<String, ScanWebConfig> keysToDelete = new HashMap<String, ScanWebConfig>();
+      
+      
       Set<String> ids = scanWebConfigMap.keySet();
       for (String id : ids) {
-        ScanWebConfigTester ss = scanWebConfigMap.get(id);
-        if (now > ss.getExpiryTransaction()) {
+        ScanWebConfig ss = scanWebConfigMap.get(id);
+        // XYZ ZZZ Optimitzar amb un SelectMultiple de scanwebid i DATAINICI
+        Timestamp ts;
+        try {
+          ts = transaccioLogicaEjb.executeQueryOne(TransaccioFields.DATAINICI, TransaccioFields.TRANSACTIONWEBID.equal(scanWebID));
+        } catch (I18NException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+          continue;
+        }
+
+        long expiryTransaction = ts.getTime() + Constants.EXPIRATION_TIME_MS;
+            
+        if (now > expiryTransaction) {
           keysToDelete.put(id, ss);
           SimpleDateFormat sdf = new SimpleDateFormat();
           log.info("Tancant ScanWebConfig amb ID = " + id + " a causa de que està caducat "
               + "( ARA: " + sdf.format(new Date(now)) + " | CADUCITAT: "
-              + sdf.format(new Date(ss.getExpiryTransaction())) + ")");
+              + sdf.format(new Date(expiryTransaction)) + ")");
         }
       }
 
       if (keysToDelete.size() != 0) {
         synchronized (scanWebConfigMap) {
 
-          for (Entry<String, ScanWebConfigTester> pss : keysToDelete.entrySet()) {
-            closeScanWebProcess(request, pss.getKey(), pss.getValue());
+          for (Entry<String, ScanWebConfig> pss : keysToDelete.entrySet()) {
+            try {
+              closeScanWebProcess(request, pss.getKey());
+            } catch (I18NException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
           }
         }
       }
     }
+    
 
     return scanWebConfigMap.get(scanWebID);
   }
 
+
   @Override
-  public void startScanWebProcess(ScanWebConfigTester scanWebConfig) {
+  public void startScanWebProcess(ScanWebConfig scanWebConfig) {
     final String scanWebID = scanWebConfig.getScanWebID();
     synchronized (scanWebConfigMap) {
       scanWebConfigMap.put(scanWebID, scanWebConfig);
     }
 
   }
+    
   
-  
+  /*
   @Override
   public Set<String> getDefaultFlags(ScanWebConfigTester ss) throws Exception  {
     
@@ -283,5 +328,6 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
     return supFlags.get(0);
     
   }
+  */
 
 }

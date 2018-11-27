@@ -139,9 +139,18 @@
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.estatcodi" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.estatcodi"   />
-
+          <form:errors path="transaccio.estatcodi" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)}" >
+          <form:hidden path="transaccio.estatcodi"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.estatcodi,__theForm.listOfValuesForEstatcodi)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)}" >
+          <form:select id="transaccio_estatcodi"  onchange="if(typeof onChangeEstatcodi == 'function') {  onChangeEstatcodi(this); };"  cssClass="input-xxlarge" path="transaccio.estatcodi">
+            <c:forEach items="${__theForm.listOfValuesForEstatcodi}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>
@@ -591,7 +600,7 @@
         <tr id="transaccio_view_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.VIEW])?'transaccio.view':__theForm.labels[TransaccioFields.VIEW]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.VIEW])?'transaccio.view':__theForm.labels[TransaccioFields.VIEW]}" /> &nbsp;(*)
               <c:if test="${not empty __theForm.help[TransaccioFields.VIEW]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.VIEW]}" ></i>
               </c:if>
@@ -605,8 +614,6 @@
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.VIEW)}" >
           <form:select id="transaccio_view"  onchange="if(typeof onChangeView == 'function') {  onChangeView(this); };"  cssClass="input-xxlarge" path="transaccio.view">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfValuesForView}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>

@@ -19,17 +19,19 @@
 		<sec:intercept-url pattern="/error.jsp" access="permitAll"/>
 		<sec:intercept-url pattern="/index.jsp" access="permitAll"/>
     
-     <sec:intercept-url pattern="/common/scanwebmodule/requestPlugin/**" access="permitAll"/>
-     <sec:intercept-url pattern="/common/rest/apiscanwebsimple/v1/**" access="permitAll"/>
-     <sec:intercept-url pattern="/public/**" access="permitAll"/>
+    <sec:intercept-url pattern="/public/scanwebmodule/requestPlugin/**" access="permitAll"/>
+    <sec:intercept-url pattern="/user/scanwebmodule/requestPlugin/**" access="permitAll"/>
+     
+    <sec:intercept-url pattern="/common/rest/apiscanwebsimple/v1/**" access="permitAll"/>
+    <sec:intercept-url pattern="/public/**" access="permitAll"/>
 	
-        <sec:intercept-url pattern="/common/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+    <sec:intercept-url pattern="/common/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         
-        <sec:intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
+    <sec:intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
         
-        <sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+    <sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
         
-        <sec:intercept-url pattern="/webdb/**" access="hasRole('ROLE_ADMIN')"/>
+    <sec:intercept-url pattern="/webdb/**" access="hasRole('ROLE_ADMIN')"/>
 
 <!--  OTHER EXAMPLES 
 		<sec:intercept-url pattern="/soli/**" access="hasRole('ROLE_SOLI')"/>

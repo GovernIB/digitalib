@@ -17,6 +17,9 @@ private static final long serialVersionUID = -1444815491L;
 	java.lang.String suportTelefon;
 	long logoHeaderID;
 	long logoFooterID;
+	java.lang.Long perfilNomesEscaneigID;
+	java.lang.Long perfilCopiaAutenticaID;
+	java.lang.Long perfilCustodiaID;
 
 
   /** Constructor Buit */
@@ -24,7 +27,7 @@ private static final long serialVersionUID = -1444815491L;
   }
 
   /** Constructor amb tots els camps  */
-  public ConfiguracioGrupBean(long configuracioGrupID , java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID) {
+  public ConfiguracioGrupBean(long configuracioGrupID , java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCustodiaID) {
     this.configuracioGrupID=configuracioGrupID;
     this.nom=nom;
     this.suportWeb=suportWeb;
@@ -32,15 +35,21 @@ private static final long serialVersionUID = -1444815491L;
     this.suportTelefon=suportTelefon;
     this.logoHeaderID=logoHeaderID;
     this.logoFooterID=logoFooterID;
+    this.perfilNomesEscaneigID=perfilNomesEscaneigID;
+    this.perfilCopiaAutenticaID=perfilCopiaAutenticaID;
+    this.perfilCustodiaID=perfilCustodiaID;
 }
   /** Constructor sense valors autoincrementals */
-  public ConfiguracioGrupBean(java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID) {
+  public ConfiguracioGrupBean(java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCustodiaID) {
     this.nom=nom;
     this.suportWeb=suportWeb;
     this.suportEmail=suportEmail;
     this.suportTelefon=suportTelefon;
     this.logoHeaderID=logoHeaderID;
     this.logoFooterID=logoFooterID;
+    this.perfilNomesEscaneigID=perfilNomesEscaneigID;
+    this.perfilCopiaAutenticaID=perfilCopiaAutenticaID;
+    this.perfilCustodiaID=perfilCustodiaID;
 }
   /** Constructor dels valors Not Null */
   public ConfiguracioGrupBean(long configuracioGrupID , java.lang.String nom , long logoHeaderID , long logoFooterID) {
@@ -57,6 +66,9 @@ private static final long serialVersionUID = -1444815491L;
     this.setSuportTelefon(__bean.getSuportTelefon());
     this.setLogoHeaderID(__bean.getLogoHeaderID());
     this.setLogoFooterID(__bean.getLogoFooterID());
+    this.setPerfilNomesEscaneigID(__bean.getPerfilNomesEscaneigID());
+    this.setPerfilCopiaAutenticaID(__bean.getPerfilCopiaAutenticaID());
+    this.setPerfilCustodiaID(__bean.getPerfilCustodiaID());
     // Fitxer
     this.setLogoHeader(FitxerBean.toBean(__bean.getLogoHeader()));
     // Fitxer
@@ -112,6 +124,27 @@ private static final long serialVersionUID = -1444815491L;
 		this.logoFooterID = _logoFooterID_;
 	};
 
+	public java.lang.Long getPerfilNomesEscaneigID() {
+		return(perfilNomesEscaneigID);
+	};
+	public void setPerfilNomesEscaneigID(java.lang.Long _perfilNomesEscaneigID_) {
+		this.perfilNomesEscaneigID = _perfilNomesEscaneigID_;
+	};
+
+	public java.lang.Long getPerfilCopiaAutenticaID() {
+		return(perfilCopiaAutenticaID);
+	};
+	public void setPerfilCopiaAutenticaID(java.lang.Long _perfilCopiaAutenticaID_) {
+		this.perfilCopiaAutenticaID = _perfilCopiaAutenticaID_;
+	};
+
+	public java.lang.Long getPerfilCustodiaID() {
+		return(perfilCustodiaID);
+	};
+	public void setPerfilCustodiaID(java.lang.Long _perfilCustodiaID_) {
+		this.perfilCustodiaID = _perfilCustodiaID_;
+	};
+
 
 
   // ======================================
@@ -126,6 +159,9 @@ private static final long serialVersionUID = -1444815491L;
     __tmp.setSuportTelefon(__bean.getSuportTelefon());
     __tmp.setLogoHeaderID(__bean.getLogoHeaderID());
     __tmp.setLogoFooterID(__bean.getLogoFooterID());
+    __tmp.setPerfilNomesEscaneigID(__bean.getPerfilNomesEscaneigID());
+    __tmp.setPerfilCopiaAutenticaID(__bean.getPerfilCopiaAutenticaID());
+    __tmp.setPerfilCustodiaID(__bean.getPerfilCustodiaID());
     // Fitxer
     __tmp.setLogoHeader(FitxerBean.toBean(__bean.getLogoHeader()));
     // Fitxer

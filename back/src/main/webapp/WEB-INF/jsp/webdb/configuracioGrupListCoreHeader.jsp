@@ -33,6 +33,15 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.LOGOFOOTERID)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.LOGOFOOTERID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILCUSTODIAID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.PERFILCUSTODIAID)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

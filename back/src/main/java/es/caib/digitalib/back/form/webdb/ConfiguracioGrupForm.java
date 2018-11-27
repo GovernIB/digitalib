@@ -1,5 +1,7 @@
 package es.caib.digitalib.back.form.webdb;
 
+import java.util.List;
+import org.fundaciobit.genapp.common.StringKeyValue;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import es.caib.digitalib.back.form.DigitalIBBaseForm;
 import es.caib.digitalib.jpa.ConfiguracioGrupJPA;
@@ -26,6 +28,9 @@ public class ConfiguracioGrupForm extends DigitalIBBaseForm {
   public ConfiguracioGrupForm(ConfiguracioGrupForm __toClone) {
     super(__toClone);
       this.configuracioGrup = __toClone.configuracioGrup;
+    this.listOfPerfilForPerfilNomesEscaneigID = __toClone.listOfPerfilForPerfilNomesEscaneigID;
+    this.listOfPerfilForPerfilCopiaAutenticaID = __toClone.listOfPerfilForPerfilCopiaAutenticaID;
+    this.listOfPerfilForPerfilCustodiaID = __toClone.listOfPerfilForPerfilCustodiaID;
   }
   
   public ConfiguracioGrupForm(ConfiguracioGrupJPA configuracioGrup, boolean nou) {
@@ -69,5 +74,41 @@ public class ConfiguracioGrupForm extends DigitalIBBaseForm {
   public void setLogoFooterIDDelete(boolean logoFooterIDDelete) {
     this.logoFooterIDDelete = logoFooterIDDelete;
    }
+  private List<StringKeyValue> listOfPerfilForPerfilNomesEscaneigID;
+
+  public List<StringKeyValue> getListOfPerfilForPerfilNomesEscaneigID() {
+    return this.listOfPerfilForPerfilNomesEscaneigID;
+  }
+
+  public void setListOfPerfilForPerfilNomesEscaneigID(List<StringKeyValue> listOfPerfilForPerfilNomesEscaneigID) {
+    this.listOfPerfilForPerfilNomesEscaneigID = listOfPerfilForPerfilNomesEscaneigID;
+  }
+
+
+
+  private List<StringKeyValue> listOfPerfilForPerfilCopiaAutenticaID;
+
+  public List<StringKeyValue> getListOfPerfilForPerfilCopiaAutenticaID() {
+    return this.listOfPerfilForPerfilCopiaAutenticaID;
+  }
+
+  public void setListOfPerfilForPerfilCopiaAutenticaID(List<StringKeyValue> listOfPerfilForPerfilCopiaAutenticaID) {
+    this.listOfPerfilForPerfilCopiaAutenticaID = listOfPerfilForPerfilCopiaAutenticaID;
+  }
+
+
+
+  private List<StringKeyValue> listOfPerfilForPerfilCustodiaID;
+
+  public List<StringKeyValue> getListOfPerfilForPerfilCustodiaID() {
+    return this.listOfPerfilForPerfilCustodiaID;
+  }
+
+  public void setListOfPerfilForPerfilCustodiaID(List<StringKeyValue> listOfPerfilForPerfilCustodiaID) {
+    this.listOfPerfilForPerfilCustodiaID = listOfPerfilForPerfilCustodiaID;
+  }
+
+
+
   
 } // Final de Classe 

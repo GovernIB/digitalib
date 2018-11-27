@@ -3,6 +3,7 @@ package es.caib.digitalib.back.form.webdb;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -86,6 +87,72 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
   }
 
 
+  private java.lang.Long perfilNomesEscaneigIDDesde;
+
+  public java.lang.Long getPerfilNomesEscaneigIDDesde() {
+    return this.perfilNomesEscaneigIDDesde;
+  }
+
+  public void setPerfilNomesEscaneigIDDesde(java.lang.Long perfilNomesEscaneigIDDesde) {
+    this.perfilNomesEscaneigIDDesde = perfilNomesEscaneigIDDesde;
+  }
+
+
+  private java.lang.Long perfilNomesEscaneigIDFins;
+
+  public java.lang.Long getPerfilNomesEscaneigIDFins() {
+    return this.perfilNomesEscaneigIDFins;
+  }
+
+  public void setPerfilNomesEscaneigIDFins(java.lang.Long perfilNomesEscaneigIDFins) {
+    this.perfilNomesEscaneigIDFins = perfilNomesEscaneigIDFins;
+  }
+
+
+  private java.lang.Long perfilCopiaAutenticaIDDesde;
+
+  public java.lang.Long getPerfilCopiaAutenticaIDDesde() {
+    return this.perfilCopiaAutenticaIDDesde;
+  }
+
+  public void setPerfilCopiaAutenticaIDDesde(java.lang.Long perfilCopiaAutenticaIDDesde) {
+    this.perfilCopiaAutenticaIDDesde = perfilCopiaAutenticaIDDesde;
+  }
+
+
+  private java.lang.Long perfilCopiaAutenticaIDFins;
+
+  public java.lang.Long getPerfilCopiaAutenticaIDFins() {
+    return this.perfilCopiaAutenticaIDFins;
+  }
+
+  public void setPerfilCopiaAutenticaIDFins(java.lang.Long perfilCopiaAutenticaIDFins) {
+    this.perfilCopiaAutenticaIDFins = perfilCopiaAutenticaIDFins;
+  }
+
+
+  private java.lang.Long perfilCustodiaIDDesde;
+
+  public java.lang.Long getPerfilCustodiaIDDesde() {
+    return this.perfilCustodiaIDDesde;
+  }
+
+  public void setPerfilCustodiaIDDesde(java.lang.Long perfilCustodiaIDDesde) {
+    this.perfilCustodiaIDDesde = perfilCustodiaIDDesde;
+  }
+
+
+  private java.lang.Long perfilCustodiaIDFins;
+
+  public java.lang.Long getPerfilCustodiaIDFins() {
+    return this.perfilCustodiaIDFins;
+  }
+
+  public void setPerfilCustodiaIDFins(java.lang.Long perfilCustodiaIDFins) {
+    this.perfilCustodiaIDFins = perfilCustodiaIDFins;
+  }
+
+
   public ConfiguracioGrupFilterForm() {
   }
   
@@ -97,6 +164,15 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
     this.suportWeb = __toClone.suportWeb;
     this.suportEmail = __toClone.suportEmail;
     this.suportTelefon = __toClone.suportTelefon;
+    this.perfilNomesEscaneigIDDesde = __toClone.perfilNomesEscaneigIDDesde;
+    this.perfilNomesEscaneigIDFins = __toClone.perfilNomesEscaneigIDFins;
+    this.perfilCopiaAutenticaIDDesde = __toClone.perfilCopiaAutenticaIDDesde;
+    this.perfilCopiaAutenticaIDFins = __toClone.perfilCopiaAutenticaIDFins;
+    this.perfilCustodiaIDDesde = __toClone.perfilCustodiaIDDesde;
+    this.perfilCustodiaIDFins = __toClone.perfilCustodiaIDFins;
+    this.mapOfPerfilForPerfilNomesEscaneigID = __toClone.mapOfPerfilForPerfilNomesEscaneigID;
+    this.mapOfPerfilForPerfilCopiaAutenticaID = __toClone.mapOfPerfilForPerfilCopiaAutenticaID;
+    this.mapOfPerfilForPerfilCustodiaID = __toClone.mapOfPerfilForPerfilCustodiaID;
   }
   
   /* ========= UTILS ========== */
@@ -131,6 +207,42 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
    // -----------------------
    // Maps de referencies.
    // -----------------------
+  private Map<String, String> mapOfPerfilForPerfilNomesEscaneigID;
+
+  public Map<String, String> getMapOfPerfilForPerfilNomesEscaneigID() {
+    return this.mapOfPerfilForPerfilNomesEscaneigID;
+  }
+
+  public void setMapOfPerfilForPerfilNomesEscaneigID(Map<String, String> mapOfPerfilForPerfilNomesEscaneigID) {
+    this.mapOfPerfilForPerfilNomesEscaneigID = mapOfPerfilForPerfilNomesEscaneigID;
+  }
+
+
+
+  private Map<String, String> mapOfPerfilForPerfilCopiaAutenticaID;
+
+  public Map<String, String> getMapOfPerfilForPerfilCopiaAutenticaID() {
+    return this.mapOfPerfilForPerfilCopiaAutenticaID;
+  }
+
+  public void setMapOfPerfilForPerfilCopiaAutenticaID(Map<String, String> mapOfPerfilForPerfilCopiaAutenticaID) {
+    this.mapOfPerfilForPerfilCopiaAutenticaID = mapOfPerfilForPerfilCopiaAutenticaID;
+  }
+
+
+
+  private Map<String, String> mapOfPerfilForPerfilCustodiaID;
+
+  public Map<String, String> getMapOfPerfilForPerfilCustodiaID() {
+    return this.mapOfPerfilForPerfilCustodiaID;
+  }
+
+  public void setMapOfPerfilForPerfilCustodiaID(Map<String, String> mapOfPerfilForPerfilCustodiaID) {
+    this.mapOfPerfilForPerfilCustodiaID = mapOfPerfilForPerfilCustodiaID;
+  }
+
+
+
 
    // --------------------------------
    // Camps traduibles de referencies.

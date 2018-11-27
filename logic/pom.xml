@@ -18,7 +18,12 @@
 
 
   <dependencies>
-
+  
+    <dependency>
+      <artifactId>digitalib-scanwebsimple-api</artifactId>
+      <groupId>es.caib.digitalib</groupId>
+      <version>1.0</version>
+    </dependency>  
 
     <dependency>
       <groupId>es.caib.digitalib</groupId>

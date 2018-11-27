@@ -80,8 +80,8 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.String getReturnUrl();
 	public void setReturnUrl(java.lang.String _returnUrl_);
 
-	public java.lang.Integer getView();
-	public void setView(java.lang.Integer _view_);
+	public int getView();
+	public void setView(int _view_);
 
   // Fitxer
   public <F extends Fitxer> F getFitxerEscanejat();

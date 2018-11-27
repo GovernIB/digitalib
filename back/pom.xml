@@ -54,6 +54,13 @@
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
+      <artifactId>pluginsib-scanweb-api</artifactId>
+      <version>3.0.0</version>
+      <scope>provided</scope>
+    </dependency>
 
 
     <!-- Externas -->
@@ -144,6 +151,7 @@
       <artifactId>digitalib-scanwebsimple-api</artifactId>
       <groupId>es.caib.digitalib</groupId>
       <version>1.0</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>

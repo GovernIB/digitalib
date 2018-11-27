@@ -11,6 +11,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  *
  */
 @XmlRootElement
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ScanWebSimpleScanResult {
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

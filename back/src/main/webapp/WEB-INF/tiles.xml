@@ -50,19 +50,19 @@
     </definition>
     -->
 
-    <definition name="public_plugindescan_seleccio" extends="common.emptylayout">
+    <definition name="public_plugindescan_seleccio" extends="user.emptylayout">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_seleccio.jsp" />
     </definition>
 
-    <definition name="public_finalsortiriframe" extends="common.emptylayout">
+    <definition name="public_finalsortiriframe" extends="user.emptylayout">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/finalsortiriframe.jsp" />
     </definition>
     
-    <definition name="public_plugindescan_final" extends="common.emptylayout">
+    <definition name="public_plugindescan_final" extends="user.emptylayout">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_final.jsp" />
     </definition>
     
-    <definition name="public_plugindescan_contenidor" extends="common.emptylayout">
+    <definition name="public_plugindescan_contenidor" extends="user.emptylayout">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_contenidor.jsp" />
     </definition>
     
@@ -76,11 +76,7 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/principal.jsp" />
     </definition>
     
-    <definition name="common.fullview" extends="base.definition.fullview">
-    </definition>
     
-    <definition name="common.emptylayout" extends="base.definition.emptylayout">
-    </definition>
 
     <definition name="principal" extends="common">
         <put-attribute name="contingut" value="/WEB-INF/jsp/principal.jsp" />
@@ -96,29 +92,7 @@
     
     
     
-    <definition name="scanWebForm" extends="common">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/common/scanWebForm.jsp" />
-    </definition>
-    
-    <definition name="scanWebFinal" extends="common.fullview">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/common/scanWebFinal.jsp" />
-    </definition>
 
-    <definition name="plugindescan_seleccio" extends="common.fullview">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_seleccio.jsp" />
-    </definition>
-
-    <definition name="finalsortiriframe" extends="common.emptylayout">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/common/finalsortiriframe.jsp" />
-    </definition>
-    
-    <definition name="plugindescan_final" extends="common">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_final.jsp" />
-    </definition>
-    
-    <definition name="plugindescan_contenidor" extends="common">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_contenidor.jsp" />
-    </definition>
     
 
     <!--  ===========  USER  ================== -->
@@ -128,13 +102,49 @@
          <put-attribute name="pipella" value="user" />
     </definition>
     
-    <definition name="option1User" extends="user">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/user/user.jsp" />
+    <definition name="user.fullview" extends="base.definition.fullview">
     </definition>
     
-    <definition name="option2User" extends="user">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/user/user.jsp" />
+    <definition name="user.emptylayout" extends="base.definition.emptylayout">
     </definition>
+
+    <definition name="scanWebForm" extends="user">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/scanWebForm.jsp" />
+    </definition>
+
+    <definition name="scanWebFinal" extends="user.fullview">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/scanWebFinal.jsp" />
+    </definition>
+
+    <definition name="plugindescan_seleccio" extends="user.fullview">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_seleccio.jsp" />
+    </definition>
+
+    <definition name="finalsortiriframe" extends="user.emptylayout">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/finalsortiriframe.jsp" />
+    </definition>
+
+    <definition name="plugindescan_final" extends="user">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_final.jsp" />
+    </definition>
+
+    <definition name="plugindescan_contenidor" extends="user">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_contenidor.jsp" />
+    </definition>
+
+    <definition name="llistatperfilsdisponibles" extends="user">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/user/llistatperfilsdisponibles.jsp" />
+    </definition>
+    
+    <definition name="transaccioFormUser" extends="user">
+        <put-attribute name="titol" value="transaccio.transaccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioForm.jsp" />
+    </definition>
+    
+    <definition name="transaccioListUser" extends="user">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioList.jsp" />
+    </definition>
+
 
     <!--  ===========  ADMIN  ================== -->
         

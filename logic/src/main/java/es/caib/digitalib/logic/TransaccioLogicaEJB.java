@@ -1,6 +1,8 @@
 package es.caib.digitalib.logic;
 
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RunAs;
@@ -8,14 +10,24 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.hibernate.Hibernate;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import es.caib.digitalib.ejb.TransaccioEJB;
+import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
-import es.caib.digitalib.model.entity.Perfil;
+import es.caib.digitalib.jpa.UsuariAplicacioJPA;
+import es.caib.digitalib.jpa.UsuariPersonaJPA;
+import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.model.entity.Transaccio;
+import es.caib.digitalib.model.fields.PerfilFields;
+import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
+import es.caib.digitalib.model.fields.PerfilUsuariAplicacioQueryPath;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.utils.Constants;
 
 /**
  *
@@ -29,9 +41,14 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
   @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
+  
 
+  @EJB(mappedName = es.caib.digitalib.ejb.PerfilUsuariAplicacioLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.PerfilUsuariAplicacioLocal perfilUsuariAplicacioEjb;
+
+  /*
   @Override
-  public Transaccio createWithProfile(TransaccioJPA transaccio) throws I18NException {
+  public TransaccioJPA createWithProfile(TransaccioJPA transaccio) throws I18NException {
 
     Perfil perfil = (Perfil) transaccio.getPerfil();
 
@@ -44,9 +61,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     transaccio.setPerfil(null);
     transaccio.setPerfilid(perfil.getPerfilID());
 
-    return this.create(transaccio);
+    return (TransaccioJPA)this.create(transaccio);
 
   }
+  */
   
   
   @Override
@@ -70,6 +88,133 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
   @PermitAll
   public Transaccio update(Transaccio instance) throws I18NException {
      return super.update(instance);
+  }
+  
+  
+  @Override
+  @PermitAll
+  public TransaccioJPA crearTransaccio(ScanWebSimpleGetTransactionIdRequest requestTransaction,
+      UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String returnURL) throws I18NException {
+    
+
+    String scanWebProfile = requestTransaction.getScanWebProfile();
+
+    PerfilUsuariAplicacioQueryPath qp = new PerfilUsuariAplicacioQueryPath();
+
+    Long perfilID = null;
+    if (usuariPersona == null) {
+  
+      try {
+        perfilID = perfilUsuariAplicacioEjb.executeQueryOne(qp.PERFIL().PERFILID(), Where.AND(
+            PerfilUsuariAplicacioFields.USUARIAPLICACIOID.equal(usuariAplicacio.getUsuariAplicacioID()),
+            // Dels perfils assignats esta el del codi enviat
+            qp.PERFIL().CODI().equal(scanWebProfile)));
+      } catch (I18NException e1) {
+        // XYZ ZZZ YTraduir     
+        throw new I18NException("genapp.comodi", "Error desconegut cercant perfil "
+          + scanWebProfile + ": " + I18NLogicUtils.getMessage(e1, new Locale("ca")));
+      }
+  
+      if (perfilID == null) {
+        // XYZ ZZZ Traduir
+        throw new I18NException("genapp.comodi", "El perfil " + scanWebProfile
+            + " no està assignat a usuari aplicacio " + usuariAplicacio.getUsername());
+      }
+    } else {
+      
+      perfilID = perfilEjb.executeQueryOne(PerfilFields.PERFILID, PerfilFields.CODI.equal(scanWebProfile));
+      
+      // XYZ ZZZ Traduir
+      if (perfilID == null) {
+        throw new I18NException("genapp.comodi", "No puc trobar el perfil amb codi " + scanWebProfile);
+      }
+      
+    }
+
+    final String transactionWebID = internalGetTransacction();
+    
+    PerfilJPA perfil = perfilEjb.findByPrimaryKey(perfilID);
+
+    PerfilJPA clonedPerfil = PerfilJPA.toJPA(perfil);
+
+    clonedPerfil.setCodi(clonedPerfil.getCodi() + "-" + transactionWebID);
+    clonedPerfil.setPerfilID(0);
+    clonedPerfil.setUsPerfil(Constants.PERFIL_US_TRANSACCIO_INFO);
+
+    // XYZ ZZZ ZZZ Falten altres comprovacions
+    TransaccioJPA t = new TransaccioJPA();
+
+    t.setDatainici(new Timestamp(System.currentTimeMillis()));
+    t.setEstatcodi(ScanWebSimpleStatus.STATUS_REQUESTED_ID);
+    t.setTransactionWebId(transactionWebID);
+    t.setLanguageui(requestTransaction.getLanguageUI());
+    t.setLanguagedoc(requestTransaction.getLanguageDoc());
+    
+    t.setView(requestTransaction.getView());
+    
+    t.setReturnUrl(returnURL);
+
+    if (usuariAplicacio != null) {
+      t.setUsuariaplicacioid(usuariAplicacio.getUsuariAplicacioID());
+    }
+    
+    if (usuariPersona != null) {
+      t.setUsuaripersonaid(usuariPersona.getUsuariPersonaID());
+    }
+
+    t.setFuncionariusername(requestTransaction.getFuncionariUsername());
+    t.setFuncionarinom(requestTransaction.getFuncionariNom());
+    t.setCiutadanif(requestTransaction.getCiutadaNif());
+    t.setCiutadanom(requestTransaction.getCiutadaNom());
+    t.setExpedient(requestTransaction.getExpedientID());
+    
+    t.setView(requestTransaction.getView());
+
+    t.setPerfil(clonedPerfil);
+
+    
+    //return createWithProfile(t);
+    
+    clonedPerfil =  t.getPerfil();
+
+    if (perfil == null) {
+      // XYZ ZZZ ZZZ Llança excepcio I18NException
+    }
+
+    clonedPerfil = (PerfilJPA)perfilEjb.create(clonedPerfil);
+
+    t.setPerfil(null);
+    t.setPerfilid(clonedPerfil.getPerfilID());
+
+    t = (TransaccioJPA)this.create(t);
+    
+    t.setPerfil(clonedPerfil);
+    
+    return t;
+   
+  }
+  
+  
+  
+  protected String internalGetTransacction() {
+    String transactionID;
+    synchronized (this) {
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+      }
+
+      transactionID = System.currentTimeMillis() + "" + System.nanoTime();
+      transactionID = org.fundaciobit.pluginsib.core.utils.Base64.encode(transactionID)
+          .toLowerCase();
+      transactionID = transactionID.replaceAll("=", "");
+
+    }
+
+    if (log.isDebugEnabled()) {
+      log.info(" Creada transacció amb ID = |" + transactionID + "|");
+    }
+    return transactionID;
   }
   
 

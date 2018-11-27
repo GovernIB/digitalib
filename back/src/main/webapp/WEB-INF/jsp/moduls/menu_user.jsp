@@ -1,10 +1,10 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java"
-%><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java"%><%@ include
+  file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <c:set var="url" value="${urlActual}" />
 <div>
-  <h5>Menú ROLE_USER</h5>
+  <h5>Menú usuari XYZ ZZZ</h5>
   <ul class="tree" style="margin: 3px; padding: 0px;">
-
+    <%--
 
     <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
@@ -13,8 +13,17 @@
       </a>
     </li>
 
-   <%-- Example with security: virtual roles  --%>
-   <%--
+    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/user/option2"/>">
+        <span style="${(fn:contains(url, 'option2'))? "font-weight: bold;" : ""}">Menú USER Option 2</span>
+      </a>
+    </li>
+
+
+--%>
+    <%-- Example with security: virtual roles  --%>
+    <%--
    <sec:authorize access="hasAnyRole('ROLE_SOLI', 'ROLE_DEST', 'ROLE_COLA', 'ROLE_DELE')">
       <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
       <li style="list-style-type: disc; list-style-position: inside;">
@@ -24,13 +33,35 @@
    </sec:authorize>
     --%>
 
-    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
-    <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/user/option2"/>">
-        <span style="${(fn:contains(url, 'option2'))? "font-weight: bold;" : ""}">Menú USER Option 2</span>
-      </a>
-    </li>
-   
+
+
+
+    <hr style="margin-top: 6px; margin-bottom: 6px;" />
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/user/llistatperfilsdisponibles"/>"> <span
+        style="${(fn:contains(url, '/user/llistatperfilsdisponibles'))? " font-weight:bold;" : ""}"><fmt:message
+            key="escanejar" /></span>
+    </a></li>
+    
+    
+    <hr style="margin-top: 6px; margin-bottom: 6px;" />
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/user/transaccio/list"/>"> <span
+        style="${(fn:contains(url, '/user/transaccio/'))? " font-weight:bold;" : ""}">Llistat Digitalitzacions XYZ</span>
+    </a></li>
+    
+    <hr style="margin-top: 6px; margin-bottom: 6px;" />
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/user/transaccioca/list"/>"> <span
+        style="${(fn:contains(url, '/user/transaccioca/'))? " font-weight:bold;" : ""}">Llistat Copies Autentiques XYZ </span>
+    </a></li>
+    
+        <hr style="margin-top: 6px; margin-bottom: 6px;" />
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/user/transacciocust/list"/>"> <span
+        style="${(fn:contains(url, '/user/transacciocust/'))? " font-weight:bold;" : ""}">Llistat Copies Autentiques i Custodia XYZ </span>
+    </a></li>
+
   </ul>
 </div>
 
