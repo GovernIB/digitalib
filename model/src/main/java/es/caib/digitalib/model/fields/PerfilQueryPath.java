@@ -89,6 +89,48 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
+  public ConfiguracioGrupQueryPath CONFIGURACIOGRUP_PERFILNOMESESCANEIGIDS() {
+    return new ConfiguracioGrupQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PerfilQueryPath.this.getQueryPath() + "configuracioGrup_perfilnomesescaneigids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public ConfiguracioGrupQueryPath CONFIGURACIOGRUP_PERFILCOPIAAUTENTICAIDS() {
+    return new ConfiguracioGrupQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PerfilQueryPath.this.getQueryPath() + "configuracioGrup_perfilcopiaautenticaids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public ConfiguracioGrupQueryPath CONFIGURACIOGRUP_PERFILCUSTODIAIDS() {
+    return new ConfiguracioGrupQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PerfilQueryPath.this.getQueryPath() + "configuracioGrup_perfilcustodiaids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
   public PerfilUsuariAplicacioQueryPath PERFILUSUARIAPLICACIOS() {
     return new PerfilUsuariAplicacioQueryPath(new QueryPath() {
       public String getQueryPath() {

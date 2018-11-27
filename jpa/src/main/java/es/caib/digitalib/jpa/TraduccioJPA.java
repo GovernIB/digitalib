@@ -34,7 +34,6 @@ private static final long serialVersionUID = -326205279L;
   /**  */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
-	@Index(name="dib_traduccio_pk_i")
 	@Column(name="traduccioid",nullable = false,length = 19)
 	long traduccioID;
 

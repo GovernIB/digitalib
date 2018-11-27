@@ -5,16 +5,15 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import org.hibernate.annotations.Index;
-import org.hibernate.annotations.ForeignKey;
 import java.util.HashSet;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
+import javax.persistence.GenerationType;
 import java.util.Set;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import org.hibernate.annotations.ForeignKey;
 import javax.persistence.GeneratedValue;
 
 
@@ -30,11 +29,10 @@ private static final long serialVersionUID = -1815612849L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
-	@Index(name="dib_perfil_pk_i")
 	@Column(name="perfilid",nullable = false,length = 19)
 	long perfilID;
 
-	@Column(name="codi",nullable = false,unique = true,length = 255)
+	@Column(name="codi",nullable = false,length = 255)
 	java.lang.String codi;
 
 	@Column(name="nom",nullable = false,length = 100)
@@ -58,29 +56,24 @@ private static final long serialVersionUID = -1815612849L;
 	@Column(name="scanpixeltype",length = 10)
 	int scanPixelType;
 
-	@Index(name="dib_perfil_plugscanwebid_fk_i")
 	@Column(name="pluginscanwebid",nullable = false,length = 19)
 	long pluginScanWebID;
 
 	@Column(name="tipusfirma",nullable = false,length = 10)
 	int tipusFirma;
 
-	@Index(name="dib_perfil_plugin_psid_fk_i")
 	@Column(name="pluginfirmaservidorid",length = 19)
 	java.lang.Long pluginFirmaServidorID;
 
-	@Index(name="dib_perfil_apisimpleid_fk_i")
 	@Column(name="apisimpleid",length = 19)
 	java.lang.Long apiSimpleID;
 
 	@Column(name="tipuscustodia",nullable = false,length = 10)
 	int tipusCustodia;
 
-	@Index(name="dib_perfil_pluginarxiuid_fk_i")
 	@Column(name="pluginarxiuid",length = 19)
 	java.lang.Long pluginArxiuID;
 
-	@Index(name="dib_perfil_plugin_pdcid_fk_i")
 	@Column(name="plugindoccustodyid",length = 19)
 	java.lang.Long pluginDocCustodyID;
 
@@ -288,6 +281,45 @@ private static final long serialVersionUID = -1815612849L;
     return __result;
   }
 
+// EXP  Field:perfilnomesescaneigid | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilNomesEscaneigID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneigids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilnomesescaneigids() {
+    return this.configuracioGrup_perfilnomesescaneigids;
+  }
+
+	public void setConfiguracioGrup_perfilnomesescaneigids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneigids) {
+	  this.configuracioGrup_perfilnomesescaneigids = configuracioGrup_perfilnomesescaneigids;
+	}
+
+
+// EXP  Field:perfilcopiaautenticaid | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilCopiaAutenticaID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilcopiaautenticaids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilcopiaautenticaids() {
+    return this.configuracioGrup_perfilcopiaautenticaids;
+  }
+
+	public void setConfiguracioGrup_perfilcopiaautenticaids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilcopiaautenticaids) {
+	  this.configuracioGrup_perfilcopiaautenticaids = configuracioGrup_perfilcopiaautenticaids;
+	}
+
+
+// EXP  Field:perfilcustodiaid | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilCustodiaID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodiaids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilcustodiaids() {
+    return this.configuracioGrup_perfilcustodiaids;
+  }
+
+	public void setConfiguracioGrup_perfilcustodiaids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodiaids) {
+	  this.configuracioGrup_perfilcustodiaids = configuracioGrup_perfilcustodiaids;
+	}
+
+
 // EXP  Field:perfilid | Table: dib_perfilusrapp | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfil")
@@ -446,6 +478,18 @@ private static final long serialVersionUID = -1815612849L;
     if(!"TransaccioJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.transaccios) || org.hibernate.Hibernate.isInitialized(__jpa.getTransaccios())) ) {
       __tmp.setTransaccios(TransaccioJPA.copyJPA(__jpa.getTransaccios(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilcopiaautenticaids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilcopiaautenticaids())) ) {
+      __tmp.setConfiguracioGrup_perfilcopiaautenticaids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilcopiaautenticaids(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilcustodiaids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilcustodiaids())) ) {
+      __tmp.setConfiguracioGrup_perfilcustodiaids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilcustodiaids(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilnomesescaneigids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilnomesescaneigids())) ) {
+      __tmp.setConfiguracioGrup_perfilnomesescaneigids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilnomesescaneigids(), __alreadyCopied,"PerfilJPA"));
     }
     // Copia de beans complexes (IMP)
     if(!"PluginJPA".equals(origenJPA) && 

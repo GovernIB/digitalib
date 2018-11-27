@@ -61,10 +61,24 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public PerfilQueryPath PERFIL_PLUGINSCANWEBIDS() {
+  public PerfilQueryPath PERFIL_PLUGINARXIUIDS() {
     return new PerfilQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "perfil_pluginscanwebids" + ".";
+          return PluginQueryPath.this.getQueryPath() + "perfil_pluginarxiuids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public PerfilQueryPath PERFIL_PLUGINDOCCUSTODYIDS() {
+    return new PerfilQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PluginQueryPath.this.getQueryPath() + "perfil_plugindoccustodyids" + ".";
       }
     });
   }
@@ -89,24 +103,10 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public PerfilQueryPath PERFIL_PLUGINARXIUIDS() {
+  public PerfilQueryPath PERFIL_PLUGINSCANWEBIDS() {
     return new PerfilQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "perfil_pluginarxiuids" + ".";
-      }
-    });
-  }
-*/
-
-/* L'ús d'aquest camp (OneToMany) llança una exception:
- [Illegal attempt to dereference a collection]
-
- // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
-
-  public PerfilQueryPath PERFIL_PLUGINDOCCUSTODYIDS() {
-    return new PerfilQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "perfil_plugindoccustodyids" + ".";
+          return PluginQueryPath.this.getQueryPath() + "perfil_pluginscanwebids" + ".";
       }
     });
   }

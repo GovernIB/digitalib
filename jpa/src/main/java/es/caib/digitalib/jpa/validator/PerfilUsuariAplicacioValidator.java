@@ -46,45 +46,12 @@ public class PerfilUsuariAplicacioValidator<T> implements PerfilUsuariAplicacioF
       // Fitxers 
       // ====== Check Unique MULTIPLES - NOU =======
 
-      // Check Unique MULTIPLE for (perfilid, usuariaplicacioid)
-      if (__vr.getFieldErrorCount(PERFILID) == 0 && __vr.getFieldErrorCount(USUARIAPLICACIOID) == 0) {
-        java.lang.Long __perfilid = (java.lang.Long)__vr.getFieldValue(__target__,PERFILID);
-        java.lang.Long __usuariaplicacioid = (java.lang.Long)__vr.getFieldValue(__target__,USUARIAPLICACIOID);
-        Long __count_ = null;
-        try { __count_ = __perfilUsuariAplicacioManager.count(org.fundaciobit.genapp.common.query.Where.AND(PERFILID.equal(__perfilid), USUARIAPLICACIOID.equal(__usuariaplicacioid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-        if (__count_ == null || __count_ != 0) {        
-            __vr.rejectValue(PERFILID, "genapp.validation.unique",
-                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__perfilid)),
-                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERFILID)));
-            __vr.rejectValue(USUARIAPLICACIOID, "genapp.validation.unique",
-                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__usuariaplicacioid)),
-                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USUARIAPLICACIOID)));
-        }
-      }
-
       // Check Unique - no PK
       // Check Unique - PK no AutoIncrement amb UNA SOLA PK 
     } else {
       // ================ UPDATE
 
       // ====== Check Unique MULTIPLES - EDIT  =======
-
-      // Check Unique MULTIPLE for (perfilid, usuariaplicacioid)
-      if (__vr.getFieldErrorCount(PERFILID) == 0 && __vr.getFieldErrorCount(USUARIAPLICACIOID) == 0 && __vr.getFieldErrorCount(PERFILUSRAPPID) == 0) {
-        java.lang.Long __perfilid = (java.lang.Long)__vr.getFieldValue(__target__,PERFILID);
-        java.lang.Long __usuariaplicacioid = (java.lang.Long)__vr.getFieldValue(__target__,USUARIAPLICACIOID);
-        java.lang.Long __perfilusrappid = (java.lang.Long)__vr.getFieldValue(__target__,PERFILUSRAPPID);
-        Long __count_ = null;
-        try { __count_ = __perfilUsuariAplicacioManager.count(org.fundaciobit.genapp.common.query.Where.AND(PERFILID.equal(__perfilid), USUARIAPLICACIOID.equal(__usuariaplicacioid), PERFILUSRAPPID.notEqual(__perfilusrappid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-        if (__count_ == null || __count_ != 0) {        
-            __vr.rejectValue(PERFILID, "genapp.validation.unique",
-                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__perfilid)),
-                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERFILID)));
-            __vr.rejectValue(USUARIAPLICACIOID, "genapp.validation.unique",
-                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__usuariaplicacioid)),
-                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USUARIAPLICACIOID)));
-        }
-      }
 
       // Check Unique - no PK
     }

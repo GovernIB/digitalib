@@ -458,6 +458,7 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.returnUrl = __toClone.returnUrl;
     this.viewDesde = __toClone.viewDesde;
     this.viewFins = __toClone.viewFins;
+    this.mapOfValuesForEstatcodi = __toClone.mapOfValuesForEstatcodi;
     this.mapOfInfoSignaturaForInfosignaturaid = __toClone.mapOfInfoSignaturaForInfosignaturaid;
     this.mapOfInfoCustodyForInfocustodyid = __toClone.mapOfInfoCustodyForInfocustodyid;
     this.mapOfPerfilForPerfilid = __toClone.mapOfPerfilForPerfilid;
@@ -496,6 +497,18 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
    // -----------------------
    // Maps de referencies.
    // -----------------------
+  private Map<String, String> mapOfValuesForEstatcodi;
+
+  public Map<String, String> getMapOfValuesForEstatcodi() {
+    return this.mapOfValuesForEstatcodi;
+  }
+
+  public void setMapOfValuesForEstatcodi(Map<String, String> mapOfValuesForEstatcodi) {
+    this.mapOfValuesForEstatcodi = mapOfValuesForEstatcodi;
+  }
+
+
+
   private Map<String, String> mapOfInfoSignaturaForInfosignaturaid;
 
   public Map<String, String> getMapOfInfoSignaturaForInfosignaturaid() {

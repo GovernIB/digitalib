@@ -8,8 +8,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
-import org.hibernate.annotations.Index;
-import javax.persistence.UniqueConstraint;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import org.hibernate.annotations.ForeignKey;
@@ -17,8 +15,7 @@ import javax.persistence.GeneratedValue;
 
 
 @Entity
-@Table(name = "dib_perfilusrapp"  , uniqueConstraints = {
-            @UniqueConstraint( columnNames={"perfilid","usuariaplicacioid"}) } )
+@Table(name = "dib_perfilusrapp" )
 @SequenceGenerator(name="DIGITALIB_SEQ", sequenceName="dib_digitalib_seq", allocationSize=1)
 @javax.xml.bind.annotation.XmlRootElement
 public class PerfilUsuariAplicacioJPA implements PerfilUsuariAplicacio {
@@ -29,15 +26,12 @@ private static final long serialVersionUID = -1571857111L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
-	@Index(name="dib_perfilusrapp_pk_i")
 	@Column(name="perfilusrappid",nullable = false,length = 19)
 	long perfilUsrAppID;
 
-	@Index(name="dib_perfilusrapp_perfilid_fk_i")
 	@Column(name="perfilid",nullable = false,length = 19)
 	long perfilID;
 
-	@Index(name="dib_perfusrapp_usrappid_fk_i")
 	@Column(name="usuariaplicacioid",nullable = false,length = 19)
 	long usuariAplicacioID;
 

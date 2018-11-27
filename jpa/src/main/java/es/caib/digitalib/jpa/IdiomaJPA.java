@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 import java.util.Set;
-import org.hibernate.annotations.Index;
 import javax.persistence.FetchType;
 
 
@@ -24,7 +23,6 @@ public class IdiomaJPA implements Idioma {
 private static final long serialVersionUID = 1367253670L;
 
 	@Id
-	@Index(name="dib_idioma_pk_i")
 	@Column(name="idiomaid",nullable = false,length = 5)
 	java.lang.String idiomaID;
 

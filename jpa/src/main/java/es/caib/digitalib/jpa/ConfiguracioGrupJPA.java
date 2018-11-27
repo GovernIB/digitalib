@@ -5,16 +5,15 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import org.hibernate.annotations.Index;
-import org.hibernate.annotations.ForeignKey;
 import java.util.HashSet;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
+import javax.persistence.GenerationType;
 import java.util.Set;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import org.hibernate.annotations.ForeignKey;
 import javax.persistence.GeneratedValue;
 
 
@@ -30,11 +29,10 @@ private static final long serialVersionUID = -185147282L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
-	@Index(name="dib_configuraciogrup_pk_i")
 	@Column(name="configuraciogrupid",nullable = false,length = 19)
 	long configuracioGrupID;
 
-	@Column(name="nom",nullable = false,unique = true,length = 100)
+	@Column(name="nom",nullable = false,length = 100)
 	java.lang.String nom;
 
 	@Column(name="suportweb",length = 255)
@@ -46,13 +44,20 @@ private static final long serialVersionUID = -185147282L;
 	@Column(name="suporttelefon",length = 255)
 	java.lang.String suportTelefon;
 
-	@Index(name="dib_cfggrup_logoheaderid_fk_i")
 	@Column(name="logoheaderid",nullable = false,length = 19)
 	long logoHeaderID;
 
-	@Index(name="dib_cfggrup_logofooterid_fk_i")
 	@Column(name="logofooterid",nullable = false,length = 19)
 	long logoFooterID;
+
+	@Column(name="perfilnomesescaneigid",length = 19)
+	java.lang.Long perfilNomesEscaneigID;
+
+	@Column(name="perfilcopiaautenticaid",length = 19)
+	java.lang.Long perfilCopiaAutenticaID;
+
+	@Column(name="perfilcustodiaid",length = 19)
+	java.lang.Long perfilCustodiaID;
 
 
 
@@ -61,7 +66,7 @@ private static final long serialVersionUID = -185147282L;
   }
 
   /** Constructor amb tots els camps  */
-  public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID) {
+  public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCustodiaID) {
     this.configuracioGrupID=configuracioGrupID;
     this.nom=nom;
     this.suportWeb=suportWeb;
@@ -69,15 +74,21 @@ private static final long serialVersionUID = -185147282L;
     this.suportTelefon=suportTelefon;
     this.logoHeaderID=logoHeaderID;
     this.logoFooterID=logoFooterID;
+    this.perfilNomesEscaneigID=perfilNomesEscaneigID;
+    this.perfilCopiaAutenticaID=perfilCopiaAutenticaID;
+    this.perfilCustodiaID=perfilCustodiaID;
 }
   /** Constructor sense valors autoincrementals */
-  public ConfiguracioGrupJPA(java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID) {
+  public ConfiguracioGrupJPA(java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCustodiaID) {
     this.nom=nom;
     this.suportWeb=suportWeb;
     this.suportEmail=suportEmail;
     this.suportTelefon=suportTelefon;
     this.logoHeaderID=logoHeaderID;
     this.logoFooterID=logoFooterID;
+    this.perfilNomesEscaneigID=perfilNomesEscaneigID;
+    this.perfilCopiaAutenticaID=perfilCopiaAutenticaID;
+    this.perfilCustodiaID=perfilCustodiaID;
 }
   /** Constructor dels valors Not Null */
   public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , long logoHeaderID , long logoFooterID) {
@@ -94,6 +105,9 @@ private static final long serialVersionUID = -185147282L;
     this.setSuportTelefon(__bean.getSuportTelefon());
     this.setLogoHeaderID(__bean.getLogoHeaderID());
     this.setLogoFooterID(__bean.getLogoFooterID());
+    this.setPerfilNomesEscaneigID(__bean.getPerfilNomesEscaneigID());
+    this.setPerfilCopiaAutenticaID(__bean.getPerfilCopiaAutenticaID());
+    this.setPerfilCustodiaID(__bean.getPerfilCustodiaID());
     // Fitxer
     this.setLogoHeader(FitxerJPA.toJPA(__bean.getLogoHeader()));
     // Fitxer
@@ -147,6 +161,27 @@ private static final long serialVersionUID = -185147282L;
 	};
 	public void setLogoFooterID(long _logoFooterID_) {
 		this.logoFooterID = _logoFooterID_;
+	};
+
+	public java.lang.Long getPerfilNomesEscaneigID() {
+		return(perfilNomesEscaneigID);
+	};
+	public void setPerfilNomesEscaneigID(java.lang.Long _perfilNomesEscaneigID_) {
+		this.perfilNomesEscaneigID = _perfilNomesEscaneigID_;
+	};
+
+	public java.lang.Long getPerfilCopiaAutenticaID() {
+		return(perfilCopiaAutenticaID);
+	};
+	public void setPerfilCopiaAutenticaID(java.lang.Long _perfilCopiaAutenticaID_) {
+		this.perfilCopiaAutenticaID = _perfilCopiaAutenticaID_;
+	};
+
+	public java.lang.Long getPerfilCustodiaID() {
+		return(perfilCustodiaID);
+	};
+	public void setPerfilCustodiaID(java.lang.Long _perfilCustodiaID_) {
+		this.perfilCustodiaID = _perfilCustodiaID_;
 	};
 
 
@@ -207,6 +242,51 @@ private static final long serialVersionUID = -185147282L;
     this.logoFooter = logoFooter;
   }
 
+// IMP Field:perfilid | Table: dib_perfil | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="dib_cfggrup_perfil_scan_fk")
+	@JoinColumn(name = "perfilnomesescaneigid", referencedColumnName ="perfilID", nullable = true, insertable=false, updatable=false)
+	private PerfilJPA perfilNomesEscaneig;
+
+	public PerfilJPA getPerfilNomesEscaneig() {
+    return this.perfilNomesEscaneig;
+  }
+
+	public  void setPerfilNomesEscaneig(PerfilJPA perfilNomesEscaneig) {
+    this.perfilNomesEscaneig = perfilNomesEscaneig;
+  }
+
+// IMP Field:perfilid | Table: dib_perfil | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="dib_cfggrup_perfil_coau_fk")
+	@JoinColumn(name = "perfilcopiaautenticaid", referencedColumnName ="perfilID", nullable = true, insertable=false, updatable=false)
+	private PerfilJPA perfilCopiaAutentica;
+
+	public PerfilJPA getPerfilCopiaAutentica() {
+    return this.perfilCopiaAutentica;
+  }
+
+	public  void setPerfilCopiaAutentica(PerfilJPA perfilCopiaAutentica) {
+    this.perfilCopiaAutentica = perfilCopiaAutentica;
+  }
+
+// IMP Field:perfilid | Table: dib_perfil | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="dib_cfggrup_perfil_cust_fk")
+	@JoinColumn(name = "perfilcustodiaid", referencedColumnName ="perfilID", nullable = true, insertable=false, updatable=false)
+	private PerfilJPA perfilCustodia;
+
+	public PerfilJPA getPerfilCustodia() {
+    return this.perfilCustodia;
+  }
+
+	public  void setPerfilCustodia(PerfilJPA perfilCustodia) {
+    this.perfilCustodia = perfilCustodia;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static ConfiguracioGrupJPA toJPA(ConfiguracioGrup __bean) {
@@ -219,6 +299,9 @@ private static final long serialVersionUID = -185147282L;
     __tmp.setSuportTelefon(__bean.getSuportTelefon());
     __tmp.setLogoHeaderID(__bean.getLogoHeaderID());
     __tmp.setLogoFooterID(__bean.getLogoFooterID());
+    __tmp.setPerfilNomesEscaneigID(__bean.getPerfilNomesEscaneigID());
+    __tmp.setPerfilCopiaAutenticaID(__bean.getPerfilCopiaAutenticaID());
+    __tmp.setPerfilCustodiaID(__bean.getPerfilCustodiaID());
     // Fitxer
     __tmp.setLogoHeader(FitxerJPA.toJPA(__bean.getLogoHeader()));
     // Fitxer
@@ -257,6 +340,18 @@ private static final long serialVersionUID = -185147282L;
       __tmp.setUsuariPersonas(UsuariPersonaJPA.copyJPA(__jpa.getUsuariPersonas(), __alreadyCopied,"ConfiguracioGrupJPA"));
     }
     // Copia de beans complexes (IMP)
+    if(!"PerfilJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.perfilCopiaAutentica) || org.hibernate.Hibernate.isInitialized(__jpa.getPerfilCopiaAutentica()) ) ) {
+      __tmp.setPerfilCopiaAutentica(PerfilJPA.copyJPA(__jpa.getPerfilCopiaAutentica(), __alreadyCopied,"ConfiguracioGrupJPA"));
+    }
+    if(!"PerfilJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.perfilNomesEscaneig) || org.hibernate.Hibernate.isInitialized(__jpa.getPerfilNomesEscaneig()) ) ) {
+      __tmp.setPerfilNomesEscaneig(PerfilJPA.copyJPA(__jpa.getPerfilNomesEscaneig(), __alreadyCopied,"ConfiguracioGrupJPA"));
+    }
+    if(!"PerfilJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.perfilCustodia) || org.hibernate.Hibernate.isInitialized(__jpa.getPerfilCustodia()) ) ) {
+      __tmp.setPerfilCustodia(PerfilJPA.copyJPA(__jpa.getPerfilCustodia(), __alreadyCopied,"ConfiguracioGrupJPA"));
+    }
 
     return __tmp;
   }

@@ -153,17 +153,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
       // ====== Check Unique MULTIPLES - NOU =======
 
       // Check Unique - no PK
-      if (__vr.getFieldErrorCount(TRANSACTIONWEBID) == 0) {
-        java.lang.String __transactionwebid = (java.lang.String)__vr.getFieldValue(__target__,TRANSACTIONWEBID);
-        Long __count_ = null;
-        try { __count_ = __transaccioManager.count(org.fundaciobit.genapp.common.query.Where.AND(TRANSACTIONWEBID.equal(__transactionwebid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-        if (__count_ == null || __count_ != 0) {        
-            __vr.rejectValue(TRANSACTIONWEBID, "genapp.validation.unique",
-                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__transactionwebid)),
-                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TRANSACTIONWEBID)));
-        }
-      }
-
       // Check Unique - PK no AutoIncrement amb UNA SOLA PK 
     } else {
       // ================ UPDATE
@@ -171,18 +160,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
       // ====== Check Unique MULTIPLES - EDIT  =======
 
       // Check Unique - no PK
-      if (__vr.getFieldErrorCount(TRANSACTIONWEBID) == 0 && __vr.getFieldErrorCount(TRANSACCIOID) == 0) {
-        java.lang.String __transactionwebid = (java.lang.String)__vr.getFieldValue(__target__,TRANSACTIONWEBID);
-        java.lang.Long __transaccioid = (java.lang.Long)__vr.getFieldValue(__target__,TRANSACCIOID);
-        Long __count_ = null;
-        try { __count_ = __transaccioManager.count(org.fundaciobit.genapp.common.query.Where.AND(TRANSACTIONWEBID.equal(__transactionwebid), TRANSACCIOID.notEqual(__transaccioid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-        if (__count_ == null || __count_ != 0) {        
-            __vr.rejectValue(TRANSACTIONWEBID, "genapp.validation.unique",
-                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__transactionwebid)),
-                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TRANSACTIONWEBID)));
-        }
-      }
-
     }
 
     // Fields with References to Other tables 

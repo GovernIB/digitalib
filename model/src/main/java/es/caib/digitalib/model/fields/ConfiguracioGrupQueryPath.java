@@ -39,6 +39,18 @@ public class ConfiguracioGrupQueryPath extends org.fundaciobit.genapp.common.que
     return new LongField(getQueryPath(), ConfiguracioGrupFields.LOGOFOOTERID);
   }
 
+  public LongField PERFILNOMESESCANEIGID() {
+    return new LongField(getQueryPath(), ConfiguracioGrupFields.PERFILNOMESESCANEIGID);
+  }
+
+  public LongField PERFILCOPIAAUTENTICAID() {
+    return new LongField(getQueryPath(), ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID);
+  }
+
+  public LongField PERFILCUSTODIAID() {
+    return new LongField(getQueryPath(), ConfiguracioGrupFields.PERFILCUSTODIAID);
+  }
+
 
 
   @Override
@@ -74,6 +86,30 @@ public class ConfiguracioGrupQueryPath extends org.fundaciobit.genapp.common.que
     return new FitxerQueryPath(new QueryPath() {
       public String getQueryPath() {
           return ConfiguracioGrupQueryPath.this.getQueryPath() + "logoFooter" + ".";
+      }
+    });
+  }
+
+  public PerfilQueryPath PERFILNOMESESCANEIG() {
+    return new PerfilQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ConfiguracioGrupQueryPath.this.getQueryPath() + "perfilNomesEscaneig" + ".";
+      }
+    });
+  }
+
+  public PerfilQueryPath PERFILCOPIAAUTENTICA() {
+    return new PerfilQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ConfiguracioGrupQueryPath.this.getQueryPath() + "perfilCopiaAutentica" + ".";
+      }
+    });
+  }
+
+  public PerfilQueryPath PERFILCUSTODIA() {
+    return new PerfilQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ConfiguracioGrupQueryPath.this.getQueryPath() + "perfilCustodia" + ".";
       }
     });
   }

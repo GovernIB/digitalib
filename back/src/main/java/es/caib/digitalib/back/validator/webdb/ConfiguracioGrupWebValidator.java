@@ -30,6 +30,9 @@ public class ConfiguracioGrupWebValidator  implements Validator, ConfiguracioGru
   @javax.ejb.EJB(mappedName = "digitalib/ConfiguracioGrupEJB/local")
   protected es.caib.digitalib.ejb.ConfiguracioGrupLocal configuracioGrupEjb;
 
+  @javax.ejb.EJB(mappedName = "digitalib/PerfilEJB/local")
+  protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
+
 
 
   public ConfiguracioGrupWebValidator() {
@@ -76,7 +79,7 @@ public class ConfiguracioGrupWebValidator  implements Validator, ConfiguracioGru
 
     }
     validator.validate(wvr, target,
-      isNou, configuracioGrupEjb);
+      isNou, configuracioGrupEjb, perfilEjb);
 
   } // Final de metode
 

@@ -22,5 +22,24 @@
      }
 
  }
+
+//Politica de Custodia (ocultar o mostrar valor)
+ onChangeTipusCustodia(document.getElementById("<%=PerfilFields.TIPUSCUSTODIA.fullName.replace('.', '_') %>"));
+
+ function onChangeTipusCustodia(combo) {
+
+     var value = combo.options[combo.selectedIndex].value;
+     if (value == <%=Constants.TIPUS_CUSTODIA_SENSE%>) { 
+       document.getElementById("<%=PerfilFields.PLUGINDOCCUSTODYID.fullName.replace('.', '_') %>_rowid").style.display = 'none';
+       document.getElementById("<%=PerfilFields.PLUGINARXIUID.fullName.replace('.', '_') %>_rowid").style.display = 'none';
+     } else if (value == <%=Constants.TIPUS_CUSTODIA_ARXIU%>) { 
+       document.getElementById("<%=PerfilFields.PLUGINDOCCUSTODYID.fullName.replace('.', '_') %>_rowid").style.display = 'none';
+       document.getElementById("<%=PerfilFields.PLUGINARXIUID.fullName.replace('.', '_') %>_rowid").style.display = '';
+     } else {
+       document.getElementById("<%=PerfilFields.PLUGINDOCCUSTODYID.fullName.replace('.', '_') %>_rowid").style.display = '';
+       document.getElementById("<%=PerfilFields.PLUGINARXIUID.fullName.replace('.', '_') %>_rowid").style.display = 'none';
+     }
+
+ }
  
  </script>

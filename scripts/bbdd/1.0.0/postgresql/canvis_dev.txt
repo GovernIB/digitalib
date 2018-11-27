@@ -1,53 +1,29 @@
+ALTER TABLE dib_configuraciogrup 
+  ADD COLUMN perfilnomesescaneig bigint;
+ALTER TABLE dib_configuraciogrup 
+  ADD COLUMN perfilcopiaautentica bigint;
+ALTER TABLE dib_configuraciogrup 
+  ADD COLUMN perfilcustodia bigint;
 
 
-
-ALTER TABLE dib_transaccio
-  ADD COLUMN returnurl character varying(255);
-ALTER TABLE dib_transaccio
-  ADD COLUMN view integer;
-  
-  
-  
-  ALTER TABLE dib_usuariaplicacio
-  ADD COLUMN urlbase character varying(255);
-  
-  
-  ALTER TABLE dib_perfil
-  ADD COLUMN formatscanfile integer NOT NULL DEFAULT 0;
-  
-  ALTER TABLE dib_perfil RENAME formatscanfile TO scanformatfitxer;
-ALTER TABLE dib_perfil ADD COLUMN scanminimaresolucio integer;
-
-ALTER TABLE dib_perfil
-  ADD COLUMN scanpixeltype integer;
-  
-  ALTER TABLE dib_perfil
-  ADD COLUMN urlbase character varying(255);
-COMMENT ON COLUMN dib_perfil.urlbase IS 'Opcional. Serveix per indicar la url que utilitzaran els client per connectar-se a DigitalIB. Si val null s''obtindrà de la propietat dels properties-service.xml';
-
-
-ALTER TABLE dib_usuariaplicacio
-  DROP COLUMN urlbase;
-  
-  ALTER TABLE dib_transaccio
-  DROP COLUMN infoscanformatfitxer;
-  
-  ALTER TABLE dib_perfil
-   ALTER COLUMN codi TYPE character varying(255);
-
-   ALTER TABLE dib_transaccio ADD CONSTRAINT dib_transaccio_fitxer_pla_fk FOREIGN KEY (fitxerescanejatid)
-      REFERENCES dib_fitxer (fitxerid) MATCH SIMPLE
+ALTER TABLE dib_configuraciogrup ADD CONSTRAINT dib_cfggrup_perfil_scan_fk FOREIGN KEY (perfilnomesescaneig)
+      REFERENCES dib_perfil (perfilid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION;
-  ALTER TABLE dib_transaccio ADD CONSTRAINT dib_transaccio_fitxer_sign_fk FOREIGN KEY (fitxersignaturaid)
-      REFERENCES dib_fitxer (fitxerid) MATCH SIMPLE
+
+ALTER TABLE dib_configuraciogrup ADD CONSTRAINT dib_cfggrup_perfil_coau_fk FOREIGN KEY (perfilcopiaautentica)
+      REFERENCES dib_perfil (perfilid) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION;
-      
-      
-      
-       -- Es recomanable tenir un index de la clau forania.
-create index dib_transaccio_fileplain_fk_i on dib_transaccio (fitxerescanejatid);
+
+ALTER TABLE dib_configuraciogrup ADD CONSTRAINT dib_cfggrup_perfil_cust_fk FOREIGN KEY (perfilcustodia)
+      REFERENCES dib_perfil (perfilid) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
 
  -- Es recomanable tenir un index de la clau forania.
-create index dib_transaccio_filesign_fk_i on dib_transaccio (fitxersignaturaid);
-      
-      
+create index dib_cfggrup_perfilscan_fk_i on dib_configuraciogrup (perfilnomesescaneig);
+
+ -- Es recomanable tenir un index de la clau forania.
+create index dib_cfggrup_perfilcoau_fk_i on dib_configuraciogrup (perfilcopiaautentica);
+
+ -- Es recomanable tenir un index de la clau forania.
+create index dib_cfggrup_perfilcust_fk_i on dib_configuraciogrup (perfilcustodia);

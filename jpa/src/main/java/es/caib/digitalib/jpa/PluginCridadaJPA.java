@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
-import org.hibernate.annotations.Index;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import org.hibernate.annotations.ForeignKey;
@@ -28,7 +27,6 @@ private static final long serialVersionUID = -1618108326L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
-	@Index(name="dib_plugincridada_pk_i")
 	@Column(name="plugincridadaid",nullable = false,length = 19)
 	long pluginCridadaID;
 
@@ -44,7 +42,6 @@ private static final long serialVersionUID = -1618108326L;
 	@Column(name="tempsexecucio",length = 19)
 	java.lang.Long tempsexecucio;
 
-	@Index(name="dib_plugcrid_pluginid_fk_i")
 	@Column(name="pluginid",nullable = false,length = 19)
 	long pluginID;
 
@@ -58,7 +55,6 @@ private static final long serialVersionUID = -1618108326L;
   @Lob
 	java.lang.String parametrestext;
 
-	@Index(name="dib_plugcrid_paramfitxer_fk_i")
 	@Column(name="parametresfitxerid",length = 19)
 	java.lang.Long parametresFitxerID;
 
@@ -66,7 +62,6 @@ private static final long serialVersionUID = -1618108326L;
   @Lob
 	java.lang.String retorntext;
 
-	@Index(name="dib_plugcrid_retofitxerid_fk_i")
 	@Column(name="retornfitxerid",length = 19)
 	java.lang.Long retornFitxerID;
 

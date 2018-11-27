@@ -139,9 +139,18 @@
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.estatcodi" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.estatcodi"   />
-
+          <form:errors path="transaccio.estatcodi" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)}" >
+          <form:hidden path="transaccio.estatcodi"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.estatcodi,__theForm.listOfValuesForEstatcodi)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)}" >
+          <form:select id="transaccio_estatcodi"  onchange="if(typeof onChangeEstatcodi == 'function') {  onChangeEstatcodi(this); };"  cssClass="input-xxlarge" path="transaccio.estatcodi">
+            <c:forEach items="${__theForm.listOfValuesForEstatcodi}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>

@@ -23,6 +23,15 @@ public interface ConfiguracioGrup extends org.fundaciobit.genapp.common.IGenAppE
 	public long getLogoFooterID();
 	public void setLogoFooterID(long _logoFooterID_);
 
+	public java.lang.Long getPerfilNomesEscaneigID();
+	public void setPerfilNomesEscaneigID(java.lang.Long _perfilNomesEscaneigID_);
+
+	public java.lang.Long getPerfilCopiaAutenticaID();
+	public void setPerfilCopiaAutenticaID(java.lang.Long _perfilCopiaAutenticaID_);
+
+	public java.lang.Long getPerfilCustodiaID();
+	public void setPerfilCustodiaID(java.lang.Long _perfilCustodiaID_);
+
   // Fitxer
   public <F extends Fitxer> F getLogoHeader();
   // Fitxer

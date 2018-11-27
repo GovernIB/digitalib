@@ -162,3 +162,90 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}">
+        <tr id="configuracioGrup_perfilNomesEscaneigID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioGrupFields.PERFILNOMESESCANEIGID])?'configuracioGrup.perfilNomesEscaneigID':__theForm.labels[ConfiguracioGrupFields.PERFILNOMESESCANEIGID]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioGrupFields.PERFILNOMESESCANEIGID]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioGrupFields.PERFILNOMESESCANEIGID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="configuracioGrup.perfilNomesEscaneigID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}" >
+          <form:hidden path="configuracioGrup.perfilNomesEscaneigID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioGrup.perfilNomesEscaneigID,__theForm.listOfPerfilForPerfilNomesEscaneigID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}" >
+          <form:select id="configuracioGrup_perfilNomesEscaneigID"  onchange="if(typeof onChangePerfilNomesEscaneigID == 'function') {  onChangePerfilNomesEscaneigID(this); };"  cssClass="input-xxlarge" path="configuracioGrup.perfilNomesEscaneigID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPerfilForPerfilNomesEscaneigID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID)}">
+        <tr id="configuracioGrup_perfilCopiaAutenticaID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID])?'configuracioGrup.perfilCopiaAutenticaID':__theForm.labels[ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="configuracioGrup.perfilCopiaAutenticaID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID)}" >
+          <form:hidden path="configuracioGrup.perfilCopiaAutenticaID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioGrup.perfilCopiaAutenticaID,__theForm.listOfPerfilForPerfilCopiaAutenticaID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID)}" >
+          <form:select id="configuracioGrup_perfilCopiaAutenticaID"  onchange="if(typeof onChangePerfilCopiaAutenticaID == 'function') {  onChangePerfilCopiaAutenticaID(this); };"  cssClass="input-xxlarge" path="configuracioGrup.perfilCopiaAutenticaID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPerfilForPerfilCopiaAutenticaID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.PERFILCUSTODIAID)}">
+        <tr id="configuracioGrup_perfilCustodiaID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioGrupFields.PERFILCUSTODIAID])?'configuracioGrup.perfilCustodiaID':__theForm.labels[ConfiguracioGrupFields.PERFILCUSTODIAID]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioGrupFields.PERFILCUSTODIAID]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioGrupFields.PERFILCUSTODIAID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="configuracioGrup.perfilCustodiaID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILCUSTODIAID)}" >
+          <form:hidden path="configuracioGrup.perfilCustodiaID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioGrup.perfilCustodiaID,__theForm.listOfPerfilForPerfilCustodiaID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILCUSTODIAID)}" >
+          <form:select id="configuracioGrup_perfilCustodiaID"  onchange="if(typeof onChangePerfilCustodiaID == 'function') {  onChangePerfilCustodiaID(this); };"  cssClass="input-xxlarge" path="configuracioGrup.perfilCustodiaID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPerfilForPerfilCustodiaID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        

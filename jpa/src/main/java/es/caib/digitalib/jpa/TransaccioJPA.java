@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
-import org.hibernate.annotations.Index;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import org.hibernate.annotations.ForeignKey;
@@ -28,11 +27,10 @@ private static final long serialVersionUID = 760472444L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
-	@Index(name="dib_transaccio_pk_i")
 	@Column(name="transaccioid",nullable = false,length = 19)
 	long transaccioID;
 
-	@Column(name="webid",nullable = false,unique = true,length = 100)
+	@Column(name="webid",nullable = false,length = 100)
 	java.lang.String transactionWebId;
 
 	@Column(name="datainici",nullable = false,length = 29,precision = 6)
@@ -57,11 +55,9 @@ private static final long serialVersionUID = 760472444L;
   @Lob
 	java.lang.String estatexcepcio;
 
-	@Index(name="dib_transaccio_fileplain_fk_i")
 	@Column(name="fitxerescanejatid",length = 19)
 	java.lang.Long fitxerEscanejatID;
 
-	@Index(name="dib_transaccio_filesign_fk_i")
 	@Column(name="fitxersignaturaid",length = 19)
 	java.lang.Long fitxerSignaturaID;
 
@@ -74,11 +70,9 @@ private static final long serialVersionUID = 760472444L;
 	@Column(name="infoscanocr",length = 1)
 	boolean infoscanocr;
 
-	@Index(name="dib_transaccio_infosignid_fk_i")
 	@Column(name="infosignaturaid",length = 19)
 	java.lang.Long infosignaturaid;
 
-	@Index(name="dib_transaccio_infocustid_fk_i")
 	@Column(name="infocustodyid",length = 19)
 	java.lang.Long infocustodyid;
 
@@ -103,7 +97,6 @@ private static final long serialVersionUID = 760472444L;
 	@Column(name="expedient",length = 255)
 	java.lang.String expedient;
 
-	@Index(name="dib_transaccio_perfilid_fk_i")
 	@Column(name="perfilid",nullable = false,length = 19)
 	long perfilid;
 

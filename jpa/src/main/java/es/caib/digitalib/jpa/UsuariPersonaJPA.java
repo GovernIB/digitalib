@@ -8,7 +8,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
-import org.hibernate.annotations.Index;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import org.hibernate.annotations.ForeignKey;
@@ -27,11 +26,10 @@ private static final long serialVersionUID = -80349968L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
-	@Index(name="dib_usuaripersona_pk_i")
 	@Column(name="usuaripersonaid",nullable = false,length = 19)
 	long usuariPersonaID;
 
-	@Column(name="username",nullable = false,unique = true,length = 50)
+	@Column(name="username",nullable = false,length = 50)
 	java.lang.String username;
 
 	@Column(name="nom",nullable = false,length = 50)
@@ -43,14 +41,12 @@ private static final long serialVersionUID = -80349968L;
 	@Column(name="email",nullable = false,length = 100)
 	java.lang.String email;
 
-	@Column(name="nif",nullable = false,unique = true,length = 9)
+	@Column(name="nif",nullable = false,length = 9)
 	java.lang.String nif;
 
-	@Index(name="dib_usrperson_idiomaid_fk_i")
 	@Column(name="idiomaid",nullable = false,length = 5)
 	java.lang.String idiomaID;
 
-	@Index(name="dib_usrperson_confgrupid_fk_i")
 	@Column(name="configuraciogrupid",nullable = false,length = 19)
 	long configuraciogrupid;
 
