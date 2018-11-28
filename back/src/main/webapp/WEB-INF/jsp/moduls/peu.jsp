@@ -1,4 +1,8 @@
-﻿<%@page import="es.caib.digitalib.logic.utils.LogicUtils"%>
+﻿<%--
+XYZ ZZZ 
+<%@page import="es.caib.digitalib.utils.Build"%> 
+--%>
+<%@page import="es.caib.digitalib.logic.utils.LogicUtils"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
  %><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
  
@@ -7,7 +11,7 @@
  <tr>
  <td width="40%" valign="top">
    <div class="pull-left colophon">
-     <b>DigitalIB v<%=LogicUtils.getVersio()%></b><br/>
+     <b><fmt:message key="app.nom" /> v<%=LogicUtils.getVersio()%></b><br/>
      <i><a href="http://otaeweb.ibit.org/" target="_blank"><fmt:message key="desenvolupatper" /></a></i><br/>
      <!-- Button to trigger modal -->
      <small><a href="#modalAjuda" role="button" data-toggle="modal"><fmt:message key="ajuda.necessitau" /></a></small>
