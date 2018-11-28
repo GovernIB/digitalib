@@ -221,20 +221,21 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
       Long perfilID;
       switch (getTipusPerfil()) {
-      case 1: // Només Escaneig XYZ ZZZ Constants.PERFIL_US_NOMES_ESCANEIG
-        perfilID = configGrup.getPerfilNomesEscaneigID();
-        break;
+        case 1: // Només Escaneig XYZ ZZZ Constants.PERFIL_US_NOMES_ESCANEIG
+          perfilID = configGrup.getPerfilNomesEscaneigID();
+          break;
 
-      case 2:
-        // XYZ ZZZ Falta
-      case 3:
-        // XYZ ZZZ Falta
+        case 2:
+          // XYZ ZZZ Falta
 
-      default:
-        // XYZ ZZZ
-        HtmlUtils.saveMessageError(request, "Tipus Perfil desconegut " + getTipusPerfil());
-        ModelAndView mav = new ModelAndView(new RedirectView("/canviarPipella/user", true));
-        return mav;
+        case 3:
+          // XYZ ZZZ Falta
+
+        default:
+          // XYZ ZZZ
+          HtmlUtils.saveMessageError(request, "Tipus Perfil desconegut " + getTipusPerfil());
+          ModelAndView mav = new ModelAndView(new RedirectView(request.getContextPath() + "/canviarPipella/user", true));
+          return mav;
       }
 
       String scanWebProfile = perfilEjb.executeQueryOne(PerfilFields.CODI,
@@ -346,58 +347,38 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     int status = transaccio.getEstatCodi();
 
     if (status == ScanWebSimpleStatus.STATUS_FINAL_OK) {
-      HtmlUtils.saveMessageSuccess(request, "Operacio realitzada correctament");
-      return new ModelAndView(new RedirectView("/user/transaccio/view/"
-          + transaccio.getTransaccioID() , true));
-    }
+      HtmlUtils
+          .saveMessageSuccess(request, "Operacio realitzada correctament XYZ ZZZ Traduir");
+      mav.addObject("urlRetorn", "/user/transaccio/view/" + transaccio.getTransaccioID());
 
-    if (transaccio.getEstatmissatge() == null) {
+    } else {
 
-      switch (status) {
-      case ScanWebSimpleStatus.STATUS_IN_PROGRESS:
-        // XYZ ZZZ
-        transaccio.setEstatmissatge("Estat inconsistent: EN PROGRESS");
-        break;
-      case ScanWebSimpleStatus.STATUS_EXPIRED:
-        // XYZ ZZZ
-        transaccio.setEstatmissatge("Estat inconsistent: EXPIRED");
-        break;
-      case ScanWebSimpleStatus.STATUS_REQUESTED_ID:
-        // XYZ ZZZ
-        transaccio.setEstatmissatge("Estat inconsistent: REQUESTEDID");
+      if (transaccio.getEstatmissatge() == null) {
 
-        break;
+        switch (status) {
+        case ScanWebSimpleStatus.STATUS_IN_PROGRESS:
+          // XYZ ZZZ
+          transaccio.setEstatmissatge("Estat inconsistent: EN PROGRESS");
+          break;
+        case ScanWebSimpleStatus.STATUS_EXPIRED:
+          // XYZ ZZZ
+          transaccio.setEstatmissatge("Estat inconsistent: EXPIRED");
+          break;
+        case ScanWebSimpleStatus.STATUS_REQUESTED_ID:
+          // XYZ ZZZ
+          transaccio.setEstatmissatge("Estat inconsistent: REQUESTEDID");
 
-      default:
-        transaccio.setEstatmissatge("Estat final desconegut: " + status);
+          break;
+
+        default:
+          transaccio.setEstatmissatge("Estat final desconegut: " + status);
+        }
+        transaccioLogicaEjb.update(transaccio);
+
       }
-      transaccioLogicaEjb.update(transaccio);
 
+      HtmlUtils.saveMessageError(request, transaccio.getEstatmissatge());
     }
-
-    HtmlUtils.saveMessageError(request, transaccio.getEstatmissatge());
-
-    /*
-     * 
-     * if (status == ScanWebSimpleStatus.STATUS_IN_PROGRESS || || status ==
-     * ScanWebSimpleStatus.STATUS_EXPIRED || status ==ScanWebSimpleStatus.STATUS_REQUESTED_ID)
-     * {
-     * 
-     * HtmlUtils }
-     * 
-     * 
-     * if (status == ScanWebStatus.STATUS_FINAL_ERROR) {
-     * 
-     * 
-     * } else if (status == ScanWebStatus.STATUS_CANCELLED) {
-     * 
-     * if (transaccio.getEstatmissatge() == null) { // XYZ ZZZ traduir
-     * transaccio.setEstatmissatge("plugindescan.cancelat"); } } else if (status ==
-     * ScanWebStatus.STATUS_IN_PROGRESS) {
-     * 
-     * 
-     * //
-     */
 
     return mav;
 
@@ -407,6 +388,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
    * 
    * @RequestMapping(value = "/final/{scanWebID}") public ModelAndView
    * finalProcesDeScan(HttpServletRequest request, HttpServletResponse response,
+   * 
    * @PathVariable("scanWebID") String scanWebID) throws Exception {
    * 
    * ScanWebConfig swc; swc = scanWebModuleEjb.getScanWebConfig(request, scanWebID);
