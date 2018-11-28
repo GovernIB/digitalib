@@ -7122,21 +7122,21 @@
       <void property="labels"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>Transaccio</string> 
+        <string>Transacció</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>Transaccio</string> 
+        <string>Transacción</string> 
        </void> 
       </void> 
       <void property="labelsPlural"> 
        <void method="put"> 
         <string>ca</string> 
-        <string></string> 
+        <string>Transaccions</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string></string> 
+        <string>Transacciones</string> 
        </void> 
       </void> 
       <void property="name"> 
