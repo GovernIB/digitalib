@@ -81,9 +81,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.EXPEDIENT)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.EXPEDIENT)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.PERFILID)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.PERFILID)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USERNAMEREQUEST)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.USERNAMEREQUEST)}</th>
         </c:if>
@@ -92,6 +89,9 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.VIEW)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.VIEW)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.PERFILID)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.PERFILID)}</th>
         </c:if>
 
 

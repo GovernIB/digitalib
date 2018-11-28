@@ -56,19 +56,21 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     
     // XYZ ZZZ Revisar si esta caducada (mirar que ja hi ha mètodes)
     
-    long pluginSelectedID;    
-    if (transaccio.getUsuaripersonaid() != null) {
-      // Obtindrem de Configuracio Grup
-      // XYZ ZZZ ZZZ
-      pluginSelectedID = transaccio.getPerfil().getPluginScanWebID();
+    long pluginSelectedID = transaccio.getPerfil().getPluginScanWebID();
+    Long pluginSelected2ID = transaccio.getPerfil().getPluginScanWeb2ID();
+    
+    
+    Long[] pluginsID;
+    
+    if (pluginSelected2ID == null) {
+      pluginsID = new Long[] { pluginSelectedID};
     } else {
-      // Obtenim del Perfil el plugin d'escaneig a utilitzar
-      pluginSelectedID = transaccio.getPerfil().getPluginScanWebID();
+      pluginsID = new Long[] { pluginSelectedID, pluginSelected2ID};
     }
     
     
     List<Plugin> pluginsFiltered = scanWebModuleEjb.getAllPluginsFiltered(request,
-        transactionWebID, new Long[] { pluginSelectedID});
+        transactionWebID, pluginsID);
 
     
     // Si cap modul compleix llavors mostrar missatge
@@ -318,7 +320,7 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     } else {
 
 
-      trans.setEstatmissatge(msg);
+      trans.setEstatMissatge(msg);
       
       trans.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       if (th == null) {
@@ -329,7 +331,7 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
         PrintWriter pw = new PrintWriter(sw);
         th.printStackTrace(pw);
         
-        trans.setEstatexcepcio(pw.toString()); // XYZ ZZZ Passar StackTrace
+        trans.setEstatExcepcio(pw.toString()); // XYZ ZZZ Passar StackTrace
         log.warn(msg, th);
       }
 

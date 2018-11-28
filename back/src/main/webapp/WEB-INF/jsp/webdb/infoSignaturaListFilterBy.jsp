@@ -71,16 +71,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.SIGNOPERATION)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="infoSignatura.signoperation" />:</span>
+              <span class="add-on"><fmt:message key="infoSignatura.signOperation" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="signoperationDesde" />
+              <form:input cssClass="input-append input-small" path="signOperationDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="signoperationFins" />
+              <form:input cssClass="input-append input-small search-query" path="signOperationFins" />
 
             </div>
 
@@ -89,12 +89,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.SIGNTYPE)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoSignatura.signtype" var="signtype" />
-              <fmt:message key="genapp.form.searchby" var="cercapersigntype" >                
-                 <fmt:param value="${signtype}"/>
+              <fmt:message key="infoSignatura.signType" var="signType" />
+              <fmt:message key="genapp.form.searchby" var="cercapersignType" >                
+                 <fmt:param value="${signType}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${signtype}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapersigntype}" path="signtype" />
+              <span class="add-on"><c:out value="${signType}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapersignType}" path="signType" />
             </div>
 
 
@@ -102,12 +102,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.SIGNALGORITHM)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoSignatura.signalgorithm" var="signalgorithm" />
-              <fmt:message key="genapp.form.searchby" var="cercapersignalgorithm" >                
-                 <fmt:param value="${signalgorithm}"/>
+              <fmt:message key="infoSignatura.signAlgorithm" var="signAlgorithm" />
+              <fmt:message key="genapp.form.searchby" var="cercapersignAlgorithm" >                
+                 <fmt:param value="${signAlgorithm}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${signalgorithm}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapersignalgorithm}" path="signalgorithm" />
+              <span class="add-on"><c:out value="${signAlgorithm}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapersignAlgorithm}" path="signAlgorithm" />
             </div>
 
 
@@ -115,16 +115,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.SIGNMODE)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="infoSignatura.signmode" />:</span>
+              <span class="add-on"><fmt:message key="infoSignatura.signMode" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="signmodeDesde" />
+              <form:input cssClass="input-append input-small" path="signModeDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="signmodeFins" />
+              <form:input cssClass="input-append input-small search-query" path="signModeFins" />
 
             </div>
 
@@ -133,16 +133,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.SIGNATURESTABLELOCATION)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="infoSignatura.signaturestablelocation" />:</span>
+              <span class="add-on"><fmt:message key="infoSignatura.signaturesTableLocation" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="signaturestablelocationDesde" />
+              <form:input cssClass="input-append input-small" path="signaturesTableLocationDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="signaturestablelocationFins" />
+              <form:input cssClass="input-append input-small search-query" path="signaturesTableLocationFins" />
 
             </div>
 
@@ -151,16 +151,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.TIMESTAMPINCLUDED)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="infoSignatura.timestampincluded" />:</span>
+              <span class="add-on"><fmt:message key="infoSignatura.timestampIncluded" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="timestampincludedDesde" />
+              <form:input cssClass="input-append input-small" path="timestampIncludedDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="timestampincludedFins" />
+              <form:input cssClass="input-append input-small search-query" path="timestampIncludedFins" />
 
             </div>
 
@@ -169,16 +169,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.POLICYINCLUDED)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="infoSignatura.policyincluded" />:</span>
+              <span class="add-on"><fmt:message key="infoSignatura.policyIncluded" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="policyincludedDesde" />
+              <form:input cssClass="input-append input-small" path="policyIncludedDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="policyincludedFins" />
+              <form:input cssClass="input-append input-small search-query" path="policyIncludedFins" />
 
             </div>
 
@@ -187,12 +187,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.ENITIPOFIRMA)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoSignatura.enitipofirma" var="enitipofirma" />
-              <fmt:message key="genapp.form.searchby" var="cercaperenitipofirma" >                
-                 <fmt:param value="${enitipofirma}"/>
+              <fmt:message key="infoSignatura.eniTipoFirma" var="eniTipoFirma" />
+              <fmt:message key="genapp.form.searchby" var="cercapereniTipoFirma" >                
+                 <fmt:param value="${eniTipoFirma}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${enitipofirma}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperenitipofirma}" path="enitipofirma" />
+              <span class="add-on"><c:out value="${eniTipoFirma}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapereniTipoFirma}" path="eniTipoFirma" />
             </div>
 
 
@@ -200,12 +200,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.ENIPERFILFIRMA)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoSignatura.eniperfilfirma" var="eniperfilfirma" />
-              <fmt:message key="genapp.form.searchby" var="cercapereniperfilfirma" >                
-                 <fmt:param value="${eniperfilfirma}"/>
+              <fmt:message key="infoSignatura.eniPerfilFirma" var="eniPerfilFirma" />
+              <fmt:message key="genapp.form.searchby" var="cercapereniPerfilFirma" >                
+                 <fmt:param value="${eniPerfilFirma}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${eniperfilfirma}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapereniperfilfirma}" path="eniperfilfirma" />
+              <span class="add-on"><c:out value="${eniPerfilFirma}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapereniPerfilFirma}" path="eniPerfilFirma" />
             </div>
 
 
@@ -213,12 +213,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.ENIROLFIRMA)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoSignatura.enirolfirma" var="enirolfirma" />
-              <fmt:message key="genapp.form.searchby" var="cercaperenirolfirma" >                
-                 <fmt:param value="${enirolfirma}"/>
+              <fmt:message key="infoSignatura.eniRolFirma" var="eniRolFirma" />
+              <fmt:message key="genapp.form.searchby" var="cercapereniRolFirma" >                
+                 <fmt:param value="${eniRolFirma}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${enirolfirma}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperenirolfirma}" path="enirolfirma" />
+              <span class="add-on"><c:out value="${eniRolFirma}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapereniRolFirma}" path="eniRolFirma" />
             </div>
 
 
@@ -226,12 +226,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.ENISIGNERNAME)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoSignatura.enisignername" var="enisignername" />
-              <fmt:message key="genapp.form.searchby" var="cercaperenisignername" >                
-                 <fmt:param value="${enisignername}"/>
+              <fmt:message key="infoSignatura.eniSignerName" var="eniSignerName" />
+              <fmt:message key="genapp.form.searchby" var="cercapereniSignerName" >                
+                 <fmt:param value="${eniSignerName}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${enisignername}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperenisignername}" path="enisignername" />
+              <span class="add-on"><c:out value="${eniSignerName}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapereniSignerName}" path="eniSignerName" />
             </div>
 
 
@@ -239,12 +239,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.ENISIGNERADMINISTRATIONID)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoSignatura.enisigneradministrationid" var="enisigneradministrationid" />
-              <fmt:message key="genapp.form.searchby" var="cercaperenisigneradministrationid" >                
-                 <fmt:param value="${enisigneradministrationid}"/>
+              <fmt:message key="infoSignatura.eniSignerAdministrationId" var="eniSignerAdministrationId" />
+              <fmt:message key="genapp.form.searchby" var="cercapereniSignerAdministrationId" >                
+                 <fmt:param value="${eniSignerAdministrationId}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${enisigneradministrationid}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperenisigneradministrationid}" path="enisigneradministrationid" />
+              <span class="add-on"><c:out value="${eniSignerAdministrationId}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapereniSignerAdministrationId}" path="eniSignerAdministrationId" />
             </div>
 
 
@@ -252,12 +252,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.ENISIGNLEVEL)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoSignatura.enisignlevel" var="enisignlevel" />
-              <fmt:message key="genapp.form.searchby" var="cercaperenisignlevel" >                
-                 <fmt:param value="${enisignlevel}"/>
+              <fmt:message key="infoSignatura.eniSignLevel" var="eniSignLevel" />
+              <fmt:message key="genapp.form.searchby" var="cercapereniSignLevel" >                
+                 <fmt:param value="${eniSignLevel}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${enisignlevel}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperenisignlevel}" path="enisignlevel" />
+              <span class="add-on"><c:out value="${eniSignLevel}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapereniSignLevel}" path="eniSignLevel" />
             </div>
 
 
@@ -265,16 +265,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.CHECKADMINISTRATIONIDOFSIGNER)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="infoSignatura.checkadministrationidofsigner" />:</span>
+              <span class="add-on"><fmt:message key="infoSignatura.checkAdministrationIdOfSigner" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="checkadministrationidofsignerDesde" />
+              <form:input cssClass="input-append input-small" path="checkAdministrationIdOfSignerDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="checkadministrationidofsignerFins" />
+              <form:input cssClass="input-append input-small search-query" path="checkAdministrationIdOfSignerFins" />
 
             </div>
 
@@ -283,16 +283,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.CHECKDOCUMENTMODIFICATIONS)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="infoSignatura.checkdocumentmodifications" />:</span>
+              <span class="add-on"><fmt:message key="infoSignatura.checkDocumentModifications" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="checkdocumentmodificationsDesde" />
+              <form:input cssClass="input-append input-small" path="checkDocumentModificationsDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="checkdocumentmodificationsFins" />
+              <form:input cssClass="input-append input-small search-query" path="checkDocumentModificationsFins" />
 
             </div>
 
@@ -301,16 +301,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoSignaturaFields.CHECKVALIDATIONSIGNATURE)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="infoSignatura.checkvalidationsignature" />:</span>
+              <span class="add-on"><fmt:message key="infoSignatura.checkValidationSignature" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="checkvalidationsignatureDesde" />
+              <form:input cssClass="input-append input-small" path="checkValidationSignatureDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="checkvalidationsignatureFins" />
+              <form:input cssClass="input-append input-small search-query" path="checkValidationSignatureFins" />
 
             </div>
 

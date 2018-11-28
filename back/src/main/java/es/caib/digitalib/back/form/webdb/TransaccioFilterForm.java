@@ -76,69 +76,69 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
-  private java.sql.Timestamp datafiDesde;
+  private java.sql.Timestamp dataFiDesde;
 
-  public java.sql.Timestamp getDatafiDesde() {
-    return this.datafiDesde;
+  public java.sql.Timestamp getDataFiDesde() {
+    return this.dataFiDesde;
   }
 
-  public void setDatafiDesde(java.sql.Timestamp datafiDesde) {
-    this.datafiDesde = datafiDesde;
-  }
-
-
-  private java.sql.Timestamp datafiFins;
-
-  public java.sql.Timestamp getDatafiFins() {
-    return this.datafiFins;
-  }
-
-  public void setDatafiFins(java.sql.Timestamp datafiFins) {
-    this.datafiFins = datafiFins;
+  public void setDataFiDesde(java.sql.Timestamp dataFiDesde) {
+    this.dataFiDesde = dataFiDesde;
   }
 
 
-  private java.lang.Long usuariaplicacioidDesde;
+  private java.sql.Timestamp dataFiFins;
 
-  public java.lang.Long getUsuariaplicacioidDesde() {
-    return this.usuariaplicacioidDesde;
+  public java.sql.Timestamp getDataFiFins() {
+    return this.dataFiFins;
   }
 
-  public void setUsuariaplicacioidDesde(java.lang.Long usuariaplicacioidDesde) {
-    this.usuariaplicacioidDesde = usuariaplicacioidDesde;
-  }
-
-
-  private java.lang.Long usuariaplicacioidFins;
-
-  public java.lang.Long getUsuariaplicacioidFins() {
-    return this.usuariaplicacioidFins;
-  }
-
-  public void setUsuariaplicacioidFins(java.lang.Long usuariaplicacioidFins) {
-    this.usuariaplicacioidFins = usuariaplicacioidFins;
+  public void setDataFiFins(java.sql.Timestamp dataFiFins) {
+    this.dataFiFins = dataFiFins;
   }
 
 
-  private java.lang.Long usuaripersonaidDesde;
+  private java.lang.Long usuariAplicacioIdDesde;
 
-  public java.lang.Long getUsuaripersonaidDesde() {
-    return this.usuaripersonaidDesde;
+  public java.lang.Long getUsuariAplicacioIdDesde() {
+    return this.usuariAplicacioIdDesde;
   }
 
-  public void setUsuaripersonaidDesde(java.lang.Long usuaripersonaidDesde) {
-    this.usuaripersonaidDesde = usuaripersonaidDesde;
+  public void setUsuariAplicacioIdDesde(java.lang.Long usuariAplicacioIdDesde) {
+    this.usuariAplicacioIdDesde = usuariAplicacioIdDesde;
   }
 
 
-  private java.lang.Long usuaripersonaidFins;
+  private java.lang.Long usuariAplicacioIdFins;
 
-  public java.lang.Long getUsuaripersonaidFins() {
-    return this.usuaripersonaidFins;
+  public java.lang.Long getUsuariAplicacioIdFins() {
+    return this.usuariAplicacioIdFins;
   }
 
-  public void setUsuaripersonaidFins(java.lang.Long usuaripersonaidFins) {
-    this.usuaripersonaidFins = usuaripersonaidFins;
+  public void setUsuariAplicacioIdFins(java.lang.Long usuariAplicacioIdFins) {
+    this.usuariAplicacioIdFins = usuariAplicacioIdFins;
+  }
+
+
+  private java.lang.Long usuariPersonaIdDesde;
+
+  public java.lang.Long getUsuariPersonaIdDesde() {
+    return this.usuariPersonaIdDesde;
+  }
+
+  public void setUsuariPersonaIdDesde(java.lang.Long usuariPersonaIdDesde) {
+    this.usuariPersonaIdDesde = usuariPersonaIdDesde;
+  }
+
+
+  private java.lang.Long usuariPersonaIdFins;
+
+  public java.lang.Long getUsuariPersonaIdFins() {
+    return this.usuariPersonaIdFins;
+  }
+
+  public void setUsuariPersonaIdFins(java.lang.Long usuariPersonaIdFins) {
+    this.usuariPersonaIdFins = usuariPersonaIdFins;
   }
 
 
@@ -164,179 +164,179 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
-  private java.lang.String estatmissatge;
+  private java.lang.String estatMissatge;
 
-  public java.lang.String getEstatmissatge() {
-    return this.estatmissatge;
+  public java.lang.String getEstatMissatge() {
+    return this.estatMissatge;
   }
 
-  public void setEstatmissatge(java.lang.String estatmissatge) {
-    this.estatmissatge = estatmissatge;
-  }
-
-
-  private java.lang.String estatexcepcio;
-
-  public java.lang.String getEstatexcepcio() {
-    return this.estatexcepcio;
-  }
-
-  public void setEstatexcepcio(java.lang.String estatexcepcio) {
-    this.estatexcepcio = estatexcepcio;
+  public void setEstatMissatge(java.lang.String estatMissatge) {
+    this.estatMissatge = estatMissatge;
   }
 
 
-  private java.lang.Integer infoscanpixeltypeDesde;
+  private java.lang.String estatExcepcio;
 
-  public java.lang.Integer getInfoscanpixeltypeDesde() {
-    return this.infoscanpixeltypeDesde;
+  public java.lang.String getEstatExcepcio() {
+    return this.estatExcepcio;
   }
 
-  public void setInfoscanpixeltypeDesde(java.lang.Integer infoscanpixeltypeDesde) {
-    this.infoscanpixeltypeDesde = infoscanpixeltypeDesde;
-  }
-
-
-  private java.lang.Integer infoscanpixeltypeFins;
-
-  public java.lang.Integer getInfoscanpixeltypeFins() {
-    return this.infoscanpixeltypeFins;
-  }
-
-  public void setInfoscanpixeltypeFins(java.lang.Integer infoscanpixeltypeFins) {
-    this.infoscanpixeltypeFins = infoscanpixeltypeFins;
+  public void setEstatExcepcio(java.lang.String estatExcepcio) {
+    this.estatExcepcio = estatExcepcio;
   }
 
 
-  private java.lang.Integer infoscanresoluciopppDesde;
+  private java.lang.Integer infoScanPixelTypeDesde;
 
-  public java.lang.Integer getInfoscanresoluciopppDesde() {
-    return this.infoscanresoluciopppDesde;
+  public java.lang.Integer getInfoScanPixelTypeDesde() {
+    return this.infoScanPixelTypeDesde;
   }
 
-  public void setInfoscanresoluciopppDesde(java.lang.Integer infoscanresoluciopppDesde) {
-    this.infoscanresoluciopppDesde = infoscanresoluciopppDesde;
-  }
-
-
-  private java.lang.Integer infoscanresoluciopppFins;
-
-  public java.lang.Integer getInfoscanresoluciopppFins() {
-    return this.infoscanresoluciopppFins;
-  }
-
-  public void setInfoscanresoluciopppFins(java.lang.Integer infoscanresoluciopppFins) {
-    this.infoscanresoluciopppFins = infoscanresoluciopppFins;
+  public void setInfoScanPixelTypeDesde(java.lang.Integer infoScanPixelTypeDesde) {
+    this.infoScanPixelTypeDesde = infoScanPixelTypeDesde;
   }
 
 
-  private java.lang.Long infosignaturaidDesde;
+  private java.lang.Integer infoScanPixelTypeFins;
 
-  public java.lang.Long getInfosignaturaidDesde() {
-    return this.infosignaturaidDesde;
+  public java.lang.Integer getInfoScanPixelTypeFins() {
+    return this.infoScanPixelTypeFins;
   }
 
-  public void setInfosignaturaidDesde(java.lang.Long infosignaturaidDesde) {
-    this.infosignaturaidDesde = infosignaturaidDesde;
-  }
-
-
-  private java.lang.Long infosignaturaidFins;
-
-  public java.lang.Long getInfosignaturaidFins() {
-    return this.infosignaturaidFins;
-  }
-
-  public void setInfosignaturaidFins(java.lang.Long infosignaturaidFins) {
-    this.infosignaturaidFins = infosignaturaidFins;
+  public void setInfoScanPixelTypeFins(java.lang.Integer infoScanPixelTypeFins) {
+    this.infoScanPixelTypeFins = infoScanPixelTypeFins;
   }
 
 
-  private java.lang.Long infocustodyidDesde;
+  private java.lang.Integer infoScanResolucioPppDesde;
 
-  public java.lang.Long getInfocustodyidDesde() {
-    return this.infocustodyidDesde;
+  public java.lang.Integer getInfoScanResolucioPppDesde() {
+    return this.infoScanResolucioPppDesde;
   }
 
-  public void setInfocustodyidDesde(java.lang.Long infocustodyidDesde) {
-    this.infocustodyidDesde = infocustodyidDesde;
-  }
-
-
-  private java.lang.Long infocustodyidFins;
-
-  public java.lang.Long getInfocustodyidFins() {
-    return this.infocustodyidFins;
-  }
-
-  public void setInfocustodyidFins(java.lang.Long infocustodyidFins) {
-    this.infocustodyidFins = infocustodyidFins;
+  public void setInfoScanResolucioPppDesde(java.lang.Integer infoScanResolucioPppDesde) {
+    this.infoScanResolucioPppDesde = infoScanResolucioPppDesde;
   }
 
 
-  private java.lang.String languageui;
+  private java.lang.Integer infoScanResolucioPppFins;
 
-  public java.lang.String getLanguageui() {
-    return this.languageui;
+  public java.lang.Integer getInfoScanResolucioPppFins() {
+    return this.infoScanResolucioPppFins;
   }
 
-  public void setLanguageui(java.lang.String languageui) {
-    this.languageui = languageui;
-  }
-
-
-  private java.lang.String languagedoc;
-
-  public java.lang.String getLanguagedoc() {
-    return this.languagedoc;
-  }
-
-  public void setLanguagedoc(java.lang.String languagedoc) {
-    this.languagedoc = languagedoc;
+  public void setInfoScanResolucioPppFins(java.lang.Integer infoScanResolucioPppFins) {
+    this.infoScanResolucioPppFins = infoScanResolucioPppFins;
   }
 
 
-  private java.lang.String ciutadanif;
+  private java.lang.Long infoSignaturaIDDesde;
 
-  public java.lang.String getCiutadanif() {
-    return this.ciutadanif;
+  public java.lang.Long getInfoSignaturaIDDesde() {
+    return this.infoSignaturaIDDesde;
   }
 
-  public void setCiutadanif(java.lang.String ciutadanif) {
-    this.ciutadanif = ciutadanif;
-  }
-
-
-  private java.lang.String ciutadanom;
-
-  public java.lang.String getCiutadanom() {
-    return this.ciutadanom;
-  }
-
-  public void setCiutadanom(java.lang.String ciutadanom) {
-    this.ciutadanom = ciutadanom;
+  public void setInfoSignaturaIDDesde(java.lang.Long infoSignaturaIDDesde) {
+    this.infoSignaturaIDDesde = infoSignaturaIDDesde;
   }
 
 
-  private java.lang.String funcionariusername;
+  private java.lang.Long infoSignaturaIDFins;
 
-  public java.lang.String getFuncionariusername() {
-    return this.funcionariusername;
+  public java.lang.Long getInfoSignaturaIDFins() {
+    return this.infoSignaturaIDFins;
   }
 
-  public void setFuncionariusername(java.lang.String funcionariusername) {
-    this.funcionariusername = funcionariusername;
+  public void setInfoSignaturaIDFins(java.lang.Long infoSignaturaIDFins) {
+    this.infoSignaturaIDFins = infoSignaturaIDFins;
   }
 
 
-  private java.lang.String funcionarinom;
+  private java.lang.Long infoCustodyIDDesde;
 
-  public java.lang.String getFuncionarinom() {
-    return this.funcionarinom;
+  public java.lang.Long getInfoCustodyIDDesde() {
+    return this.infoCustodyIDDesde;
   }
 
-  public void setFuncionarinom(java.lang.String funcionarinom) {
-    this.funcionarinom = funcionarinom;
+  public void setInfoCustodyIDDesde(java.lang.Long infoCustodyIDDesde) {
+    this.infoCustodyIDDesde = infoCustodyIDDesde;
+  }
+
+
+  private java.lang.Long infoCustodyIDFins;
+
+  public java.lang.Long getInfoCustodyIDFins() {
+    return this.infoCustodyIDFins;
+  }
+
+  public void setInfoCustodyIDFins(java.lang.Long infoCustodyIDFins) {
+    this.infoCustodyIDFins = infoCustodyIDFins;
+  }
+
+
+  private java.lang.String languageUI;
+
+  public java.lang.String getLanguageUI() {
+    return this.languageUI;
+  }
+
+  public void setLanguageUI(java.lang.String languageUI) {
+    this.languageUI = languageUI;
+  }
+
+
+  private java.lang.String languageDoc;
+
+  public java.lang.String getLanguageDoc() {
+    return this.languageDoc;
+  }
+
+  public void setLanguageDoc(java.lang.String languageDoc) {
+    this.languageDoc = languageDoc;
+  }
+
+
+  private java.lang.String ciutadaNif;
+
+  public java.lang.String getCiutadaNif() {
+    return this.ciutadaNif;
+  }
+
+  public void setCiutadaNif(java.lang.String ciutadaNif) {
+    this.ciutadaNif = ciutadaNif;
+  }
+
+
+  private java.lang.String ciutadaNom;
+
+  public java.lang.String getCiutadaNom() {
+    return this.ciutadaNom;
+  }
+
+  public void setCiutadaNom(java.lang.String ciutadaNom) {
+    this.ciutadaNom = ciutadaNom;
+  }
+
+
+  private java.lang.String funcionariUsername;
+
+  public java.lang.String getFuncionariUsername() {
+    return this.funcionariUsername;
+  }
+
+  public void setFuncionariUsername(java.lang.String funcionariUsername) {
+    this.funcionariUsername = funcionariUsername;
+  }
+
+
+  private java.lang.String funcionariNom;
+
+  public java.lang.String getFuncionariNom() {
+    return this.funcionariNom;
+  }
+
+  public void setFuncionariNom(java.lang.String funcionariNom) {
+    this.funcionariNom = funcionariNom;
   }
 
 
@@ -348,28 +348,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setExpedient(java.lang.String expedient) {
     this.expedient = expedient;
-  }
-
-
-  private java.lang.Long perfilidDesde;
-
-  public java.lang.Long getPerfilidDesde() {
-    return this.perfilidDesde;
-  }
-
-  public void setPerfilidDesde(java.lang.Long perfilidDesde) {
-    this.perfilidDesde = perfilidDesde;
-  }
-
-
-  private java.lang.Long perfilidFins;
-
-  public java.lang.Long getPerfilidFins() {
-    return this.perfilidFins;
-  }
-
-  public void setPerfilidFins(java.lang.Long perfilidFins) {
-    this.perfilidFins = perfilidFins;
   }
 
 
@@ -417,6 +395,28 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.Long perfilIDDesde;
+
+  public java.lang.Long getPerfilIDDesde() {
+    return this.perfilIDDesde;
+  }
+
+  public void setPerfilIDDesde(java.lang.Long perfilIDDesde) {
+    this.perfilIDDesde = perfilIDDesde;
+  }
+
+
+  private java.lang.Long perfilIDFins;
+
+  public java.lang.Long getPerfilIDFins() {
+    return this.perfilIDFins;
+  }
+
+  public void setPerfilIDFins(java.lang.Long perfilIDFins) {
+    this.perfilIDFins = perfilIDFins;
+  }
+
+
   public TransaccioFilterForm() {
   }
   
@@ -427,42 +427,42 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.transactionWebId = __toClone.transactionWebId;
     this.dataIniciDesde = __toClone.dataIniciDesde;
     this.dataIniciFins = __toClone.dataIniciFins;
-    this.datafiDesde = __toClone.datafiDesde;
-    this.datafiFins = __toClone.datafiFins;
-    this.usuariaplicacioidDesde = __toClone.usuariaplicacioidDesde;
-    this.usuariaplicacioidFins = __toClone.usuariaplicacioidFins;
-    this.usuaripersonaidDesde = __toClone.usuaripersonaidDesde;
-    this.usuaripersonaidFins = __toClone.usuaripersonaidFins;
+    this.dataFiDesde = __toClone.dataFiDesde;
+    this.dataFiFins = __toClone.dataFiFins;
+    this.usuariAplicacioIdDesde = __toClone.usuariAplicacioIdDesde;
+    this.usuariAplicacioIdFins = __toClone.usuariAplicacioIdFins;
+    this.usuariPersonaIdDesde = __toClone.usuariPersonaIdDesde;
+    this.usuariPersonaIdFins = __toClone.usuariPersonaIdFins;
     this.estatCodiDesde = __toClone.estatCodiDesde;
     this.estatCodiFins = __toClone.estatCodiFins;
-    this.estatmissatge = __toClone.estatmissatge;
-    this.estatexcepcio = __toClone.estatexcepcio;
-    this.infoscanpixeltypeDesde = __toClone.infoscanpixeltypeDesde;
-    this.infoscanpixeltypeFins = __toClone.infoscanpixeltypeFins;
-    this.infoscanresoluciopppDesde = __toClone.infoscanresoluciopppDesde;
-    this.infoscanresoluciopppFins = __toClone.infoscanresoluciopppFins;
-    this.infosignaturaidDesde = __toClone.infosignaturaidDesde;
-    this.infosignaturaidFins = __toClone.infosignaturaidFins;
-    this.infocustodyidDesde = __toClone.infocustodyidDesde;
-    this.infocustodyidFins = __toClone.infocustodyidFins;
-    this.languageui = __toClone.languageui;
-    this.languagedoc = __toClone.languagedoc;
-    this.ciutadanif = __toClone.ciutadanif;
-    this.ciutadanom = __toClone.ciutadanom;
-    this.funcionariusername = __toClone.funcionariusername;
-    this.funcionarinom = __toClone.funcionarinom;
+    this.estatMissatge = __toClone.estatMissatge;
+    this.estatExcepcio = __toClone.estatExcepcio;
+    this.infoScanPixelTypeDesde = __toClone.infoScanPixelTypeDesde;
+    this.infoScanPixelTypeFins = __toClone.infoScanPixelTypeFins;
+    this.infoScanResolucioPppDesde = __toClone.infoScanResolucioPppDesde;
+    this.infoScanResolucioPppFins = __toClone.infoScanResolucioPppFins;
+    this.infoSignaturaIDDesde = __toClone.infoSignaturaIDDesde;
+    this.infoSignaturaIDFins = __toClone.infoSignaturaIDFins;
+    this.infoCustodyIDDesde = __toClone.infoCustodyIDDesde;
+    this.infoCustodyIDFins = __toClone.infoCustodyIDFins;
+    this.languageUI = __toClone.languageUI;
+    this.languageDoc = __toClone.languageDoc;
+    this.ciutadaNif = __toClone.ciutadaNif;
+    this.ciutadaNom = __toClone.ciutadaNom;
+    this.funcionariUsername = __toClone.funcionariUsername;
+    this.funcionariNom = __toClone.funcionariNom;
     this.expedient = __toClone.expedient;
-    this.perfilidDesde = __toClone.perfilidDesde;
-    this.perfilidFins = __toClone.perfilidFins;
     this.usernameRequest = __toClone.usernameRequest;
     this.returnUrl = __toClone.returnUrl;
     this.viewDesde = __toClone.viewDesde;
     this.viewFins = __toClone.viewFins;
+    this.perfilIDDesde = __toClone.perfilIDDesde;
+    this.perfilIDFins = __toClone.perfilIDFins;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
-    this.mapOfInfoSignaturaForInfosignaturaid = __toClone.mapOfInfoSignaturaForInfosignaturaid;
-    this.mapOfInfoCustodyForInfocustodyid = __toClone.mapOfInfoCustodyForInfocustodyid;
-    this.mapOfPerfilForPerfilid = __toClone.mapOfPerfilForPerfilid;
+    this.mapOfInfoSignaturaForInfoSignaturaID = __toClone.mapOfInfoSignaturaForInfoSignaturaID;
+    this.mapOfInfoCustodyForInfoCustodyID = __toClone.mapOfInfoCustodyForInfoCustodyID;
     this.mapOfValuesForView = __toClone.mapOfValuesForView;
+    this.mapOfPerfilForPerfilID = __toClone.mapOfPerfilForPerfilID;
   }
   
   /* ========= UTILS ========== */
@@ -474,7 +474,7 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   @Override
   public List<Field<?>> getDefaultGroupByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { DATAINICI ,DATAFI ,USUARIAPLICACIOID ,USUARIPERSONAID ,ESTATCODI }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { DATAINICI ,DATAFI ,USUARIAPLICACIOID ,USUARIPERSONAID ,ESTATCODI ,FUNCIONARIUSERNAME }));
   }
 
 
@@ -509,38 +509,26 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
 
 
-  private Map<String, String> mapOfInfoSignaturaForInfosignaturaid;
+  private Map<String, String> mapOfInfoSignaturaForInfoSignaturaID;
 
-  public Map<String, String> getMapOfInfoSignaturaForInfosignaturaid() {
-    return this.mapOfInfoSignaturaForInfosignaturaid;
+  public Map<String, String> getMapOfInfoSignaturaForInfoSignaturaID() {
+    return this.mapOfInfoSignaturaForInfoSignaturaID;
   }
 
-  public void setMapOfInfoSignaturaForInfosignaturaid(Map<String, String> mapOfInfoSignaturaForInfosignaturaid) {
-    this.mapOfInfoSignaturaForInfosignaturaid = mapOfInfoSignaturaForInfosignaturaid;
-  }
-
-
-
-  private Map<String, String> mapOfInfoCustodyForInfocustodyid;
-
-  public Map<String, String> getMapOfInfoCustodyForInfocustodyid() {
-    return this.mapOfInfoCustodyForInfocustodyid;
-  }
-
-  public void setMapOfInfoCustodyForInfocustodyid(Map<String, String> mapOfInfoCustodyForInfocustodyid) {
-    this.mapOfInfoCustodyForInfocustodyid = mapOfInfoCustodyForInfocustodyid;
+  public void setMapOfInfoSignaturaForInfoSignaturaID(Map<String, String> mapOfInfoSignaturaForInfoSignaturaID) {
+    this.mapOfInfoSignaturaForInfoSignaturaID = mapOfInfoSignaturaForInfoSignaturaID;
   }
 
 
 
-  private Map<String, String> mapOfPerfilForPerfilid;
+  private Map<String, String> mapOfInfoCustodyForInfoCustodyID;
 
-  public Map<String, String> getMapOfPerfilForPerfilid() {
-    return this.mapOfPerfilForPerfilid;
+  public Map<String, String> getMapOfInfoCustodyForInfoCustodyID() {
+    return this.mapOfInfoCustodyForInfoCustodyID;
   }
 
-  public void setMapOfPerfilForPerfilid(Map<String, String> mapOfPerfilForPerfilid) {
-    this.mapOfPerfilForPerfilid = mapOfPerfilForPerfilid;
+  public void setMapOfInfoCustodyForInfoCustodyID(Map<String, String> mapOfInfoCustodyForInfoCustodyID) {
+    this.mapOfInfoCustodyForInfoCustodyID = mapOfInfoCustodyForInfoCustodyID;
   }
 
 
@@ -553,6 +541,18 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setMapOfValuesForView(Map<String, String> mapOfValuesForView) {
     this.mapOfValuesForView = mapOfValuesForView;
+  }
+
+
+
+  private Map<String, String> mapOfPerfilForPerfilID;
+
+  public Map<String, String> getMapOfPerfilForPerfilID() {
+    return this.mapOfPerfilForPerfilID;
+  }
+
+  public void setMapOfPerfilForPerfilID(Map<String, String> mapOfPerfilForPerfilID) {
+    this.mapOfPerfilForPerfilID = mapOfPerfilForPerfilID;
   }
 
 

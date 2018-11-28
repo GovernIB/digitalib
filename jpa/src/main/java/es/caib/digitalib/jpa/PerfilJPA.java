@@ -62,16 +62,20 @@ private static final long serialVersionUID = -1815612849L;
 	@Column(name="pluginscanwebid",nullable = false,length = 19)
 	long pluginScanWebID;
 
+	@Index(name="dib_perfil_plugscanweb2_fk_i")
+	@Column(name="pluginscanweb2id",length = 19)
+	java.lang.Long pluginScanWeb2ID;
+
 	@Column(name="tipusfirma",nullable = false,length = 10)
 	int tipusFirma;
-
-	@Index(name="dib_perfil_plugin_psid_fk_i")
-	@Column(name="pluginfirmaservidorid",length = 19)
-	java.lang.Long pluginFirmaServidorID;
 
 	@Index(name="dib_perfil_apisimpleid_fk_i")
 	@Column(name="apisimpleid",length = 19)
 	java.lang.Long apiSimpleID;
+
+	@Index(name="dib_perfil_plugin_psid_fk_i")
+	@Column(name="pluginfirmaservidorid",length = 19)
+	java.lang.Long pluginFirmaServidorID;
 
 	@Column(name="tipuscustodia",nullable = false,length = 10)
 	int tipusCustodia;
@@ -95,7 +99,7 @@ private static final long serialVersionUID = -1815612849L;
   }
 
   /** Constructor amb tots els camps  */
-  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
+  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
@@ -105,16 +109,17 @@ private static final long serialVersionUID = -1815612849L;
     this.scanMinimaResolucio=scanMinimaResolucio;
     this.scanPixelType=scanPixelType;
     this.pluginScanWebID=pluginScanWebID;
+    this.pluginScanWeb2ID=pluginScanWeb2ID;
     this.tipusFirma=tipusFirma;
-    this.pluginFirmaServidorID=pluginFirmaServidorID;
     this.apiSimpleID=apiSimpleID;
+    this.pluginFirmaServidorID=pluginFirmaServidorID;
     this.tipusCustodia=tipusCustodia;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
     this.usPerfil=usPerfil;
 }
   /** Constructor sense valors autoincrementals */
-  public PerfilJPA(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , int tipusFirma , java.lang.Long pluginFirmaServidorID , java.lang.Long apiSimpleID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
+  public PerfilJPA(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
     this.codi=codi;
     this.nom=nom;
     this.descripcio=descripcio;
@@ -123,9 +128,10 @@ private static final long serialVersionUID = -1815612849L;
     this.scanMinimaResolucio=scanMinimaResolucio;
     this.scanPixelType=scanPixelType;
     this.pluginScanWebID=pluginScanWebID;
+    this.pluginScanWeb2ID=pluginScanWeb2ID;
     this.tipusFirma=tipusFirma;
-    this.pluginFirmaServidorID=pluginFirmaServidorID;
     this.apiSimpleID=apiSimpleID;
+    this.pluginFirmaServidorID=pluginFirmaServidorID;
     this.tipusCustodia=tipusCustodia;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
@@ -152,9 +158,10 @@ private static final long serialVersionUID = -1815612849L;
     this.setScanMinimaResolucio(__bean.getScanMinimaResolucio());
     this.setScanPixelType(__bean.getScanPixelType());
     this.setPluginScanWebID(__bean.getPluginScanWebID());
+    this.setPluginScanWeb2ID(__bean.getPluginScanWeb2ID());
     this.setTipusFirma(__bean.getTipusFirma());
-    this.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
     this.setApiSimpleID(__bean.getApiSimpleID());
+    this.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
     this.setTipusCustodia(__bean.getTipusCustodia());
     this.setPluginArxiuID(__bean.getPluginArxiuID());
     this.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
@@ -224,6 +231,13 @@ private static final long serialVersionUID = -1815612849L;
 		this.pluginScanWebID = _pluginScanWebID_;
 	};
 
+	public java.lang.Long getPluginScanWeb2ID() {
+		return(pluginScanWeb2ID);
+	};
+	public void setPluginScanWeb2ID(java.lang.Long _pluginScanWeb2ID_) {
+		this.pluginScanWeb2ID = _pluginScanWeb2ID_;
+	};
+
 	public int getTipusFirma() {
 		return(tipusFirma);
 	};
@@ -231,18 +245,18 @@ private static final long serialVersionUID = -1815612849L;
 		this.tipusFirma = _tipusFirma_;
 	};
 
-	public java.lang.Long getPluginFirmaServidorID() {
-		return(pluginFirmaServidorID);
-	};
-	public void setPluginFirmaServidorID(java.lang.Long _pluginFirmaServidorID_) {
-		this.pluginFirmaServidorID = _pluginFirmaServidorID_;
-	};
-
 	public java.lang.Long getApiSimpleID() {
 		return(apiSimpleID);
 	};
 	public void setApiSimpleID(java.lang.Long _apiSimpleID_) {
 		this.apiSimpleID = _apiSimpleID_;
+	};
+
+	public java.lang.Long getPluginFirmaServidorID() {
+		return(pluginFirmaServidorID);
+	};
+	public void setPluginFirmaServidorID(java.lang.Long _pluginFirmaServidorID_) {
+		this.pluginFirmaServidorID = _pluginFirmaServidorID_;
 	};
 
 	public int getTipusCustodia() {
@@ -371,16 +385,16 @@ private static final long serialVersionUID = -1815612849L;
 // IMP Field:pluginid | Table: dib_plugin | Type: 1  
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="dib_perfil_plugin_firma_fk")
-	@JoinColumn(name = "pluginfirmaservidorid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
-	private PluginJPA pluginFirmaServidor;
+	@ForeignKey(name="dib_perfil_plugin_scan2_fk")
+	@JoinColumn(name = "pluginscanweb2id", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
+	private PluginJPA pluginScanWeb2;
 
-	public PluginJPA getPluginFirmaServidor() {
-    return this.pluginFirmaServidor;
+	public PluginJPA getPluginScanWeb2() {
+    return this.pluginScanWeb2;
   }
 
-	public  void setPluginFirmaServidor(PluginJPA pluginFirmaServidor) {
-    this.pluginFirmaServidor = pluginFirmaServidor;
+	public  void setPluginScanWeb2(PluginJPA pluginScanWeb2) {
+    this.pluginScanWeb2 = pluginScanWeb2;
   }
 
 // IMP Field:apisimpleid | Table: dib_apisimple | Type: 1  
@@ -396,6 +410,21 @@ private static final long serialVersionUID = -1815612849L;
 
 	public  void setApiSimple(ApiSimpleJPA apiSimple) {
     this.apiSimple = apiSimple;
+  }
+
+// IMP Field:pluginid | Table: dib_plugin | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="dib_perfil_plugin_firma_fk")
+	@JoinColumn(name = "pluginfirmaservidorid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
+	private PluginJPA pluginFirmaServidor;
+
+	public PluginJPA getPluginFirmaServidor() {
+    return this.pluginFirmaServidor;
+  }
+
+	public  void setPluginFirmaServidor(PluginJPA pluginFirmaServidor) {
+    this.pluginFirmaServidor = pluginFirmaServidor;
   }
 
 // IMP Field:pluginid | Table: dib_plugin | Type: 1  
@@ -442,9 +471,10 @@ private static final long serialVersionUID = -1815612849L;
     __tmp.setScanMinimaResolucio(__bean.getScanMinimaResolucio());
     __tmp.setScanPixelType(__bean.getScanPixelType());
     __tmp.setPluginScanWebID(__bean.getPluginScanWebID());
+    __tmp.setPluginScanWeb2ID(__bean.getPluginScanWeb2ID());
     __tmp.setTipusFirma(__bean.getTipusFirma());
-    __tmp.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
     __tmp.setApiSimpleID(__bean.getApiSimpleID());
+    __tmp.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
     __tmp.setTipusCustodia(__bean.getTipusCustodia());
     __tmp.setPluginArxiuID(__bean.getPluginArxiuID());
     __tmp.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
@@ -506,6 +536,10 @@ private static final long serialVersionUID = -1815612849L;
     if(!"PluginJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginScanWeb) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginScanWeb()) ) ) {
       __tmp.setPluginScanWeb(PluginJPA.copyJPA(__jpa.getPluginScanWeb(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"PluginJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginScanWeb2) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginScanWeb2()) ) ) {
+      __tmp.setPluginScanWeb2(PluginJPA.copyJPA(__jpa.getPluginScanWeb2(), __alreadyCopied,"PerfilJPA"));
     }
     if(!"ApiSimpleJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.apiSimple) || org.hibernate.Hibernate.isInitialized(__jpa.getApiSimple()) ) ) {

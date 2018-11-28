@@ -47,16 +47,20 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), PerfilFields.PLUGINSCANWEBID);
   }
 
+  public LongField PLUGINSCANWEB2ID() {
+    return new LongField(getQueryPath(), PerfilFields.PLUGINSCANWEB2ID);
+  }
+
   public IntegerField TIPUSFIRMA() {
     return new IntegerField(getQueryPath(), PerfilFields.TIPUSFIRMA);
   }
 
-  public LongField PLUGINFIRMASERVIDORID() {
-    return new LongField(getQueryPath(), PerfilFields.PLUGINFIRMASERVIDORID);
-  }
-
   public LongField APISIMPLEID() {
     return new LongField(getQueryPath(), PerfilFields.APISIMPLEID);
+  }
+
+  public LongField PLUGINFIRMASERVIDORID() {
+    return new LongField(getQueryPath(), PerfilFields.PLUGINFIRMASERVIDORID);
   }
 
   public IntegerField TIPUSCUSTODIA() {
@@ -162,10 +166,10 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     });
   }
 
-  public PluginQueryPath PLUGINFIRMASERVIDOR() {
+  public PluginQueryPath PLUGINSCANWEB2() {
     return new PluginQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PerfilQueryPath.this.getQueryPath() + "pluginFirmaServidor" + ".";
+          return PerfilQueryPath.this.getQueryPath() + "pluginScanWeb2" + ".";
       }
     });
   }
@@ -174,6 +178,14 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new ApiSimpleQueryPath(new QueryPath() {
       public String getQueryPath() {
           return PerfilQueryPath.this.getQueryPath() + "apiSimple" + ".";
+      }
+    });
+  }
+
+  public PluginQueryPath PLUGINFIRMASERVIDOR() {
+    return new PluginQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PerfilQueryPath.this.getQueryPath() + "pluginFirmaServidor" + ".";
       }
     });
   }

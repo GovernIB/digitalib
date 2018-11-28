@@ -54,7 +54,7 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
       }
     }
 
-    languageUI = transaccio.getLanguageui();
+    languageUI = transaccio.getLanguageUI();
 
     String urlBase = transaccio.getPerfil().getUrlBase();
 

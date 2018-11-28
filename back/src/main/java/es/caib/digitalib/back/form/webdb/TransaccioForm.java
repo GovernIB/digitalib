@@ -29,10 +29,10 @@ public class TransaccioForm extends DigitalIBBaseForm {
     super(__toClone);
       this.transaccio = __toClone.transaccio;
     this.listOfValuesForEstatCodi = __toClone.listOfValuesForEstatCodi;
-    this.listOfInfoSignaturaForInfosignaturaid = __toClone.listOfInfoSignaturaForInfosignaturaid;
-    this.listOfInfoCustodyForInfocustodyid = __toClone.listOfInfoCustodyForInfocustodyid;
-    this.listOfPerfilForPerfilid = __toClone.listOfPerfilForPerfilid;
+    this.listOfInfoSignaturaForInfoSignaturaID = __toClone.listOfInfoSignaturaForInfoSignaturaID;
+    this.listOfInfoCustodyForInfoCustodyID = __toClone.listOfInfoCustodyForInfoCustodyID;
     this.listOfValuesForView = __toClone.listOfValuesForView;
+    this.listOfPerfilForPerfilID = __toClone.listOfPerfilForPerfilID;
   }
   
   public TransaccioForm(TransaccioJPA transaccio, boolean nou) {
@@ -88,38 +88,26 @@ public class TransaccioForm extends DigitalIBBaseForm {
 
 
 
-  private List<StringKeyValue> listOfInfoSignaturaForInfosignaturaid;
+  private List<StringKeyValue> listOfInfoSignaturaForInfoSignaturaID;
 
-  public List<StringKeyValue> getListOfInfoSignaturaForInfosignaturaid() {
-    return this.listOfInfoSignaturaForInfosignaturaid;
+  public List<StringKeyValue> getListOfInfoSignaturaForInfoSignaturaID() {
+    return this.listOfInfoSignaturaForInfoSignaturaID;
   }
 
-  public void setListOfInfoSignaturaForInfosignaturaid(List<StringKeyValue> listOfInfoSignaturaForInfosignaturaid) {
-    this.listOfInfoSignaturaForInfosignaturaid = listOfInfoSignaturaForInfosignaturaid;
-  }
-
-
-
-  private List<StringKeyValue> listOfInfoCustodyForInfocustodyid;
-
-  public List<StringKeyValue> getListOfInfoCustodyForInfocustodyid() {
-    return this.listOfInfoCustodyForInfocustodyid;
-  }
-
-  public void setListOfInfoCustodyForInfocustodyid(List<StringKeyValue> listOfInfoCustodyForInfocustodyid) {
-    this.listOfInfoCustodyForInfocustodyid = listOfInfoCustodyForInfocustodyid;
+  public void setListOfInfoSignaturaForInfoSignaturaID(List<StringKeyValue> listOfInfoSignaturaForInfoSignaturaID) {
+    this.listOfInfoSignaturaForInfoSignaturaID = listOfInfoSignaturaForInfoSignaturaID;
   }
 
 
 
-  private List<StringKeyValue> listOfPerfilForPerfilid;
+  private List<StringKeyValue> listOfInfoCustodyForInfoCustodyID;
 
-  public List<StringKeyValue> getListOfPerfilForPerfilid() {
-    return this.listOfPerfilForPerfilid;
+  public List<StringKeyValue> getListOfInfoCustodyForInfoCustodyID() {
+    return this.listOfInfoCustodyForInfoCustodyID;
   }
 
-  public void setListOfPerfilForPerfilid(List<StringKeyValue> listOfPerfilForPerfilid) {
-    this.listOfPerfilForPerfilid = listOfPerfilForPerfilid;
+  public void setListOfInfoCustodyForInfoCustodyID(List<StringKeyValue> listOfInfoCustodyForInfoCustodyID) {
+    this.listOfInfoCustodyForInfoCustodyID = listOfInfoCustodyForInfoCustodyID;
   }
 
 
@@ -132,6 +120,18 @@ public class TransaccioForm extends DigitalIBBaseForm {
 
   public void setListOfValuesForView(List<StringKeyValue> listOfValuesForView) {
     this.listOfValuesForView = listOfValuesForView;
+  }
+
+
+
+  private List<StringKeyValue> listOfPerfilForPerfilID;
+
+  public List<StringKeyValue> getListOfPerfilForPerfilID() {
+    return this.listOfPerfilForPerfilID;
+  }
+
+  public void setListOfPerfilForPerfilID(List<StringKeyValue> listOfPerfilForPerfilID) {
+    this.listOfPerfilForPerfilID = listOfPerfilForPerfilID;
   }
 
 

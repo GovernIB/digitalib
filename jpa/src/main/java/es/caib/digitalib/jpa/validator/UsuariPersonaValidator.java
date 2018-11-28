@@ -56,10 +56,6 @@ public class UsuariPersonaValidator<T> implements UsuariPersonaFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(IDIOMAID)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,CONFIGURACIOGRUPID, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONFIGURACIOGRUPID)));
-
     // Check size
     if (__vr.getFieldErrorCount(USERNAME) == 0) {
       java.lang.String __username = (java.lang.String)__vr.getFieldValue(__target__,USERNAME);
@@ -207,13 +203,15 @@ public class UsuariPersonaValidator<T> implements UsuariPersonaFields {
 
     if (__vr.getFieldErrorCount(CONFIGURACIOGRUPID) == 0) {
       java.lang.Long __configuraciogrupid = (java.lang.Long)__vr.getFieldValue(__target__,CONFIGURACIOGRUPID);
-      Long __count_ = null;
-      try { __count_ = __configuracioGrupManager.count(ConfiguracioGrupFields.CONFIGURACIOGRUPID.equal(__configuraciogrupid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-      if (__count_ == null || __count_ == 0) {        
-        __vr.rejectValue(CONFIGURACIOGRUPID, "error.notfound",
+      if (__configuraciogrupid != null ) {
+        Long __count_ = null;
+        try { __count_ = __configuracioGrupManager.count(ConfiguracioGrupFields.CONFIGURACIOGRUPID.equal(__configuraciogrupid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(CONFIGURACIOGRUPID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("configuracioGrup.configuracioGrup"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("configuracioGrup.configuracioGrupID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__configuraciogrupid)));
+        }
       }
     }
 

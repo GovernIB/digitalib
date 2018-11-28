@@ -145,25 +145,25 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     t.setDataInici(new Timestamp(System.currentTimeMillis()));
     t.setEstatCodi(ScanWebSimpleStatus.STATUS_REQUESTED_ID);
     t.setTransactionWebId(transactionWebID);
-    t.setLanguageui(requestTransaction.getLanguageUI());
-    t.setLanguagedoc(requestTransaction.getLanguageDoc());
+    t.setLanguageUI(requestTransaction.getLanguageUI());
+    t.setLanguageDoc(requestTransaction.getLanguageDoc());
 
     t.setView(requestTransaction.getView());
 
     t.setReturnUrl(returnURL);
 
     if (usuariAplicacio != null) {
-      t.setUsuariaplicacioid(usuariAplicacio.getUsuariAplicacioID());
+      t.setUsuariAplicacioId(usuariAplicacio.getUsuariAplicacioID());
     }
 
     if (usuariPersona != null) {
-      t.setUsuaripersonaid(usuariPersona.getUsuariPersonaID());
+      t.setUsuariPersonaId(usuariPersona.getUsuariPersonaID());
     }
 
-    t.setFuncionariusername(requestTransaction.getFuncionariUsername());
-    t.setFuncionarinom(requestTransaction.getFuncionariNom());
-    t.setCiutadanif(requestTransaction.getCiutadaNif());
-    t.setCiutadanom(requestTransaction.getCiutadaNom());
+    t.setFuncionariUsername(requestTransaction.getFuncionariUsername());
+    t.setFuncionariNom(requestTransaction.getFuncionariNom());
+    t.setCiutadaNif(requestTransaction.getCiutadaNif());
+    t.setCiutadaNom(requestTransaction.getCiutadaNom());
     t.setExpedient(requestTransaction.getExpedientID());
 
     t.setView(requestTransaction.getView());
@@ -181,7 +181,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     clonedPerfil = (PerfilJPA) perfilEjb.create(clonedPerfil);
 
     t.setPerfil(null);
-    t.setPerfilid(clonedPerfil.getPerfilID());
+    t.setPerfilID(clonedPerfil.getPerfilID());
 
     t = (TransaccioJPA) this.create(t);
 

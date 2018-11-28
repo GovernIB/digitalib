@@ -122,10 +122,10 @@ public abstract class AbstractScanWebProcessController {
           transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
           if (listDocs.size() == 0) {
             // XYZ ZZZ Traduir
-            transaccio.setEstatmissatge(" L'usuari no ha escanejat cap fitxer.");
+            transaccio.setEstatMissatge(" L'usuari no ha escanejat cap fitxer.");
           } else {
             // XYZ ZZZ Traduir
-            transaccio.setEstatmissatge(" L'usuari ha escanejat més d'1 fitxer.");
+            transaccio.setEstatMissatge(" L'usuari ha escanejat més d'1 fitxer.");
           }
         }
       } 
@@ -140,9 +140,9 @@ public abstract class AbstractScanWebProcessController {
       case ScanWebStatus.STATUS_CANCELLED:
       {
         transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_CANCELLED);
-        if (transaccio.getEstatmissatge() == null) {
+        if (transaccio.getEstatMissatge() == null) {
           // XYZ ZZZ traduir
-          transaccio.setEstatmissatge("plugindescan.cancelat");
+          transaccio.setEstatMissatge("plugindescan.cancelat");
         }
       }
       break;
@@ -154,8 +154,8 @@ public abstract class AbstractScanWebProcessController {
         String inconsistentState = "El mòdul d´escaneig ha finalitzat inesperadament"
             + " amb un codi d'estat desconegut " + status;
         transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-        transaccio.setEstatmissatge(inconsistentState);
-        transaccio.setEstatexcepcio(new Exception().toString()); // XYZ ZZZ  
+        transaccio.setEstatMissatge(inconsistentState);
+        transaccio.setEstatExcepcio(new Exception().toString()); // XYZ ZZZ  
       }
     }
 
@@ -168,10 +168,10 @@ public abstract class AbstractScanWebProcessController {
 
     if (transaccio.getEstatCodi() != ScanWebStatus.STATUS_FINAL_OK) {
 
-      if (transaccio.getEstatmissatge() == null) {
+      if (transaccio.getEstatMissatge() == null) {
         // XYZ ZZZ
         transaccio
-            .setEstatmissatge("Error desconegut ja que no s'ha definit el missatge de l'error !!!!!");
+            .setEstatMissatge("Error desconegut ja que no s'ha definit el missatge de l'error !!!!!");
       }
     }
 
@@ -191,7 +191,7 @@ public abstract class AbstractScanWebProcessController {
       mav.addObject("urlRetorn", urlRetorn);
     }
 
-    transaccio.setDatafi(new Timestamp(System.currentTimeMillis()));
+    transaccio.setDataFi(new Timestamp(System.currentTimeMillis()));
 
     transaccioLogicaEjb.update(transaccio);
 

@@ -353,31 +353,31 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
     } else {
 
-      if (transaccio.getEstatmissatge() == null) {
+      if (transaccio.getEstatMissatge() == null) {
 
         switch (status) {
         case ScanWebSimpleStatus.STATUS_IN_PROGRESS:
           // XYZ ZZZ
-          transaccio.setEstatmissatge("Estat inconsistent: EN PROGRESS");
+          transaccio.setEstatMissatge("Estat inconsistent: EN PROGRESS");
           break;
         case ScanWebSimpleStatus.STATUS_EXPIRED:
           // XYZ ZZZ
-          transaccio.setEstatmissatge("Estat inconsistent: EXPIRED");
+          transaccio.setEstatMissatge("Estat inconsistent: EXPIRED");
           break;
         case ScanWebSimpleStatus.STATUS_REQUESTED_ID:
           // XYZ ZZZ
-          transaccio.setEstatmissatge("Estat inconsistent: REQUESTEDID");
+          transaccio.setEstatMissatge("Estat inconsistent: REQUESTEDID");
 
           break;
 
         default:
-          transaccio.setEstatmissatge("Estat final desconegut: " + status);
+          transaccio.setEstatMissatge("Estat final desconegut: " + status);
         }
         transaccioLogicaEjb.update(transaccio);
 
       }
 
-      HtmlUtils.saveMessageError(request, transaccio.getEstatmissatge());
+      HtmlUtils.saveMessageError(request, transaccio.getEstatMissatge());
     }
 
     return mav;

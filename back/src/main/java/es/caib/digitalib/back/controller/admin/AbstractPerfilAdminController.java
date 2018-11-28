@@ -225,6 +225,15 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 
 		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
 	}
+	
+	
+  @Override
+  public List<StringKeyValue> getReferenceListForPluginScanWeb2ID(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
+    Where w = Where.AND(where, PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_SCANWEB));
+
+    return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
+  }
 
 	@Override
 	public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(

@@ -175,6 +175,28 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
   }
 
 
+  private java.lang.Long pluginScanWeb2IDDesde;
+
+  public java.lang.Long getPluginScanWeb2IDDesde() {
+    return this.pluginScanWeb2IDDesde;
+  }
+
+  public void setPluginScanWeb2IDDesde(java.lang.Long pluginScanWeb2IDDesde) {
+    this.pluginScanWeb2IDDesde = pluginScanWeb2IDDesde;
+  }
+
+
+  private java.lang.Long pluginScanWeb2IDFins;
+
+  public java.lang.Long getPluginScanWeb2IDFins() {
+    return this.pluginScanWeb2IDFins;
+  }
+
+  public void setPluginScanWeb2IDFins(java.lang.Long pluginScanWeb2IDFins) {
+    this.pluginScanWeb2IDFins = pluginScanWeb2IDFins;
+  }
+
+
   private java.lang.Integer tipusFirmaDesde;
 
   public java.lang.Integer getTipusFirmaDesde() {
@@ -197,28 +219,6 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
   }
 
 
-  private java.lang.Long pluginFirmaServidorIDDesde;
-
-  public java.lang.Long getPluginFirmaServidorIDDesde() {
-    return this.pluginFirmaServidorIDDesde;
-  }
-
-  public void setPluginFirmaServidorIDDesde(java.lang.Long pluginFirmaServidorIDDesde) {
-    this.pluginFirmaServidorIDDesde = pluginFirmaServidorIDDesde;
-  }
-
-
-  private java.lang.Long pluginFirmaServidorIDFins;
-
-  public java.lang.Long getPluginFirmaServidorIDFins() {
-    return this.pluginFirmaServidorIDFins;
-  }
-
-  public void setPluginFirmaServidorIDFins(java.lang.Long pluginFirmaServidorIDFins) {
-    this.pluginFirmaServidorIDFins = pluginFirmaServidorIDFins;
-  }
-
-
   private java.lang.Long apiSimpleIDDesde;
 
   public java.lang.Long getApiSimpleIDDesde() {
@@ -238,6 +238,28 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
   public void setApiSimpleIDFins(java.lang.Long apiSimpleIDFins) {
     this.apiSimpleIDFins = apiSimpleIDFins;
+  }
+
+
+  private java.lang.Long pluginFirmaServidorIDDesde;
+
+  public java.lang.Long getPluginFirmaServidorIDDesde() {
+    return this.pluginFirmaServidorIDDesde;
+  }
+
+  public void setPluginFirmaServidorIDDesde(java.lang.Long pluginFirmaServidorIDDesde) {
+    this.pluginFirmaServidorIDDesde = pluginFirmaServidorIDDesde;
+  }
+
+
+  private java.lang.Long pluginFirmaServidorIDFins;
+
+  public java.lang.Long getPluginFirmaServidorIDFins() {
+    return this.pluginFirmaServidorIDFins;
+  }
+
+  public void setPluginFirmaServidorIDFins(java.lang.Long pluginFirmaServidorIDFins) {
+    this.pluginFirmaServidorIDFins = pluginFirmaServidorIDFins;
   }
 
 
@@ -348,12 +370,14 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.scanPixelTypeFins = __toClone.scanPixelTypeFins;
     this.pluginScanWebIDDesde = __toClone.pluginScanWebIDDesde;
     this.pluginScanWebIDFins = __toClone.pluginScanWebIDFins;
+    this.pluginScanWeb2IDDesde = __toClone.pluginScanWeb2IDDesde;
+    this.pluginScanWeb2IDFins = __toClone.pluginScanWeb2IDFins;
     this.tipusFirmaDesde = __toClone.tipusFirmaDesde;
     this.tipusFirmaFins = __toClone.tipusFirmaFins;
-    this.pluginFirmaServidorIDDesde = __toClone.pluginFirmaServidorIDDesde;
-    this.pluginFirmaServidorIDFins = __toClone.pluginFirmaServidorIDFins;
     this.apiSimpleIDDesde = __toClone.apiSimpleIDDesde;
     this.apiSimpleIDFins = __toClone.apiSimpleIDFins;
+    this.pluginFirmaServidorIDDesde = __toClone.pluginFirmaServidorIDDesde;
+    this.pluginFirmaServidorIDFins = __toClone.pluginFirmaServidorIDFins;
     this.tipusCustodiaDesde = __toClone.tipusCustodiaDesde;
     this.tipusCustodiaFins = __toClone.tipusCustodiaFins;
     this.pluginArxiuIDDesde = __toClone.pluginArxiuIDDesde;
@@ -366,9 +390,10 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.mapOfValuesForScanMinimaResolucio = __toClone.mapOfValuesForScanMinimaResolucio;
     this.mapOfValuesForScanPixelType = __toClone.mapOfValuesForScanPixelType;
     this.mapOfPluginForPluginScanWebID = __toClone.mapOfPluginForPluginScanWebID;
+    this.mapOfPluginForPluginScanWeb2ID = __toClone.mapOfPluginForPluginScanWeb2ID;
     this.mapOfValuesForTipusFirma = __toClone.mapOfValuesForTipusFirma;
-    this.mapOfPluginForPluginFirmaServidorID = __toClone.mapOfPluginForPluginFirmaServidorID;
     this.mapOfApiSimpleForApiSimpleID = __toClone.mapOfApiSimpleForApiSimpleID;
+    this.mapOfPluginForPluginFirmaServidorID = __toClone.mapOfPluginForPluginFirmaServidorID;
     this.mapOfValuesForTipusCustodia = __toClone.mapOfValuesForTipusCustodia;
     this.mapOfPluginForPluginArxiuID = __toClone.mapOfPluginForPluginArxiuID;
     this.mapOfPluginForPluginDocCustodyID = __toClone.mapOfPluginForPluginDocCustodyID;
@@ -455,6 +480,18 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
 
 
+  private Map<String, String> mapOfPluginForPluginScanWeb2ID;
+
+  public Map<String, String> getMapOfPluginForPluginScanWeb2ID() {
+    return this.mapOfPluginForPluginScanWeb2ID;
+  }
+
+  public void setMapOfPluginForPluginScanWeb2ID(Map<String, String> mapOfPluginForPluginScanWeb2ID) {
+    this.mapOfPluginForPluginScanWeb2ID = mapOfPluginForPluginScanWeb2ID;
+  }
+
+
+
   private Map<String, String> mapOfValuesForTipusFirma;
 
   public Map<String, String> getMapOfValuesForTipusFirma() {
@@ -467,18 +504,6 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
 
 
-  private Map<String, String> mapOfPluginForPluginFirmaServidorID;
-
-  public Map<String, String> getMapOfPluginForPluginFirmaServidorID() {
-    return this.mapOfPluginForPluginFirmaServidorID;
-  }
-
-  public void setMapOfPluginForPluginFirmaServidorID(Map<String, String> mapOfPluginForPluginFirmaServidorID) {
-    this.mapOfPluginForPluginFirmaServidorID = mapOfPluginForPluginFirmaServidorID;
-  }
-
-
-
   private Map<String, String> mapOfApiSimpleForApiSimpleID;
 
   public Map<String, String> getMapOfApiSimpleForApiSimpleID() {
@@ -487,6 +512,18 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
   public void setMapOfApiSimpleForApiSimpleID(Map<String, String> mapOfApiSimpleForApiSimpleID) {
     this.mapOfApiSimpleForApiSimpleID = mapOfApiSimpleForApiSimpleID;
+  }
+
+
+
+  private Map<String, String> mapOfPluginForPluginFirmaServidorID;
+
+  public Map<String, String> getMapOfPluginForPluginFirmaServidorID() {
+    return this.mapOfPluginForPluginFirmaServidorID;
+  }
+
+  public void setMapOfPluginForPluginFirmaServidorID(Map<String, String> mapOfPluginForPluginFirmaServidorID) {
+    this.mapOfPluginForPluginFirmaServidorID = mapOfPluginForPluginFirmaServidorID;
   }
 
 

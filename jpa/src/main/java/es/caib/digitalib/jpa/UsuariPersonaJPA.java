@@ -51,7 +51,7 @@ private static final long serialVersionUID = -80349968L;
 	java.lang.String idiomaID;
 
 	@Index(name="dib_usrperson_confgrupid_fk_i")
-	@Column(name="configuraciogrupid",nullable = false,length = 19)
+	@Column(name="configuraciogrupid",length = 19)
 	long configuracioGrupID;
 
 
@@ -182,7 +182,7 @@ private static final long serialVersionUID = -80349968L;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ForeignKey(name="dib_usrperson_cfggrup_conf_fk")
-	@JoinColumn(name = "configuraciogrupid", referencedColumnName ="configuracioGrupID", nullable = false, insertable=false, updatable=false)
+	@JoinColumn(name = "configuraciogrupid", referencedColumnName ="configuracioGrupID", nullable = true, insertable=false, updatable=false)
 	private ConfiguracioGrupJPA configuracioGrup;
 
 	public ConfiguracioGrupJPA getConfiguracioGrup() {

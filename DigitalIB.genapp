@@ -750,7 +750,7 @@
           <void property="foreignKeys"> 
            <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
             <void index="0"> 
-             <object id="ForeignKey0" class="org.fundaciobit.genapp.ForeignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilid</string> 
               </void> 
@@ -798,7 +798,20 @@
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="foreignKey"> 
-             <object idref="ForeignKey0"/> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_scan_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
             </void> 
             <void property="webtype"> 
              <int>3</int> 
@@ -815,7 +828,7 @@
           <void property="foreignKeys"> 
            <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
             <void index="0"> 
-             <object id="ForeignKey1" class="org.fundaciobit.genapp.ForeignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilid</string> 
               </void> 
@@ -863,7 +876,20 @@
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="foreignKey"> 
-             <object idref="ForeignKey1"/> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_coau_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
             </void> 
             <void property="webtype"> 
              <int>3</int> 
@@ -880,7 +906,7 @@
           <void property="foreignKeys"> 
            <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
             <void index="0"> 
-             <object id="ForeignKey2" class="org.fundaciobit.genapp.ForeignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilid</string> 
               </void> 
@@ -928,7 +954,20 @@
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="foreignKey"> 
-             <object idref="ForeignKey2"/> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_cust_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
             </void> 
             <void property="webtype"> 
              <int>3</int> 
@@ -2001,11 +2040,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>custodyfileid</string> 
+            <string>ID de Custòdia</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>custodyfileid</string> 
+            <string>ID de Custódia</string> 
            </void> 
           </void> 
           <void property="showInReferenceList"> 
@@ -2043,11 +2082,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>custodyfileurl</string> 
+            <string>URL al fitxer custodiat</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>custodyfileurl</string> 
+            <string>URL al fichero custodiado</string> 
            </void> 
           </void> 
           <void property="showInReferenceList"> 
@@ -2065,7 +2104,7 @@
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="webtype"> 
-             <int>1</int> 
+             <int>13</int> 
             </void> 
            </object> 
           </void> 
@@ -2085,11 +2124,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>csv</string> 
+            <string>Codi Segur Verificació (CSV)</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>csv</string> 
+            <string>Código Seguro Verificación (CSV)</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2124,11 +2163,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>csvvalidationweb</string> 
+            <string>Web de Validació del CSV</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>csvvalidationweb</string> 
+            <string>Web de Validación del CSV</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2143,7 +2182,7 @@
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="webtype"> 
-             <int>1</int> 
+             <int>13</int> 
             </void> 
            </object> 
           </void> 
@@ -2163,11 +2202,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>csvgenerationdefinition</string> 
+            <string>Definició de Generació del CSV</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>csvgenerationdefinition</string> 
+            <string>Definició de Generació del CSV</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2271,11 +2310,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>infosignaturaid</string> 
+            <string>ID</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>infosignaturaid</string> 
+            <string>ID</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -2309,7 +2348,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>signoperation</string> 
+           <string>signOperation</string> 
           </void> 
           <void property="javaType"> 
            <class>int</class> 
@@ -2317,11 +2356,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>signoperation</string> 
+            <string>Operació de Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>signoperation</string> 
+            <string>Operación de Firma</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -2357,7 +2396,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>signtype</string> 
+           <string>signType</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2365,11 +2404,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>signtype</string> 
+            <string>Tipus de Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>signtype</string> 
+            <string>Tipo de Firma</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -2402,7 +2441,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>signalgorithm</string> 
+           <string>signAlgorithm</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2410,11 +2449,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>signalgorithm</string> 
+            <string>Algorisme de firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>signalgorithm</string> 
+            <string>Algoritmo de firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2441,7 +2480,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>signmode</string> 
+           <string>signMode</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Integer</class> 
@@ -2449,11 +2488,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>signmode</string> 
+            <string>Mode de Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>signmode</string> 
+            <string>Modo de Firma</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -2483,7 +2522,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>signaturestablelocation</string> 
+           <string>signaturesTableLocation</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Integer</class> 
@@ -2491,11 +2530,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>signaturestablelocation</string> 
+            <string>Posició de Taula de Firmes</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>signaturestablelocation</string> 
+            <string>Posición de Tabla de Firmas</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -2525,7 +2564,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>timestampincluded</string> 
+           <string>timestampIncluded</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -2533,11 +2572,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>timestampincluded</string> 
+            <string>Inclou Segell de Temps</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>timestampincluded</string> 
+            <string>Incluye Sello de Tiempo</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2564,7 +2603,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>policyincluded</string> 
+           <string>policyIncluded</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -2572,11 +2611,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>policyincluded</string> 
+            <string>Inclou Política de Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>policyincluded</string> 
+            <string>Incluye Política de Firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2603,7 +2642,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>enitipofirma</string> 
+           <string>eniTipoFirma</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2611,11 +2650,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>enitipofirma</string> 
+            <string>Eni Tipus Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>enitipofirma</string> 
+            <string>ENI Tipo Firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2642,7 +2681,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>eniperfilfirma</string> 
+           <string>eniPerfilFirma</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2650,11 +2689,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>eniperfilfirma</string> 
+            <string>ENI Perfil Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>eniperfilfirma</string> 
+            <string>ENI Perfil Firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2681,7 +2720,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>enirolfirma</string> 
+           <string>eniRolFirma</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2689,11 +2728,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>enirolfirma</string> 
+            <string>ENI Rol Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>enirolfirma</string> 
+            <string>ENI Rol Firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2720,7 +2759,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>enisignername</string> 
+           <string>eniSignerName</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2728,11 +2767,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>enisignername</string> 
+            <string>ENI Signer Name</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>enisignername</string> 
+            <string>ENI Signer Name</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2759,7 +2798,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>enisigneradministrationid</string> 
+           <string>eniSignerAdministrationId</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2767,11 +2806,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>enisigneradministrationid</string> 
+            <string>ENI Signer Administration ID</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>enisigneradministrationid</string> 
+            <string>ENI Signer Administration ID</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2798,7 +2837,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>enisignlevel</string> 
+           <string>eniSignLevel</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2806,11 +2845,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>enisignlevel</string> 
+            <string>ENI Sign Level</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>enisignlevel</string> 
+            <string>ENI Sign Level</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2837,7 +2876,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>checkadministrationidofsigner</string> 
+           <string>checkAdministrationIdOfSigner</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -2845,11 +2884,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>checkadministrationidofsigner</string> 
+            <string>S´ha validat NIF del Firmant</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>checkadministrationidofsigner</string> 
+            <string>Se ha validado NIF del Firmante</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2876,7 +2915,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>checkdocumentmodifications</string> 
+           <string>checkDocumentModifications</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -2884,11 +2923,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>checkdocumentmodifications</string> 
+            <string>S´han validat modificacions en el document original</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>checkdocumentmodifications</string> 
+            <string>Se ha validado modificaciones en el documento original</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2915,7 +2954,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>checkvalidationsignature</string> 
+           <string>checkValidationSignature</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -2923,11 +2962,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>checkvalidationsignature</string> 
+            <string>S&apos;ha validat la firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>checkvalidationsignature</string> 
+            <string>Se ha validado la firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2987,7 +3026,7 @@
     <void index="7"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
-       <array class="org.fundaciobit.genapp.FieldInfo" length="16"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="17"> 
         <void index="0"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="PK"> 
@@ -3270,11 +3309,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>urlbase</string> 
+            <string>Url Base</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>urlbase</string> 
+            <string>Url Base</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -3318,11 +3357,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>scanformatfitxer</string> 
+            <string>Format Fitxer Escaneig</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>scanformatfitxer</string> 
+            <string>Formato Fichero Escaneo</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -3366,11 +3405,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>scanminimaresolucio</string> 
+            <string>Mínima Resolució Escaneig</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>scanminimaresolucio</string> 
+            <string>Mínima Resolución Escaneo</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -3411,11 +3450,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>scanpixeltype</string> 
+            <string>Tipus Color</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>scanpixeltype</string> 
+            <string>Tipo Color</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -3479,11 +3518,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Plugin ScanWeb</string> 
+            <string>Plugin d&apos;Escaneig</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Plugin ScanWeb</string> 
+            <string>Plugin de Escaneo</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -3524,6 +3563,84 @@
          </object> 
         </void> 
         <void index="9"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>pluginid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_plugin_scan2_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_plugin</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_perfil_plugscanweb2_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>pluginScanWeb2ID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Plugin d´Escaneig 2</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Plugin de Escaneo 2</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>pluginscanweb2id</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>pluginid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_plugin_scan2_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_plugin</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="10"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="defaultValue"> 
            <string>0</string> 
@@ -3569,84 +3686,6 @@
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="webtype"> 
              <int>16</int> 
-            </void> 
-           </object> 
-          </void> 
-         </object> 
-        </void> 
-        <void index="10"> 
-         <object class="org.fundaciobit.genapp.FieldInfo"> 
-          <void property="digits"> 
-           <int>0</int> 
-          </void> 
-          <void property="foreignKeys"> 
-           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
-            <void index="0"> 
-             <object class="org.fundaciobit.genapp.ForeignKey"> 
-              <void property="field"> 
-               <string>pluginid</string> 
-              </void> 
-              <void property="name"> 
-               <string>dib_perfil_plugin_firma_fk</string> 
-              </void> 
-              <void property="table"> 
-               <string>dib_plugin</string> 
-              </void> 
-              <void property="type"> 
-               <int>1</int> 
-              </void> 
-             </object> 
-            </void> 
-           </array> 
-          </void> 
-          <void property="index"> 
-           <string>dib_perfil_plugin_psid_fk_i</string> 
-          </void> 
-          <void property="javaName"> 
-           <string>pluginFirmaServidorID</string> 
-          </void> 
-          <void property="javaType"> 
-           <class>java.lang.Long</class> 
-          </void> 
-          <void property="labels"> 
-           <void method="put"> 
-            <string>ca</string> 
-            <string>Plugin Firma en Servidor</string> 
-           </void> 
-           <void method="put"> 
-            <string>es</string> 
-            <string>Plugin Firma en Servidor</string> 
-           </void> 
-          </void> 
-          <void property="size"> 
-           <int>19</int> 
-          </void> 
-          <void property="sqlName"> 
-           <string>pluginfirmaservidorid</string> 
-          </void> 
-          <void property="sqlType"> 
-           <int>-5</int> 
-          </void> 
-          <void property="webFieldInfo"> 
-           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
-            <void property="foreignKey"> 
-             <object class="org.fundaciobit.genapp.ForeignKey"> 
-              <void property="field"> 
-               <string>pluginid</string> 
-              </void> 
-              <void property="name"> 
-               <string>dib_perfil_plugin_firma_fk</string> 
-              </void> 
-              <void property="table"> 
-               <string>dib_plugin</string> 
-              </void> 
-              <void property="type"> 
-               <int>1</int> 
-              </void> 
-             </object> 
-            </void> 
-            <void property="webtype"> 
-             <int>3</int> 
             </void> 
            </object> 
           </void> 
@@ -3732,6 +3771,84 @@
         </void> 
         <void index="12"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>pluginid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_plugin_firma_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_plugin</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_perfil_plugin_psid_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>pluginFirmaServidorID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Plugin Firma en Servidor</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Plugin Firma en Servidor</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>pluginfirmaservidorid</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>pluginid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_plugin_firma_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_plugin</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="13"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="defaultValue"> 
            <string>0</string> 
           </void> 
@@ -3781,7 +3898,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="13"> 
+        <void index="14"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -3862,7 +3979,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="14"> 
+        <void index="15"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -3943,7 +4060,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="15"> 
+        <void index="16"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="defaultValue"> 
            <string>0</string> 
@@ -4328,7 +4445,7 @@
            <int>0</int> 
           </void> 
           <void property="foreignKeys"> 
-           <array class="org.fundaciobit.genapp.ForeignKey" length="5"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="6"> 
             <void index="0"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
@@ -4382,6 +4499,19 @@
              </object> 
             </void> 
             <void index="4"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>pluginscanweb2id</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_plugin_scan2_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="5"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>pluginid</string> 
@@ -4920,7 +5050,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>metodeplugin</string> 
+           <string>metodePlugin</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -4962,7 +5092,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>tipusresultat</string> 
+           <string>tipusResultat</string> 
           </void> 
           <void property="javaType"> 
            <class>int</class> 
@@ -4970,12 +5100,15 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>tipusresultat</string> 
+            <string>Resultat Execució</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>tipusresultat</string> 
+            <string>Resultado Ejecución</string> 
            </void> 
+          </void> 
+          <void property="minAllowedValue"> 
+           <string>0,1</string> 
           </void> 
           <void property="notNullable"> 
            <boolean>true</boolean> 
@@ -4992,7 +5125,7 @@
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="webtype"> 
-             <int>14</int> 
+             <int>16</int> 
             </void> 
            </object> 
           </void> 
@@ -5004,7 +5137,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>tempsexecucio</string> 
+           <string>tempsExecucio</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -5012,11 +5145,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>tempsexecucio</string> 
+            <string>Temps d´Execució</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>tempsexecucio</string> 
+            <string>Tiempo de Ejecución</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5074,11 +5207,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>pluginid</string> 
+            <string>Plugin</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>pluginid</string> 
+            <string>Plugin</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -5124,7 +5257,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>usuaripersonaid</string> 
+           <string>usuariPersonaId</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -5132,11 +5265,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>usuaripersonaid</string> 
+            <string>Usuari Persona</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>usuaripersonaid</string> 
+            <string>Usuario Persona</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5163,7 +5296,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>usuariaplicacioid</string> 
+           <string>usuariAplicacioId</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -5171,11 +5304,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>usuariaplicacioid</string> 
+            <string>Usuari Aplicació</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>usuariaplicacioid</string> 
+            <string>Usuario Aplicación</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5202,7 +5335,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>parametrestext</string> 
+           <string>parametresText</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -5210,11 +5343,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>parametrestext</string> 
+            <string>Parametres Text</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>parametrestext</string> 
+            <string>Parametros Texto</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5272,11 +5405,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>parametresfitxerid</string> 
+            <string>Parametres Fitxer</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>parametresfitxerid</string> 
+            <string>Parametros Fichero</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5319,7 +5452,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>retorntext</string> 
+           <string>retornText</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -5327,11 +5460,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>retorntext</string> 
+            <string>Retorn Text</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>retorntext</string> 
+            <string>Retorno Texto</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5389,11 +5522,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>retornfitxerid</string> 
+            <string>Retorn Fitxer</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>retornfitxerid</string> 
+            <string>Retorn Fitxer</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5559,21 +5692,21 @@
       <void property="labels"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>dib_traduccio_XX_ca</string> 
+        <string>Traducció</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>dib_traduccio_XX_es</string> 
+        <string>Traducción</string> 
        </void> 
       </void> 
       <void property="labelsPlural"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>dib_traduccio_XX_ca</string> 
+        <string>Traduccións</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>dib_traduccio_XX_ca</string> 
+        <string>Traducciones</string> 
        </void> 
       </void> 
       <void property="name"> 
@@ -5781,21 +5914,21 @@
       <void property="labels"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>dib_traducciomap_XX_ca</string> 
+        <string>Traducció map</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>dib_traducciomap_XX_es</string> 
+        <string>Traducció map</string> 
        </void> 
       </void> 
       <void property="labelsPlural"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>dib_traducciomap_XX_ca</string> 
+        <string>Traducció map</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>dib_traducciomap_XX_ca</string> 
+        <string>Traducció map</string> 
        </void> 
       </void> 
       <void property="name"> 
@@ -5974,7 +6107,7 @@
            <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
-           <string>datafi</string> 
+           <string>dataFi</string> 
           </void> 
           <void property="javaType"> 
            <class>java.sql.Timestamp</class> 
@@ -5982,11 +6115,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>datafi</string> 
+            <string>Data Fi</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>datafi</string> 
+            <string>Fecha Fin</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6016,7 +6149,7 @@
            <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
-           <string>usuariaplicacioid</string> 
+           <string>usuariAplicacioId</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -6024,11 +6157,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>usuariaplicacioid</string> 
+            <string>Usuari Aplicació</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>usuariaplicacioid</string> 
+            <string>Usuario Aplicación</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6058,7 +6191,7 @@
            <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
-           <string>usuaripersonaid</string> 
+           <string>usuariPersonaId</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -6066,11 +6199,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>usuaripersonaid</string> 
+            <string>Usuari Persona</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>usuaripersonaid</string> 
+            <string>Usuario Persona</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6148,7 +6281,7 @@
            <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
-           <string>estatmissatge</string> 
+           <string>estatMissatge</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -6156,11 +6289,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>estatmissatge</string> 
+            <string>Missatge Error</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>estatmissatge</string> 
+            <string>Mensaje Error</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6187,7 +6320,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>estatexcepcio</string> 
+           <string>estatExcepcio</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -6195,11 +6328,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>estatexcepcio</string> 
+            <string>Excepció</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>estatexcepcio</string> 
+            <string>Excepción</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6257,11 +6390,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>fitxerescanejatid</string> 
+            <string>Fitxer Escanejat</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>fitxerescanejatid</string> 
+            <string>Fichero Escaneado</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6335,11 +6468,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>fitxersignaturaid</string> 
+            <string>Fitxer Signat</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>fitxersignaturaid</string> 
+            <string>Fichero Firmado</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6382,7 +6515,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>infoscanpixeltype</string> 
+           <string>infoScanPixelType</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Integer</class> 
@@ -6390,11 +6523,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>infoscanpixeltype</string> 
+            <string>Tipus Color</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>infoscanpixeltype</string> 
+            <string>Tpus Color</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6421,7 +6554,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>infoscanresolucioppp</string> 
+           <string>infoScanResolucioPpp</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Integer</class> 
@@ -6429,11 +6562,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>infoscanresolucioppp</string> 
+            <string>Resolució (ppp)</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>infoscanresolucioppp</string> 
+            <string>Resolucion (ppp)</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6460,7 +6593,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>infoscanocr</string> 
+           <string>infoScanOcr</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -6468,11 +6601,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>infoscanocr</string> 
+            <string>OCR</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>infoscanocr</string> 
+            <string>OCR</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6522,7 +6655,7 @@
            <string>dib_transaccio_infosignid_fk_i</string> 
           </void> 
           <void property="javaName"> 
-           <string>infosignaturaid</string> 
+           <string>infoSignaturaID</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -6530,11 +6663,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>infosignaturaid</string> 
+            <string>Info Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>infosignaturaid</string> 
+            <string>Info Firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6600,7 +6733,7 @@
            <string>dib_transaccio_infocustid_fk_i</string> 
           </void> 
           <void property="javaName"> 
-           <string>infocustodyid</string> 
+           <string>infoCustodyID</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -6608,11 +6741,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>infocustodyid</string> 
+            <string>Info Custodia</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>infocustodyid</string> 
+            <string>Info Custodia</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6655,7 +6788,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>languageui</string> 
+           <string>languageUI</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -6663,11 +6796,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>languageui</string> 
+            <string>Idioma IU</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>languageui</string> 
+            <string>Idioma IU</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6694,7 +6827,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>languagedoc</string> 
+           <string>languageDoc</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -6702,11 +6835,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>languagedoc</string> 
+            <string>Idioma Document</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>languagedoc</string> 
+            <string>Idioma Documento</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6733,7 +6866,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>ciutadanif</string> 
+           <string>ciutadaNif</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -6741,11 +6874,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>ciutadanif</string> 
+            <string>Ciutada Nif</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>ciutadanif</string> 
+            <string>Ciudadano Nif</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6772,7 +6905,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>ciutadanom</string> 
+           <string>ciutadaNom</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -6780,11 +6913,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>ciutadanom</string> 
+            <string>Ciutadà Nom</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>ciutadanom</string> 
+            <string>Ciudadano Nombre</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6810,8 +6943,11 @@
           <void property="digits"> 
            <int>0</int> 
           </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
+          </void> 
           <void property="javaName"> 
-           <string>funcionariusername</string> 
+           <string>funcionariUsername</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -6819,11 +6955,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>funcionariusername</string> 
+            <string>Funcionari Username</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>funcionariusername</string> 
+            <string>Funcionari Username</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6850,7 +6986,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>funcionarinom</string> 
+           <string>funcionariNom</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -6858,11 +6994,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>funcionarinom</string> 
+            <string>Funcionari Nom</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>funcionarinom</string> 
+            <string>Funcionario Nombre</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6897,11 +7033,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>expedient</string> 
+            <string>Expedient</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>expedient</string> 
+            <string>Expediente</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -6923,87 +7059,6 @@
          </object> 
         </void> 
         <void index="23"> 
-         <object class="org.fundaciobit.genapp.FieldInfo"> 
-          <void property="digits"> 
-           <int>0</int> 
-          </void> 
-          <void property="foreignKeys"> 
-           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
-            <void index="0"> 
-             <object class="org.fundaciobit.genapp.ForeignKey"> 
-              <void property="field"> 
-               <string>perfilid</string> 
-              </void> 
-              <void property="name"> 
-               <string>dib_transaccio_perfil_perfi_fk</string> 
-              </void> 
-              <void property="table"> 
-               <string>dib_perfil</string> 
-              </void> 
-              <void property="type"> 
-               <int>1</int> 
-              </void> 
-             </object> 
-            </void> 
-           </array> 
-          </void> 
-          <void property="index"> 
-           <string>dib_transaccio_perfilid_fk_i</string> 
-          </void> 
-          <void property="javaName"> 
-           <string>perfilid</string> 
-          </void> 
-          <void property="javaType"> 
-           <class>long</class> 
-          </void> 
-          <void property="labels"> 
-           <void method="put"> 
-            <string>ca</string> 
-            <string>perfilid</string> 
-           </void> 
-           <void method="put"> 
-            <string>es</string> 
-            <string>perfilid</string> 
-           </void> 
-          </void> 
-          <void property="notNullable"> 
-           <boolean>true</boolean> 
-          </void> 
-          <void property="size"> 
-           <int>19</int> 
-          </void> 
-          <void property="sqlName"> 
-           <string>perfilid</string> 
-          </void> 
-          <void property="sqlType"> 
-           <int>-5</int> 
-          </void> 
-          <void property="webFieldInfo"> 
-           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
-            <void property="foreignKey"> 
-             <object class="org.fundaciobit.genapp.ForeignKey"> 
-              <void property="field"> 
-               <string>perfilid</string> 
-              </void> 
-              <void property="name"> 
-               <string>dib_transacccio_perfil_fk</string> 
-              </void> 
-              <void property="table"> 
-               <string>dib_perfil</string> 
-              </void> 
-              <void property="type"> 
-               <int>1</int> 
-              </void> 
-             </object> 
-            </void> 
-            <void property="webtype"> 
-             <int>3</int> 
-            </void> 
-           </object> 
-          </void> 
-         </object> 
-        </void> 
-        <void index="24"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="descripcio"> 
            <string>Nom d&apos;usuari de la persona que està loguejada en una altre aplicació web quan es fa una cridada via REST</string> 
@@ -7048,7 +7103,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="25"> 
+        <void index="24"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7065,11 +7120,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>returnurl</string> 
+            <string>URL de retorn</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>returnurl</string> 
+            <string>URL de retorno</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -7090,7 +7145,7 @@
           </void> 
          </object> 
         </void> 
-        <void index="26"> 
+        <void index="25"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7104,11 +7159,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>view</string> 
+            <string>Vista</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>view</string> 
+            <string>Vista</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -7127,6 +7182,87 @@
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="webtype"> 
              <int>16</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="26"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_transaccio_perfil_perfi_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_transaccio_perfilid_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>perfilID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Perfil</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Perfil</string> 
+           </void> 
+          </void> 
+          <void property="notNullable"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>perfilid</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_transacccio_perfil_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
             </void> 
            </object> 
           </void> 
@@ -7912,9 +8048,6 @@
             <string>es</string> 
             <string>Configuración Grupo</string> 
            </void> 
-          </void> 
-          <void property="notNullable"> 
-           <boolean>true</boolean> 
           </void> 
           <void property="size"> 
            <int>19</int> 

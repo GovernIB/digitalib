@@ -66,8 +66,8 @@ public class PerfilJPAManager
 		return list.toArray(new Perfil[list.size()]);
 	};
 
-	public synchronized Perfil create( java.lang.String _codi_, java.lang.String _nom_, java.lang.String _descripcio_, java.lang.String _urlBase_, int _scanFormatFitxer_, java.lang.Integer _scanMinimaResolucio_, int _scanPixelType_, long _pluginScanWebID_, int _tipusFirma_, java.lang.Long _pluginFirmaServidorID_, java.lang.Long _apiSimpleID_, int _tipusCustodia_, java.lang.Long _pluginArxiuID_, java.lang.Long _pluginDocCustodyID_, int _usPerfil_) throws I18NException {
-		PerfilJPA __bean =  new PerfilJPA(_codi_,_nom_,_descripcio_,_urlBase_,_scanFormatFitxer_,_scanMinimaResolucio_,_scanPixelType_,_pluginScanWebID_,_tipusFirma_,_pluginFirmaServidorID_,_apiSimpleID_,_tipusCustodia_,_pluginArxiuID_,_pluginDocCustodyID_,_usPerfil_);
+	public synchronized Perfil create( java.lang.String _codi_, java.lang.String _nom_, java.lang.String _descripcio_, java.lang.String _urlBase_, int _scanFormatFitxer_, java.lang.Integer _scanMinimaResolucio_, int _scanPixelType_, long _pluginScanWebID_, java.lang.Long _pluginScanWeb2ID_, int _tipusFirma_, java.lang.Long _apiSimpleID_, java.lang.Long _pluginFirmaServidorID_, int _tipusCustodia_, java.lang.Long _pluginArxiuID_, java.lang.Long _pluginDocCustodyID_, int _usPerfil_) throws I18NException {
+		PerfilJPA __bean =  new PerfilJPA(_codi_,_nom_,_descripcio_,_urlBase_,_scanFormatFitxer_,_scanMinimaResolucio_,_scanPixelType_,_pluginScanWebID_,_pluginScanWeb2ID_,_tipusFirma_,_apiSimpleID_,_pluginFirmaServidorID_,_tipusCustodia_,_pluginArxiuID_,_pluginDocCustodyID_,_usPerfil_);
 		return create(__bean);
 	}
 
