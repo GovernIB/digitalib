@@ -54,25 +54,25 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
-  private java.sql.Timestamp dataIniciDesde;
+  private java.sql.Timestamp datainiciDesde;
 
-  public java.sql.Timestamp getDataIniciDesde() {
-    return this.dataIniciDesde;
+  public java.sql.Timestamp getDatainiciDesde() {
+    return this.datainiciDesde;
   }
 
-  public void setDataIniciDesde(java.sql.Timestamp dataIniciDesde) {
-    this.dataIniciDesde = dataIniciDesde;
+  public void setDatainiciDesde(java.sql.Timestamp datainiciDesde) {
+    this.datainiciDesde = datainiciDesde;
   }
 
 
-  private java.sql.Timestamp dataIniciFins;
+  private java.sql.Timestamp datainiciFins;
 
-  public java.sql.Timestamp getDataIniciFins() {
-    return this.dataIniciFins;
+  public java.sql.Timestamp getDatainiciFins() {
+    return this.datainiciFins;
   }
 
-  public void setDataIniciFins(java.sql.Timestamp dataIniciFins) {
-    this.dataIniciFins = dataIniciFins;
+  public void setDatainiciFins(java.sql.Timestamp datainiciFins) {
+    this.datainiciFins = datainiciFins;
   }
 
 
@@ -425,8 +425,8 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.transaccioIDDesde = __toClone.transaccioIDDesde;
     this.transaccioIDFins = __toClone.transaccioIDFins;
     this.transactionWebId = __toClone.transactionWebId;
-    this.dataIniciDesde = __toClone.dataIniciDesde;
-    this.dataIniciFins = __toClone.dataIniciFins;
+    this.datainiciDesde = __toClone.datainiciDesde;
+    this.datainiciFins = __toClone.datainiciFins;
     this.datafiDesde = __toClone.datafiDesde;
     this.datafiFins = __toClone.datafiFins;
     this.usuariaplicacioidDesde = __toClone.usuariaplicacioidDesde;
@@ -458,7 +458,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.returnUrl = __toClone.returnUrl;
     this.viewDesde = __toClone.viewDesde;
     this.viewFins = __toClone.viewFins;
-    this.mapOfValuesForEstatcodi = __toClone.mapOfValuesForEstatcodi;
     this.mapOfInfoSignaturaForInfosignaturaid = __toClone.mapOfInfoSignaturaForInfosignaturaid;
     this.mapOfInfoCustodyForInfocustodyid = __toClone.mapOfInfoCustodyForInfocustodyid;
     this.mapOfPerfilForPerfilid = __toClone.mapOfPerfilForPerfilid;
@@ -497,18 +496,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfValuesForEstatcodi;
-
-  public Map<String, String> getMapOfValuesForEstatcodi() {
-    return this.mapOfValuesForEstatcodi;
-  }
-
-  public void setMapOfValuesForEstatcodi(Map<String, String> mapOfValuesForEstatcodi) {
-    this.mapOfValuesForEstatcodi = mapOfValuesForEstatcodi;
-  }
-
-
-
   private Map<String, String> mapOfInfoSignaturaForInfosignaturaid;
 
   public Map<String, String> getMapOfInfoSignaturaForInfosignaturaid() {

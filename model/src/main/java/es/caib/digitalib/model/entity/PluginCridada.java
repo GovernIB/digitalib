@@ -8,32 +8,32 @@ public interface PluginCridada extends org.fundaciobit.genapp.common.IGenAppEnti
 	public java.sql.Timestamp getData();
 	public void setData(java.sql.Timestamp _data_);
 
-	public java.lang.String getMetodePlugin();
-	public void setMetodePlugin(java.lang.String _metodePlugin_);
+	public java.lang.String getMetodeplugin();
+	public void setMetodeplugin(java.lang.String _metodeplugin_);
 
-	public int getTipusResultat();
-	public void setTipusResultat(int _tipusResultat_);
+	public int getTipusresultat();
+	public void setTipusresultat(int _tipusresultat_);
 
-	public java.lang.Long getTempsExecucio();
-	public void setTempsExecucio(java.lang.Long _tempsExecucio_);
+	public java.lang.Long getTempsexecucio();
+	public void setTempsexecucio(java.lang.Long _tempsexecucio_);
 
 	public long getPluginID();
 	public void setPluginID(long _pluginID_);
 
-	public java.lang.Long getUsuariPersonaId();
-	public void setUsuariPersonaId(java.lang.Long _usuariPersonaId_);
+	public java.lang.Long getUsuaripersonaid();
+	public void setUsuaripersonaid(java.lang.Long _usuaripersonaid_);
 
-	public java.lang.Long getUsuariAplicacioId();
-	public void setUsuariAplicacioId(java.lang.Long _usuariAplicacioId_);
+	public java.lang.Long getUsuariaplicacioid();
+	public void setUsuariaplicacioid(java.lang.Long _usuariaplicacioid_);
 
-	public java.lang.String getParametresText();
-	public void setParametresText(java.lang.String _parametresText_);
+	public java.lang.String getParametrestext();
+	public void setParametrestext(java.lang.String _parametrestext_);
 
 	public java.lang.Long getParametresFitxerID();
 	public void setParametresFitxerID(java.lang.Long _parametresFitxerID_);
 
-	public java.lang.String getRetornText();
-	public void setRetornText(java.lang.String _retornText_);
+	public java.lang.String getRetorntext();
+	public void setRetorntext(java.lang.String _retorntext_);
 
 	public java.lang.Long getRetornFitxerID();
 	public void setRetornFitxerID(java.lang.Long _retornFitxerID_);

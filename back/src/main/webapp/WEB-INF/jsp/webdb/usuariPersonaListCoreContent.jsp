@@ -64,9 +64,9 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.CONFIGURACIOGRUPID)}">
           <td>
-          <c:set var="tmp">${usuariPersona.configuracioGrupID}</c:set>
+          <c:set var="tmp">${usuariPersona.configuraciogrupid}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfConfiguracioGrupForConfiguracioGrupID[tmp]}
+          ${__theFilterForm.mapOfConfiguracioGrupForConfiguraciogrupid[tmp]}
           </c:if>
           </td>
         </c:if>

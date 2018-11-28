@@ -194,16 +194,6 @@ public class TransaccioController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
-    // Field estatcodi
-    {
-      _listSKV = getReferenceListForEstatcodi(request, mav, filterForm, list, groupByItemsMap, null);
-      _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfValuesForEstatcodi(_tmp);
-      if (filterForm.getGroupByFields().contains(ESTATCODI)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, ESTATCODI, false);
-      };
-    }
-
 
       fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, INFOSCANOCR);
 
@@ -262,7 +252,6 @@ public class TransaccioController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
-    __mapping.put(ESTATCODI, filterForm.getMapOfValuesForEstatcodi());
     __mapping.put(INFOSIGNATURAID, filterForm.getMapOfInfoSignaturaForInfosignaturaid());
     __mapping.put(INFOCUSTODYID, filterForm.getMapOfInfoCustodyForInfocustodyid());
     __mapping.put(PERFILID, filterForm.getMapOfPerfilForPerfilid());
@@ -314,13 +303,6 @@ public class TransaccioController
 
   public void fillReferencesForForm(TransaccioForm transaccioForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
-    // Comprovam si ja esta definida la llista
-    if (transaccioForm.getListOfValuesForEstatcodi() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForEstatcodi(request, mav, transaccioForm, null);
-
-      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      transaccioForm.setListOfValuesForEstatcodi(_listSKV);
-    }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfInfoSignaturaForInfosignaturaid() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForInfosignaturaid(request, mav, transaccioForm, null);
@@ -692,40 +674,6 @@ public java.lang.Long stringToPK(String value) {
 
   public boolean isActiveFormView() {
     return isActiveFormEdit();
-  }
-
-
-  public List<StringKeyValue> getReferenceListForEstatcodi(HttpServletRequest request,
-       ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
-    if (transaccioForm.isHiddenField(ESTATCODI)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    return getReferenceListForEstatcodi(request, mav, where);
-  }
-
-
-  public List<StringKeyValue> getReferenceListForEstatcodi(HttpServletRequest request,
-       ModelAndView mav, TransaccioFilterForm transaccioFilterForm,
-       List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (transaccioFilterForm.isHiddenField(ESTATCODI)
-      && !transaccioFilterForm.isGroupByField(ESTATCODI)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    return getReferenceListForEstatcodi(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForEstatcodi(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("-3" , "-3"));
-    __tmp.add(new StringKeyValue("-2" , "-2"));
-    __tmp.add(new StringKeyValue("-1" , "-1"));
-    __tmp.add(new StringKeyValue("0" , "0"));
-    __tmp.add(new StringKeyValue("1" , "1"));
-    __tmp.add(new StringKeyValue("2" , "2"));
-    return __tmp;
   }
 
 

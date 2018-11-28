@@ -65,58 +65,58 @@ public class PluginCridadaFilterForm extends DigitalIBBaseFilterForm implements 
   }
 
 
-  private java.lang.String metodePlugin;
+  private java.lang.String metodeplugin;
 
-  public java.lang.String getMetodePlugin() {
-    return this.metodePlugin;
+  public java.lang.String getMetodeplugin() {
+    return this.metodeplugin;
   }
 
-  public void setMetodePlugin(java.lang.String metodePlugin) {
-    this.metodePlugin = metodePlugin;
-  }
-
-
-  private java.lang.Integer tipusResultatDesde;
-
-  public java.lang.Integer getTipusResultatDesde() {
-    return this.tipusResultatDesde;
-  }
-
-  public void setTipusResultatDesde(java.lang.Integer tipusResultatDesde) {
-    this.tipusResultatDesde = tipusResultatDesde;
+  public void setMetodeplugin(java.lang.String metodeplugin) {
+    this.metodeplugin = metodeplugin;
   }
 
 
-  private java.lang.Integer tipusResultatFins;
+  private java.lang.Integer tipusresultatDesde;
 
-  public java.lang.Integer getTipusResultatFins() {
-    return this.tipusResultatFins;
+  public java.lang.Integer getTipusresultatDesde() {
+    return this.tipusresultatDesde;
   }
 
-  public void setTipusResultatFins(java.lang.Integer tipusResultatFins) {
-    this.tipusResultatFins = tipusResultatFins;
-  }
-
-
-  private java.lang.Long tempsExecucioDesde;
-
-  public java.lang.Long getTempsExecucioDesde() {
-    return this.tempsExecucioDesde;
-  }
-
-  public void setTempsExecucioDesde(java.lang.Long tempsExecucioDesde) {
-    this.tempsExecucioDesde = tempsExecucioDesde;
+  public void setTipusresultatDesde(java.lang.Integer tipusresultatDesde) {
+    this.tipusresultatDesde = tipusresultatDesde;
   }
 
 
-  private java.lang.Long tempsExecucioFins;
+  private java.lang.Integer tipusresultatFins;
 
-  public java.lang.Long getTempsExecucioFins() {
-    return this.tempsExecucioFins;
+  public java.lang.Integer getTipusresultatFins() {
+    return this.tipusresultatFins;
   }
 
-  public void setTempsExecucioFins(java.lang.Long tempsExecucioFins) {
-    this.tempsExecucioFins = tempsExecucioFins;
+  public void setTipusresultatFins(java.lang.Integer tipusresultatFins) {
+    this.tipusresultatFins = tipusresultatFins;
+  }
+
+
+  private java.lang.Long tempsexecucioDesde;
+
+  public java.lang.Long getTempsexecucioDesde() {
+    return this.tempsexecucioDesde;
+  }
+
+  public void setTempsexecucioDesde(java.lang.Long tempsexecucioDesde) {
+    this.tempsexecucioDesde = tempsexecucioDesde;
+  }
+
+
+  private java.lang.Long tempsexecucioFins;
+
+  public java.lang.Long getTempsexecucioFins() {
+    return this.tempsexecucioFins;
+  }
+
+  public void setTempsexecucioFins(java.lang.Long tempsexecucioFins) {
+    this.tempsexecucioFins = tempsexecucioFins;
   }
 
 
@@ -142,69 +142,69 @@ public class PluginCridadaFilterForm extends DigitalIBBaseFilterForm implements 
   }
 
 
-  private java.lang.Long usuariPersonaIdDesde;
+  private java.lang.Long usuaripersonaidDesde;
 
-  public java.lang.Long getUsuariPersonaIdDesde() {
-    return this.usuariPersonaIdDesde;
+  public java.lang.Long getUsuaripersonaidDesde() {
+    return this.usuaripersonaidDesde;
   }
 
-  public void setUsuariPersonaIdDesde(java.lang.Long usuariPersonaIdDesde) {
-    this.usuariPersonaIdDesde = usuariPersonaIdDesde;
-  }
-
-
-  private java.lang.Long usuariPersonaIdFins;
-
-  public java.lang.Long getUsuariPersonaIdFins() {
-    return this.usuariPersonaIdFins;
-  }
-
-  public void setUsuariPersonaIdFins(java.lang.Long usuariPersonaIdFins) {
-    this.usuariPersonaIdFins = usuariPersonaIdFins;
+  public void setUsuaripersonaidDesde(java.lang.Long usuaripersonaidDesde) {
+    this.usuaripersonaidDesde = usuaripersonaidDesde;
   }
 
 
-  private java.lang.Long usuariAplicacioIdDesde;
+  private java.lang.Long usuaripersonaidFins;
 
-  public java.lang.Long getUsuariAplicacioIdDesde() {
-    return this.usuariAplicacioIdDesde;
+  public java.lang.Long getUsuaripersonaidFins() {
+    return this.usuaripersonaidFins;
   }
 
-  public void setUsuariAplicacioIdDesde(java.lang.Long usuariAplicacioIdDesde) {
-    this.usuariAplicacioIdDesde = usuariAplicacioIdDesde;
-  }
-
-
-  private java.lang.Long usuariAplicacioIdFins;
-
-  public java.lang.Long getUsuariAplicacioIdFins() {
-    return this.usuariAplicacioIdFins;
-  }
-
-  public void setUsuariAplicacioIdFins(java.lang.Long usuariAplicacioIdFins) {
-    this.usuariAplicacioIdFins = usuariAplicacioIdFins;
+  public void setUsuaripersonaidFins(java.lang.Long usuaripersonaidFins) {
+    this.usuaripersonaidFins = usuaripersonaidFins;
   }
 
 
-  private java.lang.String parametresText;
+  private java.lang.Long usuariaplicacioidDesde;
 
-  public java.lang.String getParametresText() {
-    return this.parametresText;
+  public java.lang.Long getUsuariaplicacioidDesde() {
+    return this.usuariaplicacioidDesde;
   }
 
-  public void setParametresText(java.lang.String parametresText) {
-    this.parametresText = parametresText;
+  public void setUsuariaplicacioidDesde(java.lang.Long usuariaplicacioidDesde) {
+    this.usuariaplicacioidDesde = usuariaplicacioidDesde;
   }
 
 
-  private java.lang.String retornText;
+  private java.lang.Long usuariaplicacioidFins;
 
-  public java.lang.String getRetornText() {
-    return this.retornText;
+  public java.lang.Long getUsuariaplicacioidFins() {
+    return this.usuariaplicacioidFins;
   }
 
-  public void setRetornText(java.lang.String retornText) {
-    this.retornText = retornText;
+  public void setUsuariaplicacioidFins(java.lang.Long usuariaplicacioidFins) {
+    this.usuariaplicacioidFins = usuariaplicacioidFins;
+  }
+
+
+  private java.lang.String parametrestext;
+
+  public java.lang.String getParametrestext() {
+    return this.parametrestext;
+  }
+
+  public void setParametrestext(java.lang.String parametrestext) {
+    this.parametrestext = parametrestext;
+  }
+
+
+  private java.lang.String retorntext;
+
+  public java.lang.String getRetorntext() {
+    return this.retorntext;
+  }
+
+  public void setRetorntext(java.lang.String retorntext) {
+    this.retorntext = retorntext;
   }
 
 
@@ -217,19 +217,19 @@ public class PluginCridadaFilterForm extends DigitalIBBaseFilterForm implements 
     this.pluginCridadaIDFins = __toClone.pluginCridadaIDFins;
     this.dataDesde = __toClone.dataDesde;
     this.dataFins = __toClone.dataFins;
-    this.metodePlugin = __toClone.metodePlugin;
-    this.tipusResultatDesde = __toClone.tipusResultatDesde;
-    this.tipusResultatFins = __toClone.tipusResultatFins;
-    this.tempsExecucioDesde = __toClone.tempsExecucioDesde;
-    this.tempsExecucioFins = __toClone.tempsExecucioFins;
+    this.metodeplugin = __toClone.metodeplugin;
+    this.tipusresultatDesde = __toClone.tipusresultatDesde;
+    this.tipusresultatFins = __toClone.tipusresultatFins;
+    this.tempsexecucioDesde = __toClone.tempsexecucioDesde;
+    this.tempsexecucioFins = __toClone.tempsexecucioFins;
     this.pluginIDDesde = __toClone.pluginIDDesde;
     this.pluginIDFins = __toClone.pluginIDFins;
-    this.usuariPersonaIdDesde = __toClone.usuariPersonaIdDesde;
-    this.usuariPersonaIdFins = __toClone.usuariPersonaIdFins;
-    this.usuariAplicacioIdDesde = __toClone.usuariAplicacioIdDesde;
-    this.usuariAplicacioIdFins = __toClone.usuariAplicacioIdFins;
-    this.parametresText = __toClone.parametresText;
-    this.retornText = __toClone.retornText;
+    this.usuaripersonaidDesde = __toClone.usuaripersonaidDesde;
+    this.usuaripersonaidFins = __toClone.usuaripersonaidFins;
+    this.usuariaplicacioidDesde = __toClone.usuariaplicacioidDesde;
+    this.usuariaplicacioidFins = __toClone.usuariaplicacioidFins;
+    this.parametrestext = __toClone.parametrestext;
+    this.retorntext = __toClone.retorntext;
     this.mapOfPluginForPluginID = __toClone.mapOfPluginForPluginID;
   }
   

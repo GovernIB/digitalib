@@ -179,31 +179,31 @@ public class InfoSignaturaController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
-    // Field signOperation
+    // Field signoperation
     {
-      _listSKV = getReferenceListForSignOperation(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForSignoperation(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfValuesForSignOperation(_tmp);
+      filterForm.setMapOfValuesForSignoperation(_tmp);
       if (filterForm.getGroupByFields().contains(SIGNOPERATION)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, SIGNOPERATION, false);
       };
     }
 
-    // Field signMode
+    // Field signmode
     {
-      _listSKV = getReferenceListForSignMode(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForSignmode(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfValuesForSignMode(_tmp);
+      filterForm.setMapOfValuesForSignmode(_tmp);
       if (filterForm.getGroupByFields().contains(SIGNMODE)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, SIGNMODE, false);
       };
     }
 
-    // Field signaturesTableLocation
+    // Field signaturestablelocation
     {
-      _listSKV = getReferenceListForSignaturesTableLocation(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForSignaturestablelocation(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfValuesForSignaturesTableLocation(_tmp);
+      filterForm.setMapOfValuesForSignaturestablelocation(_tmp);
       if (filterForm.getGroupByFields().contains(SIGNATURESTABLELOCATION)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, SIGNATURESTABLELOCATION, false);
       };
@@ -239,9 +239,9 @@ public class InfoSignaturaController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
-    __mapping.put(SIGNOPERATION, filterForm.getMapOfValuesForSignOperation());
-    __mapping.put(SIGNMODE, filterForm.getMapOfValuesForSignMode());
-    __mapping.put(SIGNATURESTABLELOCATION, filterForm.getMapOfValuesForSignaturesTableLocation());
+    __mapping.put(SIGNOPERATION, filterForm.getMapOfValuesForSignoperation());
+    __mapping.put(SIGNMODE, filterForm.getMapOfValuesForSignmode());
+    __mapping.put(SIGNATURESTABLELOCATION, filterForm.getMapOfValuesForSignaturestablelocation());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -290,25 +290,25 @@ public class InfoSignaturaController
   public void fillReferencesForForm(InfoSignaturaForm infoSignaturaForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
-    if (infoSignaturaForm.getListOfValuesForSignOperation() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForSignOperation(request, mav, infoSignaturaForm, null);
+    if (infoSignaturaForm.getListOfValuesForSignoperation() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForSignoperation(request, mav, infoSignaturaForm, null);
 
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      infoSignaturaForm.setListOfValuesForSignOperation(_listSKV);
+      infoSignaturaForm.setListOfValuesForSignoperation(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (infoSignaturaForm.getListOfValuesForSignMode() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForSignMode(request, mav, infoSignaturaForm, null);
+    if (infoSignaturaForm.getListOfValuesForSignmode() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForSignmode(request, mav, infoSignaturaForm, null);
 
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      infoSignaturaForm.setListOfValuesForSignMode(_listSKV);
+      infoSignaturaForm.setListOfValuesForSignmode(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (infoSignaturaForm.getListOfValuesForSignaturesTableLocation() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForSignaturesTableLocation(request, mav, infoSignaturaForm, null);
+    if (infoSignaturaForm.getListOfValuesForSignaturestablelocation() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForSignaturestablelocation(request, mav, infoSignaturaForm, null);
 
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      infoSignaturaForm.setListOfValuesForSignaturesTableLocation(_listSKV);
+      infoSignaturaForm.setListOfValuesForSignaturestablelocation(_listSKV);
     }
     
   }
@@ -611,16 +611,16 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForSignOperation(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForSignoperation(HttpServletRequest request,
        ModelAndView mav, InfoSignaturaForm infoSignaturaForm, Where where)  throws I18NException {
     if (infoSignaturaForm.isHiddenField(SIGNOPERATION)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
-    return getReferenceListForSignOperation(request, mav, where);
+    return getReferenceListForSignoperation(request, mav, where);
   }
 
 
-  public List<StringKeyValue> getReferenceListForSignOperation(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForSignoperation(HttpServletRequest request,
        ModelAndView mav, InfoSignaturaFilterForm infoSignaturaFilterForm,
        List<InfoSignatura> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (infoSignaturaFilterForm.isHiddenField(SIGNOPERATION)
@@ -628,11 +628,11 @@ public java.lang.Long stringToPK(String value) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
-    return getReferenceListForSignOperation(request, mav, Where.AND(where,_w));
+    return getReferenceListForSignoperation(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForSignOperation(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForSignoperation(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
     __tmp.add(new StringKeyValue("0" , "0"));
@@ -642,16 +642,16 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForSignMode(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForSignmode(HttpServletRequest request,
        ModelAndView mav, InfoSignaturaForm infoSignaturaForm, Where where)  throws I18NException {
     if (infoSignaturaForm.isHiddenField(SIGNMODE)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
-    return getReferenceListForSignMode(request, mav, where);
+    return getReferenceListForSignmode(request, mav, where);
   }
 
 
-  public List<StringKeyValue> getReferenceListForSignMode(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForSignmode(HttpServletRequest request,
        ModelAndView mav, InfoSignaturaFilterForm infoSignaturaFilterForm,
        List<InfoSignatura> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (infoSignaturaFilterForm.isHiddenField(SIGNMODE)
@@ -659,11 +659,11 @@ public java.lang.Long stringToPK(String value) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
-    return getReferenceListForSignMode(request, mav, Where.AND(where,_w));
+    return getReferenceListForSignmode(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForSignMode(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForSignmode(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
     __tmp.add(new StringKeyValue("0" , "0"));
@@ -672,16 +672,16 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForSignaturesTableLocation(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForSignaturestablelocation(HttpServletRequest request,
        ModelAndView mav, InfoSignaturaForm infoSignaturaForm, Where where)  throws I18NException {
     if (infoSignaturaForm.isHiddenField(SIGNATURESTABLELOCATION)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
-    return getReferenceListForSignaturesTableLocation(request, mav, where);
+    return getReferenceListForSignaturestablelocation(request, mav, where);
   }
 
 
-  public List<StringKeyValue> getReferenceListForSignaturesTableLocation(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForSignaturestablelocation(HttpServletRequest request,
        ModelAndView mav, InfoSignaturaFilterForm infoSignaturaFilterForm,
        List<InfoSignatura> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (infoSignaturaFilterForm.isHiddenField(SIGNATURESTABLELOCATION)
@@ -689,11 +689,11 @@ public java.lang.Long stringToPK(String value) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
-    return getReferenceListForSignaturesTableLocation(request, mav, Where.AND(where,_w));
+    return getReferenceListForSignaturestablelocation(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForSignaturesTableLocation(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForSignaturestablelocation(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
     __tmp.add(new StringKeyValue("-1" , "-1"));

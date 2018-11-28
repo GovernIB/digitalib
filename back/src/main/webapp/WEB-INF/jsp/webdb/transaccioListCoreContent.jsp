@@ -35,7 +35,7 @@
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.DATAINICI)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${transaccio.dataInici}" /></td>
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${transaccio.datainici}" /></td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.DATAFI)}">
           <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${transaccio.datafi}" /></td>
@@ -52,10 +52,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATCODI)}">
           <td>
-          <c:set var="tmp">${transaccio.estatcodi}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForEstatcodi[tmp]}
-          </c:if>
+          ${transaccio.estatcodi}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATMISSATGE)}">

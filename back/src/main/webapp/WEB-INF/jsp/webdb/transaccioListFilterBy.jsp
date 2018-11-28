@@ -84,10 +84,10 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.DATAINICI)}">
             <%-- FILTRE DATE --%>
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.dataInici" />:</span>
+              <span class="add-on"><fmt:message key="transaccio.datainici" />:</span>
               <span class="add-on"><fmt:message key="genapp.from" /></span>
-              <div id="dataIniciDesde" class="input-append">
-                <form:input cssClass="input-large" path="dataIniciDesde" />
+              <div id="datainiciDesde" class="input-append">
+                <form:input cssClass="input-large" path="datainiciDesde" />
                 <span class="add-on">
                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                   </i>
@@ -95,7 +95,7 @@
               </div>
               <script type="text/javascript">                
                 $(function() {
-                  $('#dataIniciDesde').datetimepicker({
+                  $('#datainiciDesde').datetimepicker({
                     language: '${lang}',
                     pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
                     format:  '${gen:getJSDateTimePattern()}',
@@ -105,8 +105,8 @@
                 });
               </script>
               <span class="add-on"><fmt:message key="genapp.to" /></span>              
-              <div id="dataIniciFins" class="input-append">
-                <form:input cssClass="input-large" path="dataIniciFins" />
+              <div id="datainiciFins" class="input-append">
+                <form:input cssClass="input-large" path="datainiciFins" />
                 <span class="add-on">
                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                   </i>
@@ -114,7 +114,7 @@
               </div>
               <script type="text/javascript">                
                 $(function() {
-                  $('#dataIniciFins').datetimepicker({
+                  $('#datainiciFins').datetimepicker({
                     language: '${lang}',
                     pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
                     format:  '${gen:getJSDateTimePattern()}',

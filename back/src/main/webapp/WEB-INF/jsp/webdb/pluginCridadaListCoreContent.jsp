@@ -34,17 +34,17 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.METODEPLUGIN)}">
           <td>
-          ${pluginCridada.metodePlugin}
+          ${pluginCridada.metodeplugin}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.TIPUSRESULTAT)}">
           <td>
-          ${pluginCridada.tipusResultat}
+          ${pluginCridada.tipusresultat}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.TEMPSEXECUCIO)}">
           <td>
-          ${pluginCridada.tempsExecucio}
+          ${pluginCridada.tempsexecucio}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.PLUGINID)}">
@@ -57,17 +57,17 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.USUARIPERSONAID)}">
           <td>
-          ${pluginCridada.usuariPersonaId}
+          ${pluginCridada.usuaripersonaid}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.USUARIAPLICACIOID)}">
           <td>
-          ${pluginCridada.usuariAplicacioId}
+          ${pluginCridada.usuariaplicacioid}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.PARAMETRESTEXT)}">
           <td>
-          ${pluginCridada.parametresText}
+          ${pluginCridada.parametrestext}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.PARAMETRESFITXERID)}">
@@ -79,7 +79,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.RETORNTEXT)}">
           <td>
-          ${pluginCridada.retornText}
+          ${pluginCridada.retorntext}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.RETORNFITXERID)}">

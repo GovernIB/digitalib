@@ -66,8 +66,8 @@ public class UsuariAplicacioJPAManager
 		return list.toArray(new UsuariAplicacio[list.size()]);
 	};
 
-	public synchronized UsuariAplicacio create( java.lang.String _username_, java.lang.String _contrasenya_, java.lang.String _emailAdmin_, java.lang.String _descripcio_, boolean _actiu_) throws I18NException {
-		UsuariAplicacioJPA __bean =  new UsuariAplicacioJPA(_username_,_contrasenya_,_emailAdmin_,_descripcio_,_actiu_);
+	public synchronized UsuariAplicacio create( java.lang.String _username_, java.lang.String _contrasenya_, java.lang.String _emailadmin_, java.lang.String _descripcio_, boolean _actiu_) throws I18NException {
+		UsuariAplicacioJPA __bean =  new UsuariAplicacioJPA(_username_,_contrasenya_,_emailadmin_,_descripcio_,_actiu_);
 		return create(__bean);
 	}
 

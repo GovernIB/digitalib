@@ -15,7 +15,7 @@ public interface UsuariAplicacioFields extends java.io.Serializable {
 	 public static final LongField USUARIAPLICACIOID = new LongField(_TABLE_MODEL, "usuariAplicacioID", "usuariaplicacioid");  // PK
 	 public static final StringField USERNAME = new StringField(_TABLE_MODEL, "username", "username");
 	 public static final StringField CONTRASENYA = new StringField(_TABLE_MODEL, "contrasenya", "contrasenya");
-	 public static final StringField EMAILADMIN = new StringField(_TABLE_MODEL, "emailAdmin", "emailadmin");
+	 public static final StringField EMAILADMIN = new StringField(_TABLE_MODEL, "emailadmin", "emailadmin");
 	 public static final StringField DESCRIPCIO = new StringField(_TABLE_MODEL, "descripcio", "descripcio");
 	 public static final BooleanField ACTIU = new BooleanField(_TABLE_MODEL, "actiu", "actiu");
 

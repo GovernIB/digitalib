@@ -19,9 +19,9 @@ public class InfoSignaturaForm extends DigitalIBBaseForm {
   public InfoSignaturaForm(InfoSignaturaForm __toClone) {
     super(__toClone);
       this.infoSignatura = __toClone.infoSignatura;
-    this.listOfValuesForSignOperation = __toClone.listOfValuesForSignOperation;
-    this.listOfValuesForSignMode = __toClone.listOfValuesForSignMode;
-    this.listOfValuesForSignaturesTableLocation = __toClone.listOfValuesForSignaturesTableLocation;
+    this.listOfValuesForSignoperation = __toClone.listOfValuesForSignoperation;
+    this.listOfValuesForSignmode = __toClone.listOfValuesForSignmode;
+    this.listOfValuesForSignaturestablelocation = __toClone.listOfValuesForSignaturestablelocation;
   }
   
   public InfoSignaturaForm(InfoSignaturaJPA infoSignatura, boolean nou) {
@@ -37,38 +37,38 @@ public class InfoSignaturaForm extends DigitalIBBaseForm {
   }
   
   
-  private List<StringKeyValue> listOfValuesForSignOperation;
+  private List<StringKeyValue> listOfValuesForSignoperation;
 
-  public List<StringKeyValue> getListOfValuesForSignOperation() {
-    return this.listOfValuesForSignOperation;
+  public List<StringKeyValue> getListOfValuesForSignoperation() {
+    return this.listOfValuesForSignoperation;
   }
 
-  public void setListOfValuesForSignOperation(List<StringKeyValue> listOfValuesForSignOperation) {
-    this.listOfValuesForSignOperation = listOfValuesForSignOperation;
-  }
-
-
-
-  private List<StringKeyValue> listOfValuesForSignMode;
-
-  public List<StringKeyValue> getListOfValuesForSignMode() {
-    return this.listOfValuesForSignMode;
-  }
-
-  public void setListOfValuesForSignMode(List<StringKeyValue> listOfValuesForSignMode) {
-    this.listOfValuesForSignMode = listOfValuesForSignMode;
+  public void setListOfValuesForSignoperation(List<StringKeyValue> listOfValuesForSignoperation) {
+    this.listOfValuesForSignoperation = listOfValuesForSignoperation;
   }
 
 
 
-  private List<StringKeyValue> listOfValuesForSignaturesTableLocation;
+  private List<StringKeyValue> listOfValuesForSignmode;
 
-  public List<StringKeyValue> getListOfValuesForSignaturesTableLocation() {
-    return this.listOfValuesForSignaturesTableLocation;
+  public List<StringKeyValue> getListOfValuesForSignmode() {
+    return this.listOfValuesForSignmode;
   }
 
-  public void setListOfValuesForSignaturesTableLocation(List<StringKeyValue> listOfValuesForSignaturesTableLocation) {
-    this.listOfValuesForSignaturesTableLocation = listOfValuesForSignaturesTableLocation;
+  public void setListOfValuesForSignmode(List<StringKeyValue> listOfValuesForSignmode) {
+    this.listOfValuesForSignmode = listOfValuesForSignmode;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForSignaturestablelocation;
+
+  public List<StringKeyValue> getListOfValuesForSignaturestablelocation() {
+    return this.listOfValuesForSignaturestablelocation;
+  }
+
+  public void setListOfValuesForSignaturestablelocation(List<StringKeyValue> listOfValuesForSignaturestablelocation) {
+    this.listOfValuesForSignaturestablelocation = listOfValuesForSignaturestablelocation;
   }
 
 

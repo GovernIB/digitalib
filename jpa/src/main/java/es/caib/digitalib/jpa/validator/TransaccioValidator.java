@@ -50,10 +50,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERFILID)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,VIEW, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(VIEW)));
-
     // Check size
     if (__vr.getFieldErrorCount(TRANSACTIONWEBID) == 0) {
       java.lang.String __transactionwebid = (java.lang.String)__vr.getFieldValue(__target__,TRANSACTIONWEBID);

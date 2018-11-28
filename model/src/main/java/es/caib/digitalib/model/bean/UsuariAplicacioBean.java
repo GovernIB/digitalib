@@ -13,7 +13,7 @@ private static final long serialVersionUID = 1703005582L;
 	long usuariAplicacioID;// PK
 	java.lang.String username;
 	java.lang.String contrasenya;
-	java.lang.String emailAdmin;
+	java.lang.String emailadmin;
 	java.lang.String descripcio;
 	boolean actiu;
 
@@ -23,34 +23,34 @@ private static final long serialVersionUID = 1703005582L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariAplicacioBean(long usuariAplicacioID , java.lang.String username , java.lang.String contrasenya , java.lang.String emailAdmin , java.lang.String descripcio , boolean actiu) {
+  public UsuariAplicacioBean(long usuariAplicacioID , java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu) {
     this.usuariAplicacioID=usuariAplicacioID;
     this.username=username;
     this.contrasenya=contrasenya;
-    this.emailAdmin=emailAdmin;
+    this.emailadmin=emailadmin;
     this.descripcio=descripcio;
     this.actiu=actiu;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariAplicacioBean(java.lang.String username , java.lang.String contrasenya , java.lang.String emailAdmin , java.lang.String descripcio , boolean actiu) {
+  public UsuariAplicacioBean(java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu) {
     this.username=username;
     this.contrasenya=contrasenya;
-    this.emailAdmin=emailAdmin;
+    this.emailadmin=emailadmin;
     this.descripcio=descripcio;
     this.actiu=actiu;
 }
   /** Constructor dels valors Not Null */
-  public UsuariAplicacioBean(long usuariAplicacioID , java.lang.String username , java.lang.String emailAdmin , boolean actiu) {
+  public UsuariAplicacioBean(long usuariAplicacioID , java.lang.String username , java.lang.String emailadmin , boolean actiu) {
     this.usuariAplicacioID=usuariAplicacioID;
     this.username=username;
-    this.emailAdmin=emailAdmin;
+    this.emailadmin=emailadmin;
     this.actiu=actiu;
 }
   public UsuariAplicacioBean(UsuariAplicacio __bean) {
     this.setUsuariAplicacioID(__bean.getUsuariAplicacioID());
     this.setUsername(__bean.getUsername());
     this.setContrasenya(__bean.getContrasenya());
-    this.setEmailAdmin(__bean.getEmailAdmin());
+    this.setEmailadmin(__bean.getEmailadmin());
     this.setDescripcio(__bean.getDescripcio());
     this.setActiu(__bean.isActiu());
 	}
@@ -76,11 +76,11 @@ private static final long serialVersionUID = 1703005582L;
 		this.contrasenya = _contrasenya_;
 	};
 
-	public java.lang.String getEmailAdmin() {
-		return(emailAdmin);
+	public java.lang.String getEmailadmin() {
+		return(emailadmin);
 	};
-	public void setEmailAdmin(java.lang.String _emailAdmin_) {
-		this.emailAdmin = _emailAdmin_;
+	public void setEmailadmin(java.lang.String _emailadmin_) {
+		this.emailadmin = _emailadmin_;
 	};
 
 	public java.lang.String getDescripcio() {
@@ -107,7 +107,7 @@ private static final long serialVersionUID = 1703005582L;
     __tmp.setUsuariAplicacioID(__bean.getUsuariAplicacioID());
     __tmp.setUsername(__bean.getUsername());
     __tmp.setContrasenya(__bean.getContrasenya());
-    __tmp.setEmailAdmin(__bean.getEmailAdmin());
+    __tmp.setEmailadmin(__bean.getEmailadmin());
     __tmp.setDescripcio(__bean.getDescripcio());
     __tmp.setActiu(__bean.isActiu());
 		return __tmp;

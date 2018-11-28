@@ -31,100 +31,100 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.SIGNOPERATION)}">
           <td>
-          <c:set var="tmp">${infoSignatura.signOperation}</c:set>
+          <c:set var="tmp">${infoSignatura.signoperation}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForSignOperation[tmp]}
+          ${__theFilterForm.mapOfValuesForSignoperation[tmp]}
           </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.SIGNTYPE)}">
           <td>
-          ${infoSignatura.signType}
+          ${infoSignatura.signtype}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.SIGNALGORITHM)}">
           <td>
-          ${infoSignatura.signAlgorithm}
+          ${infoSignatura.signalgorithm}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.SIGNMODE)}">
           <td>
-          <c:set var="tmp">${infoSignatura.signMode}</c:set>
+          <c:set var="tmp">${infoSignatura.signmode}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForSignMode[tmp]}
+          ${__theFilterForm.mapOfValuesForSignmode[tmp]}
           </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.SIGNATURESTABLELOCATION)}">
           <td>
-          <c:set var="tmp">${infoSignatura.signaturesTableLocation}</c:set>
+          <c:set var="tmp">${infoSignatura.signaturestablelocation}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForSignaturesTableLocation[tmp]}
+          ${__theFilterForm.mapOfValuesForSignaturestablelocation[tmp]}
           </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.TIMESTAMPINCLUDED)}">
           <td>
-            &nbsp;<c:if test="${not empty infoSignatura.timestampIncluded}">
-            <img height="18" width="18" src="<c:url value="/img/icn_alert_${infoSignatura.timestampIncluded?'success':'error'}.png"/>">
+            &nbsp;<c:if test="${not empty infoSignatura.timestampincluded}">
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${infoSignatura.timestampincluded?'success':'error'}.png"/>">
             </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.POLICYINCLUDED)}">
           <td>
-            &nbsp;<c:if test="${not empty infoSignatura.policyIncluded}">
-            <img height="18" width="18" src="<c:url value="/img/icn_alert_${infoSignatura.policyIncluded?'success':'error'}.png"/>">
+            &nbsp;<c:if test="${not empty infoSignatura.policyincluded}">
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${infoSignatura.policyincluded?'success':'error'}.png"/>">
             </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENITIPOFIRMA)}">
           <td>
-          ${infoSignatura.eniTipoFirma}
+          ${infoSignatura.enitipofirma}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENIPERFILFIRMA)}">
           <td>
-          ${infoSignatura.eniPerfilFirma}
+          ${infoSignatura.eniperfilfirma}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENIROLFIRMA)}">
           <td>
-          ${infoSignatura.eniRolFirma}
+          ${infoSignatura.enirolfirma}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENISIGNERNAME)}">
           <td>
-          ${infoSignatura.eniSignerName}
+          ${infoSignatura.enisignername}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENISIGNERADMINISTRATIONID)}">
           <td>
-          ${infoSignatura.eniSignerAdministrationId}
+          ${infoSignatura.enisigneradministrationid}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENISIGNLEVEL)}">
           <td>
-          ${infoSignatura.eniSignLevel}
+          ${infoSignatura.enisignlevel}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.CHECKADMINISTRATIONIDOFSIGNER)}">
           <td>
-            &nbsp;<c:if test="${not empty infoSignatura.checkAdministrationIdOfSigner}">
-            <img height="18" width="18" src="<c:url value="/img/icn_alert_${infoSignatura.checkAdministrationIdOfSigner?'success':'error'}.png"/>">
+            &nbsp;<c:if test="${not empty infoSignatura.checkadministrationidofsigner}">
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${infoSignatura.checkadministrationidofsigner?'success':'error'}.png"/>">
             </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.CHECKDOCUMENTMODIFICATIONS)}">
           <td>
-            &nbsp;<c:if test="${not empty infoSignatura.checkDocumentModifications}">
-            <img height="18" width="18" src="<c:url value="/img/icn_alert_${infoSignatura.checkDocumentModifications?'success':'error'}.png"/>">
+            &nbsp;<c:if test="${not empty infoSignatura.checkdocumentmodifications}">
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${infoSignatura.checkdocumentmodifications?'success':'error'}.png"/>">
             </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.CHECKVALIDATIONSIGNATURE)}">
           <td>
-            &nbsp;<c:if test="${not empty infoSignatura.checkValidationSignature}">
-            <img height="18" width="18" src="<c:url value="/img/icn_alert_${infoSignatura.checkValidationSignature?'success':'error'}.png"/>">
+            &nbsp;<c:if test="${not empty infoSignatura.checkvalidationsignature}">
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${infoSignatura.checkvalidationsignature?'success':'error'}.png"/>">
             </c:if>
           </td>
         </c:if>

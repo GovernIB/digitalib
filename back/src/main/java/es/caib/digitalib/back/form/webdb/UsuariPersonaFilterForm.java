@@ -109,25 +109,25 @@ public class UsuariPersonaFilterForm extends DigitalIBBaseFilterForm implements 
   }
 
 
-  private java.lang.Long configuracioGrupIDDesde;
+  private java.lang.Long configuraciogrupidDesde;
 
-  public java.lang.Long getConfiguracioGrupIDDesde() {
-    return this.configuracioGrupIDDesde;
+  public java.lang.Long getConfiguraciogrupidDesde() {
+    return this.configuraciogrupidDesde;
   }
 
-  public void setConfiguracioGrupIDDesde(java.lang.Long configuracioGrupIDDesde) {
-    this.configuracioGrupIDDesde = configuracioGrupIDDesde;
+  public void setConfiguraciogrupidDesde(java.lang.Long configuraciogrupidDesde) {
+    this.configuraciogrupidDesde = configuraciogrupidDesde;
   }
 
 
-  private java.lang.Long configuracioGrupIDFins;
+  private java.lang.Long configuraciogrupidFins;
 
-  public java.lang.Long getConfiguracioGrupIDFins() {
-    return this.configuracioGrupIDFins;
+  public java.lang.Long getConfiguraciogrupidFins() {
+    return this.configuraciogrupidFins;
   }
 
-  public void setConfiguracioGrupIDFins(java.lang.Long configuracioGrupIDFins) {
-    this.configuracioGrupIDFins = configuracioGrupIDFins;
+  public void setConfiguraciogrupidFins(java.lang.Long configuraciogrupidFins) {
+    this.configuraciogrupidFins = configuraciogrupidFins;
   }
 
 
@@ -144,10 +144,10 @@ public class UsuariPersonaFilterForm extends DigitalIBBaseFilterForm implements 
     this.email = __toClone.email;
     this.nif = __toClone.nif;
     this.idiomaID = __toClone.idiomaID;
-    this.configuracioGrupIDDesde = __toClone.configuracioGrupIDDesde;
-    this.configuracioGrupIDFins = __toClone.configuracioGrupIDFins;
+    this.configuraciogrupidDesde = __toClone.configuraciogrupidDesde;
+    this.configuraciogrupidFins = __toClone.configuraciogrupidFins;
     this.mapOfIdiomaForIdiomaID = __toClone.mapOfIdiomaForIdiomaID;
-    this.mapOfConfiguracioGrupForConfiguracioGrupID = __toClone.mapOfConfiguracioGrupForConfiguracioGrupID;
+    this.mapOfConfiguracioGrupForConfiguraciogrupid = __toClone.mapOfConfiguracioGrupForConfiguraciogrupid;
   }
   
   /* ========= UTILS ========== */
@@ -194,14 +194,14 @@ public class UsuariPersonaFilterForm extends DigitalIBBaseFilterForm implements 
 
 
 
-  private Map<String, String> mapOfConfiguracioGrupForConfiguracioGrupID;
+  private Map<String, String> mapOfConfiguracioGrupForConfiguraciogrupid;
 
-  public Map<String, String> getMapOfConfiguracioGrupForConfiguracioGrupID() {
-    return this.mapOfConfiguracioGrupForConfiguracioGrupID;
+  public Map<String, String> getMapOfConfiguracioGrupForConfiguraciogrupid() {
+    return this.mapOfConfiguracioGrupForConfiguraciogrupid;
   }
 
-  public void setMapOfConfiguracioGrupForConfiguracioGrupID(Map<String, String> mapOfConfiguracioGrupForConfiguracioGrupID) {
-    this.mapOfConfiguracioGrupForConfiguracioGrupID = mapOfConfiguracioGrupForConfiguracioGrupID;
+  public void setMapOfConfiguracioGrupForConfiguraciogrupid(Map<String, String> mapOfConfiguracioGrupForConfiguraciogrupid) {
+    this.mapOfConfiguracioGrupForConfiguraciogrupid = mapOfConfiguracioGrupForConfiguraciogrupid;
   }
 
 

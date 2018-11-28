@@ -339,7 +339,7 @@
     <void index="1"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
-       <array class="org.fundaciobit.genapp.FieldInfo" length="7"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="10"> 
         <void index="0"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="PK"> 
@@ -734,6 +734,201 @@
                <int>1</int> 
               </void> 
              </object> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="7"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object id="ForeignKey0" class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_scan_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_cfggrup_perfilscan_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>perfilNomesEscaneigID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Perfil Només Escaneig</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Perfil Solo Escaneo</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>perfilnomesescaneigid</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object idref="ForeignKey0"/> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="8"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object id="ForeignKey1" class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_coau_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_cfggrup_perfilcoau_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>perfilCopiaAutenticaID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Perfil Còpia Autèntica</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Perfil Copia Auténtica</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>perfilcopiaautenticaid</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object idref="ForeignKey1"/> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="9"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object id="ForeignKey2" class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_cust_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_cfggrup_perfilcust_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>perfilCustodiaID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Perfil Còpia Autèntica i Custòdia</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Perfil Còpia Autèntica i Custòdia</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>perfilcustodiaid</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object idref="ForeignKey2"/> 
             </void> 
             <void property="webtype"> 
              <int>3</int> 
@@ -2808,8 +3003,47 @@
            <int>0</int> 
           </void> 
           <void property="foreignKeys"> 
-           <array class="org.fundaciobit.genapp.ForeignKey" length="2"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="5"> 
             <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilnomesescaneigid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_scan_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_configuraciogrup</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="1"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilcopiaautenticaid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_coau_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_configuraciogrup</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="2"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilcustodiaid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_cust_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_configuraciogrup</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="3"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilid</string> 
@@ -2822,7 +3056,7 @@
               </void> 
              </object> 
             </void> 
-            <void index="1"> 
+            <void index="4"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilid</string> 
@@ -3729,11 +3963,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>usperfil</string> 
+            <string>Us Perfil</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>usperfil</string> 
+            <string>Uso Perfil</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 

@@ -11,8 +11,8 @@ public interface UsuariAplicacio extends org.fundaciobit.genapp.common.IGenAppEn
 	public java.lang.String getContrasenya();
 	public void setContrasenya(java.lang.String _contrasenya_);
 
-	public java.lang.String getEmailAdmin();
-	public void setEmailAdmin(java.lang.String _emailAdmin_);
+	public java.lang.String getEmailadmin();
+	public void setEmailadmin(java.lang.String _emailadmin_);
 
 	public java.lang.String getDescripcio();
 	public void setDescripcio(java.lang.String _descripcio_);

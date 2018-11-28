@@ -51,8 +51,8 @@ private static final long serialVersionUID = -80349968L;
 	java.lang.String idiomaID;
 
 	@Index(name="dib_usrperson_confgrupid_fk_i")
-	@Column(name="configuraciogrupid",length = 19)
-	java.lang.Long configuracioGrupID;
+	@Column(name="configuraciogrupid",nullable = false,length = 19)
+	long configuraciogrupid;
 
 
 
@@ -61,7 +61,7 @@ private static final long serialVersionUID = -80349968L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariPersonaJPA(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , java.lang.Long configuracioGrupID) {
+  public UsuariPersonaJPA(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , long configuraciogrupid) {
     this.usuariPersonaID=usuariPersonaID;
     this.username=username;
     this.nom=nom;
@@ -69,17 +69,17 @@ private static final long serialVersionUID = -80349968L;
     this.email=email;
     this.nif=nif;
     this.idiomaID=idiomaID;
-    this.configuracioGrupID=configuracioGrupID;
+    this.configuraciogrupid=configuraciogrupid;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariPersonaJPA(java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , java.lang.Long configuracioGrupID) {
+  public UsuariPersonaJPA(java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , long configuraciogrupid) {
     this.username=username;
     this.nom=nom;
     this.llinatges=llinatges;
     this.email=email;
     this.nif=nif;
     this.idiomaID=idiomaID;
-    this.configuracioGrupID=configuracioGrupID;
+    this.configuraciogrupid=configuraciogrupid;
 }
   public UsuariPersonaJPA(UsuariPersona __bean) {
     this.setUsuariPersonaID(__bean.getUsuariPersonaID());
@@ -89,7 +89,7 @@ private static final long serialVersionUID = -80349968L;
     this.setEmail(__bean.getEmail());
     this.setNif(__bean.getNif());
     this.setIdiomaID(__bean.getIdiomaID());
-    this.setConfiguracioGrupID(__bean.getConfiguracioGrupID());
+    this.setConfiguraciogrupid(__bean.getConfiguraciogrupid());
 	}
 
 	public long getUsuariPersonaID() {
@@ -141,11 +141,11 @@ private static final long serialVersionUID = -80349968L;
 		this.idiomaID = _idiomaID_;
 	};
 
-	public java.lang.Long getConfiguracioGrupID() {
-		return(configuracioGrupID);
+	public long getConfiguraciogrupid() {
+		return(configuraciogrupid);
 	};
-	public void setConfiguracioGrupID(java.lang.Long _configuracioGrupID_) {
-		this.configuracioGrupID = _configuracioGrupID_;
+	public void setConfiguraciogrupid(long _configuraciogrupid_) {
+		this.configuraciogrupid = _configuraciogrupid_;
 	};
 
 
@@ -182,7 +182,7 @@ private static final long serialVersionUID = -80349968L;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ForeignKey(name="dib_usrperson_cfggrup_conf_fk")
-	@JoinColumn(name = "configuraciogrupid", referencedColumnName ="configuracioGrupID", nullable = true, insertable=false, updatable=false)
+	@JoinColumn(name = "configuraciogrupid", referencedColumnName ="configuracioGrupID", nullable = false, insertable=false, updatable=false)
 	private ConfiguracioGrupJPA configuracioGrup;
 
 	public ConfiguracioGrupJPA getConfiguracioGrup() {
@@ -205,7 +205,7 @@ private static final long serialVersionUID = -80349968L;
     __tmp.setEmail(__bean.getEmail());
     __tmp.setNif(__bean.getNif());
     __tmp.setIdiomaID(__bean.getIdiomaID());
-    __tmp.setConfiguracioGrupID(__bean.getConfiguracioGrupID());
+    __tmp.setConfiguraciogrupid(__bean.getConfiguraciogrupid());
 		return __tmp;
 	}
 

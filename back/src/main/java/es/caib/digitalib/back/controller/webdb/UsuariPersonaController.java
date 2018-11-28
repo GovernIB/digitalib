@@ -197,11 +197,11 @@ public class UsuariPersonaController
       };
     }
 
-    // Field configuracioGrupID
+    // Field configuraciogrupid
     {
-      _listSKV = getReferenceListForConfiguracioGrupID(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForConfiguraciogrupid(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfConfiguracioGrupForConfiguracioGrupID(_tmp);
+      filterForm.setMapOfConfiguracioGrupForConfiguraciogrupid(_tmp);
       if (filterForm.getGroupByFields().contains(CONFIGURACIOGRUPID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, CONFIGURACIOGRUPID, false);
       };
@@ -223,7 +223,7 @@ public class UsuariPersonaController
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(IDIOMAID, filterForm.getMapOfIdiomaForIdiomaID());
-    __mapping.put(CONFIGURACIOGRUPID, filterForm.getMapOfConfiguracioGrupForConfiguracioGrupID());
+    __mapping.put(CONFIGURACIOGRUPID, filterForm.getMapOfConfiguracioGrupForConfiguraciogrupid());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -279,11 +279,11 @@ public class UsuariPersonaController
       usuariPersonaForm.setListOfIdiomaForIdiomaID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (usuariPersonaForm.getListOfConfiguracioGrupForConfiguracioGrupID() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForConfiguracioGrupID(request, mav, usuariPersonaForm, null);
+    if (usuariPersonaForm.getListOfConfiguracioGrupForConfiguraciogrupid() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForConfiguraciogrupid(request, mav, usuariPersonaForm, null);
 
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      usuariPersonaForm.setListOfConfiguracioGrupForConfiguracioGrupID(_listSKV);
+      usuariPersonaForm.setListOfConfiguracioGrupForConfiguraciogrupid(_listSKV);
     }
     
   }
@@ -625,20 +625,20 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForConfiguracioGrupID(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForConfiguraciogrupid(HttpServletRequest request,
        ModelAndView mav, UsuariPersonaForm usuariPersonaForm, Where where)  throws I18NException {
     if (usuariPersonaForm.isHiddenField(CONFIGURACIOGRUPID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _where = null;
     if (usuariPersonaForm.isReadOnlyField(CONFIGURACIOGRUPID)) {
-      _where = ConfiguracioGrupFields.CONFIGURACIOGRUPID.equal(usuariPersonaForm.getUsuariPersona().getConfiguracioGrupID());
+      _where = ConfiguracioGrupFields.CONFIGURACIOGRUPID.equal(usuariPersonaForm.getUsuariPersona().getConfiguraciogrupid());
     }
-    return getReferenceListForConfiguracioGrupID(request, mav, Where.AND(where, _where));
+    return getReferenceListForConfiguraciogrupid(request, mav, Where.AND(where, _where));
   }
 
 
-  public List<StringKeyValue> getReferenceListForConfiguracioGrupID(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForConfiguraciogrupid(HttpServletRequest request,
        ModelAndView mav, UsuariPersonaFilterForm usuariPersonaFilterForm,
        List<UsuariPersona> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (usuariPersonaFilterForm.isHiddenField(CONFIGURACIOGRUPID)
@@ -650,16 +650,15 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (UsuariPersona _item : list) {
-        if(_item.getConfiguracioGrupID() == null) { continue; };
-        _pkList.add(_item.getConfiguracioGrupID());
+        _pkList.add(_item.getConfiguraciogrupid());
         }
         _w = ConfiguracioGrupFields.CONFIGURACIOGRUPID.in(_pkList);
       }
-    return getReferenceListForConfiguracioGrupID(request, mav, Where.AND(where,_w));
+    return getReferenceListForConfiguraciogrupid(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForConfiguracioGrupID(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForConfiguraciogrupid(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return configuracioGrupRefList.getReferenceList(ConfiguracioGrupFields.CONFIGURACIOGRUPID, where );
   }
