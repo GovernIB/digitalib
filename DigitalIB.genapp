@@ -5925,6 +5925,9 @@
           <void property="digits"> 
            <int>6</int> 
           </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
+          </void> 
           <void property="javaName"> 
            <string>dataInici</string> 
           </void> 
@@ -5967,6 +5970,9 @@
           <void property="digits"> 
            <int>6</int> 
           </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
+          </void> 
           <void property="javaName"> 
            <string>datafi</string> 
           </void> 
@@ -6005,6 +6011,9 @@
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
+          </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
            <string>usuariaplicacioid</string> 
@@ -6045,6 +6054,9 @@
           <void property="digits"> 
            <int>0</int> 
           </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
+          </void> 
           <void property="javaName"> 
            <string>usuaripersonaid</string> 
           </void> 
@@ -6083,6 +6095,9 @@
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
+          </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
            <string>estatCodi</string> 
@@ -6128,6 +6143,9 @@
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
+          </void> 
+          <void property="filter"> 
+           <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
            <string>estatmissatge</string> 

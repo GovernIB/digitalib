@@ -469,12 +469,12 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TRANSACTIONWEBID ,USERNAMEREQUEST ,RETURNURL }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TRANSACTIONWEBID ,ESTATMISSATGE ,USERNAMEREQUEST ,RETURNURL }));
   }
 
   @Override
   public List<Field<?>> getDefaultGroupByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { DATAINICI ,DATAFI ,USUARIAPLICACIOID ,USUARIPERSONAID ,ESTATCODI }));
   }
 
 
