@@ -271,10 +271,10 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
           return generateServerError(msg);
         }
 
-        if (transaccio.getEstatcodi() < 0) {
+        if (transaccio.getEstatCodi() < 0) {
           // XYZ ZZZ ZZZ
           String msg = "La transacció amb ID " + transactionWebID + " te un estat no vàlid ("
-              + transaccio.getEstatcodi() + ") per iniciar el proces d'escaneig.";
+              + transaccio.getEstatCodi() + ") per iniciar el proces d'escaneig.";
           return generateServerError(msg);
         }
 
@@ -349,7 +349,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       ResponseEntity<?> re = new ResponseEntity<String>(redirectUrl, headers, HttpStatus.OK);
       log.info(" XYZ ZZZ SURT DE startTransaction => FINAL OK");
 
-      transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_IN_PROGRESS);
+      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_IN_PROGRESS);
       transaccioLogicaEjb.update(transaccio);
 
       return re;
@@ -462,7 +462,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       ScanWebSimpleScanResult fssr = new ScanWebSimpleScanResult();
 
       ScanWebSimpleStatus status = new ScanWebSimpleStatus();
-      status.setStatus(transaccio.getEstatcodi());
+      status.setStatus(transaccio.getEstatCodi());
       status.setErrorStackTrace(transaccio.getEstatexcepcio());
       // XYZ ZZZ Recuperar una Excepcio a partir d'un stack trace
       // status.setErrorException(errorException);
@@ -578,7 +578,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       try {
 
         TransaccioJPA trans = transaccioLogicaEjb.findByPrimaryKey(tid);
-        trans.setEstatcodi(ScanWebSimpleStatus.STATUS_EXPIRED);
+        trans.setEstatCodi(ScanWebSimpleStatus.STATUS_EXPIRED);
         trans.setDatafi(new Timestamp(now));
 
         log.warn("Marcant transaccio com caducada: " + trans.getTransactionWebId());

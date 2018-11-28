@@ -145,7 +145,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     TransaccioJPA t = new TransaccioJPA();
 
     t.setDataInici(new Timestamp(System.currentTimeMillis()));
-    t.setEstatcodi(ScanWebSimpleStatus.STATUS_REQUESTED_ID);
+    t.setEstatCodi(ScanWebSimpleStatus.STATUS_REQUESTED_ID);
     t.setTransactionWebId(transactionWebID);
     t.setLanguageui(requestTransaction.getLanguageUI());
     t.setLanguagedoc(requestTransaction.getLanguageDoc());

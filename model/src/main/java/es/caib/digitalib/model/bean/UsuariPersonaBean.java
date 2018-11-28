@@ -17,7 +17,7 @@ private static final long serialVersionUID = 1803901243L;
 	java.lang.String email;
 	java.lang.String nif;
 	java.lang.String idiomaID;
-	long configuraciogrupid;
+	long configuracioGrupID;
 
 
   /** Constructor Buit */
@@ -25,7 +25,7 @@ private static final long serialVersionUID = 1803901243L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariPersonaBean(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , long configuraciogrupid) {
+  public UsuariPersonaBean(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , long configuracioGrupID) {
     this.usuariPersonaID=usuariPersonaID;
     this.username=username;
     this.nom=nom;
@@ -33,17 +33,17 @@ private static final long serialVersionUID = 1803901243L;
     this.email=email;
     this.nif=nif;
     this.idiomaID=idiomaID;
-    this.configuraciogrupid=configuraciogrupid;
+    this.configuracioGrupID=configuracioGrupID;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariPersonaBean(java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , long configuraciogrupid) {
+  public UsuariPersonaBean(java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , long configuracioGrupID) {
     this.username=username;
     this.nom=nom;
     this.llinatges=llinatges;
     this.email=email;
     this.nif=nif;
     this.idiomaID=idiomaID;
-    this.configuraciogrupid=configuraciogrupid;
+    this.configuracioGrupID=configuracioGrupID;
 }
   public UsuariPersonaBean(UsuariPersona __bean) {
     this.setUsuariPersonaID(__bean.getUsuariPersonaID());
@@ -53,7 +53,7 @@ private static final long serialVersionUID = 1803901243L;
     this.setEmail(__bean.getEmail());
     this.setNif(__bean.getNif());
     this.setIdiomaID(__bean.getIdiomaID());
-    this.setConfiguraciogrupid(__bean.getConfiguraciogrupid());
+    this.setConfiguracioGrupID(__bean.getConfiguracioGrupID());
 	}
 
 	public long getUsuariPersonaID() {
@@ -105,11 +105,11 @@ private static final long serialVersionUID = 1803901243L;
 		this.idiomaID = _idiomaID_;
 	};
 
-	public long getConfiguraciogrupid() {
-		return(configuraciogrupid);
+	public long getConfiguracioGrupID() {
+		return(configuracioGrupID);
 	};
-	public void setConfiguraciogrupid(long _configuraciogrupid_) {
-		this.configuraciogrupid = _configuraciogrupid_;
+	public void setConfiguracioGrupID(long _configuracioGrupID_) {
+		this.configuracioGrupID = _configuracioGrupID_;
 	};
 
 
@@ -126,7 +126,7 @@ private static final long serialVersionUID = 1803901243L;
     __tmp.setEmail(__bean.getEmail());
     __tmp.setNif(__bean.getNif());
     __tmp.setIdiomaID(__bean.getIdiomaID());
-    __tmp.setConfiguraciogrupid(__bean.getConfiguraciogrupid());
+    __tmp.setConfiguracioGrupID(__bean.getConfiguracioGrupID());
 		return __tmp;
 	}
 

@@ -28,6 +28,7 @@ public class TransaccioForm extends DigitalIBBaseForm {
   public TransaccioForm(TransaccioForm __toClone) {
     super(__toClone);
       this.transaccio = __toClone.transaccio;
+    this.listOfValuesForEstatCodi = __toClone.listOfValuesForEstatCodi;
     this.listOfInfoSignaturaForInfosignaturaid = __toClone.listOfInfoSignaturaForInfosignaturaid;
     this.listOfInfoCustodyForInfocustodyid = __toClone.listOfInfoCustodyForInfocustodyid;
     this.listOfPerfilForPerfilid = __toClone.listOfPerfilForPerfilid;
@@ -75,6 +76,18 @@ public class TransaccioForm extends DigitalIBBaseForm {
   public void setFitxerSignaturaIDDelete(boolean fitxerSignaturaIDDelete) {
     this.fitxerSignaturaIDDelete = fitxerSignaturaIDDelete;
    }
+  private List<StringKeyValue> listOfValuesForEstatCodi;
+
+  public List<StringKeyValue> getListOfValuesForEstatCodi() {
+    return this.listOfValuesForEstatCodi;
+  }
+
+  public void setListOfValuesForEstatCodi(List<StringKeyValue> listOfValuesForEstatCodi) {
+    this.listOfValuesForEstatCodi = listOfValuesForEstatCodi;
+  }
+
+
+
   private List<StringKeyValue> listOfInfoSignaturaForInfosignaturaid;
 
   public List<StringKeyValue> getListOfInfoSignaturaForInfosignaturaid() {

@@ -5926,7 +5926,7 @@
            <int>6</int> 
           </void> 
           <void property="javaName"> 
-           <string>datainici</string> 
+           <string>dataInici</string> 
           </void> 
           <void property="javaType"> 
            <class>java.sql.Timestamp</class> 
@@ -5934,11 +5934,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>datainici</string> 
+            <string>Data Inici</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>datainici</string> 
+            <string>Fecha Inicio</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -6085,7 +6085,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>estatcodi</string> 
+           <string>estatCodi</string> 
           </void> 
           <void property="javaType"> 
            <class>int</class> 
@@ -6093,12 +6093,15 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>estatcodi</string> 
+            <string>Estat </string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>estatcodi</string> 
+            <string>Estado</string> 
            </void> 
+          </void> 
+          <void property="minAllowedValue"> 
+           <string>-3,-2,-1,0,1,2</string> 
           </void> 
           <void property="notNullable"> 
            <boolean>true</boolean> 
@@ -6115,7 +6118,7 @@
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="webtype"> 
-             <int>14</int> 
+             <int>16</int> 
             </void> 
            </object> 
           </void> 
@@ -7877,7 +7880,7 @@
            <string>dib_usrperson_confgrupid_fk_i</string> 
           </void> 
           <void property="javaName"> 
-           <string>configuraciogrupid</string> 
+           <string>configuracioGrupID</string> 
           </void> 
           <void property="javaType"> 
            <class>long</class> 

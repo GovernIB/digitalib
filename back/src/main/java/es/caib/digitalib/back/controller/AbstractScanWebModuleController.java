@@ -320,7 +320,7 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
 
       trans.setEstatmissatge(msg);
       
-      trans.setEstatcodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+      trans.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       if (th == null) {
         log.warn(msg);
       } else {

@@ -116,7 +116,7 @@ public class TransaccioAdminController extends TransaccioController {
 	}
 
 	@Override
-	public List<StringKeyValue> getReferenceListForEstatcodi(HttpServletRequest request,
+	public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request,
 			ModelAndView mav, Where where)  throws I18NException {
 		
 		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();

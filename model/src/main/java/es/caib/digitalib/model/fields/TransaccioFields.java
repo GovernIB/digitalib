@@ -14,11 +14,11 @@ public interface TransaccioFields extends java.io.Serializable {
 
 	 public static final LongField TRANSACCIOID = new LongField(_TABLE_MODEL, "transaccioID", "transaccioid");  // PK
 	 public static final StringField TRANSACTIONWEBID = new StringField(_TABLE_MODEL, "transactionWebId", "webid");
-	 public static final TimestampField DATAINICI = new TimestampField(_TABLE_MODEL, "datainici", "datainici");
+	 public static final TimestampField DATAINICI = new TimestampField(_TABLE_MODEL, "dataInici", "datainici");
 	 public static final TimestampField DATAFI = new TimestampField(_TABLE_MODEL, "datafi", "datafi");
 	 public static final LongField USUARIAPLICACIOID = new LongField(_TABLE_MODEL, "usuariaplicacioid", "usuariaplicacioid");
 	 public static final LongField USUARIPERSONAID = new LongField(_TABLE_MODEL, "usuaripersonaid", "usuaripersonaid");
-	 public static final IntegerField ESTATCODI = new IntegerField(_TABLE_MODEL, "estatcodi", "estatcodi");
+	 public static final IntegerField ESTATCODI = new IntegerField(_TABLE_MODEL, "estatCodi", "estatcodi");
 	 public static final StringField ESTATMISSATGE = new StringField(_TABLE_MODEL, "estatmissatge", "estatmissatge");
 	 public static final StringField ESTATEXCEPCIO = new StringField(_TABLE_MODEL, "estatexcepcio", "estatexcepcio");
 	 public static final LongField FITXERESCANEJATID = new LongField(_TABLE_MODEL, "fitxerEscanejatID", "fitxerescanejatid");

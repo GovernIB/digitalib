@@ -21,19 +21,19 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.DATAINICI)}">
-        <tr id="transaccio_datainici_rowid">
+        <tr id="transaccio_dataInici_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.DATAINICI])?'transaccio.datainici':__theForm.labels[TransaccioFields.DATAINICI]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.DATAINICI])?'transaccio.dataInici':__theForm.labels[TransaccioFields.DATAINICI]}" /> &nbsp;(*)
               <c:if test="${not empty __theForm.help[TransaccioFields.DATAINICI]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.DATAINICI]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-              <form:errors path="transaccio.datainici" cssClass="errorField alert alert-error" />
-              <div id="datainici" class="input-append">
-                <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAINICI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAINICI)? 'input-medium uneditable-input' : 'input-medium'}"  path="transaccio.datainici" />
+              <form:errors path="transaccio.dataInici" cssClass="errorField alert alert-error" />
+              <div id="dataInici" class="input-append">
+                <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAINICI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAINICI)? 'input-medium uneditable-input' : 'input-medium'}"  path="transaccio.dataInici" />
                 <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAINICI)}" >
                 <span class="add-on">
                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
@@ -43,7 +43,7 @@
               </div>
               <script type="text/javascript">                
                 $(function() {
-                  $('#datainici').datetimepicker({
+                  $('#dataInici').datetimepicker({
                     language: '${lang}',
                     pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
                     format:  '${gen:getJSDateTimePattern()}',
@@ -129,19 +129,28 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ESTATCODI)}">
-        <tr id="transaccio_estatcodi_rowid">
+        <tr id="transaccio_estatCodi_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ESTATCODI])?'transaccio.estatcodi':__theForm.labels[TransaccioFields.ESTATCODI]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ESTATCODI])?'transaccio.estatCodi':__theForm.labels[TransaccioFields.ESTATCODI]}" /> &nbsp;(*)
               <c:if test="${not empty __theForm.help[TransaccioFields.ESTATCODI]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ESTATCODI]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.estatcodi" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.estatcodi"   />
-
+          <form:errors path="transaccio.estatCodi" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)}" >
+          <form:hidden path="transaccio.estatCodi"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.estatCodi,__theForm.listOfValuesForEstatCodi)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATCODI)}" >
+          <form:select id="transaccio_estatCodi"  onchange="if(typeof onChangeEstatCodi == 'function') {  onChangeEstatCodi(this); };"  cssClass="input-xxlarge" path="transaccio.estatCodi">
+            <c:forEach items="${__theForm.listOfValuesForEstatCodi}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>

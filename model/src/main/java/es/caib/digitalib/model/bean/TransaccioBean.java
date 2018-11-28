@@ -12,11 +12,11 @@ private static final long serialVersionUID = 2099592239L;
 
 	long transaccioID;// PK
 	java.lang.String transactionWebId;
-	java.sql.Timestamp datainici;
+	java.sql.Timestamp dataInici;
 	java.sql.Timestamp datafi;
 	java.lang.Long usuariaplicacioid;
 	java.lang.Long usuaripersonaid;
-	int estatcodi;
+	int estatCodi;
 	java.lang.String estatmissatge;
 	java.lang.String estatexcepcio;
 	java.lang.Long fitxerEscanejatID;
@@ -44,14 +44,14 @@ private static final long serialVersionUID = 2099592239L;
   }
 
   /** Constructor amb tots els camps  */
-  public TransaccioBean(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp datainici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatcodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view) {
+  public TransaccioBean(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatCodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view) {
     this.transaccioID=transaccioID;
     this.transactionWebId=transactionWebId;
-    this.datainici=datainici;
+    this.dataInici=dataInici;
     this.datafi=datafi;
     this.usuariaplicacioid=usuariaplicacioid;
     this.usuaripersonaid=usuaripersonaid;
-    this.estatcodi=estatcodi;
+    this.estatCodi=estatCodi;
     this.estatmissatge=estatmissatge;
     this.estatexcepcio=estatexcepcio;
     this.fitxerEscanejatID=fitxerEscanejatID;
@@ -74,13 +74,13 @@ private static final long serialVersionUID = 2099592239L;
     this.view=view;
 }
   /** Constructor sense valors autoincrementals */
-  public TransaccioBean(java.lang.String transactionWebId , java.sql.Timestamp datainici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatcodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view) {
+  public TransaccioBean(java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatCodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view) {
     this.transactionWebId=transactionWebId;
-    this.datainici=datainici;
+    this.dataInici=dataInici;
     this.datafi=datafi;
     this.usuariaplicacioid=usuariaplicacioid;
     this.usuaripersonaid=usuaripersonaid;
-    this.estatcodi=estatcodi;
+    this.estatCodi=estatCodi;
     this.estatmissatge=estatmissatge;
     this.estatexcepcio=estatexcepcio;
     this.fitxerEscanejatID=fitxerEscanejatID;
@@ -103,21 +103,21 @@ private static final long serialVersionUID = 2099592239L;
     this.view=view;
 }
   /** Constructor dels valors Not Null */
-  public TransaccioBean(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp datainici , int estatcodi , long perfilid) {
+  public TransaccioBean(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , int estatCodi , long perfilid) {
     this.transaccioID=transaccioID;
     this.transactionWebId=transactionWebId;
-    this.datainici=datainici;
-    this.estatcodi=estatcodi;
+    this.dataInici=dataInici;
+    this.estatCodi=estatCodi;
     this.perfilid=perfilid;
 }
   public TransaccioBean(Transaccio __bean) {
     this.setTransaccioID(__bean.getTransaccioID());
     this.setTransactionWebId(__bean.getTransactionWebId());
-    this.setDatainici(__bean.getDatainici());
+    this.setDataInici(__bean.getDataInici());
     this.setDatafi(__bean.getDatafi());
     this.setUsuariaplicacioid(__bean.getUsuariaplicacioid());
     this.setUsuaripersonaid(__bean.getUsuaripersonaid());
-    this.setEstatcodi(__bean.getEstatcodi());
+    this.setEstatCodi(__bean.getEstatCodi());
     this.setEstatmissatge(__bean.getEstatmissatge());
     this.setEstatexcepcio(__bean.getEstatexcepcio());
     this.setFitxerEscanejatID(__bean.getFitxerEscanejatID());
@@ -158,11 +158,11 @@ private static final long serialVersionUID = 2099592239L;
 		this.transactionWebId = _transactionWebId_;
 	};
 
-	public java.sql.Timestamp getDatainici() {
-		return(datainici);
+	public java.sql.Timestamp getDataInici() {
+		return(dataInici);
 	};
-	public void setDatainici(java.sql.Timestamp _datainici_) {
-		this.datainici = _datainici_;
+	public void setDataInici(java.sql.Timestamp _dataInici_) {
+		this.dataInici = _dataInici_;
 	};
 
 	public java.sql.Timestamp getDatafi() {
@@ -186,11 +186,11 @@ private static final long serialVersionUID = 2099592239L;
 		this.usuaripersonaid = _usuaripersonaid_;
 	};
 
-	public int getEstatcodi() {
-		return(estatcodi);
+	public int getEstatCodi() {
+		return(estatCodi);
 	};
-	public void setEstatcodi(int _estatcodi_) {
-		this.estatcodi = _estatcodi_;
+	public void setEstatCodi(int _estatCodi_) {
+		this.estatCodi = _estatCodi_;
 	};
 
 	public java.lang.String getEstatmissatge() {
@@ -342,11 +342,11 @@ private static final long serialVersionUID = 2099592239L;
     TransaccioBean __tmp = new TransaccioBean();
     __tmp.setTransaccioID(__bean.getTransaccioID());
     __tmp.setTransactionWebId(__bean.getTransactionWebId());
-    __tmp.setDatainici(__bean.getDatainici());
+    __tmp.setDataInici(__bean.getDataInici());
     __tmp.setDatafi(__bean.getDatafi());
     __tmp.setUsuariaplicacioid(__bean.getUsuariaplicacioid());
     __tmp.setUsuaripersonaid(__bean.getUsuaripersonaid());
-    __tmp.setEstatcodi(__bean.getEstatcodi());
+    __tmp.setEstatCodi(__bean.getEstatCodi());
     __tmp.setEstatmissatge(__bean.getEstatmissatge());
     __tmp.setEstatexcepcio(__bean.getEstatexcepcio());
     __tmp.setFitxerEscanejatID(__bean.getFitxerEscanejatID());

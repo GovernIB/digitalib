@@ -115,11 +115,11 @@ public abstract class AbstractScanWebProcessController {
           FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
   
           transaccio.setFitxerEscanejatID(fitxer.getFitxerID());
-          transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
+          transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
   
         } else {
   
-          transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+          transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
           if (listDocs.size() == 0) {
             // XYZ ZZZ Traduir
             transaccio.setEstatmissatge(" L'usuari no ha escanejat cap fitxer.");
@@ -133,13 +133,13 @@ public abstract class AbstractScanWebProcessController {
       
       case ScanWebStatus.STATUS_FINAL_ERROR:
       {
-        transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       }
       break;
       
       case ScanWebStatus.STATUS_CANCELLED:
       {
-        transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_CANCELLED);
+        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_CANCELLED);
         if (transaccio.getEstatmissatge() == null) {
           // XYZ ZZZ traduir
           transaccio.setEstatmissatge("plugindescan.cancelat");
@@ -153,7 +153,7 @@ public abstract class AbstractScanWebProcessController {
         // XYZ ZZZ Traduir
         String inconsistentState = "El mòdul d´escaneig ha finalitzat inesperadament"
             + " amb un codi d'estat desconegut " + status;
-        transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
         transaccio.setEstatmissatge(inconsistentState);
         transaccio.setEstatexcepcio(new Exception().toString()); // XYZ ZZZ  
       }
@@ -166,7 +166,7 @@ public abstract class AbstractScanWebProcessController {
 
     String urlRetorn = transaccio.getReturnUrl();
 
-    if (transaccio.getEstatcodi() != ScanWebStatus.STATUS_FINAL_OK) {
+    if (transaccio.getEstatCodi() != ScanWebStatus.STATUS_FINAL_OK) {
 
       if (transaccio.getEstatmissatge() == null) {
         // XYZ ZZZ

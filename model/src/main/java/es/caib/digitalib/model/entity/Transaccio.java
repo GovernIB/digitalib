@@ -8,8 +8,8 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.String getTransactionWebId();
 	public void setTransactionWebId(java.lang.String _transactionWebId_);
 
-	public java.sql.Timestamp getDatainici();
-	public void setDatainici(java.sql.Timestamp _datainici_);
+	public java.sql.Timestamp getDataInici();
+	public void setDataInici(java.sql.Timestamp _dataInici_);
 
 	public java.sql.Timestamp getDatafi();
 	public void setDatafi(java.sql.Timestamp _datafi_);
@@ -20,8 +20,8 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.Long getUsuaripersonaid();
 	public void setUsuaripersonaid(java.lang.Long _usuaripersonaid_);
 
-	public int getEstatcodi();
-	public void setEstatcodi(int _estatcodi_);
+	public int getEstatCodi();
+	public void setEstatCodi(int _estatCodi_);
 
 	public java.lang.String getEstatmissatge();
 	public void setEstatmissatge(java.lang.String _estatmissatge_);

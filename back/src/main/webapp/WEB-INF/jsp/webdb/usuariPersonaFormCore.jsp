@@ -120,24 +120,24 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariPersonaFields.CONFIGURACIOGRUPID)}">
-        <tr id="usuariPersona_configuraciogrupid_rowid">
+        <tr id="usuariPersona_configuracioGrupID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[UsuariPersonaFields.CONFIGURACIOGRUPID])?'usuariPersona.configuraciogrupid':__theForm.labels[UsuariPersonaFields.CONFIGURACIOGRUPID]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[UsuariPersonaFields.CONFIGURACIOGRUPID])?'usuariPersona.configuracioGrupID':__theForm.labels[UsuariPersonaFields.CONFIGURACIOGRUPID]}" /> &nbsp;(*)
               <c:if test="${not empty __theForm.help[UsuariPersonaFields.CONFIGURACIOGRUPID]}">
               <i class="icon-info-sign" title="${__theForm.help[UsuariPersonaFields.CONFIGURACIOGRUPID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-          <form:errors path="usuariPersona.configuraciogrupid" cssClass="errorField alert alert-error" />
+          <form:errors path="usuariPersona.configuracioGrupID" cssClass="errorField alert alert-error" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.CONFIGURACIOGRUPID)}" >
-          <form:hidden path="usuariPersona.configuraciogrupid"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.usuariPersona.configuraciogrupid,__theForm.listOfConfiguracioGrupForConfiguraciogrupid)}"  />
+          <form:hidden path="usuariPersona.configuracioGrupID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.usuariPersona.configuracioGrupID,__theForm.listOfConfiguracioGrupForConfiguracioGrupID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.CONFIGURACIOGRUPID)}" >
-          <form:select id="usuariPersona_configuraciogrupid"  onchange="if(typeof onChangeConfiguraciogrupid == 'function') {  onChangeConfiguraciogrupid(this); };"  cssClass="input-xxlarge" path="usuariPersona.configuraciogrupid">
-            <c:forEach items="${__theForm.listOfConfiguracioGrupForConfiguraciogrupid}" var="tmp">
+          <form:select id="usuariPersona_configuracioGrupID"  onchange="if(typeof onChangeConfiguracioGrupID == 'function') {  onChangeConfiguracioGrupID(this); };"  cssClass="input-xxlarge" path="usuariPersona.configuracioGrupID">
+            <c:forEach items="${__theForm.listOfConfiguracioGrupForConfiguracioGrupID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

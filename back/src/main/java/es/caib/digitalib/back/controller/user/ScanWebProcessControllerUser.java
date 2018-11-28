@@ -343,7 +343,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     TransaccioJPA transaccio = transaccioLogicaEjb
         .searchTransaccioByTransactionWebID(transactionWebID);
 
-    int status = transaccio.getEstatcodi();
+    int status = transaccio.getEstatCodi();
 
     if (status == ScanWebSimpleStatus.STATUS_FINAL_OK) {
       HtmlUtils.saveMessageSuccess(request, "Operacio realitzada correctament");

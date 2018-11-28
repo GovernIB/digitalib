@@ -46,10 +46,10 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
         throw new Exception("NO existeix la transacció amb ID " + transactionWebID);
       }
 
-      if (transaccio.getEstatcodi() < 0) {
+      if (transaccio.getEstatCodi() < 0) {
         // XYZ ZZZ ZZZ Traduir
         String msg = "La transacció amb ID " + transactionWebID + " te un estat no vàlid ("
-            + transaccio.getEstatcodi() + ") per iniciar el proces d'escaneig.";
+            + transaccio.getEstatCodi() + ") per iniciar el proces d'escaneig.";
         throw new Exception(msg);
       }
     }

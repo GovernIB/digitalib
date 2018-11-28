@@ -149,16 +149,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuariPersonaFields.CONFIGURACIOGRUPID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="usuariPersona.configuraciogrupid" />:</span>
+              <span class="add-on"><fmt:message key="usuariPersona.configuracioGrupID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="configuraciogrupidDesde" />
+              <form:input cssClass="input-append input-small" path="configuracioGrupIDDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="configuraciogrupidFins" />
+              <form:input cssClass="input-append input-small search-query" path="configuracioGrupIDFins" />
 
             </div>
 

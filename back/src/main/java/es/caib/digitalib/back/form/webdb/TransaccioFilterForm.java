@@ -54,25 +54,25 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
-  private java.sql.Timestamp datainiciDesde;
+  private java.sql.Timestamp dataIniciDesde;
 
-  public java.sql.Timestamp getDatainiciDesde() {
-    return this.datainiciDesde;
+  public java.sql.Timestamp getDataIniciDesde() {
+    return this.dataIniciDesde;
   }
 
-  public void setDatainiciDesde(java.sql.Timestamp datainiciDesde) {
-    this.datainiciDesde = datainiciDesde;
+  public void setDataIniciDesde(java.sql.Timestamp dataIniciDesde) {
+    this.dataIniciDesde = dataIniciDesde;
   }
 
 
-  private java.sql.Timestamp datainiciFins;
+  private java.sql.Timestamp dataIniciFins;
 
-  public java.sql.Timestamp getDatainiciFins() {
-    return this.datainiciFins;
+  public java.sql.Timestamp getDataIniciFins() {
+    return this.dataIniciFins;
   }
 
-  public void setDatainiciFins(java.sql.Timestamp datainiciFins) {
-    this.datainiciFins = datainiciFins;
+  public void setDataIniciFins(java.sql.Timestamp dataIniciFins) {
+    this.dataIniciFins = dataIniciFins;
   }
 
 
@@ -142,25 +142,25 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
-  private java.lang.Integer estatcodiDesde;
+  private java.lang.Integer estatCodiDesde;
 
-  public java.lang.Integer getEstatcodiDesde() {
-    return this.estatcodiDesde;
+  public java.lang.Integer getEstatCodiDesde() {
+    return this.estatCodiDesde;
   }
 
-  public void setEstatcodiDesde(java.lang.Integer estatcodiDesde) {
-    this.estatcodiDesde = estatcodiDesde;
+  public void setEstatCodiDesde(java.lang.Integer estatCodiDesde) {
+    this.estatCodiDesde = estatCodiDesde;
   }
 
 
-  private java.lang.Integer estatcodiFins;
+  private java.lang.Integer estatCodiFins;
 
-  public java.lang.Integer getEstatcodiFins() {
-    return this.estatcodiFins;
+  public java.lang.Integer getEstatCodiFins() {
+    return this.estatCodiFins;
   }
 
-  public void setEstatcodiFins(java.lang.Integer estatcodiFins) {
-    this.estatcodiFins = estatcodiFins;
+  public void setEstatCodiFins(java.lang.Integer estatCodiFins) {
+    this.estatCodiFins = estatCodiFins;
   }
 
 
@@ -425,16 +425,16 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.transaccioIDDesde = __toClone.transaccioIDDesde;
     this.transaccioIDFins = __toClone.transaccioIDFins;
     this.transactionWebId = __toClone.transactionWebId;
-    this.datainiciDesde = __toClone.datainiciDesde;
-    this.datainiciFins = __toClone.datainiciFins;
+    this.dataIniciDesde = __toClone.dataIniciDesde;
+    this.dataIniciFins = __toClone.dataIniciFins;
     this.datafiDesde = __toClone.datafiDesde;
     this.datafiFins = __toClone.datafiFins;
     this.usuariaplicacioidDesde = __toClone.usuariaplicacioidDesde;
     this.usuariaplicacioidFins = __toClone.usuariaplicacioidFins;
     this.usuaripersonaidDesde = __toClone.usuaripersonaidDesde;
     this.usuaripersonaidFins = __toClone.usuaripersonaidFins;
-    this.estatcodiDesde = __toClone.estatcodiDesde;
-    this.estatcodiFins = __toClone.estatcodiFins;
+    this.estatCodiDesde = __toClone.estatCodiDesde;
+    this.estatCodiFins = __toClone.estatCodiFins;
     this.estatmissatge = __toClone.estatmissatge;
     this.estatexcepcio = __toClone.estatexcepcio;
     this.infoscanpixeltypeDesde = __toClone.infoscanpixeltypeDesde;
@@ -458,6 +458,7 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.returnUrl = __toClone.returnUrl;
     this.viewDesde = __toClone.viewDesde;
     this.viewFins = __toClone.viewFins;
+    this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
     this.mapOfInfoSignaturaForInfosignaturaid = __toClone.mapOfInfoSignaturaForInfosignaturaid;
     this.mapOfInfoCustodyForInfocustodyid = __toClone.mapOfInfoCustodyForInfocustodyid;
     this.mapOfPerfilForPerfilid = __toClone.mapOfPerfilForPerfilid;
@@ -496,6 +497,18 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
    // -----------------------
    // Maps de referencies.
    // -----------------------
+  private Map<String, String> mapOfValuesForEstatCodi;
+
+  public Map<String, String> getMapOfValuesForEstatCodi() {
+    return this.mapOfValuesForEstatCodi;
+  }
+
+  public void setMapOfValuesForEstatCodi(Map<String, String> mapOfValuesForEstatCodi) {
+    this.mapOfValuesForEstatCodi = mapOfValuesForEstatCodi;
+  }
+
+
+
   private Map<String, String> mapOfInfoSignaturaForInfosignaturaid;
 
   public Map<String, String> getMapOfInfoSignaturaForInfosignaturaid() {
