@@ -3,11 +3,16 @@ package es.caib.digitalib.back.controller.all;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import es.caib.digitalib.back.controller.ScanWebModuleController;
+import es.caib.digitalib.back.controller.AbstractScanWebModuleController;
 
+/**
+ * 
+ * @author anadal
+ *
+ */
 @Controller
-@RequestMapping(value = ScanWebModuleController.CONTEXTWEB_PUBLIC)
-public class ScanWebModuleControllerPublic extends ScanWebModuleController {
+@RequestMapping(value = AbstractScanWebModuleController.CONTEXTWEB_PUBLIC)
+public class ScanWebModuleControllerPublic extends AbstractScanWebModuleController {
 
   @Override
   protected String getContextWeb() {

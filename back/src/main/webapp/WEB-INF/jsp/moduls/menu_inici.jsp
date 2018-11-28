@@ -30,12 +30,6 @@
    </sec:authorize>
     --%>
 
-    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
-    <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/common/scan/form"/>">
-        <span style="${(fn:contains(url, '/common/scan/form'))? "font-weight: bold;" : ""}"><fmt:message key="escanejar" /></span>
-      </a>
-    </li>
    
   </ul>
 </div>

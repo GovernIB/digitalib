@@ -22,18 +22,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import es.caib.digitalib.back.controller.all.RestScanWebProcessController;
+import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
 import es.caib.digitalib.back.security.LoginInfo;
-import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
+import es.caib.digitalib.logic.utils.ScanWebUtils;
 import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.PerfilUsuariAplicacio;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
-import es.caib.digitalib.model.fields.PerfilUsuariAplicacioQueryPath;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
@@ -185,8 +184,6 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     }
 
     // XYZ ZZZ ZZZ Valida Idioma DOC
-    
-    final String transactionWebID = internalGetTransacction();
 
     // Valida Perfil
     String scanWebProfile = requestTransactionID.getScanWebProfile();
@@ -195,65 +192,36 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     }
 
     UsuariAplicacioJPA usuariAplicacio = usuariAplicacioCache.get();
+    
+    // Valida VISTA
+    int view = requestTransactionID.getView();
 
-    PerfilUsuariAplicacioQueryPath qp = new PerfilUsuariAplicacioQueryPath();
+    if (view == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN
+        || view == ScanWebSimpleGetTransactionIdRequest.VIEW_IFRAME) {
+      // OK
+    } else {
+      // XYZ ZZZ ZZZ
+      String msg = "La transacció s'ha intentat crear amb un id de vista desconegut (" + view + ")";
+      return generateServerError(msg);
 
-    Long perfilID = null;
+    }
+
+
+    // Crea Transacció
+    String transactionWebID;
     try {
-      perfilID = perfilUsuariAplicacioEjb.executeQueryOne(qp.PERFIL().PERFILID(), Where.AND(
-          PerfilUsuariAplicacioFields.USUARIAPLICACIOID.equal(usuariAplicacio
-              .getUsuariAplicacioID()),
-          // Dels perfils assignats esta el del codi enviat
-          qp.PERFIL().CODI().equal(scanWebProfile)));
-    } catch (I18NException e1) {
-      log.error("Error desconegut cercant perfil"
-          + I18NLogicUtils.getMessage(e1, new Locale("ca")));
+      TransaccioJPA transaccio = transaccioLogicaEjb.crearTransaccio(requestTransactionID,
+          usuariAplicacio, null, null);
+      transactionWebID = transaccio.getTransactionWebId();
+    } catch (I18NException e) {
+      // XYZ ZZZ YTraduir
+      return generateServerError("Error creant la transaccio amb Perfil: "
+          + I18NLogicUtils.getMessage(e, new Locale(lang)));
     }
-
-    if (perfilID == null) {
-      return generateServerError("El pefil " + scanWebProfile
-          + " no està assignat a usuari aplicacio " + usuariAplicacio.getUsername());
-    }
-
-    PerfilJPA perfil = perfilEjb.findByPrimaryKey(perfilID);
-
-    PerfilJPA clonedPerfil = PerfilJPA.toJPA(perfil);
-
-    clonedPerfil.setCodi(clonedPerfil.getCodi() + "-" + transactionWebID);
-    clonedPerfil.setPerfilID(0);
-    clonedPerfil.setUsPerfil(Constants.PERFIL_US_TRANSACCIO_INFO);
-
-    // XYZ ZZZ ZZZ Falten altres comprovacions
-
 
     HttpHeaders headers = addAccessControllAllowOrigin();
-    ResponseEntity<?> res = new ResponseEntity<String>(transactionWebID, headers, HttpStatus.OK);
-
-    TransaccioJPA t = new TransaccioJPA();
-
-    t.setDatainici(new Timestamp(System.currentTimeMillis()));
-    t.setEstatcodi(ScanWebSimpleStatus.STATUS_REQUESTED_ID);
-    t.setTransactionWebId(transactionWebID);
-    t.setLanguageui(requestTransactionID.getLanguageUI());
-    t.setLanguagedoc(requestTransactionID.getLanguageDoc());
-
-    t.setUsuariaplicacioid(usuariAplicacio.getUsuariAplicacioID());
-    t.setUsuaripersonaid(null); // Falta cercarla a partir de
-                                // requestTransactionID.usernameRequest;
-
-    t.setFuncionariusername(requestTransactionID.getFuncionariUsername());
-    t.setFuncionarinom(requestTransactionID.getFuncionariNom());
-    t.setCiutadanif(requestTransactionID.getCiutadaNif());
-    t.setCiutadanom(requestTransactionID.getCiutadaNom());
-    t.setExpedient(requestTransactionID.getExpedientID());
-
-    t.setPerfil(clonedPerfil);
-
-    try {
-      transaccioLogicaEjb.createWithProfile(t);
-    } catch (I18NException e) {
-      return generateServerError("Error creant la transaccio amb Perfil");
-    }
+    ResponseEntity<?> res = new ResponseEntity<String>(transactionWebID, headers,
+        HttpStatus.OK);
 
     return res;
 
@@ -344,21 +312,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
       transaccio.setReturnUrl(startTransactionRequest.getReturnUrl());
 
-      int view = startTransactionRequest.getView();
-
-      if (view == ScanWebSimpleStartTransactionRequest.VIEW_FULLSCREEN
-          || view == ScanWebSimpleStartTransactionRequest.VIEW_IFRAME) {
-        // OK
-        transaccio.setView(view);
-      } else {
-
-        // XYZ ZZZ ZZZ
-        String msg = "La transacció amb ID " + transactionWebID + " s'ha intentat iniciar"
-            + "amb un id de vista desconegut (" + view + ")";
-        return generateServerError(msg);
-
-      }
-
+      
       // CRIDAR A START TRANSACION
 
       // XYZ ZZZ ZZZ Validar
@@ -385,8 +339,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       // XYZ ZZZ TODO Això ho ha de collir de la propietat URL PortaFIB de
       // UsuariApplicacioConfig
       // XYZ ZZZ TODO Configurar que si getAppUrl val null llavors llanci excepció
-      final String redirectUrl = urlBase + RestScanWebProcessController.SCANWEB_CONTEXTPATH + "/start/"
-          + transaccio.getTransactionWebId();
+      final String redirectUrl = urlBase + ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
+          + "/start/" + transaccio.getTransactionWebId();
       if (log.isDebugEnabled()) {
         log.debug("Inici de TRANSACCIO SCANWEB = " + redirectUrl);
       }
@@ -425,7 +379,6 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     }
 
   }
-
 
   @RequestMapping(value = "/" + ApiScanWebSimple.TRANSACTIONSTATUS, method = RequestMethod.POST)
   @ResponseBody
@@ -501,48 +454,47 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       // + "] de la transacció: " + transactionID;
       // return generateServerError(msg);
       // }
-      
-      TransaccioJPA transaccio = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
-      
-      
+
+      TransaccioJPA transaccio = transaccioLogicaEjb
+          .searchTransaccioByTransactionWebID(transactionWebID);
 
       // TODO XYZ ZZZ ZZZZ
       ScanWebSimpleScanResult fssr = new ScanWebSimpleScanResult();
-      
+
       ScanWebSimpleStatus status = new ScanWebSimpleStatus();
       status.setStatus(transaccio.getEstatcodi());
       status.setErrorStackTrace(transaccio.getEstatexcepcio());
       // XYZ ZZZ Recuperar una Excepcio a partir d'un stack trace
-      //status.setErrorException(errorException);
-      
+      // status.setErrorException(errorException);
+
       fssr.setStatus(status);
-      
-      
+
       if (status.getStatus() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
-      
+
         fssr.setCustodyInfo(null);
-        
+
         fssr.setDetachedSignatureFile(null);
-        
+
         // Document escanejat
-        long scannedFileID= transaccio.getFitxerEscanejatID();
-        
+        long scannedFileID = transaccio.getFitxerEscanejatID();
+
         byte[] data = FileSystemManager.getFileContent(scannedFileID);
 
         String nom = transaccio.getFitxerEscanejat().getNom();
-        
+
         // XYZ ZZZ Treure mime segons tipus format del perfil de Transaccio
         String mime = transaccio.getFitxerEscanejat().getMime();
-        
+
         fssr.setScannedFile(new ScanWebSimpleFile(nom, mime, data));
-        
+
         // Informació de Document escanejat
         Integer pixelType = null;
         Integer pppResolution = null;
-        String formatFile =  RestScanWebProcessController.formatFileToScanWebApi(transaccio.getPerfil().getScanFormatFitxer()); // S'ha de treure de Perfil        
+        String formatFile = ScanWebUtils.formatFileToScanWebApi(transaccio
+            .getPerfil().getScanFormatFitxer()); // S'ha de treure de Perfil
         Boolean ocr = null;
-        ScanWebSimpleScannedFileInfo scannedFileInfo = new ScanWebSimpleScannedFileInfo(pixelType, pppResolution,
-            formatFile, ocr);
+        ScanWebSimpleScannedFileInfo scannedFileInfo = new ScanWebSimpleScannedFileInfo(
+            pixelType, pppResolution, formatFile, ocr);
 
         fssr.setScannedFileInfo(scannedFileInfo);
 
@@ -600,7 +552,6 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     log.info(" XYZ ZZZ closeTransaction => FINAL OK");
 
   }
-
 
   public static long lastCheckExpiredTransaccions = 0;
 

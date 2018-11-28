@@ -90,6 +90,17 @@ public class UsuariAplicacioValidator<T> implements UsuariAplicacioFields {
       // ====== Check Unique MULTIPLES - NOU =======
 
       // Check Unique - no PK
+      if (__vr.getFieldErrorCount(USERNAME) == 0) {
+        java.lang.String __username = (java.lang.String)__vr.getFieldValue(__target__,USERNAME);
+        Long __count_ = null;
+        try { __count_ = __usuariAplicacioManager.count(org.fundaciobit.genapp.common.query.Where.AND(USERNAME.equal(__username))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(USERNAME, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__username)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAME)));
+        }
+      }
+
       // Check Unique - PK no AutoIncrement amb UNA SOLA PK 
     } else {
       // ================ UPDATE
@@ -97,6 +108,18 @@ public class UsuariAplicacioValidator<T> implements UsuariAplicacioFields {
       // ====== Check Unique MULTIPLES - EDIT  =======
 
       // Check Unique - no PK
+      if (__vr.getFieldErrorCount(USERNAME) == 0 && __vr.getFieldErrorCount(USUARIAPLICACIOID) == 0) {
+        java.lang.String __username = (java.lang.String)__vr.getFieldValue(__target__,USERNAME);
+        java.lang.Long __usuariaplicacioid = (java.lang.Long)__vr.getFieldValue(__target__,USUARIAPLICACIOID);
+        Long __count_ = null;
+        try { __count_ = __usuariAplicacioManager.count(org.fundaciobit.genapp.common.query.Where.AND(USERNAME.equal(__username), USUARIAPLICACIOID.notEqual(__usuariaplicacioid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(USERNAME, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__username)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAME)));
+        }
+      }
+
     }
 
     // Fields with References to Other tables 

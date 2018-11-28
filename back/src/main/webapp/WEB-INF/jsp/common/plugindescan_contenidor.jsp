@@ -7,14 +7,14 @@
 </script>
 </c:if>
 <c:if test="${not fullView}">
-
+<%-- 
 <style>
     body{
         background-image: url("/img/bg.png");
          background-repeat: repeat;
     }
 </style>
-
+--%>
 <br/><br/>
 
 

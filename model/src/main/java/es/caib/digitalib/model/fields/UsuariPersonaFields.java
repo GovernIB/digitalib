@@ -19,7 +19,7 @@ public interface UsuariPersonaFields extends java.io.Serializable {
 	 public static final StringField EMAIL = new StringField(_TABLE_MODEL, "email", "email");
 	 public static final StringField NIF = new StringField(_TABLE_MODEL, "nif", "nif");
 	 public static final StringField IDIOMAID = new StringField(_TABLE_MODEL, "idiomaID", "idiomaid");
-	 public static final LongField CONFIGURACIOGRUPID = new LongField(_TABLE_MODEL, "configuraciogrupid", "configuraciogrupid");
+	 public static final LongField CONFIGURACIOGRUPID = new LongField(_TABLE_MODEL, "configuracioGrupID", "configuraciogrupid");
 
 
   public static final Field<?>[] ALL_USUARIPERSONA_FIELDS = {

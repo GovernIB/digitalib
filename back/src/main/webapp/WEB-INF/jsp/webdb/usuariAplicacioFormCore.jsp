@@ -39,18 +39,18 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariAplicacioFields.EMAILADMIN)}">
-        <tr id="usuariAplicacio_emailadmin_rowid">
+        <tr id="usuariAplicacio_emailAdmin_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[UsuariAplicacioFields.EMAILADMIN])?'usuariAplicacio.emailadmin':__theForm.labels[UsuariAplicacioFields.EMAILADMIN]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[UsuariAplicacioFields.EMAILADMIN])?'usuariAplicacio.emailAdmin':__theForm.labels[UsuariAplicacioFields.EMAILADMIN]}" /> &nbsp;(*)
               <c:if test="${not empty __theForm.help[UsuariAplicacioFields.EMAILADMIN]}">
               <i class="icon-info-sign" title="${__theForm.help[UsuariAplicacioFields.EMAILADMIN]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="usuariAplicacio.emailadmin" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariAplicacioFields.EMAILADMIN)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,UsuariAplicacioFields.EMAILADMIN)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="usuariAplicacio.emailadmin"   />
+            <form:errors path="usuariAplicacio.emailAdmin" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariAplicacioFields.EMAILADMIN)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,UsuariAplicacioFields.EMAILADMIN)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="usuariAplicacio.emailAdmin"   />
 
            </td>
         </tr>

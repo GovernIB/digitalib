@@ -56,10 +56,6 @@ public class UsuariPersonaValidator<T> implements UsuariPersonaFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(IDIOMAID)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,CONFIGURACIOGRUPID, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONFIGURACIOGRUPID)));
-
     // Check size
     if (__vr.getFieldErrorCount(USERNAME) == 0) {
       java.lang.String __username = (java.lang.String)__vr.getFieldValue(__target__,USERNAME);
@@ -137,6 +133,28 @@ public class UsuariPersonaValidator<T> implements UsuariPersonaFields {
       // ====== Check Unique MULTIPLES - NOU =======
 
       // Check Unique - no PK
+      if (__vr.getFieldErrorCount(USERNAME) == 0) {
+        java.lang.String __username = (java.lang.String)__vr.getFieldValue(__target__,USERNAME);
+        Long __count_ = null;
+        try { __count_ = __usuariPersonaManager.count(org.fundaciobit.genapp.common.query.Where.AND(USERNAME.equal(__username))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(USERNAME, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__username)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAME)));
+        }
+      }
+
+      if (__vr.getFieldErrorCount(NIF) == 0) {
+        java.lang.String __nif = (java.lang.String)__vr.getFieldValue(__target__,NIF);
+        Long __count_ = null;
+        try { __count_ = __usuariPersonaManager.count(org.fundaciobit.genapp.common.query.Where.AND(NIF.equal(__nif))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(NIF, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__nif)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NIF)));
+        }
+      }
+
       // Check Unique - PK no AutoIncrement amb UNA SOLA PK 
     } else {
       // ================ UPDATE
@@ -144,6 +162,30 @@ public class UsuariPersonaValidator<T> implements UsuariPersonaFields {
       // ====== Check Unique MULTIPLES - EDIT  =======
 
       // Check Unique - no PK
+      if (__vr.getFieldErrorCount(USERNAME) == 0 && __vr.getFieldErrorCount(USUARIPERSONAID) == 0) {
+        java.lang.String __username = (java.lang.String)__vr.getFieldValue(__target__,USERNAME);
+        java.lang.Long __usuaripersonaid = (java.lang.Long)__vr.getFieldValue(__target__,USUARIPERSONAID);
+        Long __count_ = null;
+        try { __count_ = __usuariPersonaManager.count(org.fundaciobit.genapp.common.query.Where.AND(USERNAME.equal(__username), USUARIPERSONAID.notEqual(__usuaripersonaid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(USERNAME, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__username)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAME)));
+        }
+      }
+
+      if (__vr.getFieldErrorCount(NIF) == 0 && __vr.getFieldErrorCount(USUARIPERSONAID) == 0) {
+        java.lang.String __nif = (java.lang.String)__vr.getFieldValue(__target__,NIF);
+        java.lang.Long __usuaripersonaid = (java.lang.Long)__vr.getFieldValue(__target__,USUARIPERSONAID);
+        Long __count_ = null;
+        try { __count_ = __usuariPersonaManager.count(org.fundaciobit.genapp.common.query.Where.AND(NIF.equal(__nif), USUARIPERSONAID.notEqual(__usuaripersonaid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(NIF, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__nif)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NIF)));
+        }
+      }
+
     }
 
     // Fields with References to Other tables 
@@ -161,13 +203,15 @@ public class UsuariPersonaValidator<T> implements UsuariPersonaFields {
 
     if (__vr.getFieldErrorCount(CONFIGURACIOGRUPID) == 0) {
       java.lang.Long __configuraciogrupid = (java.lang.Long)__vr.getFieldValue(__target__,CONFIGURACIOGRUPID);
-      Long __count_ = null;
-      try { __count_ = __configuracioGrupManager.count(ConfiguracioGrupFields.CONFIGURACIOGRUPID.equal(__configuraciogrupid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-      if (__count_ == null || __count_ == 0) {        
-        __vr.rejectValue(CONFIGURACIOGRUPID, "error.notfound",
+      if (__configuraciogrupid != null ) {
+        Long __count_ = null;
+        try { __count_ = __configuracioGrupManager.count(ConfiguracioGrupFields.CONFIGURACIOGRUPID.equal(__configuraciogrupid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(CONFIGURACIOGRUPID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("configuracioGrup.configuracioGrup"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("configuracioGrup.configuracioGrupID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__configuraciogrupid)));
+        }
       }
     }
 

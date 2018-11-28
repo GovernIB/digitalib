@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
+import org.hibernate.annotations.Index;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import org.hibernate.annotations.ForeignKey;
@@ -27,14 +28,15 @@ private static final long serialVersionUID = 760472444L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
+	@Index(name="dib_transaccio_pk_i")
 	@Column(name="transaccioid",nullable = false,length = 19)
 	long transaccioID;
 
-	@Column(name="webid",nullable = false,length = 100)
+	@Column(name="webid",nullable = false,unique = true,length = 100)
 	java.lang.String transactionWebId;
 
 	@Column(name="datainici",nullable = false,length = 29,precision = 6)
-	java.sql.Timestamp datainici;
+	java.sql.Timestamp dataInici;
 
 	@Column(name="datafi",length = 29,precision = 6)
 	java.sql.Timestamp datafi;
@@ -55,9 +57,11 @@ private static final long serialVersionUID = 760472444L;
   @Lob
 	java.lang.String estatexcepcio;
 
+	@Index(name="dib_transaccio_fileplain_fk_i")
 	@Column(name="fitxerescanejatid",length = 19)
 	java.lang.Long fitxerEscanejatID;
 
+	@Index(name="dib_transaccio_filesign_fk_i")
 	@Column(name="fitxersignaturaid",length = 19)
 	java.lang.Long fitxerSignaturaID;
 
@@ -70,9 +74,11 @@ private static final long serialVersionUID = 760472444L;
 	@Column(name="infoscanocr",length = 1)
 	boolean infoscanocr;
 
+	@Index(name="dib_transaccio_infosignid_fk_i")
 	@Column(name="infosignaturaid",length = 19)
 	java.lang.Long infosignaturaid;
 
+	@Index(name="dib_transaccio_infocustid_fk_i")
 	@Column(name="infocustodyid",length = 19)
 	java.lang.Long infocustodyid;
 
@@ -97,6 +103,7 @@ private static final long serialVersionUID = 760472444L;
 	@Column(name="expedient",length = 255)
 	java.lang.String expedient;
 
+	@Index(name="dib_transaccio_perfilid_fk_i")
 	@Column(name="perfilid",nullable = false,length = 19)
 	long perfilid;
 
@@ -107,8 +114,8 @@ private static final long serialVersionUID = 760472444L;
 	@Column(name="returnurl",length = 255)
 	java.lang.String returnUrl;
 
-	@Column(name="view",length = 10)
-	java.lang.Integer view;
+	@Column(name="view",nullable = false,length = 10)
+	int view;
 
 
 
@@ -117,10 +124,10 @@ private static final long serialVersionUID = 760472444L;
   }
 
   /** Constructor amb tots els camps  */
-  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp datainici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatcodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view) {
+  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatcodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest , java.lang.String returnUrl , int view) {
     this.transaccioID=transaccioID;
     this.transactionWebId=transactionWebId;
-    this.datainici=datainici;
+    this.dataInici=dataInici;
     this.datafi=datafi;
     this.usuariaplicacioid=usuariaplicacioid;
     this.usuaripersonaid=usuaripersonaid;
@@ -147,9 +154,9 @@ private static final long serialVersionUID = 760472444L;
     this.view=view;
 }
   /** Constructor sense valors autoincrementals */
-  public TransaccioJPA(java.lang.String transactionWebId , java.sql.Timestamp datainici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatcodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view) {
+  public TransaccioJPA(java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp datafi , java.lang.Long usuariaplicacioid , java.lang.Long usuaripersonaid , int estatcodi , java.lang.String estatmissatge , java.lang.String estatexcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoscanpixeltype , java.lang.Integer infoscanresolucioppp , boolean infoscanocr , java.lang.Long infosignaturaid , java.lang.Long infocustodyid , java.lang.String languageui , java.lang.String languagedoc , java.lang.String ciutadanif , java.lang.String ciutadanom , java.lang.String funcionariusername , java.lang.String funcionarinom , java.lang.String expedient , long perfilid , java.lang.String usernameRequest , java.lang.String returnUrl , int view) {
     this.transactionWebId=transactionWebId;
-    this.datainici=datainici;
+    this.dataInici=dataInici;
     this.datafi=datafi;
     this.usuariaplicacioid=usuariaplicacioid;
     this.usuaripersonaid=usuaripersonaid;
@@ -176,17 +183,18 @@ private static final long serialVersionUID = 760472444L;
     this.view=view;
 }
   /** Constructor dels valors Not Null */
-  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp datainici , int estatcodi , long perfilid) {
+  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , int estatcodi , long perfilid , int view) {
     this.transaccioID=transaccioID;
     this.transactionWebId=transactionWebId;
-    this.datainici=datainici;
+    this.dataInici=dataInici;
     this.estatcodi=estatcodi;
     this.perfilid=perfilid;
+    this.view=view;
 }
   public TransaccioJPA(Transaccio __bean) {
     this.setTransaccioID(__bean.getTransaccioID());
     this.setTransactionWebId(__bean.getTransactionWebId());
-    this.setDatainici(__bean.getDatainici());
+    this.setDataInici(__bean.getDataInici());
     this.setDatafi(__bean.getDatafi());
     this.setUsuariaplicacioid(__bean.getUsuariaplicacioid());
     this.setUsuaripersonaid(__bean.getUsuaripersonaid());
@@ -231,11 +239,11 @@ private static final long serialVersionUID = 760472444L;
 		this.transactionWebId = _transactionWebId_;
 	};
 
-	public java.sql.Timestamp getDatainici() {
-		return(datainici);
+	public java.sql.Timestamp getDataInici() {
+		return(dataInici);
 	};
-	public void setDatainici(java.sql.Timestamp _datainici_) {
-		this.datainici = _datainici_;
+	public void setDataInici(java.sql.Timestamp _dataInici_) {
+		this.dataInici = _dataInici_;
 	};
 
 	public java.sql.Timestamp getDatafi() {
@@ -399,10 +407,10 @@ private static final long serialVersionUID = 760472444L;
 		this.returnUrl = _returnUrl_;
 	};
 
-	public java.lang.Integer getView() {
+	public int getView() {
 		return(view);
 	};
-	public void setView(java.lang.Integer _view_) {
+	public void setView(int _view_) {
 		this.view = _view_;
 	};
 
@@ -503,7 +511,7 @@ private static final long serialVersionUID = 760472444L;
     TransaccioJPA __tmp = new TransaccioJPA();
     __tmp.setTransaccioID(__bean.getTransaccioID());
     __tmp.setTransactionWebId(__bean.getTransactionWebId());
-    __tmp.setDatainici(__bean.getDatainici());
+    __tmp.setDataInici(__bean.getDataInici());
     __tmp.setDatafi(__bean.getDatafi());
     __tmp.setUsuariaplicacioid(__bean.getUsuariaplicacioid());
     __tmp.setUsuaripersonaid(__bean.getUsuaripersonaid());

@@ -5,15 +5,16 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import java.util.HashSet;
 import javax.persistence.Id;
+import javax.persistence.GenerationType;
+import org.hibernate.annotations.Index;
+import org.hibernate.annotations.ForeignKey;
+import java.util.HashSet;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
-import javax.persistence.GenerationType;
 import java.util.Set;
-import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
 
 
@@ -29,10 +30,11 @@ private static final long serialVersionUID = -185147282L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
+	@Index(name="dib_configuraciogrup_pk_i")
 	@Column(name="configuraciogrupid",nullable = false,length = 19)
 	long configuracioGrupID;
 
-	@Column(name="nom",nullable = false,length = 100)
+	@Column(name="nom",nullable = false,unique = true,length = 100)
 	java.lang.String nom;
 
 	@Column(name="suportweb",length = 255)
@@ -44,18 +46,23 @@ private static final long serialVersionUID = -185147282L;
 	@Column(name="suporttelefon",length = 255)
 	java.lang.String suportTelefon;
 
+	@Index(name="dib_cfggrup_logoheaderid_fk_i")
 	@Column(name="logoheaderid",nullable = false,length = 19)
 	long logoHeaderID;
 
+	@Index(name="dib_cfggrup_logofooterid_fk_i")
 	@Column(name="logofooterid",nullable = false,length = 19)
 	long logoFooterID;
 
+	@Index(name="dib_cfggrup_perfilscan_fk_i")
 	@Column(name="perfilnomesescaneigid",length = 19)
 	java.lang.Long perfilNomesEscaneigID;
 
+	@Index(name="dib_cfggrup_perfilcoau_fk_i")
 	@Column(name="perfilcopiaautenticaid",length = 19)
 	java.lang.Long perfilCopiaAutenticaID;
 
+	@Index(name="dib_cfggrup_perfilcust_fk_i")
 	@Column(name="perfilcustodiaid",length = 19)
 	java.lang.Long perfilCustodiaID;
 

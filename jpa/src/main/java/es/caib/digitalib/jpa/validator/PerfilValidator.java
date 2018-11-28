@@ -110,6 +110,17 @@ public class PerfilValidator<T> implements PerfilFields {
       // ====== Check Unique MULTIPLES - NOU =======
 
       // Check Unique - no PK
+      if (__vr.getFieldErrorCount(CODI) == 0) {
+        java.lang.String __codi = (java.lang.String)__vr.getFieldValue(__target__,CODI);
+        Long __count_ = null;
+        try { __count_ = __perfilManager.count(org.fundaciobit.genapp.common.query.Where.AND(CODI.equal(__codi))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(CODI, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__codi)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CODI)));
+        }
+      }
+
       // Check Unique - PK no AutoIncrement amb UNA SOLA PK 
     } else {
       // ================ UPDATE
@@ -117,6 +128,18 @@ public class PerfilValidator<T> implements PerfilFields {
       // ====== Check Unique MULTIPLES - EDIT  =======
 
       // Check Unique - no PK
+      if (__vr.getFieldErrorCount(CODI) == 0 && __vr.getFieldErrorCount(PERFILID) == 0) {
+        java.lang.String __codi = (java.lang.String)__vr.getFieldValue(__target__,CODI);
+        java.lang.Long __perfilid = (java.lang.Long)__vr.getFieldValue(__target__,PERFILID);
+        Long __count_ = null;
+        try { __count_ = __perfilManager.count(org.fundaciobit.genapp.common.query.Where.AND(CODI.equal(__codi), PERFILID.notEqual(__perfilid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(CODI, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__codi)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CODI)));
+        }
+      }
+
     }
 
     // Fields with References to Other tables 

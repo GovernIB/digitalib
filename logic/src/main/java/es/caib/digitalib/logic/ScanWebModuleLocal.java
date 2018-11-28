@@ -1,15 +1,14 @@
 package es.caib.digitalib.logic;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Local;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.plugins.scanweb.api.ScanWebConfig;
 
-import es.caib.digitalib.logic.utils.ScanWebConfigTester;
 import es.caib.digitalib.model.entity.Plugin;
 
 
@@ -24,10 +23,10 @@ public interface ScanWebModuleLocal {
   
   public static final String JNDI_NAME = "digitalib/ScanWebModuleEJB/local";
 
-  public void closeScanWebProcess(HttpServletRequest request, String scanWebID);
+  public void closeScanWebProcess(HttpServletRequest request, String scanWebID) throws I18NException;
   
   
-  public void startScanWebProcess(ScanWebConfigTester ess);
+  public void startScanWebProcess(ScanWebConfig ess);
   
   
   public String scanDocument(
@@ -41,12 +40,11 @@ public interface ScanWebModuleLocal {
       String scanWebID, String query, boolean isPost)  throws Exception, I18NException;
   
   
-  public ScanWebConfigTester getScanWebConfig(HttpServletRequest request,
-      String scanWebID);
+  public ScanWebConfig getScanWebConfig(HttpServletRequest request,   String scanWebID);
   
-  public List<Plugin> getAllPluginsFiltered(HttpServletRequest request, String scanWebID) throws Exception,I18NException;
+  public List<Plugin> getAllPluginsFiltered(HttpServletRequest request, String scanWebID, Long[] pluginsID) throws Exception,I18NException;
   
   
-  public Set<String> getDefaultFlags(ScanWebConfigTester ss) throws Exception;
+  // XYZ ZZZ public Set<String> getDefaultFlags(ScanWebConfigTester ss) throws Exception;
   
 }

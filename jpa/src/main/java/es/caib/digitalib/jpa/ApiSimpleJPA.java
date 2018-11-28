@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import java.util.Set;
+import org.hibernate.annotations.Index;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 
@@ -26,6 +27,7 @@ private static final long serialVersionUID = 1125838831L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
+	@Index(name="dib_apisimple_pk_i")
 	@Column(name="apisimpleid",nullable = false,length = 19)
 	long apiSimpleID;
 

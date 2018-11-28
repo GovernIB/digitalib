@@ -12,18 +12,11 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @XmlRootElement
 public class ScanWebSimpleStartTransactionRequest {
 
-  public static final int VIEW_FULLSCREEN = 0; // "fullview";
-
-  public static final int VIEW_IFRAME = 1; // "iframe";
-
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String transactionID;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String returnUrl;
-
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected int view;
 
   /**
    * 
@@ -36,12 +29,9 @@ public class ScanWebSimpleStartTransactionRequest {
    * @param transactionID
    * @param fileInfoSignatureArray
    */
-  public ScanWebSimpleStartTransactionRequest(String transactionID, String returnUrl,
-      int view) {
-
+  public ScanWebSimpleStartTransactionRequest(String transactionID, String returnUrl) {
     this.transactionID = transactionID;
     this.returnUrl = returnUrl;
-    this.view = view;
   }
 
   public String getReturnUrl() {
@@ -50,14 +40,6 @@ public class ScanWebSimpleStartTransactionRequest {
 
   public void setReturnUrl(String returnUrl) {
     this.returnUrl = returnUrl;
-  }
-
-  public int getView() {
-    return view;
-  }
-
-  public void setView(int view) {
-    this.view = view;
   }
 
   public String getTransactionID() {

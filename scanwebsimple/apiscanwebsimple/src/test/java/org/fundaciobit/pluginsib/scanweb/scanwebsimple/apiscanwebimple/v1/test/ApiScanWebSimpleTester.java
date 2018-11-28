@@ -74,13 +74,16 @@ public class ApiScanWebSimpleTester {
         
         String funcionariUsername = "u00666";
         String funcionariNom = "Funcionari DeProfessio";
+        String funcionariNif = "12345678X";
         String expedientID = null;
+        
+        final int view = ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN;
         
 
         ScanWebSimpleGetTransactionIdRequest commonInfo;
-        commonInfo = new ScanWebSimpleGetTransactionIdRequest(scanWebProfile, languageUI,
-            languageDoc, usernameRequest, ciutadaNif, ciutadaNom, funcionariUsername,
-            funcionariNom, expedientID);
+        commonInfo = new ScanWebSimpleGetTransactionIdRequest(scanWebProfile, view,
+            languageUI, languageDoc, usernameRequest, ciutadaNif, ciutadaNom,
+            funcionariUsername, funcionariNom, funcionariNif, expedientID);
 
         // Enviam la part comu de la transacció
         transactionID = api.getTransactionID(commonInfo);
@@ -95,11 +98,11 @@ public class ApiScanWebSimpleTester {
       final int port = 1989;
       final String returnUrl = "http://" + host + ":" + port + "/returnurl/" + transactionID;
 
-      final int view = ScanWebSimpleStartTransactionRequest.VIEW_FULLSCREEN;
+      
 
       ScanWebSimpleStartTransactionRequest startTransactionInfo;
       startTransactionInfo = new ScanWebSimpleStartTransactionRequest(transactionID,
-          returnUrl,  view);
+          returnUrl);
 
       String redirectUrl = api.startTransaction(startTransactionInfo);
 

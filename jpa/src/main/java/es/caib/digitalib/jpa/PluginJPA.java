@@ -11,6 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import java.util.Set;
+import org.hibernate.annotations.Index;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 
@@ -27,6 +28,7 @@ private static final long serialVersionUID = 190357384L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
+	@Index(name="dib_plugin_pk_i")
 	@Column(name="pluginid",nullable = false,length = 19)
 	long pluginID;
 
@@ -183,6 +185,32 @@ private static final long serialVersionUID = 190357384L;
     return __result;
   }
 
+// EXP  Field:pluginscanwebid | Table: dib_perfil | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pluginScanWebID")
+	private Set<PerfilJPA> perfil_pluginscanwebids = new HashSet<PerfilJPA>(0);
+	public  Set<PerfilJPA> getPerfil_pluginscanwebids() {
+    return this.perfil_pluginscanwebids;
+  }
+
+	public void setPerfil_pluginscanwebids(Set<PerfilJPA> perfil_pluginscanwebids) {
+	  this.perfil_pluginscanwebids = perfil_pluginscanwebids;
+	}
+
+
+// EXP  Field:pluginfirmaservidorid | Table: dib_perfil | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pluginFirmaServidorID")
+	private Set<PerfilJPA> perfil_pluginfirmaservidorids = new HashSet<PerfilJPA>(0);
+	public  Set<PerfilJPA> getPerfil_pluginfirmaservidorids() {
+    return this.perfil_pluginfirmaservidorids;
+  }
+
+	public void setPerfil_pluginfirmaservidorids(Set<PerfilJPA> perfil_pluginfirmaservidorids) {
+	  this.perfil_pluginfirmaservidorids = perfil_pluginfirmaservidorids;
+	}
+
+
 // EXP  Field:pluginarxiuid | Table: dib_perfil | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pluginArxiuID")
@@ -206,32 +234,6 @@ private static final long serialVersionUID = 190357384L;
 
 	public void setPerfil_plugindoccustodyids(Set<PerfilJPA> perfil_plugindoccustodyids) {
 	  this.perfil_plugindoccustodyids = perfil_plugindoccustodyids;
-	}
-
-
-// EXP  Field:pluginfirmaservidorid | Table: dib_perfil | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pluginFirmaServidorID")
-	private Set<PerfilJPA> perfil_pluginfirmaservidorids = new HashSet<PerfilJPA>(0);
-	public  Set<PerfilJPA> getPerfil_pluginfirmaservidorids() {
-    return this.perfil_pluginfirmaservidorids;
-  }
-
-	public void setPerfil_pluginfirmaservidorids(Set<PerfilJPA> perfil_pluginfirmaservidorids) {
-	  this.perfil_pluginfirmaservidorids = perfil_pluginfirmaservidorids;
-	}
-
-
-// EXP  Field:pluginscanwebid | Table: dib_perfil | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pluginScanWebID")
-	private Set<PerfilJPA> perfil_pluginscanwebids = new HashSet<PerfilJPA>(0);
-	public  Set<PerfilJPA> getPerfil_pluginscanwebids() {
-    return this.perfil_pluginscanwebids;
-  }
-
-	public void setPerfil_pluginscanwebids(Set<PerfilJPA> perfil_pluginscanwebids) {
-	  this.perfil_pluginscanwebids = perfil_pluginscanwebids;
 	}
 
 

@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import java.util.Set;
+import org.hibernate.annotations.Index;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 
@@ -26,6 +27,7 @@ private static final long serialVersionUID = -252813913L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
+	@Index(name="dib_fitxer_pk_i")
 	@Column(name="fitxerid",nullable = false,length = 19)
 	long fitxerID;
 
@@ -150,19 +152,6 @@ private static final long serialVersionUID = -252813913L;
 	}
 
 
-// EXP  Field:parametresfitxerid | Table: dib_plugincridada | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parametresFitxerID")
-	private Set<PluginCridadaJPA> pluginCridada_parametresfitxerids = new HashSet<PluginCridadaJPA>(0);
-	public  Set<PluginCridadaJPA> getPluginCridada_parametresfitxerids() {
-    return this.pluginCridada_parametresfitxerids;
-  }
-
-	public void setPluginCridada_parametresfitxerids(Set<PluginCridadaJPA> pluginCridada_parametresfitxerids) {
-	  this.pluginCridada_parametresfitxerids = pluginCridada_parametresfitxerids;
-	}
-
-
 // EXP  Field:retornfitxerid | Table: dib_plugincridada | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "retornFitxerID")
@@ -173,6 +162,19 @@ private static final long serialVersionUID = -252813913L;
 
 	public void setPluginCridada_retornfitxerids(Set<PluginCridadaJPA> pluginCridada_retornfitxerids) {
 	  this.pluginCridada_retornfitxerids = pluginCridada_retornfitxerids;
+	}
+
+
+// EXP  Field:parametresfitxerid | Table: dib_plugincridada | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parametresFitxerID")
+	private Set<PluginCridadaJPA> pluginCridada_parametresfitxerids = new HashSet<PluginCridadaJPA>(0);
+	public  Set<PluginCridadaJPA> getPluginCridada_parametresfitxerids() {
+    return this.pluginCridada_parametresfitxerids;
+  }
+
+	public void setPluginCridada_parametresfitxerids(Set<PluginCridadaJPA> pluginCridada_parametresfitxerids) {
+	  this.pluginCridada_parametresfitxerids = pluginCridada_parametresfitxerids;
 	}
 
 

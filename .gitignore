@@ -56,4 +56,9 @@
 /scanwebsimple/apiscanwebsimple/target
 /scanwebsimple/apiscanwebsimple/.settings
 /scanwebsimple/apiscanwebsimple/scanfile.pdf
+/scanwebsimple/apiscanwebsimple/detached_sign_scanfile.sig
 /genapp/lastconfig.properties
+/scripts/sqlgenerator/shortNames.properties
+/scripts/sqlgenerator/genapp.log
+/scripts/sqlgenerator/digitalib_create_schema_caib.sql
+/scripts/sqlgenerator/digitalib_create_schema.sql

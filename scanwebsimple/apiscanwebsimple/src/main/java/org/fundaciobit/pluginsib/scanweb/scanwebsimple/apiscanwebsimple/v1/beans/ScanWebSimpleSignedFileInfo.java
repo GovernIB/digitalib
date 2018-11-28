@@ -332,7 +332,7 @@ public class ScanWebSimpleSignedFileInfo {
       return "";
     }
     
-    StringBuffer str = new StringBuffer("  + INFORMACIO:");
+    StringBuffer str = new StringBuffer("  + FIRMA:");
 
     String operation;
     switch (sfi.getSignOperation()) {

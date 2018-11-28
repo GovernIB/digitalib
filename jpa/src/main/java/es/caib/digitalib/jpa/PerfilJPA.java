@@ -5,15 +5,16 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import java.util.HashSet;
 import javax.persistence.Id;
+import javax.persistence.GenerationType;
+import org.hibernate.annotations.Index;
+import org.hibernate.annotations.ForeignKey;
+import java.util.HashSet;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
-import javax.persistence.GenerationType;
 import java.util.Set;
-import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
 
 
@@ -29,10 +30,11 @@ private static final long serialVersionUID = -1815612849L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
+	@Index(name="dib_perfil_pk_i")
 	@Column(name="perfilid",nullable = false,length = 19)
 	long perfilID;
 
-	@Column(name="codi",nullable = false,length = 255)
+	@Column(name="codi",nullable = false,unique = true,length = 255)
 	java.lang.String codi;
 
 	@Column(name="nom",nullable = false,length = 100)
@@ -56,24 +58,29 @@ private static final long serialVersionUID = -1815612849L;
 	@Column(name="scanpixeltype",length = 10)
 	int scanPixelType;
 
+	@Index(name="dib_perfil_plugscanwebid_fk_i")
 	@Column(name="pluginscanwebid",nullable = false,length = 19)
 	long pluginScanWebID;
 
 	@Column(name="tipusfirma",nullable = false,length = 10)
 	int tipusFirma;
 
+	@Index(name="dib_perfil_plugin_psid_fk_i")
 	@Column(name="pluginfirmaservidorid",length = 19)
 	java.lang.Long pluginFirmaServidorID;
 
+	@Index(name="dib_perfil_apisimpleid_fk_i")
 	@Column(name="apisimpleid",length = 19)
 	java.lang.Long apiSimpleID;
 
 	@Column(name="tipuscustodia",nullable = false,length = 10)
 	int tipusCustodia;
 
+	@Index(name="dib_perfil_pluginarxiuid_fk_i")
 	@Column(name="pluginarxiuid",length = 19)
 	java.lang.Long pluginArxiuID;
 
+	@Index(name="dib_perfil_plugin_pdcid_fk_i")
 	@Column(name="plugindoccustodyid",length = 19)
 	java.lang.Long pluginDocCustodyID;
 

@@ -7,6 +7,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
+import org.hibernate.annotations.Index;
 import javax.persistence.GeneratedValue;
 
 
@@ -22,6 +23,7 @@ private static final long serialVersionUID = -2066559243L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DIGITALIB_SEQ")
+	@Index(name="dib_estadistica_pk_i")
 	@Column(name="estadisticaid",nullable = false,length = 19)
 	long estadisticaID;
 

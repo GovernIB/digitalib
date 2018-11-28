@@ -117,12 +117,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PluginCridadaFields.METODEPLUGIN)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="pluginCridada.metodeplugin" var="metodeplugin" />
-              <fmt:message key="genapp.form.searchby" var="cercapermetodeplugin" >                
-                 <fmt:param value="${metodeplugin}"/>
+              <fmt:message key="pluginCridada.metodePlugin" var="metodePlugin" />
+              <fmt:message key="genapp.form.searchby" var="cercapermetodePlugin" >                
+                 <fmt:param value="${metodePlugin}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${metodeplugin}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapermetodeplugin}" path="metodeplugin" />
+              <span class="add-on"><c:out value="${metodePlugin}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapermetodePlugin}" path="metodePlugin" />
             </div>
 
 
@@ -130,16 +130,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PluginCridadaFields.TIPUSRESULTAT)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="pluginCridada.tipusresultat" />:</span>
+              <span class="add-on"><fmt:message key="pluginCridada.tipusResultat" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="tipusresultatDesde" />
+              <form:input cssClass="input-append input-small" path="tipusResultatDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="tipusresultatFins" />
+              <form:input cssClass="input-append input-small search-query" path="tipusResultatFins" />
 
             </div>
 
@@ -148,16 +148,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PluginCridadaFields.TEMPSEXECUCIO)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="pluginCridada.tempsexecucio" />:</span>
+              <span class="add-on"><fmt:message key="pluginCridada.tempsExecucio" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="tempsexecucioDesde" />
+              <form:input cssClass="input-append input-small" path="tempsExecucioDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="tempsexecucioFins" />
+              <form:input cssClass="input-append input-small search-query" path="tempsExecucioFins" />
 
             </div>
 
@@ -184,16 +184,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PluginCridadaFields.USUARIPERSONAID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="pluginCridada.usuaripersonaid" />:</span>
+              <span class="add-on"><fmt:message key="pluginCridada.usuariPersonaId" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="usuaripersonaidDesde" />
+              <form:input cssClass="input-append input-small" path="usuariPersonaIdDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="usuaripersonaidFins" />
+              <form:input cssClass="input-append input-small search-query" path="usuariPersonaIdFins" />
 
             </div>
 
@@ -202,16 +202,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PluginCridadaFields.USUARIAPLICACIOID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="pluginCridada.usuariaplicacioid" />:</span>
+              <span class="add-on"><fmt:message key="pluginCridada.usuariAplicacioId" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="usuariaplicacioidDesde" />
+              <form:input cssClass="input-append input-small" path="usuariAplicacioIdDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="usuariaplicacioidFins" />
+              <form:input cssClass="input-append input-small search-query" path="usuariAplicacioIdFins" />
 
             </div>
 
@@ -220,12 +220,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PluginCridadaFields.PARAMETRESTEXT)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="pluginCridada.parametrestext" var="parametrestext" />
-              <fmt:message key="genapp.form.searchby" var="cercaperparametrestext" >                
-                 <fmt:param value="${parametrestext}"/>
+              <fmt:message key="pluginCridada.parametresText" var="parametresText" />
+              <fmt:message key="genapp.form.searchby" var="cercaperparametresText" >                
+                 <fmt:param value="${parametresText}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${parametrestext}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperparametrestext}" path="parametrestext" />
+              <span class="add-on"><c:out value="${parametresText}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperparametresText}" path="parametresText" />
             </div>
 
 
@@ -233,12 +233,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PluginCridadaFields.RETORNTEXT)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="pluginCridada.retorntext" var="retorntext" />
-              <fmt:message key="genapp.form.searchby" var="cercaperretorntext" >                
-                 <fmt:param value="${retorntext}"/>
+              <fmt:message key="pluginCridada.retornText" var="retornText" />
+              <fmt:message key="genapp.form.searchby" var="cercaperretornText" >                
+                 <fmt:param value="${retornText}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${retorntext}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperretorntext}" path="retorntext" />
+              <span class="add-on"><c:out value="${retornText}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperretornText}" path="retornText" />
             </div>
 
 

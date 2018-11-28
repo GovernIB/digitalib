@@ -54,25 +54,25 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
-  private java.sql.Timestamp datainiciDesde;
+  private java.sql.Timestamp dataIniciDesde;
 
-  public java.sql.Timestamp getDatainiciDesde() {
-    return this.datainiciDesde;
+  public java.sql.Timestamp getDataIniciDesde() {
+    return this.dataIniciDesde;
   }
 
-  public void setDatainiciDesde(java.sql.Timestamp datainiciDesde) {
-    this.datainiciDesde = datainiciDesde;
+  public void setDataIniciDesde(java.sql.Timestamp dataIniciDesde) {
+    this.dataIniciDesde = dataIniciDesde;
   }
 
 
-  private java.sql.Timestamp datainiciFins;
+  private java.sql.Timestamp dataIniciFins;
 
-  public java.sql.Timestamp getDatainiciFins() {
-    return this.datainiciFins;
+  public java.sql.Timestamp getDataIniciFins() {
+    return this.dataIniciFins;
   }
 
-  public void setDatainiciFins(java.sql.Timestamp datainiciFins) {
-    this.datainiciFins = datainiciFins;
+  public void setDataIniciFins(java.sql.Timestamp dataIniciFins) {
+    this.dataIniciFins = dataIniciFins;
   }
 
 
@@ -425,8 +425,8 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.transaccioIDDesde = __toClone.transaccioIDDesde;
     this.transaccioIDFins = __toClone.transaccioIDFins;
     this.transactionWebId = __toClone.transactionWebId;
-    this.datainiciDesde = __toClone.datainiciDesde;
-    this.datainiciFins = __toClone.datainiciFins;
+    this.dataIniciDesde = __toClone.dataIniciDesde;
+    this.dataIniciFins = __toClone.dataIniciFins;
     this.datafiDesde = __toClone.datafiDesde;
     this.datafiFins = __toClone.datafiFins;
     this.usuariaplicacioidDesde = __toClone.usuariaplicacioidDesde;

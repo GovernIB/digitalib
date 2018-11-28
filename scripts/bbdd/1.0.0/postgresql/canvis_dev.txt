@@ -1,29 +1,4 @@
-ALTER TABLE dib_configuraciogrup 
-  ADD COLUMN perfilnomesescaneig bigint;
-ALTER TABLE dib_configuraciogrup 
-  ADD COLUMN perfilcopiaautentica bigint;
-ALTER TABLE dib_configuraciogrup 
-  ADD COLUMN perfilcustodia bigint;
 
+ALTER TABLE dib_usuaripersona
+   ALTER COLUMN configuraciogrupid DROP NOT NULL;
 
-ALTER TABLE dib_configuraciogrup ADD CONSTRAINT dib_cfggrup_perfil_scan_fk FOREIGN KEY (perfilnomesescaneig)
-      REFERENCES dib_perfil (perfilid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-ALTER TABLE dib_configuraciogrup ADD CONSTRAINT dib_cfggrup_perfil_coau_fk FOREIGN KEY (perfilcopiaautentica)
-      REFERENCES dib_perfil (perfilid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-ALTER TABLE dib_configuraciogrup ADD CONSTRAINT dib_cfggrup_perfil_cust_fk FOREIGN KEY (perfilcustodia)
-      REFERENCES dib_perfil (perfilid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-
- -- Es recomanable tenir un index de la clau forania.
-create index dib_cfggrup_perfilscan_fk_i on dib_configuraciogrup (perfilnomesescaneig);
-
- -- Es recomanable tenir un index de la clau forania.
-create index dib_cfggrup_perfilcoau_fk_i on dib_configuraciogrup (perfilcopiaautentica);
-
- -- Es recomanable tenir un index de la clau forania.
-create index dib_cfggrup_perfilcust_fk_i on dib_configuraciogrup (perfilcustodia);

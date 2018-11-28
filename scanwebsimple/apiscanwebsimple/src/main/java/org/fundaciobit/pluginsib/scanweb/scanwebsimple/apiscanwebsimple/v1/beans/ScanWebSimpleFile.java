@@ -10,6 +10,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  *
  */
 @XmlRootElement
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ScanWebSimpleFile {
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -17,7 +18,9 @@ public class ScanWebSimpleFile {
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected java.lang.String mime;
-  byte[] data;
+  
+  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+  protected byte[] data;
 
   /** Constructor Buit */
   public ScanWebSimpleFile() {
