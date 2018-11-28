@@ -2,16 +2,8 @@
 %><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <c:set var="url" value="${urlActual}" />
 <div>
-  <h5>Menú ROLE_ADMIN</h5>
+  <h5><fmt:message key="administrador.menu" /></h5>
   <ul class="tree" style="margin: 3px; padding: 0px;">
-
-
-    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
-    <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/admin/option1"/>">
-        <span style="${(fn:contains(url, 'option1'))? "font-weight: bold;" : ""}">Menú ADMIN Option 1</span>
-      </a>
-    </li>
 
    <%-- Example with security: virtual roles  --%>
    <%--
@@ -24,7 +16,6 @@
    </sec:authorize>
     --%>
 
-    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/pluginscanweb/list"/>">
         <span style="${(fn:contains(url, 'pluginscanweb/list'))? "font-weight: bold;" : ""}"><fmt:message key="scanwebplugin.menu" /></span>
@@ -52,7 +43,7 @@
         
       </a>
     </li>
-    
+    <hr style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/perfilnomesescaneig/list"/>">
         <span style="${(fn:contains(url, 'perfilnomesescaneig/list'))? "font-weight: bold;" : ""}"><fmt:message key="perfil.us.gestio" ><fmt:param><fmt:message key="perfil.us.1" /></fmt:param></fmt:message></span>
@@ -73,11 +64,18 @@
         
       </a>
     </li>
-    
+    <hr style="margin-top: 6px;  margin-bottom: 6px;" />
     
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/usuariAplicacio/list"/>">
         <span style="${(fn:contains(url, '/usuariAplicacio/list'))? "font-weight: bold;" : ""}"><fmt:message key="usuariAplicacio.usuariAplicacio.plural" /></span>
+        
+      </a>
+    </li>
+    
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/usuariPersona/list"/>">
+        <span style="${(fn:contains(url, '/usuariPersona/list'))? "font-weight: bold;" : ""}"><fmt:message key="usuariPersona.usuariPersona.plural" /></span>
         
       </a>
     </li>
@@ -89,12 +87,7 @@
       </a>
     </li>
     
-    <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/admin/usuariPersona/list"/>">
-        <span style="${(fn:contains(url, '/usuariPersona/list'))? "font-weight: bold;" : ""}"><fmt:message key="usuariPersona.usuariPersona.plural" /></span>
-        
-      </a>
-    </li>
+    <hr style="margin-top: 6px;  margin-bottom: 6px;" />
     
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/transaccio/list"/>">
