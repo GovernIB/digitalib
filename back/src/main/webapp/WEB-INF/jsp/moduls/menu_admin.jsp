@@ -68,21 +68,21 @@
     
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/usuariAplicacio/list"/>">
-        <span style="${(fn:contains(url, '/usuariAplicacio/list'))? "font-weight: bold;" : ""}"><fmt:message key="usuariAplicacio.usuariAplicacio.plural" /></span>
+        <span style="${(fn:contains(url, '/usuariAplicacio/list'))? "font-weight: bold;" : ""}"><fmt:message key="usuariaplicacio.gestio" /></span>
         
       </a>
     </li>
     
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/usuariPersona/list"/>">
-        <span style="${(fn:contains(url, '/usuariPersona/list'))? "font-weight: bold;" : ""}"><fmt:message key="usuariPersona.usuariPersona.plural" /></span>
+        <span style="${(fn:contains(url, '/usuariPersona/list'))? "font-weight: bold;" : ""}"><fmt:message key="usuaripersona.gestio" /></span>
         
       </a>
     </li>
     
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/configuracioGrup/list"/>">
-        <span style="${(fn:contains(url, '/configuracioGrup/list'))? "font-weight: bold;" : ""}"><fmt:message key="configuracioGrup.configuracioGrup.plural" /></span>
+        <span style="${(fn:contains(url, '/configuracioGrup/list'))? "font-weight: bold;" : ""}"><fmt:message key="configuraciogrup.gestio" /></span>
         
       </a>
     </li>
@@ -91,7 +91,7 @@
     
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/transaccio/list"/>">
-        <span style="${(fn:contains(url, '/transaccio/list'))? "font-weight: bold;" : ""}"><fmt:message key="transaccio.transaccio" /></span>
+        <span style="${(fn:contains(url, '/transaccio/list'))? "font-weight: bold;" : ""}"><fmt:message key="transaccio.gestio" /></span>
         
       </a>
     </li>

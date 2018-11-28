@@ -47,8 +47,6 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 	public static final int PERFILCOLUMN = 1;
 
 	public static final String CONTEXTWEB = "/admin/usuariAplicacio";
-	public static final String CONTEXTWEBPERFIL = "/admin/perfil/";
-	public static final String CONTEXTWEBPERFILUSRAPP = "/admin/perfilUsuariAplicacio";	
 
 	public static final String USUARI_APLICAIO_PER_AFEGIR_PERFIL = "USUARI_APLICAIO_PER_AFEGIR_PERFIL";
 
@@ -127,7 +125,7 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 
 		request.getSession().setAttribute(USUARI_APLICAIO_PER_AFEGIR_PERFIL, usrappid);
 
-		return "redirect:" + UsuariAplicacioAdminController.CONTEXTWEBPERFILUSRAPP +  "/new";
+		return "redirect:" + PerfilUsuariAplicacioAdminController.CONTEXTWEB +  "/new";
 
 	}
 
@@ -153,7 +151,7 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 
 		// request.getSession().setAttribute("USUARI_APLICAIO_PER_AFEGIR_PERFIL", usrappid);
 
-		return "redirect:" + UsuariAplicacioAdminController.CONTEXTWEBPERFIL + perusrapp.getPerfilID() + "/edit";
+		return "redirect:" + AbstractPerfilAdminController.CONTEXTWEB + perusrapp.getPerfilID() + "/edit";
 	}
 
 

@@ -47,6 +47,8 @@ public class ConfiguracioGrupAdminController extends ConfiguracioGrupController{
 			HttpServletRequest request) throws I18NException {
 		ConfiguracioGrupFilterForm configuracioGrupFilterForm = super.getConfiguracioGrupFilterForm(pagina, mav, request);
 
+		configuracioGrupFilterForm.setTitleCode("configuraciogrup.llistat");
+		
 		if (configuracioGrupFilterForm.isNou()) {
 			Set<Field<?>> ocults = new HashSet<Field<?>>(
 					Arrays.asList(ConfiguracioGrupFields.ALL_CONFIGURACIOGRUP_FIELDS));

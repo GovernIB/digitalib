@@ -1,6 +1,5 @@
 package es.caib.digitalib.back.controller.admin;
 
-
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,15 +15,40 @@ import es.caib.digitalib.utils.Constants;
  *
  */
 @Controller
-@RequestMapping(value = "/admin/perfilinfotransaccio")
+@RequestMapping(value = PerfilInfoTransaccioAdminController.CONTEXTWEB)
 @SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class })
 public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminController {
 
-	
+	public static final String CONTEXTWEB = "/admin/perfilinfotransaccio";
+
 	@Override
 	public int getTipusPerfil() {
 		return Constants.PERFIL_US_TRANSACCIO_INFO;
 	}
 
-	
+	@Override
+	public boolean isActiveList() {
+		return true;
+	}
+
+	@Override
+	public boolean isActiveFormNew() {
+		return false;
+	}
+
+	@Override
+	public boolean isActiveFormEdit() {
+		return false;
+	}
+
+	@Override
+	public boolean isActiveDelete() {
+		return false;
+	}
+
+	@Override
+	public boolean isActiveFormView() {
+		return true;
+	}
+
 }

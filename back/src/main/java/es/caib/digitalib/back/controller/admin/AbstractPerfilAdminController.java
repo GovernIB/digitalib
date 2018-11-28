@@ -40,11 +40,12 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 	public static final  int TIPUSFIRMACOLUMN = 1;
 
 	public abstract int getTipusPerfil();
+	
+	public static final String CONTEXTWEB = "/admin/perfil";
 
 
 	@Override
 	public String getTileForm() {
-		//		return "perfilFormAdmin";
 		switch (getTipusPerfil()) {
 		case Constants.PERFIL_US_NOMES_ESCANEIG:
 			return "perfilEscaneigFormAdmin";
@@ -63,7 +64,6 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 
 	@Override
 	public String getTileList() {
-		//		return "perfilListAdmin";
 		switch (getTipusPerfil()) {
 		case Constants.PERFIL_US_NOMES_ESCANEIG:
 			return "perfilEscaneigListAdmin";
@@ -82,7 +82,6 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 
 	@Override
 	public String getSessionAttributeFilterForm() {
-		//		return "PerfilAdmin_FilterForm";
 		switch (getTipusPerfil()) {
 		case Constants.PERFIL_US_NOMES_ESCANEIG:
 			return "PerfilEscaneigAdmin_FilterForm";
