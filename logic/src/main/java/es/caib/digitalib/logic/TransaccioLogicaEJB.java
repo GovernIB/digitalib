@@ -144,7 +144,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     // XYZ ZZZ ZZZ Falten altres comprovacions
     TransaccioJPA t = new TransaccioJPA();
 
-    t.setDatainici(new Timestamp(System.currentTimeMillis()));
+    t.setDataInici(new Timestamp(System.currentTimeMillis()));
     t.setEstatcodi(ScanWebSimpleStatus.STATUS_REQUESTED_ID);
     t.setTransactionWebId(transactionWebID);
     t.setLanguageui(requestTransaction.getLanguageUI());

@@ -97,12 +97,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuariAplicacioFields.EMAILADMIN)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="usuariAplicacio.emailadmin" var="emailadmin" />
-              <fmt:message key="genapp.form.searchby" var="cercaperemailadmin" >                
-                 <fmt:param value="${emailadmin}"/>
+              <fmt:message key="usuariAplicacio.emailAdmin" var="emailAdmin" />
+              <fmt:message key="genapp.form.searchby" var="cercaperemailAdmin" >                
+                 <fmt:param value="${emailAdmin}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${emailadmin}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperemailadmin}" path="emailadmin" />
+              <span class="add-on"><c:out value="${emailAdmin}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperemailAdmin}" path="emailAdmin" />
             </div>
 
 

@@ -109,5 +109,10 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
 
   }
 
+  @Override
+  public boolean isPublic() {    
+    return true;
+  }
+
 
 }

@@ -205,7 +205,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
       UsuariPersonaJPA usuariPersona = usuariPersonaEjb.findByPrimaryKey(usuariPersonaID);
 
-      Long configGrupID = usuariPersona.getConfiguraciogrupid();
+      Long configGrupID = usuariPersona.getConfiguracioGrupID();
 
       if (configGrupID == null) {
         // XYZ ZZZ Traduir
@@ -534,6 +534,11 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
     binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
 
+  }
+
+  @Override
+  public boolean isPublic() {
+    return false;
   }
 
 }

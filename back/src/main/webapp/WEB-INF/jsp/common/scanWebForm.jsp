@@ -1,6 +1,7 @@
 <%@ page language="java" 
 %><%@ include file="/WEB-INF/jsp/moduls/includes.jsp" 
 %>
+<%--   XYZ ZZZ ESborrar --%>
 <h3 class="tabs_involved">
   &nbsp;&nbsp;&nbsp;<fmt:message key="scan.proces" />
 </h3>

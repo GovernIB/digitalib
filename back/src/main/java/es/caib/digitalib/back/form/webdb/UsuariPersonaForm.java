@@ -20,7 +20,7 @@ public class UsuariPersonaForm extends DigitalIBBaseForm {
     super(__toClone);
       this.usuariPersona = __toClone.usuariPersona;
     this.listOfIdiomaForIdiomaID = __toClone.listOfIdiomaForIdiomaID;
-    this.listOfConfiguracioGrupForConfiguraciogrupid = __toClone.listOfConfiguracioGrupForConfiguraciogrupid;
+    this.listOfConfiguracioGrupForConfiguracioGrupID = __toClone.listOfConfiguracioGrupForConfiguracioGrupID;
   }
   
   public UsuariPersonaForm(UsuariPersonaJPA usuariPersona, boolean nou) {
@@ -48,14 +48,14 @@ public class UsuariPersonaForm extends DigitalIBBaseForm {
 
 
 
-  private List<StringKeyValue> listOfConfiguracioGrupForConfiguraciogrupid;
+  private List<StringKeyValue> listOfConfiguracioGrupForConfiguracioGrupID;
 
-  public List<StringKeyValue> getListOfConfiguracioGrupForConfiguraciogrupid() {
-    return this.listOfConfiguracioGrupForConfiguraciogrupid;
+  public List<StringKeyValue> getListOfConfiguracioGrupForConfiguracioGrupID() {
+    return this.listOfConfiguracioGrupForConfiguracioGrupID;
   }
 
-  public void setListOfConfiguracioGrupForConfiguraciogrupid(List<StringKeyValue> listOfConfiguracioGrupForConfiguraciogrupid) {
-    this.listOfConfiguracioGrupForConfiguraciogrupid = listOfConfiguracioGrupForConfiguraciogrupid;
+  public void setListOfConfiguracioGrupForConfiguracioGrupID(List<StringKeyValue> listOfConfiguracioGrupForConfiguracioGrupID) {
+    this.listOfConfiguracioGrupForConfiguracioGrupID = listOfConfiguracioGrupForConfiguracioGrupID;
   }
 
 

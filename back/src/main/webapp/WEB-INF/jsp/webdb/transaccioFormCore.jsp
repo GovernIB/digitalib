@@ -21,19 +21,19 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.DATAINICI)}">
-        <tr id="transaccio_datainici_rowid">
+        <tr id="transaccio_dataInici_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.DATAINICI])?'transaccio.datainici':__theForm.labels[TransaccioFields.DATAINICI]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.DATAINICI])?'transaccio.dataInici':__theForm.labels[TransaccioFields.DATAINICI]}" /> &nbsp;(*)
               <c:if test="${not empty __theForm.help[TransaccioFields.DATAINICI]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.DATAINICI]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-              <form:errors path="transaccio.datainici" cssClass="errorField alert alert-error" />
-              <div id="datainici" class="input-append">
-                <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAINICI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAINICI)? 'input-medium uneditable-input' : 'input-medium'}"  path="transaccio.datainici" />
+              <form:errors path="transaccio.dataInici" cssClass="errorField alert alert-error" />
+              <div id="dataInici" class="input-append">
+                <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAINICI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAINICI)? 'input-medium uneditable-input' : 'input-medium'}"  path="transaccio.dataInici" />
                 <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAINICI)}" >
                 <span class="add-on">
                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
@@ -43,7 +43,7 @@
               </div>
               <script type="text/javascript">                
                 $(function() {
-                  $('#datainici').datetimepicker({
+                  $('#dataInici').datetimepicker({
                     language: '${lang}',
                     pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
                     format:  '${gen:getJSDateTimePattern()}',

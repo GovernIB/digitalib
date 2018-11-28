@@ -219,7 +219,9 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
     }
     scanWebConfigMap.remove(transactionWebID);
     
-    log.info(" XYZ ZZZ\n\n ESBORRAT TRANSACCIO " + transactionWebID + " \n\n\n ", new Exception());
+    if(log.isDebugEnabled()) {
+      log.debug(" ESBORRAT TRANSACCIO " + transactionWebID + ".");
+    }
     
   }
 

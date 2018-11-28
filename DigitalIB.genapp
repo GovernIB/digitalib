@@ -2040,11 +2040,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>custodyfileid</string> 
+            <string>Identificador de Custòdia</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>custodyfileid</string> 
+            <string>Identificador de Custodia</string> 
            </void> 
           </void> 
           <void property="showInReferenceList"> 
@@ -2082,11 +2082,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>custodyfileurl</string> 
+            <string>URL al fitxer Custodiat</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>custodyfileurl</string> 
+            <string>URL al fichero custodiado</string> 
            </void> 
           </void> 
           <void property="showInReferenceList"> 
@@ -2124,11 +2124,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>csv</string> 
+            <string>CSV</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>csv</string> 
+            <string>CSV</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2163,11 +2163,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>csvvalidationweb</string> 
+            <string>Web de validació del CSV</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>csvvalidationweb</string> 
+            <string>Web de validación del CSV</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2202,11 +2202,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>csvgenerationdefinition</string> 
+            <string>Definició de Generacio del CSV</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>csvgenerationdefinition</string> 
+            <string>Definició de Generacio del CSV</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2310,11 +2310,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>infosignaturaid</string> 
+            <string>ID</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>infosignaturaid</string> 
+            <string>ID</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -2348,7 +2348,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>signoperation</string> 
+           <string>signOperation</string> 
           </void> 
           <void property="javaType"> 
            <class>int</class> 
@@ -2356,11 +2356,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>signoperation</string> 
+            <string>Operació de Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>signoperation</string> 
+            <string>Operación de Firma</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -2396,7 +2396,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>signtype</string> 
+           <string>signType</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2404,11 +2404,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>signtype</string> 
+            <string>Tipus de Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>signtype</string> 
+            <string>Tipo de Firma</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -2441,7 +2441,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>signalgorithm</string> 
+           <string>signAlgorithm</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2449,11 +2449,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>signalgorithm</string> 
+            <string>Algorisme de Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>signalgorithm</string> 
+            <string>Algoritmo de Firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2480,7 +2480,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>signmode</string> 
+           <string>signMode</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Integer</class> 
@@ -2488,11 +2488,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>signmode</string> 
+            <string>Mode de firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>signmode</string> 
+            <string>Modo de firma</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -2522,7 +2522,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>signaturestablelocation</string> 
+           <string>signaturesTableLocation</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Integer</class> 
@@ -2530,11 +2530,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>signaturestablelocation</string> 
+            <string>Posició Taula de Firmes</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>signaturestablelocation</string> 
+            <string>Posición Tabla de Firmas</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -2564,7 +2564,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>timestampincluded</string> 
+           <string>timestampIncluded</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -2572,11 +2572,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>timestampincluded</string> 
+            <string>Segell de Temps inclòs</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>timestampincluded</string> 
+            <string>Sello de tiempo incluido</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2603,7 +2603,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>policyincluded</string> 
+           <string>policyIncluded</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -2611,11 +2611,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>policyincluded</string> 
+            <string>Política de Firma inclosa</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>policyincluded</string> 
+            <string>Política de Firma incluida</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2642,7 +2642,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>enitipofirma</string> 
+           <string>eniTipoFirma</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2650,11 +2650,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>enitipofirma</string> 
+            <string>ENI Tipus Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>enitipofirma</string> 
+            <string>ENI Tipo Firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2681,7 +2681,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>eniperfilfirma</string> 
+           <string>eniPerfilFirma</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2689,11 +2689,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>eniperfilfirma</string> 
+            <string>Perfil de firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>eniperfilfirma</string> 
+            <string>Perfil de firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2720,7 +2720,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>enirolfirma</string> 
+           <string>eniRolFirma</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2728,11 +2728,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>enirolfirma</string> 
+            <string>ENI Rol de firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>enirolfirma</string> 
+            <string>ENI Rol de firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2759,7 +2759,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>enisignername</string> 
+           <string>eniSignerName</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2767,11 +2767,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>enisignername</string> 
+            <string>ENI Signer Name</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>enisignername</string> 
+            <string>ENI Signer Name</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2798,7 +2798,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>enisigneradministrationid</string> 
+           <string>eniSignerAdministrationId</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2806,11 +2806,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>enisigneradministrationid</string> 
+            <string>ENI Signer Administration</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>enisigneradministrationid</string> 
+            <string>ENI Signer Administration</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2837,7 +2837,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>enisignlevel</string> 
+           <string>eniSignLevel</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -2845,11 +2845,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>enisignlevel</string> 
+            <string>ENI Sign Level</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>enisignlevel</string> 
+            <string>ENI Sign Level</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2876,7 +2876,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>checkadministrationidofsigner</string> 
+           <string>checkAdministrationIdOfSigner</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -2884,11 +2884,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>checkadministrationidofsigner</string> 
+            <string>Validat NIF del firmant</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>checkadministrationidofsigner</string> 
+            <string>Validado NIF del firmante</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2915,7 +2915,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>checkdocumentmodifications</string> 
+           <string>checkDocumentModifications</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -2923,11 +2923,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>checkdocumentmodifications</string> 
+            <string>Validades posibles modificacions en el document</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>checkdocumentmodifications</string> 
+            <string>Validadas posibles modificaciones en el documento</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2954,7 +2954,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>checkvalidationsignature</string> 
+           <string>checkValidationSignature</string> 
           </void> 
           <void property="javaType"> 
            <class>boolean</class> 
@@ -2962,11 +2962,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>checkvalidationsignature</string> 
+            <string>Validada Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>checkvalidationsignature</string> 
+            <string>Validada Firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -3357,11 +3357,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>scanformatfitxer</string> 
+            <string>Format Fitxer</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>scanformatfitxer</string> 
+            <string>Formato Fichero</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -3405,11 +3405,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>scanminimaresolucio</string> 
+            <string>Mínima resolució</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>scanminimaresolucio</string> 
+            <string>Mínima resolución</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -3450,11 +3450,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>scanpixeltype</string> 
+            <string>Tipus Color</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>scanpixeltype</string> 
+            <string>Tipo Color</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -4959,7 +4959,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>metodeplugin</string> 
+           <string>metodePlugin</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -5001,7 +5001,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>tipusresultat</string> 
+           <string>tipusResultat</string> 
           </void> 
           <void property="javaType"> 
            <class>int</class> 
@@ -5009,11 +5009,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>tipusresultat</string> 
+            <string>Tipus resultat</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>tipusresultat</string> 
+            <string>Tipo resultado</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -5043,7 +5043,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>tempsexecucio</string> 
+           <string>tempsExecucio</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -5051,11 +5051,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>tempsexecucio</string> 
+            <string>Temps d&apos;Execució</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>tempsexecucio</string> 
+            <string>Tiempo de ejecución</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5113,11 +5113,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>pluginid</string> 
+            <string>Plugin</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>pluginid</string> 
+            <string>Plugin</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -5163,7 +5163,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>usuaripersonaid</string> 
+           <string>usuariPersonaId</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -5171,11 +5171,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>usuaripersonaid</string> 
+            <string>Usuari persona</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>usuaripersonaid</string> 
+            <string>Usuario persona</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5202,7 +5202,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>usuariaplicacioid</string> 
+           <string>usuariAplicacioId</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 
@@ -5210,11 +5210,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>usuariaplicacioid</string> 
+            <string>Usuari Aplicació</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>usuariaplicacioid</string> 
+            <string>Usuario Aplicación</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5241,7 +5241,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>parametrestext</string> 
+           <string>parametresText</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -5249,11 +5249,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>parametrestext</string> 
+            <string>Parametres Text</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>parametrestext</string> 
+            <string>Parametros Texto</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5311,11 +5311,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>parametresfitxerid</string> 
+            <string>Parametres Fitxer</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>parametresfitxerid</string> 
+            <string>Parametros Fichero</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5358,7 +5358,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>retorntext</string> 
+           <string>retornText</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -5366,11 +5366,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>retorntext</string> 
+            <string>Text retornat</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>retorntext</string> 
+            <string>Texto retornado</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5428,11 +5428,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>retornfitxerid</string> 
+            <string>Fitxer retornat</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>retornfitxerid</string> 
+            <string>Fichero retornado</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -5598,21 +5598,21 @@
       <void property="labels"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>dib_traduccio_XX_ca</string> 
+        <string>Traducció</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>dib_traduccio_XX_es</string> 
+        <string>Traducción</string> 
        </void> 
       </void> 
       <void property="labelsPlural"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>dib_traduccio_XX_ca</string> 
+        <string>Traduccions</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>dib_traduccio_XX_ca</string> 
+        <string>Traducciones</string> 
        </void> 
       </void> 
       <void property="name"> 
@@ -5820,21 +5820,21 @@
       <void property="labels"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>dib_traducciomap_XX_ca</string> 
+        <string>Traduccio Map</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>dib_traducciomap_XX_es</string> 
+        <string>Traduccio Map</string> 
        </void> 
       </void> 
       <void property="labelsPlural"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>dib_traducciomap_XX_ca</string> 
+        <string>Traduccio Map</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>dib_traducciomap_XX_ca</string> 
+        <string>Traduccio Map</string> 
        </void> 
       </void> 
       <void property="name"> 
@@ -5965,7 +5965,7 @@
            <int>6</int> 
           </void> 
           <void property="javaName"> 
-           <string>datainici</string> 
+           <string>dataInici</string> 
           </void> 
           <void property="javaType"> 
            <class>java.sql.Timestamp</class> 
@@ -5973,11 +5973,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>datainici</string> 
+            <string>Data Inici</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>datainici</string> 
+            <string>Fecha Inicio</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -7164,21 +7164,21 @@
       <void property="labels"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>Transaccio</string> 
+        <string>Transacció</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>Transaccio</string> 
+        <string>Transacción</string> 
        </void> 
       </void> 
       <void property="labelsPlural"> 
        <void method="put"> 
         <string>ca</string> 
-        <string></string> 
+        <string>Transaccions</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string></string> 
+        <string>Transacciones</string> 
        </void> 
       </void> 
       <void property="name"> 
@@ -7359,7 +7359,7 @@
            <int>0</int> 
           </void> 
           <void property="javaName"> 
-           <string>emailadmin</string> 
+           <string>emailAdmin</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -7922,7 +7922,7 @@
            <string>dib_usrperson_confgrupid_fk_i</string> 
           </void> 
           <void property="javaName"> 
-           <string>configuraciogrupid</string> 
+           <string>configuracioGrupID</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.Long</class> 

@@ -16,6 +16,7 @@ import org.fundaciobit.plugins.scanweb.api.ScanWebStatus;
 import org.fundaciobit.plugins.scanweb.api.ScannedDocument;
 import org.fundaciobit.plugins.scanweb.api.ScannedPlainFile;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -76,12 +77,12 @@ public abstract class AbstractScanWebProcessController {
         throw new Exception("NO existeix la transacció amb ID " + transactionWebID);
       }
 
-      if (transaccio.getEstatcodi() < 0) {
-        // XYZ ZZZ ZZZ
-        String msg = "La transacció amb ID " + transactionWebID + " te un estat no vàlid ("
-            + transaccio.getEstatcodi() + ") per iniciar el proces d'escaneig.";
-        throw new Exception(msg);
-      }
+//      if (transaccio.getEstatcodi() < 0) {
+//        // XYZ ZZZ ZZZ
+//        String msg = "La transacció amb ID " + transactionWebID + " te un estat no vàlid ("
+//            + transaccio.getEstatcodi() + ") per iniciar el proces d'escaneig.";
+//        throw new Exception(msg);
+//      }
     }
     
    
@@ -90,58 +91,74 @@ public abstract class AbstractScanWebProcessController {
     swc = scanWebModuleEjb.getScanWebConfig(request, transactionWebID);
     //ScanWebStatus scanWebStatus = swc.getStatus();
 
-    int status = transaccio.getEstatcodi();
-
-    if (status == ScanWebStatus.STATUS_FINAL_ERROR) {
-      
-      
-    } else if (status == ScanWebStatus.STATUS_CANCELLED) {
-
-      if (transaccio.getEstatmissatge() == null) {
-        // XYZ ZZZ traduir
-        transaccio.setEstatmissatge("plugindescan.cancelat");
-      }
-    } else if (status == ScanWebStatus.STATUS_IN_PROGRESS) {
-      // Comprovam que s'hagin escanejat coses
-
-      List<ScannedDocument> listDocs = swc.getScannedFiles();
-
-      if (listDocs.size() == 1) {
-
-        ScannedDocument sd = listDocs.get(0);
-
-        ScannedPlainFile scannedFile = sd.getScannedPlainFile();
-
-        byte[] data = scannedFile.getData();
-        Fitxer fitxer = new FitxerBean("", scannedFile.getMime(), scannedFile.getName(),
-            data.length);
-
-        fitxer = fitxerEjb.create(fitxer);
-
-        FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
-
-        transaccio.setFitxerEscanejatID(fitxer.getFitxerID());
-        transaccio.setEstatcodi(ScanWebStatus.STATUS_FINAL_OK);
-
-      } else {
-
-        transaccio.setEstatcodi(ScanWebStatus.STATUS_FINAL_ERROR);
-        if (listDocs.size() == 0) {
-          // XYZ ZZZ Traduir
-          transaccio.setEstatmissatge(" L'usuari no ha escanejat cap fitxer.");
+    int status = swc.getStatus().getStatus();
+    
+    switch(status) {
+      case ScanWebStatus.STATUS_IN_PROGRESS:
+      {
+        // Comprovam que s'hagin escanejat coses
+  
+        List<ScannedDocument> listDocs = swc.getScannedFiles();
+  
+        if (listDocs.size() == 1) {
+  
+          ScannedDocument sd = listDocs.get(0);
+  
+          ScannedPlainFile scannedFile = sd.getScannedPlainFile();
+  
+          byte[] data = scannedFile.getData();
+          Fitxer fitxer = new FitxerBean("", scannedFile.getMime(), scannedFile.getName(),
+              data.length);
+  
+          fitxer = fitxerEjb.create(fitxer);
+  
+          FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
+  
+          transaccio.setFitxerEscanejatID(fitxer.getFitxerID());
+          transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
+  
         } else {
-          // XYZ ZZZ Traduir
-          transaccio.setEstatmissatge(" L'usuari ha escanejat més d'1 fitxer.");
+  
+          transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+          if (listDocs.size() == 0) {
+            // XYZ ZZZ Traduir
+            transaccio.setEstatmissatge(" L'usuari no ha escanejat cap fitxer.");
+          } else {
+            // XYZ ZZZ Traduir
+            transaccio.setEstatmissatge(" L'usuari ha escanejat més d'1 fitxer.");
+          }
+        }
+      } 
+      break;
+      
+      case ScanWebStatus.STATUS_FINAL_ERROR:
+      {
+        transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+      }
+      break;
+      
+      case ScanWebStatus.STATUS_CANCELLED:
+      {
+        transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_CANCELLED);
+        if (transaccio.getEstatmissatge() == null) {
+          // XYZ ZZZ traduir
+          transaccio.setEstatmissatge("plugindescan.cancelat");
         }
       }
-
-    } else {
-      // XYZ ZZZ Traduir
-      String inconsistentState = "El mòdul d´escaneig ha finalitzat inesperadament"
-          + " amb un estat desconegut " + status;
-      transaccio.setEstatmissatge(inconsistentState);
-      transaccio.setEstatexcepcio(new Exception().toString()); // XYZ ZZZ  
+      break;
+      
+      
+      default:
+      {
+        // XYZ ZZZ Traduir
+        String inconsistentState = "El mòdul d´escaneig ha finalitzat inesperadament"
+            + " amb un codi d'estat desconegut " + status;
+        transaccio.setEstatcodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+        transaccio.setEstatmissatge(inconsistentState);
+        transaccio.setEstatexcepcio(new Exception().toString()); // XYZ ZZZ  
+      }
     }
+
 
     scanWebModuleEjb.closeScanWebProcess(request, transactionWebID);
 
@@ -170,7 +187,7 @@ public abstract class AbstractScanWebProcessController {
       // Sortir de IFRAME
       
       log.info("XYZ ZZZ ZZZZZ\n\n Sortir de IFRAME = " + urlRetorn);
-      mav = new ModelAndView("public_finalsortiriframe");
+      mav = new ModelAndView(isPublic()?"public_finalsortiriframe":"finalsortiriframe");
       mav.addObject("urlRetorn", urlRetorn);
     }
 
@@ -181,6 +198,9 @@ public abstract class AbstractScanWebProcessController {
     return mav;
 
   }
+  
+  
+  public abstract boolean isPublic();
   
   
   /**
