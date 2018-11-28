@@ -36,7 +36,10 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CUSTODYFILEURL)}">
           <td>
-          ${infoCustody.custodyFileUrl}
+                       <c:if test="${ not empty infoCustody.custodyFileUrl}">
+               <a href="${infoCustody.custodyFileUrl}" target="_blank">${infoCustody.custodyFileUrl}</a>
+             </c:if>
+
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSV)}">
@@ -46,7 +49,10 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSVVALIDATIONWEB)}">
           <td>
-          ${infoCustody.csvValidationWeb}
+                       <c:if test="${ not empty infoCustody.csvValidationWeb}">
+               <a href="${infoCustody.csvValidationWeb}" target="_blank">${infoCustody.csvValidationWeb}</a>
+             </c:if>
+
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSVGENERATIONDEFINITION)}">

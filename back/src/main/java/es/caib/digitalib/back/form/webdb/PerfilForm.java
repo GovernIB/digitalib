@@ -23,9 +23,10 @@ public class PerfilForm extends DigitalIBBaseForm {
     this.listOfValuesForScanMinimaResolucio = __toClone.listOfValuesForScanMinimaResolucio;
     this.listOfValuesForScanPixelType = __toClone.listOfValuesForScanPixelType;
     this.listOfPluginForPluginScanWebID = __toClone.listOfPluginForPluginScanWebID;
+    this.listOfPluginForPluginScanWeb2ID = __toClone.listOfPluginForPluginScanWeb2ID;
     this.listOfValuesForTipusFirma = __toClone.listOfValuesForTipusFirma;
-    this.listOfPluginForPluginFirmaServidorID = __toClone.listOfPluginForPluginFirmaServidorID;
     this.listOfApiSimpleForApiSimpleID = __toClone.listOfApiSimpleForApiSimpleID;
+    this.listOfPluginForPluginFirmaServidorID = __toClone.listOfPluginForPluginFirmaServidorID;
     this.listOfValuesForTipusCustodia = __toClone.listOfValuesForTipusCustodia;
     this.listOfPluginForPluginArxiuID = __toClone.listOfPluginForPluginArxiuID;
     this.listOfPluginForPluginDocCustodyID = __toClone.listOfPluginForPluginDocCustodyID;
@@ -93,6 +94,18 @@ public class PerfilForm extends DigitalIBBaseForm {
 
 
 
+  private List<StringKeyValue> listOfPluginForPluginScanWeb2ID;
+
+  public List<StringKeyValue> getListOfPluginForPluginScanWeb2ID() {
+    return this.listOfPluginForPluginScanWeb2ID;
+  }
+
+  public void setListOfPluginForPluginScanWeb2ID(List<StringKeyValue> listOfPluginForPluginScanWeb2ID) {
+    this.listOfPluginForPluginScanWeb2ID = listOfPluginForPluginScanWeb2ID;
+  }
+
+
+
   private List<StringKeyValue> listOfValuesForTipusFirma;
 
   public List<StringKeyValue> getListOfValuesForTipusFirma() {
@@ -105,18 +118,6 @@ public class PerfilForm extends DigitalIBBaseForm {
 
 
 
-  private List<StringKeyValue> listOfPluginForPluginFirmaServidorID;
-
-  public List<StringKeyValue> getListOfPluginForPluginFirmaServidorID() {
-    return this.listOfPluginForPluginFirmaServidorID;
-  }
-
-  public void setListOfPluginForPluginFirmaServidorID(List<StringKeyValue> listOfPluginForPluginFirmaServidorID) {
-    this.listOfPluginForPluginFirmaServidorID = listOfPluginForPluginFirmaServidorID;
-  }
-
-
-
   private List<StringKeyValue> listOfApiSimpleForApiSimpleID;
 
   public List<StringKeyValue> getListOfApiSimpleForApiSimpleID() {
@@ -125,6 +126,18 @@ public class PerfilForm extends DigitalIBBaseForm {
 
   public void setListOfApiSimpleForApiSimpleID(List<StringKeyValue> listOfApiSimpleForApiSimpleID) {
     this.listOfApiSimpleForApiSimpleID = listOfApiSimpleForApiSimpleID;
+  }
+
+
+
+  private List<StringKeyValue> listOfPluginForPluginFirmaServidorID;
+
+  public List<StringKeyValue> getListOfPluginForPluginFirmaServidorID() {
+    return this.listOfPluginForPluginFirmaServidorID;
+  }
+
+  public void setListOfPluginForPluginFirmaServidorID(List<StringKeyValue> listOfPluginForPluginFirmaServidorID) {
+    this.listOfPluginForPluginFirmaServidorID = listOfPluginForPluginFirmaServidorID;
   }
 
 

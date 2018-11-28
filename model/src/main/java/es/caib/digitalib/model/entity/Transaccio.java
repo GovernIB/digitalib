@@ -11,23 +11,23 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.sql.Timestamp getDataInici();
 	public void setDataInici(java.sql.Timestamp _dataInici_);
 
-	public java.sql.Timestamp getDatafi();
-	public void setDatafi(java.sql.Timestamp _datafi_);
+	public java.sql.Timestamp getDataFi();
+	public void setDataFi(java.sql.Timestamp _dataFi_);
 
-	public java.lang.Long getUsuariaplicacioid();
-	public void setUsuariaplicacioid(java.lang.Long _usuariaplicacioid_);
+	public java.lang.Long getUsuariAplicacioId();
+	public void setUsuariAplicacioId(java.lang.Long _usuariAplicacioId_);
 
-	public java.lang.Long getUsuaripersonaid();
-	public void setUsuaripersonaid(java.lang.Long _usuaripersonaid_);
+	public java.lang.Long getUsuariPersonaId();
+	public void setUsuariPersonaId(java.lang.Long _usuariPersonaId_);
 
 	public int getEstatCodi();
 	public void setEstatCodi(int _estatCodi_);
 
-	public java.lang.String getEstatmissatge();
-	public void setEstatmissatge(java.lang.String _estatmissatge_);
+	public java.lang.String getEstatMissatge();
+	public void setEstatMissatge(java.lang.String _estatMissatge_);
 
-	public java.lang.String getEstatexcepcio();
-	public void setEstatexcepcio(java.lang.String _estatexcepcio_);
+	public java.lang.String getEstatExcepcio();
+	public void setEstatExcepcio(java.lang.String _estatExcepcio_);
 
 	public java.lang.Long getFitxerEscanejatID();
 	public void setFitxerEscanejatID(java.lang.Long _fitxerEscanejatID_);
@@ -35,44 +35,41 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.Long getFitxerSignaturaID();
 	public void setFitxerSignaturaID(java.lang.Long _fitxerSignaturaID_);
 
-	public java.lang.Integer getInfoscanpixeltype();
-	public void setInfoscanpixeltype(java.lang.Integer _infoscanpixeltype_);
+	public java.lang.Integer getInfoScanPixelType();
+	public void setInfoScanPixelType(java.lang.Integer _infoScanPixelType_);
 
-	public java.lang.Integer getInfoscanresolucioppp();
-	public void setInfoscanresolucioppp(java.lang.Integer _infoscanresolucioppp_);
+	public java.lang.Integer getInfoScanResolucioPpp();
+	public void setInfoScanResolucioPpp(java.lang.Integer _infoScanResolucioPpp_);
 
-	public boolean isInfoscanocr();
-	public void setInfoscanocr(boolean _infoscanocr_);
+	public boolean isInfoScanOcr();
+	public void setInfoScanOcr(boolean _infoScanOcr_);
 
-	public java.lang.Long getInfosignaturaid();
-	public void setInfosignaturaid(java.lang.Long _infosignaturaid_);
+	public java.lang.Long getInfoSignaturaID();
+	public void setInfoSignaturaID(java.lang.Long _infoSignaturaID_);
 
-	public java.lang.Long getInfocustodyid();
-	public void setInfocustodyid(java.lang.Long _infocustodyid_);
+	public java.lang.Long getInfoCustodyID();
+	public void setInfoCustodyID(java.lang.Long _infoCustodyID_);
 
-	public java.lang.String getLanguageui();
-	public void setLanguageui(java.lang.String _languageui_);
+	public java.lang.String getLanguageUI();
+	public void setLanguageUI(java.lang.String _languageUI_);
 
-	public java.lang.String getLanguagedoc();
-	public void setLanguagedoc(java.lang.String _languagedoc_);
+	public java.lang.String getLanguageDoc();
+	public void setLanguageDoc(java.lang.String _languageDoc_);
 
-	public java.lang.String getCiutadanif();
-	public void setCiutadanif(java.lang.String _ciutadanif_);
+	public java.lang.String getCiutadaNif();
+	public void setCiutadaNif(java.lang.String _ciutadaNif_);
 
-	public java.lang.String getCiutadanom();
-	public void setCiutadanom(java.lang.String _ciutadanom_);
+	public java.lang.String getCiutadaNom();
+	public void setCiutadaNom(java.lang.String _ciutadaNom_);
 
-	public java.lang.String getFuncionariusername();
-	public void setFuncionariusername(java.lang.String _funcionariusername_);
+	public java.lang.String getFuncionariUsername();
+	public void setFuncionariUsername(java.lang.String _funcionariUsername_);
 
-	public java.lang.String getFuncionarinom();
-	public void setFuncionarinom(java.lang.String _funcionarinom_);
+	public java.lang.String getFuncionariNom();
+	public void setFuncionariNom(java.lang.String _funcionariNom_);
 
 	public java.lang.String getExpedient();
 	public void setExpedient(java.lang.String _expedient_);
-
-	public long getPerfilid();
-	public void setPerfilid(long _perfilid_);
 
 	public java.lang.String getUsernameRequest();
 	public void setUsernameRequest(java.lang.String _usernameRequest_);
@@ -82,6 +79,9 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 
 	public java.lang.Integer getView();
 	public void setView(java.lang.Integer _view_);
+
+	public long getPerfilID();
+	public void setPerfilID(long _perfilID_);
 
   // Fitxer
   public <F extends Fitxer> F getFitxerEscanejat();

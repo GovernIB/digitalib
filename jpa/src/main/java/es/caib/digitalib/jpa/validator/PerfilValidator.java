@@ -155,16 +155,16 @@ public class PerfilValidator<T> implements PerfilFields {
       }
     }
 
-    if (__vr.getFieldErrorCount(PLUGINFIRMASERVIDORID) == 0) {
-      java.lang.Long __pluginfirmaservidorid = (java.lang.Long)__vr.getFieldValue(__target__,PLUGINFIRMASERVIDORID);
-      if (__pluginfirmaservidorid != null ) {
+    if (__vr.getFieldErrorCount(PLUGINSCANWEB2ID) == 0) {
+      java.lang.Long __pluginscanweb2id = (java.lang.Long)__vr.getFieldValue(__target__,PLUGINSCANWEB2ID);
+      if (__pluginscanweb2id != null ) {
         Long __count_ = null;
-        try { __count_ = __pluginManager.count(PluginFields.PLUGINID.equal(__pluginfirmaservidorid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        try { __count_ = __pluginManager.count(PluginFields.PLUGINID.equal(__pluginscanweb2id)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
         if (__count_ == null || __count_ == 0) {        
-          __vr.rejectValue(PLUGINFIRMASERVIDORID, "error.notfound",
+          __vr.rejectValue(PLUGINSCANWEB2ID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginfirmaservidorid)));
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginscanweb2id)));
         }
       }
     }
@@ -179,6 +179,20 @@ public class PerfilValidator<T> implements PerfilFields {
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("apiSimple.apiSimple"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("apiSimple.apiSimpleID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__apisimpleid)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(PLUGINFIRMASERVIDORID) == 0) {
+      java.lang.Long __pluginfirmaservidorid = (java.lang.Long)__vr.getFieldValue(__target__,PLUGINFIRMASERVIDORID);
+      if (__pluginfirmaservidorid != null ) {
+        Long __count_ = null;
+        try { __count_ = __pluginManager.count(PluginFields.PLUGINID.equal(__pluginfirmaservidorid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(PLUGINFIRMASERVIDORID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginfirmaservidorid)));
         }
       }
     }

@@ -63,7 +63,7 @@ public class ScanWebUtils {
     
     final String transactionWebID = transaction.getTransactionWebId();
     
-    final String languageUI = transaction.getLanguageui();
+    final String languageUI = transaction.getLanguageUI();
     
     final String scanType = ScanWebUtils.formatFileToScanWebApi(transaction.getPerfil()
         .getScanFormatFitxer());

@@ -31,8 +31,20 @@
              </label>
             </td>
             <td>
+           <c:if test="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYFILEURL)}">
+
+             <c:if test="${ not empty __theForm.infoCustody.custodyFileUrl}">
+               <a href="${__theForm.infoCustody.custodyFileUrl}" target="_blank">${__theForm.infoCustody.custodyFileUrl}</a>
+
+             </c:if>
+           </c:if>
+
+           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYFILEURL))}">
+
             <form:errors path="infoCustody.custodyFileUrl" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYFILEURL)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYFILEURL)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.custodyFileUrl"   />
+
+           </c:if>
 
            </td>
         </tr>
@@ -67,8 +79,20 @@
              </label>
             </td>
             <td>
+           <c:if test="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB)}">
+
+             <c:if test="${ not empty __theForm.infoCustody.csvValidationWeb}">
+               <a href="${__theForm.infoCustody.csvValidationWeb}" target="_blank">${__theForm.infoCustody.csvValidationWeb}</a>
+
+             </c:if>
+           </c:if>
+
+           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB))}">
+
             <form:errors path="infoCustody.csvValidationWeb" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.csvValidationWeb"   />
+
+           </c:if>
 
            </td>
         </tr>

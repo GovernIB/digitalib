@@ -57,19 +57,19 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.DATAFI)}">
-        <tr id="transaccio_datafi_rowid">
+        <tr id="transaccio_dataFi_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.DATAFI])?'transaccio.datafi':__theForm.labels[TransaccioFields.DATAFI]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.DATAFI])?'transaccio.dataFi':__theForm.labels[TransaccioFields.DATAFI]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.DATAFI]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.DATAFI]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-              <form:errors path="transaccio.datafi" cssClass="errorField alert alert-error" />
-              <div id="datafi" class="input-append">
-                <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAFI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAFI)? 'input-medium uneditable-input' : 'input-medium'}"  path="transaccio.datafi" />
+              <form:errors path="transaccio.dataFi" cssClass="errorField alert alert-error" />
+              <div id="dataFi" class="input-append">
+                <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAFI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAFI)? 'input-medium uneditable-input' : 'input-medium'}"  path="transaccio.dataFi" />
                 <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.DATAFI)}" >
                 <span class="add-on">
                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
@@ -79,7 +79,7 @@
               </div>
               <script type="text/javascript">                
                 $(function() {
-                  $('#datafi').datetimepicker({
+                  $('#dataFi').datetimepicker({
                     language: '${lang}',
                     pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
                     format:  '${gen:getJSDateTimePattern()}',
@@ -93,36 +93,36 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.USUARIAPLICACIOID)}">
-        <tr id="transaccio_usuariaplicacioid_rowid">
+        <tr id="transaccio_usuariAplicacioId_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.USUARIAPLICACIOID])?'transaccio.usuariaplicacioid':__theForm.labels[TransaccioFields.USUARIAPLICACIOID]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.USUARIAPLICACIOID])?'transaccio.usuariAplicacioId':__theForm.labels[TransaccioFields.USUARIAPLICACIOID]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.USUARIAPLICACIOID]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.USUARIAPLICACIOID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.usuariaplicacioid" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIAPLICACIOID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIAPLICACIOID)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.usuariaplicacioid"   />
+            <form:errors path="transaccio.usuariAplicacioId" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIAPLICACIOID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIAPLICACIOID)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.usuariAplicacioId"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.USUARIPERSONAID)}">
-        <tr id="transaccio_usuaripersonaid_rowid">
+        <tr id="transaccio_usuariPersonaId_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.USUARIPERSONAID])?'transaccio.usuaripersonaid':__theForm.labels[TransaccioFields.USUARIPERSONAID]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.USUARIPERSONAID])?'transaccio.usuariPersonaId':__theForm.labels[TransaccioFields.USUARIPERSONAID]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.USUARIPERSONAID]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.USUARIPERSONAID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.usuaripersonaid" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIPERSONAID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIPERSONAID)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.usuaripersonaid"   />
+            <form:errors path="transaccio.usuariPersonaId" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIPERSONAID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIPERSONAID)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.usuariPersonaId"   />
 
            </td>
         </tr>
@@ -156,42 +156,42 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ESTATMISSATGE)}">
-        <tr id="transaccio_estatmissatge_rowid">
+        <tr id="transaccio_estatMissatge_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ESTATMISSATGE])?'transaccio.estatmissatge':__theForm.labels[TransaccioFields.ESTATMISSATGE]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ESTATMISSATGE])?'transaccio.estatMissatge':__theForm.labels[TransaccioFields.ESTATMISSATGE]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.ESTATMISSATGE]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ESTATMISSATGE]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.estatmissatge" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATMISSATGE)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATMISSATGE)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="3000" path="transaccio.estatmissatge"   />
+            <form:errors path="transaccio.estatMissatge" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATMISSATGE)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATMISSATGE)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="3000" path="transaccio.estatMissatge"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ESTATEXCEPCIO)}">
-        <tr id="transaccio_estatexcepcio_rowid">
+        <tr id="transaccio_estatExcepcio_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ESTATEXCEPCIO])?'transaccio.estatexcepcio':__theForm.labels[TransaccioFields.ESTATEXCEPCIO]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ESTATEXCEPCIO])?'transaccio.estatExcepcio':__theForm.labels[TransaccioFields.ESTATEXCEPCIO]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.ESTATEXCEPCIO]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ESTATEXCEPCIO]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-              <form:errors path="transaccio.estatexcepcio" cssClass="errorField alert alert-error" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;" cssClass="input-xxlarge" readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATEXCEPCIO)? 'true' : 'false'}" path="transaccio.estatexcepcio"  />
+              <form:errors path="transaccio.estatExcepcio" cssClass="errorField alert alert-error" />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;" cssClass="input-xxlarge" readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATEXCEPCIO)? 'true' : 'false'}" path="transaccio.estatExcepcio"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
               <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('transaccio.estatexcepcio'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('transaccio.estatexcepcio'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('transaccio.estatexcepcio'); ta.wrap='hard';">Hard Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('transaccio.estatExcepcio'); ta.wrap='off';" >No Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('transaccio.estatExcepcio'); ta.wrap='soft';">Soft Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('transaccio.estatExcepcio'); ta.wrap='hard';">Hard Wrap</a></li>
               </ul>
               </div>
            </td>
@@ -289,46 +289,46 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANPIXELTYPE)}">
-        <tr id="transaccio_infoscanpixeltype_rowid">
+        <tr id="transaccio_infoScanPixelType_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANPIXELTYPE])?'transaccio.infoscanpixeltype':__theForm.labels[TransaccioFields.INFOSCANPIXELTYPE]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANPIXELTYPE])?'transaccio.infoScanPixelType':__theForm.labels[TransaccioFields.INFOSCANPIXELTYPE]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.INFOSCANPIXELTYPE]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOSCANPIXELTYPE]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.infoscanpixeltype" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANPIXELTYPE)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANPIXELTYPE)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.infoscanpixeltype"   />
+            <form:errors path="transaccio.infoScanPixelType" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANPIXELTYPE)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANPIXELTYPE)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.infoScanPixelType"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANRESOLUCIOPPP)}">
-        <tr id="transaccio_infoscanresolucioppp_rowid">
+        <tr id="transaccio_infoScanResolucioPpp_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANRESOLUCIOPPP])?'transaccio.infoscanresolucioppp':__theForm.labels[TransaccioFields.INFOSCANRESOLUCIOPPP]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANRESOLUCIOPPP])?'transaccio.infoScanResolucioPpp':__theForm.labels[TransaccioFields.INFOSCANRESOLUCIOPPP]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.INFOSCANRESOLUCIOPPP]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOSCANRESOLUCIOPPP]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.infoscanresolucioppp" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANRESOLUCIOPPP)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANRESOLUCIOPPP)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.infoscanresolucioppp"   />
+            <form:errors path="transaccio.infoScanResolucioPpp" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANRESOLUCIOPPP)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANRESOLUCIOPPP)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.infoScanResolucioPpp"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANOCR)}">
-        <tr id="transaccio_infoscanocr_rowid">
+        <tr id="transaccio_infoScanOcr_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANOCR])?'transaccio.infoscanocr':__theForm.labels[TransaccioFields.INFOSCANOCR]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANOCR])?'transaccio.infoScanOcr':__theForm.labels[TransaccioFields.INFOSCANOCR]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.INFOSCANOCR]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOSCANOCR]}" ></i>
               </c:if>
@@ -336,40 +336,40 @@
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANOCR)}" >
-              <form:select cssClass="input-medium" onchange="if(typeof onChangeInfoscanocr == 'function') {  onChangeInfoscanocr(this); };"  path="transaccio.infoscanocr">
+              <form:select cssClass="input-medium" onchange="if(typeof onChangeInfoScanOcr == 'function') {  onChangeInfoScanOcr(this); };"  path="transaccio.infoScanOcr">
                 <form:option value=""><fmt:message key="genapp.checkbox." /></form:option>
                 <form:option value="true" ><fmt:message key="genapp.checkbox.true" /></form:option>
                 <form:option value="false" ><fmt:message key="genapp.checkbox.false" /></form:option>
               </form:select>
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANOCR)}" >
-                <fmt:message key="genapp.checkbox.${__theForm.transaccio.infoscanocr}" />
+                <fmt:message key="genapp.checkbox.${__theForm.transaccio.infoScanOcr}" />
           </c:if>
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSIGNATURAID)}">
-        <tr id="transaccio_infosignaturaid_rowid">
+        <tr id="transaccio_infoSignaturaID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSIGNATURAID])?'transaccio.infosignaturaid':__theForm.labels[TransaccioFields.INFOSIGNATURAID]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSIGNATURAID])?'transaccio.infoSignaturaID':__theForm.labels[TransaccioFields.INFOSIGNATURAID]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.INFOSIGNATURAID]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOSIGNATURAID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-          <form:errors path="transaccio.infosignaturaid" cssClass="errorField alert alert-error" />
+          <form:errors path="transaccio.infoSignaturaID" cssClass="errorField alert alert-error" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSIGNATURAID)}" >
-          <form:hidden path="transaccio.infosignaturaid"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.infosignaturaid,__theForm.listOfInfoSignaturaForInfosignaturaid)}"  />
+          <form:hidden path="transaccio.infoSignaturaID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.infoSignaturaID,__theForm.listOfInfoSignaturaForInfoSignaturaID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSIGNATURAID)}" >
-          <form:select id="transaccio_infosignaturaid"  onchange="if(typeof onChangeInfosignaturaid == 'function') {  onChangeInfosignaturaid(this); };"  cssClass="input-xxlarge" path="transaccio.infosignaturaid">
+          <form:select id="transaccio_infoSignaturaID"  onchange="if(typeof onChangeInfoSignaturaID == 'function') {  onChangeInfoSignaturaID(this); };"  cssClass="input-xxlarge" path="transaccio.infoSignaturaID">
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfInfoSignaturaForInfosignaturaid}" var="tmp">
+            <c:forEach items="${__theForm.listOfInfoSignaturaForInfoSignaturaID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>
@@ -379,26 +379,26 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOCUSTODYID)}">
-        <tr id="transaccio_infocustodyid_rowid">
+        <tr id="transaccio_infoCustodyID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOCUSTODYID])?'transaccio.infocustodyid':__theForm.labels[TransaccioFields.INFOCUSTODYID]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOCUSTODYID])?'transaccio.infoCustodyID':__theForm.labels[TransaccioFields.INFOCUSTODYID]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.INFOCUSTODYID]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOCUSTODYID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-          <form:errors path="transaccio.infocustodyid" cssClass="errorField alert alert-error" />
+          <form:errors path="transaccio.infoCustodyID" cssClass="errorField alert alert-error" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOCUSTODYID)}" >
-          <form:hidden path="transaccio.infocustodyid"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.infocustodyid,__theForm.listOfInfoCustodyForInfocustodyid)}"  />
+          <form:hidden path="transaccio.infoCustodyID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.infoCustodyID,__theForm.listOfInfoCustodyForInfoCustodyID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOCUSTODYID)}" >
-          <form:select id="transaccio_infocustodyid"  onchange="if(typeof onChangeInfocustodyid == 'function') {  onChangeInfocustodyid(this); };"  cssClass="input-xxlarge" path="transaccio.infocustodyid">
+          <form:select id="transaccio_infoCustodyID"  onchange="if(typeof onChangeInfoCustodyID == 'function') {  onChangeInfoCustodyID(this); };"  cssClass="input-xxlarge" path="transaccio.infoCustodyID">
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfInfoCustodyForInfocustodyid}" var="tmp">
+            <c:forEach items="${__theForm.listOfInfoCustodyForInfoCustodyID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>
@@ -408,108 +408,108 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.LANGUAGEUI)}">
-        <tr id="transaccio_languageui_rowid">
+        <tr id="transaccio_languageUI_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.LANGUAGEUI])?'transaccio.languageui':__theForm.labels[TransaccioFields.LANGUAGEUI]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.LANGUAGEUI])?'transaccio.languageUI':__theForm.labels[TransaccioFields.LANGUAGEUI]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.LANGUAGEUI]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.LANGUAGEUI]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.languageui" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEUI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEUI)? 'input-small uneditable-input' : 'input-small'}"  maxlength="10" path="transaccio.languageui"   />
+            <form:errors path="transaccio.languageUI" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEUI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEUI)? 'input-small uneditable-input' : 'input-small'}"  maxlength="10" path="transaccio.languageUI"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.LANGUAGEDOC)}">
-        <tr id="transaccio_languagedoc_rowid">
+        <tr id="transaccio_languageDoc_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.LANGUAGEDOC])?'transaccio.languagedoc':__theForm.labels[TransaccioFields.LANGUAGEDOC]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.LANGUAGEDOC])?'transaccio.languageDoc':__theForm.labels[TransaccioFields.LANGUAGEDOC]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.LANGUAGEDOC]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.LANGUAGEDOC]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.languagedoc" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEDOC)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEDOC)? 'input-small uneditable-input' : 'input-small'}"  maxlength="10" path="transaccio.languagedoc"   />
+            <form:errors path="transaccio.languageDoc" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEDOC)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEDOC)? 'input-small uneditable-input' : 'input-small'}"  maxlength="10" path="transaccio.languageDoc"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.CIUTADANIF)}">
-        <tr id="transaccio_ciutadanif_rowid">
+        <tr id="transaccio_ciutadaNif_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.CIUTADANIF])?'transaccio.ciutadanif':__theForm.labels[TransaccioFields.CIUTADANIF]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.CIUTADANIF])?'transaccio.ciutadaNif':__theForm.labels[TransaccioFields.CIUTADANIF]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.CIUTADANIF]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.CIUTADANIF]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.ciutadanif" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANIF)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANIF)? 'input-medium uneditable-input' : 'input-medium'}"  maxlength="15" path="transaccio.ciutadanif"   />
+            <form:errors path="transaccio.ciutadaNif" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANIF)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANIF)? 'input-medium uneditable-input' : 'input-medium'}"  maxlength="15" path="transaccio.ciutadaNif"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.CIUTADANOM)}">
-        <tr id="transaccio_ciutadanom_rowid">
+        <tr id="transaccio_ciutadaNom_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.CIUTADANOM])?'transaccio.ciutadanom':__theForm.labels[TransaccioFields.CIUTADANOM]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.CIUTADANOM])?'transaccio.ciutadaNom':__theForm.labels[TransaccioFields.CIUTADANOM]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.CIUTADANOM]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.CIUTADANOM]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.ciutadanom" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.ciutadanom"   />
+            <form:errors path="transaccio.ciutadaNom" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.ciutadaNom"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.FUNCIONARIUSERNAME)}">
-        <tr id="transaccio_funcionariusername_rowid">
+        <tr id="transaccio_funcionariUsername_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FUNCIONARIUSERNAME])?'transaccio.funcionariusername':__theForm.labels[TransaccioFields.FUNCIONARIUSERNAME]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FUNCIONARIUSERNAME])?'transaccio.funcionariUsername':__theForm.labels[TransaccioFields.FUNCIONARIUSERNAME]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.FUNCIONARIUSERNAME]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.FUNCIONARIUSERNAME]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.funcionariusername" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARIUSERNAME)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARIUSERNAME)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.funcionariusername"   />
+            <form:errors path="transaccio.funcionariUsername" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARIUSERNAME)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARIUSERNAME)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.funcionariUsername"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.FUNCIONARINOM)}">
-        <tr id="transaccio_funcionarinom_rowid">
+        <tr id="transaccio_funcionariNom_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FUNCIONARINOM])?'transaccio.funcionarinom':__theForm.labels[TransaccioFields.FUNCIONARINOM]}" />
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FUNCIONARINOM])?'transaccio.funcionariNom':__theForm.labels[TransaccioFields.FUNCIONARINOM]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.FUNCIONARINOM]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.FUNCIONARINOM]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.funcionarinom" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARINOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARINOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.funcionarinom"   />
+            <form:errors path="transaccio.funcionariNom" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARINOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARINOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.funcionariNom"   />
 
            </td>
         </tr>
@@ -529,33 +529,6 @@
             <form:errors path="transaccio.expedient" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.EXPEDIENT)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.EXPEDIENT)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.expedient"   />
 
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.PERFILID)}">
-        <tr id="transaccio_perfilid_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.PERFILID])?'transaccio.perfilid':__theForm.labels[TransaccioFields.PERFILID]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[TransaccioFields.PERFILID]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.PERFILID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="transaccio.perfilid" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.PERFILID)}" >
-          <form:hidden path="transaccio.perfilid"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.perfilid,__theForm.listOfPerfilForPerfilid)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.PERFILID)}" >
-          <form:select id="transaccio_perfilid"  onchange="if(typeof onChangePerfilid == 'function') {  onChangePerfilid(this); };"  cssClass="input-xxlarge" path="transaccio.perfilid">
-            <c:forEach items="${__theForm.listOfPerfilForPerfilid}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
            </td>
         </tr>
         </c:if>
@@ -617,6 +590,33 @@
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfValuesForView}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.PERFILID)}">
+        <tr id="transaccio_perfilID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.PERFILID])?'transaccio.perfilID':__theForm.labels[TransaccioFields.PERFILID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[TransaccioFields.PERFILID]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.PERFILID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.perfilID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.PERFILID)}" >
+          <form:hidden path="transaccio.perfilID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.perfilID,__theForm.listOfPerfilForPerfilID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.PERFILID)}" >
+          <form:select id="transaccio_perfilID"  onchange="if(typeof onChangePerfilID == 'function') {  onChangePerfilID(this); };"  cssClass="input-xxlarge" path="transaccio.perfilID">
+            <c:forEach items="${__theForm.listOfPerfilForPerfilID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

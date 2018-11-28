@@ -38,16 +38,16 @@
           <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${transaccio.dataInici}" /></td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.DATAFI)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${transaccio.datafi}" /></td>
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${transaccio.dataFi}" /></td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USUARIAPLICACIOID)}">
           <td>
-          ${transaccio.usuariaplicacioid}
+          ${transaccio.usuariAplicacioId}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USUARIPERSONAID)}">
           <td>
-          ${transaccio.usuaripersonaid}
+          ${transaccio.usuariPersonaId}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATCODI)}">
@@ -60,12 +60,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATMISSATGE)}">
           <td>
-          ${transaccio.estatmissatge}
+          ${transaccio.estatMissatge}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATEXCEPCIO)}">
           <td>
-          ${transaccio.estatexcepcio}
+          ${transaccio.estatExcepcio}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FITXERESCANEJATID)}">
@@ -84,78 +84,70 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANPIXELTYPE)}">
           <td>
-          ${transaccio.infoscanpixeltype}
+          ${transaccio.infoScanPixelType}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANRESOLUCIOPPP)}">
           <td>
-          ${transaccio.infoscanresolucioppp}
+          ${transaccio.infoScanResolucioPpp}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANOCR)}">
           <td>
-            &nbsp;<c:if test="${not empty transaccio.infoscanocr}">
-            <img height="18" width="18" src="<c:url value="/img/icn_alert_${transaccio.infoscanocr?'success':'error'}.png"/>">
+            &nbsp;<c:if test="${not empty transaccio.infoScanOcr}">
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${transaccio.infoScanOcr?'success':'error'}.png"/>">
             </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSIGNATURAID)}">
           <td>
-          <c:set var="tmp">${transaccio.infosignaturaid}</c:set>
+          <c:set var="tmp">${transaccio.infoSignaturaID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfInfoSignaturaForInfosignaturaid[tmp]}
+          ${__theFilterForm.mapOfInfoSignaturaForInfoSignaturaID[tmp]}
           </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOCUSTODYID)}">
           <td>
-          <c:set var="tmp">${transaccio.infocustodyid}</c:set>
+          <c:set var="tmp">${transaccio.infoCustodyID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfInfoCustodyForInfocustodyid[tmp]}
+          ${__theFilterForm.mapOfInfoCustodyForInfoCustodyID[tmp]}
           </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.LANGUAGEUI)}">
           <td>
-          ${transaccio.languageui}
+          ${transaccio.languageUI}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.LANGUAGEDOC)}">
           <td>
-          ${transaccio.languagedoc}
+          ${transaccio.languageDoc}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.CIUTADANIF)}">
           <td>
-          ${transaccio.ciutadanif}
+          ${transaccio.ciutadaNif}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.CIUTADANOM)}">
           <td>
-          ${transaccio.ciutadanom}
+          ${transaccio.ciutadaNom}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FUNCIONARIUSERNAME)}">
           <td>
-          ${transaccio.funcionariusername}
+          ${transaccio.funcionariUsername}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FUNCIONARINOM)}">
           <td>
-          ${transaccio.funcionarinom}
+          ${transaccio.funcionariNom}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.EXPEDIENT)}">
           <td>
           ${transaccio.expedient}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.PERFILID)}">
-          <td>
-          <c:set var="tmp">${transaccio.perfilid}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfPerfilForPerfilid[tmp]}
-          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USERNAMEREQUEST)}">
@@ -173,6 +165,14 @@
           <c:set var="tmp">${transaccio.view}</c:set>
           <c:if test="${not empty tmp}">
           ${__theFilterForm.mapOfValuesForView[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.PERFILID)}">
+          <td>
+          <c:set var="tmp">${transaccio.perfilID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfPerfilForPerfilID[tmp]}
           </c:if>
           </td>
         </c:if>

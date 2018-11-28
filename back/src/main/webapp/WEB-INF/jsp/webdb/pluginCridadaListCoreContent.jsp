@@ -34,17 +34,20 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.METODEPLUGIN)}">
           <td>
-          ${pluginCridada.metodeplugin}
+          ${pluginCridada.metodePlugin}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.TIPUSRESULTAT)}">
           <td>
-          ${pluginCridada.tipusresultat}
+          <c:set var="tmp">${pluginCridada.tipusResultat}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForTipusResultat[tmp]}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.TEMPSEXECUCIO)}">
           <td>
-          ${pluginCridada.tempsexecucio}
+          ${pluginCridada.tempsExecucio}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.PLUGINID)}">
@@ -57,17 +60,17 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.USUARIPERSONAID)}">
           <td>
-          ${pluginCridada.usuaripersonaid}
+          ${pluginCridada.usuariPersonaId}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.USUARIAPLICACIOID)}">
           <td>
-          ${pluginCridada.usuariaplicacioid}
+          ${pluginCridada.usuariAplicacioId}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.PARAMETRESTEXT)}">
           <td>
-          ${pluginCridada.parametrestext}
+          ${pluginCridada.parametresText}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.PARAMETRESFITXERID)}">
@@ -79,7 +82,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.RETORNTEXT)}">
           <td>
-          ${pluginCridada.retorntext}
+          ${pluginCridada.retornText}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.RETORNFITXERID)}">

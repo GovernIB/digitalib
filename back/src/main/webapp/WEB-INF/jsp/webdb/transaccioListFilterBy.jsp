@@ -130,10 +130,10 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.DATAFI)}">
             <%-- FILTRE DATE --%>
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.datafi" />:</span>
+              <span class="add-on"><fmt:message key="transaccio.dataFi" />:</span>
               <span class="add-on"><fmt:message key="genapp.from" /></span>
-              <div id="datafiDesde" class="input-append">
-                <form:input cssClass="input-large" path="datafiDesde" />
+              <div id="dataFiDesde" class="input-append">
+                <form:input cssClass="input-large" path="dataFiDesde" />
                 <span class="add-on">
                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                   </i>
@@ -141,7 +141,7 @@
               </div>
               <script type="text/javascript">                
                 $(function() {
-                  $('#datafiDesde').datetimepicker({
+                  $('#dataFiDesde').datetimepicker({
                     language: '${lang}',
                     pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
                     format:  '${gen:getJSDateTimePattern()}',
@@ -151,8 +151,8 @@
                 });
               </script>
               <span class="add-on"><fmt:message key="genapp.to" /></span>              
-              <div id="datafiFins" class="input-append">
-                <form:input cssClass="input-large" path="datafiFins" />
+              <div id="dataFiFins" class="input-append">
+                <form:input cssClass="input-large" path="dataFiFins" />
                 <span class="add-on">
                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                   </i>
@@ -160,7 +160,7 @@
               </div>
               <script type="text/javascript">                
                 $(function() {
-                  $('#datafiFins').datetimepicker({
+                  $('#dataFiFins').datetimepicker({
                     language: '${lang}',
                     pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
                     format:  '${gen:getJSDateTimePattern()}',
@@ -176,16 +176,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.USUARIAPLICACIOID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.usuariaplicacioid" />:</span>
+              <span class="add-on"><fmt:message key="transaccio.usuariAplicacioId" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="usuariaplicacioidDesde" />
+              <form:input cssClass="input-append input-small" path="usuariAplicacioIdDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="usuariaplicacioidFins" />
+              <form:input cssClass="input-append input-small search-query" path="usuariAplicacioIdFins" />
 
             </div>
 
@@ -194,16 +194,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.USUARIPERSONAID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.usuaripersonaid" />:</span>
+              <span class="add-on"><fmt:message key="transaccio.usuariPersonaId" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="usuaripersonaidDesde" />
+              <form:input cssClass="input-append input-small" path="usuariPersonaIdDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="usuaripersonaidFins" />
+              <form:input cssClass="input-append input-small search-query" path="usuariPersonaIdFins" />
 
             </div>
 
@@ -230,12 +230,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.ESTATMISSATGE)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.estatmissatge" var="estatmissatge" />
-              <fmt:message key="genapp.form.searchby" var="cercaperestatmissatge" >                
-                 <fmt:param value="${estatmissatge}"/>
+              <fmt:message key="transaccio.estatMissatge" var="estatMissatge" />
+              <fmt:message key="genapp.form.searchby" var="cercaperestatMissatge" >                
+                 <fmt:param value="${estatMissatge}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${estatmissatge}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperestatmissatge}" path="estatmissatge" />
+              <span class="add-on"><c:out value="${estatMissatge}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperestatMissatge}" path="estatMissatge" />
             </div>
 
 
@@ -243,12 +243,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.ESTATEXCEPCIO)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.estatexcepcio" var="estatexcepcio" />
-              <fmt:message key="genapp.form.searchby" var="cercaperestatexcepcio" >                
-                 <fmt:param value="${estatexcepcio}"/>
+              <fmt:message key="transaccio.estatExcepcio" var="estatExcepcio" />
+              <fmt:message key="genapp.form.searchby" var="cercaperestatExcepcio" >                
+                 <fmt:param value="${estatExcepcio}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${estatexcepcio}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperestatexcepcio}" path="estatexcepcio" />
+              <span class="add-on"><c:out value="${estatExcepcio}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperestatExcepcio}" path="estatExcepcio" />
             </div>
 
 
@@ -256,16 +256,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANPIXELTYPE)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.infoscanpixeltype" />:</span>
+              <span class="add-on"><fmt:message key="transaccio.infoScanPixelType" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="infoscanpixeltypeDesde" />
+              <form:input cssClass="input-append input-small" path="infoScanPixelTypeDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="infoscanpixeltypeFins" />
+              <form:input cssClass="input-append input-small search-query" path="infoScanPixelTypeFins" />
 
             </div>
 
@@ -274,16 +274,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANRESOLUCIOPPP)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.infoscanresolucioppp" />:</span>
+              <span class="add-on"><fmt:message key="transaccio.infoScanResolucioPpp" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="infoscanresoluciopppDesde" />
+              <form:input cssClass="input-append input-small" path="infoScanResolucioPppDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="infoscanresoluciopppFins" />
+              <form:input cssClass="input-append input-small search-query" path="infoScanResolucioPppFins" />
 
             </div>
 
@@ -292,16 +292,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANOCR)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.infoscanocr" />:</span>
+              <span class="add-on"><fmt:message key="transaccio.infoScanOcr" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="infoscanocrDesde" />
+              <form:input cssClass="input-append input-small" path="infoScanOcrDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="infoscanocrFins" />
+              <form:input cssClass="input-append input-small search-query" path="infoScanOcrFins" />
 
             </div>
 
@@ -310,16 +310,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSIGNATURAID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.infosignaturaid" />:</span>
+              <span class="add-on"><fmt:message key="transaccio.infoSignaturaID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="infosignaturaidDesde" />
+              <form:input cssClass="input-append input-small" path="infoSignaturaIDDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="infosignaturaidFins" />
+              <form:input cssClass="input-append input-small search-query" path="infoSignaturaIDFins" />
 
             </div>
 
@@ -328,16 +328,16 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOCUSTODYID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.infocustodyid" />:</span>
+              <span class="add-on"><fmt:message key="transaccio.infoCustodyID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="infocustodyidDesde" />
+              <form:input cssClass="input-append input-small" path="infoCustodyIDDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="infocustodyidFins" />
+              <form:input cssClass="input-append input-small search-query" path="infoCustodyIDFins" />
 
             </div>
 
@@ -346,12 +346,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.LANGUAGEUI)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.languageui" var="languageui" />
-              <fmt:message key="genapp.form.searchby" var="cercaperlanguageui" >                
-                 <fmt:param value="${languageui}"/>
+              <fmt:message key="transaccio.languageUI" var="languageUI" />
+              <fmt:message key="genapp.form.searchby" var="cercaperlanguageUI" >                
+                 <fmt:param value="${languageUI}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${languageui}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperlanguageui}" path="languageui" />
+              <span class="add-on"><c:out value="${languageUI}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperlanguageUI}" path="languageUI" />
             </div>
 
 
@@ -359,12 +359,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.LANGUAGEDOC)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.languagedoc" var="languagedoc" />
-              <fmt:message key="genapp.form.searchby" var="cercaperlanguagedoc" >                
-                 <fmt:param value="${languagedoc}"/>
+              <fmt:message key="transaccio.languageDoc" var="languageDoc" />
+              <fmt:message key="genapp.form.searchby" var="cercaperlanguageDoc" >                
+                 <fmt:param value="${languageDoc}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${languagedoc}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperlanguagedoc}" path="languagedoc" />
+              <span class="add-on"><c:out value="${languageDoc}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperlanguageDoc}" path="languageDoc" />
             </div>
 
 
@@ -372,12 +372,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.CIUTADANIF)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.ciutadanif" var="ciutadanif" />
-              <fmt:message key="genapp.form.searchby" var="cercaperciutadanif" >                
-                 <fmt:param value="${ciutadanif}"/>
+              <fmt:message key="transaccio.ciutadaNif" var="ciutadaNif" />
+              <fmt:message key="genapp.form.searchby" var="cercaperciutadaNif" >                
+                 <fmt:param value="${ciutadaNif}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${ciutadanif}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperciutadanif}" path="ciutadanif" />
+              <span class="add-on"><c:out value="${ciutadaNif}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperciutadaNif}" path="ciutadaNif" />
             </div>
 
 
@@ -385,12 +385,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.CIUTADANOM)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.ciutadanom" var="ciutadanom" />
-              <fmt:message key="genapp.form.searchby" var="cercaperciutadanom" >                
-                 <fmt:param value="${ciutadanom}"/>
+              <fmt:message key="transaccio.ciutadaNom" var="ciutadaNom" />
+              <fmt:message key="genapp.form.searchby" var="cercaperciutadaNom" >                
+                 <fmt:param value="${ciutadaNom}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${ciutadanom}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperciutadanom}" path="ciutadanom" />
+              <span class="add-on"><c:out value="${ciutadaNom}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperciutadaNom}" path="ciutadaNom" />
             </div>
 
 
@@ -398,12 +398,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.FUNCIONARIUSERNAME)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.funcionariusername" var="funcionariusername" />
-              <fmt:message key="genapp.form.searchby" var="cercaperfuncionariusername" >                
-                 <fmt:param value="${funcionariusername}"/>
+              <fmt:message key="transaccio.funcionariUsername" var="funcionariUsername" />
+              <fmt:message key="genapp.form.searchby" var="cercaperfuncionariUsername" >                
+                 <fmt:param value="${funcionariUsername}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${funcionariusername}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperfuncionariusername}" path="funcionariusername" />
+              <span class="add-on"><c:out value="${funcionariUsername}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperfuncionariUsername}" path="funcionariUsername" />
             </div>
 
 
@@ -411,12 +411,12 @@
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.FUNCIONARINOM)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.funcionarinom" var="funcionarinom" />
-              <fmt:message key="genapp.form.searchby" var="cercaperfuncionarinom" >                
-                 <fmt:param value="${funcionarinom}"/>
+              <fmt:message key="transaccio.funcionariNom" var="funcionariNom" />
+              <fmt:message key="genapp.form.searchby" var="cercaperfuncionariNom" >                
+                 <fmt:param value="${funcionariNom}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${funcionarinom}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperfuncionarinom}" path="funcionarinom" />
+              <span class="add-on"><c:out value="${funcionariNom}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperfuncionariNom}" path="funcionariNom" />
             </div>
 
 
@@ -430,24 +430,6 @@
               </fmt:message>
               <span class="add-on"><c:out value="${expedient}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperexpedient}" path="expedient" />
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.PERFILID)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.perfilid" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="perfilidDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="perfilidFins" />
-
             </div>
 
 
@@ -491,6 +473,24 @@
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
               <form:input cssClass="input-append input-small search-query" path="viewFins" />
+
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.PERFILID)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="transaccio.perfilID" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="perfilIDDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="perfilIDFins" />
 
             </div>
 

@@ -198,6 +198,35 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.PLUGINSCANWEB2ID)}">
+        <tr id="perfil_pluginScanWeb2ID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.PLUGINSCANWEB2ID])?'perfil.pluginScanWeb2ID':__theForm.labels[PerfilFields.PLUGINSCANWEB2ID]}" />
+              <c:if test="${not empty __theForm.help[PerfilFields.PLUGINSCANWEB2ID]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.PLUGINSCANWEB2ID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="perfil.pluginScanWeb2ID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.PLUGINSCANWEB2ID)}" >
+          <form:hidden path="perfil.pluginScanWeb2ID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.perfil.pluginScanWeb2ID,__theForm.listOfPluginForPluginScanWeb2ID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.PLUGINSCANWEB2ID)}" >
+          <form:select id="perfil_pluginScanWeb2ID"  onchange="if(typeof onChangePluginScanWeb2ID == 'function') {  onChangePluginScanWeb2ID(this); };"  cssClass="input-xxlarge" path="perfil.pluginScanWeb2ID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPluginForPluginScanWeb2ID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.TIPUSFIRMA)}">
         <tr id="perfil_tipusFirma_rowid">
           <td>
@@ -217,35 +246,6 @@
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.TIPUSFIRMA)}" >
           <form:select id="perfil_tipusFirma"  onchange="if(typeof onChangeTipusFirma == 'function') {  onChangeTipusFirma(this); };"  cssClass="input-xxlarge" path="perfil.tipusFirma">
             <c:forEach items="${__theForm.listOfValuesForTipusFirma}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.PLUGINFIRMASERVIDORID)}">
-        <tr id="perfil_pluginFirmaServidorID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[PerfilFields.PLUGINFIRMASERVIDORID])?'perfil.pluginFirmaServidorID':__theForm.labels[PerfilFields.PLUGINFIRMASERVIDORID]}" />
-              <c:if test="${not empty __theForm.help[PerfilFields.PLUGINFIRMASERVIDORID]}">
-              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.PLUGINFIRMASERVIDORID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="perfil.pluginFirmaServidorID" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.PLUGINFIRMASERVIDORID)}" >
-          <form:hidden path="perfil.pluginFirmaServidorID"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.perfil.pluginFirmaServidorID,__theForm.listOfPluginForPluginFirmaServidorID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.PLUGINFIRMASERVIDORID)}" >
-          <form:select id="perfil_pluginFirmaServidorID"  onchange="if(typeof onChangePluginFirmaServidorID == 'function') {  onChangePluginFirmaServidorID(this); };"  cssClass="input-xxlarge" path="perfil.pluginFirmaServidorID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfPluginForPluginFirmaServidorID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>
@@ -275,6 +275,35 @@
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfApiSimpleForApiSimpleID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.PLUGINFIRMASERVIDORID)}">
+        <tr id="perfil_pluginFirmaServidorID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.PLUGINFIRMASERVIDORID])?'perfil.pluginFirmaServidorID':__theForm.labels[PerfilFields.PLUGINFIRMASERVIDORID]}" />
+              <c:if test="${not empty __theForm.help[PerfilFields.PLUGINFIRMASERVIDORID]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.PLUGINFIRMASERVIDORID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="perfil.pluginFirmaServidorID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.PLUGINFIRMASERVIDORID)}" >
+          <form:hidden path="perfil.pluginFirmaServidorID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.perfil.pluginFirmaServidorID,__theForm.listOfPluginForPluginFirmaServidorID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.PLUGINFIRMASERVIDORID)}" >
+          <form:select id="perfil_pluginFirmaServidorID"  onchange="if(typeof onChangePluginFirmaServidorID == 'function') {  onChangePluginFirmaServidorID(this); };"  cssClass="input-xxlarge" path="perfil.pluginFirmaServidorID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPluginForPluginFirmaServidorID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

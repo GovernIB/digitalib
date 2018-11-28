@@ -103,10 +103,6 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new StringField(getQueryPath(), TransaccioFields.EXPEDIENT);
   }
 
-  public LongField PERFILID() {
-    return new LongField(getQueryPath(), TransaccioFields.PERFILID);
-  }
-
   public StringField USERNAMEREQUEST() {
     return new StringField(getQueryPath(), TransaccioFields.USERNAMEREQUEST);
   }
@@ -117,6 +113,10 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
 
   public IntegerField VIEW() {
     return new IntegerField(getQueryPath(), TransaccioFields.VIEW);
+  }
+
+  public LongField PERFILID() {
+    return new LongField(getQueryPath(), TransaccioFields.PERFILID);
   }
 
 

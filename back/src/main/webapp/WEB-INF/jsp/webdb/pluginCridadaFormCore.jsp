@@ -39,54 +39,63 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginCridadaFields.METODEPLUGIN)}">
-        <tr id="pluginCridada_metodeplugin_rowid">
+        <tr id="pluginCridada_metodePlugin_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.METODEPLUGIN])?'pluginCridada.metodeplugin':__theForm.labels[PluginCridadaFields.METODEPLUGIN]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.METODEPLUGIN])?'pluginCridada.metodePlugin':__theForm.labels[PluginCridadaFields.METODEPLUGIN]}" /> &nbsp;(*)
               <c:if test="${not empty __theForm.help[PluginCridadaFields.METODEPLUGIN]}">
               <i class="icon-info-sign" title="${__theForm.help[PluginCridadaFields.METODEPLUGIN]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="pluginCridada.metodeplugin" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.METODEPLUGIN)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.METODEPLUGIN)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="pluginCridada.metodeplugin"   />
+            <form:errors path="pluginCridada.metodePlugin" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.METODEPLUGIN)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.METODEPLUGIN)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="pluginCridada.metodePlugin"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginCridadaFields.TIPUSRESULTAT)}">
-        <tr id="pluginCridada_tipusresultat_rowid">
+        <tr id="pluginCridada_tipusResultat_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.TIPUSRESULTAT])?'pluginCridada.tipusresultat':__theForm.labels[PluginCridadaFields.TIPUSRESULTAT]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.TIPUSRESULTAT])?'pluginCridada.tipusResultat':__theForm.labels[PluginCridadaFields.TIPUSRESULTAT]}" /> &nbsp;(*)
               <c:if test="${not empty __theForm.help[PluginCridadaFields.TIPUSRESULTAT]}">
               <i class="icon-info-sign" title="${__theForm.help[PluginCridadaFields.TIPUSRESULTAT]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="pluginCridada.tipusresultat" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.TIPUSRESULTAT)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.TIPUSRESULTAT)? 'input-mini uneditable-input' : 'input-mini'}"   path="pluginCridada.tipusresultat"   />
-
+          <form:errors path="pluginCridada.tipusResultat" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.TIPUSRESULTAT)}" >
+          <form:hidden path="pluginCridada.tipusResultat"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.pluginCridada.tipusResultat,__theForm.listOfValuesForTipusResultat)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.TIPUSRESULTAT)}" >
+          <form:select id="pluginCridada_tipusResultat"  onchange="if(typeof onChangeTipusResultat == 'function') {  onChangeTipusResultat(this); };"  cssClass="input-xxlarge" path="pluginCridada.tipusResultat">
+            <c:forEach items="${__theForm.listOfValuesForTipusResultat}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginCridadaFields.TEMPSEXECUCIO)}">
-        <tr id="pluginCridada_tempsexecucio_rowid">
+        <tr id="pluginCridada_tempsExecucio_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.TEMPSEXECUCIO])?'pluginCridada.tempsexecucio':__theForm.labels[PluginCridadaFields.TEMPSEXECUCIO]}" />
+              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.TEMPSEXECUCIO])?'pluginCridada.tempsExecucio':__theForm.labels[PluginCridadaFields.TEMPSEXECUCIO]}" />
               <c:if test="${not empty __theForm.help[PluginCridadaFields.TEMPSEXECUCIO]}">
               <i class="icon-info-sign" title="${__theForm.help[PluginCridadaFields.TEMPSEXECUCIO]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="pluginCridada.tempsexecucio" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.TEMPSEXECUCIO)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.TEMPSEXECUCIO)? 'input-mini uneditable-input' : 'input-mini'}"   path="pluginCridada.tempsexecucio"   />
+            <form:errors path="pluginCridada.tempsExecucio" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.TEMPSEXECUCIO)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.TEMPSEXECUCIO)? 'input-mini uneditable-input' : 'input-mini'}"   path="pluginCridada.tempsExecucio"   />
 
            </td>
         </tr>
@@ -120,60 +129,60 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginCridadaFields.USUARIPERSONAID)}">
-        <tr id="pluginCridada_usuaripersonaid_rowid">
+        <tr id="pluginCridada_usuariPersonaId_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.USUARIPERSONAID])?'pluginCridada.usuaripersonaid':__theForm.labels[PluginCridadaFields.USUARIPERSONAID]}" />
+              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.USUARIPERSONAID])?'pluginCridada.usuariPersonaId':__theForm.labels[PluginCridadaFields.USUARIPERSONAID]}" />
               <c:if test="${not empty __theForm.help[PluginCridadaFields.USUARIPERSONAID]}">
               <i class="icon-info-sign" title="${__theForm.help[PluginCridadaFields.USUARIPERSONAID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="pluginCridada.usuaripersonaid" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.USUARIPERSONAID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.USUARIPERSONAID)? 'input-mini uneditable-input' : 'input-mini'}"   path="pluginCridada.usuaripersonaid"   />
+            <form:errors path="pluginCridada.usuariPersonaId" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.USUARIPERSONAID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.USUARIPERSONAID)? 'input-mini uneditable-input' : 'input-mini'}"   path="pluginCridada.usuariPersonaId"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginCridadaFields.USUARIAPLICACIOID)}">
-        <tr id="pluginCridada_usuariaplicacioid_rowid">
+        <tr id="pluginCridada_usuariAplicacioId_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.USUARIAPLICACIOID])?'pluginCridada.usuariaplicacioid':__theForm.labels[PluginCridadaFields.USUARIAPLICACIOID]}" />
+              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.USUARIAPLICACIOID])?'pluginCridada.usuariAplicacioId':__theForm.labels[PluginCridadaFields.USUARIAPLICACIOID]}" />
               <c:if test="${not empty __theForm.help[PluginCridadaFields.USUARIAPLICACIOID]}">
               <i class="icon-info-sign" title="${__theForm.help[PluginCridadaFields.USUARIAPLICACIOID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="pluginCridada.usuariaplicacioid" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.USUARIAPLICACIOID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.USUARIAPLICACIOID)? 'input-mini uneditable-input' : 'input-mini'}"   path="pluginCridada.usuariaplicacioid"   />
+            <form:errors path="pluginCridada.usuariAplicacioId" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.USUARIAPLICACIOID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.USUARIAPLICACIOID)? 'input-mini uneditable-input' : 'input-mini'}"   path="pluginCridada.usuariAplicacioId"   />
 
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginCridadaFields.PARAMETRESTEXT)}">
-        <tr id="pluginCridada_parametrestext_rowid">
+        <tr id="pluginCridada_parametresText_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.PARAMETRESTEXT])?'pluginCridada.parametrestext':__theForm.labels[PluginCridadaFields.PARAMETRESTEXT]}" />
+              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.PARAMETRESTEXT])?'pluginCridada.parametresText':__theForm.labels[PluginCridadaFields.PARAMETRESTEXT]}" />
               <c:if test="${not empty __theForm.help[PluginCridadaFields.PARAMETRESTEXT]}">
               <i class="icon-info-sign" title="${__theForm.help[PluginCridadaFields.PARAMETRESTEXT]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-              <form:errors path="pluginCridada.parametrestext" cssClass="errorField alert alert-error" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;" cssClass="input-xxlarge" readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.PARAMETRESTEXT)? 'true' : 'false'}" path="pluginCridada.parametrestext"  />
+              <form:errors path="pluginCridada.parametresText" cssClass="errorField alert alert-error" />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;" cssClass="input-xxlarge" readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.PARAMETRESTEXT)? 'true' : 'false'}" path="pluginCridada.parametresText"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
               <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.parametrestext'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.parametrestext'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.parametrestext'); ta.wrap='hard';">Hard Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.parametresText'); ta.wrap='off';" >No Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.parametresText'); ta.wrap='soft';">Soft Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.parametresText'); ta.wrap='hard';">Hard Wrap</a></li>
               </ul>
               </div>
            </td>
@@ -226,24 +235,24 @@
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginCridadaFields.RETORNTEXT)}">
-        <tr id="pluginCridada_retorntext_rowid">
+        <tr id="pluginCridada_retornText_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.RETORNTEXT])?'pluginCridada.retorntext':__theForm.labels[PluginCridadaFields.RETORNTEXT]}" />
+              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.RETORNTEXT])?'pluginCridada.retornText':__theForm.labels[PluginCridadaFields.RETORNTEXT]}" />
               <c:if test="${not empty __theForm.help[PluginCridadaFields.RETORNTEXT]}">
               <i class="icon-info-sign" title="${__theForm.help[PluginCridadaFields.RETORNTEXT]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-              <form:errors path="pluginCridada.retorntext" cssClass="errorField alert alert-error" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;" cssClass="input-xxlarge" readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.RETORNTEXT)? 'true' : 'false'}" path="pluginCridada.retorntext"  />
+              <form:errors path="pluginCridada.retornText" cssClass="errorField alert alert-error" />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;" cssClass="input-xxlarge" readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.RETORNTEXT)? 'true' : 'false'}" path="pluginCridada.retornText"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
               <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.retorntext'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.retorntext'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.retorntext'); ta.wrap='hard';">Hard Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.retornText'); ta.wrap='off';" >No Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.retornText'); ta.wrap='soft';">Soft Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('pluginCridada.retornText'); ta.wrap='hard';">Hard Wrap</a></li>
               </ul>
               </div>
            </td>

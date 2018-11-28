@@ -186,6 +186,16 @@ public class PluginCridadaController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
+    // Field tipusResultat
+    {
+      _listSKV = getReferenceListForTipusResultat(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForTipusResultat(_tmp);
+      if (filterForm.getGroupByFields().contains(TIPUSRESULTAT)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUSRESULTAT, false);
+      };
+    }
+
     // Field pluginID
     {
       _listSKV = getReferenceListForPluginID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -211,6 +221,7 @@ public class PluginCridadaController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
+    __mapping.put(TIPUSRESULTAT, filterForm.getMapOfValuesForTipusResultat());
     __mapping.put(PLUGINID, filterForm.getMapOfPluginForPluginID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
@@ -259,6 +270,13 @@ public class PluginCridadaController
 
   public void fillReferencesForForm(PluginCridadaForm pluginCridadaForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
+    // Comprovam si ja esta definida la llista
+    if (pluginCridadaForm.getListOfValuesForTipusResultat() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForTipusResultat(request, mav, pluginCridadaForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      pluginCridadaForm.setListOfValuesForTipusResultat(_listSKV);
+    }
     // Comprovam si ja esta definida la llista
     if (pluginCridadaForm.getListOfPluginForPluginID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPluginID(request, mav, pluginCridadaForm, null);
@@ -609,6 +627,36 @@ public java.lang.Long stringToPK(String value) {
 
   public boolean isActiveFormView() {
     return isActiveFormEdit();
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipusResultat(HttpServletRequest request,
+       ModelAndView mav, PluginCridadaForm pluginCridadaForm, Where where)  throws I18NException {
+    if (pluginCridadaForm.isHiddenField(TIPUSRESULTAT)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForTipusResultat(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipusResultat(HttpServletRequest request,
+       ModelAndView mav, PluginCridadaFilterForm pluginCridadaFilterForm,
+       List<PluginCridada> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (pluginCridadaFilterForm.isHiddenField(TIPUSRESULTAT)
+      && !pluginCridadaFilterForm.isGroupByField(TIPUSRESULTAT)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForTipusResultat(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipusResultat(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("0" , "0"));
+    __tmp.add(new StringKeyValue("1" , "1"));
+    return __tmp;
   }
 
 

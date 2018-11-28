@@ -280,7 +280,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
       }
 
-      languageUI = transaccio.getLanguageui();
+      languageUI = transaccio.getLanguageUI();
 
       // XYZ ZZZ TODO
       // Falta verificar estructura de
@@ -463,7 +463,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
       ScanWebSimpleStatus status = new ScanWebSimpleStatus();
       status.setStatus(transaccio.getEstatCodi());
-      status.setErrorStackTrace(transaccio.getEstatexcepcio());
+      status.setErrorStackTrace(transaccio.getEstatExcepcio());
       // XYZ ZZZ Recuperar una Excepcio a partir d'un stack trace
       // status.setErrorException(errorException);
 
@@ -579,7 +579,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
         TransaccioJPA trans = transaccioLogicaEjb.findByPrimaryKey(tid);
         trans.setEstatCodi(ScanWebSimpleStatus.STATUS_EXPIRED);
-        trans.setDatafi(new Timestamp(now));
+        trans.setDataFi(new Timestamp(now));
 
         log.warn("Marcant transaccio com caducada: " + trans.getTransactionWebId());
         transaccioLogicaEjb.update(trans);
