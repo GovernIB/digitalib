@@ -232,6 +232,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
     </definition>
     
+    <definition name="perfilInfoTransaccioFormAdmin" extends="admin">
+        <put-attribute name="titol" value="perfil.us.0" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
+    </definition>
+    
+    <definition name="perfilInfoTransaccioListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
+    </definition>
+    
    <definition name="usuariAplicacioFormAdmin" extends="admin">
         <put-attribute name="titol" value="usuariAplicacio.usuariAplicacio" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariAplicacioForm.jsp" />

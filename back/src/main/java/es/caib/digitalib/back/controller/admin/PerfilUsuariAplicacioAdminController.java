@@ -19,68 +19,69 @@ import es.caib.digitalib.jpa.PerfilUsuariAplicacioJPA;
  *
  */
 @Controller
-@RequestMapping(value = "/admin/perfilUsuariAplicacio")
+@RequestMapping(value = PerfilUsuariAplicacioAdminController.CONTEXTWEB)
 @SessionAttributes(types = { PerfilUsuariAplicacioForm.class, PerfilUsuariAplicacioFilterForm.class })
 public class PerfilUsuariAplicacioAdminController extends PerfilUsuariAplicacioController {
 
-  
-  @Override
-  public String getRedirectWhenCreated(HttpServletRequest request, PerfilUsuariAplicacioForm perfilUsuariAplicacioForm) {
-    return "redirect:" + UsuariAplicacioAdminController.CONTEXTWEB + "/list";
-  }
+	public static final String CONTEXTWEB = "/admin/perfilUsuariAplicacio";
 
-  @Override
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long perfilUsrAppID) {
-    return "redirect:" + UsuariAplicacioAdminController.CONTEXTWEB + "/list";
-  }
+	@Override
+	public String getRedirectWhenCreated(HttpServletRequest request, PerfilUsuariAplicacioForm perfilUsuariAplicacioForm) {
+		return "redirect:" + UsuariAplicacioAdminController.CONTEXTWEB + "/list";
+	}
 
-  @Override
-  public String getTileForm() {
-    return "perfilUsuariAplicacioFormAdmin";
-  }
+	@Override
+	public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long perfilUsrAppID) {
+		return "redirect:" + UsuariAplicacioAdminController.CONTEXTWEB + "/list";
+	}
 
-
-  @Override
-  public String getSessionAttributeFilterForm() {
-    return "PerfilUsuariAplicacioAdmin_FilterForm";
-  }
+	@Override
+	public String getTileForm() {
+		return "perfilUsuariAplicacioFormAdmin";
+	}
 
 
-  @Override
-  public boolean isActiveList() {
-    return false;
-  }
+	@Override
+	public String getSessionAttributeFilterForm() {
+		return "PerfilUsuariAplicacioAdmin_FilterForm";
+	}
 
 
-  @Override
-  public boolean isActiveFormEdit() {
-    return false;
-  }
+	@Override
+	public boolean isActiveList() {
+		return false;
+	}
 
-  @Override
-  public boolean isActiveDelete() {
-    return false;
-  }
 
-  @Override
-  public boolean isActiveFormView() {
-    return false;
-  }
-  
-  @Override
-  public PerfilUsuariAplicacioForm getPerfilUsuariAplicacioForm(PerfilUsuariAplicacioJPA _jpa,
-      boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
-   PerfilUsuariAplicacioForm perfilUsuariAplicacioForm = super.getPerfilUsuariAplicacioForm(_jpa, __isView, request, mav);
-   
-   Long id = (Long)request.getSession().getAttribute(UsuariAplicacioAdminController.USUARI_APLICAIO_PER_AFEGIR_PERFIL);
-   
-   perfilUsuariAplicacioForm.getPerfilUsuariAplicacio().setUsuariAplicacioID(id);
-   
-   perfilUsuariAplicacioForm.addReadOnlyField(USUARIAPLICACIOID);
+	@Override
+	public boolean isActiveFormEdit() {
+		return false;
+	}
 
-   return perfilUsuariAplicacioForm;
-  }
-   
-  
-  
+	@Override
+	public boolean isActiveDelete() {
+		return false;
+	}
+
+	@Override
+	public boolean isActiveFormView() {
+		return false;
+	}
+
+	@Override
+	public PerfilUsuariAplicacioForm getPerfilUsuariAplicacioForm(PerfilUsuariAplicacioJPA _jpa,
+			boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
+		PerfilUsuariAplicacioForm perfilUsuariAplicacioForm = super.getPerfilUsuariAplicacioForm(_jpa, __isView, request, mav);
+
+		Long id = (Long)request.getSession().getAttribute(UsuariAplicacioAdminController.USUARI_APLICAIO_PER_AFEGIR_PERFIL);
+
+		perfilUsuariAplicacioForm.getPerfilUsuariAplicacio().setUsuariAplicacioID(id);
+
+		perfilUsuariAplicacioForm.addReadOnlyField(USUARIAPLICACIOID);
+
+		return perfilUsuariAplicacioForm;
+	}
+
+
+
 }

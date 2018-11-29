@@ -6,17 +6,22 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import es.caib.digitalib.back.controller.webdb.TransaccioController;
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
@@ -72,6 +77,16 @@ public class TransaccioAdminController extends TransaccioController {
 
 			filterForm.setHiddenFields(ocults);
 
+			filterForm.setOrderBy(TransaccioFields.DATAFI.fullName);
+			filterForm.setOrderAsc(false);
+
+			filterForm.addAdditionalButtonForEachItem(new AdditionalButton(
+					"icon-eye-open icon-white", "transaccio.veuredetall",
+					TransaccioAdminController.CONTEXTWEB + "/view/{0}", "btn-primary"));
+
+			filterForm.addAdditionalButtonForEachItem(new AdditionalButton(
+					"icon-user icon-white", "transaccio.veureperfil",
+					TransaccioAdminController.CONTEXTWEB + "/viewperfil/{0}", "btn-info"));
 		}
 		filterForm.setVisibleMultipleSelection(false);
 		filterForm.setAddButtonVisible(false);
@@ -79,6 +94,15 @@ public class TransaccioAdminController extends TransaccioController {
 		filterForm.setEditButtonVisible(false);
 
 		return filterForm;
+	}
+
+	@RequestMapping(value = "/viewperfil/{transaccioID}", method = RequestMethod.GET)
+	public ModelAndView veurePerfilGet(@PathVariable("transaccioID") java.lang.Long transaccioID,
+			HttpServletRequest request,
+			HttpServletResponse response) throws I18NException {
+		Long perfilID = transaccioEjb.executeQueryOne(TransaccioFields.PERFILID, TransaccioFields.TRANSACCIOID.equal(transaccioID));
+
+		return new ModelAndView(new RedirectView(PerfilInfoTransaccioAdminController.CONTEXTWEB + "/view/"+ perfilID, true));
 	}
 
 	@Override
@@ -107,18 +131,18 @@ public class TransaccioAdminController extends TransaccioController {
 
 	@Override
 	public boolean isActiveDelete() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isActiveFormView() {
-		return isActiveFormEdit();
+		return true;
 	}
 
 	@Override
 	public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request,
 			ModelAndView mav, Where where)  throws I18NException {
-		
+
 		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
 		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_EXPIRED), I18NUtils.tradueix("estatcodi._3")));
 		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_CANCELLED), I18NUtils.tradueix("estatcodi._2")));
