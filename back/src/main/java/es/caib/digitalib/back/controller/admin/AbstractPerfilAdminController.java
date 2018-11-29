@@ -171,17 +171,21 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 			HttpServletRequest request, ModelAndView mav) throws I18NException {
 		PerfilForm perfilForm = super.getPerfilForm(_jpa, __isView, request, mav);
 
-		perfilForm.getPerfil().setTipusFirma(Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE);
-		perfilForm.getPerfil().setTipusCustodia(Constants.TIPUS_CUSTODIA_SENSE);
-
+		int tipusPerfil = getTipusPerfil();
+		
+		if (tipusPerfil != Constants.PERFIL_US_TRANSACCIO_INFO) {
+			perfilForm.getPerfil().setTipusFirma(Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE);
+			perfilForm.getPerfil().setTipusCustodia(Constants.TIPUS_CUSTODIA_SENSE);
+		}
+		
 		if (perfilForm.isNou()) {
-			perfilForm.getPerfil().setUsPerfil(getTipusPerfil());
+			perfilForm.getPerfil().setUsPerfil(tipusPerfil);
 
 		}
 
-		perfilForm.setTitleCode("perfil.us." + getTipusPerfil());
+		perfilForm.setTitleCode("perfil.us." + tipusPerfil);
 
-		switch (getTipusPerfil()) {
+		switch (tipusPerfil) {
 		case Constants.PERFIL_US_NOMES_ESCANEIG:
 			perfilForm.addHiddenField(TIPUSFIRMA);
 			perfilForm.addHiddenField(APISIMPLEID);
