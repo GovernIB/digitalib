@@ -1,6 +1,5 @@
 package es.caib.digitalib.back.security;
 
-
 import java.util.Set;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,10 +10,9 @@ import org.springframework.security.core.userdetails.User;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
 import es.caib.digitalib.jpa.UsuariPersonaJPA;
 
-
 /**
- * Informació disponible durant el cicle de vida de l'aplicació en la Sessio
- * HTTP. Veure BasePreparer
+ * Informació disponible durant el cicle de vida de l'aplicació en la Sessio HTTP. Veure
+ * BasePreparer
  * 
  * @author anadal
  * 
@@ -28,32 +26,30 @@ public class LoginInfo {
   Set<GrantedAuthority> grantedAuthorities;
 
   final String username;
-  
-  final UsuariAplicacioJPA usuariAplicacio; 
+
+  final UsuariAplicacioJPA usuariAplicacio;
 
   final UsuariPersonaJPA usuariPersona;
-  
+
   boolean needConfigUser;
-  
-  
+
   /**
    * @param usuari
    * @param entitatActual
    * @param roles
    */
-  public LoginInfo(User springSecurityUser, UsuariPersonaJPA usuariPersona, 
+  public LoginInfo(User springSecurityUser, UsuariPersonaJPA usuariPersona,
       Set<GrantedAuthority> grantedAuthorities, boolean needConfigUser) {
     this.springSecurityUser = springSecurityUser;
     this.usuariPersona = usuariPersona;
     this.grantedAuthorities = grantedAuthorities;
-    this.needConfigUser=needConfigUser;
+    this.needConfigUser = needConfigUser;
     username = springSecurityUser.getUsername();
-  
+
     // Només per usuari Aplicacio
     this.usuariAplicacio = null;
   }
-  
-  
+
   /**
    * Login per usuari aplicacio
    * 
@@ -63,13 +59,12 @@ public class LoginInfo {
    * @param roles
    */
   public LoginInfo(User springSecurityUser, UsuariAplicacioJPA usuariAplicacio,
-       Set<GrantedAuthority> roles) {
+      Set<GrantedAuthority> roles) {
     this.springSecurityUser = springSecurityUser;
-
 
     this.grantedAuthorities = roles;
     username = springSecurityUser.getUsername();
-  
+
     this.usuariAplicacio = usuariAplicacio;
 
     // Només per usuari-entitat
@@ -77,24 +72,18 @@ public class LoginInfo {
     this.needConfigUser = false;
 
   }
-  
-  
 
   public UsuariPersonaJPA getUsuariPersona() {
     return usuariPersona;
   }
 
-
-
-
-
   public Set<GrantedAuthority> getRoles() {
     return this.grantedAuthorities;
   }
 
+  public static boolean hasRole(String role) {
+    Set<GrantedAuthority> rols = LoginInfo.getInstance().getRoles();
 
-  public boolean hasRole(String role) {
-    Set<GrantedAuthority> rols = getRoles();
     for (GrantedAuthority grantedAuthority : rols) {
       if (grantedAuthority.getAuthority().equals(role)) {
         return true;
@@ -102,13 +91,10 @@ public class LoginInfo {
     }
     return false;
   }
-  
-
 
   public UsuariAplicacioJPA getUsuariAplicacio() {
     return usuariAplicacio;
   }
-
 
   public boolean getNeedConfigUser() {
     return needConfigUser;
@@ -117,39 +103,28 @@ public class LoginInfo {
   public void setNeedConfigUser(boolean needConfigUser) {
     this.needConfigUser = needConfigUser;
   }
-  
-  
-  
 
   public User getSpringSecurityUser() {
     return springSecurityUser;
   }
 
-
   public Set<GrantedAuthority> getGrantedAuthorities() {
     return grantedAuthorities;
   }
-
 
   public String getUsername() {
     return username;
   }
 
-
   public UsernamePasswordAuthenticationToken generateToken() {
     UsernamePasswordAuthenticationToken authToken;
     Set<GrantedAuthority> roles = getRoles();
     /*
-    Set<GrantedAuthority> roles;
-    if (this.entitatIDActual == null) {
-      roles = new HashSet<GrantedAuthority>();
-      roles.add(new SimpleGrantedAuthority(Constants.ROLE_ADMIN));
-    } else {
-      roles = getRoles();
-    }
-    */
-    authToken = new UsernamePasswordAuthenticationToken(this.springSecurityUser, "",
-        roles);
+     * Set<GrantedAuthority> roles; if (this.entitatIDActual == null) { roles = new
+     * HashSet<GrantedAuthority>(); roles.add(new
+     * SimpleGrantedAuthority(Constants.ROLE_ADMIN)); } else { roles = getRoles(); }
+     */
+    authToken = new UsernamePasswordAuthenticationToken(this.springSecurityUser, "", roles);
     authToken.setDetails(this);
     return authToken;
   }

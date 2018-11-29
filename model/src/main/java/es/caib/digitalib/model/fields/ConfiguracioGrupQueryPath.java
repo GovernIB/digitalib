@@ -39,6 +39,10 @@ public class ConfiguracioGrupQueryPath extends org.fundaciobit.genapp.common.que
     return new LongField(getQueryPath(), ConfiguracioGrupFields.LOGOFOOTERID);
   }
 
+  public StringField ADREZA() {
+    return new StringField(getQueryPath(), ConfiguracioGrupFields.ADREZA);
+  }
+
   public LongField PERFILNOMESESCANEIGID() {
     return new LongField(getQueryPath(), ConfiguracioGrupFields.PERFILNOMESESCANEIGID);
   }

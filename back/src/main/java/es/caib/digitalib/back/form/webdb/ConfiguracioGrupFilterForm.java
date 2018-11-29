@@ -87,6 +87,17 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
   }
 
 
+  private java.lang.String adreza;
+
+  public java.lang.String getAdreza() {
+    return this.adreza;
+  }
+
+  public void setAdreza(java.lang.String adreza) {
+    this.adreza = adreza;
+  }
+
+
   private java.lang.Long perfilNomesEscaneigIDDesde;
 
   public java.lang.Long getPerfilNomesEscaneigIDDesde() {
@@ -164,6 +175,7 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
     this.suportWeb = __toClone.suportWeb;
     this.suportEmail = __toClone.suportEmail;
     this.suportTelefon = __toClone.suportTelefon;
+    this.adreza = __toClone.adreza;
     this.perfilNomesEscaneigIDDesde = __toClone.perfilNomesEscaneigIDDesde;
     this.perfilNomesEscaneigIDFins = __toClone.perfilNomesEscaneigIDFins;
     this.perfilCopiaAutenticaIDDesde = __toClone.perfilCopiaAutenticaIDDesde;

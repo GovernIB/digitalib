@@ -1,19 +1,5 @@
 
 
-**** FALTA NOVES PROPERTIES *****
-
-
-
-ALTER TABLE dib_usuariaplicacio
-  ADD COLUMN rolescan boolean NOT NULL DEFAULT false;
-ALTER TABLE dib_usuariaplicacio
-  ADD COLUMN rolecoau boolean NOT NULL DEFAULT false;
-ALTER TABLE dib_usuariaplicacio
-  ADD COLUMN rolecust boolean NOT NULL DEFAULT false;
+ALTER TABLE dib_configuraciogrup
+  ADD COLUMN adreza text NOT NULL default '  ';
   
-  ALTER TABLE dib_usuaripersona
-  ADD COLUMN rolescan boolean NOT NULL DEFAULT false;
-ALTER TABLE dib_usuaripersona
-  ADD COLUMN rolecoau boolean NOT NULL DEFAULT false;
-ALTER TABLE dib_usuaripersona
-  ADD COLUMN rolecust boolean NOT NULL DEFAULT false;

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.GenerationType;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.ForeignKey;
@@ -54,6 +55,10 @@ private static final long serialVersionUID = -185147282L;
 	@Column(name="logofooterid",nullable = false,length = 19)
 	long logoFooterID;
 
+	@Column(name="adreza",nullable = false,length = 2147483647)
+  @Lob
+	java.lang.String adreza;
+
 	@Index(name="dib_cfggrup_perfilscan_fk_i")
 	@Column(name="perfilnomesescaneigid",length = 19)
 	java.lang.Long perfilNomesEscaneigID;
@@ -73,7 +78,7 @@ private static final long serialVersionUID = -185147282L;
   }
 
   /** Constructor amb tots els camps  */
-  public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCustodiaID) {
+  public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCustodiaID) {
     this.configuracioGrupID=configuracioGrupID;
     this.nom=nom;
     this.suportWeb=suportWeb;
@@ -81,28 +86,31 @@ private static final long serialVersionUID = -185147282L;
     this.suportTelefon=suportTelefon;
     this.logoHeaderID=logoHeaderID;
     this.logoFooterID=logoFooterID;
+    this.adreza=adreza;
     this.perfilNomesEscaneigID=perfilNomesEscaneigID;
     this.perfilCopiaAutenticaID=perfilCopiaAutenticaID;
     this.perfilCustodiaID=perfilCustodiaID;
 }
   /** Constructor sense valors autoincrementals */
-  public ConfiguracioGrupJPA(java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCustodiaID) {
+  public ConfiguracioGrupJPA(java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCustodiaID) {
     this.nom=nom;
     this.suportWeb=suportWeb;
     this.suportEmail=suportEmail;
     this.suportTelefon=suportTelefon;
     this.logoHeaderID=logoHeaderID;
     this.logoFooterID=logoFooterID;
+    this.adreza=adreza;
     this.perfilNomesEscaneigID=perfilNomesEscaneigID;
     this.perfilCopiaAutenticaID=perfilCopiaAutenticaID;
     this.perfilCustodiaID=perfilCustodiaID;
 }
   /** Constructor dels valors Not Null */
-  public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , long logoHeaderID , long logoFooterID) {
+  public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , long logoHeaderID , long logoFooterID , java.lang.String adreza) {
     this.configuracioGrupID=configuracioGrupID;
     this.nom=nom;
     this.logoHeaderID=logoHeaderID;
     this.logoFooterID=logoFooterID;
+    this.adreza=adreza;
 }
   public ConfiguracioGrupJPA(ConfiguracioGrup __bean) {
     this.setConfiguracioGrupID(__bean.getConfiguracioGrupID());
@@ -112,6 +120,7 @@ private static final long serialVersionUID = -185147282L;
     this.setSuportTelefon(__bean.getSuportTelefon());
     this.setLogoHeaderID(__bean.getLogoHeaderID());
     this.setLogoFooterID(__bean.getLogoFooterID());
+    this.setAdreza(__bean.getAdreza());
     this.setPerfilNomesEscaneigID(__bean.getPerfilNomesEscaneigID());
     this.setPerfilCopiaAutenticaID(__bean.getPerfilCopiaAutenticaID());
     this.setPerfilCustodiaID(__bean.getPerfilCustodiaID());
@@ -168,6 +177,13 @@ private static final long serialVersionUID = -185147282L;
 	};
 	public void setLogoFooterID(long _logoFooterID_) {
 		this.logoFooterID = _logoFooterID_;
+	};
+
+	public java.lang.String getAdreza() {
+		return(adreza);
+	};
+	public void setAdreza(java.lang.String _adreza_) {
+		this.adreza = _adreza_;
 	};
 
 	public java.lang.Long getPerfilNomesEscaneigID() {
@@ -306,6 +322,7 @@ private static final long serialVersionUID = -185147282L;
     __tmp.setSuportTelefon(__bean.getSuportTelefon());
     __tmp.setLogoHeaderID(__bean.getLogoHeaderID());
     __tmp.setLogoFooterID(__bean.getLogoFooterID());
+    __tmp.setAdreza(__bean.getAdreza());
     __tmp.setPerfilNomesEscaneigID(__bean.getPerfilNomesEscaneigID());
     __tmp.setPerfilCopiaAutenticaID(__bean.getPerfilCopiaAutenticaID());
     __tmp.setPerfilCustodiaID(__bean.getPerfilCustodiaID());

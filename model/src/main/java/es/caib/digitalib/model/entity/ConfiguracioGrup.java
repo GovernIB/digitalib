@@ -23,6 +23,9 @@ public interface ConfiguracioGrup extends org.fundaciobit.genapp.common.IGenAppE
 	public long getLogoFooterID();
 	public void setLogoFooterID(long _logoFooterID_);
 
+	public java.lang.String getAdreza();
+	public void setAdreza(java.lang.String _adreza_);
+
 	public java.lang.Long getPerfilNomesEscaneigID();
 	public void setPerfilNomesEscaneigID(java.lang.Long _perfilNomesEscaneigID_);
 

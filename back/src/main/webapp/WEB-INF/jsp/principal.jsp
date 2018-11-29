@@ -42,12 +42,19 @@ This page is generated automatically. Please edit.
 
 <c:if test="${dib:isDesenvolupament()}">
 <br/>
- Username: ${loginInfo.username}<br/> 
-Only in Development Mode
-&#36;{dib:hasRole(ROLE_ADMIN)}= ${dib:hasRole('ROLE_ADMIN')}<br/>
-&#36;{dib:hasRole(ROLE_USER) }= ${dib:hasRole('ROLE_USER') }<br/>
-&#36;{dib:hasRole(ROLE_SCAN)}= ${dib:hasRole('ROLE_SCAN')}<br/>
-&#36;{dib:hasRole(ROLE_COAU) }= ${dib:hasRole('ROLE_COAU') }<br/>
-&#36;{dib:hasRole(ROLE_CUST) }= ${dib:hasRole('ROLE_CUST') }<br/>
+<b>Only in Development Mode</b> <br/>
+* Username: ${loginInfo.username}<br/> 
+
+* &#36;{dib:hasRole(ROLE_ADMIN)} = ${dib:hasRole('ROLE_ADMIN')}<br/>
+* &#36;{dib:hasRole(ROLE_USER) } = ${dib:hasRole('ROLE_USER')}<br/>
+* &#36;{dib:hasRole(ROLE_SCAN) } = ${dib:hasRole('ROLE_SCAN')}<br/>
+* &#36;{dib:hasRole(ROLE_COAU) } = ${dib:hasRole('ROLE_COAU') }<br/>
+* &#36;{dib:hasRole(ROLE_CUST) } = ${dib:hasRole('ROLE_CUST') }<br/>
+
+
+<c:if test="${not empty loginInfo.usuariPersona.configuracioGrup }">
+* &#36;{loginInfo.usuariPersona.configuracioGrup.nom }= ${loginInfo.usuariPersona.configuracioGrup.nom}<br/>
+</c:if>
+
 </c:if>
 

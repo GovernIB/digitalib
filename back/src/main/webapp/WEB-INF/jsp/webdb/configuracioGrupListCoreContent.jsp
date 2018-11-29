@@ -66,6 +66,11 @@
             </c:if>
            </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.ADREZA)}">
+          <td>
+          ${configuracioGrup.adreza}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}">
           <td>
           <c:set var="tmp">${configuracioGrup.perfilNomesEscaneigID}</c:set>

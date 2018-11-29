@@ -66,8 +66,8 @@ public class ConfiguracioGrupJPAManager
 		return list.toArray(new ConfiguracioGrup[list.size()]);
 	};
 
-	public synchronized ConfiguracioGrup create( java.lang.String _nom_, java.lang.String _suportWeb_, java.lang.String _suportEmail_, java.lang.String _suportTelefon_, long _logoHeaderID_, long _logoFooterID_, java.lang.Long _perfilNomesEscaneigID_, java.lang.Long _perfilCopiaAutenticaID_, java.lang.Long _perfilCustodiaID_) throws I18NException {
-		ConfiguracioGrupJPA __bean =  new ConfiguracioGrupJPA(_nom_,_suportWeb_,_suportEmail_,_suportTelefon_,_logoHeaderID_,_logoFooterID_,_perfilNomesEscaneigID_,_perfilCopiaAutenticaID_,_perfilCustodiaID_);
+	public synchronized ConfiguracioGrup create( java.lang.String _nom_, java.lang.String _suportWeb_, java.lang.String _suportEmail_, java.lang.String _suportTelefon_, long _logoHeaderID_, long _logoFooterID_, java.lang.String _adreza_, java.lang.Long _perfilNomesEscaneigID_, java.lang.Long _perfilCopiaAutenticaID_, java.lang.Long _perfilCustodiaID_) throws I18NException {
+		ConfiguracioGrupJPA __bean =  new ConfiguracioGrupJPA(_nom_,_suportWeb_,_suportEmail_,_suportTelefon_,_logoHeaderID_,_logoFooterID_,_adreza_,_perfilNomesEscaneigID_,_perfilCopiaAutenticaID_,_perfilCustodiaID_);
 		return create(__bean);
 	}
 

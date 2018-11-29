@@ -7,7 +7,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 public interface IConfiguracioGrupManager extends org.fundaciobit.genapp.common.query.ITableManager<ConfiguracioGrup, Long> {
 
 
-	public ConfiguracioGrup create( java.lang.String _nom_, java.lang.String _suportWeb_, java.lang.String _suportEmail_, java.lang.String _suportTelefon_, long _logoHeaderID_, long _logoFooterID_, java.lang.Long _perfilNomesEscaneigID_, java.lang.Long _perfilCopiaAutenticaID_, java.lang.Long _perfilCustodiaID_) throws I18NException;
+	public ConfiguracioGrup create( java.lang.String _nom_, java.lang.String _suportWeb_, java.lang.String _suportEmail_, java.lang.String _suportTelefon_, long _logoHeaderID_, long _logoFooterID_, java.lang.String _adreza_, java.lang.Long _perfilNomesEscaneigID_, java.lang.Long _perfilCopiaAutenticaID_, java.lang.Long _perfilCustodiaID_) throws I18NException;
 
 	public ConfiguracioGrup findByPrimaryKey(long _configuracioGrupID_);
 

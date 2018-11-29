@@ -38,14 +38,13 @@
         style="${(fn:contains(url, '/user/llistatperfilsdisponibles'))? " font-weight:bold;" : ""}"><fmt:message
             key="escanejar" /></span>
     </a></li>
-    
-    
+
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/user/transaccio/list"/>"> <span
         style="${(fn:contains(url, '/user/transaccio/'))? " font-weight:bold;" : ""}">Llistat Digitalitzacions XYZ</span>
     </a></li>
-    
+
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/user/transaccioca/list"/>"> <span

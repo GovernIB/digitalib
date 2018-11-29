@@ -162,6 +162,23 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.ADREZA)}">
+        <tr id="configuracioGrup_adreza_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioGrupFields.ADREZA])?'configuracioGrup.adreza':__theForm.labels[ConfiguracioGrupFields.ADREZA]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[ConfiguracioGrupFields.ADREZA]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioGrupFields.ADREZA]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="configuracioGrup.adreza" cssClass="errorField alert alert-error" />
+              <form:textarea cssClass="input-xxlarge ${gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.ADREZA)? 'mceEditorReadOnly':'mceEditor'}" path="configuracioGrup.adreza"  />
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}">
         <tr id="configuracioGrup_perfilNomesEscaneigID_rowid">
           <td>

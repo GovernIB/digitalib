@@ -34,6 +34,10 @@ public class ConfiguracioGrupValidator<T> implements ConfiguracioGrupFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,ADREZA, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ADREZA)));
+
     // Check size
     if (__vr.getFieldErrorCount(NOM) == 0) {
       java.lang.String __nom = (java.lang.String)__vr.getFieldValue(__target__,NOM);
@@ -64,6 +68,14 @@ public class ConfiguracioGrupValidator<T> implements ConfiguracioGrupFields {
       if (__suporttelefon!= null && __suporttelefon.length() > 255) {
         __vr.rejectValue(SUPORTTELEFON, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SUPORTTELEFON)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ADREZA) == 0) {
+      java.lang.String __adreza = (java.lang.String)__vr.getFieldValue(__target__,ADREZA);
+      if (__adreza!= null && __adreza.length() > 2147483647) {
+        __vr.rejectValue(ADREZA, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ADREZA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
       }
     }
     

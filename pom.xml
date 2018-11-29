@@ -5,11 +5,7 @@
   <artifactId>digitalib</artifactId>
   <packaging>pom</packaging>
 
-
   <name>DigitalIB</name>
-
-
-
 
   <modules>	
     <!--       -->

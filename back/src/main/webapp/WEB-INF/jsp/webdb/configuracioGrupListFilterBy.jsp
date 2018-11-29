@@ -120,6 +120,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioGrupFields.ADREZA)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="configuracioGrup.adreza" var="adreza" />
+              <fmt:message key="genapp.form.searchby" var="cercaperadreza" >                
+                 <fmt:param value="${adreza}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${adreza}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperadreza}" path="adreza" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
