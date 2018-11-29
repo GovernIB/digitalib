@@ -178,6 +178,15 @@ public class UsuariAplicacioController
       fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ACTIU);
 
 
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ROLESCAN);
+
+
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ROLECOAU);
+
+
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ROLECUST);
+
+
     return groupByItemsMap;
   }
 

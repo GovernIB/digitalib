@@ -1,15 +1,19 @@
 
 
-ALTER TABLE dib_perfil
-  ADD COLUMN pluginscanweb2id bigint;
-ALTER TABLE dib_perfil
-  ADD CONSTRAINT dib_perfil_plugin_scan2_fk FOREIGN KEY (pluginscanweb2id) REFERENCES dib_plugin (pluginid) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-  create index dib_perfil_plugscanweb2_fk_i on dib_perfil (pluginscanweb2id);
+**** FALTA NOVES PROPERTIES *****
 
 
-  UPDATE dib_perfil SET usperfil=-1  WHERE usperfil=0;
 
-UPDATE dib_perfil SET usperfil=0  WHERE usperfil=1;
-
-UPDATE dib_perfil SET usperfil=1  WHERE usperfil=-1;
+ALTER TABLE dib_usuariaplicacio
+  ADD COLUMN rolescan boolean NOT NULL DEFAULT false;
+ALTER TABLE dib_usuariaplicacio
+  ADD COLUMN rolecoau boolean NOT NULL DEFAULT false;
+ALTER TABLE dib_usuariaplicacio
+  ADD COLUMN rolecust boolean NOT NULL DEFAULT false;
+  
+  ALTER TABLE dib_usuaripersona
+  ADD COLUMN rolescan boolean NOT NULL DEFAULT false;
+ALTER TABLE dib_usuaripersona
+  ADD COLUMN rolecoau boolean NOT NULL DEFAULT false;
+ALTER TABLE dib_usuaripersona
+  ADD COLUMN rolecust boolean NOT NULL DEFAULT false;

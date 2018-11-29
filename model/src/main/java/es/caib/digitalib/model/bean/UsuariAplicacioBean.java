@@ -16,6 +16,9 @@ private static final long serialVersionUID = 1703005582L;
 	java.lang.String emailadmin;
 	java.lang.String descripcio;
 	boolean actiu;
+	boolean roleScan;
+	boolean roleCoAu;
+	boolean roleCust;
 
 
   /** Constructor Buit */
@@ -23,28 +26,37 @@ private static final long serialVersionUID = 1703005582L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariAplicacioBean(long usuariAplicacioID , java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu) {
+  public UsuariAplicacioBean(long usuariAplicacioID , java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.usuariAplicacioID=usuariAplicacioID;
     this.username=username;
     this.contrasenya=contrasenya;
     this.emailadmin=emailadmin;
     this.descripcio=descripcio;
     this.actiu=actiu;
+    this.roleScan=roleScan;
+    this.roleCoAu=roleCoAu;
+    this.roleCust=roleCust;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariAplicacioBean(java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu) {
+  public UsuariAplicacioBean(java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.username=username;
     this.contrasenya=contrasenya;
     this.emailadmin=emailadmin;
     this.descripcio=descripcio;
     this.actiu=actiu;
+    this.roleScan=roleScan;
+    this.roleCoAu=roleCoAu;
+    this.roleCust=roleCust;
 }
   /** Constructor dels valors Not Null */
-  public UsuariAplicacioBean(long usuariAplicacioID , java.lang.String username , java.lang.String emailadmin , boolean actiu) {
+  public UsuariAplicacioBean(long usuariAplicacioID , java.lang.String username , java.lang.String emailadmin , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.usuariAplicacioID=usuariAplicacioID;
     this.username=username;
     this.emailadmin=emailadmin;
     this.actiu=actiu;
+    this.roleScan=roleScan;
+    this.roleCoAu=roleCoAu;
+    this.roleCust=roleCust;
 }
   public UsuariAplicacioBean(UsuariAplicacio __bean) {
     this.setUsuariAplicacioID(__bean.getUsuariAplicacioID());
@@ -53,6 +65,9 @@ private static final long serialVersionUID = 1703005582L;
     this.setEmailadmin(__bean.getEmailadmin());
     this.setDescripcio(__bean.getDescripcio());
     this.setActiu(__bean.isActiu());
+    this.setRoleScan(__bean.isRoleScan());
+    this.setRoleCoAu(__bean.isRoleCoAu());
+    this.setRoleCust(__bean.isRoleCust());
 	}
 
 	public long getUsuariAplicacioID() {
@@ -97,6 +112,27 @@ private static final long serialVersionUID = 1703005582L;
 		this.actiu = _actiu_;
 	};
 
+	public boolean isRoleScan() {
+		return(roleScan);
+	};
+	public void setRoleScan(boolean _roleScan_) {
+		this.roleScan = _roleScan_;
+	};
+
+	public boolean isRoleCoAu() {
+		return(roleCoAu);
+	};
+	public void setRoleCoAu(boolean _roleCoAu_) {
+		this.roleCoAu = _roleCoAu_;
+	};
+
+	public boolean isRoleCust() {
+		return(roleCust);
+	};
+	public void setRoleCust(boolean _roleCust_) {
+		this.roleCust = _roleCust_;
+	};
+
 
 
   // ======================================
@@ -110,6 +146,9 @@ private static final long serialVersionUID = 1703005582L;
     __tmp.setEmailadmin(__bean.getEmailadmin());
     __tmp.setDescripcio(__bean.getDescripcio());
     __tmp.setActiu(__bean.isActiu());
+    __tmp.setRoleScan(__bean.isRoleScan());
+    __tmp.setRoleCoAu(__bean.isRoleCoAu());
+    __tmp.setRoleCust(__bean.isRoleCust());
 		return __tmp;
 	}
 

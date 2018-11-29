@@ -36,13 +36,12 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
   protected static Logger log = Logger.getLogger(AbstractScanWebModuleController.class);
 
   public static final String CONTEXTWEB_USER = "/user/scanwebmodule";
-  
-  public static final String CONTEXTWEB_PUBLIC = "/public/scanwebmodule";
 
+  public static final String CONTEXTWEB_PUBLIC = "/public/scanwebmodule";
 
   @EJB(mappedName = ScanWebModuleLocal.JNDI_NAME)
   protected ScanWebModuleLocal scanWebModuleEjb;
-  
+
   @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
   protected TransaccioLogicaLocal transaccioLogicaEjb;
 
@@ -52,33 +51,31 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
       throws Exception, I18NException {
 
     // Miram la transacció
-    TransaccioJPA transaccio = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
-    
+    TransaccioJPA transaccio = transaccioLogicaEjb
+        .searchTransaccioByTransactionWebID(transactionWebID);
+
     // XYZ ZZZ Revisar si esta caducada (mirar que ja hi ha mètodes)
-    
+
     long pluginSelectedID = transaccio.getPerfil().getPluginScanWebID();
     Long pluginSelected2ID = transaccio.getPerfil().getPluginScanWeb2ID();
-    
-    
+
     Long[] pluginsID;
-    
+
     if (pluginSelected2ID == null) {
-      pluginsID = new Long[] { pluginSelectedID};
+      pluginsID = new Long[] { pluginSelectedID };
     } else {
-      pluginsID = new Long[] { pluginSelectedID, pluginSelected2ID};
+      pluginsID = new Long[] { pluginSelectedID, pluginSelected2ID };
     }
-    
-    
+
     List<Plugin> pluginsFiltered = scanWebModuleEjb.getAllPluginsFiltered(request,
         transactionWebID, pluginsID);
 
-    
     // Si cap modul compleix llavors mostrar missatge
     if (pluginsFiltered.size() == 0) {
       String msg = "No existeix cap mòdul de scan que passi els filtres";
       return generateErrorMAV(request, transactionWebID, msg, null);
     }
-    
+
     // Si només hi ha un mòdul de scan llavors anar a scan directament
     if (pluginsFiltered.size() == 1) {
       Plugin modul = pluginsFiltered.get(0);
@@ -89,8 +86,9 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
 
     // /WEB-INF/views/plugindescan_seleccio.jsp
     boolean isPublic = (CONTEXTWEB_PUBLIC.equals(getContextWeb()));
-    
-    ModelAndView mav = new ModelAndView(isPublic? "public_plugindescan_seleccio" :  "plugindescan_seleccio");
+
+    ModelAndView mav = new ModelAndView(isPublic ? "public_plugindescan_seleccio"
+        : "plugindescan_seleccio");
     mav.addObject("scanWebID", transactionWebID);
     mav.addObject("plugins", pluginsFiltered);
     mav.addObject("scancontext", getContextWeb());
@@ -99,15 +97,15 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
 
   }
 
-
   @RequestMapping(value = "/error")
   public ModelAndView errorProcesDeScan(HttpServletRequest request,
       HttpServletResponse response, @RequestParam("URL_FINAL") String urlFinal)
       throws Exception {
 
     boolean isPublic = (CONTEXTWEB_PUBLIC.equals(getContextWeb()));
-    
-    ModelAndView mav = new ModelAndView(isPublic? "public_plugindescan_final": "plugindescan_final");
+
+    ModelAndView mav = new ModelAndView(isPublic ? "public_plugindescan_final"
+        : "plugindescan_final");
 
     mav.addObject("URL_FINAL", urlFinal);
 
@@ -123,15 +121,14 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     log.info("SMC :: showscanwebmodule: scanWebID = " + scanWebID);
 
     // Assignar plugin Elegit
-//    ScanWebConfigTester ss = scanWebModuleEjb.getScanWebConfig(request, scanWebID);
-//    ss.setPluginID(pluginID);
-//    
-//    if (ss.getFlags() == null || ss.getFlags().size() == 0) {
-//      // Seleccionam el primer suportat
-//      Set<String> defaultFlags = scanWebModuleEjb.getDefaultFlags(ss);
-//      ss.setFlags(defaultFlags);
-//    }
-    
+    // ScanWebConfigTester ss = scanWebModuleEjb.getScanWebConfig(request, scanWebID);
+    // ss.setPluginID(pluginID);
+    //
+    // if (ss.getFlags() == null || ss.getFlags().size() == 0) {
+    // // Seleccionam el primer suportat
+    // Set<String> defaultFlags = scanWebModuleEjb.getDefaultFlags(ss);
+    // ss.setFlags(defaultFlags);
+    // }
 
     String relativeControllerBase = getRelativeControllerBase(request, getContextWeb());
     String relativeRequestPluginBasePath = getRequestPluginBasePath(relativeControllerBase,
@@ -142,8 +139,8 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
         scanWebID);
 
     String urlToPluginWebPage;
-    urlToPluginWebPage = scanWebModuleEjb.scanDocument(request,
-        absoluteRequestPluginBasePath, relativeRequestPluginBasePath, scanWebID);
+    urlToPluginWebPage = scanWebModuleEjb.scanDocument(request, absoluteRequestPluginBasePath,
+        relativeRequestPluginBasePath, scanWebID);
 
     log.info("SMC :: showscanwebmodule: redirectTO = " + urlToPluginWebPage);
 
@@ -151,69 +148,58 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
 
   }
 
-  
-  
-  
   /*
-  @RequestMapping(value = "/requestPlugin/{scanWebID}", method = RequestMethod.GET)
-  public void requestPluginGET(HttpServletRequest request, HttpServletResponse response,
-      @PathVariable long scanWebID,
-      @RequestParam("restOfTheUrl") String query) throws Exception {
+   * @RequestMapping(value = "/requestPlugin/{scanWebID}", method = RequestMethod.GET) public
+   * void requestPluginGET(HttpServletRequest request, HttpServletResponse response,
+   * 
+   * @PathVariable long scanWebID,
+   * 
+   * @RequestParam("restOfTheUrl") String query) throws Exception {
+   * 
+   * final boolean isPost = false;
+   * 
+   * requestPlugin(request, response, scanWebID, query, isPost);
+   * 
+   * }
+   * 
+   * 
+   * @RequestMapping(value = "/requestPlugin/{scanWebID}", method = RequestMethod.POST) public
+   * void requestPluginPOST(HttpServletRequest request, HttpServletResponse response,
+   * 
+   * @PathVariable long scanWebID,
+   * 
+   * @RequestParam("restOfTheUrl") String query) throws Exception {
+   * 
+   * final boolean isPost = true; requestPlugin(request, response, scanWebID, query, isPost);
+   * 
+   * }
+   */
 
-    final boolean isPost = false;
-
-    requestPlugin(request, response, scanWebID,  query, isPost);
-
-  }
-
-
-  @RequestMapping(value = "/requestPlugin/{scanWebID}", method = RequestMethod.POST)
-  public void requestPluginPOST(HttpServletRequest request, HttpServletResponse response,
-      @PathVariable long scanWebID,
-      @RequestParam("restOfTheUrl") String query) throws Exception {
-
-    final boolean isPost = true;
-    requestPlugin(request, response, scanWebID, query, isPost);
-
-  }
-*/
-  
-  
-  
   @Override
-  public void doGet(HttpServletRequest request,
-      HttpServletResponse response) throws ServletException, IOException  {
-    
-    
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
     processServlet(request, response, false);
-    
-    
-    
+
   }
-  
-  
+
   @Override
-  public void doPost(HttpServletRequest request,
-      HttpServletResponse response) throws ServletException, IOException  {
-    
-    
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
     processServlet(request, response, true);
-    
-    
-    
+
   }
-  
-  
-  
-  protected void processServlet(HttpServletRequest request,
-      HttpServletResponse response, boolean isPost) throws ServletException, IOException {
-    
+
+  protected void processServlet(HttpServletRequest request, HttpServletResponse response,
+      boolean isPost) throws ServletException, IOException {
+
     final boolean debug = log.isDebugEnabled();
-    
+
     if (debug) {
       log.debug(servletRequestInfoToStr(request));
     }
-    
+
     // uri = /scanweb/user/scanwebmodule/requestPlugin/1466408733012148444/index.html
     String uri = request.getRequestURI();
     if (debug) {
@@ -221,51 +207,47 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     }
     final String BASE = getContextWeb() + "/requestPlugin";
     int index = uri.indexOf(BASE);
-    
+
     if (index == -1) {
       String msg = "URL base incorrecte !!!! Esperat " + BASE + ". URI = " + uri;
       throw new IOException(msg);
     }
-  
-    //  idAndQuery = 1466408733012148444/index.html
+
+    // idAndQuery = 1466408733012148444/index.html
     String idAndQuery = uri.substring(index + BASE.length() + 1);
     if (debug) {
       log.debug(" idAndQuery = " + idAndQuery);
     }
-    
+
     index = idAndQuery.indexOf('/');
-    
+
     String idStr = idAndQuery.substring(0, index);
     String query = idAndQuery.substring(index + 1, idAndQuery.length());
-        
+
     if (debug) {
       log.debug(" idStr = " + idStr);
       log.debug(" query = " + query);
     }
-    
+
     String scanWebID = idStr;
-        
+
     try {
       requestPlugin(request, response, scanWebID, query, isPost);
     } catch (Throwable e) {
       throw new IOException(e.getMessage(), e);
     }
-  
-  }
-  
 
-  
+  }
 
   protected void requestPlugin(HttpServletRequest request, HttpServletResponse response,
-      String scanWebID, String query, boolean isPost)
-      throws Exception, I18NException {
+      String scanWebID, String query, boolean isPost) throws Exception, I18NException {
 
     String absoluteRequestPluginBasePath = getAbsoluteRequestPluginBasePath(request,
         getContextWeb(), scanWebID);
     String relativeRequestPluginBasePath = getRelativeRequestPluginBasePath(request,
         getContextWeb(), scanWebID);
 
-   // Map<String, IUploadedFile> uploadedFiles = getMultipartFiles(request);
+    // Map<String, IUploadedFile> uploadedFiles = getMultipartFiles(request);
 
     scanWebModuleEjb.requestPlugin(request, response, absoluteRequestPluginBasePath,
         relativeRequestPluginBasePath, scanWebID, query, isPost);
@@ -279,9 +261,10 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
   // -------------------------------------------------------------------------
 
   protected ModelAndView generateErrorMAV(HttpServletRequest request, String transactionWebID,
-      String msg, Throwable th)  throws I18NException {
+      String msg, Throwable th) throws I18NException {
 
-    TransaccioJPA transaccio =  transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
+    TransaccioJPA transaccio = transaccioLogicaEjb
+        .searchTransaccioByTransactionWebID(transactionWebID);
 
     String urlFinal = processError(request, transaccio, msg, th);
 
@@ -293,25 +276,23 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
   }
 
   /*
-  protected static void generateErrorAndRedirect(HttpServletRequest request,
-      HttpServletResponse response, TransaccioJPA trans, String msg, Throwable th, boolean isPublic) {
-
-    String urlFinal = processError(request, trans, msg, th);
-
-    try {
-
-      String r = request.getContextPath() + getContextWeb(isPublic) + "/error?URL_FINAL="
-          + URLEncoder.encode(urlFinal, "UTF8");
-
-      response.sendRedirect(r);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-  }
-*/
-  protected String processError(HttpServletRequest request, TransaccioJPA trans,
-      String msg, Throwable th) throws I18NException {
+   * protected static void generateErrorAndRedirect(HttpServletRequest request,
+   * HttpServletResponse response, TransaccioJPA trans, String msg, Throwable th, boolean
+   * isPublic) {
+   * 
+   * String urlFinal = processError(request, trans, msg, th);
+   * 
+   * try {
+   * 
+   * String r = request.getContextPath() + getContextWeb(isPublic) + "/error?URL_FINAL=" +
+   * URLEncoder.encode(urlFinal, "UTF8");
+   * 
+   * response.sendRedirect(r); } catch (Exception e) { e.printStackTrace(); }
+   * 
+   * }
+   */
+  protected String processError(HttpServletRequest request, TransaccioJPA trans, String msg,
+      Throwable th) throws I18NException {
 
     String urlFinal;
     if (trans == null) {
@@ -319,24 +300,23 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
       urlFinal = getRelativeURLBase(request);
     } else {
 
-
       trans.setEstatMissatge(msg);
-      
+
       trans.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       if (th == null) {
         log.warn(msg);
       } else {
-        
+
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         th.printStackTrace(pw);
-        
+
         trans.setEstatExcepcio(pw.toString()); // XYZ ZZZ Passar StackTrace
         log.warn(msg, th);
       }
 
       transaccioLogicaEjb.update(trans);
-      
+
       urlFinal = trans.getReturnUrl();
 
     }
@@ -344,17 +324,14 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     return urlFinal;
   }
 
- 
-
-
   protected abstract String getContextWeb();
-  
+
   public static String getContextWeb(boolean isPublic) {
-    return isPublic? CONTEXTWEB_PUBLIC : CONTEXTWEB_USER;  
+    return isPublic ? CONTEXTWEB_PUBLIC : CONTEXTWEB_USER;
   }
 
-/*  XYZ ZZZ ESBORRARARAR **/
-  
+  /* XYZ ZZZ ESBORRARARAR * */
+
   public static String getAbsoluteURLBase(HttpServletRequest request) {
     return request.getScheme() + "://" + request.getServerName() + ":"
         + +request.getServerPort() + request.getContextPath();
@@ -392,12 +369,6 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     return absoluteRequestPluginBasePath;
   }
 
-
-
-
-
-
-  
   /* XYZ TODO MOURE A CLASSE D'UTILITAT DE PLUGIN */
   protected String servletRequestInfoToStr(HttpServletRequest request) {
     StringBuffer str = new StringBuffer(
@@ -413,10 +384,9 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     str.append(" ++++ getRequestURL: " + request.getRequestURL() + "\n");
     str.append(" ++++ getQueryString: " + request.getQueryString() + "\n");
     str.append(" ++++ javax.servlet.forward.request_uri: "
-        + (String) request.getAttribute("javax.servlet.forward.request_uri")  + "\n");
+        + (String) request.getAttribute("javax.servlet.forward.request_uri") + "\n");
     str.append(" ===============================================================");
     return str.toString();
   }
-  
-  
+
 }

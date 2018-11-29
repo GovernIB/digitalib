@@ -82,12 +82,9 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/principal.jsp" />
     </definition>
 
-    <definition name="option1Common" extends="common">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/common/option.jsp" />
-    </definition>
-
-    <definition name="option2Common" extends="common">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/common/option.jsp" />
+    <definition name="usuariPersonaFormCommon" extends="common">
+        <put-attribute name="titol" value="usuariPersona.usuariPersona" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariPersonaForm.jsp" />
     </definition>
     
     

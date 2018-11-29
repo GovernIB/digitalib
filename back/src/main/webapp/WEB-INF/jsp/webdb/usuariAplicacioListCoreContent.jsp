@@ -54,6 +54,21 @@
             <img height="18" width="18" src="<c:url value="/img/icn_alert_${usuariAplicacio.actiu?'success':'error'}.png"/>">
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.ROLESCAN)}">
+          <td>
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${usuariAplicacio.roleScan?'success':'error'}.png"/>">
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.ROLECOAU)}">
+          <td>
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${usuariAplicacio.roleCoAu?'success':'error'}.png"/>">
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.ROLECUST)}">
+          <td>
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${usuariAplicacio.roleCust?'success':'error'}.png"/>">
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

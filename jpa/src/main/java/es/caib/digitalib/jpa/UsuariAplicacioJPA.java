@@ -46,6 +46,15 @@ private static final long serialVersionUID = -360699331L;
 	@Column(name="actiu",nullable = false,length = 1)
 	boolean actiu;
 
+	@Column(name="rolescan",nullable = false,length = 1)
+	boolean roleScan;
+
+	@Column(name="rolecoau",nullable = false,length = 1)
+	boolean roleCoAu;
+
+	@Column(name="rolecust",nullable = false,length = 1)
+	boolean roleCust;
+
 
 
   /** Constructor Buit */
@@ -53,28 +62,37 @@ private static final long serialVersionUID = -360699331L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariAplicacioJPA(long usuariAplicacioID , java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu) {
+  public UsuariAplicacioJPA(long usuariAplicacioID , java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.usuariAplicacioID=usuariAplicacioID;
     this.username=username;
     this.contrasenya=contrasenya;
     this.emailadmin=emailadmin;
     this.descripcio=descripcio;
     this.actiu=actiu;
+    this.roleScan=roleScan;
+    this.roleCoAu=roleCoAu;
+    this.roleCust=roleCust;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariAplicacioJPA(java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu) {
+  public UsuariAplicacioJPA(java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.username=username;
     this.contrasenya=contrasenya;
     this.emailadmin=emailadmin;
     this.descripcio=descripcio;
     this.actiu=actiu;
+    this.roleScan=roleScan;
+    this.roleCoAu=roleCoAu;
+    this.roleCust=roleCust;
 }
   /** Constructor dels valors Not Null */
-  public UsuariAplicacioJPA(long usuariAplicacioID , java.lang.String username , java.lang.String emailadmin , boolean actiu) {
+  public UsuariAplicacioJPA(long usuariAplicacioID , java.lang.String username , java.lang.String emailadmin , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.usuariAplicacioID=usuariAplicacioID;
     this.username=username;
     this.emailadmin=emailadmin;
     this.actiu=actiu;
+    this.roleScan=roleScan;
+    this.roleCoAu=roleCoAu;
+    this.roleCust=roleCust;
 }
   public UsuariAplicacioJPA(UsuariAplicacio __bean) {
     this.setUsuariAplicacioID(__bean.getUsuariAplicacioID());
@@ -83,6 +101,9 @@ private static final long serialVersionUID = -360699331L;
     this.setEmailadmin(__bean.getEmailadmin());
     this.setDescripcio(__bean.getDescripcio());
     this.setActiu(__bean.isActiu());
+    this.setRoleScan(__bean.isRoleScan());
+    this.setRoleCoAu(__bean.isRoleCoAu());
+    this.setRoleCust(__bean.isRoleCust());
 	}
 
 	public long getUsuariAplicacioID() {
@@ -127,6 +148,27 @@ private static final long serialVersionUID = -360699331L;
 		this.actiu = _actiu_;
 	};
 
+	public boolean isRoleScan() {
+		return(roleScan);
+	};
+	public void setRoleScan(boolean _roleScan_) {
+		this.roleScan = _roleScan_;
+	};
+
+	public boolean isRoleCoAu() {
+		return(roleCoAu);
+	};
+	public void setRoleCoAu(boolean _roleCoAu_) {
+		this.roleCoAu = _roleCoAu_;
+	};
+
+	public boolean isRoleCust() {
+		return(roleCust);
+	};
+	public void setRoleCust(boolean _roleCust_) {
+		this.roleCust = _roleCust_;
+	};
+
 
 
   @Override
@@ -166,6 +208,9 @@ private static final long serialVersionUID = -360699331L;
     __tmp.setEmailadmin(__bean.getEmailadmin());
     __tmp.setDescripcio(__bean.getDescripcio());
     __tmp.setActiu(__bean.isActiu());
+    __tmp.setRoleScan(__bean.isRoleScan());
+    __tmp.setRoleCoAu(__bean.isRoleCoAu());
+    __tmp.setRoleCust(__bean.isRoleCust());
 		return __tmp;
 	}
 

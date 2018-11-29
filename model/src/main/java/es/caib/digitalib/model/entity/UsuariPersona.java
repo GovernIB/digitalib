@@ -23,8 +23,17 @@ public interface UsuariPersona extends org.fundaciobit.genapp.common.IGenAppEnti
 	public java.lang.String getIdiomaID();
 	public void setIdiomaID(java.lang.String _idiomaID_);
 
-	public long getConfiguracioGrupID();
-	public void setConfiguracioGrupID(long _configuracioGrupID_);
+	public java.lang.Long getConfiguracioGrupID();
+	public void setConfiguracioGrupID(java.lang.Long _configuracioGrupID_);
+
+	public boolean isRoleScan();
+	public void setRoleScan(boolean _roleScan_);
+
+	public boolean isRoleCoAu();
+	public void setRoleCoAu(boolean _roleCoAu_);
+
+	public boolean isRoleCust();
+	public void setRoleCust(boolean _roleCust_);
 
 
 

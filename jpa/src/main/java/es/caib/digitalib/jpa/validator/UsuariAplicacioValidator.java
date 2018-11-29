@@ -40,6 +40,18 @@ public class UsuariAplicacioValidator<T> implements UsuariAplicacioFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ACTIU)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,ROLESCAN, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ROLESCAN)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,ROLECOAU, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ROLECOAU)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,ROLECUST, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ROLECUST)));
+
     // Check size
     if (__vr.getFieldErrorCount(USERNAME) == 0) {
       java.lang.String __username = (java.lang.String)__vr.getFieldValue(__target__,USERNAME);

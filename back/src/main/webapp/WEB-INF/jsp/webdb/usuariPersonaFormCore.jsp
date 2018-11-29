@@ -148,3 +148,69 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariPersonaFields.ROLESCAN)}">
+        <tr id="usuariPersona_roleScan_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[UsuariPersonaFields.ROLESCAN])?'usuariPersona.roleScan':__theForm.labels[UsuariPersonaFields.ROLESCAN]}" />
+              <c:if test="${not empty __theForm.help[UsuariPersonaFields.ROLESCAN]}">
+              <i class="icon-info-sign" title="${__theForm.help[UsuariPersonaFields.ROLESCAN]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.ROLESCAN)}" >
+              <form:errors path="usuariPersona.roleScan" cssClass="errorField alert alert-error" />
+              <form:checkbox onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.ROLESCAN)? 'false' : 'true'}" path="usuariPersona.roleScan" />
+          </c:if>
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.ROLESCAN)}" >
+                <fmt:message key="genapp.checkbox.${__theForm.usuariPersona.roleScan}" />
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariPersonaFields.ROLECOAU)}">
+        <tr id="usuariPersona_roleCoAu_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[UsuariPersonaFields.ROLECOAU])?'usuariPersona.roleCoAu':__theForm.labels[UsuariPersonaFields.ROLECOAU]}" />
+              <c:if test="${not empty __theForm.help[UsuariPersonaFields.ROLECOAU]}">
+              <i class="icon-info-sign" title="${__theForm.help[UsuariPersonaFields.ROLECOAU]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.ROLECOAU)}" >
+              <form:errors path="usuariPersona.roleCoAu" cssClass="errorField alert alert-error" />
+              <form:checkbox onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.ROLECOAU)? 'false' : 'true'}" path="usuariPersona.roleCoAu" />
+          </c:if>
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.ROLECOAU)}" >
+                <fmt:message key="genapp.checkbox.${__theForm.usuariPersona.roleCoAu}" />
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariPersonaFields.ROLECUST)}">
+        <tr id="usuariPersona_roleCust_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[UsuariPersonaFields.ROLECUST])?'usuariPersona.roleCust':__theForm.labels[UsuariPersonaFields.ROLECUST]}" />
+              <c:if test="${not empty __theForm.help[UsuariPersonaFields.ROLECUST]}">
+              <i class="icon-info-sign" title="${__theForm.help[UsuariPersonaFields.ROLECUST]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.ROLECUST)}" >
+              <form:errors path="usuariPersona.roleCust" cssClass="errorField alert alert-error" />
+              <form:checkbox onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.ROLECUST)? 'false' : 'true'}" path="usuariPersona.roleCust" />
+          </c:if>
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.ROLECUST)}" >
+                <fmt:message key="genapp.checkbox.${__theForm.usuariPersona.roleCust}" />
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        

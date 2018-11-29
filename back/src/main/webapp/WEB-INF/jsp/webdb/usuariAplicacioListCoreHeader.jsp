@@ -30,6 +30,15 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.ACTIU)}">
         <th>${dib:getSortIcons(__theFilterForm,UsuariAplicacioFields.ACTIU)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.ROLESCAN)}">
+        <th>${dib:getSortIcons(__theFilterForm,UsuariAplicacioFields.ROLESCAN)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.ROLECOAU)}">
+        <th>${dib:getSortIcons(__theFilterForm,UsuariAplicacioFields.ROLECOAU)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.ROLECUST)}">
+        <th>${dib:getSortIcons(__theFilterForm,UsuariAplicacioFields.ROLECUST)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

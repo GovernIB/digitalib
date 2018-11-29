@@ -43,6 +43,18 @@ public class UsuariPersonaQueryPath extends org.fundaciobit.genapp.common.query.
     return new LongField(getQueryPath(), UsuariPersonaFields.CONFIGURACIOGRUPID);
   }
 
+  public BooleanField ROLESCAN() {
+    return new BooleanField(getQueryPath(), UsuariPersonaFields.ROLESCAN);
+  }
+
+  public BooleanField ROLECOAU() {
+    return new BooleanField(getQueryPath(), UsuariPersonaFields.ROLECOAU);
+  }
+
+  public BooleanField ROLECUST() {
+    return new BooleanField(getQueryPath(), UsuariPersonaFields.ROLECUST);
+  }
+
 
 
   @Override

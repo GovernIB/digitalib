@@ -18,6 +18,9 @@ public interface UsuariAplicacioFields extends java.io.Serializable {
 	 public static final StringField EMAILADMIN = new StringField(_TABLE_MODEL, "emailadmin", "emailadmin");
 	 public static final StringField DESCRIPCIO = new StringField(_TABLE_MODEL, "descripcio", "descripcio");
 	 public static final BooleanField ACTIU = new BooleanField(_TABLE_MODEL, "actiu", "actiu");
+	 public static final BooleanField ROLESCAN = new BooleanField(_TABLE_MODEL, "roleScan", "rolescan");
+	 public static final BooleanField ROLECOAU = new BooleanField(_TABLE_MODEL, "roleCoAu", "rolecoau");
+	 public static final BooleanField ROLECUST = new BooleanField(_TABLE_MODEL, "roleCust", "rolecust");
 
 
   public static final Field<?>[] ALL_USUARIAPLICACIO_FIELDS = {
@@ -26,7 +29,10 @@ public interface UsuariAplicacioFields extends java.io.Serializable {
     CONTRASENYA,
     EMAILADMIN,
     DESCRIPCIO,
-    ACTIU
+    ACTIU,
+    ROLESCAN,
+    ROLECOAU,
+    ROLECUST
   };
 
 

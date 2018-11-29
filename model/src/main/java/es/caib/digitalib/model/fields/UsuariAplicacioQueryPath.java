@@ -35,6 +35,18 @@ public class UsuariAplicacioQueryPath extends org.fundaciobit.genapp.common.quer
     return new BooleanField(getQueryPath(), UsuariAplicacioFields.ACTIU);
   }
 
+  public BooleanField ROLESCAN() {
+    return new BooleanField(getQueryPath(), UsuariAplicacioFields.ROLESCAN);
+  }
+
+  public BooleanField ROLECOAU() {
+    return new BooleanField(getQueryPath(), UsuariAplicacioFields.ROLECOAU);
+  }
+
+  public BooleanField ROLECUST() {
+    return new BooleanField(getQueryPath(), UsuariAplicacioFields.ROLECUST);
+  }
+
 
 
   @Override

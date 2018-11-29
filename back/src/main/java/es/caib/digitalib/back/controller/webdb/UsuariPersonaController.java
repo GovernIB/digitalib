@@ -208,6 +208,15 @@ public class UsuariPersonaController
     }
 
 
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ROLESCAN);
+
+
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ROLECOAU);
+
+
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ROLECUST);
+
+
     return groupByItemsMap;
   }
 
@@ -650,6 +659,7 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (UsuariPersona _item : list) {
+        if(_item.getConfiguracioGrupID() == null) { continue; };
         _pkList.add(_item.getConfiguracioGrupID());
         }
         _w = ConfiguracioGrupFields.CONFIGURACIOGRUPID.in(_pkList);

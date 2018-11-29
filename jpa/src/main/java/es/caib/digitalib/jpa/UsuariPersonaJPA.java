@@ -52,7 +52,16 @@ private static final long serialVersionUID = -80349968L;
 
 	@Index(name="dib_usrperson_confgrupid_fk_i")
 	@Column(name="configuraciogrupid",length = 19)
-	long configuracioGrupID;
+	java.lang.Long configuracioGrupID;
+
+	@Column(name="rolescan",nullable = false,length = 1)
+	boolean roleScan;
+
+	@Column(name="rolecoau",nullable = false,length = 1)
+	boolean roleCoAu;
+
+	@Column(name="rolecust",nullable = false,length = 1)
+	boolean roleCust;
 
 
 
@@ -61,7 +70,7 @@ private static final long serialVersionUID = -80349968L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariPersonaJPA(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , long configuracioGrupID) {
+  public UsuariPersonaJPA(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , java.lang.Long configuracioGrupID , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.usuariPersonaID=usuariPersonaID;
     this.username=username;
     this.nom=nom;
@@ -70,9 +79,12 @@ private static final long serialVersionUID = -80349968L;
     this.nif=nif;
     this.idiomaID=idiomaID;
     this.configuracioGrupID=configuracioGrupID;
+    this.roleScan=roleScan;
+    this.roleCoAu=roleCoAu;
+    this.roleCust=roleCust;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariPersonaJPA(java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , long configuracioGrupID) {
+  public UsuariPersonaJPA(java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , java.lang.Long configuracioGrupID , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.username=username;
     this.nom=nom;
     this.llinatges=llinatges;
@@ -80,6 +92,9 @@ private static final long serialVersionUID = -80349968L;
     this.nif=nif;
     this.idiomaID=idiomaID;
     this.configuracioGrupID=configuracioGrupID;
+    this.roleScan=roleScan;
+    this.roleCoAu=roleCoAu;
+    this.roleCust=roleCust;
 }
   public UsuariPersonaJPA(UsuariPersona __bean) {
     this.setUsuariPersonaID(__bean.getUsuariPersonaID());
@@ -90,6 +105,9 @@ private static final long serialVersionUID = -80349968L;
     this.setNif(__bean.getNif());
     this.setIdiomaID(__bean.getIdiomaID());
     this.setConfiguracioGrupID(__bean.getConfiguracioGrupID());
+    this.setRoleScan(__bean.isRoleScan());
+    this.setRoleCoAu(__bean.isRoleCoAu());
+    this.setRoleCust(__bean.isRoleCust());
 	}
 
 	public long getUsuariPersonaID() {
@@ -141,11 +159,32 @@ private static final long serialVersionUID = -80349968L;
 		this.idiomaID = _idiomaID_;
 	};
 
-	public long getConfiguracioGrupID() {
+	public java.lang.Long getConfiguracioGrupID() {
 		return(configuracioGrupID);
 	};
-	public void setConfiguracioGrupID(long _configuracioGrupID_) {
+	public void setConfiguracioGrupID(java.lang.Long _configuracioGrupID_) {
 		this.configuracioGrupID = _configuracioGrupID_;
+	};
+
+	public boolean isRoleScan() {
+		return(roleScan);
+	};
+	public void setRoleScan(boolean _roleScan_) {
+		this.roleScan = _roleScan_;
+	};
+
+	public boolean isRoleCoAu() {
+		return(roleCoAu);
+	};
+	public void setRoleCoAu(boolean _roleCoAu_) {
+		this.roleCoAu = _roleCoAu_;
+	};
+
+	public boolean isRoleCust() {
+		return(roleCust);
+	};
+	public void setRoleCust(boolean _roleCust_) {
+		this.roleCust = _roleCust_;
 	};
 
 
@@ -206,6 +245,9 @@ private static final long serialVersionUID = -80349968L;
     __tmp.setNif(__bean.getNif());
     __tmp.setIdiomaID(__bean.getIdiomaID());
     __tmp.setConfiguracioGrupID(__bean.getConfiguracioGrupID());
+    __tmp.setRoleScan(__bean.isRoleScan());
+    __tmp.setRoleCoAu(__bean.isRoleCoAu());
+    __tmp.setRoleCust(__bean.isRoleCust());
 		return __tmp;
 	}
 

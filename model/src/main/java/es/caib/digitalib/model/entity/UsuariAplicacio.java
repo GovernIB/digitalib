@@ -20,6 +20,15 @@ public interface UsuariAplicacio extends org.fundaciobit.genapp.common.IGenAppEn
 	public boolean isActiu();
 	public void setActiu(boolean _actiu_);
 
+	public boolean isRoleScan();
+	public void setRoleScan(boolean _roleScan_);
+
+	public boolean isRoleCoAu();
+	public void setRoleCoAu(boolean _roleCoAu_);
+
+	public boolean isRoleCust();
+	public void setRoleCust(boolean _roleCust_);
+
 
 
   // ======================================

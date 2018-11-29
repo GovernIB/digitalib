@@ -24,6 +24,13 @@ public interface Constants {
 	public static final String ROLE_ADMIN = "ROLE_ADMIN";
 	// ROLE USER
 	public static final String ROLE_USER = "ROLE_USER"; 
+	
+	// ROLE SCAN
+  public static final String ROLE_SCAN = "ROLE_SCAN";
+  // ROLE COAU
+  public static final String ROLE_COAU = "ROLE_COAU";
+  //ROLE CUST
+  public static final String ROLE_CUST = "ROLE_CUST";
 
 
 
