@@ -27,7 +27,6 @@ import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioQueryPath;
 import es.caib.digitalib.model.fields.TransaccioFields;
-import es.caib.digitalib.utils.Constants;
 
 /**
  *
@@ -137,7 +136,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
     clonedPerfil.setCodi(clonedPerfil.getCodi() + "-" + transactionWebID);
     clonedPerfil.setPerfilID(0);
-    clonedPerfil.setUsPerfil(Constants.PERFIL_US_TRANSACCIO_INFO);
+    clonedPerfil.setUsPerfil(-1 * clonedPerfil.getUsPerfil());
 
     // XYZ ZZZ ZZZ Falten altres comprovacions
     TransaccioJPA t = new TransaccioJPA();

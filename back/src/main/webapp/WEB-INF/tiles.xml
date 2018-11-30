@@ -204,43 +204,7 @@
     <definition name="perfilListAdmin" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
     </definition>
-    
-    <definition name="perfilEscaneigFormAdmin" extends="admin">
-        <put-attribute name="titol" value="perfil.us.1" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
-    </definition>
-    
-    <definition name="perfilEscaneigListAdmin" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
-    </definition>
-    
-    <definition name="perfilCopiaAutenticaFormAdmin" extends="admin">
-        <put-attribute name="titol" value="perfil.us.2" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
-    </definition>
-    
-    <definition name="perfilCopiaAutenticaListAdmin" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
-    </definition>
-    
-    <definition name="perfilCustodiaFormAdmin" extends="admin">
-        <put-attribute name="titol" value="perfil.us.3" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
-    </definition>
-    
-    <definition name="perfilCustodiaListAdmin" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
-    </definition>
-    
-    <definition name="perfilInfoTransaccioFormAdmin" extends="admin">
-        <put-attribute name="titol" value="perfil.us.0" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
-    </definition>
-    
-    <definition name="perfilInfoTransaccioListAdmin" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
-    </definition>
-    
+
    <definition name="usuariAplicacioFormAdmin" extends="admin">
         <put-attribute name="titol" value="usuariAplicacio.usuariAplicacio" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariAplicacioForm.jsp" />

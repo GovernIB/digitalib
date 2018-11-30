@@ -1192,8 +1192,12 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForUsPerfil(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("0" , "0"));
     __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("-1" , "-1"));
+    __tmp.add(new StringKeyValue("-2" , "-2"));
+    __tmp.add(new StringKeyValue("-3" , "-3"));
     return __tmp;
   }
 

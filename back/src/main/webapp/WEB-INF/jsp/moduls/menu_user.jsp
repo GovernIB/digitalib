@@ -33,28 +33,48 @@
    </sec:authorize>
     --%>
 
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/user/llistatperfilsdisponibles"/>"> 
+        <span style="${(fn:contains(url, '/user/llistatperfilsdisponibles'))? " font-weight:bold;" : ""}">
+           <fmt:message key="escanejar" />
+        </span>
+       </a>
+    </li>
+   
+
+    <hr style="margin-top: 6px; margin-bottom: 6px;" />
+    
+        
     <li style="list-style-type: disc; list-style-position: inside;"><a
-      href="<c:url value="/user/llistatperfilsdisponibles"/>"> <span
-        style="${(fn:contains(url, '/user/llistatperfilsdisponibles'))? " font-weight:bold;" : ""}"><fmt:message
-            key="escanejar" /></span>
+      href="<c:url value="/user/transaccio/nomesescaneig/list"/>"> <span
+        style="${(fn:contains(url, '/user/transaccio/nomesescaneig/'))? " font-weight:bold;" : ""}">
+         <fmt:message key="gestio.de" >
+            <fmt:param>
+               <fmt:message key="transaccio.tipus.1.plural" />
+            </fmt:param>
+          </fmt:message></span>
     </a></li>
 
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;"><a
-      href="<c:url value="/user/transaccio/list"/>"> <span
-        style="${(fn:contains(url, '/user/transaccio/'))? " font-weight:bold;" : ""}">Llistat Digitalitzacions XYZ</span>
-    </a></li>
-
-    <hr style="margin-top: 6px; margin-bottom: 6px;" />
-    <li style="list-style-type: disc; list-style-position: inside;"><a
-      href="<c:url value="/user/transaccioca/list"/>"> <span
-        style="${(fn:contains(url, '/user/transaccioca/'))? " font-weight:bold;" : ""}">Llistat Copies Autentiques XYZ </span>
+      href="<c:url value="/user/transaccio/copiaautentica/list"/>"> <span
+        style="${(fn:contains(url, '/user/transaccio/copiaautentica/'))? " font-weight:bold;" : ""}">
+         <fmt:message key="gestio.de" >
+            <fmt:param>
+               <fmt:message key="transaccio.tipus.2.plural" />
+            </fmt:param>
+          </fmt:message></span>
     </a></li>
     
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;"><a
-      href="<c:url value="/user/transacciocust/list"/>"> <span
-        style="${(fn:contains(url, '/user/transacciocust/'))? " font-weight:bold;" : ""}">Llistat Copies Autentiques i Custodia XYZ </span>
+      href="<c:url value="/user/transaccio/custodia/list"/>"> <span
+        style="${(fn:contains(url, '/user/transaccio/custodia/'))? " font-weight:bold;" : ""}">
+         <fmt:message key="gestio.de" >
+            <fmt:param>
+               <fmt:message key="transaccio.tipus.3.plural" />
+            </fmt:param>
+          </fmt:message></span>
     </a></li>
 
   </ul>

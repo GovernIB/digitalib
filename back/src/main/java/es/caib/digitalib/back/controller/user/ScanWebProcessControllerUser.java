@@ -7,7 +7,6 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.xerces.impl.dv.util.Base64;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
@@ -39,6 +38,7 @@ import es.caib.digitalib.logic.ScanWebModuleLocal;
 import es.caib.digitalib.logic.utils.ScanWebUtils;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
+import es.caib.digitalib.utils.Constants;
 
 /**
  *
@@ -174,10 +174,21 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
    * }
    */
 
-  @RequestMapping(value = "/start/{baseURL64}", method = RequestMethod.GET)
+  @RequestMapping(value = "/start/{tipusPerfil}/**", method = RequestMethod.GET)
   public ModelAndView scanWebGet(HttpServletRequest request,
-      @PathVariable("baseURL64") String baseURL64) throws Exception {
+      @PathVariable("tipusPerfil") int tipusPerfil
+      // ,  @PathVariable("baseURL64") String baseURL64
+      ) throws Exception {
 
+    
+    
+    String requestURL = request.getRequestURL().toString();
+    log.info("XYZ ZZZ requestURL = " + requestURL);
+
+    String baseURL64 = requestURL.split("/start/" + tipusPerfil +"/")[1];
+    
+    log.info("XYZ ZZZ baseURL64 = " + baseURL64);
+    
     try {
 
       // XYZ ZZZ Llegir-ho de LoginINfo
@@ -186,8 +197,9 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       String username = LoginInfo.getInstance().getUsername();
 
       log.info("XYZ ZZZ Username = " + username);
+      log.info("XYZ ZZZ Tipus Perfil = " + tipusPerfil);
 
-      String baseURLFull = new String(Base64.decode(baseURL64));
+      String baseURLFull = new String((baseURL64)); // Base64.decode
 
       log.info("XYZ ZZZ BaseURL ORIGINAL FULL = " + baseURLFull);
 
@@ -220,21 +232,23 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       ConfiguracioGrupJPA configGrup = configuracioGrupEjb.findByPrimaryKey(configGrupID);
 
       Long perfilID;
-      switch (getTipusPerfil()) {
-        case 1: // Només Escaneig XYZ ZZZ Constants.PERFIL_US_NOMES_ESCANEIG
+      switch (tipusPerfil) {
+        case Constants.PERFIL_US_NOMES_ESCANEIG:
           perfilID = configGrup.getPerfilNomesEscaneigID();
           break;
 
-        case 2:
-          // XYZ ZZZ Falta
+        case Constants.PERFIL_US_COPIA_AUTENTICA:
+          perfilID = configGrup.getPerfilCopiaAutenticaID();
+          break;
 
-        case 3:
-          // XYZ ZZZ Falta
+        case Constants.PERFIL_US_CUSTODIA:
+          perfilID = configGrup.getPerfilCustodiaID();
+          break;
 
         default:
-          // XYZ ZZZ
-          HtmlUtils.saveMessageError(request, "Tipus Perfil desconegut " + getTipusPerfil());
-          ModelAndView mav = new ModelAndView(new RedirectView(request.getContextPath() + "/canviarPipella/user", true));
+          // XYZ ZZZ Traduir
+          HtmlUtils.saveMessageError(request, "Tipus Perfil desconegut " + tipusPerfil);
+          ModelAndView mav = new ModelAndView(new RedirectView(request.getContextPath() + "/canviarPipella/user", false));
           return mav;
       }
 
@@ -280,9 +294,16 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       // CONTEXTWEB);
 
       URL url = new URL(baseURLFull);
+      
+      String port;
+      if (url.getPort() == -1) {
+        port = "";
+      } else {
+        port =  ":" + url.getPort();
+      }
+      
 
-      String baseUrl = url.getProtocol() + "://" + url.getHost() + ":" + url.getPort()
-          + request.getContextPath();
+      String baseUrl = url.getProtocol() + "://" + url.getHost() + port  + request.getContextPath();
       log.info("XYZ ZZZ  baseUrl OK = " + baseUrl);
 
       // http://10.215.216.175:8080/digitalib/user/llistatperfilsdisponibles
@@ -322,17 +343,19 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     } catch (I18NException e) {
 
       // XYZ ZZZ
+      e.printStackTrace();
+      
       HtmlUtils.saveMessageError(request, "Error general iniciant el proces d'escaneig: "
           + I18NUtils.getMessage(e));
-      ModelAndView mav = new ModelAndView(new RedirectView("/canviarPipella/user", true));
+      ModelAndView mav = new ModelAndView(new RedirectView(request.getContextPath() + "/canviarPipella/user", false));
       return mav;
     }
 
   }
 
-  protected int getTipusPerfil() {
-    return 1; // Només Escaneig XYZ ZZZ Constants.PERFIL_US_NOMES_ESCANEIG
-  }
+//  protected int getTipusPerfil() {
+//    return 1; // Només Escaneig XYZ ZZZ Constants.PERFIL_US_NOMES_ESCANEIG
+//  }
 
   @RequestMapping(value = SCANWEB_CONTEXTPATH_FINAL + "/{transactionWebID}")
   public ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
@@ -349,8 +372,22 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     if (status == ScanWebSimpleStatus.STATUS_FINAL_OK) {
       HtmlUtils
           .saveMessageSuccess(request, "Operacio realitzada correctament XYZ ZZZ Traduir");
-      mav.addObject("urlRetorn", "/user/transaccio/view/" + transaccio.getTransaccioID());
-
+      
+      switch(transaccio.getPerfil().getUsPerfil()) {
+      case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
+        mav.addObject("urlRetorn", request.getContextPath() +  "/user/transaccio/nomesescaneig/view/" + transaccio.getTransaccioID());
+        break;
+      case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
+      mav.addObject("urlRetorn",  request.getContextPath() + "/user/transaccio/copiaautentica/view/" + transaccio.getTransaccioID());
+      break;
+      case Constants.PERFIL_US_CUSTODIA_INFO:
+      mav.addObject("urlRetorn",  request.getContextPath() + "/user/transaccio/custodia/view/" + transaccio.getTransaccioID());
+      break;
+      
+      default:
+          // XYZ ZZZ Llançar error
+      }
+ 
     } else {
 
       if (transaccio.getEstatMissatge() == null) {

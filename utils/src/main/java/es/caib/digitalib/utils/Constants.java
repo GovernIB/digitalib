@@ -98,13 +98,26 @@ public interface Constants {
 	};
 	
 	
-	public static final int PERFIL_US_TRANSACCIO_INFO = 0;
+	//public static final int PERFIL_US_TRANSACCIO_INFO = 0;
+	
+	
+	public static final int PERFIL_US_ALL_INFO = 0;
+	
+	 public static final int PERFIL_US_NOMES_ESCANEIG_INFO = -1;
+	  public static final int PERFIL_US_COPIA_AUTENTICA_INFO = -2;
+	  public static final int PERFIL_US_CUSTODIA_INFO = -3;
+	
+	  
+	
 	public static final int PERFIL_US_NOMES_ESCANEIG = 1;
 	public static final int PERFIL_US_COPIA_AUTENTICA = 2;
 	public static final int PERFIL_US_CUSTODIA = 3;
 	
 	public static final int[] PERFIL_US = {
-			PERFIL_US_TRANSACCIO_INFO,
+	     PERFIL_US_NOMES_ESCANEIG_INFO,
+       PERFIL_US_COPIA_AUTENTICA_INFO,
+       PERFIL_US_CUSTODIA_INFO,
+       
 			PERFIL_US_NOMES_ESCANEIG,
 			PERFIL_US_COPIA_AUTENTICA,
 			PERFIL_US_CUSTODIA

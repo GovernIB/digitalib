@@ -46,22 +46,19 @@
     <hr style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/perfilnomesescaneig/list"/>">
-        <span style="${(fn:contains(url, 'perfilnomesescaneig/list'))? "font-weight: bold;" : ""}"><fmt:message key="perfil.us.gestio" ><fmt:param><fmt:message key="perfil.us.1" /></fmt:param></fmt:message></span>
-        
+        <span style="${(fn:contains(url, 'perfilnomesescaneig/list'))? "font-weight: bold;" : ""}"><fmt:message key="perfil.us.gestio" ><fmt:param><fmt:message key="perfil.us.1.plural" /></fmt:param></fmt:message></span>
       </a>
     </li>
     
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/perfilcopiaautentica/list"/>">
-        <span style="${(fn:contains(url, 'perfilcopiaautentica/list'))? "font-weight: bold;" : ""}"><fmt:message key="perfil.us.gestio" ><fmt:param><fmt:message key="perfil.us.2" /></fmt:param></fmt:message></span>
-        
+        <span style="${(fn:contains(url, 'perfilcopiaautentica/list'))? "font-weight: bold;" : ""}"><fmt:message key="perfil.us.gestio" ><fmt:param><fmt:message key="perfil.us.2.plural" /></fmt:param></fmt:message></span>
       </a>
     </li>
     
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/perfilcustodia/list"/>">
-        <span style="${(fn:contains(url, 'perfilcustodia/list'))? "font-weight: bold;" : ""}"><fmt:message key="perfil.us.gestio" ><fmt:param><fmt:message key="perfil.us.3" /></fmt:param></fmt:message></span>
-        
+        <span style="${(fn:contains(url, 'perfilcustodia/list'))? "font-weight: bold;" : ""}"><fmt:message key="perfil.us.gestio" ><fmt:param><fmt:message key="perfil.us.3.plural" /></fmt:param></fmt:message></span>
       </a>
     </li>
     <hr style="margin-top: 6px;  margin-bottom: 6px;" />

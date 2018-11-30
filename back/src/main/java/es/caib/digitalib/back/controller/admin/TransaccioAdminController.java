@@ -82,11 +82,11 @@ public class TransaccioAdminController extends TransaccioController {
 
 			filterForm.addAdditionalButtonForEachItem(new AdditionalButton(
 					"icon-eye-open icon-white", "transaccio.veuredetall",
-					TransaccioAdminController.CONTEXTWEB + "/view/{0}", "btn-primary"));
+					getContextWeb() + "/view/{0}", "btn-primary"));
 
 			filterForm.addAdditionalButtonForEachItem(new AdditionalButton(
 					"icon-user icon-white", "transaccio.veureperfil",
-					TransaccioAdminController.CONTEXTWEB + "/viewperfil/{0}", "btn-info"));
+					getContextWeb() + "/viewperfil/{0}", "btn-info"));
 		}
 		filterForm.setVisibleMultipleSelection(false);
 		filterForm.setAddButtonVisible(false);
@@ -102,8 +102,14 @@ public class TransaccioAdminController extends TransaccioController {
 			HttpServletResponse response) throws I18NException {
 		Long perfilID = transaccioEjb.executeQueryOne(TransaccioFields.PERFILID, TransaccioFields.TRANSACCIOID.equal(transaccioID));
 
-		return new ModelAndView(new RedirectView(PerfilInfoTransaccioAdminController.CONTEXTWEB + "/view/"+ perfilID, true));
+		return new ModelAndView(new RedirectView(getPerfilInfoContextWeb() + "/view/"+ perfilID, true));
 	}
+	
+	
+	public String getPerfilInfoContextWeb() {
+	  return PerfilInfoTransaccioAdminController.CONTEXTWEB;
+	}
+	
 
 	@Override
 	public TransaccioForm getTransaccioForm(TransaccioJPA _jpa,
@@ -147,9 +153,9 @@ public class TransaccioAdminController extends TransaccioController {
 		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_EXPIRED), I18NUtils.tradueix("estatcodi._3")));
 		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_CANCELLED), I18NUtils.tradueix("estatcodi._2")));
 		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_FINAL_ERROR), I18NUtils.tradueix("estatcodi._1")));
-		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_REQUESTED_ID), I18NUtils.tradueix("estatcodi._0")));
-		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_IN_PROGRESS), I18NUtils.tradueix("estatcodi._1")));
-		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_FINAL_OK), I18NUtils.tradueix("estatcodi._2")));
+		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_REQUESTED_ID), I18NUtils.tradueix("estatcodi.0")));
+		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_IN_PROGRESS), I18NUtils.tradueix("estatcodi.1")));
+		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_FINAL_OK), I18NUtils.tradueix("estatcodi.2")));
 		return __tmp;
 	}
 

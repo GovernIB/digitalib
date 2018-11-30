@@ -16,7 +16,6 @@ import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
 import org.fundaciobit.pluginsib.userinformation.UserInfo;
 
 import es.caib.digitalib.back.security.LoginInfo;
-import es.caib.digitalib.ejb.UsuariPersonaLocal;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
@@ -31,7 +30,6 @@ import org.springframework.stereotype.Component;
 import es.caib.digitalib.jpa.UsuariPersonaJPA;
 import es.caib.digitalib.logic.UsuariPersonaLogicaLocal;
 import es.caib.digitalib.logic.utils.DigitalIBPluginsManager;
-import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
