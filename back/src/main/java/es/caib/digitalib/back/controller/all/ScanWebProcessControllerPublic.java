@@ -36,15 +36,19 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
       @PathVariable("transactionWebID") String transactionWebID) throws Exception,
       I18NException {
 
+    @SuppressWarnings("unused")
     String languageUI = "ca"; 
     TransaccioJPA transaccio = null;
     {
 
       transaccio = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
+
       if (transaccio == null) {
         // XYZ ZZZ ZZZ Traduir
         throw new Exception("NO existeix la transacció amb ID " + transactionWebID);
       }
+      
+      languageUI = transaccio.getLanguageUI();
 
       if (transaccio.getEstatCodi() < 0) {
         // XYZ ZZZ ZZZ Traduir

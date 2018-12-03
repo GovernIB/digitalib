@@ -56,5 +56,9 @@ This page is generated automatically. Please edit.
 * &#36;{loginInfo.usuariPersona.configuracioGrup.nom }= ${loginInfo.usuariPersona.configuracioGrup.nom}<br/>
 </c:if>
 
+<c:if test="${empty loginInfo.usuariPersona.configuracioGrup }">
+* SENSE CONFIGURACIO GRUP<br/>
+</c:if>
+
 </c:if>
 

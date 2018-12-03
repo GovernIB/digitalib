@@ -1,8 +1,6 @@
 package es.caib.digitalib.back.controller.scanwebsimple.v1;
 
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -15,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import es.caib.digitalib.back.security.LoginInfo;
+import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
+import es.caib.digitalib.logic.utils.LogicUtils;
 import es.caib.digitalib.model.bean.FitxerBean;
 
 /**
@@ -39,19 +39,14 @@ public abstract class RestApiScanWebUtils extends RestUtils {
 
   public ResponseEntity<ScanWebSimpleError> generateServerError(String msg, Throwable th,
       HttpStatus status) {
-    String sStackTrace = null;
-    if (th != null) {
-      StringWriter sw = new StringWriter();
-      PrintWriter pw = new PrintWriter(sw);
-      th.printStackTrace(pw);
-      sStackTrace = sw.toString();
-    }
+    String sStackTrace = LogicUtils.exceptionToString(th);
 
     HttpHeaders headers = addAccessControllAllowOrigin();
     return new ResponseEntity<ScanWebSimpleError>(new ScanWebSimpleError(msg,
         ServerException.class.getName(), sStackTrace), headers, status);
   }
 
+ 
   public ResponseEntity<ScanWebSimpleError> generateNoAvailablePlugin(String language) {
     // TODO XYZ ZZZ Traduir
     String msg;

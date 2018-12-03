@@ -2612,7 +2612,7 @@
            <string>timestampIncluded</string> 
           </void> 
           <void property="javaType"> 
-           <class>boolean</class> 
+           <class>java.lang.Boolean</class> 
           </void> 
           <void property="labels"> 
            <void method="put"> 
@@ -2651,7 +2651,7 @@
            <string>policyIncluded</string> 
           </void> 
           <void property="javaType"> 
-           <class>boolean</class> 
+           <class>java.lang.Boolean</class> 
           </void> 
           <void property="labels"> 
            <void method="put"> 
@@ -2924,7 +2924,7 @@
            <string>checkAdministrationIdOfSigner</string> 
           </void> 
           <void property="javaType"> 
-           <class>boolean</class> 
+           <class>java.lang.Boolean</class> 
           </void> 
           <void property="labels"> 
            <void method="put"> 
@@ -2963,7 +2963,7 @@
            <string>checkDocumentModifications</string> 
           </void> 
           <void property="javaType"> 
-           <class>boolean</class> 
+           <class>java.lang.Boolean</class> 
           </void> 
           <void property="labels"> 
            <void method="put"> 
@@ -3002,7 +3002,7 @@
            <string>checkValidationSignature</string> 
           </void> 
           <void property="javaType"> 
-           <class>boolean</class> 
+           <class>java.lang.Boolean</class> 
           </void> 
           <void property="labels"> 
            <void method="put"> 
