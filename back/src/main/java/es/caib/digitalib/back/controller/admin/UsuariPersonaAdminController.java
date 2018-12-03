@@ -93,15 +93,6 @@ public class UsuariPersonaAdminController extends UsuariPersonaController{
 	}
 
 	@Override
-	public UsuariPersonaForm getUsuariPersonaForm(UsuariPersonaJPA _jpa,
-			boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
-		UsuariPersonaForm usuariPersonaForm = super.getUsuariPersonaForm(_jpa, __isView, request, mav);
-
-
-		return usuariPersonaForm;
-	}
-
-	@Override
 	public void postList(HttpServletRequest request, ModelAndView mav, 
 			UsuariPersonaFilterForm filterForm,  List<UsuariPersona> list) throws I18NException {
 

@@ -6,12 +6,13 @@
 %>
 
 <div class="row-fluid container nav-container">
-
+<c:if test="${not empty loginInfo.usuariPersona.configuracioGrup}" >
   <div class="logo pull-left" >
-    <a href="Fundacio Bit (Your organization)" target="_blank">    
-    <img src="<c:url value="/img/fundaciobit-logo-cap.png"/>"  title="Fundacio Bit" alt="Fundacio Bit" />
+    <a href="<c:out value="${loginInfo.usuariPersona.configuracioGrup.suportWeb}"/>" target="_blank">    
+    <img src="<c:url value="${dib:fileUrl(loginInfo.usuariPersona.configuracioGrup.logoHeader)}"/>" title="${loginInfo.usuariPersona.configuracioGrup.nom}" alt="${loginInfo.usuariPersona.configuracioGrup.nom}" />
     </a>
   </div>
+  </c:if>
 
   <div class="aplication-logo pull-left">
     <img src="<c:url value="/img/app-logo.png"/>"   alt="DigitalIB" title="DigitalIB"/>

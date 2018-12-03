@@ -20,7 +20,7 @@ import es.caib.digitalib.model.entity.UsuariPersona;
  */
 @Controller
 @RequestMapping(value = "/common/usuaripersona")
-public class CommonController extends UsuariPersonaController {
+public class UsuariPersonaCommonController extends UsuariPersonaController {
 
   @Override
   public String getTileForm() {
@@ -57,6 +57,8 @@ public class CommonController extends UsuariPersonaController {
     usuariPersonaForm.addReadOnlyField(ROLECUST);
     usuariPersonaForm.addReadOnlyField(CONFIGURACIOGRUPID);
 
+    usuariPersonaForm.setDeleteButtonVisible(false);
+    
     return usuariPersonaForm;
   }
 
