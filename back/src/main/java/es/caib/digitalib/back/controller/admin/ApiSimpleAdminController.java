@@ -22,7 +22,7 @@ import es.caib.digitalib.jpa.ApiSimpleJPA;
  */
 @Controller
 @RequestMapping(value = "/admin/apisimple")
-@SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class })
+@SessionAttributes(types = { ApiSimpleForm.class, ApiSimpleFilterForm.class })
 public class ApiSimpleAdminController extends ApiSimpleController {
 
 	@Override
