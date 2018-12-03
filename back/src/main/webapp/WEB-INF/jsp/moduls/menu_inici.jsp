@@ -7,7 +7,13 @@
 
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/common/principal.html"/>">
-        <span style="${(fn:contains(url, 'principal'))? "font-weight: bold;" : ""}">Pàgina Inicial</span>
+        <span style="${(fn:contains(url, 'principal'))? "font-weight: bold;" : ""}"><fmt:message key="inici.paginainici" /></span>
+      </a>
+    </li>
+    
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/common/usuaripersona/${loginInfo.usuariPersona.usuariPersonaID}/edit"/>">
+        <span style="${(fn:contains(url, 'usuaripersona'))? "font-weight: bold;" : ""}"><fmt:message key="inici.configuraciousuari" /></span>
       </a>
     </li>
 

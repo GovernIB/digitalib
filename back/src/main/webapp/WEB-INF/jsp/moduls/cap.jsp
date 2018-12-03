@@ -36,23 +36,27 @@
         
         </ul>
       </li>
-       -->
+       
 
       <li>
-         Organitzacio
-      </li>
+         Organitzacio: ${ loginInfo.usuariPersona.nom}&nbsp;${ loginInfo.usuariPersona.llinatges}
+      </li> -->
 
 
       
       <li>
         <a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
           <i class="icon-user icon-white"></i>
-          Nom de l'usuari: <%=request.getUserPrincipal().getName()%>  |  <%= request.getRemoteUser() %>
+          <fmt:message key="cap.usuarinom" />: ${ loginInfo.usuariPersona.nom}&nbsp;${ loginInfo.usuariPersona.llinatges}
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <li><a tabindex="-1" href="#">Configuració</a></li>
-          <li><a tabindex="-1" href="<c:url value="/j_spring_security_logout" />">Sortir</a></li>
+          <li>
+          	<a tabindex="-1" href="<c:url value="/common/usuaripersona/${loginInfo.usuariPersona.usuariPersonaID}/edit"/>">
+          		<fmt:message key="cap.configuracio" />
+          	</a>
+          </li>
+          <%-- <li><a tabindex="-1" href="<c:url value="/j_spring_security_logout" />">Sortir</a></li> --%>
         </ul>
       </li>
 
