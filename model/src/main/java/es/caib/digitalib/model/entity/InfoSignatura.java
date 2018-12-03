@@ -20,11 +20,11 @@ public interface InfoSignatura extends org.fundaciobit.genapp.common.IGenAppEnti
 	public java.lang.Integer getSignaturesTableLocation();
 	public void setSignaturesTableLocation(java.lang.Integer _signaturesTableLocation_);
 
-	public boolean isTimestampIncluded();
-	public void setTimestampIncluded(boolean _timestampIncluded_);
+	public java.lang.Boolean getTimestampIncluded();
+	public void setTimestampIncluded(java.lang.Boolean _timestampIncluded_);
 
-	public boolean isPolicyIncluded();
-	public void setPolicyIncluded(boolean _policyIncluded_);
+	public java.lang.Boolean getPolicyIncluded();
+	public void setPolicyIncluded(java.lang.Boolean _policyIncluded_);
 
 	public java.lang.String getEniTipoFirma();
 	public void setEniTipoFirma(java.lang.String _eniTipoFirma_);
@@ -44,14 +44,14 @@ public interface InfoSignatura extends org.fundaciobit.genapp.common.IGenAppEnti
 	public java.lang.String getEniSignLevel();
 	public void setEniSignLevel(java.lang.String _eniSignLevel_);
 
-	public boolean isCheckAdministrationIdOfSigner();
-	public void setCheckAdministrationIdOfSigner(boolean _checkAdministrationIdOfSigner_);
+	public java.lang.Boolean getCheckAdministrationIdOfSigner();
+	public void setCheckAdministrationIdOfSigner(java.lang.Boolean _checkAdministrationIdOfSigner_);
 
-	public boolean isCheckDocumentModifications();
-	public void setCheckDocumentModifications(boolean _checkDocumentModifications_);
+	public java.lang.Boolean getCheckDocumentModifications();
+	public void setCheckDocumentModifications(java.lang.Boolean _checkDocumentModifications_);
 
-	public boolean isCheckValidationSignature();
-	public void setCheckValidationSignature(boolean _checkValidationSignature_);
+	public java.lang.Boolean getCheckValidationSignature();
+	public void setCheckValidationSignature(java.lang.Boolean _checkValidationSignature_);
 
 
 

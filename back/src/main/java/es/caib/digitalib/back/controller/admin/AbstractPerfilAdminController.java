@@ -34,7 +34,6 @@ import es.caib.digitalib.utils.Constants;
  * @author u139636
  *
  */
-
 public abstract class AbstractPerfilAdminController extends PerfilController {
 
   public static final int TIPUSFIRMACOLUMN = 1;
