@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.plugins.scanweb.api.ScanWebConfig;
 import org.fundaciobit.plugins.scanweb.api.ScanWebStatus;
 import org.fundaciobit.plugins.scanweb.api.ScannedDocument;
@@ -141,8 +142,7 @@ public abstract class AbstractScanWebProcessController {
       {
         transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_CANCELLED);
         if (transaccio.getEstatMissatge() == null) {
-          // XYZ ZZZ traduir
-          transaccio.setEstatMissatge("plugindescan.cancelat");
+          transaccio.setEstatMissatge(I18NUtils.tradueix("plugindescan.cancelat"));
         }
       }
       break;

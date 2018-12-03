@@ -4133,7 +4133,7 @@
            </void> 
           </void> 
           <void property="minAllowedValue"> 
-           <string>0,1</string> 
+           <string>1,2,3,-1,-2,-3</string> 
           </void> 
           <void property="notNullable"> 
            <boolean>true</boolean> 

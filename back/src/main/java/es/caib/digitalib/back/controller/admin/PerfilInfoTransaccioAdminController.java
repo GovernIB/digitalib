@@ -27,7 +27,7 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
 
 	@Override
 	public int getTipusPerfil() {
-		return Constants.PERFIL_US_TRANSACCIO_INFO;
+		return Constants.PERFIL_US_ALL_INFO;
 	}
 
 	@Override

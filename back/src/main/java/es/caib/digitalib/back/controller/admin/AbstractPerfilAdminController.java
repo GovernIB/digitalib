@@ -37,200 +37,161 @@ import es.caib.digitalib.utils.Constants;
 
 public abstract class AbstractPerfilAdminController extends PerfilController {
 
-	public static final  int TIPUSFIRMACOLUMN = 1;
+  public static final int TIPUSFIRMACOLUMN = 1;
 
-	public abstract int getTipusPerfil();
-	
-	public static final String CONTEXTWEB = "/admin/perfil";
+  public abstract int getTipusPerfil();
 
+  public static final String CONTEXTWEB = "/admin/perfil";
 
-	@Override
-	public String getTileForm() {
-		switch (getTipusPerfil()) {
-		case Constants.PERFIL_US_NOMES_ESCANEIG:
-			return "perfilEscaneigFormAdmin";
+  @Override
+  public String getTileForm() {
+    return "perfilFormAdmin";
+  }
 
-		case Constants.PERFIL_US_COPIA_AUTENTICA:
-			return "perfilCopiaAutenticaFormAdmin";
+  @Override
+  public String getTileList() {
+    return "perfilListAdmin";
+  }
 
-		case Constants.PERFIL_US_CUSTODIA:
-			return "perfilCustodiaFormAdmin";
-		case Constants.PERFIL_US_TRANSACCIO_INFO:
-			return "perfilInfoTransaccioFormAdmin";
+  @Override
+  public String getSessionAttributeFilterForm() {
+    return "PerfilAdmin_FilterForm_" + getTipusPerfil();
+  }
 
-		}
-		return "perfilFormAdmin";
-	}
+  @Override
+  public PerfilFilterForm getPerfilFilterForm(Integer pagina, ModelAndView mav,
+      HttpServletRequest request) throws I18NException {
 
-	@Override
-	public String getTileList() {
-		switch (getTipusPerfil()) {
-		case Constants.PERFIL_US_NOMES_ESCANEIG:
-			return "perfilEscaneigListAdmin";
+    PerfilFilterForm filterForm = super.getPerfilFilterForm(pagina, mav, request);
 
-		case Constants.PERFIL_US_COPIA_AUTENTICA:
-			return "perfilCopiaAutenticaListAdmin";
+    int tipusperfil = getTipusPerfil();
 
-		case Constants.PERFIL_US_CUSTODIA:
-			return "perfilCustodiaListAdmin";
-		case Constants.PERFIL_US_TRANSACCIO_INFO:
-			return "perfilInfoTransaccioListAdmin";
+    if (filterForm.isNou()) {
+      // Per configurar
 
-		}
-		return "perfilListAdmin";
-	}
+      Set<Field<?>> ocults = new HashSet<Field<?>>(
+          Arrays.asList(PerfilFields.ALL_PERFIL_FIELDS));
 
-	@Override
-	public String getSessionAttributeFilterForm() {
-		switch (getTipusPerfil()) {
-		case Constants.PERFIL_US_NOMES_ESCANEIG:
-			return "PerfilEscaneigAdmin_FilterForm";
+      ocults.remove(CODI);
+      ocults.remove(NOM);
+      ocults.remove(DESCRIPCIO);
 
-		case Constants.PERFIL_US_COPIA_AUTENTICA:
-			return "PerfilCopiaAutenticaAdmin_FilterForm";
+      filterForm.setHiddenFields(ocults);
 
-		case Constants.PERFIL_US_CUSTODIA:
-			return "PerfilCustodiaAdmin_FilterForm";
-		case Constants.PERFIL_US_TRANSACCIO_INFO:
-			return "PerfilInfoTransaccioAdmin_FilterForm";
+      filterForm.setOrderBy(NOM.fullName);
 
-		}
-		return "PerfilAdmin_FilterForm";
-	}
+      filterForm
+          .setGroupByFields(new ArrayList<Field<?>>(filterForm.getDefaultGroupByFields()));
 
+      //filterForm.setTitleCode("perfil.us." + tipusperfil);
+      filterForm.setEntityNameCode("perfil.us." + tipusperfil);
+      filterForm.setEntityNameCodePlural("perfil.us." + tipusperfil + ".plural");
 
-	@Override
-	public PerfilFilterForm getPerfilFilterForm(Integer pagina, ModelAndView mav,
-			HttpServletRequest request) throws I18NException {
+      if (tipusperfil != Constants.PERFIL_US_NOMES_ESCANEIG
+          && tipusperfil != Constants.PERFIL_US_NOMES_ESCANEIG_INFO) {
+        AdditionalField<Long, String> adfield4 = new AdditionalField<Long, String>();
+        adfield4.setCodeName("perfil.tipusFirma");
+        adfield4.setPosition(TIPUSFIRMACOLUMN);
+        // Els valors s'ompliran al mètode postList()
+        adfield4.setValueMap(new HashMap<Long, String>());
+        filterForm.addAdditionalField(adfield4);
+      }
 
-		PerfilFilterForm filterForm = super.getPerfilFilterForm(pagina, mav, request);
+      switch (tipusperfil) {
+      case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
+      case Constants.PERFIL_US_NOMES_ESCANEIG:
+        filterForm.addHiddenField(TIPUSFIRMA);
+        filterForm.addHiddenField(APISIMPLEID);
+        filterForm.addHiddenField(PLUGINFIRMASERVIDORID);
 
-		int tipusperfil = getTipusPerfil();
+        filterForm.getGroupByFields().remove(PerfilFields.TIPUSFIRMA);
+        filterForm.getGroupByFields().remove(PerfilFields.APISIMPLEID);
+        filterForm.getGroupByFields().remove(PerfilFields.PLUGINFIRMASERVIDORID);
 
-		if (filterForm.isNou()) {
-			// Per configurar
+      case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
+      case Constants.PERFIL_US_COPIA_AUTENTICA:
+        filterForm.addHiddenField(TIPUSCUSTODIA);
+        filterForm.addHiddenField(PLUGINARXIUID);
+        filterForm.addHiddenField(PLUGINDOCCUSTODYID);
 
-			Set<Field<?>> ocults = new HashSet<Field<?>>(
-					Arrays.asList(PerfilFields.ALL_PERFIL_FIELDS));
+        filterForm.getGroupByFields().remove(PerfilFields.TIPUSCUSTODIA);
+        filterForm.getGroupByFields().remove(PerfilFields.PLUGINDOCCUSTODYID);
+        filterForm.getGroupByFields().remove(PerfilFields.PLUGINARXIUID);
 
-			ocults.remove(CODI);
-			ocults.remove(NOM);
-			ocults.remove(DESCRIPCIO);
+      case Constants.PERFIL_US_CUSTODIA_INFO:
+      case Constants.PERFIL_US_CUSTODIA:
 
-			filterForm.setHiddenFields(ocults);
+        filterForm.addHiddenField(USPERFIL);
+        break;
+      }
+    }
 
-			filterForm.setOrderBy(NOM.fullName);
+    return filterForm;
 
-			filterForm.setGroupByFields(new ArrayList<Field<?>>(filterForm.getDefaultGroupByFields()));
+  }
 
-			filterForm.setTitleCode("perfil.us."+tipusperfil);
+  @Override
+  public PerfilForm getPerfilForm(PerfilJPA _jpa, boolean __isView,
+      HttpServletRequest request, ModelAndView mav) throws I18NException {
+    PerfilForm perfilForm = super.getPerfilForm(_jpa, __isView, request, mav);
 
-			if (tipusperfil != Constants.PERFIL_US_NOMES_ESCANEIG) {
-				AdditionalField<Long,String> adfield4 = new AdditionalField<Long,String>(); 
-				adfield4.setCodeName("perfil.tipusFirma");
-				adfield4.setPosition(TIPUSFIRMACOLUMN);
-				// Els valors s'ompliran al mètode postList()
-				adfield4.setValueMap(new HashMap<Long, String>());
-				filterForm.addAdditionalField(adfield4);
-			}
+    int tipusPerfil = getTipusPerfil();
 
-			switch (tipusperfil) {
-			case Constants.PERFIL_US_NOMES_ESCANEIG:
-				filterForm.addHiddenField(TIPUSFIRMA);
-				filterForm.addHiddenField(APISIMPLEID);
-				filterForm.addHiddenField(PLUGINFIRMASERVIDORID);
+    if (perfilForm.isNou()) {
+      perfilForm.getPerfil().setUsPerfil(tipusPerfil);
 
-				filterForm.getGroupByFields().remove(PerfilFields.TIPUSFIRMA);
-				filterForm.getGroupByFields().remove(PerfilFields.APISIMPLEID);
-				filterForm.getGroupByFields().remove(PerfilFields.PLUGINFIRMASERVIDORID);
+    }
 
-			case Constants.PERFIL_US_COPIA_AUTENTICA:
-				filterForm.addHiddenField(TIPUSCUSTODIA);
-				filterForm.addHiddenField(PLUGINARXIUID);
-				filterForm.addHiddenField(PLUGINDOCCUSTODYID);
+    // XYZ ZZZ perfilForm.setTitleCode("perfil.us." + tipusPerfil);
+    perfilForm.setEntityNameCode("perfil.us." + Math.abs(tipusPerfil));
+    perfilForm.setEntityNameCodePlural("perfil.us." + Math.abs(tipusPerfil) + ".plural");
 
-				filterForm.getGroupByFields().remove(PerfilFields.TIPUSCUSTODIA);
-				filterForm.getGroupByFields().remove(PerfilFields.PLUGINDOCCUSTODYID);
-				filterForm.getGroupByFields().remove(PerfilFields.PLUGINARXIUID);
+    switch (tipusPerfil) {
+    case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
+    case Constants.PERFIL_US_NOMES_ESCANEIG:
+      perfilForm.addHiddenField(TIPUSFIRMA);
+      perfilForm.addHiddenField(APISIMPLEID);
+      perfilForm.addHiddenField(PLUGINFIRMASERVIDORID);
 
-			case Constants.PERFIL_US_CUSTODIA:
-			case Constants.PERFIL_US_TRANSACCIO_INFO:
+    case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
+    case Constants.PERFIL_US_COPIA_AUTENTICA:
+      perfilForm.addHiddenField(TIPUSCUSTODIA);
+      perfilForm.addHiddenField(PLUGINARXIUID);
+      perfilForm.addHiddenField(PLUGINDOCCUSTODYID);
 
-				filterForm.addHiddenField(USPERFIL);
-				break;
-			}
-		}
+    case Constants.PERFIL_US_CUSTODIA_INFO:
+    case Constants.PERFIL_US_CUSTODIA:
+      perfilForm.addHiddenField(USPERFIL);
+      break;
+    }
+    perfilForm.setAttachedAdditionalJspCode(true);
 
+    return perfilForm;
 
-		return filterForm;
+  }
 
-	}
+  @Override
+  public List<StringKeyValue> getReferenceListForTipusFirma(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
 
-	@Override
-	public PerfilForm getPerfilForm(PerfilJPA _jpa, boolean __isView,
-			HttpServletRequest request, ModelAndView mav) throws I18NException {
-		PerfilForm perfilForm = super.getPerfilForm(_jpa, __isView, request, mav);
+    for (int i = 0; i < Constants.TIPUS_FIRMA_EN_SERVIDOR.length; i++) {
+      __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_FIRMA_EN_SERVIDOR[i]),
+          I18NUtils.tradueix("tipusfirmaenservidor." + Constants.TIPUS_FIRMA_EN_SERVIDOR[i])));
+    }
 
-		int tipusPerfil = getTipusPerfil();
-		
-		if (tipusPerfil != Constants.PERFIL_US_TRANSACCIO_INFO) {
-			perfilForm.getPerfil().setTipusFirma(Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE);
-			perfilForm.getPerfil().setTipusCustodia(Constants.TIPUS_CUSTODIA_SENSE);
-		}
-		
-		if (perfilForm.isNou()) {
-			perfilForm.getPerfil().setUsPerfil(tipusPerfil);
+    return __tmp;
+  }
 
-		}
+  @Override
+  public List<StringKeyValue> getReferenceListForPluginScanWebID(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
 
-		perfilForm.setTitleCode("perfil.us." + tipusPerfil);
+    Where w = Where.AND(where, PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_SCANWEB));
 
-		switch (tipusPerfil) {
-		case Constants.PERFIL_US_NOMES_ESCANEIG:
-			perfilForm.addHiddenField(TIPUSFIRMA);
-			perfilForm.addHiddenField(APISIMPLEID);
-			perfilForm.addHiddenField(PLUGINFIRMASERVIDORID);
+    return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
+  }
 
-		case Constants.PERFIL_US_COPIA_AUTENTICA:
-			perfilForm.addHiddenField(TIPUSCUSTODIA);
-			perfilForm.addHiddenField(PLUGINARXIUID);
-			perfilForm.addHiddenField(PLUGINDOCCUSTODYID);
-
-
-		case Constants.PERFIL_US_CUSTODIA:
-		case Constants.PERFIL_US_TRANSACCIO_INFO:
-			perfilForm.addHiddenField(USPERFIL);
-			break;
-		}
-		perfilForm.setAttachedAdditionalJspCode(true);
-
-		return perfilForm;
-
-	}
-
-	@Override
-	public List<StringKeyValue> getReferenceListForTipusFirma(HttpServletRequest request,
-			ModelAndView mav, Where where) throws I18NException {
-		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-
-		for (int i = 0; i < Constants.TIPUS_FIRMA_EN_SERVIDOR.length; i++) {
-			__tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_FIRMA_EN_SERVIDOR[i]),
-					I18NUtils.tradueix("tipusfirmaenservidor." + Constants.TIPUS_FIRMA_EN_SERVIDOR[i])));
-		}
-
-		return __tmp;
-	}
-
-	@Override
-	public List<StringKeyValue> getReferenceListForPluginScanWebID(HttpServletRequest request,
-			ModelAndView mav, Where where) throws I18NException {
-
-		Where w = Where.AND(where, PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_SCANWEB));
-
-		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
-	}
-	
-	
   @Override
   public List<StringKeyValue> getReferenceListForPluginScanWeb2ID(HttpServletRequest request,
       ModelAndView mav, Where where) throws I18NException {
@@ -239,159 +200,176 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
     return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
   }
 
-	@Override
-	public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(
-			HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+  @Override
+  public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(
+      HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
 
-		Where w = Where.AND(where,
-				PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR));
-		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
-	}
+    Where w = Where.AND(where,
+        PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR));
+    return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
+  }
 
-	@Override
-	public List<StringKeyValue> getReferenceListForUsPerfil(HttpServletRequest request,
-			ModelAndView mav, Where where)  throws I18NException {
-		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_NOMES_ESCANEIG), "Només escaneig"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_COPIA_AUTENTICA), "Còpia autèntica"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_CUSTODIA), "Custòdia"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_TRANSACCIO_INFO), "Info transacció"));
-		return __tmp;
-	}
+  @Override
+  public List<StringKeyValue> getReferenceListForUsPerfil(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_NOMES_ESCANEIG),
+        "Només escaneig"));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_COPIA_AUTENTICA),
+        "Còpia autèntica"));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_CUSTODIA), "Custòdia"));
 
-	@Override
-	public List<StringKeyValue> getReferenceListForScanFormatFitxer(HttpServletRequest request,
-			ModelAndView mav, Where where)  throws I18NException {
-		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_PDF), "PDF"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_JPG), "JPG"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_PNG), "PNG"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_GIF), "GIF"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_TIFF), "TIF"));
-		return __tmp;
-	}
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_NOMES_ESCANEIG_INFO),
+        "Només escaneig - Info"));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_COPIA_AUTENTICA_INFO),
+        "Còpia autèntica - Info"));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_CUSTODIA_INFO),
+        "Custòdia - Info"));
+    return __tmp;
+  }
 
-	@Override
-	public List<StringKeyValue> getReferenceListForScanPixelType(HttpServletRequest request,
-			ModelAndView mav, Where where)  throws I18NException {
-		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_BLACK_WHITE), I18NUtils.tradueix("pixeltype.0")));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_GRAY), I18NUtils.tradueix("pixeltype.1")));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_COLOR), I18NUtils.tradueix("pixeltype.2")));
-		return __tmp;
-	}
+  @Override
+  public List<StringKeyValue> getReferenceListForScanFormatFitxer(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_PDF), "PDF"));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_JPG), "JPG"));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_PNG), "PNG"));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_GIF), "GIF"));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_TIFF), "TIF"));
+    return __tmp;
+  }
 
-	@Override
-	public List<StringKeyValue> getReferenceListForTipusCustodia(HttpServletRequest request,
-			ModelAndView mav, Where where)  throws I18NException {
-		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_SENSE) , I18NUtils.tradueix("tipuscustodia.0")));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_ARXIU) , I18NUtils.tradueix("tipuscustodia.1")));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_DOCUMENTCUSTODY) , I18NUtils.tradueix("tipuscustodia.2")));
-		return __tmp;
-	}
+  @Override
+  public List<StringKeyValue> getReferenceListForScanPixelType(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_BLACK_WHITE), I18NUtils
+        .tradueix("pixeltype.0")));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_GRAY), I18NUtils
+        .tradueix("pixeltype.1")));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_COLOR), I18NUtils
+        .tradueix("pixeltype.2")));
+    return __tmp;
+  }
 
-	@Override
-	public List<StringKeyValue> getReferenceListForPluginArxiuID(HttpServletRequest request,
-			ModelAndView mav, Where where)  throws I18NException {
-		Where w = Where.AND(where, PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_ARXIU));
+  @Override
+  public List<StringKeyValue> getReferenceListForTipusCustodia(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_SENSE), I18NUtils
+        .tradueix("tipuscustodia.0")));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_ARXIU), I18NUtils
+        .tradueix("tipuscustodia.1")));
+    __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_DOCUMENTCUSTODY),
+        I18NUtils.tradueix("tipuscustodia.2")));
+    return __tmp;
+  }
 
-		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
-	}
+  @Override
+  public List<StringKeyValue> getReferenceListForPluginArxiuID(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
+    Where w = Where.AND(where, PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_ARXIU));
 
-	@Override
-	public List<StringKeyValue> getReferenceListForPluginDocCustodyID(HttpServletRequest request,
-			ModelAndView mav, Where where)  throws I18NException {
-		Where w = Where.AND(where, PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_DOCUMENT_CUSTODY));
+    return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
+  }
 
-		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
-	}
+  @Override
+  public List<StringKeyValue> getReferenceListForPluginDocCustodyID(
+      HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+    Where w = Where.AND(where,
+        PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_DOCUMENT_CUSTODY));
 
-	@Override
-	public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
-		return USPERFIL.equal(getTipusPerfil());	
-	}
+    return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
+  }
 
-	@Override
-	public void preValidate(HttpServletRequest request, PerfilForm perfilForm,
-			BindingResult result) throws I18NException {
+  @Override
+  public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
+    int tipusPerfil = getTipusPerfil();
+    if (tipusPerfil == Constants.PERFIL_US_ALL_INFO) {
+      return USPERFIL.in(new Integer[] { Constants.PERFIL_US_NOMES_ESCANEIG_INFO,
+          Constants.PERFIL_US_COPIA_AUTENTICA_INFO, Constants.PERFIL_US_CUSTODIA_INFO });
+    } else {
+      return USPERFIL.equal(getTipusPerfil());
+    }
+  }
 
-		PerfilJPA perfil = perfilForm.getPerfil();
+  @Override
+  public void preValidate(HttpServletRequest request, PerfilForm perfilForm,
+      BindingResult result) throws I18NException {
 
-		switch (perfil.getTipusFirma()) {
+    PerfilJPA perfil = perfilForm.getPerfil();
 
-		case Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE:
-			perfil.setPluginFirmaServidorID(null);
-			perfil.setApiSimpleID(null);
-			break;
+    switch (perfil.getTipusFirma()) {
 
-		case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN:
-			if (perfil.getPluginFirmaServidorID() == null) {
-				result.rejectValue(get(PLUGINFIRMASERVIDORID), "genapp.validation.required",
-						new Object[] { I18NUtils.tradueix(get(PLUGINFIRMASERVIDORID)) }, null);
-			}
-			perfil.setApiSimpleID(null);
-			break;
+    case Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE:
+      perfil.setPluginFirmaServidorID(null);
+      perfil.setApiSimpleID(null);
+      break;
 
-		case Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE:
-			if (perfil.getApiSimpleID() == null) {
-				result.rejectValue(get(APISIMPLEID), "genapp.validation.required",
-						new Object[] { I18NUtils.tradueix(get(APISIMPLEID)) }, null);
+    case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN:
+      if (perfil.getPluginFirmaServidorID() == null) {
+        result.rejectValue(get(PLUGINFIRMASERVIDORID), "genapp.validation.required",
+            new Object[] { I18NUtils.tradueix(get(PLUGINFIRMASERVIDORID)) }, null);
+      }
+      perfil.setApiSimpleID(null);
+      break;
 
-			}
-			perfil.setPluginFirmaServidorID(null);
+    case Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE:
+      if (perfil.getApiSimpleID() == null) {
+        result.rejectValue(get(APISIMPLEID), "genapp.validation.required",
+            new Object[] { I18NUtils.tradueix(get(APISIMPLEID)) }, null);
 
-			break;
+      }
+      perfil.setPluginFirmaServidorID(null);
 
-		}
+      break;
 
-	}
+    }
 
-	@Override
-	public void postList(HttpServletRequest request, ModelAndView mav, PerfilFilterForm filterForm,
-			List<Perfil> list) throws I18NException {
+  }
 
-		switch (getTipusPerfil()) {
-		case Constants.PERFIL_US_NOMES_ESCANEIG:
-			break;
+  @Override
+  public void postList(HttpServletRequest request, ModelAndView mav,
+      PerfilFilterForm filterForm, List<Perfil> list) throws I18NException {
 
-		case Constants.PERFIL_US_COPIA_AUTENTICA:
-		case Constants.PERFIL_US_CUSTODIA:
-		case Constants.PERFIL_US_TRANSACCIO_INFO:
+    int tipusperfil = getTipusPerfil();
 
-			Map<Long, String> map;
-			map = (Map<Long, String>)filterForm.getAdditionalField(TIPUSFIRMACOLUMN).getValueMap();
+    if (tipusperfil != Constants.PERFIL_US_NOMES_ESCANEIG
+        && tipusperfil != Constants.PERFIL_US_NOMES_ESCANEIG_INFO) {
 
-			map.clear();
-			long key;
-			String value;
-			for (Perfil p : list) {
-				key = p.getPerfilID();
+      Map<Long, String> map;
+      map = (Map<Long, String>) filterForm.getAdditionalField(TIPUSFIRMACOLUMN).getValueMap();
 
-				switch (p.getTipusFirma()) {
+      map.clear();
+      long key;
+      String value;
+      for (Perfil p : list) {
+        key = p.getPerfilID();
 
-				default:
-				case Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE:
-					value ="-";
-					break;
+        switch (p.getTipusFirma()) {
 
-				case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN:
-					value ="Plugin";
-					break;
+        default:
+        case Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE:
+          value = "-";
+          break;
 
-				case Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE:
-					value="ApiSimple";
+        case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN:
+          value = "Plugin";
+          break;
 
-					break;
+        case Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE:
+          value = "ApiSimple";
 
-				}
-				map.put(key, value);
+          break;
 
-			}
+        }
+        map.put(key, value);
 
-			break;
-		}
+      }
 
-	}
+    }
+
+  }
 
 }
