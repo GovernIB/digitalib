@@ -93,6 +93,13 @@
       </a>
     </li>
     
+     <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/apisimple/list"/>">
+        <span style="${(fn:contains(url, '/apisimple/list'))? "font-weight: bold;" : ""}"><fmt:message key="apisimple.gestio" /></span>
+        
+      </a>
+    </li>
+    
 
   </ul>
 </div>

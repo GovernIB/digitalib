@@ -246,6 +246,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioList.jsp" />
     </definition>
     
+    <definition name="apiSimpleFormAdmin" extends="admin">
+        <put-attribute name="titol" value="apiSimple.apiSimple" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/apiSimpleForm.jsp" />
+    </definition>
+    
+    <definition name="apiSimpleListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/apiSimpleList.jsp" />
+    </definition>
+    
     
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
