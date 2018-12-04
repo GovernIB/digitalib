@@ -11,8 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.webdb.ApiSimpleController;
 import es.caib.digitalib.back.form.webdb.ApiSimpleFilterForm;
 import es.caib.digitalib.back.form.webdb.ApiSimpleForm;
-import es.caib.digitalib.back.form.webdb.PerfilFilterForm;
-import es.caib.digitalib.back.form.webdb.PerfilForm;
 import es.caib.digitalib.jpa.ApiSimpleJPA;
 
 /**
