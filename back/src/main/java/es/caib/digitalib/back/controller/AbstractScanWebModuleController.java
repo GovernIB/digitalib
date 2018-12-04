@@ -24,6 +24,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
+import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.Plugin;
 
 /**
@@ -44,6 +45,10 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
 
   @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
   protected TransaccioLogicaLocal transaccioLogicaEjb;
+  
+
+  @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
 
   @RequestMapping(value = "/selectscanwebmodule/{transactionWebID}")
   public ModelAndView selectScanWebModule(HttpServletRequest request,
@@ -112,13 +117,13 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     return mav;
   }
 
-  @RequestMapping(value = "/showscanwebmodule/{pluginID}/{scanWebID}")
+  @RequestMapping(value = "/showscanwebmodule/{pluginID}/{transactionWebID}")
   public ModelAndView showScanWebModule(HttpServletRequest request,
       HttpServletResponse response, @PathVariable("pluginID") Long pluginID,
-      @PathVariable("scanWebID") String scanWebID) throws Exception, I18NException {
+      @PathVariable("transactionWebID") String transactionWebID) throws Exception, I18NException {
 
     log.info("SMC :: showscanwebmodule: PluginID = " + pluginID);
-    log.info("SMC :: showscanwebmodule: scanWebID = " + scanWebID);
+    log.info("SMC :: showscanwebmodule: scanWebID = " + transactionWebID);
 
     // Assignar plugin Elegit
     // ScanWebConfigTester ss = scanWebModuleEjb.getScanWebConfig(request, scanWebID);
@@ -130,17 +135,36 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     // ss.setFlags(defaultFlags);
     // }
 
+    
+    // XYZ ZZZ  S'ha d'obtenir la URL BASE de la transaccio (l'enviada inicialment des de javascript) 
+    
     String relativeControllerBase = getRelativeControllerBase(request, getContextWeb());
     String relativeRequestPluginBasePath = getRequestPluginBasePath(relativeControllerBase,
-        scanWebID);
+    		transactionWebID);
 
     String absoluteControllerBase = getAbsoluteControllerBase(request, getContextWeb());
     String absoluteRequestPluginBasePath = getRequestPluginBasePath(absoluteControllerBase,
-        scanWebID);
+    		transactionWebID);
+    
+    
+    // XYZ ZZZ 
+    // IMPORTATNT !!!!! Comprovar que pluginID es un dels dos PLugins del PERFIL
+
 
     String urlToPluginWebPage;
     urlToPluginWebPage = scanWebModuleEjb.scanDocument(request, absoluteRequestPluginBasePath,
-        relativeRequestPluginBasePath, scanWebID);
+        relativeRequestPluginBasePath, transactionWebID, pluginID);
+
+    TransaccioJPA transaccio = transaccioLogicaEjb
+            .searchTransaccioByTransactionWebID(transactionWebID);
+    
+    Perfil perfil = perfilEjb.findByPrimaryKey(transaccio.getPerfilID());
+    
+    log.info("XYZ ZZZ    \n\n Actualitzant PERFIL SCANE PLUGIN A " + pluginID + "\n\n");
+    perfil.setPluginScanWebID(pluginID);
+    perfil.setPluginScanWeb2ID(null);
+    
+    perfilEjb.update(perfil);
 
     log.info("SMC :: showscanwebmodule: redirectTO = " + urlToPluginWebPage);
 

@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.webdb.UsuariPersonaController;
 import es.caib.digitalib.back.form.webdb.UsuariPersonaFilterForm;
 import es.caib.digitalib.back.form.webdb.UsuariPersonaForm;
-import es.caib.digitalib.jpa.UsuariPersonaJPA;
 import es.caib.digitalib.model.entity.UsuariPersona;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.model.fields.UsuariPersonaQueryPath;

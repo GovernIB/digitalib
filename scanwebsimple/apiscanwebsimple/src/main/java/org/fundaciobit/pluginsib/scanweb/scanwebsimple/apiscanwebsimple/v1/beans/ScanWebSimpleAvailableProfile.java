@@ -15,54 +15,74 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ScanWebSimpleAvailableProfile {
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected String code;
+	public static final int PROFILE_TYPE_NOMES_ESCANEIG = 1;
+	public static final int PROFILE_TYPE_COPIA_AUTENTICA = 2;
+	public static final int PROFILE_TYPE_ARXIU = 3;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected String name;
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	protected String code;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected String description;
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	protected String name;
 
-  public ScanWebSimpleAvailableProfile() {
-    super();
-  }
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	protected String description;
 
-  /**
+	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	protected int profileType;
+
+	/**
    * 
-   * @param code
-   * @param name
-   * @param description
    */
-  public ScanWebSimpleAvailableProfile(String code, String name, String description) {
-    super();
-    this.code = code;
-    this.name = name;
-    this.description = description;
-  }
+	public ScanWebSimpleAvailableProfile() {
+		super();
+	}
 
-  public String getName() {
-    return name;
-  }
+	/**
+	 * 
+	 * @param code
+	 * @param name
+	 * @param description
+	 */
+	public ScanWebSimpleAvailableProfile(String code, String name,
+			String description, int profileType) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.description = description;
+		this.profileType = profileType;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public String getDescription() {
-    return description;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public String getCode() {
-    return code;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-  public void setCode(String code) {
-    this.code = code;
-  }
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public int getProfileType() {
+		return profileType;
+	}
+
+	public void setProfileType(int profileType) {
+		this.profileType = profileType;
+	}
 
 }

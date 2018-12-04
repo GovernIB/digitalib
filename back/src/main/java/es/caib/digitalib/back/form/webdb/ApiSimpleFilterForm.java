@@ -86,6 +86,17 @@ public class ApiSimpleFilterForm extends DigitalIBBaseFilterForm implements ApiS
   }
 
 
+  private java.lang.String perfil;
+
+  public java.lang.String getPerfil() {
+    return this.perfil;
+  }
+
+  public void setPerfil(java.lang.String perfil) {
+    this.perfil = perfil;
+  }
+
+
   public ApiSimpleFilterForm() {
   }
   
@@ -97,6 +108,7 @@ public class ApiSimpleFilterForm extends DigitalIBBaseFilterForm implements ApiS
     this.url = __toClone.url;
     this.username = __toClone.username;
     this.contrasenya = __toClone.contrasenya;
+    this.perfil = __toClone.perfil;
   }
   
   /* ========= UTILS ========== */

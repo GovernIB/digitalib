@@ -86,3 +86,21 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ApiSimpleFields.PERFIL)}">
+        <tr id="apiSimple_perfil_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ApiSimpleFields.PERFIL])?'apiSimple.perfil':__theForm.labels[ApiSimpleFields.PERFIL]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[ApiSimpleFields.PERFIL]}">
+              <i class="icon-info-sign" title="${__theForm.help[ApiSimpleFields.PERFIL]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="apiSimple.perfil" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ApiSimpleFields.PERFIL)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ApiSimpleFields.PERFIL)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="apiSimple.perfil"   />
+
+           </td>
+        </tr>
+        </c:if>
+        

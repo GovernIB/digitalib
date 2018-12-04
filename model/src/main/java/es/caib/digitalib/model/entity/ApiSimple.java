@@ -17,6 +17,9 @@ public interface ApiSimple extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getContrasenya();
 	public void setContrasenya(java.lang.String _contrasenya_);
 
+	public java.lang.String getPerfil();
+	public void setPerfil(java.lang.String _perfil_);
+
 
 
   // ======================================

@@ -32,7 +32,7 @@ public interface ScanWebModuleLocal {
   public String scanDocument(
       HttpServletRequest request, String absoluteRequestPluginBasePath,
       String relativeRequestPluginBasePath,      
-      String scanWebID) throws Exception, I18NException;
+      String scanWebID, long pluginID) throws Exception, I18NException;
   
   
   public void requestPlugin(HttpServletRequest request, HttpServletResponse response,

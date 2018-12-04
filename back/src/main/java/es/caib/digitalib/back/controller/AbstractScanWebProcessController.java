@@ -103,7 +103,8 @@ public abstract class AbstractScanWebProcessController {
     int status = swc.getStatus().getStatus();
 
     switch (status) {
-    case ScanWebStatus.STATUS_IN_PROGRESS: {
+      case ScanWebStatus.STATUS_FINAL_OK:
+      case ScanWebStatus.STATUS_IN_PROGRESS: {
       // Comprovam que s'hagin escanejat coses
 
       List<ScannedDocument> listDocs = swc.getScannedFiles();

@@ -44,6 +44,10 @@ public class ApiSimpleValidator<T> implements ApiSimpleFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTRASENYA)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,PERFIL, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERFIL)));
+
     // Check size
     if (__vr.getFieldErrorCount(NOM) == 0) {
       java.lang.String __nom = (java.lang.String)__vr.getFieldValue(__target__,NOM);
@@ -74,6 +78,14 @@ public class ApiSimpleValidator<T> implements ApiSimpleFields {
       if (__contrasenya!= null && __contrasenya.length() > 255) {
         __vr.rejectValue(CONTRASENYA, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTRASENYA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(PERFIL) == 0) {
+      java.lang.String __perfil = (java.lang.String)__vr.getFieldValue(__target__,PERFIL);
+      if (__perfil!= null && __perfil.length() > 255) {
+        __vr.rejectValue(PERFIL, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERFIL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     

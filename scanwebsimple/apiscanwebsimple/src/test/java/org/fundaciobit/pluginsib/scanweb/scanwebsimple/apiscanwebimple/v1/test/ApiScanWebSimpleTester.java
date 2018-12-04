@@ -33,18 +33,14 @@ import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans
 public class ApiScanWebSimpleTester {
 
   public static void main(String[] args) {
-    
-
 
     final String languageUI = "ca";
     ApiScanWebSimple api = null;
     String transactionID = null;
     try {
-      
-
+ 
       api = getApiScanWebSimple();
-      
-      
+
       ScanWebSimpleAvailableProfiles profiles = api.getAvailableProfiles(languageUI);
       
       List<ScanWebSimpleAvailableProfile> profilesList = profiles.getAvailableProfiles();

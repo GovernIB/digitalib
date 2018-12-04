@@ -15,6 +15,7 @@ private static final long serialVersionUID = 541048348L;
 	java.lang.String url;
 	java.lang.String username;
 	java.lang.String contrasenya;
+	java.lang.String perfil;
 
 
   /** Constructor Buit */
@@ -22,19 +23,21 @@ private static final long serialVersionUID = 541048348L;
   }
 
   /** Constructor amb tots els camps  */
-  public ApiSimpleBean(long apiSimpleID , java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya) {
+  public ApiSimpleBean(long apiSimpleID , java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil) {
     this.apiSimpleID=apiSimpleID;
     this.nom=nom;
     this.url=url;
     this.username=username;
     this.contrasenya=contrasenya;
+    this.perfil=perfil;
 }
   /** Constructor sense valors autoincrementals */
-  public ApiSimpleBean(java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya) {
+  public ApiSimpleBean(java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil) {
     this.nom=nom;
     this.url=url;
     this.username=username;
     this.contrasenya=contrasenya;
+    this.perfil=perfil;
 }
   public ApiSimpleBean(ApiSimple __bean) {
     this.setApiSimpleID(__bean.getApiSimpleID());
@@ -42,6 +45,7 @@ private static final long serialVersionUID = 541048348L;
     this.setUrl(__bean.getUrl());
     this.setUsername(__bean.getUsername());
     this.setContrasenya(__bean.getContrasenya());
+    this.setPerfil(__bean.getPerfil());
 	}
 
 	public long getApiSimpleID() {
@@ -79,6 +83,13 @@ private static final long serialVersionUID = 541048348L;
 		this.contrasenya = _contrasenya_;
 	};
 
+	public java.lang.String getPerfil() {
+		return(perfil);
+	};
+	public void setPerfil(java.lang.String _perfil_) {
+		this.perfil = _perfil_;
+	};
+
 
 
   // ======================================
@@ -91,6 +102,7 @@ private static final long serialVersionUID = 541048348L;
     __tmp.setUrl(__bean.getUrl());
     __tmp.setUsername(__bean.getUsername());
     __tmp.setContrasenya(__bean.getContrasenya());
+    __tmp.setPerfil(__bean.getPerfil());
 		return __tmp;
 	}
 

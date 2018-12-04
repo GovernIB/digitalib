@@ -17,6 +17,7 @@ public interface ApiSimpleFields extends java.io.Serializable {
 	 public static final StringField URL = new StringField(_TABLE_MODEL, "url", "url");
 	 public static final StringField USERNAME = new StringField(_TABLE_MODEL, "username", "username");
 	 public static final StringField CONTRASENYA = new StringField(_TABLE_MODEL, "contrasenya", "contrasenya");
+	 public static final StringField PERFIL = new StringField(_TABLE_MODEL, "perfil", "perfil");
 
 
   public static final Field<?>[] ALL_APISIMPLE_FIELDS = {
@@ -24,7 +25,8 @@ public interface ApiSimpleFields extends java.io.Serializable {
     NOM,
     URL,
     USERNAME,
-    CONTRASENYA
+    CONTRASENYA,
+    PERFIL
   };
 
 

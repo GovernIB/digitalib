@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import es.caib.digitalib.back.security.LoginInfo;
-import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
 import es.caib.digitalib.logic.utils.LogicUtils;
 import es.caib.digitalib.model.bean.FitxerBean;

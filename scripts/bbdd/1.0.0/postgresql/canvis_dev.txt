@@ -1,8 +1,6 @@
 
+ALTER TABLE dib_apisimple
+  ADD COLUMN perfil character varying(255) NOT NULL DEFAULT '';
 
 
-
-
-  
-  UPDATE dib_perfil SET usperfil=-1 WHERE usperfil=0;
   

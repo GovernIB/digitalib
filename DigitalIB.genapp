@@ -50,7 +50,7 @@
     <void index="0"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
-       <array class="org.fundaciobit.genapp.FieldInfo" length="5"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="6"> 
         <void index="0"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="PK"> 
@@ -287,6 +287,51 @@
           </void> 
           <void property="sqlName"> 
            <string>contrasenya</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>12</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>1</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="5"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="defaultValue"> 
+           <string>&apos; &apos;::character varying</string> 
+          </void> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>perfil</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.String</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Perfil</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Perfil</string> 
+           </void> 
+          </void> 
+          <void property="notNullable"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="size"> 
+           <int>255</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>perfil</string> 
           </void> 
           <void property="sqlType"> 
            <int>12</int> 
@@ -902,11 +947,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Perfil Còpia Autèntica</string> 
+            <string>Perfil Escaneig i Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Perfil Copia Auténtica</string> 
+            <string>Perfil Escaneo y Firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -980,11 +1025,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Perfil Còpia Autèntica i Custòdia</string> 
+            <string>Perfil Escaneig, Firma i Arxiu</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Perfil Còpia Autèntica i Custòdia</string> 
+            <string>Perfil Escaneo,Firma y Archivo</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -2695,7 +2740,7 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Eni Tipus Firma</string> 
+            <string>ENI Tipus Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
@@ -4125,11 +4170,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Us Perfil</string> 
+            <string>Tipus Perfil</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Uso Perfil</string> 
+            <string>Tipo Perfil</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -7659,11 +7704,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Rol per a Només Escaneig</string> 
+            <string>Permís per a Només Escaneig</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Rol para Solo Escaneo</string> 
+            <string>Permiso para Solo Escaneo</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -7704,11 +7749,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Ro per a Còpia Autèntica</string> 
+            <string>Permís per Escaneig i Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Rol para Copia Auténtica</string> 
+            <string>Permiso para Escaneo y Firma</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -7749,11 +7794,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Rol per a Custòdia</string> 
+            <string>Permís per a Escaneig, Firma i Arxiu</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Rol para Custodia</string> 
+            <string>Permiso para Escaneo, Firma y Archivo</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -8280,11 +8325,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Rol per a Només Escaneig</string> 
+            <string>Permís per a Només Escaneig</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Rol para Solo Escaneo</string> 
+            <string>Permiso para Solo Escaneo</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -8325,11 +8370,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Rol per Còpia Autèntica</string> 
+            <string>Permís per a Escaneig i Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Rol para Copia Auténtica</string> 
+            <string>Permiso para Esceneo y Firma</string> 
            </void> 
           </void> 
           <void property="notNullable"> 
@@ -8370,11 +8415,11 @@
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Rol per a Custòdia</string> 
+            <string>Permís per a Escaneig, Firma i Arxiu</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Rol para Custodia</string> 
+            <string>Permiso para Escaneo, Firma y Archivo</string> 
            </void> 
           </void> 
           <void property="notNullable"> 

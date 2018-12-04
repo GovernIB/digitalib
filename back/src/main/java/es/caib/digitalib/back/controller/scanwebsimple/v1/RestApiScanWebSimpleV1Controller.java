@@ -121,7 +121,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
         for (Perfil perfil : perfils) {
           ScanWebSimpleAvailableProfile ap = new ScanWebSimpleAvailableProfile(
-              perfil.getCodi(), perfil.getNom(), perfil.getDescripcio());
+              perfil.getCodi(), perfil.getNom(), perfil.getDescripcio(), perfil.getUsPerfil());
           list.add(ap);
         }
 

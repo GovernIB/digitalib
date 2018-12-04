@@ -97,7 +97,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
 
   @Override
   public String scanDocument(HttpServletRequest request, String absolutePluginRequestPath,
-      String relativePluginRequestPath, String transactionWebID) throws Exception, I18NException {
+      String relativePluginRequestPath, String transactionWebID, long pluginID) throws Exception, I18NException {
 
     
     
@@ -105,7 +105,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
     
     ScanWebConfig scanWebConfig = getScanWebConfig(request, transactionWebID);
 
-    Long pluginID = trans.getPerfil().getPluginScanWebID();
+    //Long pluginID = trans.getPerfil().getPluginScanWebID();****
 
     log.info("SMC :: scanDocument: PluginID = " + pluginID);
     log.info("SMC :: scanDocument: scanWebID = " + transactionWebID);

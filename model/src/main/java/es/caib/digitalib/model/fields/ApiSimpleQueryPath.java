@@ -31,6 +31,10 @@ public class ApiSimpleQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), ApiSimpleFields.CONTRASENYA);
   }
 
+  public StringField PERFIL() {
+    return new StringField(getQueryPath(), ApiSimpleFields.PERFIL);
+  }
+
 
 
   @Override
