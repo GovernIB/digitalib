@@ -63,11 +63,6 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
 		int firma = perfilForm.getPerfil().getTipusFirma();
 		
 		switch (firma) {
-		case Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE:
-			perfilForm.addHiddenField(APISIMPLEID);
-			perfilForm.addHiddenField(PLUGINFIRMASERVIDORID);
-			break;
-
 		case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN:
 			perfilForm.addHiddenField(APISIMPLEID);
 			break;
@@ -80,11 +75,6 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
 		int custodia = perfilForm.getPerfil().getTipusCustodia();
 		
 		switch (custodia) {
-		case Constants.TIPUS_CUSTODIA_SENSE:
-			perfilForm.addHiddenField(PLUGINDOCCUSTODYID);
-			perfilForm.addHiddenField(PLUGINARXIUID);
-			break;
-
 		case Constants.TIPUS_CUSTODIA_ARXIU:
 			perfilForm.addHiddenField(PLUGINDOCCUSTODYID);
 			break;

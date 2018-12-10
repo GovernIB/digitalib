@@ -10,10 +10,7 @@
  function onChangeTipusFirma(combo) {
 
      var value = combo.options[combo.selectedIndex].value;
-     if (value == <%=Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE%>) { 
-       document.getElementById("<%=PerfilFields.PLUGINFIRMASERVIDORID.fullName.replace('.', '_') %>_rowid").style.display = 'none';
-       document.getElementById("<%=PerfilFields.APISIMPLEID.fullName.replace('.', '_') %>_rowid").style.display = 'none';
-     } else if (value == <%=Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE%>) { 
+     if (value == <%=Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE%>) { 
        document.getElementById("<%=PerfilFields.PLUGINFIRMASERVIDORID.fullName.replace('.', '_') %>_rowid").style.display = 'none';
        document.getElementById("<%=PerfilFields.APISIMPLEID.fullName.replace('.', '_') %>_rowid").style.display = '';
      } else {
@@ -29,10 +26,7 @@
  function onChangeTipusCustodia(combo) {
 
      var value = combo.options[combo.selectedIndex].value;
-     if (value == <%=Constants.TIPUS_CUSTODIA_SENSE%>) { 
-       document.getElementById("<%=PerfilFields.PLUGINDOCCUSTODYID.fullName.replace('.', '_') %>_rowid").style.display = 'none';
-       document.getElementById("<%=PerfilFields.PLUGINARXIUID.fullName.replace('.', '_') %>_rowid").style.display = 'none';
-     } else if (value == <%=Constants.TIPUS_CUSTODIA_ARXIU%>) { 
+     if (value == <%=Constants.TIPUS_CUSTODIA_ARXIU%>) { 
        document.getElementById("<%=PerfilFields.PLUGINDOCCUSTODYID.fullName.replace('.', '_') %>_rowid").style.display = 'none';
        document.getElementById("<%=PerfilFields.PLUGINARXIUID.fullName.replace('.', '_') %>_rowid").style.display = '';
      } else {

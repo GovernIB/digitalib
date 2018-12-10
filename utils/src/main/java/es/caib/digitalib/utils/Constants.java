@@ -42,23 +42,19 @@ public interface Constants {
 
 	public static final int TIPUS_PLUGIN_ARXIU = 3;
 
-
-	public static final int TIPUS_CUSTODIA_SENSE = 0;
-	public static final int TIPUS_CUSTODIA_ARXIU = 1;
-	public static final int TIPUS_CUSTODIA_DOCUMENTCUSTODY = 2;
+	
+	public static final int TIPUS_CUSTODIA_ARXIU = 0;
+	public static final int TIPUS_CUSTODIA_DOCUMENTCUSTODY = 1;
 	
 	public static final int[] TIPUS_CUSTODIA = {
-			TIPUS_CUSTODIA_SENSE,
 			TIPUS_CUSTODIA_ARXIU,
 			TIPUS_CUSTODIA_DOCUMENTCUSTODY
 	};
 
-	public static final int TIPUS_FIRMA_EN_SERVIDOR_SENSE = 0;
-	public static final int TIPUS_FIRMA_EN_SERVIDOR_PLUGIN = 1;
-	public static final int TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE = 2;
+	public static final int TIPUS_FIRMA_EN_SERVIDOR_PLUGIN = 0;
+	public static final int TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE = 1;
 
 	public static final int[] TIPUS_FIRMA_EN_SERVIDOR = {
-			TIPUS_FIRMA_EN_SERVIDOR_SENSE,
 			TIPUS_FIRMA_EN_SERVIDOR_PLUGIN,
 			TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE
 	};

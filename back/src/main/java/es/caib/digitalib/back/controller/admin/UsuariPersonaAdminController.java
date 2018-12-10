@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue;
 import org.fundaciobit.genapp.common.web.form.AdditionalField;
@@ -22,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.webdb.UsuariPersonaController;
 import es.caib.digitalib.back.form.webdb.UsuariPersonaFilterForm;
 import es.caib.digitalib.back.form.webdb.UsuariPersonaForm;
+import es.caib.digitalib.back.security.LoginInfo;
+import es.caib.digitalib.jpa.UsuariPersonaJPA;
 import es.caib.digitalib.model.entity.UsuariPersona;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.model.fields.UsuariPersonaQueryPath;
@@ -90,6 +93,33 @@ public class UsuariPersonaAdminController extends UsuariPersonaController{
 		}
 		return usuariPersonaFilterForm;
 	}
+	
+//	XYZ ZZZ --> Que els canvis de header i footer s'actualitzin al moment
+//	@Override
+//	public UsuariPersonaJPA update(HttpServletRequest request, UsuariPersonaJPA usuariPersona)
+//		    throws Exception,I18NException, I18NValidationException {
+//		
+//			super.usuariPersonaEjb.update(usuariPersona);
+//			LoginInfo logInf = LoginInfo.getInstance();
+//			UsuariPersonaJPA up = logInf.getUsuariPersona();
+//			
+//			if (up.getUsername() != usuariPersona.getUsername()) {
+//				up.setUsername(usuariPersona.getUsername());
+//			} else if (up.getNif() != usuariPersona.getNif()) {
+//				
+//			} else if (up.getNom() != usuariPersona.getNom()) {
+//				
+//			} else if (up.getLlinatges() != usuariPersona.getLlinatges()) {
+//				
+//			} else if (up.getEmail() != usuariPersona.getEmail()) {
+//				
+//			} else if (up.getIdioma() != usuariPersona.getIdioma()) {
+//				
+//			}
+//			return up;    
+//		    
+//		  }
+	
 
 	@Override
 	public void postList(HttpServletRequest request, ModelAndView mav, 
