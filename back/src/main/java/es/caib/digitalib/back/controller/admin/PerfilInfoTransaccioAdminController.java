@@ -66,9 +66,7 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
 		case Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE:
 			perfilForm.addHiddenField(APISIMPLEID);
 			perfilForm.addHiddenField(PLUGINFIRMASERVIDORID);
-			break;
-
-		case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN:
+			break;		case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN:
 			perfilForm.addHiddenField(APISIMPLEID);
 			break;
 			
@@ -83,9 +81,8 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
 		case Constants.TIPUS_CUSTODIA_SENSE:
 			perfilForm.addHiddenField(PLUGINDOCCUSTODYID);
 			perfilForm.addHiddenField(PLUGINARXIUID);
-			break;
+			break;		case Constants.TIPUS_CUSTODIA_ARXIU:
 
-		case Constants.TIPUS_CUSTODIA_ARXIU:
 			perfilForm.addHiddenField(PLUGINDOCCUSTODYID);
 			break;
 			

@@ -38,8 +38,8 @@ public interface Constants {
 	public static final int TIPUS_PLUGIN_DOCUMENT_CUSTODY = 2;
 
 	public static final int TIPUS_PLUGIN_ARXIU = 3;
-	
-	public static final int  TIPUS_PLUGIN_SEGELLDETEMPS = 4;
+
+	public static final int TIPUS_PLUGIN_SEGELLDETEMPS = 4;
 
 	public static final int TIPUS_CUSTODIA_SENSE = 0;
 	public static final int TIPUS_CUSTODIA_ARXIU = 1;
@@ -53,7 +53,8 @@ public interface Constants {
 	public static final int TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE = 2;
 
 	public static final int[] TIPUS_FIRMA_EN_SERVIDOR = {
-			TIPUS_FIRMA_EN_SERVIDOR_SENSE, TIPUS_FIRMA_EN_SERVIDOR_PLUGIN,
+
+	TIPUS_FIRMA_EN_SERVIDOR_SENSE, TIPUS_FIRMA_EN_SERVIDOR_PLUGIN,
 			TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE};
 
 	public static final int FORMAT_FILE_PDF = 0; // "pdf";
@@ -121,19 +122,14 @@ public interface Constants {
 	public static final int TAULADEFIRMES_SENSETAULA = 0;
 	public static final int TAULADEFIRMES_PRIMERAPAGINA = 1;
 	public static final int TAULADEFIRMES_DARRERAPAGINA = -1;
-	
-	public static final int[] TAULADEFIRMES = {
-	    TAULADEFIRMES_SENSETAULA,
-	    TAULADEFIRMES_PRIMERAPAGINA,
-	    TAULADEFIRMES_DARRERAPAGINA
-	  };
-	
-	
-	
-	  // 0 => no usar politica de firma, 
-	  public static final int US_POLITICA_DE_FIRMA_NO_USAR = 0;
 
-	  // 1=> usar politica d'aquesta configuracio 
-	  public static final int US_POLITICA_DE_FIRMA_OBLIGATORI_DEFINIT = 1;
+	public static final int[] TAULADEFIRMES = {TAULADEFIRMES_SENSETAULA,
+			TAULADEFIRMES_PRIMERAPAGINA, TAULADEFIRMES_DARRERAPAGINA};
+
+	// 0 => no usar politica de firma,
+	public static final int US_POLITICA_DE_FIRMA_NO_USAR = 0;
+
+	// 1=> usar politica d'aquesta configuracio
+	public static final int US_POLITICA_DE_FIRMA_OBLIGATORI_DEFINIT = 1;
 
 }
