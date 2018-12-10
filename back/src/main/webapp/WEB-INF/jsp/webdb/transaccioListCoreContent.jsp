@@ -176,6 +176,21 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.IP)}">
+          <td>
+          ${transaccio.ip}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHESCANEIG)}">
+          <td>
+          ${transaccio.hashEscaneig}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHFIRMA)}">
+          <td>
+          ${transaccio.hashFirma}
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

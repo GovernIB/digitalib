@@ -119,6 +119,18 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new LongField(getQueryPath(), TransaccioFields.PERFILID);
   }
 
+  public StringField IP() {
+    return new StringField(getQueryPath(), TransaccioFields.IP);
+  }
+
+  public StringField HASHESCANEIG() {
+    return new StringField(getQueryPath(), TransaccioFields.HASHESCANEIG);
+  }
+
+  public StringField HASHFIRMA() {
+    return new StringField(getQueryPath(), TransaccioFields.HASHFIRMA);
+  }
+
 
 
   @Override

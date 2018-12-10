@@ -417,6 +417,39 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.String ip;
+
+  public java.lang.String getIp() {
+    return this.ip;
+  }
+
+  public void setIp(java.lang.String ip) {
+    this.ip = ip;
+  }
+
+
+  private java.lang.String hashEscaneig;
+
+  public java.lang.String getHashEscaneig() {
+    return this.hashEscaneig;
+  }
+
+  public void setHashEscaneig(java.lang.String hashEscaneig) {
+    this.hashEscaneig = hashEscaneig;
+  }
+
+
+  private java.lang.String hashFirma;
+
+  public java.lang.String getHashFirma() {
+    return this.hashFirma;
+  }
+
+  public void setHashFirma(java.lang.String hashFirma) {
+    this.hashFirma = hashFirma;
+  }
+
+
   public TransaccioFilterForm() {
   }
   
@@ -458,6 +491,9 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.viewFins = __toClone.viewFins;
     this.perfilIDDesde = __toClone.perfilIDDesde;
     this.perfilIDFins = __toClone.perfilIDFins;
+    this.ip = __toClone.ip;
+    this.hashEscaneig = __toClone.hashEscaneig;
+    this.hashFirma = __toClone.hashFirma;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
     this.mapOfInfoSignaturaForInfoSignaturaID = __toClone.mapOfInfoSignaturaForInfoSignaturaID;
     this.mapOfInfoCustodyForInfoCustodyID = __toClone.mapOfInfoCustodyForInfoCustodyID;

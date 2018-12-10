@@ -3,6 +3,7 @@ package es.caib.digitalib.back.controller;
 import java.io.ByteArrayInputStream;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.FitxerLogicaLocal;
+import es.caib.digitalib.logic.PluginDocumentCustodyLogicaLocal;
 import es.caib.digitalib.logic.PluginFirmaEnServidorLogicaLocal;
 import es.caib.digitalib.logic.PluginScanWebLogicaLocal;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
@@ -45,277 +47,332 @@ import es.caib.digitalib.utils.Constants;
  */
 public abstract class AbstractScanWebProcessController {
 
-  public static final String SCANWEB_CONTEXTPATH_FINAL = "/final";
+	public static final String SCANWEB_CONTEXTPATH_FINAL = "/final";
+
+	protected final Logger log = Logger.getLogger(this.getClass());
+
+	@EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
+	protected TransaccioLogicaLocal transaccioLogicaEjb;
+
+	@EJB(mappedName = ScanWebModuleLocal.JNDI_NAME)
+	protected ScanWebModuleLocal scanWebModuleEjb;
+
+	@EJB(mappedName = FitxerLogicaLocal.JNDI_NAME)
+	protected FitxerLogicaLocal fitxerEjb;
+
+	@EJB(mappedName = PluginScanWebLogicaLocal.JNDI_NAME)
+	protected PluginScanWebLogicaLocal pluginScanWebLogicaEjb;
+
+	@EJB(mappedName = PluginFirmaEnServidorLogicaLocal.JNDI_NAME)
+	protected PluginFirmaEnServidorLogicaLocal pluginFirmaServidorLogicaEjb;
+
+	@EJB(mappedName = PluginDocumentCustodyLogicaLocal.JNDI_NAME)
+	PluginDocumentCustodyLogicaLocal pluginDocumentcustodyLogicaEjb;
+
+	@RequestMapping(value = SCANWEB_CONTEXTPATH_FINAL + "/{transactionWebID}")
+	public ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
+			HttpServletResponse response,
+			@PathVariable("transactionWebID") String transactionWebID)
+			throws Exception, I18NException {
+
+		final boolean debug = log.isDebugEnabled();
+
+		log.info("XYZ ZZZ finalProcesDeScanWeb():: [transactionWebID] = "
+				+ transactionWebID);
+
+		if (debug) {
+			log.debug(" ===finalProcesEscaneig() ==> scanWebID: "
+					+ transactionWebID);
+		}
+
+		TransaccioJPA transaccio = null;
+		{
+
+			transaccio = transaccioLogicaEjb
+					.searchTransaccioByTransactionWebID(transactionWebID);
+			if (transaccio == null) {
+				// XYZ ZZZ ZZZ
+				throw new Exception("NO existeix la transacció amb ID "
+						+ transactionWebID);
+			}
+
+			// if (transaccio.getEstatcodi() < 0) {
+			// // XYZ ZZZ ZZZ
+			// String msg = "La transacció amb ID " + transactionWebID +
+			// " te un estat no vàlid ("
+			// + transaccio.getEstatcodi() +
+			// ") per iniciar el proces d'escaneig.";
+			// throw new Exception(msg);
+			// }
+		}
+
+		ScanWebConfig swc;
+		swc = scanWebModuleEjb.getScanWebConfig(request, transactionWebID);
+		// ScanWebStatus scanWebStatus = swc.getStatus();
+
+		int status = swc.getStatus().getStatus();
+
+		switch (status) {
+			case ScanWebStatus.STATUS_FINAL_OK :
+			case ScanWebStatus.STATUS_IN_PROGRESS : {
+				// Comprovam que s'hagin escanejat coses
+
+				List<ScannedDocument> listDocs = swc.getScannedFiles();
+
+				if (listDocs.size() == 1) {
+
+					// TOTS HO EXECUTEN AIXÒ
+					int usPerfil = transaccio.getPerfil().getUsPerfil();
+
+					switch (usPerfil) {
+
+						case Constants.PERFIL_US_NOMES_ESCANEIG_INFO : {
+							Fitxer fitxer = recuperarDocumentEscanejat(
+									transaccio, listDocs);
+							if (fitxer != null) {
+								transaccio
+										.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
+							}
+						}
+							break;
+
+						case Constants.PERFIL_US_COPIA_AUTENTICA_INFO : {
+							Fitxer fitxer = recuperarDocumentEscanejat(
+									transaccio, listDocs);
+							if (fitxer != null) {
+								Fitxer fitxerFirmat = firmarFitxer(transaccio,
+										fitxer);
+								if (fitxerFirmat != null) {
+									transaccio
+											.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
+								}
+							}
+						}
+							break;
+
+						case Constants.PERFIL_US_CUSTODIA_INFO : {
+
+							Fitxer fitxer = recuperarDocumentEscanejat(
+									transaccio, listDocs);
+
+							if (fitxer != null) {
+								Fitxer fitxerFirmat = firmarFitxer(transaccio,
+										fitxer);
+
+								if (fitxerFirmat != null) {
+									// XYZ ZZZ Aqui falta CUSTODIA
+									// NOMES CUSTODIA
+									InfoCustodyJPA infoCustodyJPA = custodia(
+											transaccio, fitxerFirmat);
+
+									if (infoCustodyJPA != null) {
+										transaccio
+												.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
+									}
+
+								}
+							}
+						}
+							break;
+					}
+
+				} else {
+
+					transaccio
+							.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+					if (listDocs.size() == 0) {
+						// XYZ ZZZ Traduir
+						transaccio
+								.setEstatMissatge(" L'usuari no ha escanejat cap fitxer.");
+					} else {
+						// XYZ ZZZ Traduir
+						transaccio
+								.setEstatMissatge(" L'usuari ha escanejat més d'1 fitxer.");
+					}
+				}
+			}
+				break;
+
+			case ScanWebStatus.STATUS_FINAL_ERROR : {
+				transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+			}
+				break;
 
-  protected final Logger log = Logger.getLogger(this.getClass());
+			case ScanWebStatus.STATUS_CANCELLED : {
+				transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_CANCELLED);
+				if (transaccio.getEstatMissatge() == null) {
+					transaccio.setEstatMissatge(I18NUtils
+							.tradueix("plugindescan.cancelat"));
+				}
+			}
+				break;
 
-  @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
-  protected TransaccioLogicaLocal transaccioLogicaEjb;
+			default : {
+				// XYZ ZZZ Traduir
+				String inconsistentState = "El mòdul d´escaneig ha finalitzat inesperadament"
+						+ " amb un codi d'estat desconegut " + status;
+				transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+				transaccio.setEstatMissatge(inconsistentState);
+				transaccio.setEstatExcepcio(new Exception().toString()); // XYZ
+																			// ZZZ
+			}
+		}
 
-  @EJB(mappedName = ScanWebModuleLocal.JNDI_NAME)
-  protected ScanWebModuleLocal scanWebModuleEjb;
+		scanWebModuleEjb.closeScanWebProcess(request, transactionWebID);
 
-  @EJB(mappedName = FitxerLogicaLocal.JNDI_NAME)
-  protected FitxerLogicaLocal fitxerEjb;
+		// String languageUI = transaccio.getLanguageui();
 
-  @EJB(mappedName = PluginScanWebLogicaLocal.JNDI_NAME)
-  protected PluginScanWebLogicaLocal pluginScanWebLogicaEjb;
+		String urlRetorn = transaccio.getReturnUrl();
 
-  @EJB(mappedName = PluginFirmaEnServidorLogicaLocal.JNDI_NAME)
-  protected PluginFirmaEnServidorLogicaLocal pluginFirmaServidorLogicaEjb;
+		if (transaccio.getEstatCodi() != ScanWebStatus.STATUS_FINAL_OK) {
 
+			if (transaccio.getEstatMissatge() == null) {
+				// XYZ ZZZ
+				transaccio
+						.setEstatMissatge("Error desconegut ja que no s'ha definit el missatge de l'error !!!!!");
+			}
+		}
 
+		ModelAndView mav;
+		if (transaccio.getView() == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN) {
+			// Simple REDIRECCIO
 
-  @RequestMapping(value = SCANWEB_CONTEXTPATH_FINAL + "/{transactionWebID}")
-  public ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
-      HttpServletResponse response, @PathVariable("transactionWebID") String transactionWebID)
-      throws Exception, I18NException {
-
-    final boolean debug = log.isDebugEnabled();
-
-    log.info("XYZ ZZZ finalProcesDeScanWeb():: [transactionWebID] = " + transactionWebID);
-
-    if (debug) {
-      log.debug(" ===finalProcesEscaneig() ==> scanWebID: " + transactionWebID);
-    }
-
-    TransaccioJPA transaccio = null;
-    {
-
-      transaccio = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
-      if (transaccio == null) {
-        // XYZ ZZZ ZZZ
-        throw new Exception("NO existeix la transacció amb ID " + transactionWebID);
-      }
-
-      // if (transaccio.getEstatcodi() < 0) {
-      // // XYZ ZZZ ZZZ
-      // String msg = "La transacció amb ID " + transactionWebID + " te un estat no vàlid ("
-      // + transaccio.getEstatcodi() + ") per iniciar el proces d'escaneig.";
-      // throw new Exception(msg);
-      // }
-    }
-
-    ScanWebConfig swc;
-    swc = scanWebModuleEjb.getScanWebConfig(request, transactionWebID);
-    // ScanWebStatus scanWebStatus = swc.getStatus();
-
-    int status = swc.getStatus().getStatus();
-
-    switch (status) {
-      case ScanWebStatus.STATUS_FINAL_OK:
-      case ScanWebStatus.STATUS_IN_PROGRESS: {
-      // Comprovam que s'hagin escanejat coses
-
-      List<ScannedDocument> listDocs = swc.getScannedFiles();
-
-      if (listDocs.size() == 1) {
-
-        // TOTS HO EXECUTEN AIXÒ
-        int usPerfil = transaccio.getPerfil().getUsPerfil();
-
-        switch (usPerfil) {
-
-        case Constants.PERFIL_US_NOMES_ESCANEIG_INFO: {
-          Fitxer fitxer = recuperarDocumentEscanejat(transaccio, listDocs);
-          if (fitxer != null) {
-            transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
-          }
-        }
-          break;
-
-        case Constants.PERFIL_US_COPIA_AUTENTICA_INFO: {
-          Fitxer fitxer = recuperarDocumentEscanejat(transaccio, listDocs);
-          if (fitxer != null) {
-            Fitxer fitxerFirmat = firmarFitxer(transaccio, fitxer);
-            if (fitxerFirmat != null) {
-              transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
-            }
-          }
-        }
-          break;
+			log.info("XYZ ZZZ ZZZZZ\n\n SIMPLE REDIRECCIO = " + urlRetorn);
 
-        case Constants.PERFIL_US_CUSTODIA_INFO: {
+			mav = new ModelAndView(new RedirectView(urlRetorn, false));
 
-          Fitxer fitxer = recuperarDocumentEscanejat(transaccio, listDocs);
+		} else {
+			// Sortir de IFRAME
 
-          if (fitxer != null) {
-            Fitxer fitxerFirmat = firmarFitxer(transaccio, fitxer);
+			log.info("XYZ ZZZ ZZZZZ\n\n Sortir de IFRAME = " + urlRetorn);
+			mav = new ModelAndView(isPublic()
+					? "public_finalsortiriframe"
+					: "finalsortiriframe");
+			mav.addObject("urlRetorn", urlRetorn);
+		}
 
-            if (fitxerFirmat != null) {
-              // XYZ ZZZ Aqui falta CUSTODIA
-              // NOMES CUSTODIA
-              //infoCustodyJPA =  custodia(transaccio, fitxerFirmat);
-              InfoCustodyJPA infoCustodyJPA = new InfoCustodyJPA();
-              
-              if (infoCustodyJPA != null) {
-                transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
-              }
-              
-            }
-          }
-        }
-          break;
-        }
-
-      } else {
-
-        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-        if (listDocs.size() == 0) {
-          // XYZ ZZZ Traduir
-          transaccio.setEstatMissatge(" L'usuari no ha escanejat cap fitxer.");
-        } else {
-          // XYZ ZZZ Traduir
-          transaccio.setEstatMissatge(" L'usuari ha escanejat més d'1 fitxer.");
-        }
-      }
-    }
-      break;
+		transaccio.setDataFi(new Timestamp(System.currentTimeMillis()));
 
-    case ScanWebStatus.STATUS_FINAL_ERROR: {
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-    }
-      break;
+		transaccioLogicaEjb.update(transaccio);
 
-    case ScanWebStatus.STATUS_CANCELLED: {
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_CANCELLED);
-      if (transaccio.getEstatMissatge() == null) {
-        transaccio.setEstatMissatge(I18NUtils.tradueix("plugindescan.cancelat"));
-      }
-    }
-      break;
+		return mav;
 
-    default: {
-      // XYZ ZZZ Traduir
-      String inconsistentState = "El mòdul d´escaneig ha finalitzat inesperadament"
-          + " amb un codi d'estat desconegut " + status;
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(inconsistentState);
-      transaccio.setEstatExcepcio(new Exception().toString()); // XYZ ZZZ
-    }
-    }
+	}
 
-    scanWebModuleEjb.closeScanWebProcess(request, transactionWebID);
+	public Fitxer recuperarDocumentEscanejat(TransaccioJPA transaccio,
+			List<ScannedDocument> listDocs) {
+		ScannedDocument sd = listDocs.get(0);
 
-    // String languageUI = transaccio.getLanguageui();
+		ScannedPlainFile scannedFile = sd.getScannedPlainFile();
 
-    String urlRetorn = transaccio.getReturnUrl();
+		byte[] data = scannedFile.getData();
+		Fitxer fitxer = new FitxerBean("", scannedFile.getMime(),
+				scannedFile.getName(), data.length);
 
-    if (transaccio.getEstatCodi() != ScanWebStatus.STATUS_FINAL_OK) {
+		try {
+			fitxer = fitxerEjb.create(fitxer);
 
-      if (transaccio.getEstatMissatge() == null) {
-        // XYZ ZZZ
-        transaccio
-            .setEstatMissatge("Error desconegut ja que no s'ha definit el missatge de l'error !!!!!");
-      }
-    }
+			FileSystemManager.crearFitxer(new ByteArrayInputStream(data),
+					fitxer.getFitxerID());
 
-    ModelAndView mav;
-    if (transaccio.getView() == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN) {
-      // Simple REDIRECCIO
+			transaccio.setFitxerEscanejatID(fitxer.getFitxerID());
+			return fitxer;
 
-      log.info("XYZ ZZZ ZZZZZ\n\n SIMPLE REDIRECCIO = " + urlRetorn);
+		} catch (I18NException e) {
 
-      mav = new ModelAndView(new RedirectView(urlRetorn, false));
+			transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+			transaccio
+					.setEstatMissatge("XYZ ZZZ Error intentant recuperar el fitxer escanejat: "
+							+ I18NUtils.getMessage(e));
+			transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
 
-    } else {
-      // Sortir de IFRAME
+			return null;
+		}
 
-      log.info("XYZ ZZZ ZZZZZ\n\n Sortir de IFRAME = " + urlRetorn);
-      mav = new ModelAndView(isPublic() ? "public_finalsortiriframe" : "finalsortiriframe");
-      mav.addObject("urlRetorn", urlRetorn);
-    }
+	}
 
-    transaccio.setDataFi(new Timestamp(System.currentTimeMillis()));
+	protected InfoCustodyJPA custodia(TransaccioJPA transaccio,
+			Fitxer fitxerFirmat) {
 
-    transaccioLogicaEjb.update(transaccio);
+		PerfilJPA perfil = transaccio.getPerfil();
 
-    return mav;
+		int tipus = perfil.getTipusFirma();
 
-  }
+		InfoCustodyJPA infoCust;
+		if (tipus == Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE) {
+			// throw new Exception();
 
-  public Fitxer recuperarDocumentEscanejat(TransaccioJPA transaccio,
-      List<ScannedDocument> listDocs) {
-    ScannedDocument sd = listDocs.get(0);
+			transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+			transaccio
+					.setEstatMissatge("XYZ ZZZ TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE no suportat  ");
 
-    ScannedPlainFile scannedFile = sd.getScannedPlainFile();
+			infoCust = null;
 
-    byte[] data = scannedFile.getData();
-    Fitxer fitxer = new FitxerBean("", scannedFile.getMime(), scannedFile.getName(),
-        data.length);
+		} else {
+			Locale locale = new Locale(transaccio.getLanguageUI());
+			infoCust = pluginDocumentcustodyLogicaEjb
+					.custodiaAmbApiDocumentCustody(transaccio, fitxerFirmat,
+							locale);
+		}
 
-    try {
-      fitxer = fitxerEjb.create(fitxer);
+		return infoCust;
 
-      FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
+	}
+	
 
-      transaccio.setFitxerEscanejatID(fitxer.getFitxerID());
-      return fitxer;
+	protected Fitxer firmarFitxer(TransaccioJPA transaccio, Fitxer fitxer) {
 
-    } catch (I18NException e) {
+		PerfilJPA perfil = transaccio.getPerfil();
 
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge("XYZ ZZZ Error intentant recuperar el fitxer escanejat: "
-          + I18NUtils.getMessage(e));
-      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
+		int tipus = perfil.getTipusFirma();
 
-      return null;
-    }
+		Fitxer fitxerSignat;
+		if (tipus == Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE) {
+			// throw new Exception();
 
-  }
+			transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+			transaccio
+					.setEstatMissatge("XYZ ZZZ TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE no suportat  ");
 
-  protected Fitxer firmarFitxer(TransaccioJPA transaccio, Fitxer fitxer) {
+			fitxerSignat = null;
 
-    PerfilJPA perfil = transaccio.getPerfil();
+		} else {
 
-    int tipus = perfil.getTipusFirma();
+			fitxerSignat = pluginFirmaServidorLogicaEjb
+					.firmarFitxerAmbApiFirmaEnServidor(transaccio, fitxer,
+							LocaleContextHolder.getLocale());
+		}
 
-    Fitxer fitxerSignat;
-    if (tipus == Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE) {
-      // throw new Exception();
+		return fitxerSignat;
 
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge("XYZ ZZZ TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE no suportat  ");
+	}
 
-      fitxerSignat = null;
+	public abstract boolean isPublic();
 
-    } else {
+	/**
+	 * 
+	 * @param request
+	 * @param view
+	 * @param scanWebConfig
+	 * @return
+	 * @throws Exception
+	 */
+	public ModelAndView startScanWebProcess(HttpServletRequest request,
+			String view, String scanWebID, ScanWebConfig scanWebConfig,
+			String urlBase, String contextWeb, boolean fullView)
+			throws Exception {
 
-      fitxerSignat = pluginFirmaServidorLogicaEjb.firmarFitxerAmbApiFirmaEnServidor(
-          transaccio, fitxer, LocaleContextHolder.getLocale());
-    }
+		scanWebModuleEjb.startScanWebProcess(scanWebConfig);
 
-    return fitxerSignat;
+		final String urlToSelectPluginPage = urlBase + contextWeb
+				+ "/selectscanwebmodule/" + scanWebID;
 
-  }
+		ModelAndView mav = new ModelAndView(view);
+		mav.addObject("scanWebID", scanWebID);
+		mav.addObject("urlToSelectPluginPage", urlToSelectPluginPage);
+		mav.addObject("fullView", fullView);
 
-  
-
-  public abstract boolean isPublic();
-
-  /**
-   * 
-   * @param request
-   * @param view
-   * @param scanWebConfig
-   * @return
-   * @throws Exception
-   */
-  public ModelAndView startScanWebProcess(HttpServletRequest request, String view,
-      String scanWebID, ScanWebConfig scanWebConfig, String urlBase, String contextWeb,
-      boolean fullView) throws Exception {
-
-    scanWebModuleEjb.startScanWebProcess(scanWebConfig);
-
-    final String urlToSelectPluginPage = urlBase + contextWeb + "/selectscanwebmodule/"
-        + scanWebID;
-
-    ModelAndView mav = new ModelAndView(view);
-    mav.addObject("scanWebID", scanWebID);
-    mav.addObject("urlToSelectPluginPage", urlToSelectPluginPage);
-    mav.addObject("fullView", fullView);
-
-    return mav;
-  }
+		return mav;
+	}
 
 }

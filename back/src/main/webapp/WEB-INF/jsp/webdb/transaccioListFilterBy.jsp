@@ -496,6 +496,45 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.IP)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="transaccio.ip" var="ip" />
+              <fmt:message key="genapp.form.searchby" var="cercaperip" >                
+                 <fmt:param value="${ip}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${ip}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperip}" path="ip" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.HASHESCANEIG)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="transaccio.hashEscaneig" var="hashEscaneig" />
+              <fmt:message key="genapp.form.searchby" var="cercaperhashEscaneig" >                
+                 <fmt:param value="${hashEscaneig}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${hashEscaneig}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperhashEscaneig}" path="hashEscaneig" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.HASHFIRMA)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="transaccio.hashFirma" var="hashFirma" />
+              <fmt:message key="genapp.form.searchby" var="cercaperhashFirma" >                
+                 <fmt:param value="${hashFirma}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${hashFirma}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperhashFirma}" path="hashFirma" />
+            </div>
+
+
+        </c:if>
 
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
       <c:if test="${ __entry.key >= 0 && not empty __entry.value.searchBy }">

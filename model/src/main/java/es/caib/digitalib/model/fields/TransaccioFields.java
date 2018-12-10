@@ -39,6 +39,9 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final StringField RETURNURL = new StringField(_TABLE_MODEL, "returnUrl", "returnurl");
 	 public static final IntegerField VIEW = new IntegerField(_TABLE_MODEL, "view", "view");
 	 public static final LongField PERFILID = new LongField(_TABLE_MODEL, "perfilID", "perfilid");
+	 public static final StringField IP = new StringField(_TABLE_MODEL, "ip", "ip");
+	 public static final StringField HASHESCANEIG = new StringField(_TABLE_MODEL, "hashEscaneig", "hashescaneig");
+	 public static final StringField HASHFIRMA = new StringField(_TABLE_MODEL, "hashFirma", "hashfirma");
 
 
   public static final Field<?>[] ALL_TRANSACCIO_FIELDS = {
@@ -68,7 +71,10 @@ public interface TransaccioFields extends java.io.Serializable {
     USERNAMEREQUEST,
     RETURNURL,
     VIEW,
-    PERFILID
+    PERFILID,
+    IP,
+    HASHESCANEIG,
+    HASHFIRMA
   };
 
 

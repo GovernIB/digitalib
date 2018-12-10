@@ -50,6 +50,10 @@ public class TransaccioValidator<T> implements TransaccioFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERFILID)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,IP, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(IP)));
+
     // Check size
     if (__vr.getFieldErrorCount(TRANSACTIONWEBID) == 0) {
       java.lang.String __transactionwebid = (java.lang.String)__vr.getFieldValue(__target__,TRANSACTIONWEBID);
@@ -144,6 +148,30 @@ public class TransaccioValidator<T> implements TransaccioFields {
       if (__returnurl!= null && __returnurl.length() > 255) {
         __vr.rejectValue(RETURNURL, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RETURNURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(IP) == 0) {
+      java.lang.String __ip = (java.lang.String)__vr.getFieldValue(__target__,IP);
+      if (__ip!= null && __ip.length() > 50) {
+        __vr.rejectValue(IP, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(IP)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(50)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(HASHESCANEIG) == 0) {
+      java.lang.String __hashescaneig = (java.lang.String)__vr.getFieldValue(__target__,HASHESCANEIG);
+      if (__hashescaneig!= null && __hashescaneig.length() > 255) {
+        __vr.rejectValue(HASHESCANEIG, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(HASHESCANEIG)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(HASHFIRMA) == 0) {
+      java.lang.String __hashfirma = (java.lang.String)__vr.getFieldValue(__target__,HASHFIRMA);
+      if (__hashfirma!= null && __hashfirma.length() > 255) {
+        __vr.rejectValue(HASHFIRMA, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(HASHFIRMA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     

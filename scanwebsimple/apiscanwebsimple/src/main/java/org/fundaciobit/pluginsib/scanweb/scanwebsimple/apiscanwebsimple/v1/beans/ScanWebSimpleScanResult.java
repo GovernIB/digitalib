@@ -36,25 +36,41 @@ public class ScanWebSimpleScanResult {
   protected ScanWebSimpleCustodyInfo custodyInfo = null;
 
   /**
+   * Informació de Arxiu
+   */
+  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+  protected ScanWebSimpleArxiuInfo arxiuInfo = null;
+  
+  
+  /**
    * 
    */
   public ScanWebSimpleScanResult() {
     super();
   }
+  
+  
+  public ScanWebSimpleScanResult(ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
+	      ScanWebSimpleScannedFileInfo scannedFileInfo) {
+	    super();
+	    this.status = status;
+	    this.scannedFile = scannedFile;
+	    this.scannedFileInfo = scannedFileInfo;
+	  }
+  
 
   public ScanWebSimpleScanResult(ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
-      ScanWebSimpleScannedFileInfo scannedFileInfo,
-      ScanWebSimpleSignedFileInfo signedFileInfo, ScanWebSimpleCustodyInfo custodyInfo) {
+      ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile,
+      ScanWebSimpleSignedFileInfo signedFileInfo) {
     super();
     this.status = status;
     this.scannedFile = scannedFile;
     this.scannedFileInfo = scannedFileInfo;
     this.signedFileInfo = signedFileInfo;
-    this.custodyInfo = custodyInfo;
   }
 
   public ScanWebSimpleScanResult(ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
-      ScanWebSimpleFile detachedSignatureFile, ScanWebSimpleScannedFileInfo scannedFileInfo,
+      ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile, 
       ScanWebSimpleSignedFileInfo signedFileInfo, ScanWebSimpleCustodyInfo custodyInfo) {
     super();
     this.status = status;
@@ -64,6 +80,19 @@ public class ScanWebSimpleScanResult {
     this.signedFileInfo = signedFileInfo;
     this.custodyInfo = custodyInfo;
   }
+  
+  
+  public ScanWebSimpleScanResult(ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
+	      ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile, 
+	      ScanWebSimpleSignedFileInfo signedFileInfo, ScanWebSimpleArxiuInfo arxiuInfo) {
+	    super();
+	    this.status = status;
+	    this.scannedFile = scannedFile;
+	    this.detachedSignatureFile = detachedSignatureFile;
+	    this.scannedFileInfo = scannedFileInfo;
+	    this.signedFileInfo = signedFileInfo;
+	    this.arxiuInfo = arxiuInfo;
+	  }
 
   public ScanWebSimpleStatus getStatus() {
     return status;
@@ -112,8 +141,20 @@ public class ScanWebSimpleScanResult {
   public void setDetachedSignatureFile(ScanWebSimpleFile detachedSignatureFile) {
     this.detachedSignatureFile = detachedSignatureFile;
   }
+  
+  
 
-  public static String toString(ScanWebSimpleScanResult result) {
+  public ScanWebSimpleArxiuInfo getArxiuInfo() {
+	return arxiuInfo;
+}
+
+
+public void setArxiuInfo(ScanWebSimpleArxiuInfo arxiuInfo) {
+	this.arxiuInfo = arxiuInfo;
+}
+
+
+public static String toString(ScanWebSimpleScanResult result) {
 
     StringBuffer str = new StringBuffer();
 
@@ -167,6 +208,22 @@ public class ScanWebSimpleScanResult {
       str.append("\n").append(
           "      * custodyFileCSVGenerationDefinition: "
               + custody.getCustodyFileCSVGenerationDefinition());
+    }
+    
+    
+    ScanWebSimpleArxiuInfo arxiu = result.getArxiuInfo();
+
+    if (arxiu != null) {
+      str.append("\n").append("  + ARXIU:");
+      str.append("\n").append("      * expedientID: " + arxiu.getExpedientID());
+      str.append("\n").append("      * documentID: " + arxiu.getDocumentID());
+      str.append("\n").append("      * arxiuFileURL: " + arxiu.getArxiuFileURL());
+      str.append("\n").append("      * arxiuFileCSV: " + arxiu.getArxiuFileCSV());
+      str.append("\n").append(
+          "      * arxiuFileCSVValidationWeb: " + arxiu.getArxiuFileCSVValidationWeb());
+      str.append("\n").append(
+          "      * arxiuFileCSVGenerationDefinition: "
+              + arxiu.getArxiuFileCSVGenerationDefinition());
     }
 
     return str.toString();

@@ -10,6 +10,7 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
          		
 		
 		<class>es.caib.digitalib.jpa.ApiSimpleJPA</class>
+		<class>es.caib.digitalib.jpa.ConfiguracioFirmaJPA</class>
 		<class>es.caib.digitalib.jpa.ConfiguracioGrupJPA</class>
 		<class>es.caib.digitalib.jpa.EstadisticaJPA</class>
 		<class>es.caib.digitalib.jpa.FitxerJPA</class>

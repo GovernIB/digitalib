@@ -93,6 +93,15 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.PERFILID)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.PERFILID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.IP)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.IP)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHESCANEIG)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.HASHESCANEIG)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHFIRMA)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.HASHFIRMA)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

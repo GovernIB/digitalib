@@ -8,14 +8,14 @@
   <name>DigitalIB</name>
 
   <modules>	
-    <!--       -->
+    <!--      -->
     <module>scanwebsimple</module>
     <module>model</module>
     <module>jpa</module>
     <module>ejb</module>
     <module>persistence</module>
     <module>utils</module>
-    <module>logic</module>
+    <module>logic</module> 
     <module>scripts</module>
     <module>back</module>
     <module>ear</module>

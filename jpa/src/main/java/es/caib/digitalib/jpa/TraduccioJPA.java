@@ -3,8 +3,8 @@ package es.caib.digitalib.jpa;
 import es.caib.digitalib.model.entity.*;
 import javax.persistence.Table;
 import javax.persistence.Column;
-import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.Cascade;
+import javax.persistence.SequenceGenerator;
 import java.util.Map;
 import javax.persistence.Id;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -14,8 +14,11 @@ import org.hibernate.annotations.Index;
 import javax.persistence.JoinTable;
 import org.hibernate.annotations.ForeignKey;
 import java.util.HashMap;
+import java.util.HashSet;
+import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 import org.hibernate.annotations.CollectionOfElements;
+import java.util.Set;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
@@ -73,6 +76,32 @@ private static final long serialVersionUID = -326205279L;
     }
     return __result;
   }
+
+// EXP  Field:firmatperformatid | Table: dib_configuraciofirma | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "firmatPerFormatID")
+	private Set<ConfiguracioFirmaJPA> configuracioFirma_firmatperformatids = new HashSet<ConfiguracioFirmaJPA>(0);
+	public  Set<ConfiguracioFirmaJPA> getConfiguracioFirma_firmatperformatids() {
+    return this.configuracioFirma_firmatperformatids;
+  }
+
+	public void setConfiguracioFirma_firmatperformatids(Set<ConfiguracioFirmaJPA> configuracioFirma_firmatperformatids) {
+	  this.configuracioFirma_firmatperformatids = configuracioFirma_firmatperformatids;
+	}
+
+
+// EXP  Field:motiudelegacioid | Table: dib_configuraciofirma | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "motiuDelegacioID")
+	private Set<ConfiguracioFirmaJPA> configuracioFirma_motiudelegacioids = new HashSet<ConfiguracioFirmaJPA>(0);
+	public  Set<ConfiguracioFirmaJPA> getConfiguracioFirma_motiudelegacioids() {
+    return this.configuracioFirma_motiudelegacioids;
+  }
+
+	public void setConfiguracioFirma_motiudelegacioids(Set<ConfiguracioFirmaJPA> configuracioFirma_motiudelegacioids) {
+	  this.configuracioFirma_motiudelegacioids = configuracioFirma_motiudelegacioids;
+	}
+
 
   @CollectionOfElements(fetch= FetchType.EAGER,targetElement = es.caib.digitalib.jpa.TraduccioMapJPA.class)
   @Cascade(value=org.hibernate.annotations.CascadeType.ALL)
@@ -140,6 +169,14 @@ private static final long serialVersionUID = -326205279L;
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
+    if(!"ConfiguracioFirmaJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioFirma_firmatperformatids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioFirma_firmatperformatids())) ) {
+      __tmp.setConfiguracioFirma_firmatperformatids(ConfiguracioFirmaJPA.copyJPA(__jpa.getConfiguracioFirma_firmatperformatids(), __alreadyCopied,"TraduccioJPA"));
+    }
+    if(!"ConfiguracioFirmaJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioFirma_motiudelegacioids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioFirma_motiudelegacioids())) ) {
+      __tmp.setConfiguracioFirma_motiudelegacioids(ConfiguracioFirmaJPA.copyJPA(__jpa.getConfiguracioFirma_motiudelegacioids(), __alreadyCopied,"TraduccioJPA"));
+    }
     // Copia de beans complexes (IMP)
     // Aquesta linia s'afeix de forma manual
     __tmp.setTraduccions(new HashMap<String, TraduccioMapJPA>(__jpa.getTraduccions()));

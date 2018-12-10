@@ -198,7 +198,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       } catch (InterruptedException e) {
       }
 
-      transactionID = System.nanoTime() + "" + System.currentTimeMillis();
+      long nanoTime = System.nanoTime();
+      
+      transactionID = (nanoTime % 100000) + "" + System.currentTimeMillis() + (nanoTime / 100000);
       transactionID = org.fundaciobit.pluginsib.core.utils.Base64.encode(transactionID)
           .toLowerCase();
       transactionID = transactionID.replaceAll("=", "");

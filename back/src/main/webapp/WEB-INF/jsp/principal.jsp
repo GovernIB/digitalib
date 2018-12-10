@@ -10,12 +10,9 @@
 <div>
 <br/>
 <center>
-<img src="<c:url value="/img/app-logo.png"/>"  alt="DigitalIB" title="DigitalIB"/>
+<img src="<c:url value="/img/app-logo-presentacio.png"/>"  alt="DigitalIB" title="DigitalIB"/>
 
 <br/>
-<br/>
-This page is generated automatically. Please edit.
-
 <br/>
 <br/>
 <table border="0" >

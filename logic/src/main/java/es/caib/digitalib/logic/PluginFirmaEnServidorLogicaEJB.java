@@ -247,6 +247,10 @@ public class PluginFirmaEnServidorLogicaEJB extends
       infoSign = (InfoSignaturaJPA) infoSignaturaEjb.create(infoSign);
 
       transaccio.setInfoSignaturaID(infoSign.getInfoSignaturaID());
+      
+      log.info("XYZ ZZZ Assignant  Info Signatura a Transaccio: " + infoSign);
+      
+      transaccio.setInfoSignatura(infoSign);
 
       return fitxerSignat;
     } catch (I18NException e) {

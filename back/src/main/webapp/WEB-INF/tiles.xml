@@ -301,6 +301,16 @@
     </definition>
 
 
+    <definition name="configuracioFirmaFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="configuracioFirma.configuracioFirma" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioFirmaForm.jsp" />
+    </definition>
+    
+    <definition name="configuracioFirmaListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioFirmaList.jsp" />
+    </definition>
+
+
     <definition name="configuracioGrupFormWebDB" extends="webdb">
         <put-attribute name="titol" value="configuracioGrup.configuracioGrup" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioGrupForm.jsp" />

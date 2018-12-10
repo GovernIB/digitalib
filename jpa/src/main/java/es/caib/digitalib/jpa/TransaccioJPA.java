@@ -117,6 +117,15 @@ private static final long serialVersionUID = 760472444L;
 	@Column(name="perfilid",nullable = false,length = 19)
 	long perfilID;
 
+	@Column(name="ip",nullable = false,length = 50)
+	java.lang.String ip;
+
+	@Column(name="hashescaneig",length = 255)
+	java.lang.String hashEscaneig;
+
+	@Column(name="hashfirma",length = 255)
+	java.lang.String hashFirma;
+
 
 
   /** Constructor Buit */
@@ -124,7 +133,7 @@ private static final long serialVersionUID = 760472444L;
   }
 
   /** Constructor amb tots els camps  */
-  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , boolean infoScanOcr , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID , java.lang.String languageUI , java.lang.String languageDoc , java.lang.String ciutadaNif , java.lang.String ciutadaNom , java.lang.String funcionariUsername , java.lang.String funcionariNom , java.lang.String expedient , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view , long perfilID) {
+  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , boolean infoScanOcr , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID , java.lang.String languageUI , java.lang.String languageDoc , java.lang.String ciutadaNif , java.lang.String ciutadaNom , java.lang.String funcionariUsername , java.lang.String funcionariNom , java.lang.String expedient , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view , long perfilID , java.lang.String ip , java.lang.String hashEscaneig , java.lang.String hashFirma) {
     this.transaccioID=transaccioID;
     this.transactionWebId=transactionWebId;
     this.dataInici=dataInici;
@@ -152,9 +161,12 @@ private static final long serialVersionUID = 760472444L;
     this.returnUrl=returnUrl;
     this.view=view;
     this.perfilID=perfilID;
+    this.ip=ip;
+    this.hashEscaneig=hashEscaneig;
+    this.hashFirma=hashFirma;
 }
   /** Constructor sense valors autoincrementals */
-  public TransaccioJPA(java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , boolean infoScanOcr , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID , java.lang.String languageUI , java.lang.String languageDoc , java.lang.String ciutadaNif , java.lang.String ciutadaNom , java.lang.String funcionariUsername , java.lang.String funcionariNom , java.lang.String expedient , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view , long perfilID) {
+  public TransaccioJPA(java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.Long fitxerSignaturaID , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , boolean infoScanOcr , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID , java.lang.String languageUI , java.lang.String languageDoc , java.lang.String ciutadaNif , java.lang.String ciutadaNom , java.lang.String funcionariUsername , java.lang.String funcionariNom , java.lang.String expedient , java.lang.String usernameRequest , java.lang.String returnUrl , java.lang.Integer view , long perfilID , java.lang.String ip , java.lang.String hashEscaneig , java.lang.String hashFirma) {
     this.transactionWebId=transactionWebId;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
@@ -181,14 +193,18 @@ private static final long serialVersionUID = 760472444L;
     this.returnUrl=returnUrl;
     this.view=view;
     this.perfilID=perfilID;
+    this.ip=ip;
+    this.hashEscaneig=hashEscaneig;
+    this.hashFirma=hashFirma;
 }
   /** Constructor dels valors Not Null */
-  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , int estatCodi , long perfilID) {
+  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , int estatCodi , long perfilID , java.lang.String ip) {
     this.transaccioID=transaccioID;
     this.transactionWebId=transactionWebId;
     this.dataInici=dataInici;
     this.estatCodi=estatCodi;
     this.perfilID=perfilID;
+    this.ip=ip;
 }
   public TransaccioJPA(Transaccio __bean) {
     this.setTransaccioID(__bean.getTransaccioID());
@@ -218,6 +234,9 @@ private static final long serialVersionUID = 760472444L;
     this.setReturnUrl(__bean.getReturnUrl());
     this.setView(__bean.getView());
     this.setPerfilID(__bean.getPerfilID());
+    this.setIp(__bean.getIp());
+    this.setHashEscaneig(__bean.getHashEscaneig());
+    this.setHashFirma(__bean.getHashFirma());
     // Fitxer
     this.setFitxerEscanejat(FitxerJPA.toJPA(__bean.getFitxerEscanejat()));
     // Fitxer
@@ -413,6 +432,27 @@ private static final long serialVersionUID = 760472444L;
 		this.perfilID = _perfilID_;
 	};
 
+	public java.lang.String getIp() {
+		return(ip);
+	};
+	public void setIp(java.lang.String _ip_) {
+		this.ip = _ip_;
+	};
+
+	public java.lang.String getHashEscaneig() {
+		return(hashEscaneig);
+	};
+	public void setHashEscaneig(java.lang.String _hashEscaneig_) {
+		this.hashEscaneig = _hashEscaneig_;
+	};
+
+	public java.lang.String getHashFirma() {
+		return(hashFirma);
+	};
+	public void setHashFirma(java.lang.String _hashFirma_) {
+		this.hashFirma = _hashFirma_;
+	};
+
 
 
   @Override
@@ -535,6 +575,9 @@ private static final long serialVersionUID = 760472444L;
     __tmp.setReturnUrl(__bean.getReturnUrl());
     __tmp.setView(__bean.getView());
     __tmp.setPerfilID(__bean.getPerfilID());
+    __tmp.setIp(__bean.getIp());
+    __tmp.setHashEscaneig(__bean.getHashEscaneig());
+    __tmp.setHashFirma(__bean.getHashFirma());
     // Fitxer
     __tmp.setFitxerEscanejat(FitxerJPA.toJPA(__bean.getFitxerEscanejat()));
     // Fitxer

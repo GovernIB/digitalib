@@ -83,6 +83,15 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public long getPerfilID();
 	public void setPerfilID(long _perfilID_);
 
+	public java.lang.String getIp();
+	public void setIp(java.lang.String _ip_);
+
+	public java.lang.String getHashEscaneig();
+	public void setHashEscaneig(java.lang.String _hashEscaneig_);
+
+	public java.lang.String getHashFirma();
+	public void setHashFirma(java.lang.String _hashFirma_);
+
   // Fitxer
   public <F extends Fitxer> F getFitxerEscanejat();
   // Fitxer

@@ -625,3 +625,57 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.IP)}">
+        <tr id="transaccio_ip_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.IP])?'transaccio.ip':__theForm.labels[TransaccioFields.IP]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[TransaccioFields.IP]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.IP]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.ip" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.IP)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.IP)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="50" path="transaccio.ip"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.HASHESCANEIG)}">
+        <tr id="transaccio_hashEscaneig_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.HASHESCANEIG])?'transaccio.hashEscaneig':__theForm.labels[TransaccioFields.HASHESCANEIG]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.HASHESCANEIG]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.HASHESCANEIG]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.hashEscaneig" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHESCANEIG)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHESCANEIG)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.hashEscaneig"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.HASHFIRMA)}">
+        <tr id="transaccio_hashFirma_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.HASHFIRMA])?'transaccio.hashFirma':__theForm.labels[TransaccioFields.HASHFIRMA]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.HASHFIRMA]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.HASHFIRMA]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.hashFirma" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHFIRMA)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHFIRMA)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.hashFirma"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
