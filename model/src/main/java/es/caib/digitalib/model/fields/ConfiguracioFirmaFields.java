@@ -27,6 +27,7 @@ public interface ConfiguracioFirmaFields extends java.io.Serializable {
 	 public static final LongField FIRMATPERFORMATID = new LongField(_TABLE_MODEL, "firmatPerFormatID", "firmatperformatid");
 	 public static final LongField MOTIUDELEGACIOID = new LongField(_TABLE_MODEL, "motiuDelegacioID", "motiudelegacioid");
 	 public static final StringField PROPIETATSTAULAFIRMES = new StringField(_TABLE_MODEL, "propietatsTaulaFirmes", "propietatstaulafirmes");
+	 public static final BooleanField INCLOURESEGELLDETEMPS = new BooleanField(_TABLE_MODEL, "incloureSegellDeTemps", "inclouresegelldetemps");
 	 public static final LongField PLUGINSEGELLATID = new LongField(_TABLE_MODEL, "pluginSegellatID", "pluginsegellatid");
 
 
@@ -46,6 +47,7 @@ public interface ConfiguracioFirmaFields extends java.io.Serializable {
     FIRMATPERFORMATID,
     MOTIUDELEGACIOID,
     PROPIETATSTAULAFIRMES,
+    INCLOURESEGELLDETEMPS,
     PLUGINSEGELLATID
   };
 

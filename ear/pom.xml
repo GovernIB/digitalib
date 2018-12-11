@@ -173,6 +173,18 @@
     
     <!-- Plugin d'Alfresco veure Profiles -->
     
+    
+    <!-- PLUGINS DE ARXIU -->
+    
+    <dependency>
+    	<groupId>org.fundaciobit.pluginsib.arxiu</groupId>
+	    <artifactId>pluginsib-arxiu-caib</artifactId>
+	    <version>2.0.0</version>
+    </dependency>
+    
+    <!-- Plugin de FileSystem de Arxiu veure Profiles -->
+  
+    
 
     <!-- Commons Dependencies -->
 
@@ -279,7 +291,19 @@
         </dependency>
       </dependencies>
     </profile>
-    
+
+    <profile>
+      <activation>
+        <jdk>[1.7,)</jdk>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.fundaciobit.pluginsib.arxiu</groupId>
+          <artifactId>pluginsib-arxiu-filesystem</artifactId>
+          <version>2.0.0</version>
+        </dependency>
+      </dependencies>
+    </profile>
 
     <!-- FRONT WEB DigitalIB AMB AUTENTICACIO CLIENT-CERT -->
     <profile>

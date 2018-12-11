@@ -273,6 +273,9 @@ public class ConfiguracioFirmaController
       };
     }
 
+
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, INCLOURESEGELLDETEMPS);
+
     // Field pluginSegellatID
     {
       _listSKV = getReferenceListForPluginSegellatID(request, mav, filterForm, list, groupByItemsMap, null);

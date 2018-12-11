@@ -71,6 +71,10 @@ public class ConfiguracioFirmaQueryPath extends org.fundaciobit.genapp.common.qu
     return new StringField(getQueryPath(), ConfiguracioFirmaFields.PROPIETATSTAULAFIRMES);
   }
 
+  public BooleanField INCLOURESEGELLDETEMPS() {
+    return new BooleanField(getQueryPath(), ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS);
+  }
+
   public LongField PLUGINSEGELLATID() {
     return new LongField(getQueryPath(), ConfiguracioFirmaFields.PLUGINSEGELLATID);
   }

@@ -58,10 +58,11 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 	}
 
 	@Override
-	public PerfilFilterForm getPerfilFilterForm(Integer pagina, ModelAndView mav,
-			HttpServletRequest request) throws I18NException {
+	public PerfilFilterForm getPerfilFilterForm(Integer pagina,
+			ModelAndView mav, HttpServletRequest request) throws I18NException {
 
-		PerfilFilterForm filterForm = super.getPerfilFilterForm(pagina, mav, request);
+		PerfilFilterForm filterForm = super.getPerfilFilterForm(pagina, mav,
+				request);
 
 		int tipusperfil = getTipusPerfil();
 
@@ -79,12 +80,13 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 
 			filterForm.setOrderBy(NOM.fullName);
 
-			filterForm
-			.setGroupByFields(new ArrayList<Field<?>>(filterForm.getDefaultGroupByFields()));
+			filterForm.setGroupByFields(new ArrayList<Field<?>>(filterForm
+					.getDefaultGroupByFields()));
 
-			//filterForm.setTitleCode("perfil.us." + tipusperfil);
+			// filterForm.setTitleCode("perfil.us." + tipusperfil);
 			filterForm.setEntityNameCode("perfil.us." + tipusperfil);
-			filterForm.setEntityNameCodePlural("perfil.us." + tipusperfil + ".plural");
+			filterForm.setEntityNameCodePlural("perfil.us." + tipusperfil
+					+ ".plural");
 
 			if (tipusperfil != Constants.PERFIL_US_NOMES_ESCANEIG
 					&& tipusperfil != Constants.PERFIL_US_NOMES_ESCANEIG_INFO) {
@@ -97,31 +99,37 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 			}
 
 			switch (tipusperfil) {
-			case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
-			case Constants.PERFIL_US_NOMES_ESCANEIG:
-				filterForm.addHiddenField(TIPUSFIRMA);
-				filterForm.addHiddenField(APISIMPLEID);
-				filterForm.addHiddenField(PLUGINFIRMASERVIDORID);
+				case Constants.PERFIL_US_NOMES_ESCANEIG_INFO :
+				case Constants.PERFIL_US_NOMES_ESCANEIG :
+					filterForm.addHiddenField(TIPUSFIRMA);
+					filterForm.addHiddenField(APISIMPLEID);
+					filterForm.addHiddenField(PLUGINFIRMASERVIDORID);
 
-				filterForm.getGroupByFields().remove(PerfilFields.TIPUSFIRMA);
-				filterForm.getGroupByFields().remove(PerfilFields.APISIMPLEID);
-				filterForm.getGroupByFields().remove(PerfilFields.PLUGINFIRMASERVIDORID);
+					filterForm.getGroupByFields().remove(
+							PerfilFields.TIPUSFIRMA);
+					filterForm.getGroupByFields().remove(
+							PerfilFields.APISIMPLEID);
+					filterForm.getGroupByFields().remove(
+							PerfilFields.PLUGINFIRMASERVIDORID);
 
-			case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
-			case Constants.PERFIL_US_COPIA_AUTENTICA:
-				filterForm.addHiddenField(TIPUSCUSTODIA);
-				filterForm.addHiddenField(PLUGINARXIUID);
-				filterForm.addHiddenField(PLUGINDOCCUSTODYID);
+				case Constants.PERFIL_US_COPIA_AUTENTICA_INFO :
+				case Constants.PERFIL_US_COPIA_AUTENTICA :
+					filterForm.addHiddenField(TIPUSCUSTODIA);
+					filterForm.addHiddenField(PLUGINARXIUID);
+					filterForm.addHiddenField(PLUGINDOCCUSTODYID);
 
-				filterForm.getGroupByFields().remove(PerfilFields.TIPUSCUSTODIA);
-				filterForm.getGroupByFields().remove(PerfilFields.PLUGINDOCCUSTODYID);
-				filterForm.getGroupByFields().remove(PerfilFields.PLUGINARXIUID);
+					filterForm.getGroupByFields().remove(
+							PerfilFields.TIPUSCUSTODIA);
+					filterForm.getGroupByFields().remove(
+							PerfilFields.PLUGINDOCCUSTODYID);
+					filterForm.getGroupByFields().remove(
+							PerfilFields.PLUGINARXIUID);
 
-			case Constants.PERFIL_US_CUSTODIA_INFO:
-			case Constants.PERFIL_US_CUSTODIA:
+				case Constants.PERFIL_US_CUSTODIA_INFO :
+				case Constants.PERFIL_US_CUSTODIA :
 
-				filterForm.addHiddenField(USPERFIL);
-				break;
+					filterForm.addHiddenField(USPERFIL);
+					break;
 			}
 		}
 
@@ -132,36 +140,60 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 	@Override
 	public PerfilForm getPerfilForm(PerfilJPA _jpa, boolean __isView,
 			HttpServletRequest request, ModelAndView mav) throws I18NException {
-		PerfilForm perfilForm = super.getPerfilForm(_jpa, __isView, request, mav);
+		PerfilForm perfilForm = super.getPerfilForm(_jpa, __isView, request,
+				mav);
 
 		int tipusPerfil = getTipusPerfil();
 
 		if (perfilForm.isNou()) {
 			perfilForm.getPerfil().setUsPerfil(tipusPerfil);
 
+			switch (tipusPerfil) {
+				case Constants.PERFIL_US_NOMES_ESCANEIG :
+					perfilForm.getPerfil().setTipusFirma(
+							Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE);
+					perfilForm.getPerfil().setTipusCustodia(
+							Constants.TIPUS_CUSTODIA_SENSE);
+					break;
+				case Constants.PERFIL_US_COPIA_AUTENTICA :
+					perfilForm.getPerfil().setTipusCustodia(
+							Constants.TIPUS_CUSTODIA_SENSE);
+					perfilForm.getPerfil().setTipusFirma(
+							Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE);
+					break;
+
+				case Constants.PERFIL_US_CUSTODIA :
+					perfilForm.getPerfil().setTipusFirma(
+							Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE);
+					perfilForm.getPerfil().setTipusCustodia(
+							Constants.TIPUS_CUSTODIA_ARXIU);
+					break;
+			}
+
 		}
 
 		// XYZ ZZZ perfilForm.setTitleCode("perfil.us." + tipusPerfil);
 		perfilForm.setEntityNameCode("perfil.us." + Math.abs(tipusPerfil));
-		perfilForm.setEntityNameCodePlural("perfil.us." + Math.abs(tipusPerfil) + ".plural");
+		perfilForm.setEntityNameCodePlural("perfil.us." + Math.abs(tipusPerfil)
+				+ ".plural");
 
 		switch (tipusPerfil) {
-		case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
-		case Constants.PERFIL_US_NOMES_ESCANEIG:
-			perfilForm.addHiddenField(TIPUSFIRMA);
-			perfilForm.addHiddenField(APISIMPLEID);
-			perfilForm.addHiddenField(PLUGINFIRMASERVIDORID);
+			case Constants.PERFIL_US_NOMES_ESCANEIG_INFO :
+			case Constants.PERFIL_US_NOMES_ESCANEIG :
+				perfilForm.addHiddenField(TIPUSFIRMA);
+				perfilForm.addHiddenField(APISIMPLEID);
+				perfilForm.addHiddenField(PLUGINFIRMASERVIDORID);
 
-		case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
-		case Constants.PERFIL_US_COPIA_AUTENTICA:
-			perfilForm.addHiddenField(TIPUSCUSTODIA);
-			perfilForm.addHiddenField(PLUGINARXIUID);
-			perfilForm.addHiddenField(PLUGINDOCCUSTODYID);
+			case Constants.PERFIL_US_COPIA_AUTENTICA_INFO :
+			case Constants.PERFIL_US_COPIA_AUTENTICA :
+				perfilForm.addHiddenField(TIPUSCUSTODIA);
+				perfilForm.addHiddenField(PLUGINARXIUID);
+				perfilForm.addHiddenField(PLUGINDOCCUSTODYID);
 
-		case Constants.PERFIL_US_CUSTODIA_INFO:
-		case Constants.PERFIL_US_CUSTODIA:
-			perfilForm.addHiddenField(USPERFIL);
-			break;
+			case Constants.PERFIL_US_CUSTODIA_INFO :
+			case Constants.PERFIL_US_CUSTODIA :
+				perfilForm.addHiddenField(USPERFIL);
+				break;
 		}
 		perfilForm.setAttachedAdditionalJspCode(true);
 
@@ -170,122 +202,168 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 	}
 
 	@Override
-	public List<StringKeyValue> getReferenceListForTipusFirma(HttpServletRequest request,
-			ModelAndView mav, Where where) throws I18NException {
-		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+	public List<StringKeyValue> getReferenceListForTipusFirma(
+			HttpServletRequest request, ModelAndView mav, Where where)
+			throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
 
-		for (int i = 0; i < Constants.TIPUS_FIRMA_EN_SERVIDOR.length; i++) {
-			__tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_FIRMA_EN_SERVIDOR[i]),
-					I18NUtils.tradueix("tipusfirmaenservidor." + Constants.TIPUS_FIRMA_EN_SERVIDOR[i])));
-		}
+    int tipusPerfil = getTipusPerfil();
+    if (tipusPerfil == Constants.PERFIL_US_NOMES_ESCANEIG || tipusPerfil == Constants.PERFIL_US_NOMES_ESCANEIG_INFO) {
 
-		return __tmp;
+      __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE),
+          I18NUtils.tradueix("tipusfirmaenservidor." + Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE)));
+    } else {
+      for (int i = 0; i < Constants.TIPUS_FIRMA_EN_SERVIDOR.length; i++) {
+        
+        if (Constants.TIPUS_FIRMA_EN_SERVIDOR[i] == Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE) {
+          continue;
+        }
+        __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_FIRMA_EN_SERVIDOR[i]),
+            I18NUtils.tradueix("tipusfirmaenservidor." + Constants.TIPUS_FIRMA_EN_SERVIDOR[i])));
+      }
+    }
+
+    return __tmp;
 	}
 
 	@Override
-	public List<StringKeyValue> getReferenceListForPluginScanWebID(HttpServletRequest request,
-			ModelAndView mav, Where where) throws I18NException {
+	public List<StringKeyValue> getReferenceListForPluginScanWebID(
+			HttpServletRequest request, ModelAndView mav, Where where)
+			throws I18NException {
 
-		Where w = Where.AND(where, PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_SCANWEB));
+		Where w = Where.AND(where,
+				PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_SCANWEB));
 
 		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
 	}
 
 	@Override
-	public List<StringKeyValue> getReferenceListForPluginScanWeb2ID(HttpServletRequest request,
-			ModelAndView mav, Where where) throws I18NException {
-		Where w = Where.AND(where, PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_SCANWEB));
+	public List<StringKeyValue> getReferenceListForPluginScanWeb2ID(
+			HttpServletRequest request, ModelAndView mav, Where where)
+			throws I18NException {
+		Where w = Where.AND(where,
+				PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_SCANWEB));
 
 		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
 	}
 
 	@Override
 	public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(
-			HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+			HttpServletRequest request, ModelAndView mav, Where where)
+			throws I18NException {
 
-		Where w = Where.AND(where,
-				PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR));
+		Where w = Where.AND(where, PluginFields.TIPUS
+				.equal(Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR));
 		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
 	}
 
 	@Override
-	public List<StringKeyValue> getReferenceListForUsPerfil(HttpServletRequest request,
-			ModelAndView mav, Where where) throws I18NException {
+	public List<StringKeyValue> getReferenceListForUsPerfil(
+			HttpServletRequest request, ModelAndView mav, Where where)
+			throws I18NException {
 		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_NOMES_ESCANEIG),
-				"Només escaneig"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_COPIA_AUTENTICA),
+		__tmp.add(new StringKeyValue(String
+				.valueOf(Constants.PERFIL_US_NOMES_ESCANEIG), "Només escaneig"));
+		__tmp.add(new StringKeyValue(String
+				.valueOf(Constants.PERFIL_US_COPIA_AUTENTICA),
 				"Còpia autèntica"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_CUSTODIA), "Custòdia"));
+		__tmp.add(new StringKeyValue(String
+				.valueOf(Constants.PERFIL_US_CUSTODIA), "Custòdia"));
 
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_NOMES_ESCANEIG_INFO),
+		__tmp.add(new StringKeyValue(String
+				.valueOf(Constants.PERFIL_US_NOMES_ESCANEIG_INFO),
 				"Només escaneig - Info"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_COPIA_AUTENTICA_INFO),
+		__tmp.add(new StringKeyValue(String
+				.valueOf(Constants.PERFIL_US_COPIA_AUTENTICA_INFO),
 				"Còpia autèntica - Info"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PERFIL_US_CUSTODIA_INFO),
-				"Custòdia - Info"));
+		__tmp.add(new StringKeyValue(String
+				.valueOf(Constants.PERFIL_US_CUSTODIA_INFO), "Custòdia - Info"));
 		return __tmp;
 	}
 
 	@Override
-	public List<StringKeyValue> getReferenceListForScanFormatFitxer(HttpServletRequest request,
-			ModelAndView mav, Where where) throws I18NException {
+	public List<StringKeyValue> getReferenceListForScanFormatFitxer(
+			HttpServletRequest request, ModelAndView mav, Where where)
+			throws I18NException {
 		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_PDF), "PDF"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_JPG), "JPG"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_PNG), "PNG"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_GIF), "GIF"));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_TIFF), "TIF"));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_PDF),
+				"PDF"));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_JPG),
+				"JPG"));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_PNG),
+				"PNG"));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.FORMAT_FILE_GIF),
+				"GIF"));
+		__tmp.add(new StringKeyValue(
+				String.valueOf(Constants.FORMAT_FILE_TIFF), "TIF"));
 		return __tmp;
 	}
 
 	@Override
-	public List<StringKeyValue> getReferenceListForScanPixelType(HttpServletRequest request,
-			ModelAndView mav, Where where) throws I18NException {
+	public List<StringKeyValue> getReferenceListForScanPixelType(
+			HttpServletRequest request, ModelAndView mav, Where where)
+			throws I18NException {
 		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_BLACK_WHITE), I18NUtils
+		__tmp.add(new StringKeyValue(String
+				.valueOf(Constants.PIXEL_TYPE_BLACK_WHITE), I18NUtils
 				.tradueix("pixeltype.0")));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_GRAY), I18NUtils
-				.tradueix("pixeltype.1")));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_COLOR), I18NUtils
-				.tradueix("pixeltype.2")));
+		__tmp.add(new StringKeyValue(String.valueOf(Constants.PIXEL_TYPE_GRAY),
+				I18NUtils.tradueix("pixeltype.1")));
+		__tmp.add(new StringKeyValue(
+				String.valueOf(Constants.PIXEL_TYPE_COLOR), I18NUtils
+						.tradueix("pixeltype.2")));
 		return __tmp;
 	}
 
 	@Override
-	public List<StringKeyValue> getReferenceListForTipusCustodia(HttpServletRequest request,
-			ModelAndView mav, Where where) throws I18NException {
-		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_ARXIU), I18NUtils
-				.tradueix("tipuscustodia.0")));
-		__tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_DOCUMENTCUSTODY),
-				I18NUtils.tradueix("tipuscustodia.1")));
-		return __tmp;
+	public List<StringKeyValue> getReferenceListForTipusCustodia(
+			HttpServletRequest request, ModelAndView mav, Where where)
+			throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    
+    int tipusPerfil = getTipusPerfil();
+    
+    if (tipusPerfil == Constants.PERFIL_US_CUSTODIA || tipusPerfil == Constants.PERFIL_US_CUSTODIA_INFO) {
+      __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_ARXIU), I18NUtils
+          .tradueix("tipuscustodia.1")));
+      __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_DOCUMENTCUSTODY),
+          I18NUtils.tradueix("tipuscustodia.2")));
+    } else {
+      __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_SENSE), I18NUtils
+          .tradueix("tipuscustodia.0")));
+    }
+    return __tmp;
 	}
 
 	@Override
-	public List<StringKeyValue> getReferenceListForPluginArxiuID(HttpServletRequest request,
-			ModelAndView mav, Where where) throws I18NException {
-		Where w = Where.AND(where, PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_ARXIU));
+	public List<StringKeyValue> getReferenceListForPluginArxiuID(
+			HttpServletRequest request, ModelAndView mav, Where where)
+			throws I18NException {
+		Where w = Where.AND(where,
+				PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_ARXIU));
 
 		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
 	}
 
 	@Override
 	public List<StringKeyValue> getReferenceListForPluginDocCustodyID(
-			HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
-		Where w = Where.AND(where,
-				PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_DOCUMENT_CUSTODY));
+			HttpServletRequest request, ModelAndView mav, Where where)
+			throws I18NException {
+		Where w = Where.AND(where, PluginFields.TIPUS
+				.equal(Constants.TIPUS_PLUGIN_DOCUMENT_CUSTODY));
 
 		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
 	}
 
 	@Override
-	public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
+	public Where getAdditionalCondition(HttpServletRequest request)
+			throws I18NException {
 		int tipusPerfil = getTipusPerfil();
 		if (tipusPerfil == Constants.PERFIL_US_ALL_INFO) {
-			return USPERFIL.in(new Integer[] { Constants.PERFIL_US_NOMES_ESCANEIG_INFO,
-					Constants.PERFIL_US_COPIA_AUTENTICA_INFO, Constants.PERFIL_US_CUSTODIA_INFO });
+			return USPERFIL.in(new Integer[]{
+					Constants.PERFIL_US_NOMES_ESCANEIG_INFO,
+					Constants.PERFIL_US_COPIA_AUTENTICA_INFO,
+					Constants.PERFIL_US_CUSTODIA_INFO});
 		} else {
 			return USPERFIL.equal(getTipusPerfil());
 		}
@@ -294,48 +372,58 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 	private void validaTipusFirma(PerfilJPA perfil, BindingResult result) {
 		switch (perfil.getTipusFirma()) {
 
-        case Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE:
-           perfil.setPluginFirmaServidorID(null);
-           perfil.setApiSimpleID(null);
-         break;
-		case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN:
-			if (perfil.getPluginFirmaServidorID() == null) {
-				result.rejectValue(get(PLUGINFIRMASERVIDORID), "genapp.validation.required",
-						new Object[] { I18NUtils.tradueix(get(PLUGINFIRMASERVIDORID)) }, null);
-			}
-			perfil.setApiSimpleID(null);
-			break;
+			case Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE :
+				perfil.setPluginFirmaServidorID(null);
+				perfil.setApiSimpleID(null);
+				break;
+			case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN :
+				if (perfil.getPluginFirmaServidorID() == null) {
+					result.rejectValue(get(PLUGINFIRMASERVIDORID),
+							"genapp.validation.required",
+							new Object[]{I18NUtils
+									.tradueix(get(PLUGINFIRMASERVIDORID))},
+							null);
+				}
+				perfil.setApiSimpleID(null);
+				break;
 
-		case Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE:
-			if (perfil.getApiSimpleID() == null) {
-				result.rejectValue(get(APISIMPLEID), "genapp.validation.required",
-						new Object[] { I18NUtils.tradueix(get(APISIMPLEID)) }, null);
+			case Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE :
+				if (perfil.getApiSimpleID() == null) {
+					result.rejectValue(get(APISIMPLEID),
+							"genapp.validation.required",
+							new Object[]{I18NUtils.tradueix(get(APISIMPLEID))},
+							null);
 
-			}
-			perfil.setPluginFirmaServidorID(null);
-			break;
+				}
+				perfil.setPluginFirmaServidorID(null);
+				break;
 		}
 
 	}
-	
-	private void validaTipusCustodia(PerfilJPA perfil, BindingResult result) {
-		
-		switch (perfil.getTipusCustodia()) {
-		case Constants.TIPUS_CUSTODIA_ARXIU:
-			if (perfil.getPluginArxiuID() == null) {
-				result.rejectValue(get(PLUGINARXIUID), "genapp.validation.required",
-						new Object[] { I18NUtils.tradueix(get(PLUGINARXIUID)) }, null);
-			}
-			perfil.setPluginArxiuID(null);
-			break;
 
-		case Constants.TIPUS_CUSTODIA_DOCUMENTCUSTODY:
-			if (perfil.getPluginDocCustodyID() == null) {
-				result.rejectValue(get(PLUGINDOCCUSTODYID), "genapp.validation.required",
-						new Object[] { I18NUtils.tradueix(get(PLUGINDOCCUSTODYID)) }, null);
-			}
-			perfil.setPluginDocCustodyID(null);
-			break;
+	private void validaTipusCustodia(PerfilJPA perfil, BindingResult result) {
+
+		switch (perfil.getTipusCustodia()) {
+			case Constants.TIPUS_CUSTODIA_ARXIU :
+				if (perfil.getPluginArxiuID() == null) {
+					result.rejectValue(
+							get(PLUGINARXIUID),
+							"genapp.validation.required",
+							new Object[]{I18NUtils.tradueix(get(PLUGINARXIUID))},
+							null);
+				}
+				perfil.setPluginArxiuID(null);
+				break;
+
+			case Constants.TIPUS_CUSTODIA_DOCUMENTCUSTODY :
+				if (perfil.getPluginDocCustodyID() == null) {
+					result.rejectValue(get(PLUGINDOCCUSTODYID),
+							"genapp.validation.required",
+							new Object[]{I18NUtils
+									.tradueix(get(PLUGINDOCCUSTODYID))}, null);
+				}
+				perfil.setPluginDocCustodyID(null);
+				break;
 		}
 	}
 
@@ -346,18 +434,19 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 		PerfilJPA perfil = perfilForm.getPerfil();
 
 		switch (getTipusPerfil()) {
-		case Constants.PERFIL_US_COPIA_AUTENTICA:
-			validaTipusFirma(perfil, result);
-			break;
-		case Constants.PERFIL_US_CUSTODIA:
-			validaTipusFirma(perfil, result);
-			validaTipusCustodia(perfil, result);
+			case Constants.PERFIL_US_COPIA_AUTENTICA :
+				validaTipusFirma(perfil, result);
+				break;
+			case Constants.PERFIL_US_CUSTODIA :
+				validaTipusFirma(perfil, result);
+				validaTipusCustodia(perfil, result);
 		}
 	}
 
 	@Override
 	public void postList(HttpServletRequest request, ModelAndView mav,
-			PerfilFilterForm filterForm, List<Perfil> list) throws I18NException {
+			PerfilFilterForm filterForm, List<Perfil> list)
+			throws I18NException {
 
 		int tipusperfil = getTipusPerfil();
 
@@ -365,7 +454,8 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 				&& tipusperfil != Constants.PERFIL_US_NOMES_ESCANEIG_INFO) {
 
 			Map<Long, String> map;
-			map = (Map<Long, String>) filterForm.getAdditionalField(TIPUSFIRMACOLUMN).getValueMap();
+			map = (Map<Long, String>) filterForm.getAdditionalField(
+					TIPUSFIRMACOLUMN).getValueMap();
 
 			map.clear();
 			long key;
@@ -375,16 +465,16 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 
 				switch (p.getTipusFirma()) {
 
-				default:
+					default :
 
-				case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN:
-					value = "Plugin";
-					break;
+					case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN :
+						value = "Plugin";
+						break;
 
-				case Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE:
-					value = "ApiSimple";
+					case Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE :
+						value = "ApiSimple";
 
-					break;
+						break;
 
 				}
 				map.put(key, value);

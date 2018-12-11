@@ -351,6 +351,31 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
+        <tr id="configuracioFirma_incloureSegellDeTemps_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS])?'configuracioFirma.incloureSegellDeTemps':__theForm.labels[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}" >
+              <form:select cssClass="input-medium" onchange="if(typeof onChangeIncloureSegellDeTemps == 'function') {  onChangeIncloureSegellDeTemps(this); };"  path="configuracioFirma.incloureSegellDeTemps">
+                <form:option value=""><fmt:message key="genapp.checkbox." /></form:option>
+                <form:option value="true" ><fmt:message key="genapp.checkbox.true" /></form:option>
+                <form:option value="false" ><fmt:message key="genapp.checkbox.false" /></form:option>
+              </form:select>
+          </c:if>
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}" >
+                <fmt:message key="genapp.checkbox.${__theForm.configuracioFirma.incloureSegellDeTemps}" />
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.PLUGINSEGELLATID)}">
         <tr id="configuracioFirma_pluginSegellatID_rowid">
           <td>

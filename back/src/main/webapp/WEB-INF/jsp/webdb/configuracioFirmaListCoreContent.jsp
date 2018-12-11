@@ -122,6 +122,13 @@
           ${configuracioFirma.propietatsTaulaFirmes}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
+          <td>
+            &nbsp;<c:if test="${not empty configuracioFirma.incloureSegellDeTemps}">
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${configuracioFirma.incloureSegellDeTemps?'success':'error'}.png"/>">
+            </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINSEGELLATID)}">
           <td>
           <c:set var="tmp">${configuracioFirma.pluginSegellatID}</c:set>
