@@ -1,0 +1,81 @@
+
+
+
+ALTER TABLE dib_infocustody RENAME custodyfileurl  TO fileurl());
+ALTER TABLE dib_infocustody
+  ADD COLUMN arxiuexpedientid character varying(255)());
+ALTER TABLE dib_infocustody
+  ADD COLUMN arxiudocumentid character varying(255)());
+  
+  
+  
+  ALTER TABLE dib_transaccio
+  DROP COLUMN usernamerequest());
+  
+  
+  ALTER TABLE dib_transaccio RENAME languagedoc  TO signparamlanguagedoc());
+  
+  
+  ALTER TABLE dib_transaccio RENAME funcionarinom  TO signparamfuncionarinom());
+ALTER TABLE dib_transaccio
+  ADD COLUMN signparamfuncionarinif character varying(255)());
+  
+  
+ALTER TABLE dib_transaccio
+  ADD COLUMN arxiureqparamdocestatelabora character varying(4)());
+ALTER TABLE dib_transaccio
+  ADD COLUMN arxiureqparamdocumenttipus character varying(4)());
+ALTER TABLE dib_transaccio
+  ADD COLUMN arxiureqparaminteressats character varying(255)());
+ALTER TABLE dib_transaccio
+  ADD COLUMN arxiureqparamorigen integer());
+COMMENT ON COLUMN dib_transaccio.arxiureqparamdocestatelabora IS 'documentEstatElaboracio'());
+COMMENT ON COLUMN dib_transaccio.arxiureqparamdocumenttipus IS 'TDxx'());
+COMMENT ON COLUMN dib_transaccio.arxiureqparaminteressats IS 'Llistat de Nifs dels interessats separats per comes'());
+COMMENT ON COLUMN dib_transaccio.arxiureqparamorigen IS '0 Ciutada
+1 Administracio'());
+
+UPDATE dib_transaccio
+   SET  returnurl='DESCONEGUDA' WHERE returnurl is null());
+
+ALTER TABLE dib_transaccio
+   ALTER COLUMN returnurl SET NOT NULL());
+   
+ALTER TABLE dib_transaccio
+   ALTER COLUMN languageui SET NOT NULL());
+ALTER TABLE dib_transaccio
+   ALTER COLUMN funcionariusername SET NOT NULL());
+   
+   
+   
+arxiuoptparam
+arxiuoptparamprocedimentcodi
+arxiuoptparamseriedocumental
+
+
+ALTER TABLE dib_transaccio RENAME ciutadanif  TO arxiuoptparamciutadanif());
+ALTER TABLE dib_transaccio RENAME ciutadanom  TO arxiuoptparamciutadanom());
+
+
+ALTER TABLE dib_transaccio
+  ADD COLUMN arxiuoptparamprocedimentcodi character varying(255)());
+ALTER TABLE dib_transaccio
+  ADD COLUMN arxiuoptparamprocedimentnom character varying(255)());
+  
+  
+  ALTER TABLE dib_transaccio
+  ADD COLUMN arxiuoptparamorgans character varying(255)());
+ALTER TABLE dib_transaccio
+  ADD COLUMN arxiuoptparamseriedocumental character varying(255)());
+ALTER TABLE dib_transaccio
+  ADD COLUMN arxiuoptparamcustorexpid character varying(255)());
+COMMENT ON COLUMN dib_transaccio.arxiuoptparamorgans IS 'Codi DIR3 dels organs afectats separats per comes'());
+
+
+ALTER TABLE dib_transaccio
+  DROP COLUMN expedient());
+
+
+  ALTER TABLE dib_transaccio RENAME arxiuoptparamciutadanif  TO arxiureqparamciutadanif;
+ALTER TABLE dib_transaccio RENAME arxiuoptparamciutadanom  TO arxiureqparamciutadanom;
+   

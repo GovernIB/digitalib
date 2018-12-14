@@ -1,19 +1,15 @@
 package es.caib.digitalib.back.controller.user;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.caib.digitalib.back.controller.admin.TransaccioAdminController;
+import es.caib.digitalib.back.controller.AbstractTransaccioController;
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.back.security.LoginInfo;
@@ -29,7 +25,7 @@ import es.caib.digitalib.utils.Constants;
  * @author anadal
  *
  */
-public abstract class AbstractTransaccioUserController extends TransaccioAdminController {
+public abstract class AbstractTransaccioUserController extends AbstractTransaccioController {
 
   @EJB(mappedName = es.caib.digitalib.ejb.UsuariPersonaLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.UsuariPersonaLocal usuariPersonaEjb;
@@ -50,6 +46,7 @@ public abstract class AbstractTransaccioUserController extends TransaccioAdminCo
   }
 
   public abstract int getTipusPerfil();
+
 
   @Override
   public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
@@ -73,9 +70,6 @@ public abstract class AbstractTransaccioUserController extends TransaccioAdminCo
     return Where.AND(TransaccioFields.USUARIPERSONAID.equal(usuariPersonaID), wPerfil);
 
   }
-  
-  
-  
 
   @Override
   public TransaccioFilterForm getTransaccioFilterForm(Integer pagina, ModelAndView mav,
@@ -84,50 +78,29 @@ public abstract class AbstractTransaccioUserController extends TransaccioAdminCo
         request);
 
     if (transaccioFilterForm.isNou()) {
-      
+
       int tipusPerfil = getTipusPerfil();
-      
       transaccioFilterForm.setEntityNameCode("transaccio.tipus." + Math.abs(tipusPerfil));
-      transaccioFilterForm.setEntityNameCodePlural("transaccio.tipus." + Math.abs(tipusPerfil) +".plural");
-
-      Set<Field<?>> hiddenFields = new HashSet<Field<?>>(
-          Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
-
-      hiddenFields.remove(TransaccioFields.TRANSACTIONWEBID);
-      hiddenFields.remove(TransaccioFields.DATAINICI);
-      hiddenFields.remove(TransaccioFields.DATAFI);
-      hiddenFields.remove(TransaccioFields.ESTATCODI);
-      hiddenFields.remove(TransaccioFields.ESTATMISSATGE);
-
-      hiddenFields.remove(TransaccioFields.FITXERESCANEJATID);
-      hiddenFields.remove(TransaccioFields.FITXERSIGNATURAID);
-
-      transaccioFilterForm.setHiddenFields(hiddenFields);
-
-      transaccioFilterForm.setOrderBy(TransaccioFields.DATAFI.javaName);
-      transaccioFilterForm.setOrderAsc(false);
-
+      transaccioFilterForm.setEntityNameCodePlural("transaccio.tipus." + Math.abs(tipusPerfil)
+          + ".plural");
     }
 
     return transaccioFilterForm;
   }
-  
-  
+
   @Override
-  public TransaccioForm getTransaccioForm(TransaccioJPA _jpa,
-      boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
+  public TransaccioForm getTransaccioForm(TransaccioJPA _jpa, boolean __isView,
+      HttpServletRequest request, ModelAndView mav) throws I18NException {
     TransaccioForm form = super.getTransaccioForm(_jpa, __isView, request, mav);
 
     int tipusPerfil = getTipusPerfil();
     form.setEntityNameCode("transaccio.tipus." + Math.abs(tipusPerfil));
-    form.setEntityNameCodePlural("transaccio.tipus." + Math.abs(tipusPerfil) +".plural");
-    
-    
+    form.setEntityNameCodePlural("transaccio.tipus." + Math.abs(tipusPerfil) + ".plural");
+
     return form;
 
   }
-  
-  
+
   @Override
   public String getPerfilInfoContextWeb() {
     return PerfilInfoTransaccioUserController.CONTEXTWEB;

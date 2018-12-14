@@ -33,7 +33,7 @@ public class InfoCustodyRefList extends RefListBase
     this.infoCustodyEjb = __clone.infoCustodyEjb;
   }
   public InfoCustodyRefList() {
-    setSelects(new Select<?>[] { CUSTODYFILEID.select, CUSTODYFILEURL.select });
+    setSelects(new Select<?>[] { CUSTODYFILEID.select, FILEURL.select });
   }
   public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
     Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());

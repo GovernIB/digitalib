@@ -128,6 +128,42 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.IP)}">
+        <tr id="transaccio_ip_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.IP])?'transaccio.ip':__theForm.labels[TransaccioFields.IP]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[TransaccioFields.IP]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.IP]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.ip" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.IP)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.IP)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="50" path="transaccio.ip"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.RETURNURL)}">
+        <tr id="transaccio_returnUrl_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.RETURNURL])?'transaccio.returnUrl':__theForm.labels[TransaccioFields.RETURNURL]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[TransaccioFields.RETURNURL]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.RETURNURL]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.returnUrl" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.RETURNURL)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.RETURNURL)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.returnUrl"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ESTATCODI)}">
         <tr id="transaccio_estatCodi_rowid">
           <td>
@@ -243,6 +279,24 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.HASHESCANEIG)}">
+        <tr id="transaccio_hashEscaneig_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.HASHESCANEIG])?'transaccio.hashEscaneig':__theForm.labels[TransaccioFields.HASHESCANEIG]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.HASHESCANEIG]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.HASHESCANEIG]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.hashEscaneig" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHESCANEIG)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHESCANEIG)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.hashEscaneig"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.FITXERSIGNATURAID)}">
         <tr id="transaccio_fitxerSignaturaID_rowid">
           <td>
@@ -284,6 +338,24 @@
                 </c:if>
                 </div>
               </div>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.HASHFIRMA)}">
+        <tr id="transaccio_hashFirma_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.HASHFIRMA])?'transaccio.hashFirma':__theForm.labels[TransaccioFields.HASHFIRMA]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.HASHFIRMA]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.HASHFIRMA]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.hashFirma" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHFIRMA)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHFIRMA)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.hashFirma"   />
+
            </td>
         </tr>
         </c:if>
@@ -349,6 +421,392 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.VIEW)}">
+        <tr id="transaccio_view_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.VIEW])?'transaccio.view':__theForm.labels[TransaccioFields.VIEW]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[TransaccioFields.VIEW]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.VIEW]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.view" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.VIEW)}" >
+          <form:hidden path="transaccio.view"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.view,__theForm.listOfValuesForView)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.VIEW)}" >
+          <form:select id="transaccio_view"  onchange="if(typeof onChangeView == 'function') {  onChangeView(this); };"  cssClass="input-xxlarge" path="transaccio.view">
+            <c:forEach items="${__theForm.listOfValuesForView}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.LANGUAGEUI)}">
+        <tr id="transaccio_languageUI_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.LANGUAGEUI])?'transaccio.languageUI':__theForm.labels[TransaccioFields.LANGUAGEUI]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[TransaccioFields.LANGUAGEUI]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.LANGUAGEUI]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.languageUI" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEUI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEUI)? 'input-small uneditable-input' : 'input-small'}"  maxlength="10" path="transaccio.languageUI"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.FUNCIONARIUSERNAME)}">
+        <tr id="transaccio_funcionariUsername_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FUNCIONARIUSERNAME])?'transaccio.funcionariUsername':__theForm.labels[TransaccioFields.FUNCIONARIUSERNAME]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[TransaccioFields.FUNCIONARIUSERNAME]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.FUNCIONARIUSERNAME]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.funcionariUsername" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARIUSERNAME)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARIUSERNAME)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.funcionariUsername"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARINOM)}">
+        <tr id="transaccio_signParamFuncionariNom_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.SIGNPARAMFUNCIONARINOM])?'transaccio.signParamFuncionariNom':__theForm.labels[TransaccioFields.SIGNPARAMFUNCIONARINOM]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.SIGNPARAMFUNCIONARINOM]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.SIGNPARAMFUNCIONARINOM]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.signParamFuncionariNom" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMFUNCIONARINOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMFUNCIONARINOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.signParamFuncionariNom"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARINIF)}">
+        <tr id="transaccio_signParamFuncionariNif_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.SIGNPARAMFUNCIONARINIF])?'transaccio.signParamFuncionariNif':__theForm.labels[TransaccioFields.SIGNPARAMFUNCIONARINIF]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.SIGNPARAMFUNCIONARINIF]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.SIGNPARAMFUNCIONARINIF]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.signParamFuncionariNif" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMFUNCIONARINIF)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMFUNCIONARINIF)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.signParamFuncionariNif"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.SIGNPARAMLANGUAGEDOC)}">
+        <tr id="transaccio_signParamLanguageDoc_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.SIGNPARAMLANGUAGEDOC])?'transaccio.signParamLanguageDoc':__theForm.labels[TransaccioFields.SIGNPARAMLANGUAGEDOC]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.SIGNPARAMLANGUAGEDOC]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.SIGNPARAMLANGUAGEDOC]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.signParamLanguageDoc" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMLANGUAGEDOC)}" >
+          <form:hidden path="transaccio.signParamLanguageDoc"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.signParamLanguageDoc,__theForm.listOfValuesForSignParamLanguageDoc)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMLANGUAGEDOC)}" >
+          <form:select id="transaccio_signParamLanguageDoc"  onchange="if(typeof onChangeSignParamLanguageDoc == 'function') {  onChangeSignParamLanguageDoc(this); };"  cssClass="input-xxlarge" path="transaccio.signParamLanguageDoc">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForSignParamLanguageDoc}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}">
+        <tr id="transaccio_arxiuReqParamDocEstatElabora_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUREQPARAMDOCESTATELABORA])?'transaccio.arxiuReqParamDocEstatElabora':__theForm.labels[TransaccioFields.ARXIUREQPARAMDOCESTATELABORA]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUREQPARAMDOCESTATELABORA]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUREQPARAMDOCESTATELABORA]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.arxiuReqParamDocEstatElabora" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}" >
+          <form:hidden path="transaccio.arxiuReqParamDocEstatElabora"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.arxiuReqParamDocEstatElabora,__theForm.listOfValuesForArxiuReqParamDocEstatElabora)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}" >
+          <form:select id="transaccio_arxiuReqParamDocEstatElabora"  onchange="if(typeof onChangeArxiuReqParamDocEstatElabora == 'function') {  onChangeArxiuReqParamDocEstatElabora(this); };"  cssClass="input-xxlarge" path="transaccio.arxiuReqParamDocEstatElabora">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForArxiuReqParamDocEstatElabora}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}">
+        <tr id="transaccio_arxiuReqParamDocumentTipus_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS])?'transaccio.arxiuReqParamDocumentTipus':__theForm.labels[TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.arxiuReqParamDocumentTipus" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}" >
+          <form:hidden path="transaccio.arxiuReqParamDocumentTipus"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.arxiuReqParamDocumentTipus,__theForm.listOfValuesForArxiuReqParamDocumentTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}" >
+          <form:select id="transaccio_arxiuReqParamDocumentTipus"  onchange="if(typeof onChangeArxiuReqParamDocumentTipus == 'function') {  onChangeArxiuReqParamDocumentTipus(this); };"  cssClass="input-xxlarge" path="transaccio.arxiuReqParamDocumentTipus">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForArxiuReqParamDocumentTipus}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUREQPARAMORIGEN)}">
+        <tr id="transaccio_arxiuReqParamOrigen_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUREQPARAMORIGEN])?'transaccio.arxiuReqParamOrigen':__theForm.labels[TransaccioFields.ARXIUREQPARAMORIGEN]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUREQPARAMORIGEN]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUREQPARAMORIGEN]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.arxiuReqParamOrigen" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMORIGEN)}" >
+          <form:hidden path="transaccio.arxiuReqParamOrigen"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.arxiuReqParamOrigen,__theForm.listOfValuesForArxiuReqParamOrigen)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMORIGEN)}" >
+          <form:select id="transaccio_arxiuReqParamOrigen"  onchange="if(typeof onChangeArxiuReqParamOrigen == 'function') {  onChangeArxiuReqParamOrigen(this); };"  cssClass="input-xxlarge" path="transaccio.arxiuReqParamOrigen">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForArxiuReqParamOrigen}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUREQPARAMINTERESSATS)}">
+        <tr id="transaccio_arxiuReqParamInteressats_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUREQPARAMINTERESSATS])?'transaccio.arxiuReqParamInteressats':__theForm.labels[TransaccioFields.ARXIUREQPARAMINTERESSATS]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUREQPARAMINTERESSATS]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUREQPARAMINTERESSATS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.arxiuReqParamInteressats" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMINTERESSATS)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMINTERESSATS)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.arxiuReqParamInteressats"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUREQPARAMCIUTADANIF)}">
+        <tr id="transaccio_arxiuReqParamCiutadaNif_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUREQPARAMCIUTADANIF])?'transaccio.arxiuReqParamCiutadaNif':__theForm.labels[TransaccioFields.ARXIUREQPARAMCIUTADANIF]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUREQPARAMCIUTADANIF]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUREQPARAMCIUTADANIF]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.arxiuReqParamCiutadaNif" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMCIUTADANIF)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMCIUTADANIF)? 'input-medium uneditable-input' : 'input-medium'}"  maxlength="15" path="transaccio.arxiuReqParamCiutadaNif"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUREQPARAMCIUTADANOM)}">
+        <tr id="transaccio_arxiuReqParamCiutadaNom_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUREQPARAMCIUTADANOM])?'transaccio.arxiuReqParamCiutadaNom':__theForm.labels[TransaccioFields.ARXIUREQPARAMCIUTADANOM]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUREQPARAMCIUTADANOM]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUREQPARAMCIUTADANOM]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.arxiuReqParamCiutadaNom" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMCIUTADANOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMCIUTADANOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.arxiuReqParamCiutadaNom"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)}">
+        <tr id="transaccio_arxiuOptParamProcedimentCodi_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI])?'transaccio.arxiuOptParamProcedimentCodi':__theForm.labels[TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.arxiuOptParamProcedimentCodi" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.arxiuOptParamProcedimentCodi"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)}">
+        <tr id="transaccio_arxiuOptParamProcedimentNom_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM])?'transaccio.arxiuOptParamProcedimentNom':__theForm.labels[TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.arxiuOptParamProcedimentNom" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.arxiuOptParamProcedimentNom"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMORGANS)}">
+        <tr id="transaccio_arxiuOptParamOrgans_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUOPTPARAMORGANS])?'transaccio.arxiuOptParamOrgans':__theForm.labels[TransaccioFields.ARXIUOPTPARAMORGANS]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUOPTPARAMORGANS]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUOPTPARAMORGANS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.arxiuOptParamOrgans" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMORGANS)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMORGANS)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.arxiuOptParamOrgans"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL)}">
+        <tr id="transaccio_arxiuOptParamSerieDocumental_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL])?'transaccio.arxiuOptParamSerieDocumental':__theForm.labels[TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.arxiuOptParamSerieDocumental" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.arxiuOptParamSerieDocumental"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID)}">
+        <tr id="transaccio_arxiuOptParamCustodyOrExpedientId_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID])?'transaccio.arxiuOptParamCustodyOrExpedientId':__theForm.labels[TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.arxiuOptParamCustodyOrExpedientId" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.arxiuOptParamCustodyOrExpedientId"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.PERFILID)}">
+        <tr id="transaccio_perfilID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.PERFILID])?'transaccio.perfilID':__theForm.labels[TransaccioFields.PERFILID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[TransaccioFields.PERFILID]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.PERFILID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.perfilID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.PERFILID)}" >
+          <form:hidden path="transaccio.perfilID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.perfilID,__theForm.listOfPerfilForPerfilID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.PERFILID)}" >
+          <form:select id="transaccio_perfilID"  onchange="if(typeof onChangePerfilID == 'function') {  onChangePerfilID(this); };"  cssClass="input-xxlarge" path="transaccio.perfilID">
+            <c:forEach items="${__theForm.listOfPerfilForPerfilID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSIGNATURAID)}">
         <tr id="transaccio_infoSignaturaID_rowid">
           <td>
@@ -403,278 +861,6 @@
             </c:forEach>
           </form:select>
           </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.LANGUAGEUI)}">
-        <tr id="transaccio_languageUI_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.LANGUAGEUI])?'transaccio.languageUI':__theForm.labels[TransaccioFields.LANGUAGEUI]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.LANGUAGEUI]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.LANGUAGEUI]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.languageUI" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEUI)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEUI)? 'input-small uneditable-input' : 'input-small'}"  maxlength="10" path="transaccio.languageUI"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.LANGUAGEDOC)}">
-        <tr id="transaccio_languageDoc_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.LANGUAGEDOC])?'transaccio.languageDoc':__theForm.labels[TransaccioFields.LANGUAGEDOC]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.LANGUAGEDOC]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.LANGUAGEDOC]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.languageDoc" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEDOC)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.LANGUAGEDOC)? 'input-small uneditable-input' : 'input-small'}"  maxlength="10" path="transaccio.languageDoc"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.CIUTADANIF)}">
-        <tr id="transaccio_ciutadaNif_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.CIUTADANIF])?'transaccio.ciutadaNif':__theForm.labels[TransaccioFields.CIUTADANIF]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.CIUTADANIF]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.CIUTADANIF]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.ciutadaNif" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANIF)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANIF)? 'input-medium uneditable-input' : 'input-medium'}"  maxlength="15" path="transaccio.ciutadaNif"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.CIUTADANOM)}">
-        <tr id="transaccio_ciutadaNom_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.CIUTADANOM])?'transaccio.ciutadaNom':__theForm.labels[TransaccioFields.CIUTADANOM]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.CIUTADANOM]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.CIUTADANOM]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.ciutadaNom" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.CIUTADANOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.ciutadaNom"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.FUNCIONARIUSERNAME)}">
-        <tr id="transaccio_funcionariUsername_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FUNCIONARIUSERNAME])?'transaccio.funcionariUsername':__theForm.labels[TransaccioFields.FUNCIONARIUSERNAME]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.FUNCIONARIUSERNAME]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.FUNCIONARIUSERNAME]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.funcionariUsername" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARIUSERNAME)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARIUSERNAME)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.funcionariUsername"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.FUNCIONARINOM)}">
-        <tr id="transaccio_funcionariNom_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.FUNCIONARINOM])?'transaccio.funcionariNom':__theForm.labels[TransaccioFields.FUNCIONARINOM]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.FUNCIONARINOM]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.FUNCIONARINOM]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.funcionariNom" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARINOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.FUNCIONARINOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.funcionariNom"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.EXPEDIENT)}">
-        <tr id="transaccio_expedient_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.EXPEDIENT])?'transaccio.expedient':__theForm.labels[TransaccioFields.EXPEDIENT]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.EXPEDIENT]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.EXPEDIENT]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.expedient" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.EXPEDIENT)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.EXPEDIENT)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.expedient"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.USERNAMEREQUEST)}">
-        <tr id="transaccio_usernameRequest_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.USERNAMEREQUEST])?'transaccio.usernameRequest':__theForm.labels[TransaccioFields.USERNAMEREQUEST]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.USERNAMEREQUEST]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.USERNAMEREQUEST]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.usernameRequest" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.USERNAMEREQUEST)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.USERNAMEREQUEST)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.usernameRequest"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.RETURNURL)}">
-        <tr id="transaccio_returnUrl_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.RETURNURL])?'transaccio.returnUrl':__theForm.labels[TransaccioFields.RETURNURL]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.RETURNURL]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.RETURNURL]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.returnUrl" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.RETURNURL)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.RETURNURL)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.returnUrl"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.VIEW)}">
-        <tr id="transaccio_view_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.VIEW])?'transaccio.view':__theForm.labels[TransaccioFields.VIEW]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.VIEW]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.VIEW]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="transaccio.view" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.VIEW)}" >
-          <form:hidden path="transaccio.view"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.view,__theForm.listOfValuesForView)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.VIEW)}" >
-          <form:select id="transaccio_view"  onchange="if(typeof onChangeView == 'function') {  onChangeView(this); };"  cssClass="input-xxlarge" path="transaccio.view">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfValuesForView}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.PERFILID)}">
-        <tr id="transaccio_perfilID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.PERFILID])?'transaccio.perfilID':__theForm.labels[TransaccioFields.PERFILID]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[TransaccioFields.PERFILID]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.PERFILID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="transaccio.perfilID" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.PERFILID)}" >
-          <form:hidden path="transaccio.perfilID"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.perfilID,__theForm.listOfPerfilForPerfilID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.PERFILID)}" >
-          <form:select id="transaccio_perfilID"  onchange="if(typeof onChangePerfilID == 'function') {  onChangePerfilID(this); };"  cssClass="input-xxlarge" path="transaccio.perfilID">
-            <c:forEach items="${__theForm.listOfPerfilForPerfilID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.IP)}">
-        <tr id="transaccio_ip_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.IP])?'transaccio.ip':__theForm.labels[TransaccioFields.IP]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[TransaccioFields.IP]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.IP]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.ip" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.IP)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.IP)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="50" path="transaccio.ip"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.HASHESCANEIG)}">
-        <tr id="transaccio_hashEscaneig_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.HASHESCANEIG])?'transaccio.hashEscaneig':__theForm.labels[TransaccioFields.HASHESCANEIG]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.HASHESCANEIG]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.HASHESCANEIG]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.hashEscaneig" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHESCANEIG)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHESCANEIG)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.hashEscaneig"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.HASHFIRMA)}">
-        <tr id="transaccio_hashFirma_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.HASHFIRMA])?'transaccio.hashFirma':__theForm.labels[TransaccioFields.HASHFIRMA]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.HASHFIRMA]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.HASHFIRMA]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.hashFirma" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHFIRMA)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.HASHFIRMA)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.hashFirma"   />
-
            </td>
         </tr>
         </c:if>

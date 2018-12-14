@@ -20,29 +20,65 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.CUSTODYFILEURL)}">
-        <tr id="infoCustody_custodyFileUrl_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.ARXIUEXPEDIENTID)}">
+        <tr id="infoCustody_arxiuExpedientId_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.CUSTODYFILEURL])?'infoCustody.custodyFileUrl':__theForm.labels[InfoCustodyFields.CUSTODYFILEURL]}" />
-              <c:if test="${not empty __theForm.help[InfoCustodyFields.CUSTODYFILEURL]}">
-              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.CUSTODYFILEURL]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.ARXIUEXPEDIENTID])?'infoCustody.arxiuExpedientId':__theForm.labels[InfoCustodyFields.ARXIUEXPEDIENTID]}" />
+              <c:if test="${not empty __theForm.help[InfoCustodyFields.ARXIUEXPEDIENTID]}">
+              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.ARXIUEXPEDIENTID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-           <c:if test="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYFILEURL)}">
+            <form:errors path="infoCustody.arxiuExpedientId" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.ARXIUEXPEDIENTID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.ARXIUEXPEDIENTID)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.arxiuExpedientId"   />
 
-             <c:if test="${ not empty __theForm.infoCustody.custodyFileUrl}">
-               <a href="${__theForm.infoCustody.custodyFileUrl}" target="_blank">${__theForm.infoCustody.custodyFileUrl}</a>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.ARXIUDOCUMENTID)}">
+        <tr id="infoCustody_arxiuDocumentId_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.ARXIUDOCUMENTID])?'infoCustody.arxiuDocumentId':__theForm.labels[InfoCustodyFields.ARXIUDOCUMENTID]}" />
+              <c:if test="${not empty __theForm.help[InfoCustodyFields.ARXIUDOCUMENTID]}">
+              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.ARXIUDOCUMENTID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="infoCustody.arxiuDocumentId" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.ARXIUDOCUMENTID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.ARXIUDOCUMENTID)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.arxiuDocumentId"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.FILEURL)}">
+        <tr id="infoCustody_fileUrl_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.FILEURL])?'infoCustody.fileUrl':__theForm.labels[InfoCustodyFields.FILEURL]}" />
+              <c:if test="${not empty __theForm.help[InfoCustodyFields.FILEURL]}">
+              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.FILEURL]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+           <c:if test="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.FILEURL)}">
+
+             <c:if test="${ not empty __theForm.infoCustody.fileUrl}">
+               <a href="${__theForm.infoCustody.fileUrl}" target="_blank">${__theForm.infoCustody.fileUrl}</a>
 
              </c:if>
            </c:if>
 
-           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYFILEURL))}">
+           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.FILEURL))}">
 
-            <form:errors path="infoCustody.custodyFileUrl" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYFILEURL)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYFILEURL)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.custodyFileUrl"   />
+            <form:errors path="infoCustody.fileUrl" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.FILEURL)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.FILEURL)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.fileUrl"   />
 
            </c:if>
 

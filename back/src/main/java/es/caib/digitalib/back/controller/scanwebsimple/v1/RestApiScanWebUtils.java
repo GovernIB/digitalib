@@ -132,6 +132,11 @@ public abstract class RestApiScanWebUtils extends RestUtils {
             eniTipoFirma = "TF02"; // (XAdES internally detached signature), ,
           }
         } else {
+        
+                SMIME("TF07"),
+        ODT("TF08"),
+        OOXML("TF09");
+        
           eniTipoFirma = null;
         }
 

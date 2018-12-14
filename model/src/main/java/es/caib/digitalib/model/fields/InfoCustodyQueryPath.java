@@ -19,8 +19,16 @@ public class InfoCustodyQueryPath extends org.fundaciobit.genapp.common.query.Qu
     return new StringField(getQueryPath(), InfoCustodyFields.CUSTODYFILEID);
   }
 
-  public StringField CUSTODYFILEURL() {
-    return new StringField(getQueryPath(), InfoCustodyFields.CUSTODYFILEURL);
+  public StringField ARXIUEXPEDIENTID() {
+    return new StringField(getQueryPath(), InfoCustodyFields.ARXIUEXPEDIENTID);
+  }
+
+  public StringField ARXIUDOCUMENTID() {
+    return new StringField(getQueryPath(), InfoCustodyFields.ARXIUDOCUMENTID);
+  }
+
+  public StringField FILEURL() {
+    return new StringField(getQueryPath(), InfoCustodyFields.FILEURL);
   }
 
   public StringField CSV() {

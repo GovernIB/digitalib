@@ -11,7 +11,10 @@ import javax.ejb.Stateless;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuRequiredParameters;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleSignatureParameters;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.hibernate.Hibernate;
 import org.jboss.ejb3.annotation.SecurityDomain;
@@ -22,11 +25,13 @@ import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
 import es.caib.digitalib.jpa.UsuariPersonaJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
+import es.caib.digitalib.logic.utils.LogicUtils;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioQueryPath;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.utils.Constants;
 
 /**
  *
@@ -74,6 +79,12 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
     Hibernate.initialize(transaccio.getPerfil());
 
+    // XYZ ZZZ Optimitzar-ho si infoID val null
+    
+    Hibernate.initialize(transaccio.getInfoCustody());
+    
+    Hibernate.initialize(transaccio.getInfoSignatura());
+
     return transaccio;
 
   }
@@ -88,8 +99,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
   @PermitAll
   public TransaccioJPA crearTransaccio(
       ScanWebSimpleGetTransactionIdRequest requestTransaction,
-      UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String returnURL)
-      throws I18NException {
+      UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String returnURL,
+      String ip) throws I18NException {
 
     String scanWebProfile = requestTransaction.getScanWebProfile();
 
@@ -131,6 +142,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     final String transactionWebID = internalGetTransacction();
 
     PerfilJPA perfil = perfilEjb.findByPrimaryKey(perfilID);
+    
+    if (perfil == null) {
+      // XYZ ZZZ ZZZ Llança excepcio I18NException
+    }
 
     PerfilJPA clonedPerfil = PerfilJPA.toJPA(perfil);
 
@@ -141,41 +156,90 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     // XYZ ZZZ ZZZ Falten altres comprovacions
     TransaccioJPA t = new TransaccioJPA();
 
-    t.setDataInici(new Timestamp(System.currentTimeMillis()));
-    t.setEstatCodi(ScanWebSimpleStatus.STATUS_REQUESTED_ID);
     t.setTransactionWebId(transactionWebID);
-    t.setLanguageUI(requestTransaction.getLanguageUI());
-    t.setLanguageDoc(requestTransaction.getLanguageDoc());
-
-    t.setView(requestTransaction.getView());
-
-    t.setReturnUrl(returnURL);
-
+    t.setDataInici(new Timestamp(System.currentTimeMillis()));
     if (usuariAplicacio != null) {
       t.setUsuariAplicacioId(usuariAplicacio.getUsuariAplicacioID());
     }
-
     if (usuariPersona != null) {
       t.setUsuariPersonaId(usuariPersona.getUsuariPersonaID());
     }
-
-    t.setFuncionariUsername(requestTransaction.getFuncionariUsername());
-    t.setFuncionariNom(requestTransaction.getFuncionariNom());
-    t.setCiutadaNif(requestTransaction.getCiutadaNif());
-    t.setCiutadaNom(requestTransaction.getCiutadaNom());
-    t.setExpedient(requestTransaction.getExpedientID());
-
+    t.setIp(ip);
+    t.setReturnUrl(returnURL);
+    t.setEstatCodi(ScanWebSimpleStatus.STATUS_REQUESTED_ID);
     t.setView(requestTransaction.getView());
+    t.setLanguageUI(requestTransaction.getLanguageUI());
+    t.setFuncionariUsername(requestTransaction.getFuncionariUsername());
+
+    int tipusPerfil = perfil.getUsPerfil();
+
+    if (tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA
+        || tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
+
+      ScanWebSimpleSignatureParameters signParams = requestTransaction
+          .getSignatureParameters();
+      
+      // TOT AIXÒ s'OBTINDRA D'UNA PAGINA POSTERIOR A NO SER QUE JA ESTIGUI DEFINIT
+      if (signParams != null) {
+        // XYZ ZZZ Check not null
+        
+        log.info("\n\n XYZ ZZZ ZZZ CREAR TRANSACCIO POSAM LANGDOC A " + signParams.getLanguageDoc() +"\n\n");
+        
+        t.setSignParamLanguageDoc(signParams.getLanguageDoc());
+        t.setSignParamFuncionariNom(signParams.getFuncionariNom());
+        t.setSignParamFuncionariNif(signParams.getFuncionariNif());
+      }
+    }
+
+    if (tipusPerfil == Constants.PERFIL_US_CUSTODIA
+        || tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
+
+      // ==== OBLIGATORIS =======
+
+      // TOT AIXÒ s'OBTINDRA D'UNA PAGINA POSTERIOR A NO SER QUE JA ESTIGUI DEFINIT
+     
+      ScanWebSimpleArxiuRequiredParameters arxiuReqParams = requestTransaction
+          .getArxiuRequiredParameters();
+
+      if (arxiuReqParams != null) {
+      
+        // XYZ ZZZ
+        // arxiuReqParams.getDocumentEstatElaboracio() ==> Valor Valid
+  
+        // XYZ ZZZ
+        // arxiuReqParams.getDocumentTipus() => Valor Valid
+  
+        // XYZ ZZZ
+        // arxiuReqParams.getOrigen() => Valor Valid
+  
+        t.setArxiuReqParamDocEstatElabora(arxiuReqParams.getDocumentEstatElaboracio());
+        t.setArxiuReqParamDocumentTipus(arxiuReqParams.getDocumentTipus());
+        t.setArxiuReqParamOrigen(arxiuReqParams.getOrigen());
+        t.setArxiuReqParamInteressats(LogicUtils.listToString(arxiuReqParams.getInteressats()));
+        
+        t.setArxiuReqParamCiutadaNif(arxiuReqParams.getCiutadaNif());
+        t.setArxiuReqParamCiutadaNom(arxiuReqParams.getCiutadaNom());
+      }
+    
+
+      // ==== OPCIONALS =======
+
+      ScanWebSimpleArxiuOptionalParameters arxiuOptParams = requestTransaction
+          .getArxiuOptionalParameters();
+      if (arxiuOptParams != null) {
+        t.setArxiuOptParamCustodyOrExpedientId(arxiuOptParams.getCustodyOrExpedientID());
+        t.setArxiuOptParamOrgans(LogicUtils.listToString(arxiuOptParams.getOrgans()));
+        t.setArxiuOptParamProcedimentCodi(arxiuOptParams.getProcedimentCodi());
+        t.setArxiuOptParamProcedimentNom(arxiuOptParams.getProcedimentNom());
+        t.setArxiuOptParamSerieDocumental(arxiuOptParams.getSerieDocumental());
+      }
+    }
 
     t.setPerfil(clonedPerfil);
 
     // return createWithProfile(t);
 
     clonedPerfil = t.getPerfil();
-
-    if (perfil == null) {
-      // XYZ ZZZ ZZZ Llança excepcio I18NException
-    }
 
     clonedPerfil = (PerfilJPA) perfilEjb.create(clonedPerfil);
 
@@ -190,6 +254,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
   }
 
+
+
   protected String internalGetTransacction() {
     String transactionID;
     synchronized (this) {
@@ -199,8 +265,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       }
 
       long nanoTime = System.nanoTime();
-      
-      transactionID = (nanoTime % 100000) + "" + System.currentTimeMillis() + (nanoTime / 100000);
+
+      transactionID = (nanoTime % 100000) + "" + System.currentTimeMillis()
+          + (nanoTime / 100000);
       transactionID = org.fundaciobit.pluginsib.core.utils.Base64.encode(transactionID)
           .toLowerCase();
       transactionID = transactionID.replaceAll("=", "");

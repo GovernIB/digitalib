@@ -101,6 +101,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
 
     
     
+    @SuppressWarnings("unused")
     TransaccioJPA trans = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
     
     ScanWebConfig scanWebConfig = getScanWebConfig(request, transactionWebID);

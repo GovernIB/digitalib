@@ -35,6 +35,14 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new LongField(getQueryPath(), TransaccioFields.USUARIPERSONAID);
   }
 
+  public StringField IP() {
+    return new StringField(getQueryPath(), TransaccioFields.IP);
+  }
+
+  public StringField RETURNURL() {
+    return new StringField(getQueryPath(), TransaccioFields.RETURNURL);
+  }
+
   public IntegerField ESTATCODI() {
     return new IntegerField(getQueryPath(), TransaccioFields.ESTATCODI);
   }
@@ -51,8 +59,16 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new LongField(getQueryPath(), TransaccioFields.FITXERESCANEJATID);
   }
 
+  public StringField HASHESCANEIG() {
+    return new StringField(getQueryPath(), TransaccioFields.HASHESCANEIG);
+  }
+
   public LongField FITXERSIGNATURAID() {
     return new LongField(getQueryPath(), TransaccioFields.FITXERSIGNATURAID);
+  }
+
+  public StringField HASHFIRMA() {
+    return new StringField(getQueryPath(), TransaccioFields.HASHFIRMA);
   }
 
   public IntegerField INFOSCANPIXELTYPE() {
@@ -67,68 +83,84 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new BooleanField(getQueryPath(), TransaccioFields.INFOSCANOCR);
   }
 
-  public LongField INFOSIGNATURAID() {
-    return new LongField(getQueryPath(), TransaccioFields.INFOSIGNATURAID);
-  }
-
-  public LongField INFOCUSTODYID() {
-    return new LongField(getQueryPath(), TransaccioFields.INFOCUSTODYID);
+  public IntegerField VIEW() {
+    return new IntegerField(getQueryPath(), TransaccioFields.VIEW);
   }
 
   public StringField LANGUAGEUI() {
     return new StringField(getQueryPath(), TransaccioFields.LANGUAGEUI);
   }
 
-  public StringField LANGUAGEDOC() {
-    return new StringField(getQueryPath(), TransaccioFields.LANGUAGEDOC);
-  }
-
-  public StringField CIUTADANIF() {
-    return new StringField(getQueryPath(), TransaccioFields.CIUTADANIF);
-  }
-
-  public StringField CIUTADANOM() {
-    return new StringField(getQueryPath(), TransaccioFields.CIUTADANOM);
-  }
-
   public StringField FUNCIONARIUSERNAME() {
     return new StringField(getQueryPath(), TransaccioFields.FUNCIONARIUSERNAME);
   }
 
-  public StringField FUNCIONARINOM() {
-    return new StringField(getQueryPath(), TransaccioFields.FUNCIONARINOM);
+  public StringField SIGNPARAMFUNCIONARINOM() {
+    return new StringField(getQueryPath(), TransaccioFields.SIGNPARAMFUNCIONARINOM);
   }
 
-  public StringField EXPEDIENT() {
-    return new StringField(getQueryPath(), TransaccioFields.EXPEDIENT);
+  public StringField SIGNPARAMFUNCIONARINIF() {
+    return new StringField(getQueryPath(), TransaccioFields.SIGNPARAMFUNCIONARINIF);
   }
 
-  public StringField USERNAMEREQUEST() {
-    return new StringField(getQueryPath(), TransaccioFields.USERNAMEREQUEST);
+  public StringField SIGNPARAMLANGUAGEDOC() {
+    return new StringField(getQueryPath(), TransaccioFields.SIGNPARAMLANGUAGEDOC);
   }
 
-  public StringField RETURNURL() {
-    return new StringField(getQueryPath(), TransaccioFields.RETURNURL);
+  public StringField ARXIUREQPARAMDOCESTATELABORA() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUREQPARAMDOCESTATELABORA);
   }
 
-  public IntegerField VIEW() {
-    return new IntegerField(getQueryPath(), TransaccioFields.VIEW);
+  public StringField ARXIUREQPARAMDOCUMENTTIPUS() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS);
+  }
+
+  public IntegerField ARXIUREQPARAMORIGEN() {
+    return new IntegerField(getQueryPath(), TransaccioFields.ARXIUREQPARAMORIGEN);
+  }
+
+  public StringField ARXIUREQPARAMINTERESSATS() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUREQPARAMINTERESSATS);
+  }
+
+  public StringField ARXIUREQPARAMCIUTADANIF() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUREQPARAMCIUTADANIF);
+  }
+
+  public StringField ARXIUREQPARAMCIUTADANOM() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUREQPARAMCIUTADANOM);
+  }
+
+  public StringField ARXIUOPTPARAMPROCEDIMENTCODI() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI);
+  }
+
+  public StringField ARXIUOPTPARAMPROCEDIMENTNOM() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM);
+  }
+
+  public StringField ARXIUOPTPARAMORGANS() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUOPTPARAMORGANS);
+  }
+
+  public StringField ARXIUOPTPARAMSERIEDOCUMENTAL() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL);
+  }
+
+  public StringField ARXIUOPTPARAMCUSTODYOREXPEDIENTID() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
   }
 
   public LongField PERFILID() {
     return new LongField(getQueryPath(), TransaccioFields.PERFILID);
   }
 
-  public StringField IP() {
-    return new StringField(getQueryPath(), TransaccioFields.IP);
+  public LongField INFOSIGNATURAID() {
+    return new LongField(getQueryPath(), TransaccioFields.INFOSIGNATURAID);
   }
 
-  public StringField HASHESCANEIG() {
-    return new StringField(getQueryPath(), TransaccioFields.HASHESCANEIG);
-  }
-
-  public StringField HASHFIRMA() {
-    return new StringField(getQueryPath(), TransaccioFields.HASHFIRMA);
+  public LongField INFOCUSTODYID() {
+    return new LongField(getQueryPath(), TransaccioFields.INFOCUSTODYID);
   }
 
 
@@ -156,6 +188,14 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     });
   }
 
+  public PerfilQueryPath PERFIL() {
+    return new PerfilQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return TransaccioQueryPath.this.getQueryPath() + "perfil" + ".";
+      }
+    });
+  }
+
   public InfoSignaturaQueryPath INFOSIGNATURA() {
     return new InfoSignaturaQueryPath(new QueryPath() {
       public String getQueryPath() {
@@ -168,14 +208,6 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new InfoCustodyQueryPath(new QueryPath() {
       public String getQueryPath() {
           return TransaccioQueryPath.this.getQueryPath() + "infoCustody" + ".";
-      }
-    });
-  }
-
-  public PerfilQueryPath PERFIL() {
-    return new PerfilQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return TransaccioQueryPath.this.getQueryPath() + "perfil" + ".";
       }
     });
   }

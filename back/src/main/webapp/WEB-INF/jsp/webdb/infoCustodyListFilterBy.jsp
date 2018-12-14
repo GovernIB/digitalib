@@ -81,15 +81,41 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.CUSTODYFILEURL)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.ARXIUEXPEDIENTID)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoCustody.custodyFileUrl" var="custodyFileUrl" />
-              <fmt:message key="genapp.form.searchby" var="cercapercustodyFileUrl" >                
-                 <fmt:param value="${custodyFileUrl}"/>
+              <fmt:message key="infoCustody.arxiuExpedientId" var="arxiuExpedientId" />
+              <fmt:message key="genapp.form.searchby" var="cercaperarxiuExpedientId" >                
+                 <fmt:param value="${arxiuExpedientId}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${custodyFileUrl}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapercustodyFileUrl}" path="custodyFileUrl" />
+              <span class="add-on"><c:out value="${arxiuExpedientId}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperarxiuExpedientId}" path="arxiuExpedientId" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.ARXIUDOCUMENTID)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="infoCustody.arxiuDocumentId" var="arxiuDocumentId" />
+              <fmt:message key="genapp.form.searchby" var="cercaperarxiuDocumentId" >                
+                 <fmt:param value="${arxiuDocumentId}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${arxiuDocumentId}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperarxiuDocumentId}" path="arxiuDocumentId" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.FILEURL)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="infoCustody.fileUrl" var="fileUrl" />
+              <fmt:message key="genapp.form.searchby" var="cercaperfileUrl" >                
+                 <fmt:param value="${fileUrl}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${fileUrl}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperfileUrl}" path="fileUrl" />
             </div>
 
 

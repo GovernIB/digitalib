@@ -53,14 +53,36 @@ public class InfoCustodyFilterForm extends DigitalIBBaseFilterForm implements In
   }
 
 
-  private java.lang.String custodyFileUrl;
+  private java.lang.String arxiuExpedientId;
 
-  public java.lang.String getCustodyFileUrl() {
-    return this.custodyFileUrl;
+  public java.lang.String getArxiuExpedientId() {
+    return this.arxiuExpedientId;
   }
 
-  public void setCustodyFileUrl(java.lang.String custodyFileUrl) {
-    this.custodyFileUrl = custodyFileUrl;
+  public void setArxiuExpedientId(java.lang.String arxiuExpedientId) {
+    this.arxiuExpedientId = arxiuExpedientId;
+  }
+
+
+  private java.lang.String arxiuDocumentId;
+
+  public java.lang.String getArxiuDocumentId() {
+    return this.arxiuDocumentId;
+  }
+
+  public void setArxiuDocumentId(java.lang.String arxiuDocumentId) {
+    this.arxiuDocumentId = arxiuDocumentId;
+  }
+
+
+  private java.lang.String fileUrl;
+
+  public java.lang.String getFileUrl() {
+    return this.fileUrl;
+  }
+
+  public void setFileUrl(java.lang.String fileUrl) {
+    this.fileUrl = fileUrl;
   }
 
 
@@ -105,7 +127,9 @@ public class InfoCustodyFilterForm extends DigitalIBBaseFilterForm implements In
     this.infoCustodyIDDesde = __toClone.infoCustodyIDDesde;
     this.infoCustodyIDFins = __toClone.infoCustodyIDFins;
     this.custodyFileId = __toClone.custodyFileId;
-    this.custodyFileUrl = __toClone.custodyFileUrl;
+    this.arxiuExpedientId = __toClone.arxiuExpedientId;
+    this.arxiuDocumentId = __toClone.arxiuDocumentId;
+    this.fileUrl = __toClone.fileUrl;
     this.csv = __toClone.csv;
     this.csvValidationWeb = __toClone.csvValidationWeb;
     this.csvGenerationDefinition = __toClone.csvGenerationDefinition;
@@ -115,7 +139,7 @@ public class InfoCustodyFilterForm extends DigitalIBBaseFilterForm implements In
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { CUSTODYFILEID ,ARXIUEXPEDIENTID ,ARXIUDOCUMENTID }));
   }
 
   @Override

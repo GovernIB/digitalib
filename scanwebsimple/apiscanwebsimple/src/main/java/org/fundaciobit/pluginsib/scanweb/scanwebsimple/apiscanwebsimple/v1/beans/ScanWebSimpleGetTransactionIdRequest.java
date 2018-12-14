@@ -26,53 +26,90 @@ public class ScanWebSimpleGetTransactionIdRequest {
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String languageUI;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected String languageDoc;
-
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected String usernameRequest;
-
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected String ciutadaNif;
-
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected String ciutadaNom;
-
+  /**
+   * Obligatori tant si es funcionari com si no (~ usernameRequest)
+   */
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String funcionariUsername;
 
+  /**
+   * Obligatori si el perfil requereix firma
+   */
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected String funcionariNom;
+  protected ScanWebSimpleSignatureParameters signatureParameters;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected String funcionariNif;
+  /**
+   * Obligatori si el perfil requeix Arxiu o Custodia
+   */
+  protected ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
 
-  // XYZ ZZZ
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected String expedientID;
+  protected ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters;
 
   public ScanWebSimpleGetTransactionIdRequest() {
     super();
   }
 
-  // XYZ ZZZ Fer constructors per escaneig, per copia autentic ai per custòdia
-
+  /**
+   * Constructor per Only_Scan
+   * 
+   * @param scanWebProfile
+   * @param view
+   * @param languageUI
+   * @param funcionariUsername
+   */
   public ScanWebSimpleGetTransactionIdRequest(String scanWebProfile, int view,
-      String languageUI, String languageDoc, String usernameRequest, String ciutadaNif,
-      String ciutadaNom, String funcionariUsername, String funcionariNom,
-      String funcionariNif, String expedientID) {
+      String languageUI, String funcionariUsername) {
     super();
     this.scanWebProfile = scanWebProfile;
     this.view = view;
     this.languageUI = languageUI;
-    this.languageDoc = languageDoc;
-    this.usernameRequest = usernameRequest;
-    this.ciutadaNif = ciutadaNif;
-    this.ciutadaNom = ciutadaNom;
     this.funcionariUsername = funcionariUsername;
-    this.funcionariNom = funcionariNom;
-    this.funcionariNif = funcionariNif;
-    this.expedientID = expedientID;
+  }
+
+  /**
+   * Constructor per Only_Scan + Signature
+   * 
+   * @param scanWebProfile
+   * @param view
+   * @param languageUI
+   * @param funcionariUsername
+   * @param signatureParameters
+   */
+  public ScanWebSimpleGetTransactionIdRequest(String scanWebProfile, int view,
+      String languageUI, String funcionariUsername,
+      ScanWebSimpleSignatureParameters signatureParameters) {
+    super();
+    this.scanWebProfile = scanWebProfile;
+    this.view = view;
+    this.languageUI = languageUI;
+    this.funcionariUsername = funcionariUsername;
+    this.signatureParameters = signatureParameters;
+  }
+
+  /**
+   * Constructor per Only_Scan + Signature + Arxiu
+   * 
+   * @param scanWebProfile
+   * @param view
+   * @param languageUI
+   * @param funcionariUsername
+   * @param signatureParameters
+   * @param arxiuRequiredParameters
+   * @param arxiuOptionalParameters
+   */
+  public ScanWebSimpleGetTransactionIdRequest(String scanWebProfile, int view,
+      String languageUI, String funcionariUsername,
+      ScanWebSimpleSignatureParameters signatureParameters,
+      ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters,
+      ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters) {
+    super();
+    this.scanWebProfile = scanWebProfile;
+    this.view = view;
+    this.languageUI = languageUI;
+    this.funcionariUsername = funcionariUsername;
+    this.signatureParameters = signatureParameters;
+    this.arxiuRequiredParameters = arxiuRequiredParameters;
+    this.arxiuOptionalParameters = arxiuOptionalParameters;
   }
 
   public String getScanWebProfile() {
@@ -83,44 +120,20 @@ public class ScanWebSimpleGetTransactionIdRequest {
     this.scanWebProfile = scanWebProfile;
   }
 
+  public int getView() {
+    return view;
+  }
+
+  public void setView(int view) {
+    this.view = view;
+  }
+
   public String getLanguageUI() {
     return languageUI;
   }
 
   public void setLanguageUI(String languageUI) {
     this.languageUI = languageUI;
-  }
-
-  public String getLanguageDoc() {
-    return languageDoc;
-  }
-
-  public void setLanguageDoc(String languageDoc) {
-    this.languageDoc = languageDoc;
-  }
-
-  public String getUsernameRequest() {
-    return usernameRequest;
-  }
-
-  public void setUsernameRequest(String usernameRequest) {
-    this.usernameRequest = usernameRequest;
-  }
-
-  public String getCiutadaNif() {
-    return ciutadaNif;
-  }
-
-  public void setCiutadaNif(String ciutadaNif) {
-    this.ciutadaNif = ciutadaNif;
-  }
-
-  public String getCiutadaNom() {
-    return ciutadaNom;
-  }
-
-  public void setCiutadaNom(String ciutadaNom) {
-    this.ciutadaNom = ciutadaNom;
   }
 
   public String getFuncionariUsername() {
@@ -131,36 +144,30 @@ public class ScanWebSimpleGetTransactionIdRequest {
     this.funcionariUsername = funcionariUsername;
   }
 
-  public String getFuncionariNom() {
-    return funcionariNom;
+  public ScanWebSimpleSignatureParameters getSignatureParameters() {
+    return signatureParameters;
   }
 
-  public void setFuncionariNom(String funcionariNom) {
-    this.funcionariNom = funcionariNom;
+  public void setSignatureParameters(ScanWebSimpleSignatureParameters signatureParameters) {
+    this.signatureParameters = signatureParameters;
   }
 
-  public String getExpedientID() {
-    return expedientID;
+  public ScanWebSimpleArxiuRequiredParameters getArxiuRequiredParameters() {
+    return arxiuRequiredParameters;
   }
 
-  public void setExpedientID(String expedientID) {
-    this.expedientID = expedientID;
+  public void setArxiuRequiredParameters(
+      ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters) {
+    this.arxiuRequiredParameters = arxiuRequiredParameters;
   }
 
-  public int getView() {
-    return view;
+  public ScanWebSimpleArxiuOptionalParameters getArxiuOptionalParameters() {
+    return arxiuOptionalParameters;
   }
 
-  public void setView(int view) {
-    this.view = view;
-  }
-
-  public String getFuncionariNif() {
-    return funcionariNif;
-  }
-
-  public void setFuncionariNif(String funcionariNif) {
-    this.funcionariNif = funcionariNif;
+  public void setArxiuOptionalParameters(
+      ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters) {
+    this.arxiuOptionalParameters = arxiuOptionalParameters;
   }
 
 }

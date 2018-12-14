@@ -37,11 +37,27 @@ public class InfoCustodyValidator<T> implements InfoCustodyFields {
       }
     }
     
-    if (__vr.getFieldErrorCount(CUSTODYFILEURL) == 0) {
-      java.lang.String __custodyfileurl = (java.lang.String)__vr.getFieldValue(__target__,CUSTODYFILEURL);
-      if (__custodyfileurl!= null && __custodyfileurl.length() > 255) {
-        __vr.rejectValue(CUSTODYFILEURL, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CUSTODYFILEURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+    if (__vr.getFieldErrorCount(ARXIUEXPEDIENTID) == 0) {
+      java.lang.String __arxiuexpedientid = (java.lang.String)__vr.getFieldValue(__target__,ARXIUEXPEDIENTID);
+      if (__arxiuexpedientid!= null && __arxiuexpedientid.length() > 255) {
+        __vr.rejectValue(ARXIUEXPEDIENTID, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUEXPEDIENTID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ARXIUDOCUMENTID) == 0) {
+      java.lang.String __arxiudocumentid = (java.lang.String)__vr.getFieldValue(__target__,ARXIUDOCUMENTID);
+      if (__arxiudocumentid!= null && __arxiudocumentid.length() > 255) {
+        __vr.rejectValue(ARXIUDOCUMENTID, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUDOCUMENTID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(FILEURL) == 0) {
+      java.lang.String __fileurl = (java.lang.String)__vr.getFieldValue(__target__,FILEURL);
+      if (__fileurl!= null && __fileurl.length() > 255) {
+        __vr.rejectValue(FILEURL, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(FILEURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     

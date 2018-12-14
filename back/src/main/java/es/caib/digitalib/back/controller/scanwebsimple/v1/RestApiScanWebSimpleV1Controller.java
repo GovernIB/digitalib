@@ -153,7 +153,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public ResponseEntity<?> getTransactionID(HttpServletRequest request,
-      @RequestBody ScanWebSimpleGetTransactionIdRequest requestTransactionID) {
+      @RequestBody ScanWebSimpleGetTransactionIdRequest requestTransaction) {
 
     String language = "ca";
 
@@ -173,12 +173,12 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     }
 
     // Check de requestTransactionID
-    if (requestTransactionID == null) {
+    if (requestTransaction == null) {
       return generateServerError("El parametre d'entrada no pot ser null.");
     }
 
     // Valida Idioma
-    String lang = requestTransactionID.getLanguageUI();
+    String lang = requestTransaction.getLanguageUI();
     if (lang == null || lang.trim().length() == 0) {
       return generateServerError("El camp LanguageUI del tipus FirmaSimpleCommonInfo no pot ser null o buit.");
     }
@@ -186,7 +186,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     // XYZ ZZZ ZZZ Valida Idioma DOC
 
     // Valida Perfil
-    String scanWebProfile = requestTransactionID.getScanWebProfile();
+    String scanWebProfile = requestTransaction.getScanWebProfile();
     if (scanWebProfile == null || scanWebProfile.trim().length() == 0) {
       return generateServerError("El camp scanWebProfile no pot ser null o buit.");
     }
@@ -194,7 +194,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     UsuariAplicacioJPA usuariAplicacio = usuariAplicacioCache.get();
     
     // Valida VISTA
-    int view = requestTransactionID.getView();
+    int view = requestTransaction.getView();
 
     if (view == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN
         || view == ScanWebSimpleGetTransactionIdRequest.VIEW_IFRAME) {
@@ -206,12 +206,16 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
     }
 
+    String ip = request.getHeader("X-FORWARDED-FOR");
+    if (ip == null || "".equals(ip)) {
+      ip = request.getRemoteAddr();
+    }
 
     // Crea Transacció
     String transactionWebID;
     try {
-      TransaccioJPA transaccio = transaccioLogicaEjb.crearTransaccio(requestTransactionID,
-          usuariAplicacio, null, null);
+      TransaccioJPA transaccio = transaccioLogicaEjb.crearTransaccio(requestTransaction,
+          usuariAplicacio, null, null, ip);
       transactionWebID = transaccio.getTransactionWebId();
     } catch (I18NException e) {
       // XYZ ZZZ YTraduir

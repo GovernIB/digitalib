@@ -68,9 +68,15 @@ public class PluginDocumentCustodyLogicaEJB extends
     // return null;
     // }
 
+    log.info(" XYZ ZZZ custodiaAmbApiDocumentCustody:: PERFIL = " + perfil);
+    log.info(" XYZ ZZZ custodiaAmbApiDocumentCustody:: PERFIL.getPluginDocCustodyID = "
+        + perfil.getPluginDocCustodyID());
+
     IDocumentCustodyPlugin plugin;
     try {
+
       plugin = getInstanceByPluginID(perfil.getPluginDocCustodyID());
+
     } catch (I18NException e1) {
 
       final String msg = "XYZ ZZZ Error Instanciant PLugins de DocumentCustody: "
@@ -89,11 +95,18 @@ public class PluginDocumentCustodyLogicaEJB extends
       parameters.put("transaccio", transaccio);
       parameters.put("fitxerFirmat", fitxerFirmat);
 
+      
+      if (transaccio.getArxiuOptParamCustodyOrExpedientId() != null) {
+        // XYZ ZZZ Falta implementar que s'hagi de guardar en un CUSTODY DETERMINAT
+        log.error("\n\n Falta implementar que s'hagi definit un CUSTODY ID (no s'hauria de fer reserva) \n\n", new Exception());
+      }
+      
+      
       String custodyID = plugin.reserveCustodyID(parameters);
 
       InfoSignaturaJPA infoSignatura = transaccio.getInfoSignatura();
 
-      String tipusFirma = infoSignatura.getSignType();
+      //String tipusFirma = infoSignatura.getSignType();
       int modoFirma = infoSignatura.getSignMode();
 
       boolean esDetached = (modoFirma == FileInfoSignature.SIGN_MODE_EXPLICIT);
@@ -123,8 +136,36 @@ public class PluginDocumentCustodyLogicaEJB extends
 
         final Boolean attachedDocument = false;
         final String signatureType = infoSignatura.getSignType();
+        
+        String signatureTypeDC;
+        if (FileInfoSignature.SIGN_TYPE_PADES.equals(signatureType)) {
+          signatureTypeDC = SignatureCustody.PADES_SIGNATURE;
+        } else if (FileInfoSignature.SIGN_TYPE_CADES.equals(signatureType)) {
+          signatureTypeDC = SignatureCustody.CADES_SIGNATURE;
+        } else if (FileInfoSignature.SIGN_TYPE_CADES_ASIC_S.equals(signatureType)) {
+          signatureTypeDC = SignatureCustody.CADES_SIGNATURE;
+        } else if (FileInfoSignature.SIGN_TYPE_FACTURAE.equals(signatureType)) {
+            signatureTypeDC = SignatureCustody.XADES_SIGNATURE;
+        } else if (FileInfoSignature.SIGN_TYPE_ODF.equals(signatureType)) {
+          signatureTypeDC = SignatureCustody.ODF_SIGNATURE;
+        } else if (FileInfoSignature.SIGN_TYPE_OOXML.equals(signatureType)) {
+          signatureTypeDC = SignatureCustody.OOXML_SIGNATURE;
+        } else if (FileInfoSignature.SIGN_TYPE_PKCS1.equals(signatureType)) {
+          // XYZ ZZZ Traduir
+          throw new Exception("Firma de tipus PKCS1 no està suportada per DOCUMENT CUSTODY ");
+        } else if (FileInfoSignature.SIGN_TYPE_SMIME.equals(signatureType)) {
+          signatureTypeDC = SignatureCustody.SMIME_SIGNATURE;
+        } else if (FileInfoSignature.SIGN_TYPE_XADES.equals(signatureType)) {
+          signatureTypeDC = SignatureCustody.XADES_SIGNATURE;
+        } else if (FileInfoSignature.SIGN_TYPE_XADES_ASIC_S.equals(signatureType)) {
+          signatureTypeDC = SignatureCustody.XADES_SIGNATURE;
+        } else {
+          // XYZ ZZZ Traduir
+          throw new Exception("Firma de tipus " + signatureType + " no està suportada per DOCUMENT CUSTODY ");
+        }
+
         signatureCustody = new SignatureCustody(fitxerFirmat.getNom(), fitxerFirmat.getMime(),
-            signedData, signatureType, attachedDocument);
+            signedData, signatureTypeDC, attachedDocument);
       }
 
       // XYZ ZZZ Falten metadades
@@ -136,51 +177,54 @@ public class PluginDocumentCustodyLogicaEJB extends
       java.lang.String custodyFileUrl = plugin.getValidationUrl(custodyID, parameters);
       java.lang.String csv = plugin.getCsv(custodyID, parameters);
       java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(custodyID, parameters);
-      java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(custodyID, parameters);
+      java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(custodyID,
+          parameters);
 
-      InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyFileId, custodyFileUrl, csv,
-          csvValidationWeb, csvGenerationDefinition);
+      InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyFileId, null, null, custodyFileUrl,
+          csv, csvValidationWeb, csvGenerationDefinition);
 
       infoCust = (InfoCustodyJPA) infoCustodyEjb.create(infoCust);
 
       transaccio.setInfoCustodyID(infoCust.getInfoCustodyID());
 
       return infoCust;
-      
+
     } catch (I18NException e) {
       String msg = "XYZ ZZZ Error custodiant fitxer firmat(I18NException): "
           + I18NLogicUtils.getMessage(e, locale);
-      
+
       // XYZ ZZZ
       e.printStackTrace();
-      
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
 
     } catch (CustodyException e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(CustodyException): " + e.getMessage();
+      String msg = "XYZ ZZZ Error custodiant fitxer firmat(CustodyException): "
+          + e.getMessage();
 
       // XYZ ZZZ
       e.printStackTrace();
-      
+
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
     } catch (NotSupportedCustodyException e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(NotSupportedCustodyException): " + e.getMessage();
+      String msg = "XYZ ZZZ Error custodiant fitxer firmat(NotSupportedCustodyException): "
+          + e.getMessage();
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
-      
+
     } catch (MetadataFormatException e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(MetadataFormatException): " + e.getMessage();
+      String msg = "XYZ ZZZ Error custodiant fitxer firmat(MetadataFormatException): "
+          + e.getMessage();
 
       // XYZ ZZZ
       e.printStackTrace();
-      
+
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
@@ -189,12 +233,12 @@ public class PluginDocumentCustodyLogicaEJB extends
 
       // XYZ ZZZ
       e.printStackTrace();
-      
+
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
     }
-    
+
     return null;
 
   }

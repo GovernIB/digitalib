@@ -18,8 +18,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CUSTODYFILEID)}">
         <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CUSTODYFILEID)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CUSTODYFILEURL)}">
-        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CUSTODYFILEURL)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ARXIUEXPEDIENTID)}">
+        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.ARXIUEXPEDIENTID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ARXIUDOCUMENTID)}">
+        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.ARXIUDOCUMENTID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.FILEURL)}">
+        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.FILEURL)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSV)}">
         <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CSV)}</th>

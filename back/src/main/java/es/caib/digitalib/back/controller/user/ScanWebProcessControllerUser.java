@@ -1,7 +1,9 @@
 package es.caib.digitalib.back.controller.user;
 
 import java.net.URL;
+import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.fundaciobit.plugins.scanweb.api.ScanWebConfig;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleSignatureParameters;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -26,17 +29,19 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import es.caib.digitalib.back.controller.AbstractScanWebModuleController;
 import es.caib.digitalib.back.controller.AbstractScanWebProcessController;
 import es.caib.digitalib.back.form.ScanWebConfigForm;
 import es.caib.digitalib.back.form.ScanWebConfigValidator;
 import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.jpa.ConfiguracioGrupJPA;
+import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.jpa.UsuariPersonaJPA;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
-import es.caib.digitalib.logic.utils.ScanWebUtils;
-import es.caib.digitalib.model.fields.PerfilFields;
+import es.caib.digitalib.logic.utils.LogicUtils;
+import es.caib.digitalib.model.entity.Plugin;
+import es.caib.digitalib.model.entity.UsuariPersona;
+import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.utils.Constants;
 
@@ -68,10 +73,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
    * transaccioLogicaEjb;
    */
 
-  // XYZ ZZZ
-  // public static final String LAST_SCANNED_FILES = "LAST_SCANNED_FILES";
-  //
-  // public static final String LAST_CONFIG = "LAST_CONFIG";
+
 
   // XYZ ZZZ Eliminar
   @Autowired
@@ -90,6 +92,13 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     super();
   }
 
+  
+  public static final String SCANWEB_SESSION_BASEURL = "SCANWEB_SESSION_BASEURL";
+  
+  public static final String SCANWEB_SESSION_TIPUSPERFIL = "SCANWEB_SESSION_TIPUSPERFIL";
+  
+  public static final String SCANWEB_SESSION_TRANSACCIO = "SCANWEB_SESSION_TRANSACCIO";
+  
 
   @RequestMapping(value = "/start/{tipusPerfil}/**", method = RequestMethod.GET)
   public ModelAndView scanWebGet(HttpServletRequest request,
@@ -98,25 +107,84 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       ) throws Exception {
 
     
-    
     String requestURL = request.getRequestURL().toString();
     log.info("XYZ ZZZ requestURL = " + requestURL);
 
-    String baseURL64 = requestURL.split("/start/" + tipusPerfil +"/")[1];
+    String baseUrlFull = requestURL.split("/start/" + tipusPerfil +"/")[1];
     
-    log.info("XYZ ZZZ baseURL64 = " + baseURL64);
+    log.info("XYZ ZZZ baseUrlFull = " + baseUrlFull);
+    
+    log.info("XYZ ZZZ Tipus Perfil = " + tipusPerfil);
+   
+    /*
+    
+    request.getSession().setAttribute(SCANWEB_SESSION_BASEURL, baseURL);
+    request.getSession().setAttribute(SCANWEB_SESSION_TIPUSPERFIL, tipusPerfil);
+    
+
+    
+    // redireccionar a Transaccio Que mostri valors
+    
+    
+    
+    if (tipusPerfil == Constants.PERFIL_US_NOMES_ESCANEIG) {
+      // No necessitam més informacio
+      ModelAndView mav = new ModelAndView(new RedirectView(CONTEXTWEB + "/start", true));
+      return mav;
+    } else {
+      
+      ModelAndView mav = new ModelAndView(new RedirectView(ParametresSignaturaArxiuUserController.CONTEXTWEB + "/new", true));
+      return mav;
+    }
+    
+    
+    
+  }
+    
+  @RequestMapping(value = "/start", method = RequestMethod.GET)
+  public ModelAndView scanWebGet(HttpServletRequest request
+        //@PathVariable("tipusPerfil") int tipusPerfil
+        // ,  @PathVariable("baseURL64") String baseURL64
+        ) throws Exception {
+    
+    
+    String baseUrlFull = (String)request.getSession().getAttribute(SCANWEB_SESSION_BASEURL);
+    Integer tipusPerfil = (Integer)request.getSession().getAttribute(SCANWEB_SESSION_TIPUSPERFIL);
+    Transaccio parametresFirmaArxiu = (Transaccio) request.getSession().getAttribute(SCANWEB_SESSION_TRANSACCIO);
+    */
+    
+    log.info("XYZ ZZZ baseURLFull SESSION = " + baseUrlFull);
+    log.info("XYZ ZZZ Tipus Perfil SESSION = " + tipusPerfil);
+    /*
+    log.info("XYZ ZZZ parametresFirmaArxiu SESSION = " + parametresFirmaArxiu);
+    
+    // XYZ ZZZ CHECK de baseUrl i tipusperfil
+    
+    if (baseUrlFull == null || tipusPerfil == null || parametresFirmaArxiu == null) {
+      // XYZ ZZZ Traduir
+      HtmlUtils.saveMessageError(request,
+          "Perduda informació. Per favor torni a començar.");
+      ModelAndView mav = new ModelAndView(new RedirectView("/canviarPipella/user", true));
+      return mav;
+    }
+    
+    
+    request.getSession().removeAttribute(SCANWEB_SESSION_BASEURL);
+    request.getSession().removeAttribute(SCANWEB_SESSION_TIPUSPERFIL);
+    request.getSession().removeAttribute(SCANWEB_SESSION_TRANSACCIO);
+    */
     
     try {
 
       // XYZ ZZZ Llegir-ho de LoginINfo
       // Usuari Té configuració de grup assignada
 
-      String username = LoginInfo.getInstance().getUsername();
+      final String username = LoginInfo.getInstance().getUsername();
 
       log.info("XYZ ZZZ Username = " + username);
-      log.info("XYZ ZZZ Tipus Perfil = " + tipusPerfil);
+      
 
-      String baseURLFull = new String((baseURL64)); // Base64.decode
+      String baseURLFull = new String((baseUrlFull)); // Base64.decode
 
       log.info("XYZ ZZZ BaseURL ORIGINAL FULL = " + baseURLFull);
 
@@ -169,46 +237,86 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
           return mav;
       }
 
-      String scanWebProfile = perfilEjb.executeQueryOne(PerfilFields.CODI,
-          PerfilFields.PERFILID.equal(perfilID));
+      PerfilJPA perfil = perfilEjb.findByPrimaryKey(perfilID);
+      
+      final String scanWebProfileCodi = perfil.getCodi(); 
+      // perfilEjb.executeQueryOne(PerfilFields.CODI, PerfilFields.PERFILID.equal(perfilID));
 
-      log.info("PERFIL CODI = " + scanWebProfile);
-
-      // XYZ ZZZ M'ho han de passar de pagina web
-      String languageDoc = "ca";
-      String usernameRequest = username;
-
-      // XYZ ZZZ recollir de Web quan Copia Autentica
-      String ciutadaNif = null;
-      String ciutadaNom = null;
-      String funcionariNom = "Funcionari DeProfessio";
-      String funcionariUsername = username;
-      String funcionariNif = "12345678X";
-
-      // XYZ ZZZ recollir de Web quan Custodia
-      String expedientID = null;
-
-      Locale locale = LocaleContextHolder.getLocale();
-      String languageUI = locale.getLanguage();
+      log.info("PERFIL CODI = " + scanWebProfileCodi);
 
       final int view = ScanWebSimpleGetTransactionIdRequest.VIEW_IFRAME;
+      Locale locale = LocaleContextHolder.getLocale();
+      final String languageUI = locale.getLanguage();
+      
+      final String funcionariUsername = username;
 
       ScanWebSimpleGetTransactionIdRequest requestTransaction;
-      requestTransaction = new ScanWebSimpleGetTransactionIdRequest(scanWebProfile, view,
-          languageUI, languageDoc, usernameRequest, ciutadaNif, ciutadaNom,
-          funcionariUsername, funcionariNom, funcionariNif, expedientID);
+      requestTransaction = new ScanWebSimpleGetTransactionIdRequest(scanWebProfileCodi, view, languageUI, funcionariUsername);
+      
+      if(tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA || tipusPerfil == Constants.PERFIL_US_CUSTODIA) { 
+        // Establir informacio de Firma
 
-      // final String transactionWebID = internalGetTransacction();
-      //
-      // // Valida Perfil
-      // String scanWebProfile = requestTransactionID.getScanWebProfile();
-      // if (scanWebProfile == null || scanWebProfile.trim().length() == 0) {
-      // return generateServerError("El camp scanWebProfile no pot ser null o buit.");
-      // }
+        /* XYZ ZZZ AIXÔ JA HO OBTINDREM EN PAGINES POSTERIORS */
+        final String languageDoc = null; 
 
-      // String relativeControllerBase =
-      // ScanWebModuleController.getRelativeControllerBase(request,
-      // CONTEXTWEB);
+        UsuariPersona up = LoginInfo.getInstance().getUsuariPersona();
+        
+        String funcionariNom = up.getNom() + " " + up.getLlinatges();
+        String funcionariNif = up.getNif();
+        
+        ScanWebSimpleSignatureParameters signatureParameters = new ScanWebSimpleSignatureParameters(
+            languageDoc, funcionariNom, funcionariNif);
+        
+        requestTransaction.setSignatureParameters(signatureParameters);
+        
+      }
+      
+      
+      if(tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
+
+        /* XYZ ZZZ AIXÔ JA HO OBTINDREM EN PAGINES POSTERIORS
+        ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
+        arxiuRequiredParameters = new ScanWebSimpleArxiuRequiredParameters(
+            LogicUtils.stringToListString(parametresFirmaArxiu.getArxiuReqParamInteressats()),
+            parametresFirmaArxiu.getArxiuReqParamOrigen(), 
+            parametresFirmaArxiu.getArxiuReqParamDocEstatElabora(),
+            parametresFirmaArxiu.getArxiuReqParamDocumentTipus());
+        
+        requestTransaction.setArxiuRequiredParameters(arxiuRequiredParameters);
+        */
+        
+        // Arxiu Optional Parameters
+        
+        if (perfil.getPluginArxiuID() != null) {
+          // S'utilitza Arxiu enlloc de Custody. Necessitam aquests valors
+          
+          // Els tenc que obtenir dels parametres del plugin
+          
+          long pluginArxiuID = perfil.getPluginArxiuID();
+          
+          Plugin pluginArxiuJPA = pluginArxiuLogicaEjb.findByPrimaryKey(pluginArxiuID);
+
+          String propertiesStr = pluginArxiuJPA.getProperties();
+          Properties prop = LogicUtils.stringToProperties(propertiesStr);
+
+
+          String procedimentNom = prop.getProperty(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM.javaName);
+          String procedimentCodi = prop.getProperty(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI.javaName);
+          List<String> organs = LogicUtils.stringToListString(prop.getProperty(TransaccioFields.ARXIUOPTPARAMORGANS.javaName));
+          String serieDocumental = prop.getProperty(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL.javaName);
+          String custodyOrExpedientID = prop.getProperty(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID.javaName);
+          
+          
+          ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters;
+          arxiuOptionalParameters = new ScanWebSimpleArxiuOptionalParameters(procedimentNom,
+              procedimentCodi, organs, serieDocumental, custodyOrExpedientID);
+                             
+          requestTransaction.setArxiuOptionalParameters(arxiuOptionalParameters);
+          
+        }
+
+      }
+
 
       URL url = new URL(baseURLFull);
       
@@ -226,9 +334,15 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       // http://10.215.216.175:8080/digitalib/user/llistatperfilsdisponibles
 
       String urlRetorn = baseUrl + "/user/llistatperfilsdisponibles";
-
+      
+      
+      String ip = request.getHeader("X-FORWARDED-FOR");
+      if (ip == null || "".equals(ip)) {
+        ip = request.getRemoteAddr();
+      }
+  
       TransaccioJPA transaction = transaccioLogicaEjb.crearTransaccio(requestTransaction,
-          null, usuariPersona, urlRetorn);
+          null, usuariPersona, urlRetorn, ip);
 
       final String transactionWebID = transaction.getTransactionWebId();
 
@@ -242,18 +356,18 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       // "/"
       // + transactionWebID;
 
-      ScanWebConfig swc = ScanWebUtils.generateScanWebConfig(transaction, urlFinal);
+      //ScanWebConfig swc = ScanWebUtils.generateScanWebConfig(transaction, urlFinal);
 
       final boolean isPublic = false;
 
-      // /WEB-INF/views/plugindescan_contenidor.jsp
-      final String viewModel = "plugindescan_contenidor";
 
-      final boolean fullView = (transaction.getView() == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN);
+      //final boolean fullView = (transaction.getView() == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN);
 
-      ModelAndView mav = startScanWebProcess(request, viewModel,
-          transaction.getTransactionWebId(), swc, baseUrl,
-          AbstractScanWebModuleController.getContextWeb(isPublic), fullView);
+      ModelAndView mav = startScanWebProcess(request, transaction, isPublic, urlFinal, baseUrl);
+      // XYZ ZZZ
+          //, swc,    baseUrl,
+          //AbstractScanWebModuleController.getContextWeb(isPublic),
+          //fullView);
 
       return mav;
 
@@ -269,6 +383,8 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     }
 
   }
+
+
 
 //  protected int getTipusPerfil() {
 //    return 1; // Només Escaneig XYZ ZZZ Constants.PERFIL_US_NOMES_ESCANEIG

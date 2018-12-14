@@ -29,10 +29,14 @@ public class TransaccioForm extends DigitalIBBaseForm {
     super(__toClone);
       this.transaccio = __toClone.transaccio;
     this.listOfValuesForEstatCodi = __toClone.listOfValuesForEstatCodi;
+    this.listOfValuesForView = __toClone.listOfValuesForView;
+    this.listOfValuesForSignParamLanguageDoc = __toClone.listOfValuesForSignParamLanguageDoc;
+    this.listOfValuesForArxiuReqParamDocEstatElabora = __toClone.listOfValuesForArxiuReqParamDocEstatElabora;
+    this.listOfValuesForArxiuReqParamDocumentTipus = __toClone.listOfValuesForArxiuReqParamDocumentTipus;
+    this.listOfValuesForArxiuReqParamOrigen = __toClone.listOfValuesForArxiuReqParamOrigen;
+    this.listOfPerfilForPerfilID = __toClone.listOfPerfilForPerfilID;
     this.listOfInfoSignaturaForInfoSignaturaID = __toClone.listOfInfoSignaturaForInfoSignaturaID;
     this.listOfInfoCustodyForInfoCustodyID = __toClone.listOfInfoCustodyForInfoCustodyID;
-    this.listOfValuesForView = __toClone.listOfValuesForView;
-    this.listOfPerfilForPerfilID = __toClone.listOfPerfilForPerfilID;
   }
   
   public TransaccioForm(TransaccioJPA transaccio, boolean nou) {
@@ -88,6 +92,78 @@ public class TransaccioForm extends DigitalIBBaseForm {
 
 
 
+  private List<StringKeyValue> listOfValuesForView;
+
+  public List<StringKeyValue> getListOfValuesForView() {
+    return this.listOfValuesForView;
+  }
+
+  public void setListOfValuesForView(List<StringKeyValue> listOfValuesForView) {
+    this.listOfValuesForView = listOfValuesForView;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForSignParamLanguageDoc;
+
+  public List<StringKeyValue> getListOfValuesForSignParamLanguageDoc() {
+    return this.listOfValuesForSignParamLanguageDoc;
+  }
+
+  public void setListOfValuesForSignParamLanguageDoc(List<StringKeyValue> listOfValuesForSignParamLanguageDoc) {
+    this.listOfValuesForSignParamLanguageDoc = listOfValuesForSignParamLanguageDoc;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForArxiuReqParamDocEstatElabora;
+
+  public List<StringKeyValue> getListOfValuesForArxiuReqParamDocEstatElabora() {
+    return this.listOfValuesForArxiuReqParamDocEstatElabora;
+  }
+
+  public void setListOfValuesForArxiuReqParamDocEstatElabora(List<StringKeyValue> listOfValuesForArxiuReqParamDocEstatElabora) {
+    this.listOfValuesForArxiuReqParamDocEstatElabora = listOfValuesForArxiuReqParamDocEstatElabora;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForArxiuReqParamDocumentTipus;
+
+  public List<StringKeyValue> getListOfValuesForArxiuReqParamDocumentTipus() {
+    return this.listOfValuesForArxiuReqParamDocumentTipus;
+  }
+
+  public void setListOfValuesForArxiuReqParamDocumentTipus(List<StringKeyValue> listOfValuesForArxiuReqParamDocumentTipus) {
+    this.listOfValuesForArxiuReqParamDocumentTipus = listOfValuesForArxiuReqParamDocumentTipus;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForArxiuReqParamOrigen;
+
+  public List<StringKeyValue> getListOfValuesForArxiuReqParamOrigen() {
+    return this.listOfValuesForArxiuReqParamOrigen;
+  }
+
+  public void setListOfValuesForArxiuReqParamOrigen(List<StringKeyValue> listOfValuesForArxiuReqParamOrigen) {
+    this.listOfValuesForArxiuReqParamOrigen = listOfValuesForArxiuReqParamOrigen;
+  }
+
+
+
+  private List<StringKeyValue> listOfPerfilForPerfilID;
+
+  public List<StringKeyValue> getListOfPerfilForPerfilID() {
+    return this.listOfPerfilForPerfilID;
+  }
+
+  public void setListOfPerfilForPerfilID(List<StringKeyValue> listOfPerfilForPerfilID) {
+    this.listOfPerfilForPerfilID = listOfPerfilForPerfilID;
+  }
+
+
+
   private List<StringKeyValue> listOfInfoSignaturaForInfoSignaturaID;
 
   public List<StringKeyValue> getListOfInfoSignaturaForInfoSignaturaID() {
@@ -108,30 +184,6 @@ public class TransaccioForm extends DigitalIBBaseForm {
 
   public void setListOfInfoCustodyForInfoCustodyID(List<StringKeyValue> listOfInfoCustodyForInfoCustodyID) {
     this.listOfInfoCustodyForInfoCustodyID = listOfInfoCustodyForInfoCustodyID;
-  }
-
-
-
-  private List<StringKeyValue> listOfValuesForView;
-
-  public List<StringKeyValue> getListOfValuesForView() {
-    return this.listOfValuesForView;
-  }
-
-  public void setListOfValuesForView(List<StringKeyValue> listOfValuesForView) {
-    this.listOfValuesForView = listOfValuesForView;
-  }
-
-
-
-  private List<StringKeyValue> listOfPerfilForPerfilID;
-
-  public List<StringKeyValue> getListOfPerfilForPerfilID() {
-    return this.listOfPerfilForPerfilID;
-  }
-
-  public void setListOfPerfilForPerfilID(List<StringKeyValue> listOfPerfilForPerfilID) {
-    this.listOfPerfilForPerfilID = listOfPerfilForPerfilID;
   }
 
 

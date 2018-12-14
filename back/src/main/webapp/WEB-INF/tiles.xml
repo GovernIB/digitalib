@@ -67,6 +67,11 @@
     </definition>
     
     
+   <definition name="FirmaArxiuParametersForm_public" extends="user.emptylayout">
+        <put-attribute name="titol" value="transaccio.transaccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioForm.jsp" />
+    </definition>
+    
     
 
     <!--  ===========  COMMON  ================== -->
@@ -140,6 +145,11 @@
     
     <definition name="transaccioListUser" extends="user">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioList.jsp" />
+    </definition>
+
+    <definition name="FirmaArxiuParametersForm_user" extends="user.fullview">
+        <put-attribute name="titol" value="transaccio.transaccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioForm.jsp" />
     </definition>
 
 

@@ -62,3 +62,7 @@
 /scripts/sqlgenerator/genapp.log
 /scripts/sqlgenerator/digitalib_create_schema_caib.sql
 /scripts/sqlgenerator/digitalib_create_schema.sql
+/scripts/bbdd/1.0.0/postgresql/digitalib-all.sql
+/scanwebsimple/.project
+/scanwebsimple/.settings/org.eclipse.m2e.core.prefs
+/scripts/bbdd/1.0.0/postgresql/seycon-all.sql

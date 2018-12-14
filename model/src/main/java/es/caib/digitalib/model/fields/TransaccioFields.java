@@ -18,30 +18,38 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final TimestampField DATAFI = new TimestampField(_TABLE_MODEL, "dataFi", "datafi");
 	 public static final LongField USUARIAPLICACIOID = new LongField(_TABLE_MODEL, "usuariAplicacioId", "usuariaplicacioid");
 	 public static final LongField USUARIPERSONAID = new LongField(_TABLE_MODEL, "usuariPersonaId", "usuaripersonaid");
+	 public static final StringField IP = new StringField(_TABLE_MODEL, "ip", "ip");
+	 public static final StringField RETURNURL = new StringField(_TABLE_MODEL, "returnUrl", "returnurl");
 	 public static final IntegerField ESTATCODI = new IntegerField(_TABLE_MODEL, "estatCodi", "estatcodi");
 	 public static final StringField ESTATMISSATGE = new StringField(_TABLE_MODEL, "estatMissatge", "estatmissatge");
 	 public static final StringField ESTATEXCEPCIO = new StringField(_TABLE_MODEL, "estatExcepcio", "estatexcepcio");
 	 public static final LongField FITXERESCANEJATID = new LongField(_TABLE_MODEL, "fitxerEscanejatID", "fitxerescanejatid");
+	 public static final StringField HASHESCANEIG = new StringField(_TABLE_MODEL, "hashEscaneig", "hashescaneig");
 	 public static final LongField FITXERSIGNATURAID = new LongField(_TABLE_MODEL, "fitxerSignaturaID", "fitxersignaturaid");
+	 public static final StringField HASHFIRMA = new StringField(_TABLE_MODEL, "hashFirma", "hashfirma");
 	 public static final IntegerField INFOSCANPIXELTYPE = new IntegerField(_TABLE_MODEL, "infoScanPixelType", "infoscanpixeltype");
 	 public static final IntegerField INFOSCANRESOLUCIOPPP = new IntegerField(_TABLE_MODEL, "infoScanResolucioPpp", "infoscanresolucioppp");
 	 public static final BooleanField INFOSCANOCR = new BooleanField(_TABLE_MODEL, "infoScanOcr", "infoscanocr");
+	 public static final IntegerField VIEW = new IntegerField(_TABLE_MODEL, "view", "view");
+	 public static final StringField LANGUAGEUI = new StringField(_TABLE_MODEL, "languageUI", "languageui");
+	 public static final StringField FUNCIONARIUSERNAME = new StringField(_TABLE_MODEL, "funcionariUsername", "funcionariusername");
+	 public static final StringField SIGNPARAMFUNCIONARINOM = new StringField(_TABLE_MODEL, "signParamFuncionariNom", "signparamfuncionarinom");
+	 public static final StringField SIGNPARAMFUNCIONARINIF = new StringField(_TABLE_MODEL, "signParamFuncionariNif", "signparamfuncionarinif");
+	 public static final StringField SIGNPARAMLANGUAGEDOC = new StringField(_TABLE_MODEL, "signParamLanguageDoc", "signparamlanguagedoc");
+	 public static final StringField ARXIUREQPARAMDOCESTATELABORA = new StringField(_TABLE_MODEL, "arxiuReqParamDocEstatElabora", "arxiureqparamdocestatelabora");
+	 public static final StringField ARXIUREQPARAMDOCUMENTTIPUS = new StringField(_TABLE_MODEL, "arxiuReqParamDocumentTipus", "arxiureqparamdocumenttipus");
+	 public static final IntegerField ARXIUREQPARAMORIGEN = new IntegerField(_TABLE_MODEL, "arxiuReqParamOrigen", "arxiureqparamorigen");
+	 public static final StringField ARXIUREQPARAMINTERESSATS = new StringField(_TABLE_MODEL, "arxiuReqParamInteressats", "arxiureqparaminteressats");
+	 public static final StringField ARXIUREQPARAMCIUTADANIF = new StringField(_TABLE_MODEL, "arxiuReqParamCiutadaNif", "arxiureqparamciutadanif");
+	 public static final StringField ARXIUREQPARAMCIUTADANOM = new StringField(_TABLE_MODEL, "arxiuReqParamCiutadaNom", "arxiureqparamciutadanom");
+	 public static final StringField ARXIUOPTPARAMPROCEDIMENTCODI = new StringField(_TABLE_MODEL, "arxiuOptParamProcedimentCodi", "arxiuoptparamprocedimentcodi");
+	 public static final StringField ARXIUOPTPARAMPROCEDIMENTNOM = new StringField(_TABLE_MODEL, "arxiuOptParamProcedimentNom", "arxiuoptparamprocedimentnom");
+	 public static final StringField ARXIUOPTPARAMORGANS = new StringField(_TABLE_MODEL, "arxiuOptParamOrgans", "arxiuoptparamorgans");
+	 public static final StringField ARXIUOPTPARAMSERIEDOCUMENTAL = new StringField(_TABLE_MODEL, "arxiuOptParamSerieDocumental", "arxiuoptparamseriedocumental");
+	 public static final StringField ARXIUOPTPARAMCUSTODYOREXPEDIENTID = new StringField(_TABLE_MODEL, "arxiuOptParamCustodyOrExpedientId", "arxiuoptparamcustorexpid");
+	 public static final LongField PERFILID = new LongField(_TABLE_MODEL, "perfilID", "perfilid");
 	 public static final LongField INFOSIGNATURAID = new LongField(_TABLE_MODEL, "infoSignaturaID", "infosignaturaid");
 	 public static final LongField INFOCUSTODYID = new LongField(_TABLE_MODEL, "infoCustodyID", "infocustodyid");
-	 public static final StringField LANGUAGEUI = new StringField(_TABLE_MODEL, "languageUI", "languageui");
-	 public static final StringField LANGUAGEDOC = new StringField(_TABLE_MODEL, "languageDoc", "languagedoc");
-	 public static final StringField CIUTADANIF = new StringField(_TABLE_MODEL, "ciutadaNif", "ciutadanif");
-	 public static final StringField CIUTADANOM = new StringField(_TABLE_MODEL, "ciutadaNom", "ciutadanom");
-	 public static final StringField FUNCIONARIUSERNAME = new StringField(_TABLE_MODEL, "funcionariUsername", "funcionariusername");
-	 public static final StringField FUNCIONARINOM = new StringField(_TABLE_MODEL, "funcionariNom", "funcionarinom");
-	 public static final StringField EXPEDIENT = new StringField(_TABLE_MODEL, "expedient", "expedient");
-	 public static final StringField USERNAMEREQUEST = new StringField(_TABLE_MODEL, "usernameRequest", "usernamerequest");
-	 public static final StringField RETURNURL = new StringField(_TABLE_MODEL, "returnUrl", "returnurl");
-	 public static final IntegerField VIEW = new IntegerField(_TABLE_MODEL, "view", "view");
-	 public static final LongField PERFILID = new LongField(_TABLE_MODEL, "perfilID", "perfilid");
-	 public static final StringField IP = new StringField(_TABLE_MODEL, "ip", "ip");
-	 public static final StringField HASHESCANEIG = new StringField(_TABLE_MODEL, "hashEscaneig", "hashescaneig");
-	 public static final StringField HASHFIRMA = new StringField(_TABLE_MODEL, "hashFirma", "hashfirma");
 
 
   public static final Field<?>[] ALL_TRANSACCIO_FIELDS = {
@@ -51,30 +59,38 @@ public interface TransaccioFields extends java.io.Serializable {
     DATAFI,
     USUARIAPLICACIOID,
     USUARIPERSONAID,
+    IP,
+    RETURNURL,
     ESTATCODI,
     ESTATMISSATGE,
     ESTATEXCEPCIO,
     FITXERESCANEJATID,
+    HASHESCANEIG,
     FITXERSIGNATURAID,
+    HASHFIRMA,
     INFOSCANPIXELTYPE,
     INFOSCANRESOLUCIOPPP,
     INFOSCANOCR,
-    INFOSIGNATURAID,
-    INFOCUSTODYID,
-    LANGUAGEUI,
-    LANGUAGEDOC,
-    CIUTADANIF,
-    CIUTADANOM,
-    FUNCIONARIUSERNAME,
-    FUNCIONARINOM,
-    EXPEDIENT,
-    USERNAMEREQUEST,
-    RETURNURL,
     VIEW,
+    LANGUAGEUI,
+    FUNCIONARIUSERNAME,
+    SIGNPARAMFUNCIONARINOM,
+    SIGNPARAMFUNCIONARINIF,
+    SIGNPARAMLANGUAGEDOC,
+    ARXIUREQPARAMDOCESTATELABORA,
+    ARXIUREQPARAMDOCUMENTTIPUS,
+    ARXIUREQPARAMORIGEN,
+    ARXIUREQPARAMINTERESSATS,
+    ARXIUREQPARAMCIUTADANIF,
+    ARXIUREQPARAMCIUTADANOM,
+    ARXIUOPTPARAMPROCEDIMENTCODI,
+    ARXIUOPTPARAMPROCEDIMENTNOM,
+    ARXIUOPTPARAMORGANS,
+    ARXIUOPTPARAMSERIEDOCUMENTAL,
+    ARXIUOPTPARAMCUSTODYOREXPEDIENTID,
     PERFILID,
-    IP,
-    HASHESCANEIG,
-    HASHFIRMA
+    INFOSIGNATURAID,
+    INFOCUSTODYID
   };
 
 

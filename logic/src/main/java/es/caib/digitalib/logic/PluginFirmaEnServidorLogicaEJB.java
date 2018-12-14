@@ -66,8 +66,14 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
     PerfilJPA perfil = transaccio.getPerfil();
 
+    
+    log.info("\n\n" +"XYZ ZZZ ZZZ  perfil.getScanFormatFitxer() => " + perfil.getScanFormatFitxer() + "\n\n");
+
+    
+    
     Fitxer fitxerSignat;
     // XYZ ZZZ NOMES SUPORTAM PERFIL PDF
+    // XYZ ZZZ NO ESTA BË !!!!!
     if (IScanWebPlugin.SCANTYPE_PDF.equals(perfil.getScanFormatFitxer())) {
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge("XYZ ZZZ Nomes es suporta el Format de Escaneig PDF. "
@@ -121,7 +127,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
     String location = "Palma"; // XYZ ZZZ
     String signerEmail = null; // XYZ ZZZ
     final int signNumber = 1;
-    String languageSign = transaccio.getLanguageDoc();
+    String languageSign = transaccio.getSignParamLanguageDoc();
 
     String signAlgorithm = FileInfoSignature.SIGN_ALGORITHM_SHA1;
 
@@ -136,7 +142,8 @@ public class PluginFirmaEnServidorLogicaEJB extends
     final File previusSignatureDetachedFile = null;
     final int signOperation = FileInfoSignature.SIGN_OPERATION_SIGN;
 
-    final String expedientCode = transaccio.getExpedient();
+    final String expedientCode = null;
+    // XYZ ZZZ S'ha de demanar ????
     final String expedientName = null;
     final String expedientUrl = null;
     final String procedureCode = null;
@@ -227,8 +234,8 @@ public class PluginFirmaEnServidorLogicaEJB extends
       // XYZ ZZZ Afegir Informacio de la Firma
 
       // XYZ ZZZ FALTA INFO
-      java.lang.String eniTipoFirma = null;
-      java.lang.String eniPerfilFirma = null;
+      java.lang.String eniTipoFirma = "TF06";
+      java.lang.String eniPerfilFirma = epes?"EPES":"BES";
       java.lang.String eniRolFirma = null;
 
       java.lang.String eniSignerName = null;
@@ -238,6 +245,9 @@ public class PluginFirmaEnServidorLogicaEJB extends
       Boolean checkAdministrationIdOfSigner = null;
       Boolean checkDocumentModifications = null;
       Boolean checkValidationSignature = null;
+      
+      log.info("XYZ ZZZ    eniTipoFirma = " + eniTipoFirma);
+      log.info("XYZ ZZZ    eniPerfilFirma = " + eniPerfilFirma);
 
       InfoSignaturaJPA infoSign = new InfoSignaturaJPA(signOperation, signType, signAlgorithm,
           signMode, signaturesTableLocation, userRequiresTimeStamp, epes, eniTipoFirma,

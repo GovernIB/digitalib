@@ -13,15 +13,20 @@ import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.ApiScanWebSimple;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuRequiredParameters;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfile;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfiles;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleFile;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleScanResult;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleSignatureParameters;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStartTransactionRequest;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 
@@ -34,76 +39,102 @@ public class ApiScanWebSimpleTester {
 
   public static void main(String[] args) {
 
-    final String languageUI = "ca";
     ApiScanWebSimple api = null;
     String transactionID = null;
+    final String languageUI = "ca";
     try {
- 
+
       api = getApiScanWebSimple();
 
+      // Recuperar Perfils disponibles
+
       ScanWebSimpleAvailableProfiles profiles = api.getAvailableProfiles(languageUI);
-      
+
       List<ScanWebSimpleAvailableProfile> profilesList = profiles.getAvailableProfiles();
-      
+
       if (profilesList == null || profilesList.size() == 0) {
         System.out.println("NO HI HA PERFILS PER AQUEST USUARI APLICACIÓ");
         return;
       }
-          
+
       System.out.println(" ---- Perfils Disponibles ----");
-      String scanWebProfile=null;
+      ScanWebSimpleAvailableProfile scanWebProfile = null;
       for (ScanWebSimpleAvailableProfile profile : profilesList) {
-        System.out.println("   + " + profile.getName() + "(CODI: " + profile.getCode() + "): " + profile.getDescription());
-        scanWebProfile = profile.getCode();
+        System.out.println("   + " + profile.getName() + "(CODI: " + profile.getCode() + "): "
+            + profile.getDescription());
+        scanWebProfile = profile;
       }
+
       System.out.println(" -----------------------------");
 
       // Recuperar un ID de transacció
-      
-      {
-        
-        String languageDoc = "ca";
-        String usernameRequest = "anadal";
-        
-        String ciutadaNif = "12345678C";
-        String ciutadaNom = "Antoni Nadal";
-        
-        String funcionariUsername = "u00666";
-        String funcionariNom = "Funcionari DeProfessio";
-        String funcionariNif = "12345678X";
-        String expedientID = null;
-        
-        final int view = ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN;
-        
 
-        ScanWebSimpleGetTransactionIdRequest commonInfo;
-        commonInfo = new ScanWebSimpleGetTransactionIdRequest(scanWebProfile, view,
-            languageUI, languageDoc, usernameRequest, ciutadaNif, ciutadaNom,
-            funcionariUsername, funcionariNom, funcionariNif, expedientID);
+      {
+
+        final String profileCode = scanWebProfile.getCode();
+        final int view = ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN;
+
+        String funcionariUsername = "u00666";
+
+        ScanWebSimpleGetTransactionIdRequest transacctionIdRequest;
+
+        switch (scanWebProfile.getProfileType()) {
+
+        case ScanWebSimpleAvailableProfile.PROFILE_TYPE_ONLY_SCAN:
+
+          transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode, view,
+              languageUI, funcionariUsername);
+
+          break;
+
+        case ScanWebSimpleAvailableProfile.PROFILE_TYPE_SCAN_AND_SIGNATURE: {
+          ScanWebSimpleSignatureParameters signatureParameters = getSignatureParameters();
+
+          transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode, view,
+              languageUI, funcionariUsername, signatureParameters);
+        }
+
+          break;
+
+        case ScanWebSimpleAvailableProfile.PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY: {
+
+          ScanWebSimpleSignatureParameters signatureParameters = getSignatureParameters();
+
+          ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
+          arxiuRequiredParameters = getArxiuRequiredParameters();
+
+          // See getArxiuOptionalParameters() sample
+          ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters = null;
+
+          transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode, view,
+              languageUI, funcionariUsername, signatureParameters, arxiuRequiredParameters,
+              arxiuOptionalParameters);
+        }
+          break;
+
+        default:
+          throw new Exception("Tipus de perfil desconegut " + scanWebProfile.getProfileType());
+
+        }
 
         // Enviam la part comu de la transacció
-        transactionID = api.getTransactionID(commonInfo);
+        transactionID = api.getTransactionID(transacctionIdRequest);
         System.out.println("languageUI = |" + languageUI + "|");
         System.out.println("TransactionID = |" + transactionID + "|");
-     }
-      
-      
-      
-     // Servidor TEMPORAL
+      }
+
+      // Servidor TEMPORAL
       String host = Inet4Address.getLocalHost().getHostAddress();
       final int port = 1989;
       final String returnUrl = "http://" + host + ":" + port + "/returnurl/" + transactionID;
 
-      
-
       ScanWebSimpleStartTransactionRequest startTransactionInfo;
-      startTransactionInfo = new ScanWebSimpleStartTransactionRequest(transactionID,
-          returnUrl);
+      startTransactionInfo = new ScanWebSimpleStartTransactionRequest(transactionID, returnUrl);
 
       String redirectUrl = api.startTransaction(startTransactionInfo);
 
       System.out.println("RedirectUrl = " + redirectUrl);
-      
+
       if (Desktop.isDesktopSupported()) {
         Desktop.getDesktop().browse(new URI(redirectUrl));
       } else {
@@ -151,39 +182,37 @@ public class ApiScanWebSimpleTester {
       {
 
         System.out.println(ScanWebSimpleScanResult.toString(result));
-       
+
         {
           File scanFile = new File("scanfile." + result.getScannedFileInfo().getFormatFile());
-          
+
           FileOutputStream fos = new FileOutputStream(scanFile);
           fos.write(result.getScannedFile().getData());
           fos.flush();
           fos.close();
-          
+
           System.out.println();
           System.out.println();
           System.out.println("Fitxer Escanejat guardat a " + scanFile.getAbsolutePath());
         }
         {
           ScanWebSimpleFile detachedSignInfo = result.getDetachedSignatureFile();
-          
+
           if (detachedSignInfo != null) {
             File detached = new File("detached_sign_scanfile.sig");
-            
+
             FileOutputStream fos = new FileOutputStream(detached);
             fos.write(detachedSignInfo.getData());
             fos.flush();
             fos.close();
-            
-            System.out.println("Firma Detached del Fitxer Scanejat guardat a " + detached.getAbsolutePath());
+
+            System.out.println("Firma Detached del Fitxer Scanejat guardat a "
+                + detached.getAbsolutePath());
           }
         }
-        
-         
+
       } // Final Case Firma OK
       } // Final Switch Firma
-  
-  
 
     } catch (Exception e) {
       // TODO: handle exception
@@ -197,6 +226,101 @@ public class ApiScanWebSimpleTester {
         }
       }
     }
+  }
+
+  public static ScanWebSimpleArxiuRequiredParameters getArxiuRequiredParameters() {
+    final List<String> interessats = new ArrayList<String>(Arrays.asList("12345678X",
+        "87654321Z"));
+
+    /**
+     * ScanWebSimpleArxiuRequiredParameters.CIUTADA
+     * ScanWebSimpleArxiuRequiredParameters.ORIGEN_ADMINISTRACIO
+     */
+    final int origen = ScanWebSimpleArxiuRequiredParameters.ORIGEN_ADMINISTRACIO;
+
+    /**
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_ORIGINAL
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_COPIA_CF
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_COPIA_DP
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_COPIA_PR
+     */
+    final String documentEstatElaboracio = ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_ORIGINAL;
+
+    /**
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_RESOLUCIO
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ACORD
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_CONTRACTE
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_CONVENI
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_DECLARACIO
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_COMUNICACIO
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_NOTIFICACIO
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_PUBLICACIO
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_JUSTIFICANT_RECEPCIO
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ACTA
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_CERTIFICAT
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_DILIGENCIA
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_INFORME
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_SOLICITUD
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_DENUNCIA
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALEGACIO
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_RECURS
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_COMUNICACIO_CIUTADA
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_FACTURA
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES_INCAUTATS
+     * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES
+     */
+    final String documentTipus = ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_RESOLUCIO;
+    
+    String ciutadaNif = "11223344C";
+
+    String ciutadaNom = "Pep Gonella";
+
+    ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
+    arxiuRequiredParameters = new ScanWebSimpleArxiuRequiredParameters(
+        ciutadaNif, ciutadaNom, interessats, origen,
+        documentEstatElaboracio, documentTipus);
+    return arxiuRequiredParameters;
+  }
+
+  /**
+   * 
+   */
+  public static ScanWebSimpleArxiuOptionalParameters getArxiuOptionalParameters() {
+
+
+
+    String procedimentNom = "Subvenciones empleo";
+
+    String procedimentCodi = "organo1_PRO_123456789";
+
+    List<String> organs = new ArrayList<String>(Arrays.asList("A04013511"));
+
+    String serieDocumental = null; // = "S0001"
+
+    // Que ho generi automàticament
+    // Si volem que ho fiqui dins d'un expedient o Custòdia ja existent llavors donar-li valor.
+    String custodyOrExpedientID = null; // b5d48d50-9e63-4c56-a67a-fe896bdfb130
+
+    ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters = null;
+    arxiuOptionalParameters = new ScanWebSimpleArxiuOptionalParameters(
+        procedimentNom, procedimentCodi, organs, serieDocumental, custodyOrExpedientID);
+
+    return arxiuOptionalParameters;
+  }
+
+  /**
+   * 
+   * @return
+   */
+  public static ScanWebSimpleSignatureParameters getSignatureParameters() {
+    final String languageDoc = "ca";
+    final String funcionariNom = "Funcionari DeProfessio";
+    final String funcionariNif = "12345678X";
+
+    ScanWebSimpleSignatureParameters signatureParameters;
+    signatureParameters = new ScanWebSimpleSignatureParameters(languageDoc, funcionariNom,
+        funcionariNif);
+    return signatureParameters;
   }
 
   public static void readFromSocket(int port) throws Exception {

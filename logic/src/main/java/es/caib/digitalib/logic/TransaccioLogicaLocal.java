@@ -44,5 +44,6 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
    * @throws I18NException
    */
   public TransaccioJPA crearTransaccio(ScanWebSimpleGetTransactionIdRequest requestTransaction,
-      UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String returnURL) throws I18NException;
+      UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, 
+      String returnURL, String ip) throws I18NException;
 }

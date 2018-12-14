@@ -42,17 +42,33 @@ public class TransaccioValidator<T> implements TransaccioFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATAINICI)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,IP, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(IP)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,RETURNURL, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RETURNURL)));
+
     __vr.rejectIfEmptyOrWhitespace(__target__,ESTATCODI, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ESTATCODI)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,VIEW, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(VIEW)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,LANGUAGEUI, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LANGUAGEUI)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,FUNCIONARIUSERNAME, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(FUNCIONARIUSERNAME)));
+
     __vr.rejectIfEmptyOrWhitespace(__target__,PERFILID, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERFILID)));
-
-    __vr.rejectIfEmptyOrWhitespace(__target__,IP, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(IP)));
 
     // Check size
     if (__vr.getFieldErrorCount(TRANSACTIONWEBID) == 0) {
@@ -60,6 +76,22 @@ public class TransaccioValidator<T> implements TransaccioFields {
       if (__transactionwebid!= null && __transactionwebid.length() > 100) {
         __vr.rejectValue(TRANSACTIONWEBID, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TRANSACTIONWEBID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(IP) == 0) {
+      java.lang.String __ip = (java.lang.String)__vr.getFieldValue(__target__,IP);
+      if (__ip!= null && __ip.length() > 50) {
+        __vr.rejectValue(IP, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(IP)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(50)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(RETURNURL) == 0) {
+      java.lang.String __returnurl = (java.lang.String)__vr.getFieldValue(__target__,RETURNURL);
+      if (__returnurl!= null && __returnurl.length() > 255) {
+        __vr.rejectValue(RETURNURL, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RETURNURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     
@@ -79,86 +111,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
       }
     }
     
-    if (__vr.getFieldErrorCount(LANGUAGEUI) == 0) {
-      java.lang.String __languageui = (java.lang.String)__vr.getFieldValue(__target__,LANGUAGEUI);
-      if (__languageui!= null && __languageui.length() > 10) {
-        __vr.rejectValue(LANGUAGEUI, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LANGUAGEUI)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(10)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(LANGUAGEDOC) == 0) {
-      java.lang.String __languagedoc = (java.lang.String)__vr.getFieldValue(__target__,LANGUAGEDOC);
-      if (__languagedoc!= null && __languagedoc.length() > 10) {
-        __vr.rejectValue(LANGUAGEDOC, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LANGUAGEDOC)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(10)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(CIUTADANIF) == 0) {
-      java.lang.String __ciutadanif = (java.lang.String)__vr.getFieldValue(__target__,CIUTADANIF);
-      if (__ciutadanif!= null && __ciutadanif.length() > 15) {
-        __vr.rejectValue(CIUTADANIF, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CIUTADANIF)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(15)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(CIUTADANOM) == 0) {
-      java.lang.String __ciutadanom = (java.lang.String)__vr.getFieldValue(__target__,CIUTADANOM);
-      if (__ciutadanom!= null && __ciutadanom.length() > 255) {
-        __vr.rejectValue(CIUTADANOM, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CIUTADANOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(FUNCIONARIUSERNAME) == 0) {
-      java.lang.String __funcionariusername = (java.lang.String)__vr.getFieldValue(__target__,FUNCIONARIUSERNAME);
-      if (__funcionariusername!= null && __funcionariusername.length() > 255) {
-        __vr.rejectValue(FUNCIONARIUSERNAME, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(FUNCIONARIUSERNAME)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(FUNCIONARINOM) == 0) {
-      java.lang.String __funcionarinom = (java.lang.String)__vr.getFieldValue(__target__,FUNCIONARINOM);
-      if (__funcionarinom!= null && __funcionarinom.length() > 255) {
-        __vr.rejectValue(FUNCIONARINOM, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(FUNCIONARINOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(EXPEDIENT) == 0) {
-      java.lang.String __expedient = (java.lang.String)__vr.getFieldValue(__target__,EXPEDIENT);
-      if (__expedient!= null && __expedient.length() > 255) {
-        __vr.rejectValue(EXPEDIENT, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(EXPEDIENT)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(USERNAMEREQUEST) == 0) {
-      java.lang.String __usernamerequest = (java.lang.String)__vr.getFieldValue(__target__,USERNAMEREQUEST);
-      if (__usernamerequest!= null && __usernamerequest.length() > 255) {
-        __vr.rejectValue(USERNAMEREQUEST, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAMEREQUEST)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(RETURNURL) == 0) {
-      java.lang.String __returnurl = (java.lang.String)__vr.getFieldValue(__target__,RETURNURL);
-      if (__returnurl!= null && __returnurl.length() > 255) {
-        __vr.rejectValue(RETURNURL, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RETURNURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(IP) == 0) {
-      java.lang.String __ip = (java.lang.String)__vr.getFieldValue(__target__,IP);
-      if (__ip!= null && __ip.length() > 50) {
-        __vr.rejectValue(IP, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(IP)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(50)));
-      }
-    }
-    
     if (__vr.getFieldErrorCount(HASHESCANEIG) == 0) {
       java.lang.String __hashescaneig = (java.lang.String)__vr.getFieldValue(__target__,HASHESCANEIG);
       if (__hashescaneig!= null && __hashescaneig.length() > 255) {
@@ -172,6 +124,159 @@ public class TransaccioValidator<T> implements TransaccioFields {
       if (__hashfirma!= null && __hashfirma.length() > 255) {
         __vr.rejectValue(HASHFIRMA, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(HASHFIRMA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(LANGUAGEUI) == 0) {
+      java.lang.String __languageui = (java.lang.String)__vr.getFieldValue(__target__,LANGUAGEUI);
+      if (__languageui!= null && __languageui.length() > 10) {
+        __vr.rejectValue(LANGUAGEUI, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LANGUAGEUI)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(10)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(FUNCIONARIUSERNAME) == 0) {
+      java.lang.String __funcionariusername = (java.lang.String)__vr.getFieldValue(__target__,FUNCIONARIUSERNAME);
+      if (__funcionariusername!= null && __funcionariusername.length() > 255) {
+        __vr.rejectValue(FUNCIONARIUSERNAME, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(FUNCIONARIUSERNAME)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(SIGNPARAMFUNCIONARINOM) == 0) {
+      java.lang.String __signparamfuncionarinom = (java.lang.String)__vr.getFieldValue(__target__,SIGNPARAMFUNCIONARINOM);
+      if (__signparamfuncionarinom!= null && __signparamfuncionarinom.length() > 255) {
+        __vr.rejectValue(SIGNPARAMFUNCIONARINOM, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SIGNPARAMFUNCIONARINOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(SIGNPARAMFUNCIONARINIF) == 0) {
+      java.lang.String __signparamfuncionarinif = (java.lang.String)__vr.getFieldValue(__target__,SIGNPARAMFUNCIONARINIF);
+      if (__signparamfuncionarinif!= null && __signparamfuncionarinif.length() > 255) {
+        __vr.rejectValue(SIGNPARAMFUNCIONARINIF, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SIGNPARAMFUNCIONARINIF)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(SIGNPARAMLANGUAGEDOC) == 0) {
+      java.lang.String __signparamlanguagedoc = (java.lang.String)__vr.getFieldValue(__target__,SIGNPARAMLANGUAGEDOC);
+      if (__signparamlanguagedoc!= null && __signparamlanguagedoc.length() > 10) {
+        __vr.rejectValue(SIGNPARAMLANGUAGEDOC, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SIGNPARAMLANGUAGEDOC)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(10)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(SIGNPARAMLANGUAGEDOC) == 0) {
+      String val = String.valueOf(__vr.getFieldValue(__target__,SIGNPARAMLANGUAGEDOC));
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(ca|es|en|de)");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(SIGNPARAMLANGUAGEDOC, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SIGNPARAMLANGUAGEDOC)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(ARXIUREQPARAMDOCESTATELABORA) == 0) {
+      java.lang.String __arxiureqparamdocestatelabora = (java.lang.String)__vr.getFieldValue(__target__,ARXIUREQPARAMDOCESTATELABORA);
+      if (__arxiureqparamdocestatelabora!= null && __arxiureqparamdocestatelabora.length() > 4) {
+        __vr.rejectValue(ARXIUREQPARAMDOCESTATELABORA, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMDOCESTATELABORA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(4)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ARXIUREQPARAMDOCESTATELABORA) == 0) {
+      String val = String.valueOf(__vr.getFieldValue(__target__,ARXIUREQPARAMDOCESTATELABORA));
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(EE01|EE02|EE03|EE04|EE99)");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(ARXIUREQPARAMDOCESTATELABORA, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMDOCESTATELABORA)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(ARXIUREQPARAMDOCUMENTTIPUS) == 0) {
+      java.lang.String __arxiureqparamdocumenttipus = (java.lang.String)__vr.getFieldValue(__target__,ARXIUREQPARAMDOCUMENTTIPUS);
+      if (__arxiureqparamdocumenttipus!= null && __arxiureqparamdocumenttipus.length() > 4) {
+        __vr.rejectValue(ARXIUREQPARAMDOCUMENTTIPUS, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMDOCUMENTTIPUS)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(4)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ARXIUREQPARAMDOCUMENTTIPUS) == 0) {
+      String val = String.valueOf(__vr.getFieldValue(__target__,ARXIUREQPARAMDOCUMENTTIPUS));
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(TD01|TD02|TD03|TD04|TD05|TD06|TD07|TD08|TD09|TD10|TD11|TD12|TD13|TD14|TD15|TD16|TD17|TD18|TD19|TD20|TD99)");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(ARXIUREQPARAMDOCUMENTTIPUS, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMDOCUMENTTIPUS)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(ARXIUREQPARAMINTERESSATS) == 0) {
+      java.lang.String __arxiureqparaminteressats = (java.lang.String)__vr.getFieldValue(__target__,ARXIUREQPARAMINTERESSATS);
+      if (__arxiureqparaminteressats!= null && __arxiureqparaminteressats.length() > 255) {
+        __vr.rejectValue(ARXIUREQPARAMINTERESSATS, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMINTERESSATS)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ARXIUREQPARAMCIUTADANIF) == 0) {
+      java.lang.String __arxiureqparamciutadanif = (java.lang.String)__vr.getFieldValue(__target__,ARXIUREQPARAMCIUTADANIF);
+      if (__arxiureqparamciutadanif!= null && __arxiureqparamciutadanif.length() > 15) {
+        __vr.rejectValue(ARXIUREQPARAMCIUTADANIF, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMCIUTADANIF)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(15)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ARXIUREQPARAMCIUTADANOM) == 0) {
+      java.lang.String __arxiureqparamciutadanom = (java.lang.String)__vr.getFieldValue(__target__,ARXIUREQPARAMCIUTADANOM);
+      if (__arxiureqparamciutadanom!= null && __arxiureqparamciutadanom.length() > 255) {
+        __vr.rejectValue(ARXIUREQPARAMCIUTADANOM, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMCIUTADANOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ARXIUOPTPARAMPROCEDIMENTCODI) == 0) {
+      java.lang.String __arxiuoptparamprocedimentcodi = (java.lang.String)__vr.getFieldValue(__target__,ARXIUOPTPARAMPROCEDIMENTCODI);
+      if (__arxiuoptparamprocedimentcodi!= null && __arxiuoptparamprocedimentcodi.length() > 255) {
+        __vr.rejectValue(ARXIUOPTPARAMPROCEDIMENTCODI, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUOPTPARAMPROCEDIMENTCODI)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ARXIUOPTPARAMPROCEDIMENTNOM) == 0) {
+      java.lang.String __arxiuoptparamprocedimentnom = (java.lang.String)__vr.getFieldValue(__target__,ARXIUOPTPARAMPROCEDIMENTNOM);
+      if (__arxiuoptparamprocedimentnom!= null && __arxiuoptparamprocedimentnom.length() > 255) {
+        __vr.rejectValue(ARXIUOPTPARAMPROCEDIMENTNOM, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUOPTPARAMPROCEDIMENTNOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ARXIUOPTPARAMORGANS) == 0) {
+      java.lang.String __arxiuoptparamorgans = (java.lang.String)__vr.getFieldValue(__target__,ARXIUOPTPARAMORGANS);
+      if (__arxiuoptparamorgans!= null && __arxiuoptparamorgans.length() > 255) {
+        __vr.rejectValue(ARXIUOPTPARAMORGANS, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUOPTPARAMORGANS)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ARXIUOPTPARAMSERIEDOCUMENTAL) == 0) {
+      java.lang.String __arxiuoptparamseriedocumental = (java.lang.String)__vr.getFieldValue(__target__,ARXIUOPTPARAMSERIEDOCUMENTAL);
+      if (__arxiuoptparamseriedocumental!= null && __arxiuoptparamseriedocumental.length() > 255) {
+        __vr.rejectValue(ARXIUOPTPARAMSERIEDOCUMENTAL, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUOPTPARAMSERIEDOCUMENTAL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ARXIUOPTPARAMCUSTODYOREXPEDIENTID) == 0) {
+      java.lang.String __arxiuoptparamcustodyorexpedientid = (java.lang.String)__vr.getFieldValue(__target__,ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
+      if (__arxiuoptparamcustodyorexpedientid!= null && __arxiuoptparamcustodyorexpedientid.length() > 255) {
+        __vr.rejectValue(ARXIUOPTPARAMCUSTODYOREXPEDIENTID, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUOPTPARAMCUSTODYOREXPEDIENTID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     
@@ -214,6 +319,18 @@ public class TransaccioValidator<T> implements TransaccioFields {
     }
 
     // Fields with References to Other tables 
+    if (__vr.getFieldErrorCount(PERFILID) == 0) {
+      java.lang.Long __perfilid = (java.lang.Long)__vr.getFieldValue(__target__,PERFILID);
+      Long __count_ = null;
+      try { __count_ = __perfilManager.count(PerfilFields.PERFILID.equal(__perfilid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+      if (__count_ == null || __count_ == 0) {        
+        __vr.rejectValue(PERFILID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfil"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfilID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__perfilid)));
+      }
+    }
+
     if (__vr.getFieldErrorCount(INFOSIGNATURAID) == 0) {
       java.lang.Long __infosignaturaid = (java.lang.Long)__vr.getFieldValue(__target__,INFOSIGNATURAID);
       if (__infosignaturaid != null ) {
@@ -239,18 +356,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("infoCustody.infoCustodyID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__infocustodyid)));
         }
-      }
-    }
-
-    if (__vr.getFieldErrorCount(PERFILID) == 0) {
-      java.lang.Long __perfilid = (java.lang.Long)__vr.getFieldValue(__target__,PERFILID);
-      Long __count_ = null;
-      try { __count_ = __perfilManager.count(PerfilFields.PERFILID.equal(__perfilid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-      if (__count_ == null || __count_ == 0) {        
-        __vr.rejectValue(PERFILID, "error.notfound",
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfil"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfilID"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__perfilid)));
       }
     }
 

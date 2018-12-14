@@ -34,10 +34,20 @@
           ${infoCustody.custodyFileId}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CUSTODYFILEURL)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ARXIUEXPEDIENTID)}">
           <td>
-                       <c:if test="${ not empty infoCustody.custodyFileUrl}">
-               <a href="${infoCustody.custodyFileUrl}" target="_blank">${infoCustody.custodyFileUrl}</a>
+          ${infoCustody.arxiuExpedientId}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ARXIUDOCUMENTID)}">
+          <td>
+          ${infoCustody.arxiuDocumentId}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.FILEURL)}">
+          <td>
+                       <c:if test="${ not empty infoCustody.fileUrl}">
+               <a href="${infoCustody.fileUrl}" target="_blank">${infoCustody.fileUrl}</a>
              </c:if>
 
           </td>

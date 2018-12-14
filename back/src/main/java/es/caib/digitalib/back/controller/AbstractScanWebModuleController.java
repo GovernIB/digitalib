@@ -58,7 +58,9 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     // Miram la transacció
     TransaccioJPA transaccio = transaccioLogicaEjb
         .searchTransaccioByTransactionWebID(transactionWebID);
-
+    
+    log.error("\n\n XYZ ZZZ selectScanWebModule:: transaccio.getSignParamLanguageDoc() => " + transaccio.getSignParamLanguageDoc());
+    
     // XYZ ZZZ Revisar si esta caducada (mirar que ja hi ha mètodes)
 
     long pluginSelectedID = transaccio.getPerfil().getPluginScanWebID();

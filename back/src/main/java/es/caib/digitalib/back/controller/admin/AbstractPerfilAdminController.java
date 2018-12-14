@@ -412,7 +412,7 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 							new Object[]{I18NUtils.tradueix(get(PLUGINARXIUID))},
 							null);
 				}
-				perfil.setPluginArxiuID(null);
+				perfil.setPluginDocCustodyID(null);				
 				break;
 
 			case Constants.TIPUS_CUSTODIA_DOCUMENTCUSTODY :
@@ -422,7 +422,8 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 							new Object[]{I18NUtils
 									.tradueix(get(PLUGINDOCCUSTODYID))}, null);
 				}
-				perfil.setPluginDocCustodyID(null);
+				perfil.setPluginArxiuID(null);
+				
 				break;
 		}
 	}

@@ -142,6 +142,28 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.String ip;
+
+  public java.lang.String getIp() {
+    return this.ip;
+  }
+
+  public void setIp(java.lang.String ip) {
+    this.ip = ip;
+  }
+
+
+  private java.lang.String returnUrl;
+
+  public java.lang.String getReturnUrl() {
+    return this.returnUrl;
+  }
+
+  public void setReturnUrl(java.lang.String returnUrl) {
+    this.returnUrl = returnUrl;
+  }
+
+
   private java.lang.Integer estatCodiDesde;
 
   public java.lang.Integer getEstatCodiDesde() {
@@ -183,6 +205,28 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setEstatExcepcio(java.lang.String estatExcepcio) {
     this.estatExcepcio = estatExcepcio;
+  }
+
+
+  private java.lang.String hashEscaneig;
+
+  public java.lang.String getHashEscaneig() {
+    return this.hashEscaneig;
+  }
+
+  public void setHashEscaneig(java.lang.String hashEscaneig) {
+    this.hashEscaneig = hashEscaneig;
+  }
+
+
+  private java.lang.String hashFirma;
+
+  public java.lang.String getHashFirma() {
+    return this.hashFirma;
+  }
+
+  public void setHashFirma(java.lang.String hashFirma) {
+    this.hashFirma = hashFirma;
   }
 
 
@@ -230,6 +274,237 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.Integer viewDesde;
+
+  public java.lang.Integer getViewDesde() {
+    return this.viewDesde;
+  }
+
+  public void setViewDesde(java.lang.Integer viewDesde) {
+    this.viewDesde = viewDesde;
+  }
+
+
+  private java.lang.Integer viewFins;
+
+  public java.lang.Integer getViewFins() {
+    return this.viewFins;
+  }
+
+  public void setViewFins(java.lang.Integer viewFins) {
+    this.viewFins = viewFins;
+  }
+
+
+  private java.lang.String languageUI;
+
+  public java.lang.String getLanguageUI() {
+    return this.languageUI;
+  }
+
+  public void setLanguageUI(java.lang.String languageUI) {
+    this.languageUI = languageUI;
+  }
+
+
+  private java.lang.String funcionariUsername;
+
+  public java.lang.String getFuncionariUsername() {
+    return this.funcionariUsername;
+  }
+
+  public void setFuncionariUsername(java.lang.String funcionariUsername) {
+    this.funcionariUsername = funcionariUsername;
+  }
+
+
+  private java.lang.String signParamFuncionariNom;
+
+  public java.lang.String getSignParamFuncionariNom() {
+    return this.signParamFuncionariNom;
+  }
+
+  public void setSignParamFuncionariNom(java.lang.String signParamFuncionariNom) {
+    this.signParamFuncionariNom = signParamFuncionariNom;
+  }
+
+
+  private java.lang.String signParamFuncionariNif;
+
+  public java.lang.String getSignParamFuncionariNif() {
+    return this.signParamFuncionariNif;
+  }
+
+  public void setSignParamFuncionariNif(java.lang.String signParamFuncionariNif) {
+    this.signParamFuncionariNif = signParamFuncionariNif;
+  }
+
+
+  private java.lang.String signParamLanguageDoc;
+
+  public java.lang.String getSignParamLanguageDoc() {
+    return this.signParamLanguageDoc;
+  }
+
+  public void setSignParamLanguageDoc(java.lang.String signParamLanguageDoc) {
+    this.signParamLanguageDoc = signParamLanguageDoc;
+  }
+
+
+  private java.lang.String arxiuReqParamDocEstatElabora;
+
+  public java.lang.String getArxiuReqParamDocEstatElabora() {
+    return this.arxiuReqParamDocEstatElabora;
+  }
+
+  public void setArxiuReqParamDocEstatElabora(java.lang.String arxiuReqParamDocEstatElabora) {
+    this.arxiuReqParamDocEstatElabora = arxiuReqParamDocEstatElabora;
+  }
+
+
+  private java.lang.String arxiuReqParamDocumentTipus;
+
+  public java.lang.String getArxiuReqParamDocumentTipus() {
+    return this.arxiuReqParamDocumentTipus;
+  }
+
+  public void setArxiuReqParamDocumentTipus(java.lang.String arxiuReqParamDocumentTipus) {
+    this.arxiuReqParamDocumentTipus = arxiuReqParamDocumentTipus;
+  }
+
+
+  private java.lang.Integer arxiuReqParamOrigenDesde;
+
+  public java.lang.Integer getArxiuReqParamOrigenDesde() {
+    return this.arxiuReqParamOrigenDesde;
+  }
+
+  public void setArxiuReqParamOrigenDesde(java.lang.Integer arxiuReqParamOrigenDesde) {
+    this.arxiuReqParamOrigenDesde = arxiuReqParamOrigenDesde;
+  }
+
+
+  private java.lang.Integer arxiuReqParamOrigenFins;
+
+  public java.lang.Integer getArxiuReqParamOrigenFins() {
+    return this.arxiuReqParamOrigenFins;
+  }
+
+  public void setArxiuReqParamOrigenFins(java.lang.Integer arxiuReqParamOrigenFins) {
+    this.arxiuReqParamOrigenFins = arxiuReqParamOrigenFins;
+  }
+
+
+  private java.lang.String arxiuReqParamInteressats;
+
+  public java.lang.String getArxiuReqParamInteressats() {
+    return this.arxiuReqParamInteressats;
+  }
+
+  public void setArxiuReqParamInteressats(java.lang.String arxiuReqParamInteressats) {
+    this.arxiuReqParamInteressats = arxiuReqParamInteressats;
+  }
+
+
+  private java.lang.String arxiuReqParamCiutadaNif;
+
+  public java.lang.String getArxiuReqParamCiutadaNif() {
+    return this.arxiuReqParamCiutadaNif;
+  }
+
+  public void setArxiuReqParamCiutadaNif(java.lang.String arxiuReqParamCiutadaNif) {
+    this.arxiuReqParamCiutadaNif = arxiuReqParamCiutadaNif;
+  }
+
+
+  private java.lang.String arxiuReqParamCiutadaNom;
+
+  public java.lang.String getArxiuReqParamCiutadaNom() {
+    return this.arxiuReqParamCiutadaNom;
+  }
+
+  public void setArxiuReqParamCiutadaNom(java.lang.String arxiuReqParamCiutadaNom) {
+    this.arxiuReqParamCiutadaNom = arxiuReqParamCiutadaNom;
+  }
+
+
+  private java.lang.String arxiuOptParamProcedimentCodi;
+
+  public java.lang.String getArxiuOptParamProcedimentCodi() {
+    return this.arxiuOptParamProcedimentCodi;
+  }
+
+  public void setArxiuOptParamProcedimentCodi(java.lang.String arxiuOptParamProcedimentCodi) {
+    this.arxiuOptParamProcedimentCodi = arxiuOptParamProcedimentCodi;
+  }
+
+
+  private java.lang.String arxiuOptParamProcedimentNom;
+
+  public java.lang.String getArxiuOptParamProcedimentNom() {
+    return this.arxiuOptParamProcedimentNom;
+  }
+
+  public void setArxiuOptParamProcedimentNom(java.lang.String arxiuOptParamProcedimentNom) {
+    this.arxiuOptParamProcedimentNom = arxiuOptParamProcedimentNom;
+  }
+
+
+  private java.lang.String arxiuOptParamOrgans;
+
+  public java.lang.String getArxiuOptParamOrgans() {
+    return this.arxiuOptParamOrgans;
+  }
+
+  public void setArxiuOptParamOrgans(java.lang.String arxiuOptParamOrgans) {
+    this.arxiuOptParamOrgans = arxiuOptParamOrgans;
+  }
+
+
+  private java.lang.String arxiuOptParamSerieDocumental;
+
+  public java.lang.String getArxiuOptParamSerieDocumental() {
+    return this.arxiuOptParamSerieDocumental;
+  }
+
+  public void setArxiuOptParamSerieDocumental(java.lang.String arxiuOptParamSerieDocumental) {
+    this.arxiuOptParamSerieDocumental = arxiuOptParamSerieDocumental;
+  }
+
+
+  private java.lang.String arxiuOptParamCustodyOrExpedientId;
+
+  public java.lang.String getArxiuOptParamCustodyOrExpedientId() {
+    return this.arxiuOptParamCustodyOrExpedientId;
+  }
+
+  public void setArxiuOptParamCustodyOrExpedientId(java.lang.String arxiuOptParamCustodyOrExpedientId) {
+    this.arxiuOptParamCustodyOrExpedientId = arxiuOptParamCustodyOrExpedientId;
+  }
+
+
+  private java.lang.Long perfilIDDesde;
+
+  public java.lang.Long getPerfilIDDesde() {
+    return this.perfilIDDesde;
+  }
+
+  public void setPerfilIDDesde(java.lang.Long perfilIDDesde) {
+    this.perfilIDDesde = perfilIDDesde;
+  }
+
+
+  private java.lang.Long perfilIDFins;
+
+  public java.lang.Long getPerfilIDFins() {
+    return this.perfilIDFins;
+  }
+
+  public void setPerfilIDFins(java.lang.Long perfilIDFins) {
+    this.perfilIDFins = perfilIDFins;
+  }
+
+
   private java.lang.Long infoSignaturaIDDesde;
 
   public java.lang.Long getInfoSignaturaIDDesde() {
@@ -274,182 +549,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
-  private java.lang.String languageUI;
-
-  public java.lang.String getLanguageUI() {
-    return this.languageUI;
-  }
-
-  public void setLanguageUI(java.lang.String languageUI) {
-    this.languageUI = languageUI;
-  }
-
-
-  private java.lang.String languageDoc;
-
-  public java.lang.String getLanguageDoc() {
-    return this.languageDoc;
-  }
-
-  public void setLanguageDoc(java.lang.String languageDoc) {
-    this.languageDoc = languageDoc;
-  }
-
-
-  private java.lang.String ciutadaNif;
-
-  public java.lang.String getCiutadaNif() {
-    return this.ciutadaNif;
-  }
-
-  public void setCiutadaNif(java.lang.String ciutadaNif) {
-    this.ciutadaNif = ciutadaNif;
-  }
-
-
-  private java.lang.String ciutadaNom;
-
-  public java.lang.String getCiutadaNom() {
-    return this.ciutadaNom;
-  }
-
-  public void setCiutadaNom(java.lang.String ciutadaNom) {
-    this.ciutadaNom = ciutadaNom;
-  }
-
-
-  private java.lang.String funcionariUsername;
-
-  public java.lang.String getFuncionariUsername() {
-    return this.funcionariUsername;
-  }
-
-  public void setFuncionariUsername(java.lang.String funcionariUsername) {
-    this.funcionariUsername = funcionariUsername;
-  }
-
-
-  private java.lang.String funcionariNom;
-
-  public java.lang.String getFuncionariNom() {
-    return this.funcionariNom;
-  }
-
-  public void setFuncionariNom(java.lang.String funcionariNom) {
-    this.funcionariNom = funcionariNom;
-  }
-
-
-  private java.lang.String expedient;
-
-  public java.lang.String getExpedient() {
-    return this.expedient;
-  }
-
-  public void setExpedient(java.lang.String expedient) {
-    this.expedient = expedient;
-  }
-
-
-  private java.lang.String usernameRequest;
-
-  public java.lang.String getUsernameRequest() {
-    return this.usernameRequest;
-  }
-
-  public void setUsernameRequest(java.lang.String usernameRequest) {
-    this.usernameRequest = usernameRequest;
-  }
-
-
-  private java.lang.String returnUrl;
-
-  public java.lang.String getReturnUrl() {
-    return this.returnUrl;
-  }
-
-  public void setReturnUrl(java.lang.String returnUrl) {
-    this.returnUrl = returnUrl;
-  }
-
-
-  private java.lang.Integer viewDesde;
-
-  public java.lang.Integer getViewDesde() {
-    return this.viewDesde;
-  }
-
-  public void setViewDesde(java.lang.Integer viewDesde) {
-    this.viewDesde = viewDesde;
-  }
-
-
-  private java.lang.Integer viewFins;
-
-  public java.lang.Integer getViewFins() {
-    return this.viewFins;
-  }
-
-  public void setViewFins(java.lang.Integer viewFins) {
-    this.viewFins = viewFins;
-  }
-
-
-  private java.lang.Long perfilIDDesde;
-
-  public java.lang.Long getPerfilIDDesde() {
-    return this.perfilIDDesde;
-  }
-
-  public void setPerfilIDDesde(java.lang.Long perfilIDDesde) {
-    this.perfilIDDesde = perfilIDDesde;
-  }
-
-
-  private java.lang.Long perfilIDFins;
-
-  public java.lang.Long getPerfilIDFins() {
-    return this.perfilIDFins;
-  }
-
-  public void setPerfilIDFins(java.lang.Long perfilIDFins) {
-    this.perfilIDFins = perfilIDFins;
-  }
-
-
-  private java.lang.String ip;
-
-  public java.lang.String getIp() {
-    return this.ip;
-  }
-
-  public void setIp(java.lang.String ip) {
-    this.ip = ip;
-  }
-
-
-  private java.lang.String hashEscaneig;
-
-  public java.lang.String getHashEscaneig() {
-    return this.hashEscaneig;
-  }
-
-  public void setHashEscaneig(java.lang.String hashEscaneig) {
-    this.hashEscaneig = hashEscaneig;
-  }
-
-
-  private java.lang.String hashFirma;
-
-  public java.lang.String getHashFirma() {
-    return this.hashFirma;
-  }
-
-  public void setHashFirma(java.lang.String hashFirma) {
-    this.hashFirma = hashFirma;
-  }
-
-
   public TransaccioFilterForm() {
   }
   
@@ -466,46 +565,59 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.usuariAplicacioIdFins = __toClone.usuariAplicacioIdFins;
     this.usuariPersonaIdDesde = __toClone.usuariPersonaIdDesde;
     this.usuariPersonaIdFins = __toClone.usuariPersonaIdFins;
+    this.ip = __toClone.ip;
+    this.returnUrl = __toClone.returnUrl;
     this.estatCodiDesde = __toClone.estatCodiDesde;
     this.estatCodiFins = __toClone.estatCodiFins;
     this.estatMissatge = __toClone.estatMissatge;
     this.estatExcepcio = __toClone.estatExcepcio;
+    this.hashEscaneig = __toClone.hashEscaneig;
+    this.hashFirma = __toClone.hashFirma;
     this.infoScanPixelTypeDesde = __toClone.infoScanPixelTypeDesde;
     this.infoScanPixelTypeFins = __toClone.infoScanPixelTypeFins;
     this.infoScanResolucioPppDesde = __toClone.infoScanResolucioPppDesde;
     this.infoScanResolucioPppFins = __toClone.infoScanResolucioPppFins;
+    this.viewDesde = __toClone.viewDesde;
+    this.viewFins = __toClone.viewFins;
+    this.languageUI = __toClone.languageUI;
+    this.funcionariUsername = __toClone.funcionariUsername;
+    this.signParamFuncionariNom = __toClone.signParamFuncionariNom;
+    this.signParamFuncionariNif = __toClone.signParamFuncionariNif;
+    this.signParamLanguageDoc = __toClone.signParamLanguageDoc;
+    this.arxiuReqParamDocEstatElabora = __toClone.arxiuReqParamDocEstatElabora;
+    this.arxiuReqParamDocumentTipus = __toClone.arxiuReqParamDocumentTipus;
+    this.arxiuReqParamOrigenDesde = __toClone.arxiuReqParamOrigenDesde;
+    this.arxiuReqParamOrigenFins = __toClone.arxiuReqParamOrigenFins;
+    this.arxiuReqParamInteressats = __toClone.arxiuReqParamInteressats;
+    this.arxiuReqParamCiutadaNif = __toClone.arxiuReqParamCiutadaNif;
+    this.arxiuReqParamCiutadaNom = __toClone.arxiuReqParamCiutadaNom;
+    this.arxiuOptParamProcedimentCodi = __toClone.arxiuOptParamProcedimentCodi;
+    this.arxiuOptParamProcedimentNom = __toClone.arxiuOptParamProcedimentNom;
+    this.arxiuOptParamOrgans = __toClone.arxiuOptParamOrgans;
+    this.arxiuOptParamSerieDocumental = __toClone.arxiuOptParamSerieDocumental;
+    this.arxiuOptParamCustodyOrExpedientId = __toClone.arxiuOptParamCustodyOrExpedientId;
+    this.perfilIDDesde = __toClone.perfilIDDesde;
+    this.perfilIDFins = __toClone.perfilIDFins;
     this.infoSignaturaIDDesde = __toClone.infoSignaturaIDDesde;
     this.infoSignaturaIDFins = __toClone.infoSignaturaIDFins;
     this.infoCustodyIDDesde = __toClone.infoCustodyIDDesde;
     this.infoCustodyIDFins = __toClone.infoCustodyIDFins;
-    this.languageUI = __toClone.languageUI;
-    this.languageDoc = __toClone.languageDoc;
-    this.ciutadaNif = __toClone.ciutadaNif;
-    this.ciutadaNom = __toClone.ciutadaNom;
-    this.funcionariUsername = __toClone.funcionariUsername;
-    this.funcionariNom = __toClone.funcionariNom;
-    this.expedient = __toClone.expedient;
-    this.usernameRequest = __toClone.usernameRequest;
-    this.returnUrl = __toClone.returnUrl;
-    this.viewDesde = __toClone.viewDesde;
-    this.viewFins = __toClone.viewFins;
-    this.perfilIDDesde = __toClone.perfilIDDesde;
-    this.perfilIDFins = __toClone.perfilIDFins;
-    this.ip = __toClone.ip;
-    this.hashEscaneig = __toClone.hashEscaneig;
-    this.hashFirma = __toClone.hashFirma;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
+    this.mapOfValuesForView = __toClone.mapOfValuesForView;
+    this.mapOfValuesForSignParamLanguageDoc = __toClone.mapOfValuesForSignParamLanguageDoc;
+    this.mapOfValuesForArxiuReqParamDocEstatElabora = __toClone.mapOfValuesForArxiuReqParamDocEstatElabora;
+    this.mapOfValuesForArxiuReqParamDocumentTipus = __toClone.mapOfValuesForArxiuReqParamDocumentTipus;
+    this.mapOfValuesForArxiuReqParamOrigen = __toClone.mapOfValuesForArxiuReqParamOrigen;
+    this.mapOfPerfilForPerfilID = __toClone.mapOfPerfilForPerfilID;
     this.mapOfInfoSignaturaForInfoSignaturaID = __toClone.mapOfInfoSignaturaForInfoSignaturaID;
     this.mapOfInfoCustodyForInfoCustodyID = __toClone.mapOfInfoCustodyForInfoCustodyID;
-    this.mapOfValuesForView = __toClone.mapOfValuesForView;
-    this.mapOfPerfilForPerfilID = __toClone.mapOfPerfilForPerfilID;
   }
   
   /* ========= UTILS ========== */
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TRANSACTIONWEBID ,ESTATMISSATGE ,USERNAMEREQUEST ,RETURNURL }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TRANSACTIONWEBID ,RETURNURL ,ESTATMISSATGE }));
   }
 
   @Override
@@ -545,6 +657,78 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
 
 
+  private Map<String, String> mapOfValuesForView;
+
+  public Map<String, String> getMapOfValuesForView() {
+    return this.mapOfValuesForView;
+  }
+
+  public void setMapOfValuesForView(Map<String, String> mapOfValuesForView) {
+    this.mapOfValuesForView = mapOfValuesForView;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForSignParamLanguageDoc;
+
+  public Map<String, String> getMapOfValuesForSignParamLanguageDoc() {
+    return this.mapOfValuesForSignParamLanguageDoc;
+  }
+
+  public void setMapOfValuesForSignParamLanguageDoc(Map<String, String> mapOfValuesForSignParamLanguageDoc) {
+    this.mapOfValuesForSignParamLanguageDoc = mapOfValuesForSignParamLanguageDoc;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForArxiuReqParamDocEstatElabora;
+
+  public Map<String, String> getMapOfValuesForArxiuReqParamDocEstatElabora() {
+    return this.mapOfValuesForArxiuReqParamDocEstatElabora;
+  }
+
+  public void setMapOfValuesForArxiuReqParamDocEstatElabora(Map<String, String> mapOfValuesForArxiuReqParamDocEstatElabora) {
+    this.mapOfValuesForArxiuReqParamDocEstatElabora = mapOfValuesForArxiuReqParamDocEstatElabora;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForArxiuReqParamDocumentTipus;
+
+  public Map<String, String> getMapOfValuesForArxiuReqParamDocumentTipus() {
+    return this.mapOfValuesForArxiuReqParamDocumentTipus;
+  }
+
+  public void setMapOfValuesForArxiuReqParamDocumentTipus(Map<String, String> mapOfValuesForArxiuReqParamDocumentTipus) {
+    this.mapOfValuesForArxiuReqParamDocumentTipus = mapOfValuesForArxiuReqParamDocumentTipus;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForArxiuReqParamOrigen;
+
+  public Map<String, String> getMapOfValuesForArxiuReqParamOrigen() {
+    return this.mapOfValuesForArxiuReqParamOrigen;
+  }
+
+  public void setMapOfValuesForArxiuReqParamOrigen(Map<String, String> mapOfValuesForArxiuReqParamOrigen) {
+    this.mapOfValuesForArxiuReqParamOrigen = mapOfValuesForArxiuReqParamOrigen;
+  }
+
+
+
+  private Map<String, String> mapOfPerfilForPerfilID;
+
+  public Map<String, String> getMapOfPerfilForPerfilID() {
+    return this.mapOfPerfilForPerfilID;
+  }
+
+  public void setMapOfPerfilForPerfilID(Map<String, String> mapOfPerfilForPerfilID) {
+    this.mapOfPerfilForPerfilID = mapOfPerfilForPerfilID;
+  }
+
+
+
   private Map<String, String> mapOfInfoSignaturaForInfoSignaturaID;
 
   public Map<String, String> getMapOfInfoSignaturaForInfoSignaturaID() {
@@ -565,30 +749,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setMapOfInfoCustodyForInfoCustodyID(Map<String, String> mapOfInfoCustodyForInfoCustodyID) {
     this.mapOfInfoCustodyForInfoCustodyID = mapOfInfoCustodyForInfoCustodyID;
-  }
-
-
-
-  private Map<String, String> mapOfValuesForView;
-
-  public Map<String, String> getMapOfValuesForView() {
-    return this.mapOfValuesForView;
-  }
-
-  public void setMapOfValuesForView(Map<String, String> mapOfValuesForView) {
-    this.mapOfValuesForView = mapOfValuesForView;
-  }
-
-
-
-  private Map<String, String> mapOfPerfilForPerfilID;
-
-  public Map<String, String> getMapOfPerfilForPerfilID() {
-    return this.mapOfPerfilForPerfilID;
-  }
-
-  public void setMapOfPerfilForPerfilID(Map<String, String> mapOfPerfilForPerfilID) {
-    this.mapOfPerfilForPerfilID = mapOfPerfilForPerfilID;
   }
 
 

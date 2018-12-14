@@ -30,6 +30,12 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USUARIPERSONAID)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.USUARIPERSONAID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.IP)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.IP)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.RETURNURL)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.RETURNURL)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATCODI)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ESTATCODI)}</th>
         </c:if>
@@ -42,8 +48,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FITXERESCANEJATID)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.FITXERESCANEJATID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHESCANEIG)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.HASHESCANEIG)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FITXERSIGNATURAID)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.FITXERSIGNATURAID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHFIRMA)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.HASHFIRMA)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANPIXELTYPE)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANPIXELTYPE)}</th>
@@ -54,53 +66,65 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANOCR)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANOCR)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.VIEW)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.VIEW)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.LANGUAGEUI)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.LANGUAGEUI)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FUNCIONARIUSERNAME)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.FUNCIONARIUSERNAME)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARINOM)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.SIGNPARAMFUNCIONARINOM)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARINIF)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.SIGNPARAMFUNCIONARINIF)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMLANGUAGEDOC)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.SIGNPARAMLANGUAGEDOC)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMORIGEN)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMORIGEN)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMINTERESSATS)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMINTERESSATS)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMCIUTADANIF)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMCIUTADANIF)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMCIUTADANOM)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMCIUTADANOM)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMORGANS)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUOPTPARAMORGANS)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.PERFILID)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.PERFILID)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSIGNATURAID)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSIGNATURAID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOCUSTODYID)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOCUSTODYID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.LANGUAGEUI)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.LANGUAGEUI)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.LANGUAGEDOC)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.LANGUAGEDOC)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.CIUTADANIF)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.CIUTADANIF)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.CIUTADANOM)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.CIUTADANOM)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FUNCIONARIUSERNAME)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.FUNCIONARIUSERNAME)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FUNCIONARINOM)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.FUNCIONARINOM)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.EXPEDIENT)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.EXPEDIENT)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USERNAMEREQUEST)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.USERNAMEREQUEST)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.RETURNURL)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.RETURNURL)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.VIEW)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.VIEW)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.PERFILID)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.PERFILID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.IP)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.IP)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHESCANEIG)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.HASHESCANEIG)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHFIRMA)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.HASHFIRMA)}</th>
         </c:if>
 
 
