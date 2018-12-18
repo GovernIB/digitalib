@@ -61,10 +61,10 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public ConfiguracioFirmaQueryPath CONFIGURACIOFIRMAS() {
+  public ConfiguracioFirmaQueryPath CONFIGURACIOFIRMA_PLUGINSEGELLATIDS() {
     return new ConfiguracioFirmaQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "configuracioFirmas" + ".";
+          return PluginQueryPath.this.getQueryPath() + "configuracioFirma_pluginsegellatids" + ".";
       }
     });
   }
@@ -75,10 +75,10 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public PerfilQueryPath PERFIL_PLUGINFIRMASERVIDORIDS() {
-    return new PerfilQueryPath(new QueryPath() {
+  public ConfiguracioFirmaQueryPath CONFIGURACIOFIRMA_PLUGINFIRMASERVIDORIDS() {
+    return new ConfiguracioFirmaQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "perfil_pluginfirmaservidorids" + ".";
+          return PluginQueryPath.this.getQueryPath() + "configuracioFirma_pluginfirmaservidorids" + ".";
       }
     });
   }
@@ -103,10 +103,10 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public PerfilQueryPath PERFIL_PLUGINSCANWEBIDS() {
+  public PerfilQueryPath PERFIL_PLUGINDOCCUSTODYIDS() {
     return new PerfilQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "perfil_pluginscanwebids" + ".";
+          return PluginQueryPath.this.getQueryPath() + "perfil_plugindoccustodyids" + ".";
       }
     });
   }
@@ -131,10 +131,24 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public PerfilQueryPath PERFIL_PLUGINDOCCUSTODYIDS() {
+  public PerfilQueryPath PERFIL_PLUGINSCANWEBIDS() {
     return new PerfilQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "perfil_plugindoccustodyids" + ".";
+          return PluginQueryPath.this.getQueryPath() + "perfil_pluginscanwebids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public PerfilQueryPath PERFIL_PLUGINFIRMASERVIDORIDS() {
+    return new PerfilQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PluginQueryPath.this.getQueryPath() + "perfil_pluginfirmaservidorids" + ".";
       }
     });
   }

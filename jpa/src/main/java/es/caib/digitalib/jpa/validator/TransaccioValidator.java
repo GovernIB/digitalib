@@ -71,6 +71,14 @@ public class TransaccioValidator<T> implements TransaccioFields {
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERFILID)));
 
     // Check size
+    if (__vr.getFieldErrorCount(NOM) == 0) {
+      java.lang.String __nom = (java.lang.String)__vr.getFieldValue(__target__,NOM);
+      if (__nom!= null && __nom.length() > 255) {
+        __vr.rejectValue(NOM, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
     if (__vr.getFieldErrorCount(TRANSACTIONWEBID) == 0) {
       java.lang.String __transactionwebid = (java.lang.String)__vr.getFieldValue(__target__,TRANSACTIONWEBID);
       if (__transactionwebid!= null && __transactionwebid.length() > 100) {

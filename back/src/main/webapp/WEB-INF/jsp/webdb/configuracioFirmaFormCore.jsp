@@ -351,6 +351,33 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
+        <tr id="configuracioFirma_pluginFirmaServidorID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID])?'configuracioFirma.pluginFirmaServidorID':__theForm.labels[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="configuracioFirma.pluginFirmaServidorID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}" >
+          <form:hidden path="configuracioFirma.pluginFirmaServidorID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioFirma.pluginFirmaServidorID,__theForm.listOfPluginForPluginFirmaServidorID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}" >
+          <form:select id="configuracioFirma_pluginFirmaServidorID"  onchange="if(typeof onChangePluginFirmaServidorID == 'function') {  onChangePluginFirmaServidorID(this); };"  cssClass="input-xxlarge" path="configuracioFirma.pluginFirmaServidorID">
+            <c:forEach items="${__theForm.listOfPluginForPluginFirmaServidorID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
         <tr id="configuracioFirma_incloureSegellDeTemps_rowid">
           <td>

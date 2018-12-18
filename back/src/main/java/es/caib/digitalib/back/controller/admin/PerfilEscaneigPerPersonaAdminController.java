@@ -11,12 +11,13 @@ import es.caib.digitalib.utils.Constants;
 /**
  * 
  * @author u139636
+ * @author anadal(u80067)
  *
  */
 @Controller
-@RequestMapping(value = "/admin/perfilnomesescaneig")
+@RequestMapping(value = "/admin/perfilnomesescaneig/perpersona")
 @SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class })
-public class PerfilEscaneigAdminController extends AbstractPerfilAdminController {
+public class PerfilEscaneigPerPersonaAdminController extends AbstractPerfilAdminController {
 
 	
 	@Override
@@ -24,5 +25,9 @@ public class PerfilEscaneigAdminController extends AbstractPerfilAdminController
 		return Constants.PERFIL_US_NOMES_ESCANEIG;
 	}
 
+  @Override
+  public boolean isUtilitzatPerAplicacio() {    
+    return false;
+  }
 	
 }

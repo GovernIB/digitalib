@@ -148,6 +148,10 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.UTILITZATPERAPLICACIO)}">
+          <td>
+            <fmt:message key="utilitzatper.${perfil.utilitzatPerAplicacio}" />          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

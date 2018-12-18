@@ -27,6 +27,7 @@ import es.caib.digitalib.utils.Constants;
 /**
  * 
  * @author u139636
+ * @author anadal(u80067)
  *
  */
 @Controller
@@ -53,7 +54,8 @@ public class ConfiguracioGrupAdminController extends ConfiguracioGrupController{
 			ModelAndView mav, Where where)  throws I18NException {
 
 		Where w = Where.AND(where,
-				PerfilFields.USPERFIL.equal(Constants.PERFIL_US_NOMES_ESCANEIG));
+				PerfilFields.USPERFIL.equal(Constants.PERFIL_US_NOMES_ESCANEIG),
+        PerfilFields.UTILITZATPERAPLICACIO.equal(false));
 
 		return perfilRefList.getReferenceList(PerfilFields.PERFILID, w );
 	}
@@ -62,7 +64,9 @@ public class ConfiguracioGrupAdminController extends ConfiguracioGrupController{
 	public List<StringKeyValue> getReferenceListForPerfilCopiaAutenticaID(HttpServletRequest request,
 			ModelAndView mav, Where where)  throws I18NException {
 		Where w = Where.AND(where,
-				PerfilFields.USPERFIL.equal(Constants.PERFIL_US_COPIA_AUTENTICA));
+				PerfilFields.USPERFIL.equal(Constants.PERFIL_US_COPIA_AUTENTICA),
+				PerfilFields.UTILITZATPERAPLICACIO.equal(false));
+		
 		
 		return perfilRefList.getReferenceList(PerfilFields.PERFILID, w );
 	}
@@ -71,7 +75,8 @@ public class ConfiguracioGrupAdminController extends ConfiguracioGrupController{
 	public List<StringKeyValue> getReferenceListForPerfilCustodiaID(HttpServletRequest request,
 			ModelAndView mav, Where where)  throws I18NException {
 		Where w = Where.AND(where,
-				PerfilFields.USPERFIL.equal(Constants.PERFIL_US_CUSTODIA));
+				PerfilFields.USPERFIL.equal(Constants.PERFIL_US_CUSTODIA),
+        PerfilFields.UTILITZATPERAPLICACIO.equal(false));
 		
 		return perfilRefList.getReferenceList(PerfilFields.PERFILID, w );
 	}

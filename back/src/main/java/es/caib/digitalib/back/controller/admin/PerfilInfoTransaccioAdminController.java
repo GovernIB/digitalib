@@ -95,4 +95,10 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
 
     return perfilForm;
   }
+
+  @Override
+  public boolean isUtilitzatPerAplicacio() {
+    // tant dona el que valgui: NO crearem Nous elements
+    return false;
+  }
 }

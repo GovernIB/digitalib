@@ -120,6 +120,28 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
   }
 
 
+  private java.lang.Long perfilNomesEscaneig2IDDesde;
+
+  public java.lang.Long getPerfilNomesEscaneig2IDDesde() {
+    return this.perfilNomesEscaneig2IDDesde;
+  }
+
+  public void setPerfilNomesEscaneig2IDDesde(java.lang.Long perfilNomesEscaneig2IDDesde) {
+    this.perfilNomesEscaneig2IDDesde = perfilNomesEscaneig2IDDesde;
+  }
+
+
+  private java.lang.Long perfilNomesEscaneig2IDFins;
+
+  public java.lang.Long getPerfilNomesEscaneig2IDFins() {
+    return this.perfilNomesEscaneig2IDFins;
+  }
+
+  public void setPerfilNomesEscaneig2IDFins(java.lang.Long perfilNomesEscaneig2IDFins) {
+    this.perfilNomesEscaneig2IDFins = perfilNomesEscaneig2IDFins;
+  }
+
+
   private java.lang.Long perfilCopiaAutenticaIDDesde;
 
   public java.lang.Long getPerfilCopiaAutenticaIDDesde() {
@@ -139,6 +161,28 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
 
   public void setPerfilCopiaAutenticaIDFins(java.lang.Long perfilCopiaAutenticaIDFins) {
     this.perfilCopiaAutenticaIDFins = perfilCopiaAutenticaIDFins;
+  }
+
+
+  private java.lang.Long perfilCopiaAutentica2IDDesde;
+
+  public java.lang.Long getPerfilCopiaAutentica2IDDesde() {
+    return this.perfilCopiaAutentica2IDDesde;
+  }
+
+  public void setPerfilCopiaAutentica2IDDesde(java.lang.Long perfilCopiaAutentica2IDDesde) {
+    this.perfilCopiaAutentica2IDDesde = perfilCopiaAutentica2IDDesde;
+  }
+
+
+  private java.lang.Long perfilCopiaAutentica2IDFins;
+
+  public java.lang.Long getPerfilCopiaAutentica2IDFins() {
+    return this.perfilCopiaAutentica2IDFins;
+  }
+
+  public void setPerfilCopiaAutentica2IDFins(java.lang.Long perfilCopiaAutentica2IDFins) {
+    this.perfilCopiaAutentica2IDFins = perfilCopiaAutentica2IDFins;
   }
 
 
@@ -164,6 +208,28 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
   }
 
 
+  private java.lang.Long perfilCustodia2IDDesde;
+
+  public java.lang.Long getPerfilCustodia2IDDesde() {
+    return this.perfilCustodia2IDDesde;
+  }
+
+  public void setPerfilCustodia2IDDesde(java.lang.Long perfilCustodia2IDDesde) {
+    this.perfilCustodia2IDDesde = perfilCustodia2IDDesde;
+  }
+
+
+  private java.lang.Long perfilCustodia2IDFins;
+
+  public java.lang.Long getPerfilCustodia2IDFins() {
+    return this.perfilCustodia2IDFins;
+  }
+
+  public void setPerfilCustodia2IDFins(java.lang.Long perfilCustodia2IDFins) {
+    this.perfilCustodia2IDFins = perfilCustodia2IDFins;
+  }
+
+
   public ConfiguracioGrupFilterForm() {
   }
   
@@ -178,13 +244,22 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
     this.adreza = __toClone.adreza;
     this.perfilNomesEscaneigIDDesde = __toClone.perfilNomesEscaneigIDDesde;
     this.perfilNomesEscaneigIDFins = __toClone.perfilNomesEscaneigIDFins;
+    this.perfilNomesEscaneig2IDDesde = __toClone.perfilNomesEscaneig2IDDesde;
+    this.perfilNomesEscaneig2IDFins = __toClone.perfilNomesEscaneig2IDFins;
     this.perfilCopiaAutenticaIDDesde = __toClone.perfilCopiaAutenticaIDDesde;
     this.perfilCopiaAutenticaIDFins = __toClone.perfilCopiaAutenticaIDFins;
+    this.perfilCopiaAutentica2IDDesde = __toClone.perfilCopiaAutentica2IDDesde;
+    this.perfilCopiaAutentica2IDFins = __toClone.perfilCopiaAutentica2IDFins;
     this.perfilCustodiaIDDesde = __toClone.perfilCustodiaIDDesde;
     this.perfilCustodiaIDFins = __toClone.perfilCustodiaIDFins;
+    this.perfilCustodia2IDDesde = __toClone.perfilCustodia2IDDesde;
+    this.perfilCustodia2IDFins = __toClone.perfilCustodia2IDFins;
     this.mapOfPerfilForPerfilNomesEscaneigID = __toClone.mapOfPerfilForPerfilNomesEscaneigID;
+    this.mapOfPerfilForPerfilNomesEscaneig2ID = __toClone.mapOfPerfilForPerfilNomesEscaneig2ID;
     this.mapOfPerfilForPerfilCopiaAutenticaID = __toClone.mapOfPerfilForPerfilCopiaAutenticaID;
+    this.mapOfPerfilForPerfilCopiaAutentica2ID = __toClone.mapOfPerfilForPerfilCopiaAutentica2ID;
     this.mapOfPerfilForPerfilCustodiaID = __toClone.mapOfPerfilForPerfilCustodiaID;
+    this.mapOfPerfilForPerfilCustodia2ID = __toClone.mapOfPerfilForPerfilCustodia2ID;
   }
   
   /* ========= UTILS ========== */
@@ -231,6 +306,18 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
 
 
 
+  private Map<String, String> mapOfPerfilForPerfilNomesEscaneig2ID;
+
+  public Map<String, String> getMapOfPerfilForPerfilNomesEscaneig2ID() {
+    return this.mapOfPerfilForPerfilNomesEscaneig2ID;
+  }
+
+  public void setMapOfPerfilForPerfilNomesEscaneig2ID(Map<String, String> mapOfPerfilForPerfilNomesEscaneig2ID) {
+    this.mapOfPerfilForPerfilNomesEscaneig2ID = mapOfPerfilForPerfilNomesEscaneig2ID;
+  }
+
+
+
   private Map<String, String> mapOfPerfilForPerfilCopiaAutenticaID;
 
   public Map<String, String> getMapOfPerfilForPerfilCopiaAutenticaID() {
@@ -243,6 +330,18 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
 
 
 
+  private Map<String, String> mapOfPerfilForPerfilCopiaAutentica2ID;
+
+  public Map<String, String> getMapOfPerfilForPerfilCopiaAutentica2ID() {
+    return this.mapOfPerfilForPerfilCopiaAutentica2ID;
+  }
+
+  public void setMapOfPerfilForPerfilCopiaAutentica2ID(Map<String, String> mapOfPerfilForPerfilCopiaAutentica2ID) {
+    this.mapOfPerfilForPerfilCopiaAutentica2ID = mapOfPerfilForPerfilCopiaAutentica2ID;
+  }
+
+
+
   private Map<String, String> mapOfPerfilForPerfilCustodiaID;
 
   public Map<String, String> getMapOfPerfilForPerfilCustodiaID() {
@@ -251,6 +350,18 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
 
   public void setMapOfPerfilForPerfilCustodiaID(Map<String, String> mapOfPerfilForPerfilCustodiaID) {
     this.mapOfPerfilForPerfilCustodiaID = mapOfPerfilForPerfilCustodiaID;
+  }
+
+
+
+  private Map<String, String> mapOfPerfilForPerfilCustodia2ID;
+
+  public Map<String, String> getMapOfPerfilForPerfilCustodia2ID() {
+    return this.mapOfPerfilForPerfilCustodia2ID;
+  }
+
+  public void setMapOfPerfilForPerfilCustodia2ID(Map<String, String> mapOfPerfilForPerfilCustodia2ID) {
+    this.mapOfPerfilForPerfilCustodia2ID = mapOfPerfilForPerfilCustodia2ID;
   }
 
 

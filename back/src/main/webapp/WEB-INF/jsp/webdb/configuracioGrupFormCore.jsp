@@ -208,6 +208,35 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID)}">
+        <tr id="configuracioGrup_perfilNomesEscaneig2ID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID])?'configuracioGrup.perfilNomesEscaneig2ID':__theForm.labels[ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="configuracioGrup.perfilNomesEscaneig2ID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID)}" >
+          <form:hidden path="configuracioGrup.perfilNomesEscaneig2ID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioGrup.perfilNomesEscaneig2ID,__theForm.listOfPerfilForPerfilNomesEscaneig2ID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID)}" >
+          <form:select id="configuracioGrup_perfilNomesEscaneig2ID"  onchange="if(typeof onChangePerfilNomesEscaneig2ID == 'function') {  onChangePerfilNomesEscaneig2ID(this); };"  cssClass="input-xxlarge" path="configuracioGrup.perfilNomesEscaneig2ID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPerfilForPerfilNomesEscaneig2ID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID)}">
         <tr id="configuracioGrup_perfilCopiaAutenticaID_rowid">
           <td>
@@ -237,6 +266,35 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID)}">
+        <tr id="configuracioGrup_perfilCopiaAutentica2ID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID])?'configuracioGrup.perfilCopiaAutentica2ID':__theForm.labels[ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="configuracioGrup.perfilCopiaAutentica2ID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID)}" >
+          <form:hidden path="configuracioGrup.perfilCopiaAutentica2ID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioGrup.perfilCopiaAutentica2ID,__theForm.listOfPerfilForPerfilCopiaAutentica2ID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID)}" >
+          <form:select id="configuracioGrup_perfilCopiaAutentica2ID"  onchange="if(typeof onChangePerfilCopiaAutentica2ID == 'function') {  onChangePerfilCopiaAutentica2ID(this); };"  cssClass="input-xxlarge" path="configuracioGrup.perfilCopiaAutentica2ID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPerfilForPerfilCopiaAutentica2ID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.PERFILCUSTODIAID)}">
         <tr id="configuracioGrup_perfilCustodiaID_rowid">
           <td>
@@ -258,6 +316,35 @@
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfPerfilForPerfilCustodiaID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.PERFILCUSTODIA2ID)}">
+        <tr id="configuracioGrup_perfilCustodia2ID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioGrupFields.PERFILCUSTODIA2ID])?'configuracioGrup.perfilCustodia2ID':__theForm.labels[ConfiguracioGrupFields.PERFILCUSTODIA2ID]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioGrupFields.PERFILCUSTODIA2ID]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioGrupFields.PERFILCUSTODIA2ID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="configuracioGrup.perfilCustodia2ID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILCUSTODIA2ID)}" >
+          <form:hidden path="configuracioGrup.perfilCustodia2ID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioGrup.perfilCustodia2ID,__theForm.listOfPerfilForPerfilCustodia2ID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.PERFILCUSTODIA2ID)}" >
+          <form:select id="configuracioGrup_perfilCustodia2ID"  onchange="if(typeof onChangePerfilCustodia2ID == 'function') {  onChangePerfilCustodia2ID(this); };"  cssClass="input-xxlarge" path="configuracioGrup.perfilCustodia2ID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPerfilForPerfilCustodia2ID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

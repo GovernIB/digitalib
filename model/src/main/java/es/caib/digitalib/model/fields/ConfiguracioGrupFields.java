@@ -21,8 +21,11 @@ public interface ConfiguracioGrupFields extends java.io.Serializable {
 	 public static final LongField LOGOFOOTERID = new LongField(_TABLE_MODEL, "logoFooterID", "logofooterid");
 	 public static final StringField ADREZA = new StringField(_TABLE_MODEL, "adreza", "adreza");
 	 public static final LongField PERFILNOMESESCANEIGID = new LongField(_TABLE_MODEL, "perfilNomesEscaneigID", "perfilnomesescaneigid");
+	 public static final LongField PERFILNOMESESCANEIG2ID = new LongField(_TABLE_MODEL, "perfilNomesEscaneig2ID", "perfilnomesescaneig2id");
 	 public static final LongField PERFILCOPIAAUTENTICAID = new LongField(_TABLE_MODEL, "perfilCopiaAutenticaID", "perfilcopiaautenticaid");
+	 public static final LongField PERFILCOPIAAUTENTICA2ID = new LongField(_TABLE_MODEL, "perfilCopiaAutentica2ID", "perfilcopiaautentica2id");
 	 public static final LongField PERFILCUSTODIAID = new LongField(_TABLE_MODEL, "perfilCustodiaID", "perfilcustodiaid");
+	 public static final LongField PERFILCUSTODIA2ID = new LongField(_TABLE_MODEL, "perfilCustodia2ID", "perfilcustodia2id");
 
 
   public static final Field<?>[] ALL_CONFIGURACIOGRUP_FIELDS = {
@@ -35,8 +38,11 @@ public interface ConfiguracioGrupFields extends java.io.Serializable {
     LOGOFOOTERID,
     ADREZA,
     PERFILNOMESESCANEIGID,
+    PERFILNOMESESCANEIG2ID,
     PERFILCOPIAAUTENTICAID,
-    PERFILCUSTODIAID
+    PERFILCOPIAAUTENTICA2ID,
+    PERFILCUSTODIAID,
+    PERFILCUSTODIA2ID
   };
 
 

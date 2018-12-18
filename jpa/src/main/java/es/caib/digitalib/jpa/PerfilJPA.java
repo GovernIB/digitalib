@@ -92,6 +92,9 @@ private static final long serialVersionUID = -1815612849L;
 	@Column(name="usperfil",nullable = false,length = 10)
 	int usPerfil;
 
+	@Column(name="utilitzatperaplicacio",length = 1)
+	java.lang.Boolean utilitzatPerAplicacio;
+
 
 
   /** Constructor Buit */
@@ -99,7 +102,7 @@ private static final long serialVersionUID = -1815612849L;
   }
 
   /** Constructor amb tots els camps  */
-  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
+  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
@@ -117,9 +120,10 @@ private static final long serialVersionUID = -1815612849L;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
     this.usPerfil=usPerfil;
+    this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor sense valors autoincrementals */
-  public PerfilJPA(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
+  public PerfilJPA(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.codi=codi;
     this.nom=nom;
     this.descripcio=descripcio;
@@ -136,6 +140,7 @@ private static final long serialVersionUID = -1815612849L;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
     this.usPerfil=usPerfil;
+    this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor dels valors Not Null */
   public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
@@ -166,6 +171,7 @@ private static final long serialVersionUID = -1815612849L;
     this.setPluginArxiuID(__bean.getPluginArxiuID());
     this.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
     this.setUsPerfil(__bean.getUsPerfil());
+    this.setUtilitzatPerAplicacio(__bean.getUtilitzatPerAplicacio());
 	}
 
 	public long getPerfilID() {
@@ -287,6 +293,13 @@ private static final long serialVersionUID = -1815612849L;
 		this.usPerfil = _usPerfil_;
 	};
 
+	public java.lang.Boolean getUtilitzatPerAplicacio() {
+		return(utilitzatPerAplicacio);
+	};
+	public void setUtilitzatPerAplicacio(java.lang.Boolean _utilitzatPerAplicacio_) {
+		this.utilitzatPerAplicacio = _utilitzatPerAplicacio_;
+	};
+
 
 
   @Override
@@ -301,6 +314,45 @@ private static final long serialVersionUID = -1815612849L;
     }
     return __result;
   }
+
+// EXP  Field:perfilnomesescaneig2id | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilNomesEscaneig2ID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneig2ids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilnomesescaneig2ids() {
+    return this.configuracioGrup_perfilnomesescaneig2ids;
+  }
+
+	public void setConfiguracioGrup_perfilnomesescaneig2ids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneig2ids) {
+	  this.configuracioGrup_perfilnomesescaneig2ids = configuracioGrup_perfilnomesescaneig2ids;
+	}
+
+
+// EXP  Field:perfilcopiaautentica2id | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilCopiaAutentica2ID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilcopiaautentica2ids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilcopiaautentica2ids() {
+    return this.configuracioGrup_perfilcopiaautentica2ids;
+  }
+
+	public void setConfiguracioGrup_perfilcopiaautentica2ids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilcopiaautentica2ids) {
+	  this.configuracioGrup_perfilcopiaautentica2ids = configuracioGrup_perfilcopiaautentica2ids;
+	}
+
+
+// EXP  Field:perfilcustodia2id | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilCustodia2ID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodia2ids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilcustodia2ids() {
+    return this.configuracioGrup_perfilcustodia2ids;
+  }
+
+	public void setConfiguracioGrup_perfilcustodia2ids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodia2ids) {
+	  this.configuracioGrup_perfilcustodia2ids = configuracioGrup_perfilcustodia2ids;
+	}
+
 
 // EXP  Field:perfilnomesescaneigid | Table: dib_configuraciogrup | Type: 0  
 
@@ -479,6 +531,7 @@ private static final long serialVersionUID = -1815612849L;
     __tmp.setPluginArxiuID(__bean.getPluginArxiuID());
     __tmp.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
     __tmp.setUsPerfil(__bean.getUsPerfil());
+    __tmp.setUtilitzatPerAplicacio(__bean.getUtilitzatPerAplicacio());
 		return __tmp;
 	}
 
@@ -512,6 +565,10 @@ private static final long serialVersionUID = -1815612849L;
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.perfilUsuariAplicacios) || org.hibernate.Hibernate.isInitialized(__jpa.getPerfilUsuariAplicacios())) ) {
       __tmp.setPerfilUsuariAplicacios(PerfilUsuariAplicacioJPA.copyJPA(__jpa.getPerfilUsuariAplicacios(), __alreadyCopied,"PerfilJPA"));
     }
+    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilcopiaautentica2ids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilcopiaautentica2ids())) ) {
+      __tmp.setConfiguracioGrup_perfilcopiaautentica2ids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilcopiaautentica2ids(), __alreadyCopied,"PerfilJPA"));
+    }
     if(!"TransaccioJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.transaccios) || org.hibernate.Hibernate.isInitialized(__jpa.getTransaccios())) ) {
       __tmp.setTransaccios(TransaccioJPA.copyJPA(__jpa.getTransaccios(), __alreadyCopied,"PerfilJPA"));
@@ -519,6 +576,14 @@ private static final long serialVersionUID = -1815612849L;
     if(!"ConfiguracioGrupJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilcopiaautenticaids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilcopiaautenticaids())) ) {
       __tmp.setConfiguracioGrup_perfilcopiaautenticaids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilcopiaautenticaids(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilcustodia2ids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilcustodia2ids())) ) {
+      __tmp.setConfiguracioGrup_perfilcustodia2ids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilcustodia2ids(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilnomesescaneig2ids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilnomesescaneig2ids())) ) {
+      __tmp.setConfiguracioGrup_perfilnomesescaneig2ids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilnomesescaneig2ids(), __alreadyCopied,"PerfilJPA"));
     }
     if(!"ConfiguracioGrupJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilcustodiaids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilcustodiaids())) ) {

@@ -152,10 +152,12 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     clonedPerfil.setCodi(clonedPerfil.getCodi() + "-" + transactionWebID);
     clonedPerfil.setPerfilID(0);
     clonedPerfil.setUsPerfil(-1 * clonedPerfil.getUsPerfil());
+    clonedPerfil.setUtilitzatPerAplicacio(usuariAplicacio != null);
 
     // XYZ ZZZ ZZZ Falten altres comprovacions
     TransaccioJPA t = new TransaccioJPA();
 
+    t.setNom(transactionWebID);
     t.setTransactionWebId(transactionWebID);
     t.setDataInici(new Timestamp(System.currentTimeMillis()));
     if (usuariAplicacio != null) {

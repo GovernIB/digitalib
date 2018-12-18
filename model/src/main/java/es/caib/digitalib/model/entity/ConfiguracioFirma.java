@@ -47,6 +47,9 @@ public interface ConfiguracioFirma extends org.fundaciobit.genapp.common.IGenApp
 	public java.lang.String getPropietatsTaulaFirmes();
 	public void setPropietatsTaulaFirmes(java.lang.String _propietatsTaulaFirmes_);
 
+	public long getPluginFirmaServidorID();
+	public void setPluginFirmaServidorID(long _pluginFirmaServidorID_);
+
 	public boolean isIncloureSegellDeTemps();
 	public void setIncloureSegellDeTemps(boolean _incloureSegellDeTemps_);
 

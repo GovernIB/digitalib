@@ -13,7 +13,7 @@ public interface InfoCustodyFields extends java.io.Serializable {
 
 
 	 public static final LongField INFOCUSTODYID = new LongField(_TABLE_MODEL, "infoCustodyID", "infocustodyid");  // PK
-	 public static final StringField CUSTODYFILEID = new StringField(_TABLE_MODEL, "custodyFileId", "custodyfileid");
+	 public static final StringField CUSTODYID = new StringField(_TABLE_MODEL, "custodyId", "custodyid");
 	 public static final StringField ARXIUEXPEDIENTID = new StringField(_TABLE_MODEL, "arxiuExpedientId", "arxiuexpedientid");
 	 public static final StringField ARXIUDOCUMENTID = new StringField(_TABLE_MODEL, "arxiuDocumentId", "arxiudocumentid");
 	 public static final StringField FILEURL = new StringField(_TABLE_MODEL, "fileUrl", "fileurl");
@@ -24,7 +24,7 @@ public interface InfoCustodyFields extends java.io.Serializable {
 
   public static final Field<?>[] ALL_INFOCUSTODY_FIELDS = {
     INFOCUSTODYID,
-    CUSTODYFILEID,
+    CUSTODYID,
     ARXIUEXPEDIENTID,
     ARXIUDOCUMENTID,
     FILEURL,

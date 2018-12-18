@@ -79,6 +79,10 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new IntegerField(getQueryPath(), PerfilFields.USPERFIL);
   }
 
+  public BooleanField UTILITZATPERAPLICACIO() {
+    return new BooleanField(getQueryPath(), PerfilFields.UTILITZATPERAPLICACIO);
+  }
+
 
 
   @Override
@@ -87,6 +91,48 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
         : this.parentQueryPath.getQueryPath());
   }
 
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public ConfiguracioGrupQueryPath CONFIGURACIOGRUP_PERFILNOMESESCANEIG2IDS() {
+    return new ConfiguracioGrupQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PerfilQueryPath.this.getQueryPath() + "configuracioGrup_perfilnomesescaneig2ids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public ConfiguracioGrupQueryPath CONFIGURACIOGRUP_PERFILCOPIAAUTENTICA2IDS() {
+    return new ConfiguracioGrupQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PerfilQueryPath.this.getQueryPath() + "configuracioGrup_perfilcopiaautentica2ids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public ConfiguracioGrupQueryPath CONFIGURACIOGRUP_PERFILCUSTODIA2IDS() {
+    return new ConfiguracioGrupQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PerfilQueryPath.this.getQueryPath() + "configuracioGrup_perfilcustodia2ids" + ".";
+      }
+    });
+  }
+*/
 
 /* L'ús d'aquest camp (OneToMany) llança una exception:
  [Illegal attempt to dereference a collection]

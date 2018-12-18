@@ -274,6 +274,28 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
   }
 
 
+  private java.lang.Long pluginFirmaServidorIDDesde;
+
+  public java.lang.Long getPluginFirmaServidorIDDesde() {
+    return this.pluginFirmaServidorIDDesde;
+  }
+
+  public void setPluginFirmaServidorIDDesde(java.lang.Long pluginFirmaServidorIDDesde) {
+    this.pluginFirmaServidorIDDesde = pluginFirmaServidorIDDesde;
+  }
+
+
+  private java.lang.Long pluginFirmaServidorIDFins;
+
+  public java.lang.Long getPluginFirmaServidorIDFins() {
+    return this.pluginFirmaServidorIDFins;
+  }
+
+  public void setPluginFirmaServidorIDFins(java.lang.Long pluginFirmaServidorIDFins) {
+    this.pluginFirmaServidorIDFins = pluginFirmaServidorIDFins;
+  }
+
+
   private java.lang.Long pluginSegellatIDDesde;
 
   public java.lang.Long getPluginSegellatIDDesde() {
@@ -324,6 +346,8 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
     this.motiuDelegacioIDDesde = __toClone.motiuDelegacioIDDesde;
     this.motiuDelegacioIDFins = __toClone.motiuDelegacioIDFins;
     this.propietatsTaulaFirmes = __toClone.propietatsTaulaFirmes;
+    this.pluginFirmaServidorIDDesde = __toClone.pluginFirmaServidorIDDesde;
+    this.pluginFirmaServidorIDFins = __toClone.pluginFirmaServidorIDFins;
     this.pluginSegellatIDDesde = __toClone.pluginSegellatIDDesde;
     this.pluginSegellatIDFins = __toClone.pluginSegellatIDFins;
     this.mapOfValuesForUsPoliticaDeFirma = __toClone.mapOfValuesForUsPoliticaDeFirma;
@@ -334,6 +358,7 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
     this.mapOfValuesForPosicioTaulaFirmesID = __toClone.mapOfValuesForPosicioTaulaFirmesID;
     this.mapOfTraduccioForFirmatPerFormatID = __toClone.mapOfTraduccioForFirmatPerFormatID;
     this.mapOfTraduccioForMotiuDelegacioID = __toClone.mapOfTraduccioForMotiuDelegacioID;
+    this.mapOfPluginForPluginFirmaServidorID = __toClone.mapOfPluginForPluginFirmaServidorID;
     this.mapOfPluginForPluginSegellatID = __toClone.mapOfPluginForPluginSegellatID;
   }
   
@@ -461,6 +486,18 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
 
   public void setMapOfTraduccioForMotiuDelegacioID(Map<String, String> mapOfTraduccioForMotiuDelegacioID) {
     this.mapOfTraduccioForMotiuDelegacioID = mapOfTraduccioForMotiuDelegacioID;
+  }
+
+
+
+  private Map<String, String> mapOfPluginForPluginFirmaServidorID;
+
+  public Map<String, String> getMapOfPluginForPluginFirmaServidorID() {
+    return this.mapOfPluginForPluginFirmaServidorID;
+  }
+
+  public void setMapOfPluginForPluginFirmaServidorID(Map<String, String> mapOfPluginForPluginFirmaServidorID) {
+    this.mapOfPluginForPluginFirmaServidorID = mapOfPluginForPluginFirmaServidorID;
   }
 
 

@@ -53,6 +53,9 @@ public interface Perfil extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public int getUsPerfil();
 	public void setUsPerfil(int _usPerfil_);
 
+	public java.lang.Boolean getUtilitzatPerAplicacio();
+	public void setUtilitzatPerAplicacio(java.lang.Boolean _utilitzatPerAplicacio_);
+
 
 
   // ======================================

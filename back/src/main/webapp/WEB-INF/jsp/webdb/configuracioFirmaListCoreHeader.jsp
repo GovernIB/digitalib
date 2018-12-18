@@ -57,6 +57,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PROPIETATSTAULAFIRMES)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.PROPIETATSTAULAFIRMES)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}</th>
         </c:if>

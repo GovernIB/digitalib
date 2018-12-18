@@ -148,6 +148,20 @@ public class ConfiguracioGrupValidator<T> implements ConfiguracioGrupFields {
       }
     }
 
+    if (__vr.getFieldErrorCount(PERFILNOMESESCANEIG2ID) == 0) {
+      java.lang.Long __perfilnomesescaneig2id = (java.lang.Long)__vr.getFieldValue(__target__,PERFILNOMESESCANEIG2ID);
+      if (__perfilnomesescaneig2id != null ) {
+        Long __count_ = null;
+        try { __count_ = __perfilManager.count(PerfilFields.PERFILID.equal(__perfilnomesescaneig2id)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(PERFILNOMESESCANEIG2ID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfil"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfilID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__perfilnomesescaneig2id)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(PERFILCOPIAAUTENTICAID) == 0) {
       java.lang.Long __perfilcopiaautenticaid = (java.lang.Long)__vr.getFieldValue(__target__,PERFILCOPIAAUTENTICAID);
       if (__perfilcopiaautenticaid != null ) {
@@ -162,6 +176,20 @@ public class ConfiguracioGrupValidator<T> implements ConfiguracioGrupFields {
       }
     }
 
+    if (__vr.getFieldErrorCount(PERFILCOPIAAUTENTICA2ID) == 0) {
+      java.lang.Long __perfilcopiaautentica2id = (java.lang.Long)__vr.getFieldValue(__target__,PERFILCOPIAAUTENTICA2ID);
+      if (__perfilcopiaautentica2id != null ) {
+        Long __count_ = null;
+        try { __count_ = __perfilManager.count(PerfilFields.PERFILID.equal(__perfilcopiaautentica2id)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(PERFILCOPIAAUTENTICA2ID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfil"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfilID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__perfilcopiaautentica2id)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(PERFILCUSTODIAID) == 0) {
       java.lang.Long __perfilcustodiaid = (java.lang.Long)__vr.getFieldValue(__target__,PERFILCUSTODIAID);
       if (__perfilcustodiaid != null ) {
@@ -172,6 +200,20 @@ public class ConfiguracioGrupValidator<T> implements ConfiguracioGrupFields {
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfil"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfilID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__perfilcustodiaid)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(PERFILCUSTODIA2ID) == 0) {
+      java.lang.Long __perfilcustodia2id = (java.lang.Long)__vr.getFieldValue(__target__,PERFILCUSTODIA2ID);
+      if (__perfilcustodia2id != null ) {
+        Long __count_ = null;
+        try { __count_ = __perfilManager.count(PerfilFields.PERFILID.equal(__perfilcustodia2id)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(PERFILCUSTODIA2ID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfil"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("perfil.perfilID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__perfilcustodia2id)));
         }
       }
     }

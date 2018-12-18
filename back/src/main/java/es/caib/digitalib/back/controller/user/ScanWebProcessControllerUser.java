@@ -287,17 +287,26 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
         
         // Arxiu Optional Parameters
         
-        if (perfil.getPluginArxiuID() != null) {
+        if (perfil.getPluginArxiuID() != null || perfil.getPluginDocCustodyID() != null) {
           // S'utilitza Arxiu enlloc de Custody. Necessitam aquests valors
           
           // Els tenc que obtenir dels parametres del plugin
-          
-          long pluginArxiuID = perfil.getPluginArxiuID();
-          
-          Plugin pluginArxiuJPA = pluginArxiuLogicaEjb.findByPrimaryKey(pluginArxiuID);
-
-          String propertiesStr = pluginArxiuJPA.getProperties();
-          Properties prop = LogicUtils.stringToProperties(propertiesStr);
+          Properties prop;
+          if (perfil.getPluginArxiuID() != null) {
+            long pluginArxiuID = perfil.getPluginArxiuID();
+            
+            Plugin pluginArxiuJPA = pluginArxiuLogicaEjb.findByPrimaryKey(pluginArxiuID);
+  
+            String propertiesStr = pluginArxiuJPA.getProperties();
+            prop = LogicUtils.stringToProperties(propertiesStr);
+          } else {
+            long pluginCustodyID = perfil.getPluginDocCustodyID();
+            
+            Plugin pluginDocCustodyJPA = pluginDocumentcustodyLogicaEjb.findByPrimaryKey(pluginCustodyID);
+  
+            String propertiesStr = pluginDocCustodyJPA.getProperties();
+            prop = LogicUtils.stringToProperties(propertiesStr);
+          }
 
 
           String procedimentNom = prop.getProperty(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM.javaName);
@@ -306,12 +315,16 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
           String serieDocumental = prop.getProperty(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL.javaName);
           String custodyOrExpedientID = prop.getProperty(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID.javaName);
           
-          
-          ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters;
-          arxiuOptionalParameters = new ScanWebSimpleArxiuOptionalParameters(procedimentNom,
-              procedimentCodi, organs, serieDocumental, custodyOrExpedientID);
-                             
-          requestTransaction.setArxiuOptionalParameters(arxiuOptionalParameters);
+          if (procedimentNom == null && procedimentCodi == null && organs == null 
+              && serieDocumental == null && custodyOrExpedientID == null) {
+            // SI tot val null no feim res            
+          } else {          
+            ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters;
+            arxiuOptionalParameters = new ScanWebSimpleArxiuOptionalParameters(procedimentNom,
+                procedimentCodi, organs, serieDocumental, custodyOrExpedientID);
+                               
+            requestTransaction.setArxiuOptionalParameters(arxiuOptionalParameters);
+          }
           
         }
 

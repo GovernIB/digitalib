@@ -384,7 +384,7 @@
     <void index="1"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
-       <array class="org.fundaciobit.genapp.FieldInfo" length="17"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="18"> 
         <void index="0"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="PK"> 
@@ -1148,6 +1148,87 @@ opcional incluso cuando se genera una firma EPES.</string>
         </void> 
         <void index="15"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>pluginid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_conffirma_plugin_fir_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_plugin</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_conffirma_plugfirma_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>pluginFirmaServidorID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Plugin Firma en Servidor</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Plugin Firma en Servidor</string> 
+           </void> 
+          </void> 
+          <void property="notNullable"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>pluginfirmaservidorid</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>pluginid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_conffirma_plugin_fir_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_plugin</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="16"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="defaultValue"> 
            <string>false</string> 
           </void> 
@@ -1188,7 +1269,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="16"> 
+        <void index="17"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -1305,7 +1386,7 @@ opcional incluso cuando se genera una firma EPES.</string>
     <void index="2"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
-       <array class="org.fundaciobit.genapp.FieldInfo" length="11"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="14"> 
         <void index="0"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="PK"> 
@@ -1839,6 +1920,71 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="foreignKeys"> 
            <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
             <void index="0"> 
+             <object id="ForeignKey0" class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_scan2_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_cfggrup_perfilscan2_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>perfilNomesEscaneig2ID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Perfil Només Escaneig 2</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Perfil Solo Escaneo 2</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>perfilnomesescaneig2id</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object idref="ForeignKey0"/> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="10"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilid</string> 
@@ -1909,7 +2055,72 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="10"> 
+        <void index="11"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object id="ForeignKey1" class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_coau2_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_cfggrup_perfilcoau2_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>perfilCopiaAutentica2ID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Perfil Escaneig i Firma 2</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Perfil Escaneo y Firma 2</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>perfilcopiaautentica2id</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object idref="ForeignKey1"/> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="12"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -1979,6 +2190,71 @@ opcional incluso cuando se genera una firma EPES.</string>
                <int>1</int> 
               </void> 
              </object> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="13"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object id="ForeignKey2" class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_cust2_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_cfggrup_perfilcust2_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>perfilCustodia2ID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Perfil Escaneig, Firma i Arxiu 2</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Perfil Escaneo, Firma y Archivo 2</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>perfilcustodia2id</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object idref="ForeignKey2"/> 
             </void> 
             <void property="webtype"> 
              <int>3</int> 
@@ -3046,7 +3322,7 @@ opcional incluso cuando se genera una firma EPES.</string>
            <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
-           <string>custodyFileId</string> 
+           <string>custodyId</string> 
           </void> 
           <void property="javaType"> 
            <class>java.lang.String</class> 
@@ -3058,7 +3334,7 @@ opcional incluso cuando se genera una firma EPES.</string>
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>ID de Custódia</string> 
+            <string>ID de Custodia</string> 
            </void> 
           </void> 
           <void property="showInReferenceList"> 
@@ -3068,7 +3344,7 @@ opcional incluso cuando se genera una firma EPES.</string>
            <int>255</int> 
           </void> 
           <void property="sqlName"> 
-           <string>custodyfileid</string> 
+           <string>custodyid</string> 
           </void> 
           <void property="sqlType"> 
            <int>12</int> 
@@ -3141,11 +3417,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>ID de document</string> 
+            <string>ID de Document</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>ID de documento</string> 
+            <string>ID de Documento</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -4124,7 +4400,7 @@ opcional incluso cuando se genera una firma EPES.</string>
     <void index="8"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
-       <array class="org.fundaciobit.genapp.FieldInfo" length="17"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="18"> 
         <void index="0"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="PK"> 
@@ -4140,8 +4416,47 @@ opcional incluso cuando se genera una firma EPES.</string>
            <int>0</int> 
           </void> 
           <void property="foreignKeys"> 
-           <array class="org.fundaciobit.genapp.ForeignKey" length="5"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="8"> 
             <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilnomesescaneig2id</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_scan2_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_configuraciogrup</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="1"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilcopiaautentica2id</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_coau2_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_configuraciogrup</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="2"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>perfilcustodia2id</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_cfggrup_perfil_cust2_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_configuraciogrup</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="3"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilnomesescaneigid</string> 
@@ -4154,7 +4469,7 @@ opcional incluso cuando se genera una firma EPES.</string>
               </void> 
              </object> 
             </void> 
-            <void index="1"> 
+            <void index="4"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilcopiaautenticaid</string> 
@@ -4167,7 +4482,7 @@ opcional incluso cuando se genera una firma EPES.</string>
               </void> 
              </object> 
             </void> 
-            <void index="2"> 
+            <void index="5"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilcustodiaid</string> 
@@ -4180,7 +4495,7 @@ opcional incluso cuando se genera una firma EPES.</string>
               </void> 
              </object> 
             </void> 
-            <void index="3"> 
+            <void index="6"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilid</string> 
@@ -4193,7 +4508,7 @@ opcional incluso cuando se genera una firma EPES.</string>
               </void> 
              </object> 
             </void> 
-            <void index="4"> 
+            <void index="7"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>perfilid</string> 
@@ -5209,6 +5524,51 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
+        <void index="17"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="filter"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="javaName"> 
+           <string>utilitzatPerAplicacio</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Boolean</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Utilitzat per</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Utilizado por</string> 
+           </void> 
+          </void> 
+          <void property="minAllowedValue"> 
+           <string>utilitzatper</string> 
+          </void> 
+          <void property="size"> 
+           <int>1</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>utilitzatperaplicacio</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-7</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>4</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
        </array> 
       </void> 
       <void property="generate"> 
@@ -5543,7 +5903,7 @@ opcional incluso cuando se genera una firma EPES.</string>
            <int>0</int> 
           </void> 
           <void property="foreignKeys"> 
-           <array class="org.fundaciobit.genapp.ForeignKey" length="7"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="8"> 
             <void index="0"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
@@ -5563,10 +5923,10 @@ opcional incluso cuando se genera una firma EPES.</string>
                <string>pluginfirmaservidorid</string> 
               </void> 
               <void property="name"> 
-               <string>dib_perfil_plugin_firma_fk</string> 
+               <string>dib_conffirma_plugin_fir_fk</string> 
               </void> 
               <void property="table"> 
-               <string>dib_perfil</string> 
+               <string>dib_configuraciofirma</string> 
               </void> 
              </object> 
             </void> 
@@ -5586,10 +5946,10 @@ opcional incluso cuando se genera una firma EPES.</string>
             <void index="3"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
-               <string>pluginscanwebid</string> 
+               <string>plugindoccustodyid</string> 
               </void> 
               <void property="name"> 
-               <string>dib_perfil_plugin_scan_fk</string> 
+               <string>dib_perfil_plugin_cust_fk</string> 
               </void> 
               <void property="table"> 
                <string>dib_perfil</string> 
@@ -5612,10 +5972,10 @@ opcional incluso cuando se genera una firma EPES.</string>
             <void index="5"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
-               <string>plugindoccustodyid</string> 
+               <string>pluginscanwebid</string> 
               </void> 
               <void property="name"> 
-               <string>dib_perfil_plugin_cust_fk</string> 
+               <string>dib_perfil_plugin_scan_fk</string> 
               </void> 
               <void property="table"> 
                <string>dib_perfil</string> 
@@ -5623,6 +5983,19 @@ opcional incluso cuando se genera una firma EPES.</string>
              </object> 
             </void> 
             <void index="6"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>pluginfirmaservidorid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_plugin_firma_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="7"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>pluginid</string> 
@@ -7085,7 +7458,7 @@ opcional incluso cuando se genera una firma EPES.</string>
     <void index="14"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
-       <array class="org.fundaciobit.genapp.FieldInfo" length="38"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="39"> 
         <void index="0"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="PK"> 
@@ -7141,6 +7514,54 @@ opcional incluso cuando se genera una firma EPES.</string>
         </void> 
         <void index="1"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="descripcio"> 
+           <string>Nom descriptiu de la transaccio</string> 
+          </void> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="filter"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="javaName"> 
+           <string>nom</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.String</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Nom</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Nombre</string> 
+           </void> 
+          </void> 
+          <void property="showInReferenceList"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="size"> 
+           <int>255</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>nom</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>12</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>1</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="2"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
           </void> 
@@ -7190,7 +7611,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="2"> 
+        <void index="3"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>6</int> 
@@ -7235,7 +7656,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="3"> 
+        <void index="4"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>6</int> 
@@ -7277,7 +7698,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="4"> 
+        <void index="5"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7319,7 +7740,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="5"> 
+        <void index="6"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7361,7 +7782,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="6"> 
+        <void index="7"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="defaultValue"> 
            <string>&apos;10.215.216.175&apos;::character varying</string> 
@@ -7406,7 +7827,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="7"> 
+        <void index="8"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7451,7 +7872,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="8"> 
+        <void index="9"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7499,7 +7920,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="9"> 
+        <void index="10"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7541,7 +7962,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="10"> 
+        <void index="11"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7580,7 +8001,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="11"> 
+        <void index="12"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7658,7 +8079,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="12"> 
+        <void index="13"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7697,7 +8118,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="13"> 
+        <void index="14"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7775,7 +8196,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="14"> 
+        <void index="15"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7814,7 +8235,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="15"> 
+        <void index="16"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7853,7 +8274,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="16"> 
+        <void index="17"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7892,7 +8313,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="17"> 
+        <void index="18"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7931,7 +8352,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="18"> 
+        <void index="19"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -7976,7 +8397,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="19"> 
+        <void index="20"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8018,7 +8439,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="20"> 
+        <void index="21"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8063,7 +8484,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="21"> 
+        <void index="22"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8102,7 +8523,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="22"> 
+        <void index="23"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8141,7 +8562,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="23"> 
+        <void index="24"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8183,7 +8604,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="24"> 
+        <void index="25"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="descripcio"> 
            <string>documentEstatElaboracio</string> 
@@ -8228,7 +8649,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="25"> 
+        <void index="26"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="descripcio"> 
            <string>TDxx</string> 
@@ -8273,7 +8694,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="26"> 
+        <void index="27"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="descripcio"> 
            <string>0 Ciutada
@@ -8319,7 +8740,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="27"> 
+        <void index="28"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="descripcio"> 
            <string>Llistat de Nifs dels interessats separats per comes</string> 
@@ -8361,7 +8782,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="28"> 
+        <void index="29"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8400,7 +8821,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="29"> 
+        <void index="30"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8439,7 +8860,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="30"> 
+        <void index="31"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8478,7 +8899,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="31"> 
+        <void index="32"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8517,7 +8938,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="32"> 
+        <void index="33"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="descripcio"> 
            <string>Codi DIR3 dels organs afectats separats per comes</string> 
@@ -8559,7 +8980,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="33"> 
+        <void index="34"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8598,7 +9019,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="34"> 
+        <void index="35"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8637,7 +9058,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="35"> 
+        <void index="36"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8718,7 +9139,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="36"> 
+        <void index="37"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -8796,7 +9217,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="37"> 
+        <void index="38"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 

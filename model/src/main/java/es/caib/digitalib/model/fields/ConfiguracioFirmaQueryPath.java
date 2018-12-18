@@ -71,6 +71,10 @@ public class ConfiguracioFirmaQueryPath extends org.fundaciobit.genapp.common.qu
     return new StringField(getQueryPath(), ConfiguracioFirmaFields.PROPIETATSTAULAFIRMES);
   }
 
+  public LongField PLUGINFIRMASERVIDORID() {
+    return new LongField(getQueryPath(), ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID);
+  }
+
   public BooleanField INCLOURESEGELLDETEMPS() {
     return new BooleanField(getQueryPath(), ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS);
   }
@@ -104,10 +108,18 @@ public class ConfiguracioFirmaQueryPath extends org.fundaciobit.genapp.common.qu
     });
   }
 
-  public PluginQueryPath PLUGIN() {
+  public PluginQueryPath PLUGINFIRMASERVIDOR() {
     return new PluginQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return ConfiguracioFirmaQueryPath.this.getQueryPath() + "plugin" + ".";
+          return ConfiguracioFirmaQueryPath.this.getQueryPath() + "pluginFirmaServidor" + ".";
+      }
+    });
+  }
+
+  public PluginQueryPath PLUGINSEGELLAT() {
+    return new PluginQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ConfiguracioFirmaQueryPath.this.getQueryPath() + "pluginSegellat" + ".";
       }
     });
   }

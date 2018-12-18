@@ -5,6 +5,9 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public long getTransaccioID();
 	public void setTransaccioID(long _transaccioID_);
 
+	public java.lang.String getNom();
+	public void setNom(java.lang.String _nom_);
+
 	public java.lang.String getTransactionWebId();
 	public void setTransactionWebId(java.lang.String _transactionWebId_);
 

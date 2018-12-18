@@ -43,6 +43,17 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.String nom;
+
+  public java.lang.String getNom() {
+    return this.nom;
+  }
+
+  public void setNom(java.lang.String nom) {
+    this.nom = nom;
+  }
+
+
   private java.lang.String transactionWebId;
 
   public java.lang.String getTransactionWebId() {
@@ -556,6 +567,7 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     super(__toClone);
     this.transaccioIDDesde = __toClone.transaccioIDDesde;
     this.transaccioIDFins = __toClone.transaccioIDFins;
+    this.nom = __toClone.nom;
     this.transactionWebId = __toClone.transactionWebId;
     this.dataIniciDesde = __toClone.dataIniciDesde;
     this.dataIniciFins = __toClone.dataIniciFins;
@@ -617,7 +629,7 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TRANSACTIONWEBID ,RETURNURL ,ESTATMISSATGE }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM ,TRANSACTIONWEBID ,RETURNURL ,ESTATMISSATGE }));
   }
 
   @Override

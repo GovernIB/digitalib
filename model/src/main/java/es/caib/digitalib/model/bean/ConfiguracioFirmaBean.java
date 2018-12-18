@@ -25,6 +25,7 @@ private static final long serialVersionUID = -1258385108L;
 	java.lang.Long firmatPerFormatID;
 	java.lang.Long motiuDelegacioID;
 	java.lang.String propietatsTaulaFirmes;
+	long pluginFirmaServidorID;
 	boolean incloureSegellDeTemps;
 	java.lang.Long pluginSegellatID;
 
@@ -34,7 +35,7 @@ private static final long serialVersionUID = -1258385108L;
   }
 
   /** Constructor amb tots els camps  */
-  public ConfiguracioFirmaBean(long configuracioFirmaID , int usPoliticaDeFirma , java.lang.String policyIdentifier , java.lang.String policyIdentifierHash , java.lang.String policyIdentifierHashAlgorithm , java.lang.String policyUrlDocument , int tipusOperacioFirma , int tipusFirmaID , java.lang.Integer algorismeDeFirmaID , boolean modeDeFirma , int politicaTaulaFirmes , int posicioTaulaFirmesID , java.lang.Long firmatPerFormatID , java.lang.Long motiuDelegacioID , java.lang.String propietatsTaulaFirmes , boolean incloureSegellDeTemps , java.lang.Long pluginSegellatID) {
+  public ConfiguracioFirmaBean(long configuracioFirmaID , int usPoliticaDeFirma , java.lang.String policyIdentifier , java.lang.String policyIdentifierHash , java.lang.String policyIdentifierHashAlgorithm , java.lang.String policyUrlDocument , int tipusOperacioFirma , int tipusFirmaID , java.lang.Integer algorismeDeFirmaID , boolean modeDeFirma , int politicaTaulaFirmes , int posicioTaulaFirmesID , java.lang.Long firmatPerFormatID , java.lang.Long motiuDelegacioID , java.lang.String propietatsTaulaFirmes , long pluginFirmaServidorID , boolean incloureSegellDeTemps , java.lang.Long pluginSegellatID) {
     this.configuracioFirmaID=configuracioFirmaID;
     this.usPoliticaDeFirma=usPoliticaDeFirma;
     this.policyIdentifier=policyIdentifier;
@@ -50,11 +51,12 @@ private static final long serialVersionUID = -1258385108L;
     this.firmatPerFormatID=firmatPerFormatID;
     this.motiuDelegacioID=motiuDelegacioID;
     this.propietatsTaulaFirmes=propietatsTaulaFirmes;
+    this.pluginFirmaServidorID=pluginFirmaServidorID;
     this.incloureSegellDeTemps=incloureSegellDeTemps;
     this.pluginSegellatID=pluginSegellatID;
 }
   /** Constructor sense valors autoincrementals */
-  public ConfiguracioFirmaBean(int usPoliticaDeFirma , java.lang.String policyIdentifier , java.lang.String policyIdentifierHash , java.lang.String policyIdentifierHashAlgorithm , java.lang.String policyUrlDocument , int tipusOperacioFirma , int tipusFirmaID , java.lang.Integer algorismeDeFirmaID , boolean modeDeFirma , int politicaTaulaFirmes , int posicioTaulaFirmesID , java.lang.Long firmatPerFormatID , java.lang.Long motiuDelegacioID , java.lang.String propietatsTaulaFirmes , boolean incloureSegellDeTemps , java.lang.Long pluginSegellatID) {
+  public ConfiguracioFirmaBean(int usPoliticaDeFirma , java.lang.String policyIdentifier , java.lang.String policyIdentifierHash , java.lang.String policyIdentifierHashAlgorithm , java.lang.String policyUrlDocument , int tipusOperacioFirma , int tipusFirmaID , java.lang.Integer algorismeDeFirmaID , boolean modeDeFirma , int politicaTaulaFirmes , int posicioTaulaFirmesID , java.lang.Long firmatPerFormatID , java.lang.Long motiuDelegacioID , java.lang.String propietatsTaulaFirmes , long pluginFirmaServidorID , boolean incloureSegellDeTemps , java.lang.Long pluginSegellatID) {
     this.usPoliticaDeFirma=usPoliticaDeFirma;
     this.policyIdentifier=policyIdentifier;
     this.policyIdentifierHash=policyIdentifierHash;
@@ -69,11 +71,12 @@ private static final long serialVersionUID = -1258385108L;
     this.firmatPerFormatID=firmatPerFormatID;
     this.motiuDelegacioID=motiuDelegacioID;
     this.propietatsTaulaFirmes=propietatsTaulaFirmes;
+    this.pluginFirmaServidorID=pluginFirmaServidorID;
     this.incloureSegellDeTemps=incloureSegellDeTemps;
     this.pluginSegellatID=pluginSegellatID;
 }
   /** Constructor dels valors Not Null */
-  public ConfiguracioFirmaBean(long configuracioFirmaID , int usPoliticaDeFirma , int tipusOperacioFirma , int tipusFirmaID , java.lang.Integer algorismeDeFirmaID , boolean modeDeFirma , int politicaTaulaFirmes , int posicioTaulaFirmesID) {
+  public ConfiguracioFirmaBean(long configuracioFirmaID , int usPoliticaDeFirma , int tipusOperacioFirma , int tipusFirmaID , java.lang.Integer algorismeDeFirmaID , boolean modeDeFirma , int politicaTaulaFirmes , int posicioTaulaFirmesID , long pluginFirmaServidorID) {
     this.configuracioFirmaID=configuracioFirmaID;
     this.usPoliticaDeFirma=usPoliticaDeFirma;
     this.tipusOperacioFirma=tipusOperacioFirma;
@@ -82,6 +85,7 @@ private static final long serialVersionUID = -1258385108L;
     this.modeDeFirma=modeDeFirma;
     this.politicaTaulaFirmes=politicaTaulaFirmes;
     this.posicioTaulaFirmesID=posicioTaulaFirmesID;
+    this.pluginFirmaServidorID=pluginFirmaServidorID;
 }
   public ConfiguracioFirmaBean(ConfiguracioFirma __bean) {
     this.setConfiguracioFirmaID(__bean.getConfiguracioFirmaID());
@@ -99,6 +103,7 @@ private static final long serialVersionUID = -1258385108L;
     this.setFirmatPerFormatID(__bean.getFirmatPerFormatID());
     this.setMotiuDelegacioID(__bean.getMotiuDelegacioID());
     this.setPropietatsTaulaFirmes(__bean.getPropietatsTaulaFirmes());
+    this.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
     this.setIncloureSegellDeTemps(__bean.isIncloureSegellDeTemps());
     this.setPluginSegellatID(__bean.getPluginSegellatID());
 	}
@@ -208,6 +213,13 @@ private static final long serialVersionUID = -1258385108L;
 		this.propietatsTaulaFirmes = _propietatsTaulaFirmes_;
 	};
 
+	public long getPluginFirmaServidorID() {
+		return(pluginFirmaServidorID);
+	};
+	public void setPluginFirmaServidorID(long _pluginFirmaServidorID_) {
+		this.pluginFirmaServidorID = _pluginFirmaServidorID_;
+	};
+
 	public boolean isIncloureSegellDeTemps() {
 		return(incloureSegellDeTemps);
 	};
@@ -244,6 +256,7 @@ private static final long serialVersionUID = -1258385108L;
     __tmp.setFirmatPerFormatID(__bean.getFirmatPerFormatID());
     __tmp.setMotiuDelegacioID(__bean.getMotiuDelegacioID());
     __tmp.setPropietatsTaulaFirmes(__bean.getPropietatsTaulaFirmes());
+    __tmp.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
     __tmp.setIncloureSegellDeTemps(__bean.isIncloureSegellDeTemps());
     __tmp.setPluginSegellatID(__bean.getPluginSegellatID());
 		return __tmp;

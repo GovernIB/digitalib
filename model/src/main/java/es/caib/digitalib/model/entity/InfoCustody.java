@@ -5,8 +5,8 @@ public interface InfoCustody extends org.fundaciobit.genapp.common.IGenAppEntity
 	public long getInfoCustodyID();
 	public void setInfoCustodyID(long _infoCustodyID_);
 
-	public java.lang.String getCustodyFileId();
-	public void setCustodyFileId(java.lang.String _custodyFileId_);
+	public java.lang.String getCustodyId();
+	public void setCustodyId(java.lang.String _custodyId_);
 
 	public java.lang.String getArxiuExpedientId();
 	public void setArxiuExpedientId(java.lang.String _arxiuExpedientId_);

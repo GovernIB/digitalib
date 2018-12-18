@@ -31,8 +31,8 @@ private static final long serialVersionUID = -1667677320L;
 	@Column(name="infocustodyid",nullable = false,length = 19)
 	long infoCustodyID;
 
-	@Column(name="custodyfileid",length = 255)
-	java.lang.String custodyFileId;
+	@Column(name="custodyid",length = 255)
+	java.lang.String custodyId;
 
 	@Column(name="arxiuexpedientid",length = 255)
 	java.lang.String arxiuExpedientId;
@@ -59,9 +59,9 @@ private static final long serialVersionUID = -1667677320L;
   }
 
   /** Constructor amb tots els camps  */
-  public InfoCustodyJPA(long infoCustodyID , java.lang.String custodyFileId , java.lang.String arxiuExpedientId , java.lang.String arxiuDocumentId , java.lang.String fileUrl , java.lang.String csv , java.lang.String csvValidationWeb , java.lang.String csvGenerationDefinition) {
+  public InfoCustodyJPA(long infoCustodyID , java.lang.String custodyId , java.lang.String arxiuExpedientId , java.lang.String arxiuDocumentId , java.lang.String fileUrl , java.lang.String csv , java.lang.String csvValidationWeb , java.lang.String csvGenerationDefinition) {
     this.infoCustodyID=infoCustodyID;
-    this.custodyFileId=custodyFileId;
+    this.custodyId=custodyId;
     this.arxiuExpedientId=arxiuExpedientId;
     this.arxiuDocumentId=arxiuDocumentId;
     this.fileUrl=fileUrl;
@@ -70,8 +70,8 @@ private static final long serialVersionUID = -1667677320L;
     this.csvGenerationDefinition=csvGenerationDefinition;
 }
   /** Constructor sense valors autoincrementals */
-  public InfoCustodyJPA(java.lang.String custodyFileId , java.lang.String arxiuExpedientId , java.lang.String arxiuDocumentId , java.lang.String fileUrl , java.lang.String csv , java.lang.String csvValidationWeb , java.lang.String csvGenerationDefinition) {
-    this.custodyFileId=custodyFileId;
+  public InfoCustodyJPA(java.lang.String custodyId , java.lang.String arxiuExpedientId , java.lang.String arxiuDocumentId , java.lang.String fileUrl , java.lang.String csv , java.lang.String csvValidationWeb , java.lang.String csvGenerationDefinition) {
+    this.custodyId=custodyId;
     this.arxiuExpedientId=arxiuExpedientId;
     this.arxiuDocumentId=arxiuDocumentId;
     this.fileUrl=fileUrl;
@@ -85,7 +85,7 @@ private static final long serialVersionUID = -1667677320L;
 }
   public InfoCustodyJPA(InfoCustody __bean) {
     this.setInfoCustodyID(__bean.getInfoCustodyID());
-    this.setCustodyFileId(__bean.getCustodyFileId());
+    this.setCustodyId(__bean.getCustodyId());
     this.setArxiuExpedientId(__bean.getArxiuExpedientId());
     this.setArxiuDocumentId(__bean.getArxiuDocumentId());
     this.setFileUrl(__bean.getFileUrl());
@@ -101,11 +101,11 @@ private static final long serialVersionUID = -1667677320L;
 		this.infoCustodyID = _infoCustodyID_;
 	};
 
-	public java.lang.String getCustodyFileId() {
-		return(custodyFileId);
+	public java.lang.String getCustodyId() {
+		return(custodyId);
 	};
-	public void setCustodyFileId(java.lang.String _custodyFileId_) {
-		this.custodyFileId = _custodyFileId_;
+	public void setCustodyId(java.lang.String _custodyId_) {
+		this.custodyId = _custodyId_;
 	};
 
 	public java.lang.String getArxiuExpedientId() {
@@ -184,7 +184,7 @@ private static final long serialVersionUID = -1667677320L;
     if (__bean == null) { return null;}
     InfoCustodyJPA __tmp = new InfoCustodyJPA();
     __tmp.setInfoCustodyID(__bean.getInfoCustodyID());
-    __tmp.setCustodyFileId(__bean.getCustodyFileId());
+    __tmp.setCustodyId(__bean.getCustodyId());
     __tmp.setArxiuExpedientId(__bean.getArxiuExpedientId());
     __tmp.setArxiuDocumentId(__bean.getArxiuDocumentId());
     __tmp.setFileUrl(__bean.getFileUrl());

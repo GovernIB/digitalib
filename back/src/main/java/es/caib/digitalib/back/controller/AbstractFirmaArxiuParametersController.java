@@ -53,15 +53,27 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
     final int tipusPerfil = Math.abs(perfilEjb.executeQueryOne(PerfilFields.USPERFIL,
         PerfilFields.PERFILID.equal(transaccioForm.getTransaccio().getPerfilID())));
 
+    // Tots
+    hiddenFields.remove(TransaccioFields.NOM);
+
+    // Copia Autentica
     if (tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA
         || tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
+      hiddenFields.remove(TransaccioFields.FUNCIONARIUSERNAME);
       hiddenFields.remove(TransaccioFields.SIGNPARAMFUNCIONARINIF);
       hiddenFields.remove(TransaccioFields.SIGNPARAMFUNCIONARINOM);
+
+      transaccioForm.addReadOnlyField(TransaccioFields.FUNCIONARIUSERNAME);
+      transaccioForm.addReadOnlyField(TransaccioFields.SIGNPARAMFUNCIONARINIF);
+      transaccioForm.addReadOnlyField(TransaccioFields.SIGNPARAMFUNCIONARINOM);
+      
       hiddenFields.remove(TransaccioFields.SIGNPARAMLANGUAGEDOC);
     }
 
+    // Digitalitzacio
     if (tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
 
+      /*
       // XYZ ZZZ Per DEBUG
       hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI);
       hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM);
@@ -75,6 +87,8 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
       transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMORGANS);
       transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL);
       transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
+       
+       */
 
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANIF);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANOM);
@@ -83,7 +97,7 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMINTERESSATS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORIGEN);
     }
-    
+
     transaccioForm.setTitleCode("dadesrequerides");
 
     transaccioForm.setHiddenFields(hiddenFields);
@@ -97,6 +111,10 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
   @Override
   public void postValidate(HttpServletRequest request, TransaccioForm transaccioForm,
       BindingResult result) throws I18NException {
+    
+    
+    ValidationUtils.rejectIfEmptyOrWhitespace(result, NOM.fullName,
+        "genapp.validation.required", new Object[] { I18NUtils.tradueix(NOM.fullName) });
 
     final int tipusPerfil = Math.abs(perfilEjb.executeQueryOne(PerfilFields.USPERFIL,
         PerfilFields.PERFILID.equal(transaccioForm.getTransaccio().getPerfilID())));

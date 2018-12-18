@@ -308,6 +308,9 @@ public class PerfilController
     }
 
 
+      fillValuesToGroupByItemsBoolean("utilitzatper", groupByItemsMap, UTILITZATPERAPLICACIO);
+
+
     return groupByItemsMap;
   }
 

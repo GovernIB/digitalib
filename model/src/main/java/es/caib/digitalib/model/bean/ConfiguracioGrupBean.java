@@ -19,8 +19,11 @@ private static final long serialVersionUID = -1444815491L;
 	long logoFooterID;
 	java.lang.String adreza;
 	java.lang.Long perfilNomesEscaneigID;
+	java.lang.Long perfilNomesEscaneig2ID;
 	java.lang.Long perfilCopiaAutenticaID;
+	java.lang.Long perfilCopiaAutentica2ID;
 	java.lang.Long perfilCustodiaID;
+	java.lang.Long perfilCustodia2ID;
 
 
   /** Constructor Buit */
@@ -28,7 +31,7 @@ private static final long serialVersionUID = -1444815491L;
   }
 
   /** Constructor amb tots els camps  */
-  public ConfiguracioGrupBean(long configuracioGrupID , java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCustodiaID) {
+  public ConfiguracioGrupBean(long configuracioGrupID , java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilNomesEscaneig2ID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCopiaAutentica2ID , java.lang.Long perfilCustodiaID , java.lang.Long perfilCustodia2ID) {
     this.configuracioGrupID=configuracioGrupID;
     this.nom=nom;
     this.suportWeb=suportWeb;
@@ -38,11 +41,14 @@ private static final long serialVersionUID = -1444815491L;
     this.logoFooterID=logoFooterID;
     this.adreza=adreza;
     this.perfilNomesEscaneigID=perfilNomesEscaneigID;
+    this.perfilNomesEscaneig2ID=perfilNomesEscaneig2ID;
     this.perfilCopiaAutenticaID=perfilCopiaAutenticaID;
+    this.perfilCopiaAutentica2ID=perfilCopiaAutentica2ID;
     this.perfilCustodiaID=perfilCustodiaID;
+    this.perfilCustodia2ID=perfilCustodia2ID;
 }
   /** Constructor sense valors autoincrementals */
-  public ConfiguracioGrupBean(java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCustodiaID) {
+  public ConfiguracioGrupBean(java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilNomesEscaneig2ID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCopiaAutentica2ID , java.lang.Long perfilCustodiaID , java.lang.Long perfilCustodia2ID) {
     this.nom=nom;
     this.suportWeb=suportWeb;
     this.suportEmail=suportEmail;
@@ -51,8 +57,11 @@ private static final long serialVersionUID = -1444815491L;
     this.logoFooterID=logoFooterID;
     this.adreza=adreza;
     this.perfilNomesEscaneigID=perfilNomesEscaneigID;
+    this.perfilNomesEscaneig2ID=perfilNomesEscaneig2ID;
     this.perfilCopiaAutenticaID=perfilCopiaAutenticaID;
+    this.perfilCopiaAutentica2ID=perfilCopiaAutentica2ID;
     this.perfilCustodiaID=perfilCustodiaID;
+    this.perfilCustodia2ID=perfilCustodia2ID;
 }
   /** Constructor dels valors Not Null */
   public ConfiguracioGrupBean(long configuracioGrupID , java.lang.String nom , long logoHeaderID , long logoFooterID , java.lang.String adreza) {
@@ -72,8 +81,11 @@ private static final long serialVersionUID = -1444815491L;
     this.setLogoFooterID(__bean.getLogoFooterID());
     this.setAdreza(__bean.getAdreza());
     this.setPerfilNomesEscaneigID(__bean.getPerfilNomesEscaneigID());
+    this.setPerfilNomesEscaneig2ID(__bean.getPerfilNomesEscaneig2ID());
     this.setPerfilCopiaAutenticaID(__bean.getPerfilCopiaAutenticaID());
+    this.setPerfilCopiaAutentica2ID(__bean.getPerfilCopiaAutentica2ID());
     this.setPerfilCustodiaID(__bean.getPerfilCustodiaID());
+    this.setPerfilCustodia2ID(__bean.getPerfilCustodia2ID());
     // Fitxer
     this.setLogoHeader(FitxerBean.toBean(__bean.getLogoHeader()));
     // Fitxer
@@ -143,6 +155,13 @@ private static final long serialVersionUID = -1444815491L;
 		this.perfilNomesEscaneigID = _perfilNomesEscaneigID_;
 	};
 
+	public java.lang.Long getPerfilNomesEscaneig2ID() {
+		return(perfilNomesEscaneig2ID);
+	};
+	public void setPerfilNomesEscaneig2ID(java.lang.Long _perfilNomesEscaneig2ID_) {
+		this.perfilNomesEscaneig2ID = _perfilNomesEscaneig2ID_;
+	};
+
 	public java.lang.Long getPerfilCopiaAutenticaID() {
 		return(perfilCopiaAutenticaID);
 	};
@@ -150,11 +169,25 @@ private static final long serialVersionUID = -1444815491L;
 		this.perfilCopiaAutenticaID = _perfilCopiaAutenticaID_;
 	};
 
+	public java.lang.Long getPerfilCopiaAutentica2ID() {
+		return(perfilCopiaAutentica2ID);
+	};
+	public void setPerfilCopiaAutentica2ID(java.lang.Long _perfilCopiaAutentica2ID_) {
+		this.perfilCopiaAutentica2ID = _perfilCopiaAutentica2ID_;
+	};
+
 	public java.lang.Long getPerfilCustodiaID() {
 		return(perfilCustodiaID);
 	};
 	public void setPerfilCustodiaID(java.lang.Long _perfilCustodiaID_) {
 		this.perfilCustodiaID = _perfilCustodiaID_;
+	};
+
+	public java.lang.Long getPerfilCustodia2ID() {
+		return(perfilCustodia2ID);
+	};
+	public void setPerfilCustodia2ID(java.lang.Long _perfilCustodia2ID_) {
+		this.perfilCustodia2ID = _perfilCustodia2ID_;
 	};
 
 
@@ -173,8 +206,11 @@ private static final long serialVersionUID = -1444815491L;
     __tmp.setLogoFooterID(__bean.getLogoFooterID());
     __tmp.setAdreza(__bean.getAdreza());
     __tmp.setPerfilNomesEscaneigID(__bean.getPerfilNomesEscaneigID());
+    __tmp.setPerfilNomesEscaneig2ID(__bean.getPerfilNomesEscaneig2ID());
     __tmp.setPerfilCopiaAutenticaID(__bean.getPerfilCopiaAutenticaID());
+    __tmp.setPerfilCopiaAutentica2ID(__bean.getPerfilCopiaAutentica2ID());
     __tmp.setPerfilCustodiaID(__bean.getPerfilCustodiaID());
+    __tmp.setPerfilCustodia2ID(__bean.getPerfilCustodia2ID());
     // Fitxer
     __tmp.setLogoHeader(FitxerBean.toBean(__bean.getLogoHeader()));
     // Fitxer

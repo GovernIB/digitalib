@@ -2,6 +2,24 @@
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <un:useConstants var="TransaccioFields" className="es.caib.digitalib.model.fields.TransaccioFields"/>
   
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.NOM)}">
+        <tr id="transaccio_nom_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.NOM])?'transaccio.nom':__theForm.labels[TransaccioFields.NOM]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.NOM]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.NOM]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.nom" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.NOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.NOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.nom"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.TRANSACTIONWEBID)}">
         <tr id="transaccio_transactionWebId_rowid">
           <td>

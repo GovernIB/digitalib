@@ -79,6 +79,14 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID)}">
+          <td>
+          <c:set var="tmp">${configuracioGrup.perfilNomesEscaneig2ID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfPerfilForPerfilNomesEscaneig2ID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID)}">
           <td>
           <c:set var="tmp">${configuracioGrup.perfilCopiaAutenticaID}</c:set>
@@ -87,11 +95,27 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID)}">
+          <td>
+          <c:set var="tmp">${configuracioGrup.perfilCopiaAutentica2ID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfPerfilForPerfilCopiaAutentica2ID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILCUSTODIAID)}">
           <td>
           <c:set var="tmp">${configuracioGrup.perfilCustodiaID}</c:set>
           <c:if test="${not empty tmp}">
           ${__theFilterForm.mapOfPerfilForPerfilCustodiaID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILCUSTODIA2ID)}">
+          <td>
+          <c:set var="tmp">${configuracioGrup.perfilCustodia2ID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfPerfilForPerfilCustodia2ID[tmp]}
           </c:if>
           </td>
         </c:if>

@@ -1,81 +1,63 @@
 
 
-
-ALTER TABLE dib_infocustody RENAME custodyfileurl  TO fileurl());
-ALTER TABLE dib_infocustody
-  ADD COLUMN arxiuexpedientid character varying(255)());
-ALTER TABLE dib_infocustody
-  ADD COLUMN arxiudocumentid character varying(255)());
-  
-  
-  
-  ALTER TABLE dib_transaccio
-  DROP COLUMN usernamerequest());
-  
-  
-  ALTER TABLE dib_transaccio RENAME languagedoc  TO signparamlanguagedoc());
-  
-  
-  ALTER TABLE dib_transaccio RENAME funcionarinom  TO signparamfuncionarinom());
-ALTER TABLE dib_transaccio
-  ADD COLUMN signparamfuncionarinif character varying(255)());
-  
-  
-ALTER TABLE dib_transaccio
-  ADD COLUMN arxiureqparamdocestatelabora character varying(4)());
-ALTER TABLE dib_transaccio
-  ADD COLUMN arxiureqparamdocumenttipus character varying(4)());
-ALTER TABLE dib_transaccio
-  ADD COLUMN arxiureqparaminteressats character varying(255)());
-ALTER TABLE dib_transaccio
-  ADD COLUMN arxiureqparamorigen integer());
-COMMENT ON COLUMN dib_transaccio.arxiureqparamdocestatelabora IS 'documentEstatElaboracio'());
-COMMENT ON COLUMN dib_transaccio.arxiureqparamdocumenttipus IS 'TDxx'());
-COMMENT ON COLUMN dib_transaccio.arxiureqparaminteressats IS 'Llistat de Nifs dels interessats separats per comes'());
-COMMENT ON COLUMN dib_transaccio.arxiureqparamorigen IS '0 Ciutada
-1 Administracio'());
-
-UPDATE dib_transaccio
-   SET  returnurl='DESCONEGUDA' WHERE returnurl is null());
-
-ALTER TABLE dib_transaccio
-   ALTER COLUMN returnurl SET NOT NULL());
-   
-ALTER TABLE dib_transaccio
-   ALTER COLUMN languageui SET NOT NULL());
-ALTER TABLE dib_transaccio
-   ALTER COLUMN funcionariusername SET NOT NULL());
-   
-   
-   
-arxiuoptparam
-arxiuoptparamprocedimentcodi
-arxiuoptparamseriedocumental
-
-
-ALTER TABLE dib_transaccio RENAME ciutadanif  TO arxiuoptparamciutadanif());
-ALTER TABLE dib_transaccio RENAME ciutadanom  TO arxiuoptparamciutadanom());
+ALTER TABLE dib_infocustody RENAME custodyfileid  TO custodyid;
 
 
 ALTER TABLE dib_transaccio
-  ADD COLUMN arxiuoptparamprocedimentcodi character varying(255)());
-ALTER TABLE dib_transaccio
-  ADD COLUMN arxiuoptparamprocedimentnom character varying(255)());
+  ADD COLUMN nom character varying(255);
+COMMENT ON COLUMN dib_transaccio.nom IS 'Nom descriptiu de la transaccio';
+
+ALTER TABLE dib_configuraciofirma
+  ADD COLUMN pluginfirmaservidorid bigint NOT NULL;
+ALTER TABLE dib_configuraciofirma
+  ADD CONSTRAINT dib_conffirma_plugin_fir_fk FOREIGN KEY (pluginfirmaservidorid) REFERENCES dib_plugin (pluginid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE dib_perfil
+  ADD COLUMN utilitzatperaplicacio boolean;
+  
+  UPDATE dib_perfil
+   SET utilitzatperaplicacio=false
+ WHERE utilitzatperaplicacio is NULL AND usperfil < 0;
+  
+  create index dib_conffirma_plugfirma_fk_i on dib_configuraciofirma (pluginfirmaservidorid);
   
   
-  ALTER TABLE dib_transaccio
-  ADD COLUMN arxiuoptparamorgans character varying(255)());
-ALTER TABLE dib_transaccio
-  ADD COLUMN arxiuoptparamseriedocumental character varying(255)());
-ALTER TABLE dib_transaccio
-  ADD COLUMN arxiuoptparamcustorexpid character varying(255)());
-COMMENT ON COLUMN dib_transaccio.arxiuoptparamorgans IS 'Codi DIR3 dels organs afectats separats per comes'());
+
+ALTER TABLE dib_configuraciogrup ADD COLUMN perfilnomesescaneig2id bigint;
+ALTER TABLE dib_configuraciogrup ADD COLUMN perfilcopiaautentica2id bigint;
+ALTER TABLE dib_configuraciogrup ADD COLUMN perfilcustodia2id bigint;
+
+ALTER TABLE dib_configuraciogrup
+  ADD CONSTRAINT dib_cfggrup_perfil_coau2_fk FOREIGN KEY (perfilcopiaautentica2id)
+      REFERENCES dib_perfil (perfilid) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE dib_configuraciogrup
+  ADD CONSTRAINT dib_cfggrup_perfil_cust2_fk FOREIGN KEY (perfilcustodia2id)
+      REFERENCES dib_perfil (perfilid) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE dib_configuraciogrup
+  ADD CONSTRAINT dib_cfggrup_perfil_scan2_fk FOREIGN KEY (perfilnomesescaneig2id)
+      REFERENCES dib_perfil (perfilid) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE INDEX dib_cfggrup_perfilcoau2_fk_i
+  ON dib_configuraciogrup
+  USING btree
+  (perfilcopiaautentica2id);
 
 
-ALTER TABLE dib_transaccio
-  DROP COLUMN expedient());
+
+CREATE INDEX dib_cfggrup_perfilcust2_fk_i
+  ON dib_configuraciogrup
+  USING btree
+  (perfilcustodia2id);
 
 
-  ALTER TABLE dib_transaccio RENAME arxiuoptparamciutadanif  TO arxiureqparamciutadanif;
-ALTER TABLE dib_transaccio RENAME arxiuoptparamciutadanom  TO arxiureqparamciutadanom;
-   
+
+CREATE INDEX dib_cfggrup_perfilscan2_fk_i
+  ON dib_configuraciogrup
+  USING btree
+  (perfilnomesescaneig2id);
+  
+
+

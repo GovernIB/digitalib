@@ -196,6 +196,16 @@ public class ConfiguracioGrupController
       };
     }
 
+    // Field perfilNomesEscaneig2ID
+    {
+      _listSKV = getReferenceListForPerfilNomesEscaneig2ID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfPerfilForPerfilNomesEscaneig2ID(_tmp);
+      if (filterForm.getGroupByFields().contains(PERFILNOMESESCANEIG2ID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, PERFILNOMESESCANEIG2ID, false);
+      };
+    }
+
     // Field perfilCopiaAutenticaID
     {
       _listSKV = getReferenceListForPerfilCopiaAutenticaID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -206,6 +216,16 @@ public class ConfiguracioGrupController
       };
     }
 
+    // Field perfilCopiaAutentica2ID
+    {
+      _listSKV = getReferenceListForPerfilCopiaAutentica2ID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfPerfilForPerfilCopiaAutentica2ID(_tmp);
+      if (filterForm.getGroupByFields().contains(PERFILCOPIAAUTENTICA2ID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, PERFILCOPIAAUTENTICA2ID, false);
+      };
+    }
+
     // Field perfilCustodiaID
     {
       _listSKV = getReferenceListForPerfilCustodiaID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -213,6 +233,16 @@ public class ConfiguracioGrupController
       filterForm.setMapOfPerfilForPerfilCustodiaID(_tmp);
       if (filterForm.getGroupByFields().contains(PERFILCUSTODIAID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, PERFILCUSTODIAID, false);
+      };
+    }
+
+    // Field perfilCustodia2ID
+    {
+      _listSKV = getReferenceListForPerfilCustodia2ID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfPerfilForPerfilCustodia2ID(_tmp);
+      if (filterForm.getGroupByFields().contains(PERFILCUSTODIA2ID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, PERFILCUSTODIA2ID, false);
       };
     }
 
@@ -232,8 +262,11 @@ public class ConfiguracioGrupController
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(PERFILNOMESESCANEIGID, filterForm.getMapOfPerfilForPerfilNomesEscaneigID());
+    __mapping.put(PERFILNOMESESCANEIG2ID, filterForm.getMapOfPerfilForPerfilNomesEscaneig2ID());
     __mapping.put(PERFILCOPIAAUTENTICAID, filterForm.getMapOfPerfilForPerfilCopiaAutenticaID());
+    __mapping.put(PERFILCOPIAAUTENTICA2ID, filterForm.getMapOfPerfilForPerfilCopiaAutentica2ID());
     __mapping.put(PERFILCUSTODIAID, filterForm.getMapOfPerfilForPerfilCustodiaID());
+    __mapping.put(PERFILCUSTODIA2ID, filterForm.getMapOfPerfilForPerfilCustodia2ID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -289,6 +322,13 @@ public class ConfiguracioGrupController
       configuracioGrupForm.setListOfPerfilForPerfilNomesEscaneigID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
+    if (configuracioGrupForm.getListOfPerfilForPerfilNomesEscaneig2ID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForPerfilNomesEscaneig2ID(request, mav, configuracioGrupForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      configuracioGrupForm.setListOfPerfilForPerfilNomesEscaneig2ID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
     if (configuracioGrupForm.getListOfPerfilForPerfilCopiaAutenticaID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPerfilCopiaAutenticaID(request, mav, configuracioGrupForm, null);
 
@@ -296,11 +336,25 @@ public class ConfiguracioGrupController
       configuracioGrupForm.setListOfPerfilForPerfilCopiaAutenticaID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
+    if (configuracioGrupForm.getListOfPerfilForPerfilCopiaAutentica2ID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForPerfilCopiaAutentica2ID(request, mav, configuracioGrupForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      configuracioGrupForm.setListOfPerfilForPerfilCopiaAutentica2ID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
     if (configuracioGrupForm.getListOfPerfilForPerfilCustodiaID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPerfilCustodiaID(request, mav, configuracioGrupForm, null);
 
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       configuracioGrupForm.setListOfPerfilForPerfilCustodiaID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (configuracioGrupForm.getListOfPerfilForPerfilCustodia2ID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForPerfilCustodia2ID(request, mav, configuracioGrupForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      configuracioGrupForm.setListOfPerfilForPerfilCustodia2ID(_listSKV);
     }
     
   }
@@ -686,6 +740,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  public List<StringKeyValue> getReferenceListForPerfilNomesEscaneig2ID(HttpServletRequest request,
+       ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
+    if (configuracioGrupForm.isHiddenField(PERFILNOMESESCANEIG2ID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (configuracioGrupForm.isReadOnlyField(PERFILNOMESESCANEIG2ID)) {
+      _where = PerfilFields.PERFILID.equal(configuracioGrupForm.getConfiguracioGrup().getPerfilNomesEscaneig2ID());
+    }
+    return getReferenceListForPerfilNomesEscaneig2ID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPerfilNomesEscaneig2ID(HttpServletRequest request,
+       ModelAndView mav, ConfiguracioGrupFilterForm configuracioGrupFilterForm,
+       List<ConfiguracioGrup> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (configuracioGrupFilterForm.isHiddenField(PERFILNOMESESCANEIG2ID)
+      && !configuracioGrupFilterForm.isGroupByField(PERFILNOMESESCANEIG2ID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(PERFILNOMESESCANEIG2ID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (ConfiguracioGrup _item : list) {
+        if(_item.getPerfilNomesEscaneig2ID() == null) { continue; };
+        _pkList.add(_item.getPerfilNomesEscaneig2ID());
+        }
+        _w = PerfilFields.PERFILID.in(_pkList);
+      }
+    return getReferenceListForPerfilNomesEscaneig2ID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPerfilNomesEscaneig2ID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return perfilRefList.getReferenceList(PerfilFields.PERFILID, where );
+  }
+
+
   public List<StringKeyValue> getReferenceListForPerfilCopiaAutenticaID(HttpServletRequest request,
        ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
     if (configuracioGrupForm.isHiddenField(PERFILCOPIAAUTENTICAID)) {
@@ -726,6 +820,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  public List<StringKeyValue> getReferenceListForPerfilCopiaAutentica2ID(HttpServletRequest request,
+       ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
+    if (configuracioGrupForm.isHiddenField(PERFILCOPIAAUTENTICA2ID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (configuracioGrupForm.isReadOnlyField(PERFILCOPIAAUTENTICA2ID)) {
+      _where = PerfilFields.PERFILID.equal(configuracioGrupForm.getConfiguracioGrup().getPerfilCopiaAutentica2ID());
+    }
+    return getReferenceListForPerfilCopiaAutentica2ID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPerfilCopiaAutentica2ID(HttpServletRequest request,
+       ModelAndView mav, ConfiguracioGrupFilterForm configuracioGrupFilterForm,
+       List<ConfiguracioGrup> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (configuracioGrupFilterForm.isHiddenField(PERFILCOPIAAUTENTICA2ID)
+      && !configuracioGrupFilterForm.isGroupByField(PERFILCOPIAAUTENTICA2ID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(PERFILCOPIAAUTENTICA2ID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (ConfiguracioGrup _item : list) {
+        if(_item.getPerfilCopiaAutentica2ID() == null) { continue; };
+        _pkList.add(_item.getPerfilCopiaAutentica2ID());
+        }
+        _w = PerfilFields.PERFILID.in(_pkList);
+      }
+    return getReferenceListForPerfilCopiaAutentica2ID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPerfilCopiaAutentica2ID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return perfilRefList.getReferenceList(PerfilFields.PERFILID, where );
+  }
+
+
   public List<StringKeyValue> getReferenceListForPerfilCustodiaID(HttpServletRequest request,
        ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
     if (configuracioGrupForm.isHiddenField(PERFILCUSTODIAID)) {
@@ -761,6 +895,46 @@ public java.lang.Long stringToPK(String value) {
 
 
   public List<StringKeyValue> getReferenceListForPerfilCustodiaID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return perfilRefList.getReferenceList(PerfilFields.PERFILID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPerfilCustodia2ID(HttpServletRequest request,
+       ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
+    if (configuracioGrupForm.isHiddenField(PERFILCUSTODIA2ID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (configuracioGrupForm.isReadOnlyField(PERFILCUSTODIA2ID)) {
+      _where = PerfilFields.PERFILID.equal(configuracioGrupForm.getConfiguracioGrup().getPerfilCustodia2ID());
+    }
+    return getReferenceListForPerfilCustodia2ID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPerfilCustodia2ID(HttpServletRequest request,
+       ModelAndView mav, ConfiguracioGrupFilterForm configuracioGrupFilterForm,
+       List<ConfiguracioGrup> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (configuracioGrupFilterForm.isHiddenField(PERFILCUSTODIA2ID)
+      && !configuracioGrupFilterForm.isGroupByField(PERFILCUSTODIA2ID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(PERFILCUSTODIA2ID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (ConfiguracioGrup _item : list) {
+        if(_item.getPerfilCustodia2ID() == null) { continue; };
+        _pkList.add(_item.getPerfilCustodia2ID());
+        }
+        _w = PerfilFields.PERFILID.in(_pkList);
+      }
+    return getReferenceListForPerfilCustodia2ID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPerfilCustodia2ID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return perfilRefList.getReferenceList(PerfilFields.PERFILID, where );
   }

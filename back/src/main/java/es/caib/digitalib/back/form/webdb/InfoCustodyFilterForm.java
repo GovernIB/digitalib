@@ -42,14 +42,14 @@ public class InfoCustodyFilterForm extends DigitalIBBaseFilterForm implements In
   }
 
 
-  private java.lang.String custodyFileId;
+  private java.lang.String custodyId;
 
-  public java.lang.String getCustodyFileId() {
-    return this.custodyFileId;
+  public java.lang.String getCustodyId() {
+    return this.custodyId;
   }
 
-  public void setCustodyFileId(java.lang.String custodyFileId) {
-    this.custodyFileId = custodyFileId;
+  public void setCustodyId(java.lang.String custodyId) {
+    this.custodyId = custodyId;
   }
 
 
@@ -126,7 +126,7 @@ public class InfoCustodyFilterForm extends DigitalIBBaseFilterForm implements In
     super(__toClone);
     this.infoCustodyIDDesde = __toClone.infoCustodyIDDesde;
     this.infoCustodyIDFins = __toClone.infoCustodyIDFins;
-    this.custodyFileId = __toClone.custodyFileId;
+    this.custodyId = __toClone.custodyId;
     this.arxiuExpedientId = __toClone.arxiuExpedientId;
     this.arxiuDocumentId = __toClone.arxiuDocumentId;
     this.fileUrl = __toClone.fileUrl;
@@ -139,7 +139,7 @@ public class InfoCustodyFilterForm extends DigitalIBBaseFilterForm implements In
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { CUSTODYFILEID ,ARXIUEXPEDIENTID ,ARXIUDOCUMENTID }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { CUSTODYID ,ARXIUEXPEDIENTID ,ARXIUDOCUMENTID }));
   }
 
   @Override

@@ -60,6 +60,10 @@ public class ConfiguracioFirmaValidator<T> implements ConfiguracioFirmaFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(POSICIOTAULAFIRMESID)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,PLUGINFIRMASERVIDORID, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PLUGINFIRMASERVIDORID)));
+
     // Check size
     if (__vr.getFieldErrorCount(POLICYIDENTIFIER) == 0) {
       java.lang.String __policyidentifier = (java.lang.String)__vr.getFieldValue(__target__,POLICYIDENTIFIER);
@@ -142,6 +146,18 @@ public class ConfiguracioFirmaValidator<T> implements ConfiguracioFirmaFields {
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__motiudelegacioid)));
         }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(PLUGINFIRMASERVIDORID) == 0) {
+      java.lang.Long __pluginfirmaservidorid = (java.lang.Long)__vr.getFieldValue(__target__,PLUGINFIRMASERVIDORID);
+      Long __count_ = null;
+      try { __count_ = __pluginManager.count(PluginFields.PLUGINID.equal(__pluginfirmaservidorid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+      if (__count_ == null || __count_ == 0) {        
+        __vr.rejectValue(PLUGINFIRMASERVIDORID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginfirmaservidorid)));
       }
     }
 

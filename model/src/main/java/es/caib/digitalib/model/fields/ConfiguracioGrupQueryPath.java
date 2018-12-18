@@ -47,12 +47,24 @@ public class ConfiguracioGrupQueryPath extends org.fundaciobit.genapp.common.que
     return new LongField(getQueryPath(), ConfiguracioGrupFields.PERFILNOMESESCANEIGID);
   }
 
+  public LongField PERFILNOMESESCANEIG2ID() {
+    return new LongField(getQueryPath(), ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID);
+  }
+
   public LongField PERFILCOPIAAUTENTICAID() {
     return new LongField(getQueryPath(), ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID);
   }
 
+  public LongField PERFILCOPIAAUTENTICA2ID() {
+    return new LongField(getQueryPath(), ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID);
+  }
+
   public LongField PERFILCUSTODIAID() {
     return new LongField(getQueryPath(), ConfiguracioGrupFields.PERFILCUSTODIAID);
+  }
+
+  public LongField PERFILCUSTODIA2ID() {
+    return new LongField(getQueryPath(), ConfiguracioGrupFields.PERFILCUSTODIA2ID);
   }
 
 
@@ -102,6 +114,14 @@ public class ConfiguracioGrupQueryPath extends org.fundaciobit.genapp.common.que
     });
   }
 
+  public PerfilQueryPath PERFILNOMESESCANEIG2() {
+    return new PerfilQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ConfiguracioGrupQueryPath.this.getQueryPath() + "perfilNomesEscaneig2" + ".";
+      }
+    });
+  }
+
   public PerfilQueryPath PERFILCOPIAAUTENTICA() {
     return new PerfilQueryPath(new QueryPath() {
       public String getQueryPath() {
@@ -110,10 +130,26 @@ public class ConfiguracioGrupQueryPath extends org.fundaciobit.genapp.common.que
     });
   }
 
+  public PerfilQueryPath PERFILCOPIAAUTENTICA2() {
+    return new PerfilQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ConfiguracioGrupQueryPath.this.getQueryPath() + "perfilCopiaAutentica2" + ".";
+      }
+    });
+  }
+
   public PerfilQueryPath PERFILCUSTODIA() {
     return new PerfilQueryPath(new QueryPath() {
       public String getQueryPath() {
           return ConfiguracioGrupQueryPath.this.getQueryPath() + "perfilCustodia" + ".";
+      }
+    });
+  }
+
+  public PerfilQueryPath PERFILCUSTODIA2() {
+    return new PerfilQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ConfiguracioGrupQueryPath.this.getQueryPath() + "perfilCustodia2" + ".";
       }
     });
   }

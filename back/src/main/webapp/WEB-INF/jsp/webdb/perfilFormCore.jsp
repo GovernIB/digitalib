@@ -424,3 +424,28 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.UTILITZATPERAPLICACIO)}">
+        <tr id="perfil_utilitzatPerAplicacio_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.UTILITZATPERAPLICACIO])?'perfil.utilitzatPerAplicacio':__theForm.labels[PerfilFields.UTILITZATPERAPLICACIO]}" />
+              <c:if test="${not empty __theForm.help[PerfilFields.UTILITZATPERAPLICACIO]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.UTILITZATPERAPLICACIO]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.UTILITZATPERAPLICACIO)}" >
+              <form:select cssClass="input-medium" onchange="if(typeof onChangeUtilitzatPerAplicacio == 'function') {  onChangeUtilitzatPerAplicacio(this); };"  path="perfil.utilitzatPerAplicacio">
+                <form:option value=""><fmt:message key="utilitzatper." /></form:option>
+                <form:option value="true" ><fmt:message key="utilitzatper.true" /></form:option>
+                <form:option value="false" ><fmt:message key="utilitzatper.false" /></form:option>
+              </form:select>
+          </c:if>
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.UTILITZATPERAPLICACIO)}" >
+                <fmt:message key="utilitzatper.${__theForm.perfil.utilitzatPerAplicacio}" />
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        

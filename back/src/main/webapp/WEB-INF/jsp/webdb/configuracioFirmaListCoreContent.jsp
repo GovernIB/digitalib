@@ -122,6 +122,14 @@
           ${configuracioFirma.propietatsTaulaFirmes}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
+          <td>
+          <c:set var="tmp">${configuracioFirma.pluginFirmaServidorID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfPluginForPluginFirmaServidorID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
           <td>
             &nbsp;<c:if test="${not empty configuracioFirma.incloureSegellDeTemps}">

@@ -11,18 +11,23 @@ import es.caib.digitalib.utils.Constants;
 /**
  * 
  * @author u139636
+ * @author anadal(u80067)
  *
  */
 @Controller
-@RequestMapping(value = "/admin/perfilcopiaautentica")
+@RequestMapping(value = "/admin/perfilcustodia/perpersona")
 @SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class })
-public class PerfilCopiaAutenticaAdminController extends AbstractPerfilAdminController {
+public class PerfilCustodiaPerPersonaAdminController extends AbstractPerfilAdminController {
 
 	
 	@Override
 	public int getTipusPerfil() {
-		return Constants.PERFIL_US_COPIA_AUTENTICA;
+		return Constants.PERFIL_US_CUSTODIA;
 	}
 
+  @Override
+  public boolean isUtilitzatPerAplicacio() {    
+    return false;
+  }
 	
 }

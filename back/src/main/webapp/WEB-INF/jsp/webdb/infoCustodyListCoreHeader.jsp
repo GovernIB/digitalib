@@ -15,8 +15,8 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.INFOCUSTODYID)}">
         <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.INFOCUSTODYID)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CUSTODYFILEID)}">
-        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CUSTODYFILEID)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CUSTODYID)}">
+        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CUSTODYID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ARXIUEXPEDIENTID)}">
         <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.ARXIUEXPEDIENTID)}</th>

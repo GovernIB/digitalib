@@ -29,8 +29,11 @@ public class ConfiguracioGrupForm extends DigitalIBBaseForm {
     super(__toClone);
       this.configuracioGrup = __toClone.configuracioGrup;
     this.listOfPerfilForPerfilNomesEscaneigID = __toClone.listOfPerfilForPerfilNomesEscaneigID;
+    this.listOfPerfilForPerfilNomesEscaneig2ID = __toClone.listOfPerfilForPerfilNomesEscaneig2ID;
     this.listOfPerfilForPerfilCopiaAutenticaID = __toClone.listOfPerfilForPerfilCopiaAutenticaID;
+    this.listOfPerfilForPerfilCopiaAutentica2ID = __toClone.listOfPerfilForPerfilCopiaAutentica2ID;
     this.listOfPerfilForPerfilCustodiaID = __toClone.listOfPerfilForPerfilCustodiaID;
+    this.listOfPerfilForPerfilCustodia2ID = __toClone.listOfPerfilForPerfilCustodia2ID;
   }
   
   public ConfiguracioGrupForm(ConfiguracioGrupJPA configuracioGrup, boolean nou) {
@@ -86,6 +89,18 @@ public class ConfiguracioGrupForm extends DigitalIBBaseForm {
 
 
 
+  private List<StringKeyValue> listOfPerfilForPerfilNomesEscaneig2ID;
+
+  public List<StringKeyValue> getListOfPerfilForPerfilNomesEscaneig2ID() {
+    return this.listOfPerfilForPerfilNomesEscaneig2ID;
+  }
+
+  public void setListOfPerfilForPerfilNomesEscaneig2ID(List<StringKeyValue> listOfPerfilForPerfilNomesEscaneig2ID) {
+    this.listOfPerfilForPerfilNomesEscaneig2ID = listOfPerfilForPerfilNomesEscaneig2ID;
+  }
+
+
+
   private List<StringKeyValue> listOfPerfilForPerfilCopiaAutenticaID;
 
   public List<StringKeyValue> getListOfPerfilForPerfilCopiaAutenticaID() {
@@ -98,6 +113,18 @@ public class ConfiguracioGrupForm extends DigitalIBBaseForm {
 
 
 
+  private List<StringKeyValue> listOfPerfilForPerfilCopiaAutentica2ID;
+
+  public List<StringKeyValue> getListOfPerfilForPerfilCopiaAutentica2ID() {
+    return this.listOfPerfilForPerfilCopiaAutentica2ID;
+  }
+
+  public void setListOfPerfilForPerfilCopiaAutentica2ID(List<StringKeyValue> listOfPerfilForPerfilCopiaAutentica2ID) {
+    this.listOfPerfilForPerfilCopiaAutentica2ID = listOfPerfilForPerfilCopiaAutentica2ID;
+  }
+
+
+
   private List<StringKeyValue> listOfPerfilForPerfilCustodiaID;
 
   public List<StringKeyValue> getListOfPerfilForPerfilCustodiaID() {
@@ -106,6 +133,18 @@ public class ConfiguracioGrupForm extends DigitalIBBaseForm {
 
   public void setListOfPerfilForPerfilCustodiaID(List<StringKeyValue> listOfPerfilForPerfilCustodiaID) {
     this.listOfPerfilForPerfilCustodiaID = listOfPerfilForPerfilCustodiaID;
+  }
+
+
+
+  private List<StringKeyValue> listOfPerfilForPerfilCustodia2ID;
+
+  public List<StringKeyValue> getListOfPerfilForPerfilCustodia2ID() {
+    return this.listOfPerfilForPerfilCustodia2ID;
+  }
+
+  public void setListOfPerfilForPerfilCustodia2ID(List<StringKeyValue> listOfPerfilForPerfilCustodia2ID) {
+    this.listOfPerfilForPerfilCustodia2ID = listOfPerfilForPerfilCustodia2ID;
   }
 
 

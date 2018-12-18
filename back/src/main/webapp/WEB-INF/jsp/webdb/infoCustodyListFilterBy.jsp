@@ -68,15 +68,15 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.CUSTODYFILEID)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.CUSTODYID)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoCustody.custodyFileId" var="custodyFileId" />
-              <fmt:message key="genapp.form.searchby" var="cercapercustodyFileId" >                
-                 <fmt:param value="${custodyFileId}"/>
+              <fmt:message key="infoCustody.custodyId" var="custodyId" />
+              <fmt:message key="genapp.form.searchby" var="cercapercustodyId" >                
+                 <fmt:param value="${custodyId}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${custodyFileId}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapercustodyFileId}" path="custodyFileId" />
+              <span class="add-on"><c:out value="${custodyId}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapercustodyId}" path="custodyId" />
             </div>
 
 

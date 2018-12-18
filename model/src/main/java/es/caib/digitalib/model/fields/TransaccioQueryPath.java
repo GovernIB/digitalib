@@ -15,6 +15,10 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new LongField(getQueryPath(), TransaccioFields.TRANSACCIOID);
   }
 
+  public StringField NOM() {
+    return new StringField(getQueryPath(), TransaccioFields.NOM);
+  }
+
   public StringField TRANSACTIONWEBID() {
     return new StringField(getQueryPath(), TransaccioFields.TRANSACTIONWEBID);
   }

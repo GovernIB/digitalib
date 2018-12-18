@@ -13,6 +13,7 @@ public interface TransaccioFields extends java.io.Serializable {
 
 
 	 public static final LongField TRANSACCIOID = new LongField(_TABLE_MODEL, "transaccioID", "transaccioid");  // PK
+	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");
 	 public static final StringField TRANSACTIONWEBID = new StringField(_TABLE_MODEL, "transactionWebId", "webid");
 	 public static final TimestampField DATAINICI = new TimestampField(_TABLE_MODEL, "dataInici", "datainici");
 	 public static final TimestampField DATAFI = new TimestampField(_TABLE_MODEL, "dataFi", "datafi");
@@ -54,6 +55,7 @@ public interface TransaccioFields extends java.io.Serializable {
 
   public static final Field<?>[] ALL_TRANSACCIO_FIELDS = {
     TRANSACCIOID,
+    NOM,
     TRANSACTIONWEBID,
     DATAINICI,
     DATAFI,

@@ -27,6 +27,7 @@ private static final long serialVersionUID = -449640516L;
 	java.lang.Long pluginArxiuID;
 	java.lang.Long pluginDocCustodyID;
 	int usPerfil;
+	java.lang.Boolean utilitzatPerAplicacio;
 
 
   /** Constructor Buit */
@@ -34,7 +35,7 @@ private static final long serialVersionUID = -449640516L;
   }
 
   /** Constructor amb tots els camps  */
-  public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
+  public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
@@ -52,9 +53,10 @@ private static final long serialVersionUID = -449640516L;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
     this.usPerfil=usPerfil;
+    this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor sense valors autoincrementals */
-  public PerfilBean(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil) {
+  public PerfilBean(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.codi=codi;
     this.nom=nom;
     this.descripcio=descripcio;
@@ -71,6 +73,7 @@ private static final long serialVersionUID = -449640516L;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
     this.usPerfil=usPerfil;
+    this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor dels valors Not Null */
   public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
@@ -101,6 +104,7 @@ private static final long serialVersionUID = -449640516L;
     this.setPluginArxiuID(__bean.getPluginArxiuID());
     this.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
     this.setUsPerfil(__bean.getUsPerfil());
+    this.setUtilitzatPerAplicacio(__bean.getUtilitzatPerAplicacio());
 	}
 
 	public long getPerfilID() {
@@ -222,6 +226,13 @@ private static final long serialVersionUID = -449640516L;
 		this.usPerfil = _usPerfil_;
 	};
 
+	public java.lang.Boolean getUtilitzatPerAplicacio() {
+		return(utilitzatPerAplicacio);
+	};
+	public void setUtilitzatPerAplicacio(java.lang.Boolean _utilitzatPerAplicacio_) {
+		this.utilitzatPerAplicacio = _utilitzatPerAplicacio_;
+	};
+
 
 
   // ======================================
@@ -246,6 +257,7 @@ private static final long serialVersionUID = -449640516L;
     __tmp.setPluginArxiuID(__bean.getPluginArxiuID());
     __tmp.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
     __tmp.setUsPerfil(__bean.getUsPerfil());
+    __tmp.setUtilitzatPerAplicacio(__bean.getUtilitzatPerAplicacio());
 		return __tmp;
 	}
 

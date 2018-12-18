@@ -29,11 +29,11 @@ public class InfoCustodyValidator<T> implements InfoCustodyFields {
 
     // Valors Not Null
     // Check size
-    if (__vr.getFieldErrorCount(CUSTODYFILEID) == 0) {
-      java.lang.String __custodyfileid = (java.lang.String)__vr.getFieldValue(__target__,CUSTODYFILEID);
-      if (__custodyfileid!= null && __custodyfileid.length() > 255) {
-        __vr.rejectValue(CUSTODYFILEID, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CUSTODYFILEID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+    if (__vr.getFieldErrorCount(CUSTODYID) == 0) {
+      java.lang.String __custodyid = (java.lang.String)__vr.getFieldValue(__target__,CUSTODYID);
+      if (__custodyid!= null && __custodyid.length() > 255) {
+        __vr.rejectValue(CUSTODYID, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CUSTODYID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     

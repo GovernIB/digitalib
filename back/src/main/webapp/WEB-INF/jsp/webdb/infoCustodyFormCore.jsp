@@ -2,19 +2,19 @@
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <un:useConstants var="InfoCustodyFields" className="es.caib.digitalib.model.fields.InfoCustodyFields"/>
   
-        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.CUSTODYFILEID)}">
-        <tr id="infoCustody_custodyFileId_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.CUSTODYID)}">
+        <tr id="infoCustody_custodyId_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.CUSTODYFILEID])?'infoCustody.custodyFileId':__theForm.labels[InfoCustodyFields.CUSTODYFILEID]}" />
-              <c:if test="${not empty __theForm.help[InfoCustodyFields.CUSTODYFILEID]}">
-              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.CUSTODYFILEID]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.CUSTODYID])?'infoCustody.custodyId':__theForm.labels[InfoCustodyFields.CUSTODYID]}" />
+              <c:if test="${not empty __theForm.help[InfoCustodyFields.CUSTODYID]}">
+              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.CUSTODYID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="infoCustody.custodyFileId" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYFILEID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYFILEID)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.custodyFileId"   />
+            <form:errors path="infoCustody.custodyId" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CUSTODYID)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.custodyId"   />
 
            </td>
         </tr>

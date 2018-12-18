@@ -27,6 +27,7 @@ public class ConfiguracioFirmaForm extends DigitalIBBaseForm {
     this.listOfValuesForPosicioTaulaFirmesID = __toClone.listOfValuesForPosicioTaulaFirmesID;
     this.listOfTraduccioForFirmatPerFormatID = __toClone.listOfTraduccioForFirmatPerFormatID;
     this.listOfTraduccioForMotiuDelegacioID = __toClone.listOfTraduccioForMotiuDelegacioID;
+    this.listOfPluginForPluginFirmaServidorID = __toClone.listOfPluginForPluginFirmaServidorID;
     this.listOfPluginForPluginSegellatID = __toClone.listOfPluginForPluginSegellatID;
   }
   
@@ -144,6 +145,18 @@ public class ConfiguracioFirmaForm extends DigitalIBBaseForm {
 
   public void setListOfTraduccioForMotiuDelegacioID(List<StringKeyValue> listOfTraduccioForMotiuDelegacioID) {
     this.listOfTraduccioForMotiuDelegacioID = listOfTraduccioForMotiuDelegacioID;
+  }
+
+
+
+  private List<StringKeyValue> listOfPluginForPluginFirmaServidorID;
+
+  public List<StringKeyValue> getListOfPluginForPluginFirmaServidorID() {
+    return this.listOfPluginForPluginFirmaServidorID;
+  }
+
+  public void setListOfPluginForPluginFirmaServidorID(List<StringKeyValue> listOfPluginForPluginFirmaServidorID) {
+    this.listOfPluginForPluginFirmaServidorID = listOfPluginForPluginFirmaServidorID;
   }
 
 

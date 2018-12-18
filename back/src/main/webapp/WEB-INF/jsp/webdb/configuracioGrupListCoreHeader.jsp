@@ -39,11 +39,20 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.PERFILNOMESESCANEIG2ID)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.PERFILCOPIAAUTENTICAID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.PERFILCOPIAAUTENTICA2ID)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILCUSTODIAID)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.PERFILCUSTODIAID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILCUSTODIA2ID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.PERFILCUSTODIA2ID)}</th>
         </c:if>
 
 

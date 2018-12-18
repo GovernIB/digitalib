@@ -39,6 +39,8 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 	public static final int TIPUSFIRMACOLUMN = 1;
 
 	public abstract int getTipusPerfil();
+	
+	public abstract boolean isUtilitzatPerAplicacio();
 
 	public static final String CONTEXTWEB = "/admin/perfil";
 
@@ -169,6 +171,9 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 							Constants.TIPUS_CUSTODIA_ARXIU);
 					break;
 			}
+			
+			
+			perfilForm.getPerfil().setUtilitzatPerAplicacio(isUtilitzatPerAplicacio());
 
 		}
 
@@ -359,14 +364,18 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 	public Where getAdditionalCondition(HttpServletRequest request)
 			throws I18NException {
 		int tipusPerfil = getTipusPerfil();
+		Where w;
 		if (tipusPerfil == Constants.PERFIL_US_ALL_INFO) {
-			return USPERFIL.in(new Integer[]{
+			w = USPERFIL.in(new Integer[]{
 					Constants.PERFIL_US_NOMES_ESCANEIG_INFO,
 					Constants.PERFIL_US_COPIA_AUTENTICA_INFO,
 					Constants.PERFIL_US_CUSTODIA_INFO});
 		} else {
-			return USPERFIL.equal(getTipusPerfil());
+			w = USPERFIL.equal(getTipusPerfil());
 		}
+		Where w2 = Where.OR(UTILITZATPERAPLICACIO.equal(isUtilitzatPerAplicacio()), UTILITZATPERAPLICACIO.isNull());  
+		return Where.AND(w, w2);
+		
 	}
 
 	private void validaTipusFirma(PerfilJPA perfil, BindingResult result) {

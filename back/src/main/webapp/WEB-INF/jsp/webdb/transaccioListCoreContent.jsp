@@ -29,6 +29,11 @@
           ${transaccio.transaccioID}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.NOM)}">
+          <td>
+          ${transaccio.nom}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.TRANSACTIONWEBID)}">
           <td>
           ${transaccio.transactionWebId}

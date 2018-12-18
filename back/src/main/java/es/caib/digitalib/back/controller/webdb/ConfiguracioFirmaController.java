@@ -273,6 +273,16 @@ public class ConfiguracioFirmaController
       };
     }
 
+    // Field pluginFirmaServidorID
+    {
+      _listSKV = getReferenceListForPluginFirmaServidorID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfPluginForPluginFirmaServidorID(_tmp);
+      if (filterForm.getGroupByFields().contains(PLUGINFIRMASERVIDORID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, PLUGINFIRMASERVIDORID, false);
+      };
+    }
+
 
       fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, INCLOURESEGELLDETEMPS);
 
@@ -309,6 +319,7 @@ public class ConfiguracioFirmaController
     __mapping.put(POSICIOTAULAFIRMESID, filterForm.getMapOfValuesForPosicioTaulaFirmesID());
     __mapping.put(FIRMATPERFORMATID, filterForm.getMapOfTraduccioForFirmatPerFormatID());
     __mapping.put(MOTIUDELEGACIOID, filterForm.getMapOfTraduccioForMotiuDelegacioID());
+    __mapping.put(PLUGINFIRMASERVIDORID, filterForm.getMapOfPluginForPluginFirmaServidorID());
     __mapping.put(PLUGINSEGELLATID, filterForm.getMapOfPluginForPluginSegellatID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
@@ -417,6 +428,13 @@ public class ConfiguracioFirmaController
 
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       configuracioFirmaForm.setListOfValuesForPosicioTaulaFirmesID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (configuracioFirmaForm.getListOfPluginForPluginFirmaServidorID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForPluginFirmaServidorID(request, mav, configuracioFirmaForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      configuracioFirmaForm.setListOfPluginForPluginFirmaServidorID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (configuracioFirmaForm.getListOfPluginForPluginSegellatID() == null) {
@@ -972,6 +990,45 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForMotiuDelegacioID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return traduccioRefList.getReferenceList(TraduccioFields.TRADUCCIOID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(HttpServletRequest request,
+       ModelAndView mav, ConfiguracioFirmaForm configuracioFirmaForm, Where where)  throws I18NException {
+    if (configuracioFirmaForm.isHiddenField(PLUGINFIRMASERVIDORID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (configuracioFirmaForm.isReadOnlyField(PLUGINFIRMASERVIDORID)) {
+      _where = PluginFields.PLUGINID.equal(configuracioFirmaForm.getConfiguracioFirma().getPluginFirmaServidorID());
+    }
+    return getReferenceListForPluginFirmaServidorID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(HttpServletRequest request,
+       ModelAndView mav, ConfiguracioFirmaFilterForm configuracioFirmaFilterForm,
+       List<ConfiguracioFirma> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (configuracioFirmaFilterForm.isHiddenField(PLUGINFIRMASERVIDORID)
+      && !configuracioFirmaFilterForm.isGroupByField(PLUGINFIRMASERVIDORID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(PLUGINFIRMASERVIDORID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (ConfiguracioFirma _item : list) {
+        _pkList.add(_item.getPluginFirmaServidorID());
+        }
+        _w = PluginFields.PLUGINID.in(_pkList);
+      }
+    return getReferenceListForPluginFirmaServidorID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
   }
 
 
