@@ -23,5 +23,10 @@ public class FirmaArxiuParametersPublicController extends
   public boolean isPublic() {
     return true;
   }
+
+  @Override
+  public boolean isUtilitzatPerAplicacio() {
+    return true;
+  }
   
 }

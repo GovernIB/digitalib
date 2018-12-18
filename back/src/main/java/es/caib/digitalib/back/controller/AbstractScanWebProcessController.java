@@ -366,20 +366,17 @@ public abstract class AbstractScanWebProcessController {
     final String urlToSelectPluginPage = urlBase + contextWeb + "/selectscanwebmodule/"
         + scanWebID;
     
-    
 
     ModelAndView mav = new ModelAndView(viewModel);
     mav.addObject("scanWebID", scanWebID);
-    if (tipusPerfil == Constants.PERFIL_US_NOMES_ESCANEIG) {
-      mav.addObject("urlToSelectPluginPage", urlToSelectPluginPage);
-    } else {
-      request.getSession().setAttribute(SESSION_URL_TO_SELECT_SCANWEB_MODULE, urlToSelectPluginPage);
-      final String urlToRequestFirmaArxiuParameters = urlBase 
-          + (isPublic?AbstractFirmaArxiuParametersController.CONTEXTWEB_PUBLIC: AbstractFirmaArxiuParametersController.CONTEXTWEB_USER)
-          + "/" + transaction.getTransaccioID() + "/edit";
-      
-      mav.addObject("urlToSelectPluginPage", urlToRequestFirmaArxiuParameters);
-    }
+    
+    request.getSession().setAttribute(SESSION_URL_TO_SELECT_SCANWEB_MODULE, urlToSelectPluginPage);
+    final String urlToRequestFirmaArxiuParameters = urlBase 
+        + (isPublic?AbstractFirmaArxiuParametersController.CONTEXTWEB_PUBLIC: AbstractFirmaArxiuParametersController.CONTEXTWEB_USER)
+        + "/" + transaction.getTransaccioID() + "/edit";
+    
+    mav.addObject("urlToSelectPluginPage", urlToRequestFirmaArxiuParameters);
+    
     mav.addObject("fullView", fullView);
 
     return mav;

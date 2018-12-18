@@ -25,6 +25,7 @@ import es.caib.digitalib.back.controller.webdb.TransaccioController;
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.TransaccioFields;
 
 /**
@@ -34,111 +35,142 @@ import es.caib.digitalib.model.fields.TransaccioFields;
  */
 public abstract class AbstractTransaccioController extends TransaccioController {
 
+  public abstract String getPerfilInfoContextWeb();
 
-	@Override
-	public TransaccioFilterForm getTransaccioFilterForm(Integer pagina, ModelAndView mav,
-			HttpServletRequest request) throws I18NException {
+  public abstract boolean isUtilitzatPerAplicacio();
 
-		TransaccioFilterForm filterForm = super.getTransaccioFilterForm(pagina, mav, request);
+  @Override
+  public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
+    // TransaccioQueryPath tqp = new TransaccioQueryPath();
+    // Where w =
+    // Where.OR(tqp.PERFIL().UTILITZATPERAPLICACIO().equal(isUtilitzatPerAplicacio()));
+    Where w;
+    if (isUtilitzatPerAplicacio()) {
+      w = USUARIAPLICACIOID.isNotNull();
+    } else {
+      w = USUARIPERSONAID.isNotNull();
+    }
 
-		if (filterForm.isNou()) {
+    return w;
+  }
 
-			Set<Field<?>> ocults = new HashSet<Field<?>>(
-					Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
+  @Override
+  public TransaccioForm getTransaccioForm(TransaccioJPA _jpa, boolean __isView,
+      HttpServletRequest request, ModelAndView mav) throws I18NException {
+    TransaccioForm form = super.getTransaccioForm(_jpa, __isView, request, mav);
 
-			ocults.remove(TransaccioFields.TRANSACTIONWEBID);
-			ocults.remove(TransaccioFields.DATAINICI);
-			ocults.remove(TransaccioFields.DATAFI);
-			ocults.remove(TransaccioFields.ESTATCODI);
-			ocults.remove(TransaccioFields.USUARIPERSONAID);
-			ocults.remove(TransaccioFields.USUARIAPLICACIOID);
+    if (isUtilitzatPerAplicacio()) {
+      form.addHiddenField(USUARIPERSONAID);
+    } else {
+      form.addHiddenField(USUARIAPLICACIOID);
+    }
 
-			filterForm.setHiddenFields(ocults);
+    return form;
 
-			filterForm.setOrderBy(TransaccioFields.DATAFI.fullName);
-			filterForm.setOrderAsc(false);
-			
+  }
 
-			filterForm.addAdditionalButtonForEachItem(new AdditionalButton(
-					"icon-eye-open icon-white", "transaccio.veuredetall",
-					getContextWeb() + "/view/{0}", "btn-primary"));
+  @Override
+  public TransaccioFilterForm getTransaccioFilterForm(Integer pagina, ModelAndView mav,
+      HttpServletRequest request) throws I18NException {
 
-			
-			if (getPerfilInfoContextWeb() != null) {
-				filterForm.addAdditionalButtonForEachItem(new AdditionalButton(
-					"icon-user icon-white", "transaccio.veureperfil",
-					getContextWeb() + "/viewperfil/{0}", "btn-info"));
-			}
-		}
-		filterForm.setVisibleMultipleSelection(false);
-		filterForm.setAddButtonVisible(false);
-		filterForm.setDeleteButtonVisible(false);
-		filterForm.setEditButtonVisible(false);
+    TransaccioFilterForm filterForm = super.getTransaccioFilterForm(pagina, mav, request);
 
-		return filterForm;
-	}
+    if (filterForm.isNou()) {
 
-	@RequestMapping(value = "/viewperfil/{transaccioID}", method = RequestMethod.GET)
-	public ModelAndView veurePerfilGet(@PathVariable("transaccioID") java.lang.Long transaccioID,
-			HttpServletRequest request,
-			HttpServletResponse response) throws I18NException {
-		Long perfilID = transaccioEjb.executeQueryOne(TransaccioFields.PERFILID, TransaccioFields.TRANSACCIOID.equal(transaccioID));
+      Set<Field<?>> ocults = new HashSet<Field<?>>(
+          Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
 
-		return new ModelAndView(new RedirectView(getPerfilInfoContextWeb() + "/view/"+ perfilID, true));
-	}
-	
+      ocults.remove(TransaccioFields.TRANSACTIONWEBID);
+      ocults.remove(TransaccioFields.DATAINICI);
+      ocults.remove(TransaccioFields.DATAFI);
+      ocults.remove(TransaccioFields.ESTATCODI);
+      ocults.remove(TransaccioFields.USUARIPERSONAID);
+      ocults.remove(TransaccioFields.USUARIAPLICACIOID);
 
-	public abstract String getPerfilInfoContextWeb();
+      filterForm.setHiddenFields(ocults);
 
-	@Override
-	public TransaccioForm getTransaccioForm(TransaccioJPA _jpa,
-			boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
-		TransaccioForm form = super.getTransaccioForm(_jpa, __isView, request, mav);
+      filterForm.setOrderBy(TransaccioFields.DATAFI.fullName);
+      filterForm.setOrderAsc(false);
 
-		return form;
+      filterForm.addAdditionalButtonForEachItem(new AdditionalButton(
+          "icon-eye-open icon-white", "transaccio.veuredetall", getContextWeb() + "/view/{0}",
+          "btn-primary"));
 
-	}
+      if (getPerfilInfoContextWeb() != null) {
+        filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-user icon-white",
+            "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", "btn-info"));
+      }
 
-	@Override
-	public boolean isActiveList() {
-		return true;
-	}
+      if (isUtilitzatPerAplicacio()) {
+        filterForm.addHiddenField(USUARIPERSONAID);
+      } else {
+        filterForm.addHiddenField(USUARIAPLICACIOID);
+      }
 
-	@Override
-	public boolean isActiveFormNew() {
-		return false;
-	}
+    }
+    filterForm.setVisibleMultipleSelection(false);
+    filterForm.setAddButtonVisible(false);
+    filterForm.setDeleteButtonVisible(false);
+    filterForm.setEditButtonVisible(false);
 
-	@Override
-	public boolean isActiveFormEdit() {
-		return false;
-	}
+    return filterForm;
+  }
 
-	@Override
-	public boolean isActiveDelete() {
-		return false;
-	}
+  @RequestMapping(value = "/viewperfil/{transaccioID}", method = RequestMethod.GET)
+  public ModelAndView veurePerfilGet(
+      @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
+      HttpServletResponse response) throws I18NException {
+    Long perfilID = transaccioEjb.executeQueryOne(TransaccioFields.PERFILID,
+        TransaccioFields.TRANSACCIOID.equal(transaccioID));
 
-	@Override
-	public boolean isActiveFormView() {
-		return true;
-	}
+    return new ModelAndView(new RedirectView(getPerfilInfoContextWeb() + "/view/" + perfilID,
+        true));
+  }
 
-	@Override
-	public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request,
-			ModelAndView mav, Where where)  throws I18NException {
+  @Override
+  public boolean isActiveList() {
+    return true;
+  }
 
-		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_EXPIRED), I18NUtils.tradueix("estatcodi._3")));
-		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_CANCELLED), I18NUtils.tradueix("estatcodi._2")));
-		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_FINAL_ERROR), I18NUtils.tradueix("estatcodi._1")));
-		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_REQUESTED_ID), I18NUtils.tradueix("estatcodi.0")));
-		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_IN_PROGRESS), I18NUtils.tradueix("estatcodi.1")));
-		__tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_FINAL_OK), I18NUtils.tradueix("estatcodi.2")));
-		return __tmp;
-	}
+  @Override
+  public boolean isActiveFormNew() {
+    return false;
+  }
 
-		
+  @Override
+  public boolean isActiveFormEdit() {
+    return false;
+  }
+
+  @Override
+  public boolean isActiveDelete() {
+    return false;
+  }
+
+  @Override
+  public boolean isActiveFormView() {
+    return true;
+  }
+
+  @Override
+  public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
+
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_EXPIRED), I18NUtils
+        .tradueix("estatcodi._3")));
+    __tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_CANCELLED),
+        I18NUtils.tradueix("estatcodi._2")));
+    __tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_FINAL_ERROR),
+        I18NUtils.tradueix("estatcodi._1")));
+    __tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_REQUESTED_ID),
+        I18NUtils.tradueix("estatcodi.0")));
+    __tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_IN_PROGRESS),
+        I18NUtils.tradueix("estatcodi.1")));
+    __tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_FINAL_OK),
+        I18NUtils.tradueix("estatcodi.2")));
+    return __tmp;
+  }
 
   @Override
   public List<StringKeyValue> getReferenceListForArxiuReqParamDocEstatElabora(
@@ -207,6 +239,15 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     __tmp.add(new StringKeyValue("en", "Anglès"));
     __tmp.add(new StringKeyValue("de", "Alemany"));
     return __tmp;
+  }
+  
+  
+  @Override
+  public void postList(HttpServletRequest request, ModelAndView mav,
+      TransaccioFilterForm filterForm, List<Transaccio> list) throws I18NException {
+
+    // XYZ ZZZ Ocultar columnes de datafi, missatgeerror, fitxersignat
+    // si tots els valors de les columnes són NULL
   }
 
 }

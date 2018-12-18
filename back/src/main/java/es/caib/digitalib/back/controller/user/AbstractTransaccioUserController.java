@@ -1,7 +1,5 @@
 package es.caib.digitalib.back.controller.user;
 
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +12,6 @@ import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.jpa.TransaccioJPA;
-import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.model.fields.TransaccioQueryPath;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
@@ -83,6 +80,9 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
       transaccioFilterForm.setEntityNameCode("transaccio.tipus." + Math.abs(tipusPerfil));
       transaccioFilterForm.setEntityNameCodePlural("transaccio.tipus." + Math.abs(tipusPerfil)
           + ".plural");
+      
+      transaccioFilterForm.addHiddenField(USUARIPERSONAID);
+      
     }
 
     return transaccioFilterForm;
@@ -126,12 +126,11 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
     return true;
   }
 
-  @Override
-  public void postList(HttpServletRequest request, ModelAndView mav,
-      TransaccioFilterForm filterForm, List<Transaccio> list) throws I18NException {
 
-    // XYZ ZZZ Ocultar columnes de datafi, missatgeerror, fitxersignat
-    // si tots els valors de les columnes són NULL
+
+  @Override
+  public boolean isUtilitzatPerAplicacio() {
+    return false;
   }
 
 }

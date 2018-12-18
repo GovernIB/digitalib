@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 
+
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
@@ -40,7 +41,6 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
   public String getPerfilInfoContextWeb() {
     return null;
   }
-  
 
   @Override
   public TransaccioForm getTransaccioForm(TransaccioJPA _jpa, boolean __isView,

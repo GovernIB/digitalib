@@ -22,5 +22,10 @@ public class FirmaArxiuParametersUserController extends AbstractFirmaArxiuParame
   public boolean isPublic() {
     return false;
   }
+  
+  @Override
+  public boolean isUtilitzatPerAplicacio() {
+    return false;
+  }
 
 }

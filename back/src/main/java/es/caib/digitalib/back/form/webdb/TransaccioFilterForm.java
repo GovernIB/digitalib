@@ -629,7 +629,7 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM ,TRANSACTIONWEBID ,RETURNURL ,ESTATMISSATGE }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TRANSACCIOID ,NOM ,TRANSACTIONWEBID ,RETURNURL ,ESTATMISSATGE }));
   }
 
   @Override

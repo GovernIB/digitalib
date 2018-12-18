@@ -2,6 +2,7 @@ package es.caib.digitalib.back.controller.admin;
 
 import es.caib.digitalib.back.controller.AbstractTransaccioController;
 
+
 /**
  * 
  * @author u139636
@@ -23,12 +24,12 @@ public abstract class AbstractTransaccioAdminController extends AbstractTransacc
   public String getSessionAttributeFilterForm() {
     return "TransaccioAdmin_FilterForm_" + isUtilitzatPerAplicacio();
   }
-  
-  public abstract boolean isUtilitzatPerAplicacio();
-  
+
+
   @Override
   public String getPerfilInfoContextWeb() {
     return PerfilInfoTransaccioAdminController.CONTEXTWEB;
   }
 
+  
 }
