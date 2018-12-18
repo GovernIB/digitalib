@@ -33,81 +33,106 @@ import es.caib.digitalib.utils.Constants;
 @Controller
 @RequestMapping(value = ConfiguracioGrupAdminController.CONTEXTWEB)
 @SessionAttributes(types = { ConfiguracioGrupForm.class, ConfiguracioGrupFilterForm.class })
-public class ConfiguracioGrupAdminController extends ConfiguracioGrupController{
+public class ConfiguracioGrupAdminController extends ConfiguracioGrupController {
 
-	public static final String CONTEXTWEB = "/admin/configuracioGrup";
+  public static final String CONTEXTWEB = "/admin/configuracioGrup";
 
-	public String getTileForm() {
-		return "configuracioGrupFormAdmin";
-	}
+  public String getTileForm() {
+    return "configuracioGrupFormAdmin";
+  }
 
-	public String getTileList() {
-		return "configuracioGrupListAdmin";
-	}
+  public String getTileList() {
+    return "configuracioGrupListAdmin";
+  }
 
-	public String getSessionAttributeFilterForm() {
-		return "ConfiguracioGrupAdmin_FilterForm";
-	}
+  public String getSessionAttributeFilterForm() {
+    return "ConfiguracioGrupAdmin_FilterForm";
+  }
 
-	@Override
-	public List<StringKeyValue> getReferenceListForPerfilNomesEscaneigID(HttpServletRequest request,
-			ModelAndView mav, Where where)  throws I18NException {
+  @Override
+  public List<StringKeyValue> getReferenceListForPerfilNomesEscaneigID(
+      HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
 
-		Where w = Where.AND(where,
-				PerfilFields.USPERFIL.equal(Constants.PERFIL_US_NOMES_ESCANEIG),
-        PerfilFields.UTILITZATPERAPLICACIO.equal(false));
+    return refListCopiaAutentica(where, Constants.PERFIL_US_NOMES_ESCANEIG);
+  }
 
-		return perfilRefList.getReferenceList(PerfilFields.PERFILID, w );
-	}
+  @Override
+  public List<StringKeyValue> getReferenceListForPerfilCopiaAutenticaID(
+      HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+    return refListCopiaAutentica(where, Constants.PERFIL_US_COPIA_AUTENTICA);
+  }
 
-	@Override
-	public List<StringKeyValue> getReferenceListForPerfilCopiaAutenticaID(HttpServletRequest request,
-			ModelAndView mav, Where where)  throws I18NException {
-		Where w = Where.AND(where,
-				PerfilFields.USPERFIL.equal(Constants.PERFIL_US_COPIA_AUTENTICA),
-				PerfilFields.UTILITZATPERAPLICACIO.equal(false));
-		
-		
-		return perfilRefList.getReferenceList(PerfilFields.PERFILID, w );
-	}
+  @Override
+  public List<StringKeyValue> getReferenceListForPerfilCustodiaID(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
+    return refListCopiaAutentica(where, Constants.PERFIL_US_CUSTODIA);
+  }
 
-	@Override
-	public List<StringKeyValue> getReferenceListForPerfilCustodiaID(HttpServletRequest request,
-			ModelAndView mav, Where where)  throws I18NException {
-		Where w = Where.AND(where,
-				PerfilFields.USPERFIL.equal(Constants.PERFIL_US_CUSTODIA),
-        PerfilFields.UTILITZATPERAPLICACIO.equal(false));
-		
-		return perfilRefList.getReferenceList(PerfilFields.PERFILID, w );
-	}
+  @Override
+  public List<StringKeyValue> getReferenceListForPerfilNomesEscaneig2ID(
+      HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
 
-	public ConfiguracioGrupFilterForm getConfiguracioGrupFilterForm(Integer pagina, ModelAndView mav,
-			HttpServletRequest request) throws I18NException {
-		ConfiguracioGrupFilterForm configuracioGrupFilterForm = super.getConfiguracioGrupFilterForm(pagina, mav, request);
+    return refListCopiaAutentica(where, Constants.PERFIL_US_NOMES_ESCANEIG);
 
-		configuracioGrupFilterForm.setTitleCode("configuraciogrup.llistat");
+  }
 
-		if (configuracioGrupFilterForm.isNou()) {
-			Set<Field<?>> ocults = new HashSet<Field<?>>(
-					Arrays.asList(ConfiguracioGrupFields.ALL_CONFIGURACIOGRUP_FIELDS));
+  @Override
+  public List<StringKeyValue> getReferenceListForPerfilCopiaAutentica2ID(
+      HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+    return refListCopiaAutentica(where, Constants.PERFIL_US_COPIA_AUTENTICA);
+  }
 
-			ocults.remove(CONFIGURACIOGRUPID);
-			ocults.remove(NOM);
+  @Override
+  public List<StringKeyValue> getReferenceListForPerfilCustodia2ID(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
 
-			configuracioGrupFilterForm.setHiddenFields(ocults);
+    return refListCopiaAutentica(where, Constants.PERFIL_US_CUSTODIA);
+  }
 
-		}
-		return configuracioGrupFilterForm;
+  /**
+   * 
+   * @param where
+   * @param tipus
+   * @return
+   * @throws I18NException
+   */
+  protected List<StringKeyValue> refListCopiaAutentica(Where where, int tipus)
+      throws I18NException {
+    Where w = Where.AND(where, PerfilFields.USPERFIL.equal(tipus), Where.OR(
+        PerfilFields.UTILITZATPERAPLICACIO.equal(false),
+        PerfilFields.UTILITZATPERAPLICACIO.isNull()));
 
-	}
+    return perfilRefList.getReferenceList(PerfilFields.PERFILID, w);
+  }
 
-	public ConfiguracioGrupForm getConfiguracioGrupForm(ConfiguracioGrupJPA _jpa,
-			boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
+  public ConfiguracioGrupFilterForm getConfiguracioGrupFilterForm(Integer pagina,
+      ModelAndView mav, HttpServletRequest request) throws I18NException {
+    ConfiguracioGrupFilterForm configuracioGrupFilterForm = super
+        .getConfiguracioGrupFilterForm(pagina, mav, request);
 
-		ConfiguracioGrupForm configuracioGrupForm = super.getConfiguracioGrupForm(_jpa, __isView, request, mav);
+    configuracioGrupFilterForm.setTitleCode("configuraciogrup.llistat");
 
+    if (configuracioGrupFilterForm.isNou()) {
+      Set<Field<?>> ocults = new HashSet<Field<?>>(
+          Arrays.asList(ConfiguracioGrupFields.ALL_CONFIGURACIOGRUP_FIELDS));
 
-		return configuracioGrupForm;
+      ocults.remove(CONFIGURACIOGRUPID);
+      ocults.remove(NOM);
 
-	}
+      configuracioGrupFilterForm.setHiddenFields(ocults);
+
+    }
+    return configuracioGrupFilterForm;
+
+  }
+
+  public ConfiguracioGrupForm getConfiguracioGrupForm(ConfiguracioGrupJPA _jpa,
+      boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
+
+    ConfiguracioGrupForm configuracioGrupForm = super.getConfiguracioGrupForm(_jpa, __isView,
+        request, mav);
+
+    return configuracioGrupForm;
+
+  }
 }
