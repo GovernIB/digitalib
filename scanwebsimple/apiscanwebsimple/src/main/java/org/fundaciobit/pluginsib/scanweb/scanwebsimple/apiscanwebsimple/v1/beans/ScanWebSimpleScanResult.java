@@ -200,14 +200,16 @@ public static String toString(ScanWebSimpleScanResult result) {
     if (custody != null) {
 
       str.append("\n").append("  + CUSTODIA:");
-      str.append("\n").append("      * custodyFileID: " + custody.getCustodyFileID());
-      str.append("\n").append("      * custodyFileURL: " + custody.getCustodyFileURL());
-      str.append("\n").append("      * custodyFileCSV: " + custody.getCustodyFileCSV());
+      str.append("\n").append("      * custodyFileID: " + custody.getCustodyID());
+      str.append("\n").append("      * CSV: " + custody.getCsv());
+      str.append("\n").append("      * OriginalFileURL: " + custody.getOriginalFileURL());
+      str.append("\n").append("      * PrintableFileURL: " + custody.getPrintableFileURL());
+      str.append("\n").append("      * ENIFileURL: " + custody.getEniFileURL());
       str.append("\n").append(
-          "      * custodyFileCSVValidationWeb: " + custody.getCustodyFileCSVValidationWeb());
+          "      * getCsvValidationWeb: " + custody.getCsvValidationWeb());
       str.append("\n").append(
-          "      * custodyFileCSVGenerationDefinition: "
-              + custody.getCustodyFileCSVGenerationDefinition());
+          "      * getCsvGenerationDefinition: "
+              + custody.getCsvGenerationDefinition());
     }
     
     
@@ -217,13 +219,15 @@ public static String toString(ScanWebSimpleScanResult result) {
       str.append("\n").append("  + ARXIU:");
       str.append("\n").append("      * expedientID: " + arxiu.getExpedientID());
       str.append("\n").append("      * documentID: " + arxiu.getDocumentID());
-      str.append("\n").append("      * arxiuFileURL: " + arxiu.getArxiuFileURL());
-      str.append("\n").append("      * arxiuFileCSV: " + arxiu.getArxiuFileCSV());
+      str.append("\n").append("      * CSV: " + arxiu.getCsv());
+      str.append("\n").append("      * OriginalFileURL: " + arxiu.getOriginalFileURL());
+      str.append("\n").append("      * PrintableFileURL: " + arxiu.getPrintableFileURL());
+      str.append("\n").append("      * ENIFileURL: " + arxiu.getEniFileURL());
       str.append("\n").append(
-          "      * arxiuFileCSVValidationWeb: " + arxiu.getArxiuFileCSVValidationWeb());
+          "      * getCsvValidationWeb: " + arxiu.getCsvValidationWeb());
       str.append("\n").append(
-          "      * arxiuFileCSVGenerationDefinition: "
-              + arxiu.getArxiuFileCSVGenerationDefinition());
+          "      * getCsvGenerationDefinition: "
+              + arxiu.getCsvGenerationDefinition());
     }
 
     return str.toString();

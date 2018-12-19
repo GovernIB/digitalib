@@ -53,11 +53,27 @@ public class InfoCustodyValidator<T> implements InfoCustodyFields {
       }
     }
     
-    if (__vr.getFieldErrorCount(FILEURL) == 0) {
-      java.lang.String __fileurl = (java.lang.String)__vr.getFieldValue(__target__,FILEURL);
-      if (__fileurl!= null && __fileurl.length() > 255) {
-        __vr.rejectValue(FILEURL, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(FILEURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+    if (__vr.getFieldErrorCount(ORIGINALFILEURL) == 0) {
+      java.lang.String __originalfileurl = (java.lang.String)__vr.getFieldValue(__target__,ORIGINALFILEURL);
+      if (__originalfileurl!= null && __originalfileurl.length() > 255) {
+        __vr.rejectValue(ORIGINALFILEURL, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ORIGINALFILEURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(PRINTABLEFILEURL) == 0) {
+      java.lang.String __printablefileurl = (java.lang.String)__vr.getFieldValue(__target__,PRINTABLEFILEURL);
+      if (__printablefileurl!= null && __printablefileurl.length() > 255) {
+        __vr.rejectValue(PRINTABLEFILEURL, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PRINTABLEFILEURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(ENIFILEURL) == 0) {
+      java.lang.String __enifileurl = (java.lang.String)__vr.getFieldValue(__target__,ENIFILEURL);
+      if (__enifileurl!= null && __enifileurl.length() > 255) {
+        __vr.rejectValue(ENIFILEURL, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ENIFILEURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     

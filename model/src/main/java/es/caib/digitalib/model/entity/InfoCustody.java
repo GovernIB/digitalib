@@ -14,8 +14,14 @@ public interface InfoCustody extends org.fundaciobit.genapp.common.IGenAppEntity
 	public java.lang.String getArxiuDocumentId();
 	public void setArxiuDocumentId(java.lang.String _arxiuDocumentId_);
 
-	public java.lang.String getFileUrl();
-	public void setFileUrl(java.lang.String _fileUrl_);
+	public java.lang.String getOriginalFileUrl();
+	public void setOriginalFileUrl(java.lang.String _originalFileUrl_);
+
+	public java.lang.String getPrintableFileUrl();
+	public void setPrintableFileUrl(java.lang.String _printableFileUrl_);
+
+	public java.lang.String getEniFileUrl();
+	public void setEniFileUrl(java.lang.String _eniFileUrl_);
 
 	public java.lang.String getCsv();
 	public void setCsv(java.lang.String _csv_);

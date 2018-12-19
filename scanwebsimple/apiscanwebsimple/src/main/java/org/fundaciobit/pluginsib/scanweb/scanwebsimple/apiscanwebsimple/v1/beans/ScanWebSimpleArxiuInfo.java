@@ -10,94 +10,41 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  *
  */
 @XmlRootElement
-public class ScanWebSimpleArxiuInfo {
+public class ScanWebSimpleArxiuInfo extends ScanWebSimpleCommonArxiuCustody {
 
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-	protected String expedientID;
+  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+  protected String expedientID;
 
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-	protected String documentID;
+  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+  protected String documentID;
 
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-	protected String arxiuFileURL;
+  public ScanWebSimpleArxiuInfo() {
+    super();
+  }
 
-	/** eEMGDE.Firma.FormatoFirma.ValorCSV (eEMGDE17.3) */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-	protected String arxiuFileCSV;
+  public ScanWebSimpleArxiuInfo(String expedientID, String documentID, String csv,
+      String originalFileURL, String printableFileURL, String eniFileURL,
+      String csvValidationWeb, String csvGenerationDefinition) {
+    super(csv, originalFileURL, printableFileURL, eniFileURL, csvValidationWeb,
+        csvGenerationDefinition);
+    this.expedientID = expedientID;
+    this.documentID = documentID;
+  }
 
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-	protected String arxiuFileCSVValidationWeb;
+  public String getExpedientID() {
+    return expedientID;
+  }
 
-	/**
-	 * eEMGDE.DefinicionGeneracionCSV (eEMGDE17.4):
-	 */
-	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-	protected String arxiuFileCSVGenerationDefinition;
+  public void setExpedientID(String expedientID) {
+    this.expedientID = expedientID;
+  }
 
-	public ScanWebSimpleArxiuInfo() {
-		super();
-	}
+  public String getDocumentID() {
+    return documentID;
+  }
 
-	public ScanWebSimpleArxiuInfo(String expedientID, String documentID,
-			String arxiuFileURL, String arxiuFileCSV,
-			String arxiuFileCSVValidationWeb,
-			String arxiuFileCSVGenerationDefinition) {
-		super();
-		this.expedientID = expedientID;
-		this.documentID = documentID;
-		this.arxiuFileURL = arxiuFileURL;
-		this.arxiuFileCSV = arxiuFileCSV;
-		this.arxiuFileCSVValidationWeb = arxiuFileCSVValidationWeb;
-		this.arxiuFileCSVGenerationDefinition = arxiuFileCSVGenerationDefinition;
-	}
-
-	public String getExpedientID() {
-		return expedientID;
-	}
-
-	public void setExpedientID(String expedientID) {
-		this.expedientID = expedientID;
-	}
-
-	public String getDocumentID() {
-		return documentID;
-	}
-
-	public void setDocumentID(String documentID) {
-		this.documentID = documentID;
-	}
-
-	public String getArxiuFileURL() {
-		return arxiuFileURL;
-	}
-
-	public void setArxiuFileURL(String arxiuFileURL) {
-		this.arxiuFileURL = arxiuFileURL;
-	}
-
-	public String getArxiuFileCSV() {
-		return arxiuFileCSV;
-	}
-
-	public void setArxiuFileCSV(String arxiuFileCSV) {
-		this.arxiuFileCSV = arxiuFileCSV;
-	}
-
-	public String getArxiuFileCSVValidationWeb() {
-		return arxiuFileCSVValidationWeb;
-	}
-
-	public void setArxiuFileCSVValidationWeb(String arxiuFileCSVValidationWeb) {
-		this.arxiuFileCSVValidationWeb = arxiuFileCSVValidationWeb;
-	}
-
-	public String getArxiuFileCSVGenerationDefinition() {
-		return arxiuFileCSVGenerationDefinition;
-	}
-
-	public void setArxiuFileCSVGenerationDefinition(
-			String arxiuFileCSVGenerationDefinition) {
-		this.arxiuFileCSVGenerationDefinition = arxiuFileCSVGenerationDefinition;
-	}
+  public void setDocumentID(String documentID) {
+    this.documentID = documentID;
+  }
 
 }

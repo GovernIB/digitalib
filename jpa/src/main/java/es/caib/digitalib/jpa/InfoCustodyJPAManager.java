@@ -66,8 +66,8 @@ public class InfoCustodyJPAManager
 		return list.toArray(new InfoCustody[list.size()]);
 	};
 
-	public synchronized InfoCustody create( java.lang.String _custodyId_, java.lang.String _arxiuExpedientId_, java.lang.String _arxiuDocumentId_, java.lang.String _fileUrl_, java.lang.String _csv_, java.lang.String _csvValidationWeb_, java.lang.String _csvGenerationDefinition_) throws I18NException {
-		InfoCustodyJPA __bean =  new InfoCustodyJPA(_custodyId_,_arxiuExpedientId_,_arxiuDocumentId_,_fileUrl_,_csv_,_csvValidationWeb_,_csvGenerationDefinition_);
+	public synchronized InfoCustody create( java.lang.String _custodyId_, java.lang.String _arxiuExpedientId_, java.lang.String _arxiuDocumentId_, java.lang.String _originalFileUrl_, java.lang.String _printableFileUrl_, java.lang.String _eniFileUrl_, java.lang.String _csv_, java.lang.String _csvValidationWeb_, java.lang.String _csvGenerationDefinition_) throws I18NException {
+		InfoCustodyJPA __bean =  new InfoCustodyJPA(_custodyId_,_arxiuExpedientId_,_arxiuDocumentId_,_originalFileUrl_,_printableFileUrl_,_eniFileUrl_,_csv_,_csvValidationWeb_,_csvGenerationDefinition_);
 		return create(__bean);
 	}
 

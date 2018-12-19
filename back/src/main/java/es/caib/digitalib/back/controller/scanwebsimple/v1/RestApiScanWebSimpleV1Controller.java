@@ -5,14 +5,19 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.SubQuery;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.ApiScanWebSimple;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuInfo;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfile;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfiles;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleCustodyInfo;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleFile;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleKeyValue;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleScanResult;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleScannedFileInfo;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleSignedFileInfo;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStartTransactionRequest;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
+import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleValidationInfo;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +29,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
 import es.caib.digitalib.back.security.LoginInfo;
+import es.caib.digitalib.jpa.InfoCustodyJPA;
+import es.caib.digitalib.jpa.InfoSignaturaJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
@@ -192,7 +199,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     }
 
     UsuariAplicacioJPA usuariAplicacio = usuariAplicacioCache.get();
-    
+
     // Valida VISTA
     int view = requestTransaction.getView();
 
@@ -201,7 +208,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       // OK
     } else {
       // XYZ ZZZ ZZZ
-      String msg = "La transacció s'ha intentat crear amb un id de vista desconegut (" + view + ")";
+      String msg = "La transacció s'ha intentat crear amb un id de vista desconegut (" + view
+          + ")";
       return generateServerError(msg);
 
     }
@@ -316,7 +324,6 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
       transaccio.setReturnUrl(startTransactionRequest.getReturnUrl());
 
-      
       // CRIDAR A START TRANSACION
 
       // XYZ ZZZ ZZZ Validar
@@ -494,13 +501,96 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
         // Informació de Document escanejat
         Integer pixelType = null;
         Integer pppResolution = null;
-        String formatFile = ScanWebUtils.formatFileToScanWebApi(transaccio
-            .getPerfil().getScanFormatFitxer()); // S'ha de treure de Perfil
+        String formatFile = ScanWebUtils.formatFileToScanWebApi(transaccio.getPerfil()
+            .getScanFormatFitxer()); // S'ha de treure de Perfil
         Boolean ocr = null;
         ScanWebSimpleScannedFileInfo scannedFileInfo = new ScanWebSimpleScannedFileInfo(
             pixelType, pppResolution, formatFile, ocr);
 
         fssr.setScannedFileInfo(scannedFileInfo);
+
+        int tipusPerfil = transaccio.getPerfil().getUsPerfil();
+
+        // XYZ ZZZ Falta Informacio de Firma
+        if (tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA_INFO
+            || tipusPerfil == Constants.PERFIL_US_CUSTODIA_INFO) {
+
+          InfoSignaturaJPA infoSign = transaccio.getInfoSignatura();
+
+          int signOperation = infoSign.getSignOperation();
+          String signType = infoSign.getSignType();
+          String signAlgorithm = infoSign.getSignAlgorithm();
+
+          Integer signMode = infoSign.getSignMode();
+          Integer signaturesTableLocation = infoSign.getSignaturesTableLocation();
+          Boolean timeStampIncluded = infoSign.getTimestampIncluded();
+          Boolean policyIncluded = infoSign.getPolicyIncluded();
+          String eniTipoFirma = infoSign.getEniTipoFirma();
+          String eniPerfilFirma = infoSign.getEniPerfilFirma();
+          String eniRolFirma = infoSign.getEniRolFirma();
+          String eniSignerName = infoSign.getEniSignerName();
+          String eniSignerAdministrationId = infoSign.getEniSignerAdministrationId();
+          String eniSignLevel = infoSign.getEniSignLevel();
+
+          Boolean checkAdministrationIDOfSigner = infoSign.getCheckAdministrationIdOfSigner();
+          Boolean checkDocumentModifications = infoSign.getCheckDocumentModifications();
+          Boolean checkValidationSignature = infoSign.getCheckValidationSignature();
+          ScanWebSimpleValidationInfo validationInfo = new ScanWebSimpleValidationInfo(
+              checkAdministrationIDOfSigner, checkDocumentModifications,
+              checkValidationSignature);
+
+          List<ScanWebSimpleKeyValue> additionInformation = null;
+
+          ScanWebSimpleSignedFileInfo signedFileInfo = new ScanWebSimpleSignedFileInfo(
+              signOperation, signType, signAlgorithm, signMode, signaturesTableLocation,
+              timeStampIncluded, policyIncluded, eniTipoFirma, eniPerfilFirma, eniRolFirma,
+              eniSignerName, eniSignerAdministrationId, eniSignLevel, validationInfo,
+              additionInformation);
+
+          fssr.setSignedFileInfo(signedFileInfo);
+        }
+
+        // XYZ ZZZ Falta Informació de Custòdia i Arxiu
+        if (tipusPerfil == Constants.PERFIL_US_CUSTODIA_INFO) {
+
+          InfoCustodyJPA custody = transaccio.getInfoCustody();
+
+          if (custody != null) {
+
+            if (custody.getCustodyId() == null) {
+              String custodyID = custody.getCustodyId();
+              String csv = custody.getCsv();
+              String originalFileURL = custody.getOriginalFileUrl();
+              String printableFileURL = custody.getPrintableFileUrl();
+              String eniFileURL = custody.getEniFileUrl();
+              String csvValidationWeb = custody.getCsvValidationWeb();
+              String csvGenerationDefinition = custody.getCsvGenerationDefinition();
+
+              ScanWebSimpleCustodyInfo custodyInfo = new ScanWebSimpleCustodyInfo(custodyID,
+                  csv, originalFileURL, printableFileURL, eniFileURL, csvValidationWeb,
+                  csvGenerationDefinition);
+
+              fssr.setCustodyInfo(custodyInfo);
+            } else {
+
+              String expedientID = custody.getArxiuExpedientId();
+              String documentID = custody.getArxiuDocumentId();
+              String csv = custody.getCsv();
+              String originalFileURL = custody.getOriginalFileUrl();
+              String printableFileURL = custody.getPrintableFileUrl();
+              String eniFileURL = custody.getEniFileUrl();
+              String csvValidationWeb = custody.getCsvValidationWeb();
+              String csvGenerationDefinition = custody.getCsvGenerationDefinition();
+
+              ScanWebSimpleArxiuInfo arxiuInfo = new ScanWebSimpleArxiuInfo(expedientID,
+                  documentID, csv, originalFileURL, printableFileURL, eniFileURL,
+                  csvValidationWeb, csvGenerationDefinition);
+
+              fssr.setArxiuInfo(arxiuInfo);
+
+            }
+          }
+        }
 
       }
 

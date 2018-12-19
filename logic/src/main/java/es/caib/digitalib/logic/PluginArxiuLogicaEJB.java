@@ -63,7 +63,6 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
     return "Arxiu";
   }
 
-  
   @Override
   public InfoCustodyJPA custodiaAmbApiArxiu(TransaccioJPA transaccio, Fitxer fitxerFirmat,
       Locale locale) {
@@ -305,14 +304,19 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
 
       String uuidDoc = documentCreat.getIdentificador();
 
-      java.lang.String custodyFileId = null; // Només per DocumentCustody
-      java.lang.String csvfileUrl = plugin.getCsvValidationUrl(uuidDoc);
+      java.lang.String originalFileUrl = plugin.getOriginalFileUrl(uuidDoc);
+      String printableFileUrl = plugin.getPrintableFileUrl(uuidDoc);
+      String eniFileUrl = plugin.getEniFileUrl(uuidDoc);
       java.lang.String csv = plugin.getCsv(uuidDoc);
       java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(uuidDoc);
       java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(uuidDoc);
 
-      InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyFileId, expedientId, uuidDoc,
-          csvfileUrl, csv, csvValidationWeb, csvGenerationDefinition);
+      // Només per DocumentCustody
+      java.lang.String custodyId = null;
+
+      InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyId, expedientId, uuidDoc,
+          originalFileUrl, printableFileUrl, eniFileUrl, csv, csvValidationWeb,
+          csvGenerationDefinition);
 
       infoCust = (InfoCustodyJPA) infoCustodyEjb.create(infoCust);
 

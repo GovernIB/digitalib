@@ -44,10 +44,26 @@
           ${infoCustody.arxiuDocumentId}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.FILEURL)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ORIGINALFILEURL)}">
           <td>
-                       <c:if test="${ not empty infoCustody.fileUrl}">
-               <a href="${infoCustody.fileUrl}" target="_blank">${infoCustody.fileUrl}</a>
+                       <c:if test="${ not empty infoCustody.originalFileUrl}">
+               <a href="${infoCustody.originalFileUrl}" target="_blank">${infoCustody.originalFileUrl}</a>
+             </c:if>
+
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.PRINTABLEFILEURL)}">
+          <td>
+                       <c:if test="${ not empty infoCustody.printableFileUrl}">
+               <a href="${infoCustody.printableFileUrl}" target="_blank">${infoCustody.printableFileUrl}</a>
+             </c:if>
+
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ENIFILEURL)}">
+          <td>
+                       <c:if test="${ not empty infoCustody.eniFileUrl}">
+               <a href="${infoCustody.eniFileUrl}" target="_blank">${infoCustody.eniFileUrl}</a>
              </c:if>
 
           </td>

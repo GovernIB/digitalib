@@ -348,7 +348,7 @@ public abstract class AbstractScanWebProcessController {
   public ModelAndView startScanWebProcess(HttpServletRequest request, TransaccioJPA transaction,
       boolean isPublic, String urlFinal, String urlBase) throws Exception, I18NException {
     
-    final int tipusPerfil = transaction.getPerfil().getUsPerfil();
+    //final int tipusPerfil = transaction.getPerfil().getUsPerfil();
     
     final boolean fullView = (transaction.getView() == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN);
 

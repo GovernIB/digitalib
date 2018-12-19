@@ -67,7 +67,7 @@ public class ScanWebSimpleSignedFileInfo {
    * 
    */
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected int signOperation;
+  protected Integer signOperation;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String signType;
@@ -76,17 +76,17 @@ public class ScanWebSimpleSignedFileInfo {
   protected String signAlgorithm;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected int signMode;
+  protected Integer signMode;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected int signaturesTableLocation;
+  protected Integer signaturesTableLocation;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected boolean timeStampIncluded;
+  protected Boolean timeStampIncluded;
 
   /** BES(falsE) o EPES(true) **/
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-  protected boolean policyIncluded;
+  protected Boolean policyIncluded;
 
   /**
    * eEMGDE.Firma.TipoFirma.FormatoFirma (eEMGDE17.1.1): TF01 (CSV), TF02 (XAdES internally
@@ -182,9 +182,9 @@ public class ScanWebSimpleSignedFileInfo {
    * @param validationInfo
    * @param additionInformation
    */
-  public ScanWebSimpleSignedFileInfo(int signOperation, String signType, String signAlgorithm,
-      int signMode, int signaturesTableLocation, boolean timeStampIncluded,
-      boolean policyIncluded, String eniTipoFirma, String eniPerfilFirma, String eniRolFirma,
+  public ScanWebSimpleSignedFileInfo(Integer signOperation, String signType, String signAlgorithm,
+      Integer signMode, Integer signaturesTableLocation, Boolean timeStampIncluded,
+      Boolean policyIncluded, String eniTipoFirma, String eniPerfilFirma, String eniRolFirma,
       String eniSignerName, String eniSignerAdministrationId, String eniSignLevel,
       ScanWebSimpleValidationInfo validationInfo,
       List<ScanWebSimpleKeyValue> additionInformation) {
@@ -206,11 +206,11 @@ public class ScanWebSimpleSignedFileInfo {
     this.additionInformation = additionInformation;
   }
 
-  public int getSignOperation() {
+  public Integer getSignOperation() {
     return signOperation;
   }
 
-  public void setSignOperation(int signOperation) {
+  public void setSignOperation(Integer signOperation) {
     this.signOperation = signOperation;
   }
 
@@ -230,35 +230,35 @@ public class ScanWebSimpleSignedFileInfo {
     this.signAlgorithm = signAlgorithm;
   }
 
-  public int getSignMode() {
+  public Integer getSignMode() {
     return signMode;
   }
 
-  public void setSignMode(int signMode) {
+  public void setSignMode(Integer signMode) {
     this.signMode = signMode;
   }
 
-  public int getSignaturesTableLocation() {
+  public Integer getSignaturesTableLocation() {
     return signaturesTableLocation;
   }
 
-  public void setSignaturesTableLocation(int signaturesTableLocation) {
+  public void setSignaturesTableLocation(Integer signaturesTableLocation) {
     this.signaturesTableLocation = signaturesTableLocation;
   }
 
-  public boolean isTimeStampIncluded() {
+  public Boolean getTimeStampIncluded() {
     return timeStampIncluded;
   }
 
-  public void setTimeStampIncluded(boolean timeStampIncluded) {
+  public void setTimeStampIncluded(Boolean timeStampIncluded) {
     this.timeStampIncluded = timeStampIncluded;
   }
 
-  public boolean isPolicyIncluded() {
+  public Boolean getPolicyIncluded() {
     return policyIncluded;
   }
 
-  public void setPolicyIncluded(boolean policyIncluded) {
+  public void setPolicyIncluded(Boolean policyIncluded) {
     this.policyIncluded = policyIncluded;
   }
 
@@ -381,8 +381,8 @@ public class ScanWebSimpleSignedFileInfo {
     str.append("\n").append("      * Posicio Taula De Firmes:\t" + posicioTaulaDeFirmes);
 
     str.append("\n").append(
-        "      * Inclou Politica de Firmes(o sigui es EPES):\t" + sfi.isPolicyIncluded());
-    str.append("\n").append("      * Inclou Segell de Temps:\t" + sfi.isTimeStampIncluded());
+        "      * Inclou Politica de Firmes(o sigui es EPES):\t" + sfi.getPolicyIncluded());
+    str.append("\n").append("      * Inclou Segell de Temps:\t" + sfi.getTimeStampIncluded());
 
     str.append("\n").append("      * eniTipoFirma:\t" + sfi.getEniTipoFirma());
     str.append("\n").append("      * eniPerfilFirma:\t" + sfi.getEniPerfilFirma());
