@@ -7,7 +7,6 @@ import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
@@ -22,7 +21,6 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -303,8 +301,9 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       final String transactionWebID = transaction.getTransactionWebId();
 
       // TODO per ara està buit
+      final boolean isPublic = false;
 
-      final String urlFinal = baseUrl + CONTEXTWEB + "/final/" + transactionWebID;
+      final String urlFinal = getFinalURL(baseUrl, transactionWebID, isPublic);
 
       log.info("XYZ ZZZ WEB USER urlFinal OK = " + urlFinal);
 
@@ -314,7 +313,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
       // ScanWebConfig swc = ScanWebUtils.generateScanWebConfig(transaction, urlFinal);
 
-      final boolean isPublic = false;
+     
 
       // final boolean fullView = (transaction.getView() ==
       // ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN);
@@ -347,14 +346,13 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
   // return 1; // Només Escaneig XYZ ZZZ Constants.PERFIL_US_NOMES_ESCANEIG
   // }
 
-  @RequestMapping(value = SCANWEB_CONTEXTPATH_FINAL + "/{transactionWebID}")
-  public ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
-      HttpServletResponse response, @PathVariable("transactionWebID") String transactionWebID)
-      throws Exception, I18NException {
+  @Override
+  protected ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
+      String transactionWebID) throws I18NException, Exception {
 
     log.info(" ENTRA A  finalProcesDeScanWeb de USER");
 
-    ModelAndView mav = super.finalProcesDeScanWeb(request, response, transactionWebID);
+    ModelAndView mav = super.finalProcesDeScanWeb(request, transactionWebID);
 
     log.info(" POST de cridada a super.finalProcesDeScanWeb de USER");
 
@@ -366,8 +364,9 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     log.info(" STATUS =><  " + status);
 
     if (status == ScanWebSimpleStatus.STATUS_FINAL_OK) {
+      // TODO  XYZ ZZZ Traduir
       HtmlUtils
-          .saveMessageSuccess(request, "Operacio realitzada correctament XYZ ZZZ Traduir");
+          .saveMessageSuccess(request, "Operacio realitzada correctament");
 
       switch (transaccio.getPerfil().getUsPerfil()) {
         case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:

@@ -63,8 +63,9 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
 
     log.info(" XYZ ZZZ URLBASE = " + urlBase);
 
-    final String urlFinal = urlBase + SCANWEB_CONTEXTPATH + SCANWEB_CONTEXTPATH_FINAL + "/"
-        + transactionWebID;
+    final String urlFinal = AbstractScanWebProcessController.getFinalURL(urlBase, transactionWebID, isPublic()); 
+        
+    //final String urlFinal =  urlBase + SCANWEB_CONTEXTPATH + SCANWEB_CONTEXTPATH_FINAL + "/"   + transactionWebID;
 
     log.info(" XYZ ZZZ URLFINAL = " + urlFinal);
 

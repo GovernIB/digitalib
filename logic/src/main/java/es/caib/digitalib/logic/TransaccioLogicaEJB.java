@@ -157,7 +157,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     // XYZ ZZZ ZZZ Falten altres comprovacions
     TransaccioJPA t = new TransaccioJPA();
 
-    t.setNom(transactionWebID);
+    t.setNom("");
     t.setTransactionWebId(transactionWebID);
     t.setDataInici(new Timestamp(System.currentTimeMillis()));
     if (usuariAplicacio != null) {

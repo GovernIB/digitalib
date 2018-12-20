@@ -58,6 +58,10 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/finalsortiriframe.jsp" />
     </definition>
     
+    <definition name="public_wait" extends="user.emptylayout">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/wait.jsp" />
+    </definition>
+    
     <definition name="public_plugindescan_final" extends="user.emptylayout">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_final.jsp" />
     </definition>
@@ -122,12 +126,14 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_seleccio.jsp" />
     </definition>
 
+
     <definition name="finalsortiriframe" extends="user.emptylayout">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/finalsortiriframe.jsp" />
     </definition>
 
-    <definition name="plugindescan_final" extends="user">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugindescan_final.jsp" />
+   
+    <definition name="wait" extends="user.emptylayout">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/wait.jsp" />
     </definition>
 
     <definition name="plugindescan_contenidor" extends="user">

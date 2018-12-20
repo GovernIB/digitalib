@@ -46,12 +46,12 @@ import es.caib.digitalib.utils.Constants;
 /**
  *
  * @author anadal
- *
- *
  */
 public abstract class AbstractScanWebProcessController {
 
-  public static final String SCANWEB_CONTEXTPATH_FINAL = "/final";
+  private static final String SCANWEB_CONTEXTPATH_FINAL = "/final";
+  
+  private static final String SCANWEB_CONTEXTPATH_ESPERA = "/wait";
 
   public static final String SESSION_URL_TO_SELECT_SCANWEB_MODULE = "SESSION_URL_TO_SELECT_SCANWEB_MODULE";
 
@@ -78,17 +78,43 @@ public abstract class AbstractScanWebProcessController {
   @EJB(mappedName = PluginArxiuLogicaLocal.JNDI_NAME)
   protected PluginArxiuLogicaLocal pluginArxiuLogicaEjb;
 
-  public static String getFinalURL(String transactionWebID, boolean isPublic) {
+  public static String getFinalURL(String baseURL, String transactionWebID, boolean isPublic) {
     String cp = isPublic ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
         : ScanWebProcessControllerUser.CONTEXTWEB;
-    return cp + SCANWEB_CONTEXTPATH_FINAL + "/" + transactionWebID;
+    return baseURL + cp + SCANWEB_CONTEXTPATH_ESPERA + "/" + transactionWebID;
   }
 
-  @RequestMapping(value = SCANWEB_CONTEXTPATH_FINAL + "/{transactionWebID}")
-  public ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
+  
+  @RequestMapping(value = SCANWEB_CONTEXTPATH_ESPERA + "/{transactionWebID}")
+  public ModelAndView esperaProcesDeScanWebController(HttpServletRequest request,
       HttpServletResponse response, @PathVariable("transactionWebID") String transactionWebID)
       throws Exception, I18NException {
 
+    String cp = isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
+        : ScanWebProcessControllerUser.CONTEXTWEB;
+    String finalURL =  cp + SCANWEB_CONTEXTPATH_FINAL + "/" + transactionWebID;
+
+    ModelAndView mav;
+
+    mav = new ModelAndView(isPublic()?"public_wait" : "wait");
+    mav.addObject("finalURL", finalURL);
+
+    return mav;
+
+  }
+
+
+  @RequestMapping(value = SCANWEB_CONTEXTPATH_FINAL + "/{transactionWebID}")
+  public final ModelAndView finalProcesDeScanWebController(HttpServletRequest request,
+      HttpServletResponse response, @PathVariable("transactionWebID") String transactionWebID)
+      throws Exception, I18NException {
+
+    return finalProcesDeScanWeb(request, transactionWebID);
+
+  }
+
+  protected ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
+      String transactionWebID) throws I18NException, Exception {
     final boolean debug = log.isDebugEnabled();
 
     log.info("XYZ ZZZ finalProcesDeScanWeb():: [transactionWebID] = " + transactionWebID);
@@ -251,7 +277,6 @@ public abstract class AbstractScanWebProcessController {
     transaccioLogicaEjb.update(transaccio);
 
     return mav;
-
   }
 
   public Fitxer recuperarDocumentEscanejat(TransaccioJPA transaccio,

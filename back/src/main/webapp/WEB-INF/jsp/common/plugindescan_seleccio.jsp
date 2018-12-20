@@ -2,9 +2,11 @@
 %><%@ include file="/WEB-INF/jsp/moduls/includes.jsp" 
 %>
 <style>
+<%--
     body{
         background-color: #CEE3F6;
     }
+    --%>
 </style>
 
   <br/>

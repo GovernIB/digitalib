@@ -189,7 +189,7 @@ public abstract class AbstractFirmaArxiuParametersController extends
     }
 
     String finalURL = AbstractScanWebProcessController
-        .getFinalURL(transaccioWebId, isPublic());
+        .getFinalURL("", transaccioWebId, isPublic());
 
     log.warn("XYZ ZZZ URL despres de CANCEL.LAR: " + finalURL);
 
