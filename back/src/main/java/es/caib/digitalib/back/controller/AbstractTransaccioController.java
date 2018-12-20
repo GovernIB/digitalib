@@ -1,6 +1,7 @@
 package es.caib.digitalib.back.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalField;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +37,8 @@ import es.caib.digitalib.model.fields.TransaccioFields;
  */
 public abstract class AbstractTransaccioController extends TransaccioController {
 
+  public static final int USUARICOLUMN = 1;
+  
   public abstract String getPerfilInfoContextWeb();
 
   public abstract boolean isUtilitzatPerAplicacio();
@@ -60,8 +64,12 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     TransaccioForm form = super.getTransaccioForm(_jpa, __isView, request, mav);
 
     if (isUtilitzatPerAplicacio()) {
+      form.setEntityNameCode("transaccio.aplicacio");
+      form.setEntityNameCodePlural("transaccio.aplicacio.plural");
       form.addHiddenField(USUARIPERSONAID);
     } else {
+      form.setEntityNameCode("transaccio.persona");
+      form.setEntityNameCodePlural("transaccio.persona.plural");
       form.addHiddenField(USUARIAPLICACIOID);
     }
 
@@ -80,7 +88,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       Set<Field<?>> ocults = new HashSet<Field<?>>(
           Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
 
-      ocults.remove(TransaccioFields.TRANSACTIONWEBID);
+      ocults.remove(TransaccioFields.TRANSACCIOID);
+      ocults.remove(TransaccioFields.NOM);
       ocults.remove(TransaccioFields.DATAINICI);
       ocults.remove(TransaccioFields.DATAFI);
       ocults.remove(TransaccioFields.ESTATCODI);
@@ -100,13 +109,36 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-user icon-white",
             "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", "btn-info"));
       }
+      
+      AdditionalField<Long, String> adfield4 = new AdditionalField<Long, String>();
+      
+      adfield4.setPosition(USUARICOLUMN);
+      // Els valors s'ompliran al mètode postList()
+      adfield4.setValueMap(new HashMap<Long, String>());
+      adfield4.setEscapeXml(false);
+      
+      List<Field<?>> campsFiltre = filterForm.getDefaultGroupByFields();
 
       if (isUtilitzatPerAplicacio()) {
+        filterForm.setEntityNameCode("transaccio.aplicacio");
+        filterForm.setEntityNameCodePlural("transaccio.aplicacio.plural");
         filterForm.addHiddenField(USUARIPERSONAID);
-      } else {
         filterForm.addHiddenField(USUARIAPLICACIOID);
+        
+        adfield4.setCodeName("usuariAplicacio.usuariAplicacio");
+        campsFiltre.remove(TransaccioFields.USUARIPERSONAID);
+      } else {
+        filterForm.setEntityNameCode("transaccio.persona");
+        filterForm.setEntityNameCodePlural("transaccio.persona.plural");
+        filterForm.addHiddenField(USUARIAPLICACIOID);
+        filterForm.addHiddenField(USUARIPERSONAID);
+        
+        adfield4.setCodeName("usuariPersona.usuariPersona");
+        campsFiltre.remove(TransaccioFields.USUARIAPLICACIOID);
       }
-
+      filterForm.setGroupByFields(campsFiltre);
+      
+      filterForm.addAdditionalField(adfield4);
     }
     filterForm.setVisibleMultipleSelection(false);
     filterForm.setAddButtonVisible(false);
@@ -248,6 +280,53 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     // XYZ ZZZ Ocultar columnes de datafi, missatgeerror, fitxersignat
     // si tots els valors de les columnes són NULL
+//    Map<Long, String> map;
+//    map = (Map<Long, String>) filterForm.getAdditionalField(USUARICOLUMN).getValueMap();
+//    map.clear();
+//    long key;
+//
+//    for (Transaccio ua : list) {
+//      key = ua.getTransaccioID();
+//
+//      SelectMultipleStringKeyValue smskv;
+//      List<StringKeyValue> usuaris;
+//      
+//      if (isUtilitzatPerAplicacio()) {
+//        
+//        smskv = new SelectMultipleStringKeyValue(
+//            TransaccioFields.TRANSACCIOID.select,
+//            new TransaccioQueryPath().USUARIAPLICACIOID().select);
+//        
+//        usuaris = transaccioEjb.executeQuery(smskv, TransaccioFields.USUARIAPLICACIOID.equal(key));
+//        //usuariAplicacioEjb
+//        
+////        smskv = new SelectMultipleStringKeyValue(
+////            PerfilUsuariAplicacioFields.PERFILUSRAPPID.select,
+////            new PerfilUsuariAplicacioQueryPath().PERFIL().CODI().select);
+//        
+////        usuaris = perfilUsuariAplicacioEjb.executeQuery(smskv_per_codi,
+////            PerfilUsuariAplicacioFields.USUARIAPLICACIOID.equal(key));
+//      } else {
+//        
+//        smskv = new SelectMultipleStringKeyValue(
+//            TransaccioFields.TRANSACCIOID.select,
+//            new TransaccioQueryPath().USUARIPERSONAID().select);
+//        
+//        usuaris = transaccioEjb.executeQuery(smskv, TransaccioFields.USUARIPERSONAID.equal(key));
+//      }
+//      
+//      StringBuffer str = new StringBuffer();
+//
+//      System.out.println("USUARIS.SIZE = "+ usuaris.size());
+//      for (StringKeyValue per : usuaris) {
+//        System.out.println("KEY = "+per.getKey());
+//        System.out.println("VALUE = "+per.getValue());
+//        str.append(per.getValue());
+//      }
+//
+//      map.put(key, str.toString());
+//    }
+    
   }
 
 }

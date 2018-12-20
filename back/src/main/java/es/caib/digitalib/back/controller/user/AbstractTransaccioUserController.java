@@ -1,9 +1,12 @@
 package es.caib.digitalib.back.controller.user;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -75,15 +78,20 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
         request);
 
     if (transaccioFilterForm.isNou()) {
-
       int tipusPerfil = getTipusPerfil();
       transaccioFilterForm.setEntityNameCode("transaccio.tipus." + Math.abs(tipusPerfil));
       transaccioFilterForm.setEntityNameCodePlural("transaccio.tipus." + Math.abs(tipusPerfil)
           + ".plural");
       
       transaccioFilterForm.addHiddenField(USUARIPERSONAID);
-      
     }
+    
+    List<Field<?>> campsFiltre = transaccioFilterForm.getDefaultGroupByFields();
+    
+    campsFiltre.remove(TransaccioFields.USUARIPERSONAID);
+    campsFiltre.remove(TransaccioFields.USUARIAPLICACIOID);
+    
+    transaccioFilterForm.setGroupByFields(campsFiltre);
 
     return transaccioFilterForm;
   }
