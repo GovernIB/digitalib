@@ -40,6 +40,10 @@ public class PerfilValidator<T> implements PerfilFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,DESCRIPCIO, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DESCRIPCIO)));
+
     __vr.rejectIfEmptyOrWhitespace(__target__,SCANFORMATFITXER, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SCANFORMATFITXER)));

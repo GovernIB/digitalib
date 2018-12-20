@@ -1,8 +1,13 @@
 
+-- Actualitzar Plugin de Document Custody i Arxiu
 
 ALTER TABLE dib_infocustody RENAME fileurl  TO originalfileurl;
 ALTER TABLE dib_infocustody ADD COLUMN printablefileurl character varying(255);
 
 ALTER TABLE dib_infocustody
   ADD COLUMN enifileurl character varying(255);
+  
+  
+  ALTER TABLE dib_perfil
+   ALTER COLUMN descripcio SET NOT NULL;
 

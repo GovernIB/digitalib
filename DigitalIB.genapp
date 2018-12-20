@@ -4804,6 +4804,9 @@ opcional incluso cuando se genera una firma EPES.</string>
             <string>Descripción</string> 
            </void> 
           </void> 
+          <void property="notNullable"> 
+           <boolean>true</boolean> 
+          </void> 
           <void property="size"> 
            <int>255</int> 
           </void> 

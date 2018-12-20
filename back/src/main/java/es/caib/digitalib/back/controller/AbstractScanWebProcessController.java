@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
+import es.caib.digitalib.back.controller.user.ScanWebProcessControllerUser;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
@@ -50,7 +52,7 @@ import es.caib.digitalib.utils.Constants;
 public abstract class AbstractScanWebProcessController {
 
   public static final String SCANWEB_CONTEXTPATH_FINAL = "/final";
-  
+
   public static final String SESSION_URL_TO_SELECT_SCANWEB_MODULE = "SESSION_URL_TO_SELECT_SCANWEB_MODULE";
 
   protected final Logger log = Logger.getLogger(this.getClass());
@@ -75,6 +77,12 @@ public abstract class AbstractScanWebProcessController {
 
   @EJB(mappedName = PluginArxiuLogicaLocal.JNDI_NAME)
   protected PluginArxiuLogicaLocal pluginArxiuLogicaEjb;
+
+  public static String getFinalURL(String transactionWebID, boolean isPublic) {
+    String cp = isPublic ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
+        : ScanWebProcessControllerUser.CONTEXTWEB;
+    return cp + SCANWEB_CONTEXTPATH_FINAL + "/" + transactionWebID;
+  }
 
   @RequestMapping(value = SCANWEB_CONTEXTPATH_FINAL + "/{transactionWebID}")
   public ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
@@ -115,96 +123,96 @@ public abstract class AbstractScanWebProcessController {
     int status = swc.getStatus().getStatus();
 
     switch (status) {
-    case ScanWebStatus.STATUS_FINAL_OK:
-    case ScanWebStatus.STATUS_IN_PROGRESS: {
-      // Comprovam que s'hagin escanejat coses
+      case ScanWebStatus.STATUS_FINAL_OK:
+      case ScanWebStatus.STATUS_IN_PROGRESS: {
+        // Comprovam que s'hagin escanejat coses
 
-      List<ScannedDocument> listDocs = swc.getScannedFiles();
+        List<ScannedDocument> listDocs = swc.getScannedFiles();
 
-      if (listDocs.size() == 1) {
+        if (listDocs.size() == 1) {
 
-        // TOTS HO EXECUTEN AIXÒ
-        int usPerfil = transaccio.getPerfil().getUsPerfil();
+          // TOTS HO EXECUTEN AIXÒ
+          int usPerfil = transaccio.getPerfil().getUsPerfil();
 
-        switch (usPerfil) {
+          switch (usPerfil) {
 
-        case Constants.PERFIL_US_NOMES_ESCANEIG_INFO: {
-          Fitxer fitxer = recuperarDocumentEscanejat(transaccio, listDocs);
-          if (fitxer != null) {
-            transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
-          }
-        }
-          break;
-
-        case Constants.PERFIL_US_COPIA_AUTENTICA_INFO: {
-          Fitxer fitxer = recuperarDocumentEscanejat(transaccio, listDocs);
-          if (fitxer != null) {
-            Fitxer fitxerFirmat = firmarFitxer(transaccio, fitxer);
-            if (fitxerFirmat != null) {
-              transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
-            }
-          }
-        }
-          break;
-
-        case Constants.PERFIL_US_CUSTODIA_INFO: {
-
-          Fitxer fitxer = recuperarDocumentEscanejat(transaccio, listDocs);
-
-          if (fitxer != null) {
-            Fitxer fitxerFirmat = firmarFitxer(transaccio, fitxer);
-
-            if (fitxerFirmat != null) {
-              // XYZ ZZZ Aqui falta CUSTODIA
-              // NOMES CUSTODIA
-              InfoCustodyJPA infoCustodyJPA = custodia(transaccio, fitxerFirmat);
-
-              if (infoCustodyJPA != null) {
+            case Constants.PERFIL_US_NOMES_ESCANEIG_INFO: {
+              Fitxer fitxer = recuperarDocumentEscanejat(transaccio, listDocs);
+              if (fitxer != null) {
                 transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
               }
-
             }
+            break;
+
+            case Constants.PERFIL_US_COPIA_AUTENTICA_INFO: {
+              Fitxer fitxer = recuperarDocumentEscanejat(transaccio, listDocs);
+              if (fitxer != null) {
+                Fitxer fitxerFirmat = firmarFitxer(transaccio, fitxer);
+                if (fitxerFirmat != null) {
+                  transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
+                }
+              }
+            }
+            break;
+
+            case Constants.PERFIL_US_CUSTODIA_INFO: {
+
+              Fitxer fitxer = recuperarDocumentEscanejat(transaccio, listDocs);
+
+              if (fitxer != null) {
+                Fitxer fitxerFirmat = firmarFitxer(transaccio, fitxer);
+
+                if (fitxerFirmat != null) {
+                  // XYZ ZZZ Aqui falta CUSTODIA
+                  // NOMES CUSTODIA
+                  InfoCustodyJPA infoCustodyJPA = custodia(transaccio, fitxerFirmat);
+
+                  if (infoCustodyJPA != null) {
+                    transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
+                  }
+
+                }
+              }
+            }
+            break;
+          }
+
+        } else {
+
+          transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+          if (listDocs.size() == 0) {
+            // XYZ ZZZ Traduir
+            transaccio.setEstatMissatge(" L'usuari no ha escanejat cap fitxer.");
+          } else {
+            // XYZ ZZZ Traduir
+            transaccio.setEstatMissatge(" L'usuari ha escanejat més d'1 fitxer.");
           }
         }
-          break;
-        }
+      }
+      break;
 
-      } else {
-
+      case ScanWebStatus.STATUS_FINAL_ERROR: {
         transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-        if (listDocs.size() == 0) {
-          // XYZ ZZZ Traduir
-          transaccio.setEstatMissatge(" L'usuari no ha escanejat cap fitxer.");
-        } else {
-          // XYZ ZZZ Traduir
-          transaccio.setEstatMissatge(" L'usuari ha escanejat més d'1 fitxer.");
+      }
+      break;
+
+      case ScanWebStatus.STATUS_CANCELLED: {
+        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_CANCELLED);
+        if (transaccio.getEstatMissatge() == null) {
+          transaccio.setEstatMissatge(I18NUtils.tradueix("plugindescan.cancelat"));
         }
       }
-    }
       break;
 
-    case ScanWebStatus.STATUS_FINAL_ERROR: {
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-    }
-      break;
-
-    case ScanWebStatus.STATUS_CANCELLED: {
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_CANCELLED);
-      if (transaccio.getEstatMissatge() == null) {
-        transaccio.setEstatMissatge(I18NUtils.tradueix("plugindescan.cancelat"));
+      default: {
+        // XYZ ZZZ Traduir
+        String inconsistentState = "El mòdul d´escaneig ha finalitzat inesperadament"
+            + " amb un codi d'estat desconegut " + status;
+        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+        transaccio.setEstatMissatge(inconsistentState);
+        transaccio.setEstatExcepcio(new Exception().toString()); // XYZ
+        // ZZZ
       }
-    }
-      break;
-
-    default: {
-      // XYZ ZZZ Traduir
-      String inconsistentState = "El mòdul d´escaneig ha finalitzat inesperadament"
-          + " amb un codi d'estat desconegut " + status;
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(inconsistentState);
-      transaccio.setEstatExcepcio(new Exception().toString()); // XYZ
-      // ZZZ
-    }
     }
 
     scanWebModuleEjb.closeScanWebProcess(request, transactionWebID);
@@ -283,8 +291,9 @@ public abstract class AbstractScanWebProcessController {
     log.info(" XYZ ZZZ AbstractScanWebProcessController:custodia():: PERFIL = " + perfil);
 
     int tipus = perfil.getTipusCustodia();
-    
-    log.info(" XYZ ZZZ AbstractScanWebProcessController:custodia():: TIPUS CUSTODIA = " + perfil);
+
+    log.info(" XYZ ZZZ AbstractScanWebProcessController:custodia():: TIPUS CUSTODIA = "
+        + perfil);
 
     Locale locale = new Locale(transaccio.getLanguageUI());
 
@@ -345,38 +354,39 @@ public abstract class AbstractScanWebProcessController {
    * @return
    * @throws Exception
    */
-  public ModelAndView startScanWebProcess(HttpServletRequest request, TransaccioJPA transaction,
-      boolean isPublic, String urlFinal, String urlBase) throws Exception, I18NException {
-    
-    //final int tipusPerfil = transaction.getPerfil().getUsPerfil();
-    
+  public ModelAndView startScanWebProcess(HttpServletRequest request,
+      TransaccioJPA transaction, boolean isPublic, String urlFinal, String urlBase)
+      throws Exception, I18NException {
+
+    // final int tipusPerfil = transaction.getPerfil().getUsPerfil();
+
     final boolean fullView = (transaction.getView() == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN);
 
     final String contextWeb = AbstractScanWebModuleController.getContextWeb(isPublic);
-    
-    
-    final String viewModel = isPublic? "public_plugindescan_contenidor" : "plugindescan_contenidor";
+
+    final String viewModel = isPublic ? "public_plugindescan_contenidor"
+        : "plugindescan_contenidor";
     final String scanWebID = transaction.getTransactionWebId();
-    
-    
-    ScanWebConfig  scanWebConfig = ScanWebUtils.generateScanWebConfig(transaction, urlFinal);
-    
+
+    ScanWebConfig scanWebConfig = ScanWebUtils.generateScanWebConfig(transaction, urlFinal);
+
     scanWebModuleEjb.startScanWebProcess(scanWebConfig);
-    
+
     final String urlToSelectPluginPage = urlBase + contextWeb + "/selectscanwebmodule/"
         + scanWebID;
-    
 
     ModelAndView mav = new ModelAndView(viewModel);
     mav.addObject("scanWebID", scanWebID);
-    
-    request.getSession().setAttribute(SESSION_URL_TO_SELECT_SCANWEB_MODULE, urlToSelectPluginPage);
-    final String urlToRequestFirmaArxiuParameters = urlBase 
-        + (isPublic?AbstractFirmaArxiuParametersController.CONTEXTWEB_PUBLIC: AbstractFirmaArxiuParametersController.CONTEXTWEB_USER)
-        + "/" + transaction.getTransaccioID() + "/edit";
-    
+
+    request.getSession().setAttribute(SESSION_URL_TO_SELECT_SCANWEB_MODULE,
+        urlToSelectPluginPage);
+    final String urlToRequestFirmaArxiuParameters = urlBase
+        + (isPublic ? AbstractFirmaArxiuParametersController.CONTEXTWEB_PUBLIC
+            : AbstractFirmaArxiuParametersController.CONTEXTWEB_USER) + "/"
+        + transaction.getTransaccioID() + "/edit";
+
     mav.addObject("urlToSelectPluginPage", urlToRequestFirmaArxiuParameters);
-    
+
     mav.addObject("fullView", fullView);
 
     return mav;

@@ -42,7 +42,7 @@
         <tr id="perfil_descripcio_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PerfilFields.DESCRIPCIO])?'perfil.descripcio':__theForm.labels[PerfilFields.DESCRIPCIO]}" />
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.DESCRIPCIO])?'perfil.descripcio':__theForm.labels[PerfilFields.DESCRIPCIO]}" /> &nbsp;(*)
               <c:if test="${not empty __theForm.help[PerfilFields.DESCRIPCIO]}">
               <i class="icon-info-sign" title="${__theForm.help[PerfilFields.DESCRIPCIO]}" ></i>
               </c:if>

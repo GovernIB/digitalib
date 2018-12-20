@@ -5,6 +5,8 @@
 
 <title>Benvingut a DigitalIB</title>
 
+<link rel="icon" href="/img/favicon.ico">
+
 <!-- Bootstrap CSS-->
 <link href="<c:url value="/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/css/bootstrap-responsive.css"/>" rel="stylesheet">
