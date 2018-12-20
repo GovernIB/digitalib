@@ -75,14 +75,36 @@ public class InfoCustodyFilterForm extends DigitalIBBaseFilterForm implements In
   }
 
 
-  private java.lang.String fileUrl;
+  private java.lang.String originalFileUrl;
 
-  public java.lang.String getFileUrl() {
-    return this.fileUrl;
+  public java.lang.String getOriginalFileUrl() {
+    return this.originalFileUrl;
   }
 
-  public void setFileUrl(java.lang.String fileUrl) {
-    this.fileUrl = fileUrl;
+  public void setOriginalFileUrl(java.lang.String originalFileUrl) {
+    this.originalFileUrl = originalFileUrl;
+  }
+
+
+  private java.lang.String printableFileUrl;
+
+  public java.lang.String getPrintableFileUrl() {
+    return this.printableFileUrl;
+  }
+
+  public void setPrintableFileUrl(java.lang.String printableFileUrl) {
+    this.printableFileUrl = printableFileUrl;
+  }
+
+
+  private java.lang.String eniFileUrl;
+
+  public java.lang.String getEniFileUrl() {
+    return this.eniFileUrl;
+  }
+
+  public void setEniFileUrl(java.lang.String eniFileUrl) {
+    this.eniFileUrl = eniFileUrl;
   }
 
 
@@ -129,7 +151,9 @@ public class InfoCustodyFilterForm extends DigitalIBBaseFilterForm implements In
     this.custodyId = __toClone.custodyId;
     this.arxiuExpedientId = __toClone.arxiuExpedientId;
     this.arxiuDocumentId = __toClone.arxiuDocumentId;
-    this.fileUrl = __toClone.fileUrl;
+    this.originalFileUrl = __toClone.originalFileUrl;
+    this.printableFileUrl = __toClone.printableFileUrl;
+    this.eniFileUrl = __toClone.eniFileUrl;
     this.csv = __toClone.csv;
     this.csvValidationWeb = __toClone.csvValidationWeb;
     this.csvGenerationDefinition = __toClone.csvGenerationDefinition;

@@ -7,18 +7,19 @@ import java.util.Set;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
-
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.fundaciobit.plugins.scanweb.api.ScanWebConfig;
+import org.fundaciobit.plugins.scanweb.api.ScanWebStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.logic.ScanWebModuleLocal;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.utils.Constants;
@@ -28,7 +29,8 @@ import es.caib.digitalib.utils.Constants;
  * @author anadal(u80067)
  *
  */
-public abstract class AbstractFirmaArxiuParametersController extends AbstractTransaccioController {
+public abstract class AbstractFirmaArxiuParametersController extends
+    AbstractTransaccioController {
 
   public static final String CONTEXTWEB_PUBLIC = "/public/firmaarxiuparameters";
 
@@ -36,7 +38,10 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
 
   @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
-  
+
+  @EJB(mappedName = ScanWebModuleLocal.JNDI_NAME)
+  protected ScanWebModuleLocal scanWebModuleEjb;
+
   @Override
   public String getPerfilInfoContextWeb() {
     return null;
@@ -66,7 +71,7 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
       transaccioForm.addReadOnlyField(TransaccioFields.FUNCIONARIUSERNAME);
       transaccioForm.addReadOnlyField(TransaccioFields.SIGNPARAMFUNCIONARINIF);
       transaccioForm.addReadOnlyField(TransaccioFields.SIGNPARAMFUNCIONARINOM);
-      
+
       hiddenFields.remove(TransaccioFields.SIGNPARAMLANGUAGEDOC);
     }
 
@@ -74,20 +79,19 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
     if (tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
 
       /*
-      // XYZ ZZZ Per DEBUG
-      hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI);
-      hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM);
-      hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMORGANS);
-      hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL);
-      hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
-
-      // XYZ ZZZ Per Debug
-      transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI);
-      transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM);
-      transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMORGANS);
-      transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL);
-      transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
-       
+       * // XYZ ZZZ Per DEBUG
+       * hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI);
+       * hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM);
+       * hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMORGANS);
+       * hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL);
+       * hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
+       * 
+       * // XYZ ZZZ Per Debug
+       * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI);
+       * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM);
+       * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMORGANS);
+       * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL);
+       * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
        */
 
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANIF);
@@ -105,14 +109,15 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
     // XYZ ZZZ Obtenir idioma per defecte
     transaccioForm.getTransaccio().setSignParamLanguageDoc("ca");
 
+    transaccioForm.setDeleteButtonVisible(false);
+
     return transaccioForm;
   }
 
   @Override
   public void postValidate(HttpServletRequest request, TransaccioForm transaccioForm,
       BindingResult result) throws I18NException {
-    
-    
+
     ValidationUtils.rejectIfEmptyOrWhitespace(result, NOM.fullName,
         "genapp.validation.required", new Object[] { I18NUtils.tradueix(NOM.fullName) });
 
@@ -134,14 +139,12 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
 
     if (tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
 
-      Field<?>[] reqFields = { 
-          TransaccioFields.ARXIUREQPARAMDOCESTATELABORA,
-          TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS, 
-          TransaccioFields.ARXIUREQPARAMORIGEN
-          // TransaccioFields.ARXIUREQPARAMCIUTADANIF,  No és obligatori
-          //  TransaccioFields.ARXIUREQPARAMCIUTADANOM,  No és obligatori
-          // TransaccioFields.ARXIUREQPARAMINTERESSATS, No és obligatori
-       };
+      Field<?>[] reqFields = { TransaccioFields.ARXIUREQPARAMDOCESTATELABORA,
+          TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS, TransaccioFields.ARXIUREQPARAMORIGEN
+      // TransaccioFields.ARXIUREQPARAMCIUTADANIF, No és obligatori
+      // TransaccioFields.ARXIUREQPARAMCIUTADANOM, No és obligatori
+      // TransaccioFields.ARXIUREQPARAMINTERESSATS, No és obligatori
+      };
 
       for (Field<?> field : reqFields) {
         ValidationUtils.rejectIfEmptyOrWhitespace(result, field.fullName,
@@ -155,27 +158,7 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
   public String getRedirectWhenModified(HttpServletRequest request,
       TransaccioForm transaccioForm, Throwable __e) {
     if (__e == null) {
-      /* XYZ ZZZ LLEVAR
-      log.info(" \n\n  XYZ ZZZ transaccioForm.getTransaccio().getSignParamLanguageDoc() => "
-      +  transaccioForm.getTransaccio().getSignParamLanguageDoc() + " \n\n");
-      
-      
-      try {
-        transaccioEjb.update(transaccioForm.getTransaccio());
-        
-        // XYZ ZZZ TESTS
-        
-        Transaccio tTmp = transaccioEjb.findByPrimaryKey(transaccioForm.getTransaccio().getTransaccioID());
-        log.info(" \n\n  XYZ ZZZ TMP TMP transaccioForm.getTransaccio().getSignParamLanguageDoc() => "
-                +  tTmp.getSignParamLanguageDoc() + " \n\n");
-        
-      } catch (I18NException e) {
-        // TODO Auto-generated catch block
-        // XYZ ZZZ 
-        e.printStackTrace();
-      }
 
-*/
       request.getSession().removeAttribute(HtmlUtils.MISSATGES);
       return "redirect:"
           + request.getSession().getAttribute(
@@ -187,7 +170,30 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
 
   @Override
   public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long transaccioID) {
-    return "redirect:/canviarPipella/user";
+
+    String transaccioWebId = null;
+    try {
+      transaccioWebId = transaccioEjb.executeQueryOne(TransaccioFields.TRANSACTIONWEBID,
+          TransaccioFields.TRANSACCIOID.equal(transaccioID));
+    } catch (I18NException e) {
+      // TODO XYZ ZZZ Que faig si error ????
+      e.printStackTrace();
+    }
+
+    if (transaccioWebId != null) {
+
+      ScanWebConfig swc;
+      swc = scanWebModuleEjb.getScanWebConfig(request, transaccioWebId);
+
+      swc.getStatus().setStatus(ScanWebStatus.STATUS_CANCELLED);
+    }
+
+    String finalURL = AbstractScanWebProcessController
+        .getFinalURL(transaccioWebId, isPublic());
+
+    log.warn("XYZ ZZZ URL despres de CANCEL.LAR: " + finalURL);
+
+    return "redirect:" + finalURL;
   }
 
   @Override
@@ -226,6 +232,5 @@ public abstract class AbstractFirmaArxiuParametersController extends AbstractTra
   public boolean isActiveFormView() {
     return false;
   }
-
 
 }

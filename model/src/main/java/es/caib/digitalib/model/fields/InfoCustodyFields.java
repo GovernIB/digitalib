@@ -16,7 +16,9 @@ public interface InfoCustodyFields extends java.io.Serializable {
 	 public static final StringField CUSTODYID = new StringField(_TABLE_MODEL, "custodyId", "custodyid");
 	 public static final StringField ARXIUEXPEDIENTID = new StringField(_TABLE_MODEL, "arxiuExpedientId", "arxiuexpedientid");
 	 public static final StringField ARXIUDOCUMENTID = new StringField(_TABLE_MODEL, "arxiuDocumentId", "arxiudocumentid");
-	 public static final StringField FILEURL = new StringField(_TABLE_MODEL, "fileUrl", "fileurl");
+	 public static final StringField ORIGINALFILEURL = new StringField(_TABLE_MODEL, "originalFileUrl", "originalfileurl");
+	 public static final StringField PRINTABLEFILEURL = new StringField(_TABLE_MODEL, "printableFileUrl", "printablefileurl");
+	 public static final StringField ENIFILEURL = new StringField(_TABLE_MODEL, "eniFileUrl", "enifileurl");
 	 public static final StringField CSV = new StringField(_TABLE_MODEL, "csv", "csv");
 	 public static final StringField CSVVALIDATIONWEB = new StringField(_TABLE_MODEL, "csvValidationWeb", "csvvalidationweb");
 	 public static final StringField CSVGENERATIONDEFINITION = new StringField(_TABLE_MODEL, "csvGenerationDefinition", "csvgenerationdefinition");
@@ -27,7 +29,9 @@ public interface InfoCustodyFields extends java.io.Serializable {
     CUSTODYID,
     ARXIUEXPEDIENTID,
     ARXIUDOCUMENTID,
-    FILEURL,
+    ORIGINALFILEURL,
+    PRINTABLEFILEURL,
+    ENIFILEURL,
     CSV,
     CSVVALIDATIONWEB,
     CSVGENERATIONDEFINITION

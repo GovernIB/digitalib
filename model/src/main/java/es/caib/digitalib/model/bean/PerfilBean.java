@@ -76,10 +76,11 @@ private static final long serialVersionUID = -449640516L;
     this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor dels valors Not Null */
-  public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
+  public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
+    this.descripcio=descripcio;
     this.scanFormatFitxer=scanFormatFitxer;
     this.pluginScanWebID=pluginScanWebID;
     this.tipusFirma=tipusFirma;

@@ -107,15 +107,41 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.FILEURL)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.ORIGINALFILEURL)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoCustody.fileUrl" var="fileUrl" />
-              <fmt:message key="genapp.form.searchby" var="cercaperfileUrl" >                
-                 <fmt:param value="${fileUrl}"/>
+              <fmt:message key="infoCustody.originalFileUrl" var="originalFileUrl" />
+              <fmt:message key="genapp.form.searchby" var="cercaperoriginalFileUrl" >                
+                 <fmt:param value="${originalFileUrl}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${fileUrl}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperfileUrl}" path="fileUrl" />
+              <span class="add-on"><c:out value="${originalFileUrl}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperoriginalFileUrl}" path="originalFileUrl" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.PRINTABLEFILEURL)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="infoCustody.printableFileUrl" var="printableFileUrl" />
+              <fmt:message key="genapp.form.searchby" var="cercaperprintableFileUrl" >                
+                 <fmt:param value="${printableFileUrl}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${printableFileUrl}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperprintableFileUrl}" path="printableFileUrl" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.ENIFILEURL)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="infoCustody.eniFileUrl" var="eniFileUrl" />
+              <fmt:message key="genapp.form.searchby" var="cercapereniFileUrl" >                
+                 <fmt:param value="${eniFileUrl}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${eniFileUrl}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapereniFileUrl}" path="eniFileUrl" />
             </div>
 
 

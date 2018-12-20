@@ -27,8 +27,7 @@
 
     </a></li>
 
-    <hr
-      style="margin-top: 6px; margin-bottom: 6px; border: none; height: 1px; background: gray" />
+    <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
@@ -52,8 +51,7 @@
 
     </a></li>
 
-    <hr
-      style="margin-top: 6px; margin-bottom: 6px; border: none; height: 1px; background: gray" />
+    <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
@@ -92,8 +90,7 @@
 
       </a></li>
 
-      <hr
-        style="margin-top: 6px; margin-bottom: 6px; border: none; height: 1px; background: gray" />
+      <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 
 
@@ -104,8 +101,7 @@
 
       </a></li>
 
-      <hr
-        style="margin-top: 6px; margin-bottom: 6px; border: none; height: 1px; background: gray" />
+     <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/perfilnomesescaneig/perpersona/list"/>"> <span
@@ -148,8 +144,7 @@
 
       </a></li>
 
-      <hr
-        style="margin-top: 6px; margin-bottom: 6px; border: none; height: 1px; background: gray" />
+      <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
@@ -159,8 +154,7 @@
 
       </a></li>
 
-      <hr
-        style="margin-top: 6px; margin-bottom: 6px; border: none; height: 1px; background: gray" />
+      <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/perfilnomesescaneig/peraplicacio/list"/>"> <span

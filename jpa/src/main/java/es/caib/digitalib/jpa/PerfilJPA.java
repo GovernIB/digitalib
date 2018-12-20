@@ -40,7 +40,7 @@ private static final long serialVersionUID = -1815612849L;
 	@Column(name="nom",nullable = false,length = 100)
 	java.lang.String nom;
 
-	@Column(name="descripcio",length = 255)
+	@Column(name="descripcio",nullable = false,length = 255)
 	java.lang.String descripcio;
 
   /** Opcional. Serveix per indicar la url que utilitzaran els client per connectar-se a DigitalIB. Si val null s'obtindrà de la propietat dels properties-service.xml */
@@ -143,10 +143,11 @@ private static final long serialVersionUID = -1815612849L;
     this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor dels valors Not Null */
-  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
+  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nom=nom;
+    this.descripcio=descripcio;
     this.scanFormatFitxer=scanFormatFitxer;
     this.pluginScanWebID=pluginScanWebID;
     this.tipusFirma=tipusFirma;
