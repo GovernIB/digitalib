@@ -31,5 +31,9 @@ public abstract class AbstractTransaccioAdminController extends AbstractTransacc
     return PerfilInfoTransaccioAdminController.CONTEXTWEB;
   }
 
+  @Override
+  public boolean isAdmin() {
+    return true;
+  }
   
 }

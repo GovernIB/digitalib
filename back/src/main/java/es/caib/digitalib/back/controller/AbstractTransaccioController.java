@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,6 +28,7 @@ import es.caib.digitalib.back.controller.webdb.TransaccioController;
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.TransaccioFields;
 
@@ -36,12 +38,18 @@ import es.caib.digitalib.model.fields.TransaccioFields;
  * @author anadal(u80067)
  */
 public abstract class AbstractTransaccioController extends TransaccioController {
+  
 
   public static final int USUARICOLUMN = 1;
+  
+  @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
+  protected TransaccioLogicaLocal transaccioLogicaEjb;
   
   public abstract String getPerfilInfoContextWeb();
 
   public abstract boolean isUtilitzatPerAplicacio();
+  
+  public abstract boolean isAdmin();
 
   @Override
   public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
@@ -110,35 +118,45 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", "btn-info"));
       }
       
-      AdditionalField<Long, String> adfield4 = new AdditionalField<Long, String>();
-      
-      adfield4.setPosition(USUARICOLUMN);
-      // Els valors s'ompliran al mètode postList()
-      adfield4.setValueMap(new HashMap<Long, String>());
-      adfield4.setEscapeXml(false);
-      
       List<Field<?>> campsFiltre = filterForm.getDefaultGroupByFields();
-
-      if (isUtilitzatPerAplicacio()) {
-        filterForm.setEntityNameCode("transaccio.aplicacio");
-        filterForm.setEntityNameCodePlural("transaccio.aplicacio.plural");
-        filterForm.addHiddenField(USUARIPERSONAID);
-        filterForm.addHiddenField(USUARIAPLICACIOID);
+      if (isAdmin()) {
+        AdditionalField<Long, String> adfield4 = new AdditionalField<Long, String>();
+        adfield4.setPosition(USUARICOLUMN);
+        // Els valors s'ompliran al mètode postList()
+        adfield4.setValueMap(new HashMap<Long, String>());
+        adfield4.setEscapeXml(false);
         
-        adfield4.setCodeName("usuariAplicacio.usuariAplicacio");
-        campsFiltre.remove(TransaccioFields.USUARIPERSONAID);
-      } else {
-        filterForm.setEntityNameCode("transaccio.persona");
-        filterForm.setEntityNameCodePlural("transaccio.persona.plural");
-        filterForm.addHiddenField(USUARIAPLICACIOID);
-        filterForm.addHiddenField(USUARIPERSONAID);
         
-        adfield4.setCodeName("usuariPersona.usuariPersona");
-        campsFiltre.remove(TransaccioFields.USUARIAPLICACIOID);
-      }
-      filterForm.setGroupByFields(campsFiltre);
+  
+        if (isUtilitzatPerAplicacio()) {
+          filterForm.setEntityNameCode("transaccio.aplicacio");
+          filterForm.setEntityNameCodePlural("transaccio.aplicacio.plural");
+          filterForm.addHiddenField(USUARIPERSONAID);
+          filterForm.addHiddenField(USUARIAPLICACIOID);
+          
+          adfield4.setCodeName("usuariAplicacio.usuariAplicacio");
+          campsFiltre.remove(TransaccioFields.USUARIPERSONAID);
+        } else {
+          filterForm.setEntityNameCode("transaccio.persona");
+          filterForm.setEntityNameCodePlural("transaccio.persona.plural");
+          filterForm.addHiddenField(USUARIAPLICACIOID);
+          filterForm.addHiddenField(USUARIPERSONAID);
+          
+          adfield4.setCodeName("usuariPersona.usuariPersona");
+          campsFiltre.remove(TransaccioFields.USUARIAPLICACIOID);
+        }
+        
       
-      filterForm.addAdditionalField(adfield4);
+        filterForm.addAdditionalField(adfield4);
+      } else {
+        campsFiltre.remove(TransaccioFields.USUARIPERSONAID);
+        campsFiltre.remove(TransaccioFields.USUARIAPLICACIOID);
+        
+        filterForm.addHiddenField(USUARIAPLICACIOID);
+        filterForm.addHiddenField(USUARIPERSONAID);
+      }
+      
+      filterForm.setGroupByFields(campsFiltre);
     }
     filterForm.setVisibleMultipleSelection(false);
     filterForm.setAddButtonVisible(false);
@@ -273,10 +291,72 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     return __tmp;
   }
   
+  @RequestMapping(value = "/delete/{transaccioID}")
+  public String deleteTransaccio(@PathVariable("transaccioID") java.lang.Long transaccioID,
+      HttpServletRequest request,HttpServletResponse response) {
+
+
+
+    try {
+      Transaccio transaccio = transaccioEjb.findByPrimaryKey(transaccioID);
+      if (transaccio == null) {
+        String __msg =createMessageError(request, "error.notfound", transaccioID);
+        return getRedirectWhenDelete(request, transaccioID, new Exception(__msg));
+      } else {
+        
+        // XYZ ZZZ Verificar que es pot esborrar
+        // (1) No te fitxer 
+        // (2) Esta en error i té més d'un dia
+        transaccioLogicaEjb.deleteFull(transaccio, true);
+        
+        createMessageSuccess(request, "success.deleted", transaccioID);
+        return getRedirectWhenDelete(request, transaccioID,null);
+      }
+
+    } catch (Throwable e) {
+      String msg = createMessageError(request, "error.deleting", transaccioID, e);
+      log.error(msg, e);
+      return getRedirectWhenDelete(request, transaccioID, e);
+    }
+  }
+  
   
   @Override
   public void postList(HttpServletRequest request, ModelAndView mav,
       TransaccioFilterForm filterForm, List<Transaccio> list) throws I18NException {
+    
+    
+    // Afegir boto d'esborrar per transaccions buides
+    filterForm.getAdditionalButtonsByPK().clear();
+    boolean delete;
+    for (Transaccio transaccio : list) {
+      
+      if (isAdmin()) { // XYZ ZZZ Llevar
+        delete = true;
+ 
+      } else if (transaccio.getFitxerEscanejatID() == null) {
+        delete = true;
+ 
+      } else if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_ERROR) {
+        delete = true;        
+         
+      } else {
+        delete = false;
+      }
+      
+      if (delete) {
+        AdditionalButton additionalButton = new AdditionalButton(
+            "icon-trash icon-white", "genapp.delete",
+            getContextWeb() + "/delete/" + transaccio.getTransaccioID(), "btn-danger");
+        
+        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), additionalButton);
+      }
+      
+    }
+    
+    
+    
+    
 
     // XYZ ZZZ Ocultar columnes de datafi, missatgeerror, fitxersignat
     // si tots els valors de les columnes són NULL

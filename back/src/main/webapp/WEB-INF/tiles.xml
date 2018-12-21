@@ -272,6 +272,13 @@
     </definition>
     
     
+    
+    
+    <definition name="fitxersOrfesList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/fitxerList.jsp" />
+    </definition>
+    
+    
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">

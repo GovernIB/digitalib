@@ -1,5 +1,7 @@
 package es.caib.digitalib.logic;
 
+import java.util.Set;
+
 import javax.ejb.Local;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -8,6 +10,7 @@ import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
 import es.caib.digitalib.jpa.UsuariPersonaJPA;
+import es.caib.digitalib.model.entity.Transaccio;
 
 /**
  * 
@@ -25,7 +28,7 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
    * @return
    * @throws I18NException
    */
-  //XYZ ZZZpublic TransaccioJPA createWithProfile(TransaccioJPA transaccio) throws I18NException;
+   public Set<Long> deleteFull(Transaccio transaccio, boolean esborrarFitxers) throws I18NException;
   
   /**
    * 

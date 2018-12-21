@@ -67,6 +67,22 @@
             key="doccustodyplugin.menu" /></span>
 
     </a></li>
+    
+    
+    
+    
+    
+     <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/admin/fitxersorfes/list"/>"> <span
+        style="${(fn:contains(url, '/admin/fitxersorfes'))? "font-weight:bold;" : ""}"><fmt:message
+            key="fitxers.orfes" /></span>
+
+    </a></li>
+    
+    
 </div>
 </div>
 <div class="thumbnail" style="margin-top: 20px;">

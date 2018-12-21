@@ -46,6 +46,12 @@ public abstract class AbstractFirmaArxiuParametersController extends
   public String getPerfilInfoContextWeb() {
     return null;
   }
+  
+  @Override
+  public boolean isAdmin() {
+    // No serveix per res
+    return false;
+  }
 
   @Override
   public TransaccioForm getTransaccioForm(TransaccioJPA _jpa, boolean __isView,

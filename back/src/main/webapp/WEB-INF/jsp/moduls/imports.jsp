@@ -3,7 +3,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Benvingut a DigitalIB</title>
+<title>DigitalIB</title>
 
 <link href="<c:url value="/img/favicon.ico"/>" rel="shortcut icon" type="image/x-icon" />
 

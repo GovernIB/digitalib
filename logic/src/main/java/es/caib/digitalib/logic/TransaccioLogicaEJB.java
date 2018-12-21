@@ -1,14 +1,17 @@
 package es.caib.digitalib.logic;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
@@ -19,6 +22,7 @@ import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans
 import org.hibernate.Hibernate;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
+import es.caib.digitalib.ejb.FitxerLocal;
 import es.caib.digitalib.ejb.TransaccioEJB;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
@@ -45,26 +49,66 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
   @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
+  
+  @EJB(mappedName = "digitalib/FitxerEJB/local")
+  protected FitxerLocal fitxerEjb;
 
   @EJB(mappedName = es.caib.digitalib.ejb.PerfilUsuariAplicacioLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.PerfilUsuariAplicacioLocal perfilUsuariAplicacioEjb;
+  
+  @EJB(mappedName = es.caib.digitalib.ejb.InfoCustodyLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.InfoCustodyLocal infoCustodyEjb;
+  
+  @EJB(mappedName = es.caib.digitalib.ejb.InfoSignaturaLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.InfoSignaturaLocal infoSignaturaEjb;
 
-  /*
-   * @Override public TransaccioJPA createWithProfile(TransaccioJPA transaccio) throws
-   * I18NException {
-   * 
-   * Perfil perfil = (Perfil) transaccio.getPerfil();
-   * 
-   * if (perfil == null) { // XYZ ZZZ ZZZ Llança excepcio I18NException }
-   * 
-   * perfil = perfilEjb.create(perfil);
-   * 
-   * transaccio.setPerfil(null); transaccio.setPerfilid(perfil.getPerfilID());
-   * 
-   * return (TransaccioJPA)this.create(transaccio);
-   * 
-   * }
-   */
+  @Override
+  public Set<Long> deleteFull(Transaccio transaccio, boolean esborrarFitxers) throws I18NException {
+    
+    Set<Long> fitxers = new HashSet<Long>();
+    if (transaccio == null) {
+      return fitxers;
+    }
+    
+    delete(transaccio.getTransaccioID());
+    
+    Long pid = transaccio.getPerfilID();
+    if (pid != null) {
+      perfilEjb.delete(pid);
+    }
+    
+    Long ic = transaccio.getInfoCustodyID();
+    if (ic != null) {
+      infoCustodyEjb.delete(ic);
+    }
+       
+    Long is = transaccio.getInfoSignaturaID();
+    if (is != null) {
+      infoSignaturaEjb.delete(is);
+    }
+
+    Long fe = transaccio.getFitxerEscanejatID();
+    if (fe != null) {
+      fitxers.add(fe);
+    }
+    Long fs = transaccio.getFitxerSignaturaID();
+    if (fs != null) {
+      fitxers.add(fs);
+    }
+
+    
+    
+    if (esborrarFitxers) {
+      for (Long fid : fitxers) {
+        fitxerEjb.delete(fid);   
+      }
+      FileSystemManager.eliminarArxius(fitxers);
+    }
+    
+    
+    return fitxers;
+    
+  }
 
   @Override
   public TransaccioJPA searchTransaccioByTransactionWebID(String transactionWebID)

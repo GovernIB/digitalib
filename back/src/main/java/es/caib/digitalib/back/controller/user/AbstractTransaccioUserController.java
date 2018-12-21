@@ -47,7 +47,6 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
 
   public abstract int getTipusPerfil();
 
-
   @Override
   public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
     // XYZ ZZZ Aixo s'ha de fer collint LoginINfo
@@ -82,15 +81,14 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
       transaccioFilterForm.setEntityNameCode("transaccio.tipus." + Math.abs(tipusPerfil));
       transaccioFilterForm.setEntityNameCodePlural("transaccio.tipus." + Math.abs(tipusPerfil)
           + ".plural");
-      
-      transaccioFilterForm.addHiddenField(USUARIPERSONAID);
+
     }
-    
+
     List<Field<?>> campsFiltre = transaccioFilterForm.getDefaultGroupByFields();
-    
+
     campsFiltre.remove(TransaccioFields.USUARIPERSONAID);
     campsFiltre.remove(TransaccioFields.USUARIAPLICACIOID);
-    
+
     transaccioFilterForm.setGroupByFields(campsFiltre);
 
     return transaccioFilterForm;
@@ -134,10 +132,13 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
     return true;
   }
 
-
-
   @Override
   public boolean isUtilitzatPerAplicacio() {
+    return false;
+  }
+
+  @Override
+  public boolean isAdmin() {
     return false;
   }
 
