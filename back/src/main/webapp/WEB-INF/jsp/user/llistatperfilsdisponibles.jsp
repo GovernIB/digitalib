@@ -20,14 +20,14 @@
       <c:if test="${not empty configuracioGrup.perfilNomesEscaneigID }">
         <button type="button" class="btn btn-large btn-block btn-success"
           onclick="javascript:executaPerfil(<%=Constants.PERFIL_US_NOMES_ESCANEIG%>,1)">
-           <b>${configuracioGrup.perfilNomesEscaneig.nom }</b><br> 
-              <small style="color:white;"><i>${configuracioGrup.perfilNomesEscaneig.descripcio }</i></small>
+           <b>${configuracioGrup.perfilNomesEscaneig.nom.traduccions[lang].valor }</b><br> 
+              <small style="color:white;"><i>${configuracioGrup.perfilNomesEscaneig.descripcio.traduccions[lang].valor }</i></small>
           <%--
           <b><fmt:message key="transaccio.tipus.1" /></b><br>
           <small style="color:white;"> <i>Realitza un
               escaneig d'un document XYZ FALTA COMBO BOX DE IDIOMA</i><br>
               
-           C: ${configuracioGrup.perfilNomesEscaneig.codi } |  N: ${configuracioGrup.perfilNomesEscaneig.nom } | D: ${configuracioGrup.perfilNomesEscaneig.descripcio }
+           C: ${configuracioGrup.perfilNomesEscaneig.codi } |  N: ${configuracioGrup.perfilNomesEscaneig.nom.traduccions[lang].valor.traduccions[lang].valor } | D: ${configuracioGrup.perfilNomesEscaneig.descripcio.traduccions[lang].valor }
               
           </small> --%>
         </button>
@@ -35,13 +35,13 @@
       <c:if test="${not empty configuracioGrup.perfilNomesEscaneig2ID }">
         <button type="button" class="btn btn-large btn-block btn-success"
           onclick="javascript:executaPerfil(<%=Constants.PERFIL_US_NOMES_ESCANEIG%>,2)">
-             <b>${configuracioGrup.perfilNomesEscaneig2.nom }</b><br> 
-              <small style="color:white;"><i>${configuracioGrup.perfilNomesEscaneig2.descripcio }</i></small>
+             <b>${configuracioGrup.perfilNomesEscaneig2.nom.traduccions[lang].valor }</b><br> 
+              <small style="color:white;"><i>${configuracioGrup.perfilNomesEscaneig2.descripcio.traduccions[lang].valor }</i></small>
           <%--
           <b><fmt:message key="transaccio.tipus.1" /></b><br>
           <small style="color:white;"> <i>Realitza un
               escaneig d'un document</i>
-               C: ${configuracioGrup.perfilNomesEscaneig2.codi } |  N: ${configuracioGrup.perfilNomesEscaneig2.nom } | D: ${configuracioGrup.perfilNomesEscaneig2.descripcio }
+               C: ${configuracioGrup.perfilNomesEscaneig2.codi } |  N: ${configuracioGrup.perfilNomesEscaneig2.nom.traduccions[lang].valor } | D: ${configuracioGrup.perfilNomesEscaneig2.descripcio.traduccions[lang].valor }
           </small>
           --%>
         </button>
@@ -52,24 +52,24 @@
       <c:if test="${not empty configuracioGrup.perfilCopiaAutenticaID }">
         <button type="button" class="btn btn-large btn-block btn-primary"
           onclick="javascript:executaPerfil(<%=Constants.PERFIL_US_COPIA_AUTENTICA%>,1)">
-             <b>${configuracioGrup.perfilCopiaAutentica.nom }</b><br> 
-              <small style="color:white;"><i>${configuracioGrup.perfilCopiaAutentica.descripcio }</i></small>
+             <b>${configuracioGrup.perfilCopiaAutentica.nom.traduccions[lang].valor }</b><br> 
+              <small style="color:white;"><i>${configuracioGrup.perfilCopiaAutentica.descripcio.traduccions[lang].valor }</i></small>
           <%--
           <b><fmt:message key="transaccio.tipus.2" /></b><br>
-          <i>[${configuracioGrup.perfilCopiaAutentica.codi }] N: ${configuracioGrup.perfilCopiaAutentica.nom }</i><br/>
-          <small style="color:white;"> ${configuracioGrup.perfilCopiaAutentica.descripcio }</small>
+          <i>[${configuracioGrup.perfilCopiaAutentica.codi }] N: ${configuracioGrup.perfilCopiaAutentica.nom.traduccions[lang].valor }</i><br/>
+          <small style="color:white;"> ${configuracioGrup.perfilCopiaAutentica.descripcio.traduccions[lang].valor }</small>
           --%>
         </button>
       </c:if>
       <c:if test="${not empty configuracioGrup.perfilCopiaAutentica2ID }">
         <button type="button" class="btn btn-large btn-block btn-primary"
           onclick="javascript:executaPerfil(<%=Constants.PERFIL_US_COPIA_AUTENTICA%>,2)">
-              <b>${configuracioGrup.perfilCopiaAutentica2.nom }</b><br> 
-              <small style="color:white;"><i>${configuracioGrup.perfilCopiaAutentica2.descripcio }</i></small>
+              <b>${configuracioGrup.perfilCopiaAutentica2.nom.traduccions[lang].valor }</b><br> 
+              <small style="color:white;"><i>${configuracioGrup.perfilCopiaAutentica2.descripcio.traduccions[lang].valor }</i></small>
           <%--
               <b><fmt:message key="transaccio.tipus.2" /></b><br>  
-              <i>[${configuracioGrup.perfilCopiaAutentica2.codi }] N: ${configuracioGrup.perfilCopiaAutentica2.nom }</i><br/>
-              <small style="color:white;"> ${configuracioGrup.perfilCopiaAutentica2.descripcio }</small>
+              <i>[${configuracioGrup.perfilCopiaAutentica2.codi }] N: ${configuracioGrup.perfilCopiaAutentica2.nom.traduccions[lang].valor }</i><br/>
+              <small style="color:white;"> ${configuracioGrup.perfilCopiaAutentica2.descripcio.traduccions[lang].valor }</small>
               </i>
           </small>
            --%>
@@ -83,8 +83,8 @@
         <button type="button" class="btn btn-large btn-block btn-danger"
           onclick="javascript:executaPerfil(<%=Constants.PERFIL_US_CUSTODIA%>,1)">
           
-           <b>${configuracioGrup.perfilCustodia.nom }</b><br> 
-              <small style="color:white;"><i>${configuracioGrup.perfilCustodia.descripcio }</i></small>
+           <b>${configuracioGrup.perfilCustodia.nom.traduccions[lang].valor }</b><br> 
+              <small style="color:white;"><i>${configuracioGrup.perfilCustodia.descripcio.traduccions[lang].valor }</i></small>
           <%--
           
           <b><fmt:message key="transaccio.tipus.3" /></b><br> <small style="color:white;"> <i>Realitza
@@ -96,8 +96,8 @@
       <c:if test="${not empty configuracioGrup.perfilCustodia2ID }">
         <button type="button" class="btn btn-large btn-block btn-danger"
           onclick="javascript:executaPerfil(<%=Constants.PERFIL_US_CUSTODIA%>,2)">
-          <b>${configuracioGrup.perfilCustodia2.nom }</b><br> 
-              <small style="color:white;"><i>${configuracioGrup.perfilCustodia2.descripcio }</i></small>
+          <b>${configuracioGrup.perfilCustodia2.nom.traduccions[lang].valor }</b><br> 
+              <small style="color:white;"><i>${configuracioGrup.perfilCustodia2.descripcio.traduccions[lang].valor }</i></small>
           <%--
           <b><fmt:message key="transaccio.tipus.3" /></b><br> <small style="color:white;"> <i>Realitza
               una Còpia Autèntica i Custodia el Fitxer </i>

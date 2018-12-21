@@ -26,6 +26,7 @@ import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.PluginFields;
+import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -56,7 +57,7 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 
 	@Override
 	public String getSessionAttributeFilterForm() {
-		return "PerfilAdmin_FilterForm_" + getTipusPerfil();
+		return "PerfilAdmin_FilterForm_" + getTipusPerfil() +"_" + isUtilitzatPerAplicacio();
 	}
 
 	@Override
@@ -172,10 +173,19 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 					break;
 			}
 			
-			
 			perfilForm.getPerfil().setUtilitzatPerAplicacio(isUtilitzatPerAplicacio());
 
+			if (isUtilitzatPerAplicacio()) {
+			  perfilForm.getPerfil().setUrlBase(Configuracio.getAppUrl());
+			}
 		}
+		
+    if (isUtilitzatPerAplicacio()) {
+      perfilForm.getHiddenFields().remove(URLBASE);
+    } else {
+      perfilForm.addHiddenField(URLBASE);
+    }
+		
 
 		// XYZ ZZZ perfilForm.setTitleCode("perfil.us." + tipusPerfil);
 		perfilForm.setEntityNameCode("perfil.us." + Math.abs(tipusPerfil));
@@ -440,8 +450,75 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 	@Override
 	public void preValidate(HttpServletRequest request, PerfilForm perfilForm,
 			BindingResult result) throws I18NException {
+	  
+	  
+	  PerfilJPA perfil = perfilForm.getPerfil();
+	  
+	  
+	  final BindingResult errors = result; 
+	  {
+      // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
+      es.caib.digitalib.jpa.TraduccioJPA tradJPA = perfil.getNom();
+      if (tradJPA != null) {
+        // TODO ERROR
+        java.util.Map<String,es.caib.digitalib.jpa.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        int countNotNull = 0;
+        for (String _idioma : _trad.keySet()) {
+          es.caib.digitalib.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+          if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+          } else {
+            countNotNull++;
+          }
+        }
 
-		PerfilJPA perfil = perfilForm.getPerfil();
+          if (countNotNull  == _trad.size()) {
+            // OK Tot esta ple
+          } else {
+            for (String _idioma : _trad.keySet()) {
+              es.caib.digitalib.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+              if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+                errors.rejectValue("perfil.nom", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(NOMID.fullName)}, null);
+                errors.rejectValue("perfil.nom.traduccions["+ _idioma +"].valor",
+                  "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(NOMID.fullName)}, null);
+              }
+            }
+          }
+      } else {
+        errors.rejectValue("perfil.nom", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(NOMID.fullName)}, null);
+      }
+    }
+    {
+      // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
+      es.caib.digitalib.jpa.TraduccioJPA tradJPA = perfil.getDescripcio();
+      if (tradJPA != null) {
+        // TODO ERROR
+        java.util.Map<String,es.caib.digitalib.jpa.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        int countNotNull = 0;
+        for (String _idioma : _trad.keySet()) {
+          es.caib.digitalib.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+          if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+          } else {
+            countNotNull++;
+          }
+        }
+
+          if (countNotNull  == _trad.size()) {
+            // OK Tot esta ple
+          } else {
+            for (String _idioma : _trad.keySet()) {
+              es.caib.digitalib.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+              if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+                errors.rejectValue("perfil.descripcio", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(DESCRIPCIOID.fullName)}, null);
+                errors.rejectValue("perfil.descripcio.traduccions["+ _idioma +"].valor",
+                  "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(DESCRIPCIOID.fullName)}, null);
+              }
+            }
+          }
+      } else {
+        errors.rejectValue("perfil.descripcio", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(DESCRIPCIOID.fullName)}, null);
+      }
+    }
+
 
 		switch (getTipusPerfil()) {
 			case Constants.PERFIL_US_COPIA_AUTENTICA :
