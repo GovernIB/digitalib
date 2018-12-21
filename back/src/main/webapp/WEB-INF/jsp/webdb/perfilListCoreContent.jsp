@@ -34,14 +34,20 @@
           ${perfil.codi}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.NOM)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.NOMID)}">
           <td>
-          ${perfil.nom}
+          <c:set var="tmp">${perfil.nomID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${perfil.nom.traduccions[lang].valor}
+          </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.DESCRIPCIO)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.DESCRIPCIOID)}">
           <td>
-          ${perfil.descripcio}
+          <c:set var="tmp">${perfil.descripcioID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${perfil.descripcio.traduccions[lang].valor}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.URLBASE)}">

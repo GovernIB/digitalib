@@ -14,8 +14,8 @@ public interface PerfilFields extends java.io.Serializable {
 
 	 public static final LongField PERFILID = new LongField(_TABLE_MODEL, "perfilID", "perfilid");  // PK
 	 public static final StringField CODI = new StringField(_TABLE_MODEL, "codi", "codi");
-	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");
-	 public static final StringField DESCRIPCIO = new StringField(_TABLE_MODEL, "descripcio", "descripcio");
+	 public static final LongField NOMID = new LongField(_TABLE_MODEL, "nomID", "nomid");
+	 public static final LongField DESCRIPCIOID = new LongField(_TABLE_MODEL, "descripcioID", "descripcioid");
 	 public static final StringField URLBASE = new StringField(_TABLE_MODEL, "urlBase", "urlbase");
 	 public static final IntegerField SCANFORMATFITXER = new IntegerField(_TABLE_MODEL, "scanFormatFitxer", "scanformatfitxer");
 	 public static final IntegerField SCANMINIMARESOLUCIO = new IntegerField(_TABLE_MODEL, "scanMinimaResolucio", "scanminimaresolucio");
@@ -35,8 +35,8 @@ public interface PerfilFields extends java.io.Serializable {
   public static final Field<?>[] ALL_PERFIL_FIELDS = {
     PERFILID,
     CODI,
-    NOM,
-    DESCRIPCIO,
+    NOMID,
+    DESCRIPCIOID,
     URLBASE,
     SCANFORMATFITXER,
     SCANMINIMARESOLUCIO,

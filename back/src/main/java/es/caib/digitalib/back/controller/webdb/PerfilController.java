@@ -50,6 +50,9 @@ import es.caib.digitalib.model.fields.*;
 public class PerfilController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<Perfil, java.lang.Long> implements PerfilFields {
 
+  @EJB(mappedName = es.caib.digitalib.ejb.IdiomaLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.IdiomaLocal idiomaEjb;
+
   @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
 
@@ -58,6 +61,10 @@ public class PerfilController
 
   @Autowired
   protected PerfilRefList perfilRefList;
+
+  // References 
+  @Autowired
+  protected TraduccioRefList traduccioRefList;
 
   // References 
   @Autowired
@@ -186,6 +193,26 @@ public class PerfilController
 
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
+
+    // Field nomID
+    {
+      _listSKV = getReferenceListForNomID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfTraduccioForNomID(_tmp);
+      if (filterForm.getGroupByFields().contains(NOMID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, NOMID, false);
+      };
+    }
+
+    // Field descripcioID
+    {
+      _listSKV = getReferenceListForDescripcioID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfTraduccioForDescripcioID(_tmp);
+      if (filterForm.getGroupByFields().contains(DESCRIPCIOID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, DESCRIPCIOID, false);
+      };
+    }
 
     // Field scanFormatFitxer
     {
@@ -325,6 +352,8 @@ public class PerfilController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
+    __mapping.put(NOMID, filterForm.getMapOfTraduccioForNomID());
+    __mapping.put(DESCRIPCIOID, filterForm.getMapOfTraduccioForDescripcioID());
     __mapping.put(SCANFORMATFITXER, filterForm.getMapOfValuesForScanFormatFitxer());
     __mapping.put(SCANMINIMARESOLUCIO, filterForm.getMapOfValuesForScanMinimaResolucio());
     __mapping.put(SCANPIXELTYPE, filterForm.getMapOfValuesForScanPixelType());
@@ -356,6 +385,24 @@ public class PerfilController
     }
     ModelAndView mav = new ModelAndView(getTileForm());
     PerfilForm perfilForm = getPerfilForm(null, false, request, mav);
+    
+    if (perfilForm.getPerfil().getNom() == null){
+      es.caib.digitalib.jpa.TraduccioJPA trad = new es.caib.digitalib.jpa.TraduccioJPA();
+      for (es.caib.digitalib.model.entity.Idioma idioma : perfilForm.getIdiomesTraduccio()) {
+        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.digitalib.jpa.TraduccioMapJPA());
+      }
+      perfilForm.getPerfil().setNom(trad);
+    }
+
+    
+    if (perfilForm.getPerfil().getDescripcio() == null){
+      es.caib.digitalib.jpa.TraduccioJPA trad = new es.caib.digitalib.jpa.TraduccioJPA();
+      for (es.caib.digitalib.model.entity.Idioma idioma : perfilForm.getIdiomesTraduccio()) {
+        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.digitalib.jpa.TraduccioMapJPA());
+      }
+      perfilForm.getPerfil().setDescripcio(trad);
+    }
+
     mav.addObject("perfilForm" ,perfilForm);
     fillReferencesForForm(perfilForm, request, mav);
   
@@ -379,6 +426,7 @@ public class PerfilController
     perfilForm.setContexte(getContextWeb());
     perfilForm.setEntityNameCode(getEntityNameCode());
     perfilForm.setEntityNameCodePlural(getEntityNameCodePlural());
+    perfilForm.setIdiomesTraduccio(getIdiomesSuportats());
     return perfilForm;
   }
 
@@ -470,6 +518,13 @@ public class PerfilController
     }
     
   }
+
+
+  public List<es.caib.digitalib.model.entity.Idioma> getIdiomesSuportats() throws I18NException {
+    List<es.caib.digitalib.model.entity.Idioma> idiomes = idiomaEjb.select(es.caib.digitalib.model.fields.IdiomaFields.SUPORTAT.equal(true));
+    return idiomes;
+  }
+
 
   /**
    * Guardar un nou Perfil
@@ -766,6 +821,58 @@ public java.lang.Long stringToPK(String value) {
 
   public boolean isActiveFormView() {
     return isActiveFormEdit();
+  }
+
+  public List<StringKeyValue> getReferenceListForNomID(HttpServletRequest request,
+       ModelAndView mav, PerfilFilterForm perfilFilterForm,
+       List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (perfilFilterForm.isHiddenField(NOMID)
+      && !perfilFilterForm.isGroupByField(NOMID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(NOMID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Perfil _item : list) {
+        if(_item.getNomID() == null) { continue; };
+        _pkList.add(_item.getNomID());
+        }
+        _w = TraduccioFields.TRADUCCIOID.in(_pkList);
+      }
+    return getReferenceListForNomID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForNomID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return traduccioRefList.getReferenceList(TraduccioFields.TRADUCCIOID, where );
+  }
+
+  public List<StringKeyValue> getReferenceListForDescripcioID(HttpServletRequest request,
+       ModelAndView mav, PerfilFilterForm perfilFilterForm,
+       List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (perfilFilterForm.isHiddenField(DESCRIPCIOID)
+      && !perfilFilterForm.isGroupByField(DESCRIPCIOID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(DESCRIPCIOID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Perfil _item : list) {
+        if(_item.getDescripcioID() == null) { continue; };
+        _pkList.add(_item.getDescripcioID());
+        }
+        _w = TraduccioFields.TRADUCCIOID.in(_pkList);
+      }
+    return getReferenceListForDescripcioID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForDescripcioID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return traduccioRefList.getReferenceList(TraduccioFields.TRADUCCIOID, where );
   }
 
 

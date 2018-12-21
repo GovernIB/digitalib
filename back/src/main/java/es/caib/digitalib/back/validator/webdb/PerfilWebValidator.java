@@ -35,6 +35,9 @@ public class PerfilWebValidator  implements Validator, PerfilFields {
   @javax.ejb.EJB(mappedName = "digitalib/PluginEJB/local")
   protected es.caib.digitalib.ejb.PluginLocal pluginEjb;
 
+  @javax.ejb.EJB(mappedName = "digitalib/TraduccioEJB/local")
+  protected es.caib.digitalib.ejb.TraduccioLocal traduccioEjb;
+
 
 
   public PerfilWebValidator() {
@@ -49,8 +52,11 @@ public class PerfilWebValidator  implements Validator, PerfilFields {
   @Override
   public void validate(Object target, Errors errors) {
 
+java.util.List<Field<?>> _ignoreFields = new java.util.ArrayList<Field<?>>();
+_ignoreFields.add(NOMID);
+_ignoreFields.add(DESCRIPCIOID);
     WebValidationResult<Object> wvr;
-    wvr = new WebValidationResult<Object>(errors);
+    wvr = new WebValidationResult<Object>(errors, _ignoreFields);
 
     Boolean nou = (Boolean)errors.getFieldValue("nou");
     boolean isNou =  nou != null && nou.booleanValue();
@@ -62,8 +68,95 @@ public class PerfilWebValidator  implements Validator, PerfilFields {
   public void validate(Object target, Errors errors,
     WebValidationResult<Object> wvr, boolean isNou) {
 
+  {
+    es.caib.digitalib.jpa.PerfilJPA perfil;
+    if (target instanceof PerfilForm) {
+      perfil = ((PerfilForm)target).getPerfil();
+    } else {
+      perfil = (es.caib.digitalib.jpa.PerfilJPA)target;
+    }
+    {
+      // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
+      es.caib.digitalib.jpa.TraduccioJPA tradJPA = perfil.getNom();
+      if (tradJPA != null) {
+        // TODO ERROR
+        java.util.Map<String,es.caib.digitalib.jpa.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        int countNull= 0;
+        int countNotNull = 0;
+        for (String _idioma : _trad.keySet()) {
+          es.caib.digitalib.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+          if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+            countNull++;
+          } else {
+            countNotNull++;
+          }
+        }
+
+        if (countNull == _trad.size()) {
+          // OK Tot esta buit ==> passam el camp a NULL
+          perfil.setNomID(null);
+          perfil.setNom(null);
+        } else {
+          if (countNotNull  == _trad.size()) {
+            // OK Tot esta ple
+          } else {
+            for (String _idioma : _trad.keySet()) {
+              es.caib.digitalib.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+              if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+                errors.rejectValue("perfil.nom", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(NOMID.fullName)}, null);
+                errors.rejectValue("perfil.nom.traduccions["+ _idioma +"].valor",
+                  "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(NOMID.fullName)}, null);
+              }
+            }
+          }
+        }
+      } else {
+        errors.rejectValue("perfil.nom", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(NOMID.fullName)}, null);
+      }
+    }
+    {
+      // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
+      es.caib.digitalib.jpa.TraduccioJPA tradJPA = perfil.getDescripcio();
+      if (tradJPA != null) {
+        // TODO ERROR
+        java.util.Map<String,es.caib.digitalib.jpa.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        int countNull= 0;
+        int countNotNull = 0;
+        for (String _idioma : _trad.keySet()) {
+          es.caib.digitalib.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+          if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+            countNull++;
+          } else {
+            countNotNull++;
+          }
+        }
+
+        if (countNull == _trad.size()) {
+          // OK Tot esta buit ==> passam el camp a NULL
+          perfil.setDescripcioID(null);
+          perfil.setDescripcio(null);
+        } else {
+          if (countNotNull  == _trad.size()) {
+            // OK Tot esta ple
+          } else {
+            for (String _idioma : _trad.keySet()) {
+              es.caib.digitalib.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+              if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+                errors.rejectValue("perfil.descripcio", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(DESCRIPCIOID.fullName)}, null);
+                errors.rejectValue("perfil.descripcio.traduccions["+ _idioma +"].valor",
+                  "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(DESCRIPCIOID.fullName)}, null);
+              }
+            }
+          }
+        }
+      } else {
+        errors.rejectValue("perfil.descripcio", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(DESCRIPCIOID.fullName)}, null);
+      }
+    }
+
+  }
     validator.validate(wvr, target,
-      isNou, apiSimpleEjb, perfilEjb, pluginEjb);
+      isNou, apiSimpleEjb, perfilEjb, pluginEjb, traduccioEjb);
 
   } // Final de metode
 

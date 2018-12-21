@@ -18,11 +18,11 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.CODI)}">
         <th>${dib:getSortIcons(__theFilterForm,PerfilFields.CODI)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.NOM)}">
-        <th>${dib:getSortIcons(__theFilterForm,PerfilFields.NOM)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.NOMID)}">
+        <th>${dib:getSortIcons(__theFilterForm,PerfilFields.NOMID)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.DESCRIPCIO)}">
-        <th>${dib:getSortIcons(__theFilterForm,PerfilFields.DESCRIPCIO)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.DESCRIPCIOID)}">
+        <th>${dib:getSortIcons(__theFilterForm,PerfilFields.DESCRIPCIOID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.URLBASE)}">
         <th>${dib:getSortIcons(__theFilterForm,PerfilFields.URLBASE)}</th>

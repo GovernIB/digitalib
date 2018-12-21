@@ -19,12 +19,12 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new StringField(getQueryPath(), PerfilFields.CODI);
   }
 
-  public StringField NOM() {
-    return new StringField(getQueryPath(), PerfilFields.NOM);
+  public LongField NOMID() {
+    return new LongField(getQueryPath(), PerfilFields.NOMID);
   }
 
-  public StringField DESCRIPCIO() {
-    return new StringField(getQueryPath(), PerfilFields.DESCRIPCIO);
+  public LongField DESCRIPCIOID() {
+    return new LongField(getQueryPath(), PerfilFields.DESCRIPCIOID);
   }
 
   public StringField URLBASE() {
@@ -203,6 +203,22 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     });
   }
 */
+
+  public TraduccioQueryPath NOM() {
+    return new TraduccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PerfilQueryPath.this.getQueryPath() + "nom" + ".";
+      }
+    });
+  }
+
+  public TraduccioQueryPath DESCRIPCIO() {
+    return new TraduccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PerfilQueryPath.this.getQueryPath() + "descripcio" + ".";
+      }
+    });
+  }
 
   public PluginQueryPath PLUGINSCANWEB() {
     return new PluginQueryPath(new QueryPath() {

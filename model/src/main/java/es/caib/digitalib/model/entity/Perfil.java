@@ -8,11 +8,11 @@ public interface Perfil extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getCodi();
 	public void setCodi(java.lang.String _codi_);
 
-	public java.lang.String getNom();
-	public void setNom(java.lang.String _nom_);
+	public java.lang.Long getNomID();
+	public void setNomID(java.lang.Long _nomID_);
 
-	public java.lang.String getDescripcio();
-	public void setDescripcio(java.lang.String _descripcio_);
+	public java.lang.Long getDescripcioID();
+	public void setDescripcioID(java.lang.Long _descripcioID_);
 
 	public java.lang.String getUrlBase();
 	public void setUrlBase(java.lang.String _urlBase_);

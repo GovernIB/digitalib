@@ -4740,14 +4740,34 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="digits"> 
            <int>0</int> 
           </void> 
-          <void property="filter"> 
-           <boolean>true</boolean> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>traduccioid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_traduccio_nomid_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_traduccio</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_perfil_nomid_fk_i</string> 
           </void> 
           <void property="javaName"> 
-           <string>nom</string> 
+           <string>nomID</string> 
           </void> 
           <void property="javaType"> 
-           <class>java.lang.String</class> 
+           <class>java.lang.Long</class> 
           </void> 
           <void property="labels"> 
            <void method="put"> 
@@ -4759,25 +4779,35 @@ opcional incluso cuando se genera una firma EPES.</string>
             <string>Nombre</string> 
            </void> 
           </void> 
-          <void property="notNullable"> 
-           <boolean>true</boolean> 
-          </void> 
-          <void property="showInReferenceList"> 
-           <boolean>true</boolean> 
-          </void> 
           <void property="size"> 
-           <int>100</int> 
+           <int>19</int> 
           </void> 
           <void property="sqlName"> 
-           <string>nom</string> 
+           <string>nomid</string> 
           </void> 
           <void property="sqlType"> 
-           <int>12</int> 
+           <int>-5</int> 
           </void> 
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>traduccioid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_traduc_nom_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_traduccio</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
             <void property="webtype"> 
-             <int>1</int> 
+             <int>3</int> 
             </void> 
            </object> 
           </void> 
@@ -4788,11 +4818,34 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="digits"> 
            <int>0</int> 
           </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>traduccioid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_traduccio_descri_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_traduccio</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_perfil_descripcioid_fk_i</string> 
+          </void> 
           <void property="javaName"> 
-           <string>descripcio</string> 
+           <string>descripcioID</string> 
           </void> 
           <void property="javaType"> 
-           <class>java.lang.String</class> 
+           <class>java.lang.Long</class> 
           </void> 
           <void property="labels"> 
            <void method="put"> 
@@ -4804,22 +4857,35 @@ opcional incluso cuando se genera una firma EPES.</string>
             <string>Descripción</string> 
            </void> 
           </void> 
-          <void property="notNullable"> 
-           <boolean>true</boolean> 
-          </void> 
           <void property="size"> 
-           <int>255</int> 
+           <int>19</int> 
           </void> 
           <void property="sqlName"> 
-           <string>descripcio</string> 
+           <string>descripcioid</string> 
           </void> 
           <void property="sqlType"> 
-           <int>12</int> 
+           <int>-5</int> 
           </void> 
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>traduccioid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_pefil_traduc_desc_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_traduccio</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
             <void property="webtype"> 
-             <int>1</int> 
+             <int>3</int> 
             </void> 
            </object> 
           </void> 
@@ -7225,7 +7291,7 @@ opcional incluso cuando se genera una firma EPES.</string>
            <int>0</int> 
           </void> 
           <void property="foreignKeys"> 
-           <array class="org.fundaciobit.genapp.ForeignKey" length="3"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="5"> 
             <void index="0"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
@@ -7253,6 +7319,32 @@ opcional incluso cuando se genera una firma EPES.</string>
              </object> 
             </void> 
             <void index="2"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>nomid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_traduccio_nomid_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="3"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>descripcioid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_traduccio_descri_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_perfil</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="4"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>traducciomapid</string> 

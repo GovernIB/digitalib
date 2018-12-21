@@ -197,6 +197,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     clonedPerfil.setPerfilID(0);
     clonedPerfil.setUsPerfil(-1 * clonedPerfil.getUsPerfil());
     clonedPerfil.setUtilitzatPerAplicacio(usuariAplicacio != null);
+    clonedPerfil.setNomID(null);
+    clonedPerfil.setDescripcioID(null);
+    
 
     // XYZ ZZZ ZZZ Falten altres comprovacions
     TransaccioJPA t = new TransaccioJPA();

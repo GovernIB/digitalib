@@ -20,37 +20,67 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.NOM)}">
-        <tr id="perfil_nom_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.NOMID)}">
+        <tr id="perfil_nomID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PerfilFields.NOM])?'perfil.nom':__theForm.labels[PerfilFields.NOM]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[PerfilFields.NOM]}">
-              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.NOM]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.NOMID])?'perfil.nomID':__theForm.labels[PerfilFields.NOMID]}" />
+              <c:if test="${not empty __theForm.help[PerfilFields.NOMID]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.NOMID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="perfil.nom" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PerfilFields.NOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PerfilFields.NOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="perfil.nom"   />
+       <form:errors path="perfil.nom" cssClass="errorField alert alert-error" />
+       <div class="tabbable">
+         <ul class="nav nav-tabs" style="margin-bottom: 3px;">
+             <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+               <li class="${(counter.index == 0)? 'active':''}"  ><a href="#${counter.index}_tab_nom_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a></li>
+           </c:forEach>
+           
+         </ul>
+         <div class="tab-content">
+           <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
+               <form:errors path="perfil.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-error"/>
+               <form:input path="perfil.nom.traduccions['${idioma.idiomaID}'].valor" readonly="${ gen:contains(__theForm.readOnlyFields ,PerfilFields.NOMID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PerfilFields.NOMID)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="4000" />
+           </div>
+           </c:forEach>
+         </div>
+       </div>
 
            </td>
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.DESCRIPCIO)}">
-        <tr id="perfil_descripcio_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.DESCRIPCIOID)}">
+        <tr id="perfil_descripcioID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PerfilFields.DESCRIPCIO])?'perfil.descripcio':__theForm.labels[PerfilFields.DESCRIPCIO]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[PerfilFields.DESCRIPCIO]}">
-              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.DESCRIPCIO]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.DESCRIPCIOID])?'perfil.descripcioID':__theForm.labels[PerfilFields.DESCRIPCIOID]}" />
+              <c:if test="${not empty __theForm.help[PerfilFields.DESCRIPCIOID]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.DESCRIPCIOID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="perfil.descripcio" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PerfilFields.DESCRIPCIO)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PerfilFields.DESCRIPCIO)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="perfil.descripcio"   />
+       <form:errors path="perfil.descripcio" cssClass="errorField alert alert-error" />
+       <div class="tabbable">
+         <ul class="nav nav-tabs" style="margin-bottom: 3px;">
+             <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+               <li class="${(counter.index == 0)? 'active':''}"  ><a href="#${counter.index}_tab_descripcio_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a></li>
+           </c:forEach>
+           
+         </ul>
+         <div class="tab-content">
+           <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
+               <form:errors path="perfil.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-error"/>
+               <form:input path="perfil.descripcio.traduccions['${idioma.idiomaID}'].valor" readonly="${ gen:contains(__theForm.readOnlyFields ,PerfilFields.DESCRIPCIOID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PerfilFields.DESCRIPCIOID)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="4000" />
+           </div>
+           </c:forEach>
+         </div>
+       </div>
 
            </td>
         </tr>

@@ -37,11 +37,13 @@ private static final long serialVersionUID = -1815612849L;
 	@Column(name="codi",nullable = false,unique = true,length = 255)
 	java.lang.String codi;
 
-	@Column(name="nom",nullable = false,length = 100)
-	java.lang.String nom;
+	@Index(name="dib_perfil_nomid_fk_i")
+	@Column(name="nomid",length = 19)
+	java.lang.Long nomID;
 
-	@Column(name="descripcio",nullable = false,length = 255)
-	java.lang.String descripcio;
+	@Index(name="dib_perfil_descripcioid_fk_i")
+	@Column(name="descripcioid",length = 19)
+	java.lang.Long descripcioID;
 
   /** Opcional. Serveix per indicar la url que utilitzaran els client per connectar-se a DigitalIB. Si val null s'obtindrà de la propietat dels properties-service.xml */
 	@Column(name="urlbase",length = 255)
@@ -102,11 +104,11 @@ private static final long serialVersionUID = -1815612849L;
   }
 
   /** Constructor amb tots els camps  */
-  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
+  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.perfilID=perfilID;
     this.codi=codi;
-    this.nom=nom;
-    this.descripcio=descripcio;
+    this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.urlBase=urlBase;
     this.scanFormatFitxer=scanFormatFitxer;
     this.scanMinimaResolucio=scanMinimaResolucio;
@@ -123,10 +125,10 @@ private static final long serialVersionUID = -1815612849L;
     this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor sense valors autoincrementals */
-  public PerfilJPA(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
+  public PerfilJPA(java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.codi=codi;
-    this.nom=nom;
-    this.descripcio=descripcio;
+    this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.urlBase=urlBase;
     this.scanFormatFitxer=scanFormatFitxer;
     this.scanMinimaResolucio=scanMinimaResolucio;
@@ -143,11 +145,9 @@ private static final long serialVersionUID = -1815612849L;
     this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor dels valors Not Null */
-  public PerfilJPA(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
+  public PerfilJPA(long perfilID , java.lang.String codi , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
-    this.nom=nom;
-    this.descripcio=descripcio;
     this.scanFormatFitxer=scanFormatFitxer;
     this.pluginScanWebID=pluginScanWebID;
     this.tipusFirma=tipusFirma;
@@ -157,8 +157,8 @@ private static final long serialVersionUID = -1815612849L;
   public PerfilJPA(Perfil __bean) {
     this.setPerfilID(__bean.getPerfilID());
     this.setCodi(__bean.getCodi());
-    this.setNom(__bean.getNom());
-    this.setDescripcio(__bean.getDescripcio());
+    this.setNomID(__bean.getNomID());
+    this.setDescripcioID(__bean.getDescripcioID());
     this.setUrlBase(__bean.getUrlBase());
     this.setScanFormatFitxer(__bean.getScanFormatFitxer());
     this.setScanMinimaResolucio(__bean.getScanMinimaResolucio());
@@ -189,18 +189,18 @@ private static final long serialVersionUID = -1815612849L;
 		this.codi = _codi_;
 	};
 
-	public java.lang.String getNom() {
-		return(nom);
+	public java.lang.Long getNomID() {
+		return(nomID);
 	};
-	public void setNom(java.lang.String _nom_) {
-		this.nom = _nom_;
+	public void setNomID(java.lang.Long _nomID_) {
+		this.nomID = _nomID_;
 	};
 
-	public java.lang.String getDescripcio() {
-		return(descripcio);
+	public java.lang.Long getDescripcioID() {
+		return(descripcioID);
 	};
-	public void setDescripcio(java.lang.String _descripcio_) {
-		this.descripcio = _descripcio_;
+	public void setDescripcioID(java.lang.Long _descripcioID_) {
+		this.descripcioID = _descripcioID_;
 	};
 
 	public java.lang.String getUrlBase() {
@@ -420,6 +420,56 @@ private static final long serialVersionUID = -1815612849L;
 	}
 
 
+// IMP Field:traduccioid | Table: dib_traduccio | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+	@ForeignKey(name="dib_perfil_traduccio_nomid_fk")
+	@JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+	private TraduccioJPA nom;
+
+	public TraduccioJPA getNom() {
+    return this.nom;
+  }
+
+	public  void setNom(TraduccioJPA nom) {
+    this.nom = nom;
+  }
+
+  @javax.xml.bind.annotation.XmlTransient
+  public java.util.Map<String, es.caib.digitalib.jpa.TraduccioMapJPA> getNomTraduccions() {
+    return this.nom.getTraduccions();
+  }
+
+  public void setNomTraduccions(java.util.Map<String, es.caib.digitalib.jpa.TraduccioMapJPA> __traduccions__) {
+    this.nom.setTraduccions(__traduccions__);
+  }
+
+
+// IMP Field:traduccioid | Table: dib_traduccio | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+	@ForeignKey(name="dib_perfil_traduccio_descri_fk")
+	@JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+	private TraduccioJPA descripcio;
+
+	public TraduccioJPA getDescripcio() {
+    return this.descripcio;
+  }
+
+	public  void setDescripcio(TraduccioJPA descripcio) {
+    this.descripcio = descripcio;
+  }
+
+  @javax.xml.bind.annotation.XmlTransient
+  public java.util.Map<String, es.caib.digitalib.jpa.TraduccioMapJPA> getDescripcioTraduccions() {
+    return this.descripcio.getTraduccions();
+  }
+
+  public void setDescripcioTraduccions(java.util.Map<String, es.caib.digitalib.jpa.TraduccioMapJPA> __traduccions__) {
+    this.descripcio.setTraduccions(__traduccions__);
+  }
+
+
 // IMP Field:pluginid | Table: dib_plugin | Type: 1  
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -517,8 +567,8 @@ private static final long serialVersionUID = -1815612849L;
     PerfilJPA __tmp = new PerfilJPA();
     __tmp.setPerfilID(__bean.getPerfilID());
     __tmp.setCodi(__bean.getCodi());
-    __tmp.setNom(__bean.getNom());
-    __tmp.setDescripcio(__bean.getDescripcio());
+    __tmp.setNomID(__bean.getNomID());
+    __tmp.setDescripcioID(__bean.getDescripcioID());
     __tmp.setUrlBase(__bean.getUrlBase());
     __tmp.setScanFormatFitxer(__bean.getScanFormatFitxer());
     __tmp.setScanMinimaResolucio(__bean.getScanMinimaResolucio());
@@ -607,6 +657,10 @@ private static final long serialVersionUID = -1815612849L;
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginScanWeb2) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginScanWeb2()) ) ) {
       __tmp.setPluginScanWeb2(PluginJPA.copyJPA(__jpa.getPluginScanWeb2(), __alreadyCopied,"PerfilJPA"));
     }
+    if(!"TraduccioJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.descripcio) || org.hibernate.Hibernate.isInitialized(__jpa.getDescripcio()) ) ) {
+      __tmp.setDescripcio(TraduccioJPA.copyJPA(__jpa.getDescripcio(), __alreadyCopied,"PerfilJPA"));
+    }
     if(!"ApiSimpleJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.apiSimple) || org.hibernate.Hibernate.isInitialized(__jpa.getApiSimple()) ) ) {
       __tmp.setApiSimple(ApiSimpleJPA.copyJPA(__jpa.getApiSimple(), __alreadyCopied,"PerfilJPA"));
@@ -618,6 +672,10 @@ private static final long serialVersionUID = -1815612849L;
     if(!"PluginJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginArxiu) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginArxiu()) ) ) {
       __tmp.setPluginArxiu(PluginJPA.copyJPA(__jpa.getPluginArxiu(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"TraduccioJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.nom) || org.hibernate.Hibernate.isInitialized(__jpa.getNom()) ) ) {
+      __tmp.setNom(TraduccioJPA.copyJPA(__jpa.getNom(), __alreadyCopied,"PerfilJPA"));
     }
 
     return __tmp;

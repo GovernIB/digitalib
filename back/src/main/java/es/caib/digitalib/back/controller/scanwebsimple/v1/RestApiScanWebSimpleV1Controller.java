@@ -31,6 +31,7 @@ import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
 import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.InfoSignaturaJPA;
+import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
@@ -126,9 +127,12 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
         List<ScanWebSimpleAvailableProfile> list = new ArrayList<ScanWebSimpleAvailableProfile>();
 
-        for (Perfil perfil : perfils) {
+        for (Perfil p : perfils) {
+          
+          PerfilJPA perfil = (PerfilJPA)p;
           ScanWebSimpleAvailableProfile ap = new ScanWebSimpleAvailableProfile(
-              perfil.getCodi(), perfil.getNom(), perfil.getDescripcio(), perfil.getUsPerfil());
+              perfil.getCodi(), perfil.getNom().getTraduccio(locale).getValor(), 
+              perfil.getDescripcio().getTraduccio(locale).getValor(), perfil.getUsPerfil());
           list.add(ap);
         }
 

@@ -66,8 +66,8 @@ public class PerfilJPAManager
 		return list.toArray(new Perfil[list.size()]);
 	};
 
-	public synchronized Perfil create( java.lang.String _codi_, java.lang.String _nom_, java.lang.String _descripcio_, java.lang.String _urlBase_, int _scanFormatFitxer_, java.lang.Integer _scanMinimaResolucio_, int _scanPixelType_, long _pluginScanWebID_, java.lang.Long _pluginScanWeb2ID_, int _tipusFirma_, java.lang.Long _apiSimpleID_, java.lang.Long _pluginFirmaServidorID_, int _tipusCustodia_, java.lang.Long _pluginArxiuID_, java.lang.Long _pluginDocCustodyID_, int _usPerfil_, java.lang.Boolean _utilitzatPerAplicacio_) throws I18NException {
-		PerfilJPA __bean =  new PerfilJPA(_codi_,_nom_,_descripcio_,_urlBase_,_scanFormatFitxer_,_scanMinimaResolucio_,_scanPixelType_,_pluginScanWebID_,_pluginScanWeb2ID_,_tipusFirma_,_apiSimpleID_,_pluginFirmaServidorID_,_tipusCustodia_,_pluginArxiuID_,_pluginDocCustodyID_,_usPerfil_,_utilitzatPerAplicacio_);
+	public synchronized Perfil create( java.lang.String _codi_, java.lang.Long _nomID_, java.lang.Long _descripcioID_, java.lang.String _urlBase_, int _scanFormatFitxer_, java.lang.Integer _scanMinimaResolucio_, int _scanPixelType_, long _pluginScanWebID_, java.lang.Long _pluginScanWeb2ID_, int _tipusFirma_, java.lang.Long _apiSimpleID_, java.lang.Long _pluginFirmaServidorID_, int _tipusCustodia_, java.lang.Long _pluginArxiuID_, java.lang.Long _pluginDocCustodyID_, int _usPerfil_, java.lang.Boolean _utilitzatPerAplicacio_) throws I18NException {
+		PerfilJPA __bean =  new PerfilJPA(_codi_,_nomID_,_descripcioID_,_urlBase_,_scanFormatFitxer_,_scanMinimaResolucio_,_scanPixelType_,_pluginScanWebID_,_pluginScanWeb2ID_,_tipusFirma_,_apiSimpleID_,_pluginFirmaServidorID_,_tipusCustodia_,_pluginArxiuID_,_pluginDocCustodyID_,_usPerfil_,_utilitzatPerAplicacio_);
 		return create(__bean);
 	}
 
@@ -99,6 +99,49 @@ public class PerfilJPAManager
 	  
 	  return PerfilJPA.toJPA(__bean);
 	}
+
+  @Override
+  public Perfil create(Perfil transientInstance) throws I18NException {
+    processTranslations(transientInstance);
+    return super.create(transientInstance);
+  }
+
+
+  @Override
+  public Perfil update(Perfil transientInstance) throws I18NException {
+    processTranslations(transientInstance);
+    return super.update(transientInstance);
+  }
+
+
+  private void processTranslations(Perfil transientInstance) {
+    if (transientInstance != null) {
+      if (transientInstance.getNomID() == null) {
+        if (transientInstance instanceof PerfilJPA) {
+          PerfilJPA _jpa = (PerfilJPA)transientInstance;
+          TraduccioJPA _trad = _jpa.getNom();
+           if (_trad != null) {
+            if (_trad.getTraduccioID() == 0) {
+              getEntityManager().persist(_trad);
+            } 
+            transientInstance.setNomID(_trad.getTraduccioID());
+          }
+        }
+      }
+      if (transientInstance.getDescripcioID() == null) {
+        if (transientInstance instanceof PerfilJPA) {
+          PerfilJPA _jpa = (PerfilJPA)transientInstance;
+          TraduccioJPA _trad = _jpa.getDescripcio();
+           if (_trad != null) {
+            if (_trad.getTraduccioID() == 0) {
+              getEntityManager().persist(_trad);
+            } 
+            transientInstance.setDescripcioID(_trad.getTraduccioID());
+          }
+        }
+      }
+    }
+  }
 
 
 }

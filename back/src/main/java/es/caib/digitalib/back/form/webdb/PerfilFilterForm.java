@@ -54,25 +54,47 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
   }
 
 
-  private java.lang.String nom;
+  private java.lang.Long nomIDDesde;
 
-  public java.lang.String getNom() {
-    return this.nom;
+  public java.lang.Long getNomIDDesde() {
+    return this.nomIDDesde;
   }
 
-  public void setNom(java.lang.String nom) {
-    this.nom = nom;
+  public void setNomIDDesde(java.lang.Long nomIDDesde) {
+    this.nomIDDesde = nomIDDesde;
   }
 
 
-  private java.lang.String descripcio;
+  private java.lang.Long nomIDFins;
 
-  public java.lang.String getDescripcio() {
-    return this.descripcio;
+  public java.lang.Long getNomIDFins() {
+    return this.nomIDFins;
   }
 
-  public void setDescripcio(java.lang.String descripcio) {
-    this.descripcio = descripcio;
+  public void setNomIDFins(java.lang.Long nomIDFins) {
+    this.nomIDFins = nomIDFins;
+  }
+
+
+  private java.lang.Long descripcioIDDesde;
+
+  public java.lang.Long getDescripcioIDDesde() {
+    return this.descripcioIDDesde;
+  }
+
+  public void setDescripcioIDDesde(java.lang.Long descripcioIDDesde) {
+    this.descripcioIDDesde = descripcioIDDesde;
+  }
+
+
+  private java.lang.Long descripcioIDFins;
+
+  public java.lang.Long getDescripcioIDFins() {
+    return this.descripcioIDFins;
+  }
+
+  public void setDescripcioIDFins(java.lang.Long descripcioIDFins) {
+    this.descripcioIDFins = descripcioIDFins;
   }
 
 
@@ -359,8 +381,10 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.perfilIDDesde = __toClone.perfilIDDesde;
     this.perfilIDFins = __toClone.perfilIDFins;
     this.codi = __toClone.codi;
-    this.nom = __toClone.nom;
-    this.descripcio = __toClone.descripcio;
+    this.nomIDDesde = __toClone.nomIDDesde;
+    this.nomIDFins = __toClone.nomIDFins;
+    this.descripcioIDDesde = __toClone.descripcioIDDesde;
+    this.descripcioIDFins = __toClone.descripcioIDFins;
     this.urlBase = __toClone.urlBase;
     this.scanFormatFitxerDesde = __toClone.scanFormatFitxerDesde;
     this.scanFormatFitxerFins = __toClone.scanFormatFitxerFins;
@@ -386,6 +410,8 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.pluginDocCustodyIDFins = __toClone.pluginDocCustodyIDFins;
     this.usPerfilDesde = __toClone.usPerfilDesde;
     this.usPerfilFins = __toClone.usPerfilFins;
+    this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
+    this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfValuesForScanFormatFitxer = __toClone.mapOfValuesForScanFormatFitxer;
     this.mapOfValuesForScanMinimaResolucio = __toClone.mapOfValuesForScanMinimaResolucio;
     this.mapOfValuesForScanPixelType = __toClone.mapOfValuesForScanPixelType;
@@ -404,7 +430,7 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
   }
 
   @Override
@@ -432,6 +458,30 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
    // -----------------------
    // Maps de referencies.
    // -----------------------
+  private Map<String, String> mapOfTraduccioForNomID;
+
+  public Map<String, String> getMapOfTraduccioForNomID() {
+    return this.mapOfTraduccioForNomID;
+  }
+
+  public void setMapOfTraduccioForNomID(Map<String, String> mapOfTraduccioForNomID) {
+    this.mapOfTraduccioForNomID = mapOfTraduccioForNomID;
+  }
+
+
+
+  private Map<String, String> mapOfTraduccioForDescripcioID;
+
+  public Map<String, String> getMapOfTraduccioForDescripcioID() {
+    return this.mapOfTraduccioForDescripcioID;
+  }
+
+  public void setMapOfTraduccioForDescripcioID(Map<String, String> mapOfTraduccioForDescripcioID) {
+    this.mapOfTraduccioForDescripcioID = mapOfTraduccioForDescripcioID;
+  }
+
+
+
   private Map<String, String> mapOfValuesForScanFormatFitxer;
 
   public Map<String, String> getMapOfValuesForScanFormatFitxer() {

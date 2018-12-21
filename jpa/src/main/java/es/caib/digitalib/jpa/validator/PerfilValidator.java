@@ -6,6 +6,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.ApiSimpleFields;
 import es.caib.digitalib.model.fields.PluginFields;
+import es.caib.digitalib.model.fields.TraduccioFields;
 
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
@@ -29,20 +30,13 @@ public class PerfilValidator<T> implements PerfilFields {
   public void validate(IValidatorResult<T> __vr, T __target__, boolean __isNou__
     ,es.caib.digitalib.model.dao.IApiSimpleManager __apiSimpleManager
     ,es.caib.digitalib.model.dao.IPerfilManager __perfilManager
-    ,es.caib.digitalib.model.dao.IPluginManager __pluginManager) {
+    ,es.caib.digitalib.model.dao.IPluginManager __pluginManager
+    ,es.caib.digitalib.model.dao.ITraduccioManager __traduccioManager) {
 
     // Valors Not Null
     __vr.rejectIfEmptyOrWhitespace(__target__,CODI, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CODI)));
-
-    __vr.rejectIfEmptyOrWhitespace(__target__,NOM, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
-
-    __vr.rejectIfEmptyOrWhitespace(__target__,DESCRIPCIO, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DESCRIPCIO)));
 
     __vr.rejectIfEmptyOrWhitespace(__target__,SCANFORMATFITXER, 
         "genapp.validation.required",
@@ -84,22 +78,6 @@ public class PerfilValidator<T> implements PerfilFields {
       }
     }
 
-    if (__vr.getFieldErrorCount(NOM) == 0) {
-      java.lang.String __nom = (java.lang.String)__vr.getFieldValue(__target__,NOM);
-      if (__nom!= null && __nom.length() > 100) {
-        __vr.rejectValue(NOM, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(DESCRIPCIO) == 0) {
-      java.lang.String __descripcio = (java.lang.String)__vr.getFieldValue(__target__,DESCRIPCIO);
-      if (__descripcio!= null && __descripcio.length() > 255) {
-        __vr.rejectValue(DESCRIPCIO, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DESCRIPCIO)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-    
     if (__vr.getFieldErrorCount(URLBASE) == 0) {
       java.lang.String __urlbase = (java.lang.String)__vr.getFieldValue(__target__,URLBASE);
       if (__urlbase!= null && __urlbase.length() > 255) {
@@ -147,6 +125,34 @@ public class PerfilValidator<T> implements PerfilFields {
     }
 
     // Fields with References to Other tables 
+    if (__vr.getFieldErrorCount(NOMID) == 0) {
+      java.lang.Long __nomid = (java.lang.Long)__vr.getFieldValue(__target__,NOMID);
+      if (__nomid != null ) {
+        Long __count_ = null;
+        try { __count_ = __traduccioManager.count(TraduccioFields.TRADUCCIOID.equal(__nomid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(NOMID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__nomid)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(DESCRIPCIOID) == 0) {
+      java.lang.Long __descripcioid = (java.lang.Long)__vr.getFieldValue(__target__,DESCRIPCIOID);
+      if (__descripcioid != null ) {
+        Long __count_ = null;
+        try { __count_ = __traduccioManager.count(TraduccioFields.TRADUCCIOID.equal(__descripcioid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(DESCRIPCIOID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__descripcioid)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(PLUGINSCANWEBID) == 0) {
       java.lang.Long __pluginscanwebid = (java.lang.Long)__vr.getFieldValue(__target__,PLUGINSCANWEBID);
       Long __count_ = null;

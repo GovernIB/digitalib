@@ -19,6 +19,8 @@ public class PerfilForm extends DigitalIBBaseForm {
   public PerfilForm(PerfilForm __toClone) {
     super(__toClone);
       this.perfil = __toClone.perfil;
+    this.listOfTraduccioForNomID = __toClone.listOfTraduccioForNomID;
+    this.listOfTraduccioForDescripcioID = __toClone.listOfTraduccioForDescripcioID;
     this.listOfValuesForScanFormatFitxer = __toClone.listOfValuesForScanFormatFitxer;
     this.listOfValuesForScanMinimaResolucio = __toClone.listOfValuesForScanMinimaResolucio;
     this.listOfValuesForScanPixelType = __toClone.listOfValuesForScanPixelType;
@@ -45,7 +47,40 @@ public class PerfilForm extends DigitalIBBaseForm {
     this.perfil = perfil;
   }
   
+  java.util.List<es.caib.digitalib.model.entity.Idioma> idiomesTraduccio = null;
+
+  public java.util.List<es.caib.digitalib.model.entity.Idioma> getIdiomesTraduccio() {
+    return idiomesTraduccio;
+  }
+
+  public void setIdiomesTraduccio(java.util.List<es.caib.digitalib.model.entity.Idioma> idiomesTraduccio) {
+    this.idiomesTraduccio = idiomesTraduccio;
+  }
   
+  private List<StringKeyValue> listOfTraduccioForNomID;
+
+  public List<StringKeyValue> getListOfTraduccioForNomID() {
+    return this.listOfTraduccioForNomID;
+  }
+
+  public void setListOfTraduccioForNomID(List<StringKeyValue> listOfTraduccioForNomID) {
+    this.listOfTraduccioForNomID = listOfTraduccioForNomID;
+  }
+
+
+
+  private List<StringKeyValue> listOfTraduccioForDescripcioID;
+
+  public List<StringKeyValue> getListOfTraduccioForDescripcioID() {
+    return this.listOfTraduccioForDescripcioID;
+  }
+
+  public void setListOfTraduccioForDescripcioID(List<StringKeyValue> listOfTraduccioForDescripcioID) {
+    this.listOfTraduccioForDescripcioID = listOfTraduccioForDescripcioID;
+  }
+
+
+
   private List<StringKeyValue> listOfValuesForScanFormatFitxer;
 
   public List<StringKeyValue> getListOfValuesForScanFormatFitxer() {

@@ -12,8 +12,8 @@ private static final long serialVersionUID = -449640516L;
 
 	long perfilID;// PK
 	java.lang.String codi;
-	java.lang.String nom;
-	java.lang.String descripcio;
+	java.lang.Long nomID;
+	java.lang.Long descripcioID;
 	java.lang.String urlBase;
 	int scanFormatFitxer;
 	java.lang.Integer scanMinimaResolucio;
@@ -35,11 +35,11 @@ private static final long serialVersionUID = -449640516L;
   }
 
   /** Constructor amb tots els camps  */
-  public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
+  public PerfilBean(long perfilID , java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.perfilID=perfilID;
     this.codi=codi;
-    this.nom=nom;
-    this.descripcio=descripcio;
+    this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.urlBase=urlBase;
     this.scanFormatFitxer=scanFormatFitxer;
     this.scanMinimaResolucio=scanMinimaResolucio;
@@ -56,10 +56,10 @@ private static final long serialVersionUID = -449640516L;
     this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor sense valors autoincrementals */
-  public PerfilBean(java.lang.String codi , java.lang.String nom , java.lang.String descripcio , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
+  public PerfilBean(java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.codi=codi;
-    this.nom=nom;
-    this.descripcio=descripcio;
+    this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.urlBase=urlBase;
     this.scanFormatFitxer=scanFormatFitxer;
     this.scanMinimaResolucio=scanMinimaResolucio;
@@ -76,11 +76,9 @@ private static final long serialVersionUID = -449640516L;
     this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor dels valors Not Null */
-  public PerfilBean(long perfilID , java.lang.String codi , java.lang.String nom , java.lang.String descripcio , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
+  public PerfilBean(long perfilID , java.lang.String codi , int scanFormatFitxer , long pluginScanWebID , int tipusFirma , int tipusCustodia , int usPerfil) {
     this.perfilID=perfilID;
     this.codi=codi;
-    this.nom=nom;
-    this.descripcio=descripcio;
     this.scanFormatFitxer=scanFormatFitxer;
     this.pluginScanWebID=pluginScanWebID;
     this.tipusFirma=tipusFirma;
@@ -90,8 +88,8 @@ private static final long serialVersionUID = -449640516L;
   public PerfilBean(Perfil __bean) {
     this.setPerfilID(__bean.getPerfilID());
     this.setCodi(__bean.getCodi());
-    this.setNom(__bean.getNom());
-    this.setDescripcio(__bean.getDescripcio());
+    this.setNomID(__bean.getNomID());
+    this.setDescripcioID(__bean.getDescripcioID());
     this.setUrlBase(__bean.getUrlBase());
     this.setScanFormatFitxer(__bean.getScanFormatFitxer());
     this.setScanMinimaResolucio(__bean.getScanMinimaResolucio());
@@ -122,18 +120,18 @@ private static final long serialVersionUID = -449640516L;
 		this.codi = _codi_;
 	};
 
-	public java.lang.String getNom() {
-		return(nom);
+	public java.lang.Long getNomID() {
+		return(nomID);
 	};
-	public void setNom(java.lang.String _nom_) {
-		this.nom = _nom_;
+	public void setNomID(java.lang.Long _nomID_) {
+		this.nomID = _nomID_;
 	};
 
-	public java.lang.String getDescripcio() {
-		return(descripcio);
+	public java.lang.Long getDescripcioID() {
+		return(descripcioID);
 	};
-	public void setDescripcio(java.lang.String _descripcio_) {
-		this.descripcio = _descripcio_;
+	public void setDescripcioID(java.lang.Long _descripcioID_) {
+		this.descripcioID = _descripcioID_;
 	};
 
 	public java.lang.String getUrlBase() {
@@ -243,8 +241,8 @@ private static final long serialVersionUID = -449640516L;
     PerfilBean __tmp = new PerfilBean();
     __tmp.setPerfilID(__bean.getPerfilID());
     __tmp.setCodi(__bean.getCodi());
-    __tmp.setNom(__bean.getNom());
-    __tmp.setDescripcio(__bean.getDescripcio());
+    __tmp.setNomID(__bean.getNomID());
+    __tmp.setDescripcioID(__bean.getDescripcioID());
     __tmp.setUrlBase(__bean.getUrlBase());
     __tmp.setScanFormatFitxer(__bean.getScanFormatFitxer());
     __tmp.setScanMinimaResolucio(__bean.getScanMinimaResolucio());

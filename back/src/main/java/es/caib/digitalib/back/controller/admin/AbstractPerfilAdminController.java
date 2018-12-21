@@ -75,12 +75,12 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 					Arrays.asList(PerfilFields.ALL_PERFIL_FIELDS));
 
 			ocults.remove(CODI);
-			ocults.remove(NOM);
-			ocults.remove(DESCRIPCIO);
+			ocults.remove(NOMID);
+			ocults.remove(DESCRIPCIOID);
 
 			filterForm.setHiddenFields(ocults);
 
-			filterForm.setOrderBy(NOM.fullName);
+			filterForm.setOrderBy(NOMID.fullName);
 
 			filterForm.setGroupByFields(new ArrayList<Field<?>>(filterForm
 					.getDefaultGroupByFields()));
