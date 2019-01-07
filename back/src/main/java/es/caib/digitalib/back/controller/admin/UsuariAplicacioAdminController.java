@@ -28,11 +28,13 @@ import es.caib.digitalib.back.controller.webdb.UsuariAplicacioController;
 import es.caib.digitalib.back.form.webdb.UsuariAplicacioFilterForm;
 import es.caib.digitalib.back.form.webdb.UsuariAplicacioForm;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
+import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.PerfilUsuariAplicacio;
 import es.caib.digitalib.model.entity.UsuariAplicacio;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioQueryPath;
 import es.caib.digitalib.model.fields.UsuariAplicacioFields;
+import es.caib.digitalib.utils.Constants;
 
 /**
  * 
@@ -52,6 +54,9 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 
 	@EJB(mappedName = es.caib.digitalib.ejb.PerfilUsuariAplicacioLocal.JNDI_NAME)
 	protected es.caib.digitalib.ejb.PerfilUsuariAplicacioLocal perfilUsuariAplicacioEjb;
+	
+	@EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
 
 	@Override
 	public String getTileForm() {
@@ -148,10 +153,24 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 
 		PerfilUsuariAplicacio perusrapp = perfilUsuariAplicacioEjb.findByPrimaryKey(id);
 
-
 		// request.getSession().setAttribute("USUARI_APLICAIO_PER_AFEGIR_PERFIL", usrappid);
-
-		return "redirect:" + AbstractPerfilAdminController.CONTEXTWEB + perusrapp.getPerfilID() + "/edit";
+		
+		Perfil perf = perfilEjb.findByPrimaryKey(perusrapp.getPerfilID());
+		String contextWeb = "";
+		
+		switch (perf.getUsPerfil()) {
+		  case Constants.PERFIL_US_NOMES_ESCANEIG:
+		    contextWeb = PerfilEscaneigPerAplicacioAdminController.CONTEXTWEB;
+		    break;
+		  case Constants.PERFIL_US_COPIA_AUTENTICA:
+		    contextWeb = PerfilCopiaAutenticaPerAplicacioAdminController.CONTEXTWEB;
+		    break;
+		  case Constants.PERFIL_US_CUSTODIA:
+		    contextWeb = PerfilCustodiaPerAplicacioAdminController.CONTEXTWEB;
+		    break;
+		}
+		contextWeb += "/";
+		return "redirect:" + contextWeb + perusrapp.getPerfilID() + "/edit";
 	}
 
 
@@ -167,16 +186,16 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 		for (UsuariAplicacio ua : list) {
 			key = ua.getUsuariAplicacioID();
 
-			SelectMultipleStringKeyValue smskv_per_codi = new SelectMultipleStringKeyValue(
+			SelectMultipleStringKeyValue smskv = new SelectMultipleStringKeyValue(
 					PerfilUsuariAplicacioFields.PERFILUSRAPPID.select,
 					new PerfilUsuariAplicacioQueryPath().PERFIL().CODI().select);
 
-			List<StringKeyValue> perfils_codi = perfilUsuariAplicacioEjb.executeQuery(smskv_per_codi,
+			List<StringKeyValue> perfils = perfilUsuariAplicacioEjb.executeQuery(smskv,
 					PerfilUsuariAplicacioFields.USUARIAPLICACIOID.equal(key));
 
 			StringBuffer str = new StringBuffer();
 
-			for (StringKeyValue per : perfils_codi) {
+			for (StringKeyValue per : perfils) {
 
 				str.append("<a style=\"padding: 0px; margin-bottom: 4px; margin-right: 4px\" href=\"" + request.getContextPath() + getContextWeb()
 				+ "/deleteperfilusrapp/" + per.getKey()

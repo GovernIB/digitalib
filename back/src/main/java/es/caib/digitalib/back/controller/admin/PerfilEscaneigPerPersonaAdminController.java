@@ -15,11 +15,12 @@ import es.caib.digitalib.utils.Constants;
  *
  */
 @Controller
-@RequestMapping(value = "/admin/perfilnomesescaneig/perpersona")
+@RequestMapping(value = PerfilEscaneigPerPersonaAdminController.CONTEXTWEB)
 @SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class })
 public class PerfilEscaneigPerPersonaAdminController extends AbstractPerfilAdminController {
 
-	
+	public static final String CONTEXTWEB = "/admin/perfilnomesescaneig/perpersona";
+  
 	@Override
 	public int getTipusPerfil() {
 		return Constants.PERFIL_US_NOMES_ESCANEIG;

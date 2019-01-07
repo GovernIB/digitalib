@@ -15,11 +15,12 @@ import es.caib.digitalib.utils.Constants;
  *
  */
 @Controller
-@RequestMapping(value = "/admin/perfilcopiaautentica/perpersona")
+@RequestMapping(value = PerfilCopiaAutenticaPerPersonaAdminController.CONTEXTWEB)
 @SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class })
 public class PerfilCopiaAutenticaPerPersonaAdminController extends AbstractPerfilAdminController {
 
-	
+	public static final String CONTEXTWEB = "/admin/perfilcopiaautentica/perpersona";
+  
 	@Override
 	public int getTipusPerfil() {
 		return Constants.PERFIL_US_COPIA_AUTENTICA;
