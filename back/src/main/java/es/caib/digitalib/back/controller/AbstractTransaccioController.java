@@ -38,6 +38,7 @@ import es.caib.digitalib.model.entity.InfoCustody;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.entity.UsuariPersona;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
@@ -309,6 +310,14 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       TransaccioJPA transaccio = transaccioLogicaEjb.findByPrimaryKeyFull(transaccioID);
       if (transaccio == null) {
         String __msg = createMessageError(request, "error.notfound", transaccioID);
+        HtmlUtils.saveMessageError(request, __msg);
+        return getRedirectWhenCancel(request, transaccioID);
+      }
+
+      java.util.regex.Pattern p = java.util.regex.Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+      if (!p.matcher(email).matches()) {
+        String __msg = I18NUtils.tradueix("genapp.validation.malformed",
+            email, I18NUtils.tradueix(UsuariPersonaFields.EMAIL.fullName));
         HtmlUtils.saveMessageError(request, __msg);
         return getRedirectWhenCancel(request, transaccioID);
       }

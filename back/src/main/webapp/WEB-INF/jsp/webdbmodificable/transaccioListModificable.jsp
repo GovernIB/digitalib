@@ -8,14 +8,19 @@
   function enviarEmail(transaccioID) {
     
     document.getElementById("transaccioID").value= transaccioID;
-    document.getElementById("email").value = 'anadal@fundaciobit.org'; // XYZ ZZZ 
+    
+    
+    var email = prompt("Escriu el correu on enviar el document:", "");
 
-    
-    var form = document.getElementById("transaccioFilterForm");
-    
-    form.action = "<c:url value="${contexte}/enviaremail"/>";
-    
-    form.submit(); 
+    if (email != null) {
+      document.getElementById("email").value = email;
+      
+      var form = document.getElementById("transaccioFilterForm");
+      
+      form.action = "<c:url value="${contexte}/enviaremail"/>";
+      
+      form.submit(); 
+    } 
     
   }
   
