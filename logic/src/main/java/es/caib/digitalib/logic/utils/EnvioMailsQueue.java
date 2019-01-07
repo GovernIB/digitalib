@@ -42,7 +42,7 @@ public class EnvioMailsQueue implements MessageListener {
       
 
       EmailUtil.postMail(emailInfo.getSubject(), emailInfo.getMessage(),
-          emailInfo.isHtml(), Configuracio.getAppEmail(), emailInfo.getEmail());
+          emailInfo.isHtml(), Configuracio.getAppEmail(), null, emailInfo.getEmail());
 
       if (isDebug) {
         log.info("Enviat avis amb id "

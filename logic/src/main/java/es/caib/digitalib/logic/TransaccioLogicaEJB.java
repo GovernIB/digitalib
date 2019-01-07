@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -110,9 +111,28 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     
   }
 
+
+  
+  
+  @Override
+  @RolesAllowed({"DIB_ADMIN","DIB_USER"})
+  public TransaccioJPA findByPrimaryKeyFull(Long _ID_) {
+
+    TransaccioJPA transaccio = findByPrimaryKey(_ID_);
+
+    if (transaccio != null) {
+      internalInitialization(transaccio);
+    }
+
+    return transaccio;
+  }
+  
+  
   @Override
   public TransaccioJPA searchTransaccioByTransactionWebID(String transactionWebID)
       throws I18NException {
+
+    
     List<Transaccio> list = select(TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
 
     if (list == null || list.size() == 0) {
@@ -121,6 +141,15 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
     TransaccioJPA transaccio = (TransaccioJPA) list.get(0);
 
+    internalInitialization(transaccio);
+
+    return transaccio;
+
+  }
+  
+  
+
+  protected void internalInitialization(TransaccioJPA transaccio) {
     Hibernate.initialize(transaccio.getPerfil());
 
     // XYZ ZZZ Optimitzar-ho si infoID val null
@@ -128,9 +157,6 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     Hibernate.initialize(transaccio.getInfoCustody());
     
     Hibernate.initialize(transaccio.getInfoSignatura());
-
-    return transaccio;
-
   }
 
   @Override

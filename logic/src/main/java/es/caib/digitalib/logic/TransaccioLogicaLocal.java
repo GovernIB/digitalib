@@ -40,6 +40,13 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
   
   /**
    * 
+   * @param _ID_
+   * @return
+   */
+  public TransaccioJPA findByPrimaryKeyFull(Long _ID_);
+  
+  /**
+   * 
    * @param requestTransaction
    * @param usuariAplicacio
    * @param usuariPersona
