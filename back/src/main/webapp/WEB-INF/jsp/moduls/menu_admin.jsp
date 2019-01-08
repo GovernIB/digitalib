@@ -22,7 +22,7 @@
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/pluginscanweb/list"/>"> <span
-        style="${(fn:contains(url, 'pluginscanweb/list'))? "font-weight:bold;" : ""}"><fmt:message
+        style="${(fn:contains(url, 'pluginscanweb/'))? "font-weight:bold;" : ""}"><fmt:message
             key="scanwebplugin.menu" /></span>
 
     </a></li>
@@ -32,21 +32,21 @@
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/pluginfirmaenservidor/list"/>"> <span
-        style="${(fn:contains(url, 'pluginfirmaenservidor/list'))? "font-weight:bold;" : ""}"><fmt:message
+        style="${(fn:contains(url, 'pluginfirmaenservidor/'))? "font-weight:bold;" : ""}"><fmt:message
             key="firmaenservidorplugin.menu" /></span>
 
     </a></li>
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/configuraciofirma/list"/>"> <span
-        style="${(fn:contains(url, 'plugindoccustody/list'))? "font-weight:bold;" : ""}">Configuracio
+        style="${(fn:contains(url, 'plugindoccustody/'))? "font-weight:bold;" : ""}">Configuracio
           FIRMA Servidor XYZ ZZZ</span>
     </a></li>
 
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/apisimple/list"/>"> <span
-        style="${(fn:contains(url, '/apisimple/list'))? "font-weight:bold;" : ""}"><fmt:message
+        style="${(fn:contains(url, '/apisimple/'))? "font-weight:bold;" : ""}"><fmt:message
             key="apisimple.gestio" /></span>
 
     </a></li>
@@ -56,14 +56,14 @@
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/pluginarxiu/list"/>"> <span
-        style="${(fn:contains(url, 'pluginarxiu/list'))? "font-weight:bold;" : ""}"><fmt:message
+        style="${(fn:contains(url, 'pluginarxiu/'))? "font-weight:bold;" : ""}"><fmt:message
             key="arxiuplugin.menu" /></span>
 
     </a></li>
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/plugindoccustody/list"/>"> <span
-        style="${(fn:contains(url, 'plugindoccustody/list'))? "font-weight:bold;" : ""}"><fmt:message
+        style="${(fn:contains(url, 'plugindoccustody/'))? "font-weight:bold;" : ""}"><fmt:message
             key="doccustodyplugin.menu" /></span>
 
     </a></li>
@@ -94,14 +94,14 @@
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/usuariPersona/list"/>"> <span
-          style="${(fn:contains(url, '/usuariPersona/list'))? "font-weight:bold;" : ""}"><fmt:message
+          style="${(fn:contains(url, '/usuariPersona/'))? "font-weight:bold;" : ""}"><fmt:message
               key="usuaripersona.gestio" /></span>
 
       </a></li>
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/configuracioGrup/list"/>"> <span
-          style="${(fn:contains(url, '/configuracioGrup/list'))? "font-weight:bold;" : ""}"><fmt:message
+          style="${(fn:contains(url, '/configuracioGrup/'))? "font-weight:bold;" : ""}"><fmt:message
               key="configuraciogrup.gestio" /></span>
 
       </a></li>
@@ -112,7 +112,7 @@
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/transacciopersona/list"/>"> <span
-          style="${(fn:contains(url, '/transacciopersona/list'))? "font-weight:bold;" : ""}"><fmt:message
+          style="${(fn:contains(url, '/transacciopersona/'))? "font-weight:bold;" : ""}"><fmt:message
               key="transaccio.gestio.persona" /></span>
 
       </a></li>
@@ -121,7 +121,7 @@
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/perfilnomesescaneig/perpersona/list"/>"> <span
-          style="${(fn:contains(url, 'perfilnomesescaneig/list'))? "font-weight:bold;" : ""}">
+          style="${(fn:contains(url, 'perfilnomesescaneig/perpersona'))? "font-weight:bold;" : ""}">
 
             <fmt:message key="perfil.us.1.plural" />
 
@@ -130,14 +130,14 @@
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/perfilcopiaautentica/perpersona/list"/>"> <span
-          style="${(fn:contains(url, 'perfilcopiaautentica/list'))? "font-weight:bold;" : ""}">
+          style="${(fn:contains(url, 'perfilcopiaautentica/perpersona'))? "font-weight:bold;" : ""}">
             <fmt:message key="perfil.us.2.plural" />
         </span>
       </a></li>
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/perfilcustodia/perpersona/list"/>"> <span
-          style="${(fn:contains(url, 'perfilcustodia/list'))? "font-weight:bold;" : ""}">
+          style="${(fn:contains(url, 'perfilcustodia/perpersona'))? "font-weight:bold;" : ""}">
             <fmt:message key="perfil.us.3.plural" />
         </span>
       </a></li>
@@ -155,7 +155,7 @@
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/usuariAplicacio/list"/>"> <span
-          style="${(fn:contains(url, '/usuariAplicacio/list'))? "font-weight:bold;" : ""}"><fmt:message
+          style="${(fn:contains(url, '/usuariAplicacio/'))? "font-weight:bold;" : ""}"><fmt:message
               key="usuariaplicacio.gestio" /></span>
 
       </a></li>
@@ -165,7 +165,7 @@
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/transaccioaplicacio/list"/>"> <span
-          style="${(fn:contains(url, '/transaccioaplicacio/list'))? "font-weight:bold;" : ""}"><fmt:message
+          style="${(fn:contains(url, '/transaccioaplicacio/'))? "font-weight:bold;" : ""}"><fmt:message
               key="transaccio.gestio.aplicacio" /></span>
 
       </a></li>
@@ -174,14 +174,14 @@
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/perfilnomesescaneig/peraplicacio/list"/>"> <span
-          style="${(fn:contains(url, 'perfilnomesescaneig/list'))? "font-weight:bold;" : ""}">
+          style="${(fn:contains(url, 'perfilnomesescaneig/peraplicacio'))? "font-weight:bold;" : ""}">
             <fmt:message key="perfil.us.1.plural" />
         </span>
       </a></li>
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/perfilcopiaautentica/peraplicacio/list"/>"> <span
-          style="${(fn:contains(url, 'perfilcopiaautentica/list'))? "font-weight:bold;" : ""}">
+          style="${(fn:contains(url, 'perfilcopiaautentica/peraplicacio'))? "font-weight:bold;" : ""}">
             <fmt:message key="perfil.us.2.plural" />
         </span>
       </a></li>
@@ -189,7 +189,7 @@
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/perfilcustodia/peraplicacio/list"/>"> <span
-          style="${(fn:contains(url, 'perfilcustodia/list'))? "font-weight:bold;" : ""}">
+          style="${(fn:contains(url, 'perfilcustodia/peraplicacio'))? "font-weight:bold;" : ""}">
             <fmt:message key="perfil.us.3.plural" />
         </span>
       </a></li>

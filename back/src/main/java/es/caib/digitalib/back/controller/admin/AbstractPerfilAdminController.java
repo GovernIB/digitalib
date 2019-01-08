@@ -184,6 +184,9 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
       perfilForm.getHiddenFields().remove(URLBASE);
     } else {
       perfilForm.addHiddenField(URLBASE);
+      
+      perfilForm.addHiddenField(UTILITZATPERAPLICACIO);
+      perfilForm.getPerfil().setUtilitzatPerAplicacio(false);
     }
 		
 
