@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.webdb.UsuariAplicacioController;
 import es.caib.digitalib.back.form.webdb.UsuariAplicacioFilterForm;
 import es.caib.digitalib.back.form.webdb.UsuariAplicacioForm;
+import es.caib.digitalib.jpa.TraduccioJPA;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
 import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.PerfilUsuariAplicacio;
@@ -57,6 +58,9 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 	
 	@EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
+	
+	@EJB(mappedName = es.caib.digitalib.ejb.TraduccioLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.TraduccioLocal traduccioEjb;
 
 	@Override
 	public String getTileForm() {
@@ -188,7 +192,7 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 
 			SelectMultipleStringKeyValue smskv = new SelectMultipleStringKeyValue(
 					PerfilUsuariAplicacioFields.PERFILUSRAPPID.select,
-					new PerfilUsuariAplicacioQueryPath().PERFIL().CODI().select);
+					new PerfilUsuariAplicacioQueryPath().PERFIL().NOMID().select);
 
 			List<StringKeyValue> perfils = perfilUsuariAplicacioEjb.executeQuery(smskv,
 					PerfilUsuariAplicacioFields.USUARIAPLICACIOID.equal(key));
@@ -196,13 +200,14 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 			StringBuffer str = new StringBuffer();
 
 			for (StringKeyValue per : perfils) {
-
-				str.append("<a style=\"padding: 0px; margin-bottom: 4px; margin-right: 4px\" href=\"" + request.getContextPath() + getContextWeb()
+			  TraduccioJPA trad = traduccioEjb.findByPrimaryKey(Long.valueOf(per.getValue()));
+				
+			  str.append("<a style=\"padding: 0px; margin-bottom: 4px; margin-right: 4px\" href=\"" + request.getContextPath() + getContextWeb()
 				+ "/deleteperfilusrapp/" + per.getKey()
 				+ "\" class=\"btn btn-mini btn-danger\" type=\"button\">"
 				+ "<i style=\"padding: 0px 4px 4px 0px; margin: 4px 0px 0px 3px \" class=\"icon-trash icon-white\"></i></a><a href=\""
 				+ request.getContextPath() + getContextWeb() + "/editarperfil/" + per.getKey()
-				+ "\">" + per.getValue()
+				+ "\">" + trad.getTraduccio("ca").getValor() +"/"+trad.getTraduccio("es").getValor()
 				+ "</a><br/>\n");
 			}
 

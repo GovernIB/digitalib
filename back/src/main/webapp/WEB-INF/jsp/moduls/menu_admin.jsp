@@ -39,7 +39,7 @@
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/configuraciofirma/list"/>"> <span
-        style="${(fn:contains(url, 'plugindoccustody/'))? "font-weight:bold;" : ""}">Configuracio
+        style="${(fn:contains(url, 'configuraciofirma/'))? "font-weight:bold;" : ""}">Configuracio
           FIRMA Servidor XYZ ZZZ</span>
     </a></li>
 
