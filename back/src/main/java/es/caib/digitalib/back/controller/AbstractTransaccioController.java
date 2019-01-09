@@ -351,7 +351,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         if (info.getCustodyId() == null) {
           // XYZ ZZZ TRA
           stb.append("<li><b>Arxiu::ExpedientID:</b> ").append(info.getArxiuExpedientId())
-              .append("</li><br/>");
+              .append("</li>");
           // XYZ ZZZ TRA
           stb.append("<li><b>Arxiu::DocumentID:</b> ").append(info.getArxiuDocumentId()).append("</li>");
         } else {

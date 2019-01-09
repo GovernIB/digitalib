@@ -301,6 +301,12 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       ContingutArxiu documentCreat = plugin.documentCrear(documentPerCrear, expedientId);
 
       log.info("XYZ ZZZ  Creat document ... ");
+      
+      log.info("XYZ ZZZ  Tancar Expedient ... ");
+      plugin.expedientTancar(expedientId);
+      log.info("XYZ ZZZ  Expedient Tancat... ");
+      
+      log.info("\n FINAL \n");
 
       String uuidDoc = documentCreat.getIdentificador();
 
@@ -308,19 +314,26 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       String printableFileUrl = plugin.getPrintableFileUrl(uuidDoc);
       String eniFileUrl = plugin.getEniFileUrl(uuidDoc);
       java.lang.String csv = plugin.getCsv(uuidDoc);
+      
+      
+      
       java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(uuidDoc);
       java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(uuidDoc);
+      java.lang.String validationFileUrl = plugin.getValidationFileUrl(uuidDoc);
 
       // Només per DocumentCustody
-      java.lang.String custodyId = null;
+      java.lang.String custodyID = null;
 
-      InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyId, expedientId, uuidDoc,
-          originalFileUrl, printableFileUrl, eniFileUrl, csv, csvValidationWeb,
-          csvGenerationDefinition);
+      InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyID ,
+          expedientId ,  uuidDoc ,  csv ,  originalFileUrl ,  csvValidationWeb ,
+          csvGenerationDefinition , printableFileUrl ,  eniFileUrl , validationFileUrl);
 
       infoCust = (InfoCustodyJPA) infoCustodyEjb.create(infoCust);
 
       transaccio.setInfoCustodyID(infoCust.getInfoCustodyID());
+      
+      
+  
 
       return infoCust;
 

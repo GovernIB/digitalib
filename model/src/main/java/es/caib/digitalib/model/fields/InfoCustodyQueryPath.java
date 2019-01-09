@@ -27,8 +27,20 @@ public class InfoCustodyQueryPath extends org.fundaciobit.genapp.common.query.Qu
     return new StringField(getQueryPath(), InfoCustodyFields.ARXIUDOCUMENTID);
   }
 
+  public StringField CSV() {
+    return new StringField(getQueryPath(), InfoCustodyFields.CSV);
+  }
+
   public StringField ORIGINALFILEURL() {
     return new StringField(getQueryPath(), InfoCustodyFields.ORIGINALFILEURL);
+  }
+
+  public StringField CSVVALIDATIONWEB() {
+    return new StringField(getQueryPath(), InfoCustodyFields.CSVVALIDATIONWEB);
+  }
+
+  public StringField CSVGENERATIONDEFINITION() {
+    return new StringField(getQueryPath(), InfoCustodyFields.CSVGENERATIONDEFINITION);
   }
 
   public StringField PRINTABLEFILEURL() {
@@ -39,16 +51,8 @@ public class InfoCustodyQueryPath extends org.fundaciobit.genapp.common.query.Qu
     return new StringField(getQueryPath(), InfoCustodyFields.ENIFILEURL);
   }
 
-  public StringField CSV() {
-    return new StringField(getQueryPath(), InfoCustodyFields.CSV);
-  }
-
-  public StringField CSVVALIDATIONWEB() {
-    return new StringField(getQueryPath(), InfoCustodyFields.CSVVALIDATIONWEB);
-  }
-
-  public StringField CSVGENERATIONDEFINITION() {
-    return new StringField(getQueryPath(), InfoCustodyFields.CSVGENERATIONDEFINITION);
+  public StringField VALIDATIONFILEURL() {
+    return new StringField(getQueryPath(), InfoCustodyFields.VALIDATIONFILEURL);
   }
 
 

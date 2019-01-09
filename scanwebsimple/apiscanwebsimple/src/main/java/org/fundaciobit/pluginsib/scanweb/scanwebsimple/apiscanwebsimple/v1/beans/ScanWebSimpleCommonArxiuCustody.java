@@ -34,13 +34,16 @@ public class ScanWebSimpleCommonArxiuCustody {
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String csvGenerationDefinition;
 
+  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+  protected String validationFileUrl;
+
   public ScanWebSimpleCommonArxiuCustody() {
     super();
   }
 
   public ScanWebSimpleCommonArxiuCustody(String csv, String originalFileURL,
       String printableFileURL, String eniFileURL, String csvValidationWeb,
-      String csvGenerationDefinition) {
+      String csvGenerationDefinition, String validationFileUrl) {
     super();
     this.csv = csv;
     this.originalFileURL = originalFileURL;
@@ -48,6 +51,7 @@ public class ScanWebSimpleCommonArxiuCustody {
     this.eniFileURL = eniFileURL;
     this.csvValidationWeb = csvValidationWeb;
     this.csvGenerationDefinition = csvGenerationDefinition;
+    this.validationFileUrl = validationFileUrl;
   }
 
   public String getCsv() {
@@ -96,6 +100,14 @@ public class ScanWebSimpleCommonArxiuCustody {
 
   public void setCsvGenerationDefinition(String csvGenerationDefinition) {
     this.csvGenerationDefinition = csvGenerationDefinition;
+  }
+
+  public String getValidationFileUrl() {
+    return validationFileUrl;
+  }
+
+  public void setValidationFileUrl(String validationFileUrl) {
+    this.validationFileUrl = validationFileUrl;
   }
 
 }

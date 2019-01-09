@@ -3276,7 +3276,7 @@ opcional incluso cuando se genera una firma EPES.</string>
     <void index="6"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
-       <array class="org.fundaciobit.genapp.FieldInfo" length="10"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="11"> 
         <void index="0"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="PK"> 
@@ -3487,6 +3487,45 @@ opcional incluso cuando se genera una firma EPES.</string>
            <int>0</int> 
           </void> 
           <void property="javaName"> 
+           <string>csv</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.String</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Codi Segur Verificació (CSV)</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Código Seguro Verificación (CSV)</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>255</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>csv</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>12</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>1</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="5"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
            <string>originalFileUrl</string> 
           </void> 
           <void property="javaType"> 
@@ -3523,124 +3562,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="5"> 
-         <object class="org.fundaciobit.genapp.FieldInfo"> 
-          <void property="digits"> 
-           <int>0</int> 
-          </void> 
-          <void property="javaName"> 
-           <string>printableFileUrl</string> 
-          </void> 
-          <void property="javaType"> 
-           <class>java.lang.String</class> 
-          </void> 
-          <void property="labels"> 
-           <void method="put"> 
-            <string>ca</string> 
-            <string>URL al Fitxer Imprimible</string> 
-           </void> 
-           <void method="put"> 
-            <string>es</string> 
-            <string>URL al Fichero Imprimible</string> 
-           </void> 
-          </void> 
-          <void property="size"> 
-           <int>255</int> 
-          </void> 
-          <void property="sqlName"> 
-           <string>printablefileurl</string> 
-          </void> 
-          <void property="sqlType"> 
-           <int>12</int> 
-          </void> 
-          <void property="webFieldInfo"> 
-           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
-            <void property="webtype"> 
-             <int>13</int> 
-            </void> 
-           </object> 
-          </void> 
-         </object> 
-        </void> 
         <void index="6"> 
-         <object class="org.fundaciobit.genapp.FieldInfo"> 
-          <void property="digits"> 
-           <int>0</int> 
-          </void> 
-          <void property="javaName"> 
-           <string>eniFileUrl</string> 
-          </void> 
-          <void property="javaType"> 
-           <class>java.lang.String</class> 
-          </void> 
-          <void property="labels"> 
-           <void method="put"> 
-            <string>ca</string> 
-            <string>URL al Fitxer en format ENI</string> 
-           </void> 
-           <void method="put"> 
-            <string>es</string> 
-            <string>URL al Fichero en formato ENI</string> 
-           </void> 
-          </void> 
-          <void property="size"> 
-           <int>255</int> 
-          </void> 
-          <void property="sqlName"> 
-           <string>enifileurl</string> 
-          </void> 
-          <void property="sqlType"> 
-           <int>12</int> 
-          </void> 
-          <void property="webFieldInfo"> 
-           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
-            <void property="webtype"> 
-             <int>13</int> 
-            </void> 
-           </object> 
-          </void> 
-         </object> 
-        </void> 
-        <void index="7"> 
-         <object class="org.fundaciobit.genapp.FieldInfo"> 
-          <void property="digits"> 
-           <int>0</int> 
-          </void> 
-          <void property="javaName"> 
-           <string>csv</string> 
-          </void> 
-          <void property="javaType"> 
-           <class>java.lang.String</class> 
-          </void> 
-          <void property="labels"> 
-           <void method="put"> 
-            <string>ca</string> 
-            <string>Codi Segur Verificació (CSV)</string> 
-           </void> 
-           <void method="put"> 
-            <string>es</string> 
-            <string>Código Seguro Verificación (CSV)</string> 
-           </void> 
-          </void> 
-          <void property="size"> 
-           <int>255</int> 
-          </void> 
-          <void property="sqlName"> 
-           <string>csv</string> 
-          </void> 
-          <void property="sqlType"> 
-           <int>12</int> 
-          </void> 
-          <void property="webFieldInfo"> 
-           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
-            <void property="webtype"> 
-             <int>1</int> 
-            </void> 
-           </object> 
-          </void> 
-         </object> 
-        </void> 
-        <void index="8"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -3679,7 +3601,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
          </object> 
         </void> 
-        <void index="9"> 
+        <void index="7"> 
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
@@ -3712,7 +3634,124 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="webtype"> 
-             <int>1</int> 
+             <int>13</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="8"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>printableFileUrl</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.String</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>URL al Fitxer Imprimible</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>URL al Fichero Imprimible</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>255</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>printablefileurl</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>12</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>13</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="9"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>eniFileUrl</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.String</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>URL al Document ENI</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>URL al Document ENI</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>255</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>enifileurl</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>12</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>13</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="10"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>validationFileUrl</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.String</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>URL de Validació del Document</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>URL de Validación del Documento</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>255</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>validationfileurl</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>12</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>13</int> 
             </void> 
            </object> 
           </void> 

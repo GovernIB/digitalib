@@ -173,6 +173,8 @@ public class PluginDocumentCustodyLogicaEJB extends
       Metadata[] metadata = new Metadata[] {}; // XYZ ZZZ
 
       plugin.saveAll(custodyID, parameters, document, signatureCustody, metadata);
+      
+      log.info("\n FINAL \n");
 
       // Per Custòdia
       java.lang.String originalFileUrl = plugin.getOriginalFileUrl(custodyID, parameters);
@@ -182,14 +184,17 @@ public class PluginDocumentCustodyLogicaEJB extends
       java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(custodyID, parameters);
       java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(custodyID,
           parameters);
+      java.lang.String validationFileUrl = plugin.getValidationFileUrl(custodyID,
+          parameters);
 
       // Només per Arxiu
       final String arxiuExpedientId = null;
       final String arxiuDocumentId = null;
 
-      InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyID, arxiuExpedientId,
-          arxiuDocumentId, originalFileUrl, printableFileUrl, eniFileUrl, csv,
-          csvValidationWeb, csvGenerationDefinition);
+      InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyID ,
+            arxiuExpedientId ,  arxiuDocumentId ,  csv ,  originalFileUrl ,  csvValidationWeb ,
+             csvGenerationDefinition , printableFileUrl ,  eniFileUrl , validationFileUrl);
+
 
       infoCust = (InfoCustodyJPA) infoCustodyEjb.create(infoCust);
 

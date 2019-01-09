@@ -107,6 +107,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.CSV)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="infoCustody.csv" var="csv" />
+              <fmt:message key="genapp.form.searchby" var="cercapercsv" >                
+                 <fmt:param value="${csv}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${csv}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapercsv}" path="csv" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.ORIGINALFILEURL)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -116,6 +129,32 @@
               </fmt:message>
               <span class="add-on"><c:out value="${originalFileUrl}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperoriginalFileUrl}" path="originalFileUrl" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.CSVVALIDATIONWEB)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="infoCustody.csvValidationWeb" var="csvValidationWeb" />
+              <fmt:message key="genapp.form.searchby" var="cercapercsvValidationWeb" >                
+                 <fmt:param value="${csvValidationWeb}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${csvValidationWeb}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapercsvValidationWeb}" path="csvValidationWeb" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.CSVGENERATIONDEFINITION)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="infoCustody.csvGenerationDefinition" var="csvGenerationDefinition" />
+              <fmt:message key="genapp.form.searchby" var="cercapercsvGenerationDefinition" >                
+                 <fmt:param value="${csvGenerationDefinition}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${csvGenerationDefinition}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapercsvGenerationDefinition}" path="csvGenerationDefinition" />
             </div>
 
 
@@ -146,41 +185,15 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.CSV)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.VALIDATIONFILEURL)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoCustody.csv" var="csv" />
-              <fmt:message key="genapp.form.searchby" var="cercapercsv" >                
-                 <fmt:param value="${csv}"/>
+              <fmt:message key="infoCustody.validationFileUrl" var="validationFileUrl" />
+              <fmt:message key="genapp.form.searchby" var="cercapervalidationFileUrl" >                
+                 <fmt:param value="${validationFileUrl}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${csv}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapercsv}" path="csv" />
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.CSVVALIDATIONWEB)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoCustody.csvValidationWeb" var="csvValidationWeb" />
-              <fmt:message key="genapp.form.searchby" var="cercapercsvValidationWeb" >                
-                 <fmt:param value="${csvValidationWeb}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${csvValidationWeb}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapercsvValidationWeb}" path="csvValidationWeb" />
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InfoCustodyFields.CSVGENERATIONDEFINITION)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="infoCustody.csvGenerationDefinition" var="csvGenerationDefinition" />
-              <fmt:message key="genapp.form.searchby" var="cercapercsvGenerationDefinition" >                
-                 <fmt:param value="${csvGenerationDefinition}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${csvGenerationDefinition}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapercsvGenerationDefinition}" path="csvGenerationDefinition" />
+              <span class="add-on"><c:out value="${validationFileUrl}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapervalidationFileUrl}" path="validationFileUrl" />
             </div>
 
 

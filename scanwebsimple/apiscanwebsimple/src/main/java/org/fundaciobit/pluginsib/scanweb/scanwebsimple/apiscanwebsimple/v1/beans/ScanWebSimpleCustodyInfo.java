@@ -21,9 +21,9 @@ public class ScanWebSimpleCustodyInfo extends ScanWebSimpleCommonArxiuCustody {
 
   public ScanWebSimpleCustodyInfo(String custodyID, String csv, String originalFileURL,
       String printableFileURL, String eniFileURL, String csvValidationWeb,
-      String csvGenerationDefinition) {
+      String csvGenerationDefinition, String validationFileUrl) {
     super(csv, originalFileURL, printableFileURL, eniFileURL, csvValidationWeb,
-        csvGenerationDefinition);
+        csvGenerationDefinition, validationFileUrl);
     this.custodyID = custodyID;
   }
 

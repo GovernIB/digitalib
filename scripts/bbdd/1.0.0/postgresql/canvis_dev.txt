@@ -5,6 +5,8 @@
    
    
    ALTER TABLE dib_transaccio RENAME view  TO vista;
+   
+   ALTER TABLE dib_infocustody  ADD COLUMN validationfileurl character varying(255);
 
 
 

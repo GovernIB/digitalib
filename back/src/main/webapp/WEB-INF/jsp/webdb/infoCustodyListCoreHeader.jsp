@@ -24,8 +24,17 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ARXIUDOCUMENTID)}">
         <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.ARXIUDOCUMENTID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSV)}">
+        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CSV)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ORIGINALFILEURL)}">
         <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.ORIGINALFILEURL)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSVVALIDATIONWEB)}">
+        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CSVVALIDATIONWEB)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSVGENERATIONDEFINITION)}">
+        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CSVGENERATIONDEFINITION)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.PRINTABLEFILEURL)}">
         <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.PRINTABLEFILEURL)}</th>
@@ -33,14 +42,8 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ENIFILEURL)}">
         <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.ENIFILEURL)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSV)}">
-        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CSV)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSVVALIDATIONWEB)}">
-        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CSVVALIDATIONWEB)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSVGENERATIONDEFINITION)}">
-        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.CSVGENERATIONDEFINITION)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.VALIDATIONFILEURL)}">
+        <th>${dib:getSortIcons(__theFilterForm,InfoCustodyFields.VALIDATIONFILEURL)}</th>
         </c:if>
 
 

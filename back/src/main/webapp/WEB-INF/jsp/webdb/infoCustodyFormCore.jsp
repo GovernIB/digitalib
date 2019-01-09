@@ -56,6 +56,24 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.CSV)}">
+        <tr id="infoCustody_csv_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.CSV])?'infoCustody.csv':__theForm.labels[InfoCustodyFields.CSV]}" />
+              <c:if test="${not empty __theForm.help[InfoCustodyFields.CSV]}">
+              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.CSV]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="infoCustody.csv" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSV)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSV)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.csv"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.ORIGINALFILEURL)}">
         <tr id="infoCustody_originalFileUrl_rowid">
           <td>
@@ -79,6 +97,66 @@
 
             <form:errors path="infoCustody.originalFileUrl" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.ORIGINALFILEURL)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.ORIGINALFILEURL)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.originalFileUrl"   />
+
+           </c:if>
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.CSVVALIDATIONWEB)}">
+        <tr id="infoCustody_csvValidationWeb_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.CSVVALIDATIONWEB])?'infoCustody.csvValidationWeb':__theForm.labels[InfoCustodyFields.CSVVALIDATIONWEB]}" />
+              <c:if test="${not empty __theForm.help[InfoCustodyFields.CSVVALIDATIONWEB]}">
+              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.CSVVALIDATIONWEB]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+           <c:if test="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB)}">
+
+             <c:if test="${ not empty __theForm.infoCustody.csvValidationWeb}">
+               <a href="${__theForm.infoCustody.csvValidationWeb}" target="_blank">${__theForm.infoCustody.csvValidationWeb}</a>
+
+             </c:if>
+           </c:if>
+
+           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB))}">
+
+            <form:errors path="infoCustody.csvValidationWeb" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.csvValidationWeb"   />
+
+           </c:if>
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.CSVGENERATIONDEFINITION)}">
+        <tr id="infoCustody_csvGenerationDefinition_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.CSVGENERATIONDEFINITION])?'infoCustody.csvGenerationDefinition':__theForm.labels[InfoCustodyFields.CSVGENERATIONDEFINITION]}" />
+              <c:if test="${not empty __theForm.help[InfoCustodyFields.CSVGENERATIONDEFINITION]}">
+              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.CSVGENERATIONDEFINITION]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+           <c:if test="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVGENERATIONDEFINITION)}">
+
+             <c:if test="${ not empty __theForm.infoCustody.csvGenerationDefinition}">
+               <a href="${__theForm.infoCustody.csvGenerationDefinition}" target="_blank">${__theForm.infoCustody.csvGenerationDefinition}</a>
+
+             </c:if>
+           </c:if>
+
+           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVGENERATIONDEFINITION))}">
+
+            <form:errors path="infoCustody.csvGenerationDefinition" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVGENERATIONDEFINITION)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVGENERATIONDEFINITION)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.csvGenerationDefinition"   />
 
            </c:if>
 
@@ -146,67 +224,31 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.CSV)}">
-        <tr id="infoCustody_csv_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.VALIDATIONFILEURL)}">
+        <tr id="infoCustody_validationFileUrl_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.CSV])?'infoCustody.csv':__theForm.labels[InfoCustodyFields.CSV]}" />
-              <c:if test="${not empty __theForm.help[InfoCustodyFields.CSV]}">
-              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.CSV]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.VALIDATIONFILEURL])?'infoCustody.validationFileUrl':__theForm.labels[InfoCustodyFields.VALIDATIONFILEURL]}" />
+              <c:if test="${not empty __theForm.help[InfoCustodyFields.VALIDATIONFILEURL]}">
+              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.VALIDATIONFILEURL]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="infoCustody.csv" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSV)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSV)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.csv"   />
+           <c:if test="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.VALIDATIONFILEURL)}">
 
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.CSVVALIDATIONWEB)}">
-        <tr id="infoCustody_csvValidationWeb_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.CSVVALIDATIONWEB])?'infoCustody.csvValidationWeb':__theForm.labels[InfoCustodyFields.CSVVALIDATIONWEB]}" />
-              <c:if test="${not empty __theForm.help[InfoCustodyFields.CSVVALIDATIONWEB]}">
-              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.CSVVALIDATIONWEB]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-           <c:if test="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB)}">
-
-             <c:if test="${ not empty __theForm.infoCustody.csvValidationWeb}">
-               <a href="${__theForm.infoCustody.csvValidationWeb}" target="_blank">${__theForm.infoCustody.csvValidationWeb}</a>
+             <c:if test="${ not empty __theForm.infoCustody.validationFileUrl}">
+               <a href="${__theForm.infoCustody.validationFileUrl}" target="_blank">${__theForm.infoCustody.validationFileUrl}</a>
 
              </c:if>
            </c:if>
 
-           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB))}">
+           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.VALIDATIONFILEURL))}">
 
-            <form:errors path="infoCustody.csvValidationWeb" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVVALIDATIONWEB)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.csvValidationWeb"   />
+            <form:errors path="infoCustody.validationFileUrl" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.VALIDATIONFILEURL)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.VALIDATIONFILEURL)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.validationFileUrl"   />
 
            </c:if>
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,InfoCustodyFields.CSVGENERATIONDEFINITION)}">
-        <tr id="infoCustody_csvGenerationDefinition_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[InfoCustodyFields.CSVGENERATIONDEFINITION])?'infoCustody.csvGenerationDefinition':__theForm.labels[InfoCustodyFields.CSVGENERATIONDEFINITION]}" />
-              <c:if test="${not empty __theForm.help[InfoCustodyFields.CSVGENERATIONDEFINITION]}">
-              <i class="icon-info-sign" title="${__theForm.help[InfoCustodyFields.CSVGENERATIONDEFINITION]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="infoCustody.csvGenerationDefinition" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVGENERATIONDEFINITION)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,InfoCustodyFields.CSVGENERATIONDEFINITION)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="infoCustody.csvGenerationDefinition"   />
 
            </td>
         </tr>

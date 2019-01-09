@@ -44,10 +44,31 @@
           ${infoCustody.arxiuDocumentId}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSV)}">
+          <td>
+          ${infoCustody.csv}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ORIGINALFILEURL)}">
           <td>
                        <c:if test="${ not empty infoCustody.originalFileUrl}">
                <a href="${infoCustody.originalFileUrl}" target="_blank">${infoCustody.originalFileUrl}</a>
+             </c:if>
+
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSVVALIDATIONWEB)}">
+          <td>
+                       <c:if test="${ not empty infoCustody.csvValidationWeb}">
+               <a href="${infoCustody.csvValidationWeb}" target="_blank">${infoCustody.csvValidationWeb}</a>
+             </c:if>
+
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSVGENERATIONDEFINITION)}">
+          <td>
+                       <c:if test="${ not empty infoCustody.csvGenerationDefinition}">
+               <a href="${infoCustody.csvGenerationDefinition}" target="_blank">${infoCustody.csvGenerationDefinition}</a>
              </c:if>
 
           </td>
@@ -68,22 +89,12 @@
 
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSV)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.VALIDATIONFILEURL)}">
           <td>
-          ${infoCustody.csv}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSVVALIDATIONWEB)}">
-          <td>
-                       <c:if test="${ not empty infoCustody.csvValidationWeb}">
-               <a href="${infoCustody.csvValidationWeb}" target="_blank">${infoCustody.csvValidationWeb}</a>
+                       <c:if test="${ not empty infoCustody.validationFileUrl}">
+               <a href="${infoCustody.validationFileUrl}" target="_blank">${infoCustody.validationFileUrl}</a>
              </c:if>
 
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSVGENERATIONDEFINITION)}">
-          <td>
-          ${infoCustody.csvGenerationDefinition}
           </td>
         </c:if>
 

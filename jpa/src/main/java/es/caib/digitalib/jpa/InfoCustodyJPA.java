@@ -40,8 +40,17 @@ private static final long serialVersionUID = -1667677320L;
 	@Column(name="arxiudocumentid",length = 255)
 	java.lang.String arxiuDocumentId;
 
+	@Column(name="csv",length = 255)
+	java.lang.String csv;
+
 	@Column(name="originalfileurl",length = 255)
 	java.lang.String originalFileUrl;
+
+	@Column(name="csvvalidationweb",length = 255)
+	java.lang.String csvValidationWeb;
+
+	@Column(name="csvgenerationdefinition",length = 255)
+	java.lang.String csvGenerationDefinition;
 
 	@Column(name="printablefileurl",length = 255)
 	java.lang.String printableFileUrl;
@@ -49,14 +58,8 @@ private static final long serialVersionUID = -1667677320L;
 	@Column(name="enifileurl",length = 255)
 	java.lang.String eniFileUrl;
 
-	@Column(name="csv",length = 255)
-	java.lang.String csv;
-
-	@Column(name="csvvalidationweb",length = 255)
-	java.lang.String csvValidationWeb;
-
-	@Column(name="csvgenerationdefinition",length = 255)
-	java.lang.String csvGenerationDefinition;
+	@Column(name="validationfileurl",length = 255)
+	java.lang.String validationFileUrl;
 
 
 
@@ -65,29 +68,31 @@ private static final long serialVersionUID = -1667677320L;
   }
 
   /** Constructor amb tots els camps  */
-  public InfoCustodyJPA(long infoCustodyID , java.lang.String custodyId , java.lang.String arxiuExpedientId , java.lang.String arxiuDocumentId , java.lang.String originalFileUrl , java.lang.String printableFileUrl , java.lang.String eniFileUrl , java.lang.String csv , java.lang.String csvValidationWeb , java.lang.String csvGenerationDefinition) {
+  public InfoCustodyJPA(long infoCustodyID , java.lang.String custodyId , java.lang.String arxiuExpedientId , java.lang.String arxiuDocumentId , java.lang.String csv , java.lang.String originalFileUrl , java.lang.String csvValidationWeb , java.lang.String csvGenerationDefinition , java.lang.String printableFileUrl , java.lang.String eniFileUrl , java.lang.String validationFileUrl) {
     this.infoCustodyID=infoCustodyID;
     this.custodyId=custodyId;
     this.arxiuExpedientId=arxiuExpedientId;
     this.arxiuDocumentId=arxiuDocumentId;
-    this.originalFileUrl=originalFileUrl;
-    this.printableFileUrl=printableFileUrl;
-    this.eniFileUrl=eniFileUrl;
     this.csv=csv;
+    this.originalFileUrl=originalFileUrl;
     this.csvValidationWeb=csvValidationWeb;
     this.csvGenerationDefinition=csvGenerationDefinition;
+    this.printableFileUrl=printableFileUrl;
+    this.eniFileUrl=eniFileUrl;
+    this.validationFileUrl=validationFileUrl;
 }
   /** Constructor sense valors autoincrementals */
-  public InfoCustodyJPA(java.lang.String custodyId , java.lang.String arxiuExpedientId , java.lang.String arxiuDocumentId , java.lang.String originalFileUrl , java.lang.String printableFileUrl , java.lang.String eniFileUrl , java.lang.String csv , java.lang.String csvValidationWeb , java.lang.String csvGenerationDefinition) {
+  public InfoCustodyJPA(java.lang.String custodyId , java.lang.String arxiuExpedientId , java.lang.String arxiuDocumentId , java.lang.String csv , java.lang.String originalFileUrl , java.lang.String csvValidationWeb , java.lang.String csvGenerationDefinition , java.lang.String printableFileUrl , java.lang.String eniFileUrl , java.lang.String validationFileUrl) {
     this.custodyId=custodyId;
     this.arxiuExpedientId=arxiuExpedientId;
     this.arxiuDocumentId=arxiuDocumentId;
-    this.originalFileUrl=originalFileUrl;
-    this.printableFileUrl=printableFileUrl;
-    this.eniFileUrl=eniFileUrl;
     this.csv=csv;
+    this.originalFileUrl=originalFileUrl;
     this.csvValidationWeb=csvValidationWeb;
     this.csvGenerationDefinition=csvGenerationDefinition;
+    this.printableFileUrl=printableFileUrl;
+    this.eniFileUrl=eniFileUrl;
+    this.validationFileUrl=validationFileUrl;
 }
   /** Constructor dels valors Not Null */
   public InfoCustodyJPA(long infoCustodyID) {
@@ -98,12 +103,13 @@ private static final long serialVersionUID = -1667677320L;
     this.setCustodyId(__bean.getCustodyId());
     this.setArxiuExpedientId(__bean.getArxiuExpedientId());
     this.setArxiuDocumentId(__bean.getArxiuDocumentId());
-    this.setOriginalFileUrl(__bean.getOriginalFileUrl());
-    this.setPrintableFileUrl(__bean.getPrintableFileUrl());
-    this.setEniFileUrl(__bean.getEniFileUrl());
     this.setCsv(__bean.getCsv());
+    this.setOriginalFileUrl(__bean.getOriginalFileUrl());
     this.setCsvValidationWeb(__bean.getCsvValidationWeb());
     this.setCsvGenerationDefinition(__bean.getCsvGenerationDefinition());
+    this.setPrintableFileUrl(__bean.getPrintableFileUrl());
+    this.setEniFileUrl(__bean.getEniFileUrl());
+    this.setValidationFileUrl(__bean.getValidationFileUrl());
 	}
 
 	public long getInfoCustodyID() {
@@ -134,11 +140,32 @@ private static final long serialVersionUID = -1667677320L;
 		this.arxiuDocumentId = _arxiuDocumentId_;
 	};
 
+	public java.lang.String getCsv() {
+		return(csv);
+	};
+	public void setCsv(java.lang.String _csv_) {
+		this.csv = _csv_;
+	};
+
 	public java.lang.String getOriginalFileUrl() {
 		return(originalFileUrl);
 	};
 	public void setOriginalFileUrl(java.lang.String _originalFileUrl_) {
 		this.originalFileUrl = _originalFileUrl_;
+	};
+
+	public java.lang.String getCsvValidationWeb() {
+		return(csvValidationWeb);
+	};
+	public void setCsvValidationWeb(java.lang.String _csvValidationWeb_) {
+		this.csvValidationWeb = _csvValidationWeb_;
+	};
+
+	public java.lang.String getCsvGenerationDefinition() {
+		return(csvGenerationDefinition);
+	};
+	public void setCsvGenerationDefinition(java.lang.String _csvGenerationDefinition_) {
+		this.csvGenerationDefinition = _csvGenerationDefinition_;
 	};
 
 	public java.lang.String getPrintableFileUrl() {
@@ -155,25 +182,11 @@ private static final long serialVersionUID = -1667677320L;
 		this.eniFileUrl = _eniFileUrl_;
 	};
 
-	public java.lang.String getCsv() {
-		return(csv);
+	public java.lang.String getValidationFileUrl() {
+		return(validationFileUrl);
 	};
-	public void setCsv(java.lang.String _csv_) {
-		this.csv = _csv_;
-	};
-
-	public java.lang.String getCsvValidationWeb() {
-		return(csvValidationWeb);
-	};
-	public void setCsvValidationWeb(java.lang.String _csvValidationWeb_) {
-		this.csvValidationWeb = _csvValidationWeb_;
-	};
-
-	public java.lang.String getCsvGenerationDefinition() {
-		return(csvGenerationDefinition);
-	};
-	public void setCsvGenerationDefinition(java.lang.String _csvGenerationDefinition_) {
-		this.csvGenerationDefinition = _csvGenerationDefinition_;
+	public void setValidationFileUrl(java.lang.String _validationFileUrl_) {
+		this.validationFileUrl = _validationFileUrl_;
 	};
 
 
@@ -213,12 +226,13 @@ private static final long serialVersionUID = -1667677320L;
     __tmp.setCustodyId(__bean.getCustodyId());
     __tmp.setArxiuExpedientId(__bean.getArxiuExpedientId());
     __tmp.setArxiuDocumentId(__bean.getArxiuDocumentId());
-    __tmp.setOriginalFileUrl(__bean.getOriginalFileUrl());
-    __tmp.setPrintableFileUrl(__bean.getPrintableFileUrl());
-    __tmp.setEniFileUrl(__bean.getEniFileUrl());
     __tmp.setCsv(__bean.getCsv());
+    __tmp.setOriginalFileUrl(__bean.getOriginalFileUrl());
     __tmp.setCsvValidationWeb(__bean.getCsvValidationWeb());
     __tmp.setCsvGenerationDefinition(__bean.getCsvGenerationDefinition());
+    __tmp.setPrintableFileUrl(__bean.getPrintableFileUrl());
+    __tmp.setEniFileUrl(__bean.getEniFileUrl());
+    __tmp.setValidationFileUrl(__bean.getValidationFileUrl());
 		return __tmp;
 	}
 
