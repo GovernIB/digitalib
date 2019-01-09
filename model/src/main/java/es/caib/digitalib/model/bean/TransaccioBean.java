@@ -139,12 +139,11 @@ private static final long serialVersionUID = 2099592239L;
     this.infoCustodyID=infoCustodyID;
 }
   /** Constructor dels valors Not Null */
-  public TransaccioBean(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , long perfilID) {
+  public TransaccioBean(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.lang.String ip , int estatCodi , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , long perfilID) {
     this.transaccioID=transaccioID;
     this.transactionWebId=transactionWebId;
     this.dataInici=dataInici;
     this.ip=ip;
-    this.returnUrl=returnUrl;
     this.estatCodi=estatCodi;
     this.view=view;
     this.languageUI=languageUI;

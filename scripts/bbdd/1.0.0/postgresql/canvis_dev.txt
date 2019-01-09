@@ -1,44 +1,11 @@
-
--- Actualitzar Plugin de Document Custody i Arxiu
-
-ALTER TABLE dib_infocustody RENAME fileurl  TO originalfileurl;
-ALTER TABLE dib_infocustody ADD COLUMN printablefileurl character varying(255);
-
-ALTER TABLE dib_infocustody
-  ADD COLUMN enifileurl character varying(255);
   
   
-  ALTER TABLE dib_perfil
-   ALTER COLUMN descripcio SET NOT NULL;
+  ALTER TABLE dib_transaccio
+   ALTER COLUMN returnurl DROP NOT NULL;
    
    
-   ALTER TABLE dib_perfil
-  ADD COLUMN nomid bigint;
-ALTER TABLE dib_perfil
-  ADD COLUMN descripcioid bigint;
-ALTER TABLE dib_perfil
-  ADD CONSTRAINT dib_perfil_traduc_nom_fk FOREIGN KEY (nomid) REFERENCES dib_traduccio (traduccioid) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE dib_perfil
-  ADD CONSTRAINT dib_pefil_traduc_desc_fk FOREIGN KEY (descripcioid) REFERENCES dib_traduccio (traduccioid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+   ALTER TABLE dib_transaccio RENAME view  TO vista;
 
-  
-  -- La ForeignKey dib_perfil_traduc_nom_fk de la taula Perfil no té un nom correcte (esperat dib_perfil_traduccio_*_fk )
-ALTER TABLE dib_perfil DROP CONSTRAINT dib_perfil_traduc_nom_fk;
-ALTER TABLE dib_perfil ADD CONSTRAINT dib_perfil_traduccio_nomid_fk  FOREIGN KEY (nomid)  REFERENCES dib_traduccio (traduccioid);
--- La ForeignKey dib_pefil_traduc_desc_fk de la taula Perfil no té un nom correcte (esperat dib_perfil_traduccio_*_fk )
-ALTER TABLE dib_perfil DROP CONSTRAINT dib_pefil_traduc_desc_fk;
-ALTER TABLE dib_perfil ADD CONSTRAINT dib_perfil_traduccio_descri_fk  FOREIGN KEY (descripcioid)  REFERENCES dib_traduccio (traduccioid);
-
- -- Es recomanable tenir un index de la clau forania.
- create index dib_perfil_nomid_fk_i on dib_perfil (nomid);
-
- -- Es recomanable tenir un index de la clau forania.
- create index dib_perfil_descripcioid_fk_i on dib_perfil (descripcioid);
- 
- ALTER TABLE dib_perfil
-  DROP COLUMN nom;
-ALTER TABLE dib_perfil
-  DROP COLUMN descripcio;
 
 
 
