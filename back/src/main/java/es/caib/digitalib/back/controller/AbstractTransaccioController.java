@@ -337,7 +337,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
       final boolean isHtml = true;
 
-      // XYZ ZZZ Configurable per part de Grup
+      // XYZ ZZZ TRA Configurable per part de Grup
       String subject = "Enviament de Correu des de DigitalIB";
 
       LoginInfo loginInfo = LoginInfo.getInstance();
@@ -348,12 +348,12 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       final Fitxer fitxer;
 
       if (transaccio.getPerfil().getUsPerfil() == Constants.PERFIL_US_CUSTODIA_INFO) {
-        // XYZ ZZZ Si esta custodiat llavors li hem d'enviar la informació de comunicació
+        // Si esta custodiat llavors li hem d'enviar la informació de comunicació
         
 
         StringBuffer stb = new StringBuffer("<br/>");
 
-     // XYZ ZZZ Configurable per part de Grup
+        // XYZ ZZZ TRA Configurable per part de Grup
         stb.append(up.getNom()).append(" ").append(up.getLlinatges())
             .append(" li envia la referència al següent fitxer:").append("<br/>");
 

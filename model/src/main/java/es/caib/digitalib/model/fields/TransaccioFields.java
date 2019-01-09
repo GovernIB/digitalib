@@ -31,7 +31,7 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final IntegerField INFOSCANPIXELTYPE = new IntegerField(_TABLE_MODEL, "infoScanPixelType", "infoscanpixeltype");
 	 public static final IntegerField INFOSCANRESOLUCIOPPP = new IntegerField(_TABLE_MODEL, "infoScanResolucioPpp", "infoscanresolucioppp");
 	 public static final BooleanField INFOSCANOCR = new BooleanField(_TABLE_MODEL, "infoScanOcr", "infoscanocr");
-	 public static final IntegerField VIEW = new IntegerField(_TABLE_MODEL, "view", "view");
+	 public static final IntegerField VIEW = new IntegerField(_TABLE_MODEL, "view", "vista");
 	 public static final StringField LANGUAGEUI = new StringField(_TABLE_MODEL, "languageUI", "languageui");
 	 public static final StringField FUNCIONARIUSERNAME = new StringField(_TABLE_MODEL, "funcionariUsername", "funcionariusername");
 	 public static final StringField SIGNPARAMFUNCIONARINOM = new StringField(_TABLE_MODEL, "signParamFuncionariNom", "signparamfuncionarinom");

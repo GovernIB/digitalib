@@ -168,7 +168,7 @@
         <tr id="transaccio_returnUrl_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.RETURNURL])?'transaccio.returnUrl':__theForm.labels[TransaccioFields.RETURNURL]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.RETURNURL])?'transaccio.returnUrl':__theForm.labels[TransaccioFields.RETURNURL]}" />
               <c:if test="${not empty __theForm.help[TransaccioFields.RETURNURL]}">
               <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.RETURNURL]}" ></i>
               </c:if>

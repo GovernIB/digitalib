@@ -54,7 +54,7 @@ private static final long serialVersionUID = 760472444L;
 	@Column(name="ip",nullable = false,length = 50)
 	java.lang.String ip;
 
-	@Column(name="returnurl",nullable = false,length = 255)
+	@Column(name="returnurl",length = 255)
 	java.lang.String returnUrl;
 
 	@Column(name="estatcodi",nullable = false,length = 10)
@@ -90,7 +90,7 @@ private static final long serialVersionUID = 760472444L;
 	@Column(name="infoscanocr",length = 1)
 	boolean infoScanOcr;
 
-	@Column(name="view",nullable = false,length = 10)
+	@Column(name="vista",nullable = false,length = 10)
 	java.lang.Integer view;
 
 	@Column(name="languageui",nullable = false,length = 10)
@@ -249,12 +249,11 @@ private static final long serialVersionUID = 760472444L;
     this.infoCustodyID=infoCustodyID;
 }
   /** Constructor dels valors Not Null */
-  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , long perfilID) {
+  public TransaccioJPA(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.lang.String ip , int estatCodi , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , long perfilID) {
     this.transaccioID=transaccioID;
     this.transactionWebId=transactionWebId;
     this.dataInici=dataInici;
     this.ip=ip;
-    this.returnUrl=returnUrl;
     this.estatCodi=estatCodi;
     this.view=view;
     this.languageUI=languageUI;

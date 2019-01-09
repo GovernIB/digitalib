@@ -46,10 +46,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(IP)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,RETURNURL, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RETURNURL)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,ESTATCODI, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ESTATCODI)));

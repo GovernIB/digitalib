@@ -36,13 +36,13 @@
             key="firmaenservidorplugin.menu" /></span>
 
     </a></li>
-
+<%--
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/configuraciofirma/list"/>"> <span
         style="${(fn:contains(url, 'configuraciofirma/'))? "font-weight:bold;" : ""}">Configuracio
           FIRMA Servidor XYZ ZZZ</span>
     </a></li>
-
+--%>
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/apisimple/list"/>"> <span
