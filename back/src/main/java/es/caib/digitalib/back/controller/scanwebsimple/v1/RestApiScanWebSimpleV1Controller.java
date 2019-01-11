@@ -569,10 +569,11 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
               String eniFileURL = custody.getEniFileUrl();
               String csvValidationWeb = custody.getCsvValidationWeb();
               String csvGenerationDefinition = custody.getCsvGenerationDefinition();
+              String validationFileUrl =custody.getValidationFileUrl();
 
               ScanWebSimpleCustodyInfo custodyInfo = new ScanWebSimpleCustodyInfo(custodyID,
                   csv, originalFileURL, printableFileURL, eniFileURL, csvValidationWeb,
-                  csvGenerationDefinition);
+                  csvGenerationDefinition, validationFileUrl);
 
               fssr.setCustodyInfo(custodyInfo);
             } else {
@@ -585,10 +586,11 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
               String eniFileURL = custody.getEniFileUrl();
               String csvValidationWeb = custody.getCsvValidationWeb();
               String csvGenerationDefinition = custody.getCsvGenerationDefinition();
+              String validationFileUrl =custody.getValidationFileUrl();
 
               ScanWebSimpleArxiuInfo arxiuInfo = new ScanWebSimpleArxiuInfo(expedientID,
                   documentID, csv, originalFileURL, printableFileURL, eniFileURL,
-                  csvValidationWeb, csvGenerationDefinition);
+                  csvValidationWeb, csvGenerationDefinition, validationFileUrl);
 
               fssr.setArxiuInfo(arxiuInfo);
 

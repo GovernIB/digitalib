@@ -24,9 +24,9 @@ public class ScanWebSimpleArxiuInfo extends ScanWebSimpleCommonArxiuCustody {
 
   public ScanWebSimpleArxiuInfo(String expedientID, String documentID, String csv,
       String originalFileURL, String printableFileURL, String eniFileURL,
-      String csvValidationWeb, String csvGenerationDefinition) {
+      String csvValidationWeb, String csvGenerationDefinition, String validationFileUrl) {
     super(csv, originalFileURL, printableFileURL, eniFileURL, csvValidationWeb,
-        csvGenerationDefinition);
+        csvGenerationDefinition, validationFileUrl);
     this.expedientID = expedientID;
     this.documentID = documentID;
   }
