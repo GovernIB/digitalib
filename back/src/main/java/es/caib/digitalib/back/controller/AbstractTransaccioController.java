@@ -414,6 +414,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         stb.append("<li><b>Printable File URL:</b> ").append(info.getPrintableFileUrl()).append("</li>");
         // XYZ ZZZ TRA
         stb.append("<li><b>ENI File URL:</b> ").append(info.getEniFileUrl()).append("</li>");
+        // XYZ ZZZ TRA
+        stb.append("<li><b>Validation File URL:</b> ").append(info.getValidationFileUrl()).append("</li>");
 
         stb.append("</ul>");
         
