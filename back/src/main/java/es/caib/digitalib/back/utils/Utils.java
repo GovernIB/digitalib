@@ -11,9 +11,12 @@ import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.OrderType;
+import org.fundaciobit.genapp.common.validation.BeanValidatorResult;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalField;
 import org.fundaciobit.genapp.common.web.form.BaseFilterForm;
+
+import es.caib.digitalib.back.form.DigitalIBBaseForm;
 
 
 /**
@@ -140,4 +143,15 @@ public class Utils {
     Collections.sort(listNovaFirma, STRINGKEYVALUECOMPARATOR);
   }
  
+  
+  public static <T> void  hideNullFields(T _jpa, DigitalIBBaseForm form, Field<?>[] allFields) {
+    BeanValidatorResult<T> _bvr_ = new BeanValidatorResult<T>();
+ 
+    for (Field<?> field : allFields) {
+      Object obj = _bvr_.getFieldValue(_jpa,field);  
+      if (obj == null) {
+        form.addHiddenField(field);
+      }
+    }
+  }
 }
