@@ -51,7 +51,7 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 
 	public static final String CONTEXTWEB = "/admin/usuariAplicacio";
 
-	public static final String USUARI_APLICAIO_PER_AFEGIR_PERFIL = "USUARI_APLICAIO_PER_AFEGIR_PERFIL";
+	public static final String USUARI_APLICACIO_PER_AFEGIR_PERFIL = "USUARI_APLICACIO_PER_AFEGIR_PERFIL";
 
 	@EJB(mappedName = es.caib.digitalib.ejb.PerfilUsuariAplicacioLocal.JNDI_NAME)
 	protected es.caib.digitalib.ejb.PerfilUsuariAplicacioLocal perfilUsuariAplicacioEjb;
@@ -132,7 +132,7 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 	public String crearUserAppPerfil(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable Long usrappid) throws I18NException {
 
-		request.getSession().setAttribute(USUARI_APLICAIO_PER_AFEGIR_PERFIL, usrappid);
+		request.getSession().setAttribute(USUARI_APLICACIO_PER_AFEGIR_PERFIL, usrappid);
 
 		return "redirect:" + PerfilUsuariAplicacioAdminController.CONTEXTWEB +  "/new";
 

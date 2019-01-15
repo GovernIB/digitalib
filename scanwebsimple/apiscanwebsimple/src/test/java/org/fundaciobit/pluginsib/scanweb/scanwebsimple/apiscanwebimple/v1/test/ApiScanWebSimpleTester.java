@@ -15,8 +15,11 @@ import java.net.Socket;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Scanner;
 
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.ApiScanWebSimple;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
@@ -53,32 +56,47 @@ public class ApiScanWebSimpleTester {
       List<ScanWebSimpleAvailableProfile> profilesList = profiles.getAvailableProfiles();
 
       if (profilesList == null || profilesList.size() == 0) {
-        System.out.println("NO HI HA PERFILS PER AQUEST USUARI APLICACIÓ");
+        System.err.println("NO HI HA PERFILS PER AQUEST USUARI APLICACIÓ");
         return;
       }
 
-      System.out.println(" ---- Perfils Disponibles ----");
-      ScanWebSimpleAvailableProfile scanWebProfile = null;
-      for (ScanWebSimpleAvailableProfile profile : profilesList) {
-        System.out.println("   + " + profile.getName() + "(CODI: " + profile.getCode() + "): "
-            + profile.getDescription());
-        scanWebProfile = profile;
-      }
+      
+      ScanWebSimpleAvailableProfile scanWebProfileSelected = null;
+      
+      do {
+        System.out.println(" ---- Perfils Disponibles ----");
+        int i = 1;
+        Map<Integer, ScanWebSimpleAvailableProfile> profilesByIndex = new HashMap<Integer, ScanWebSimpleAvailableProfile>();
+        for (ScanWebSimpleAvailableProfile profile : profilesList) {
+          System.out.println(i + ".-   + " + profile.getName() + "(CODI: " + profile.getCode() + "): "
+              + profile.getDescription());
+          profilesByIndex.put(i, profile);
+          i++;
+        }
+        System.out.print(" Seleccioni un perfil: ");
+        Scanner in = new Scanner(System.in);
+        
+        int n = in.nextInt();
 
+        
+        scanWebProfileSelected = profilesByIndex.get(n);
+
+      } while(scanWebProfileSelected == null);
+      
       System.out.println(" -----------------------------");
 
       // Recuperar un ID de transacció
 
       {
 
-        final String profileCode = scanWebProfile.getCode();
+        final String profileCode = scanWebProfileSelected.getCode();
         final int view = ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN;
 
         String funcionariUsername = "u00666";
 
         ScanWebSimpleGetTransactionIdRequest transacctionIdRequest;
 
-        switch (scanWebProfile.getProfileType()) {
+        switch (scanWebProfileSelected.getProfileType()) {
 
         case ScanWebSimpleAvailableProfile.PROFILE_TYPE_ONLY_SCAN:
 
@@ -113,7 +131,7 @@ public class ApiScanWebSimpleTester {
           break;
 
         default:
-          throw new Exception("Tipus de perfil desconegut " + scanWebProfile.getProfileType());
+          throw new Exception("Tipus de perfil desconegut " + scanWebProfileSelected.getProfileType());
 
         }
 
