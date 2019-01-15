@@ -65,8 +65,9 @@ public class UsuariPersonaCommonController extends UsuariPersonaController {
   @Override
   public String getRedirectWhenModified(HttpServletRequest request,
       UsuariPersonaForm usuariPersonaForm, Throwable __e) {
-    return "redirect:" + getContextWeb() + "/"
-        + usuariPersonaForm.getUsuariPersona().getUsuariPersonaID() + "/edit";
+//    return "redirect:" + getContextWeb() + "/"
+//        + usuariPersonaForm.getUsuariPersona().getUsuariPersonaID() + "/edit";
+    return "redirect:/canviarPipella/user";
   }
 
   // Mètodes a sobreescriure

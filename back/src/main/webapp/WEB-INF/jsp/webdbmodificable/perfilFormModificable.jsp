@@ -3,6 +3,15 @@
 <%@page import="org.fundaciobit.genapp.common.web.i18n.I18NUtils"%>
 <%@page import="org.fundaciobit.genapp.common.query.Field"%>
 <script>
+ // Eliminar opcio de "Nomes Persones" en el desplegable de UtilitzatPerAplicacio dins dels Perfils de Aplicacions
+ function deleteNomesPersones(selectobject) {
+	for (var i=0; i<selectobject.length; i++){
+		if (selectobject.options[i].value == 'false' )
+			selectobject.remove(i);
+	}
+ }
+ 
+ deleteNomesPersones(document.getElementById("<%=PerfilFields.UTILITZATPERAPLICACIO.fullName %>"));
 
  // Politica de Firma (ocultar o mostrar valor)
  onChangeTipusFirma(document.getElementById("<%=PerfilFields.TIPUSFIRMA.fullName.replace('.', '_') %>"));
@@ -41,5 +50,6 @@
      }
 
  }
+ 
  
  </script>

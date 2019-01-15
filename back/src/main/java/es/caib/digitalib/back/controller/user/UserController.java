@@ -45,6 +45,9 @@ public class UserController {
       // XYZ ZZZ
       conf = null;
       e.printStackTrace();
+    } catch (NullPointerException e) {
+      conf = null;
+      e.printStackTrace();
     }
 
     if (conf == null) {
