@@ -64,7 +64,7 @@ public abstract class AbstractFirmaArxiuParametersController extends
     final int tipusPerfil = Math.abs(perfilEjb.executeQueryOne(PerfilFields.USPERFIL,
         PerfilFields.PERFILID.equal(transaccioForm.getTransaccio().getPerfilID())));
 
-    // Tots
+    // Tots excepte NOM
     hiddenFields.remove(TransaccioFields.NOM);
 
     // Copia Autentica
@@ -106,6 +106,9 @@ public abstract class AbstractFirmaArxiuParametersController extends
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMINTERESSATS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORIGEN);
+
+      transaccioForm.getTransaccio().setArxiuReqParamDocEstatElabora("EE03");
+      
     }
 
     transaccioForm.setTitleCode("dadesrequerides");

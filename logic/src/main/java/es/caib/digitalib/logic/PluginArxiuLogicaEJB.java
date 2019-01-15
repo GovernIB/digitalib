@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -47,6 +48,7 @@ import es.caib.plugins.arxiu.api.IArxiuPlugin;
  */
 @Stateless(name = "PluginArxiuLogicaEJB")
 @SecurityDomain("seycon")
+@RunAs("DIB_ADMIN")
 public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> implements
     PluginArxiuLogicaLocal {
 

@@ -9427,11 +9427,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Info Firma</string> 
+            <string>Informació Firma</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Info Firma</string> 
+            <string>Información Firma</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -9505,11 +9505,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Info Custodia</string> 
+            <string>Informació Arxivat</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Info Custodia</string> 
+            <string>Información Archivado</string> 
            </void> 
           </void> 
           <void property="size"> 

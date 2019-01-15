@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -36,6 +37,7 @@ import es.caib.digitalib.utils.Constants;
  */
 @Stateless(name = "PluginDocumentCustodyLogicaEJB")
 @SecurityDomain("seycon")
+@RunAs("DIB_ADMIN")
 public class PluginDocumentCustodyLogicaEJB extends
     AbstractPluginLogicaEJB<IDocumentCustodyPlugin> implements
     PluginDocumentCustodyLogicaLocal {

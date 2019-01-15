@@ -42,12 +42,16 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 	public abstract int getTipusPerfil();
 	
 	public abstract boolean isUtilitzatPerAplicacio();
+	
+	public boolean isRoleAdmin() {
+	  return true;
+	};
 
 	public static final String CONTEXTWEB = "/admin/perfil";
 
 	@Override
 	public String getTileForm() {
-		return "perfilFormAdmin";
+		return "perfilForm" + (isRoleAdmin()?"Admin":"_user");
 	}
 
 	@Override
@@ -213,7 +217,10 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 				perfilForm.addHiddenField(USPERFIL);
 				break;
 		}
-		perfilForm.setAttachedAdditionalJspCode(true);
+
+    if (!__isView) {
+      perfilForm.setAttachedAdditionalJspCode(true);
+    }
 
 		return perfilForm;
 
@@ -341,7 +348,8 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
     
     int tipusPerfil = getTipusPerfil();
     
-    if (tipusPerfil == Constants.PERFIL_US_CUSTODIA || tipusPerfil == Constants.PERFIL_US_CUSTODIA_INFO) {
+    if (tipusPerfil == Constants.PERFIL_US_ALL_INFO 
+        || tipusPerfil == Constants.PERFIL_US_CUSTODIA || tipusPerfil == Constants.PERFIL_US_CUSTODIA_INFO) {
       __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_ARXIU), I18NUtils
           .tradueix("tipuscustodia.1")));
       __tmp.add(new StringKeyValue(String.valueOf(Constants.TIPUS_CUSTODIA_DOCUMENTCUSTODY),

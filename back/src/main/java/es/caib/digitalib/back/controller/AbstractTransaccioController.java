@@ -30,6 +30,7 @@ import es.caib.digitalib.back.controller.webdb.TransaccioController;
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.back.security.LoginInfo;
+import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.logic.utils.EmailUtil;
@@ -102,10 +103,52 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       form.setEntityNameCodePlural("transaccio.persona.plural");
       form.addHiddenField(USUARIAPLICACIOID);
     }
+    
+    if (__isView) {
+      // Ocultar tots els camps null
+      Utils.hideNullFields(_jpa, form, ALL_TRANSACCIO_FIELDS);
+      
+      if (_jpa.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
+        form.addHiddenField(ESTATCODI);
+      }
+      
+      
+      form.addHiddenField(INFOCUSTODYID);
+      form.addHiddenField(INFOSIGNATURAID);
+      form.addHiddenField(PERFILID);
+      
+      form.addHiddenField(IP);
+      form.addHiddenField(USUARIPERSONAID);
+      form.addHiddenField(RETURNURL);
+
+      // Afegir botos de info sign
+      if (_jpa.getInfoSignaturaID() != null) {
+        form.addAdditionalButton(new AdditionalButton(
+            " icon-info-sign icon-white", INFOSIGNATURAID.fullName,
+            AbstractInfoSignatureController.getContextWeb(isAdmin())  + "/view" + "/" + _jpa.getInfoSignaturaID() , "btn-info"));
+      }
+      
+      
+      // Afegir botos de info cust
+      if (_jpa.getInfoCustodyID() != null) {
+        form.addAdditionalButton(new AdditionalButton(
+            " icon-info-sign icon-white", INFOCUSTODYID.fullName,
+            AbstractInfoCustodyController.getContextWeb(isAdmin())  + "/view" + "/" + _jpa.getInfoCustodyID() , "btn-info"));
+      }
+      
+      // Afegir Boto de Veure Perfil
+      form.addAdditionalButton(new AdditionalButton("icon-user icon-white",
+          "transaccio.veureperfil", getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(), "btn-info"));
+
+    }
+    
 
     return form;
 
   }
+
+
+
 
   @Override
   public TransaccioFilterForm getTransaccioFilterForm(Integer pagina, ModelAndView mav,
@@ -384,6 +427,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         stb.append("<li><b>Printable File URL:</b> ").append(info.getPrintableFileUrl()).append("</li>");
         // XYZ ZZZ TRA
         stb.append("<li><b>ENI File URL:</b> ").append(info.getEniFileUrl()).append("</li>");
+        // XYZ ZZZ TRA
+        stb.append("<li><b>Validation File URL:</b> ").append(info.getValidationFileUrl()).append("</li>");
 
         stb.append("</ul>");
         

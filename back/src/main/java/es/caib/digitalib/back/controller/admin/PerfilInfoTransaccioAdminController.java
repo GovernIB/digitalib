@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.digitalib.back.form.webdb.PerfilFilterForm;
 import es.caib.digitalib.back.form.webdb.PerfilForm;
+import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.utils.Constants;
 
@@ -24,6 +25,8 @@ import es.caib.digitalib.utils.Constants;
 public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminController {
 
   public static final String CONTEXTWEB = "/admin/perfilinfotransaccio";
+  
+  
 
   @Override
   public int getTipusPerfil() {
@@ -92,6 +95,8 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
       perfilForm.addHiddenField(PLUGINARXIUID);
       break;
     }
+    
+    Utils.hideNullFields(perfilForm.getPerfil(), perfilForm, ALL_PERFIL_FIELDS);
 
     return perfilForm;
   }

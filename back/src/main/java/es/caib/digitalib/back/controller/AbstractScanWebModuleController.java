@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.logic.PerfilLogicaLocal;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.model.entity.Perfil;
@@ -47,8 +48,8 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
   protected TransaccioLogicaLocal transaccioLogicaEjb;
   
 
-  @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
-  protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
+  @EJB(mappedName = PerfilLogicaLocal.JNDI_NAME)
+  protected PerfilLogicaLocal perfilLogicaEjb;
 
   @RequestMapping(value = "/selectscanwebmodule/{transactionWebID}")
   public ModelAndView selectScanWebModule(HttpServletRequest request,
@@ -160,13 +161,13 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     TransaccioJPA transaccio = transaccioLogicaEjb
             .searchTransaccioByTransactionWebID(transactionWebID);
     
-    Perfil perfil = perfilEjb.findByPrimaryKey(transaccio.getPerfilID());
+    Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
     
     log.info("XYZ ZZZ    \n\n Actualitzant PERFIL SCANE PLUGIN A " + pluginID + "\n\n");
     perfil.setPluginScanWebID(pluginID);
     perfil.setPluginScanWeb2ID(null);
     
-    perfilEjb.update(perfil);
+    perfilLogicaEjb.update(perfil);
 
     log.info("SMC :: showscanwebmodule: redirectTO = " + urlToPluginWebPage);
 

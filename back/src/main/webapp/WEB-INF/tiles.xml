@@ -157,6 +157,21 @@
         <put-attribute name="titol" value="transaccio.transaccio" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioForm.jsp" />
     </definition>
+    
+    <definition name="infoCustodyForm_user" extends="user">
+        <put-attribute name="titol" value="infoCustody.infoCustody" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/infoCustodyForm.jsp" />
+    </definition>
+
+    <definition name="infoSignaturaForm_user" extends="user">
+        <put-attribute name="titol" value="infoSignatura.infoSignatura" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/infoSignaturaForm.jsp" />
+    </definition>
+    
+    <definition name="perfilForm_user" extends="user">
+        <put-attribute name="titol" value="perfil.perfil" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
+    </definition>
 
 
     <!--  ===========  ADMIN  ================== -->
@@ -270,12 +285,19 @@
     <definition name="apiSimpleListAdmin" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/apiSimpleList.jsp" />
     </definition>
-    
-    
-    
-    
+
     <definition name="fitxersOrfesList" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/fitxerList.jsp" />
+    </definition>
+    
+    <definition name="infoCustodyFormAdmin" extends="admin">
+        <put-attribute name="titol" value="infoCustody.infoCustody" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/infoCustodyForm.jsp" />
+    </definition>
+
+    <definition name="infoSignaturaFormAdmin" extends="admin">
+        <put-attribute name="titol" value="infoSignatura.infoSignatura" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/infoSignaturaForm.jsp" />
     </definition>
     
     
