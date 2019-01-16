@@ -227,6 +227,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginList.jsp" />
     </definition>
     
+    <definition name="pluginSegellTempsFormAdmin" extends="admin">
+        <put-attribute name="titol" value="plugin.plugin" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginForm.jsp" />
+    </definition>
+    
+    <definition name="pluginSegellTempsListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginList.jsp" />
+    </definition>
+    
    <definition name="perfilFormAdmin" extends="admin">
         <put-attribute name="titol" value="perfil.perfil" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
