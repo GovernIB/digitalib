@@ -68,6 +68,13 @@
 
     </a></li>
     
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/admin/pluginsegelltemps/list"/>"> <span
+        style="${(fn:contains(url, 'pluginsegelltemps/'))? "font-weight:bold;" : ""}"><fmt:message
+            key="pluginsegelltemps.menu" /></span>
+
+    </a></li>
+    
     
     
     

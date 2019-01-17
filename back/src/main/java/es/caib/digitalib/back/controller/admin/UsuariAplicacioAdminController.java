@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalField;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -198,16 +200,27 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 					PerfilUsuariAplicacioFields.USUARIAPLICACIOID.equal(key));
 
 			StringBuffer str = new StringBuffer();
-
+			
 			for (StringKeyValue per : perfils) {
 			  TraduccioJPA trad = traduccioEjb.findByPrimaryKey(Long.valueOf(per.getValue()));
+			  
+			  String nom = "";
+	      Locale loc = LocaleContextHolder.getLocale();
+	      
+	      if (loc.getLanguage().equals(new Locale("ca").getLanguage())) {
+	        nom = trad.getTraduccio("ca").getValor();
+	      } else if (loc.getLanguage().equals(new Locale("es").getLanguage())) {
+	        nom = trad.getTraduccio("es").getValor();
+	      } else {
+	        nom = trad.getTraduccio("ca").getValor();
+	      }
 				
 			  str.append("<a style=\"padding: 0px; margin-bottom: 4px; margin-right: 4px\" href=\"" + request.getContextPath() + getContextWeb()
 				+ "/deleteperfilusrapp/" + per.getKey()
 				+ "\" class=\"btn btn-mini btn-danger\" type=\"button\">"
 				+ "<i style=\"padding: 0px 4px 4px 0px; margin: 4px 0px 0px 3px \" class=\"icon-trash icon-white\"></i></a><a href=\""
 				+ request.getContextPath() + getContextWeb() + "/editarperfil/" + per.getKey()
-				+ "\">" + trad.getTraduccio("ca").getValor() +"/"+trad.getTraduccio("es").getValor()
+				+ "\">" + nom
 				+ "</a><br/>\n");
 			}
 

@@ -81,6 +81,19 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       HttpServletRequest request, ModelAndView mav) throws I18NException {
     TransaccioForm form = super.getTransaccioForm(_jpa, __isView, request, mav);
 
+    //XYZ YYY ZZZ
+//    if (!form.isNou()) {
+//      Set<Field<?>> campsBuits = new HashSet<Field<?>>(
+//          Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
+//
+//      Iterator<Field<?>> it = campsBuits.iterator();
+//      while (it.hasNext()) {
+//        if (it.next().isNotNull()) campsBuits.remove(it.next());
+//      }
+//      
+//      form.setHiddenFields(campsBuits);
+//      
+//    }
     if (isUtilitzatPerAplicacio()) {
       form.setEntityNameCode("transaccio.aplicacio");
       form.setEntityNameCodePlural("transaccio.aplicacio.plural");
