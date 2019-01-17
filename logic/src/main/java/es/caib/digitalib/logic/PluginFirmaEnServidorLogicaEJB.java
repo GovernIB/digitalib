@@ -64,7 +64,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
   @Override
   public Fitxer firmarFitxerAmbApiFirmaEnServidor(TransaccioJPA transaccio, Fitxer fitxer,
-      Locale locale) {
+      Locale locale,  String userApp, String userPerson) {
 
     PerfilJPA perfil = transaccio.getPerfil();
 
@@ -279,5 +279,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
     }
 
   }
+
+ 
 
 }

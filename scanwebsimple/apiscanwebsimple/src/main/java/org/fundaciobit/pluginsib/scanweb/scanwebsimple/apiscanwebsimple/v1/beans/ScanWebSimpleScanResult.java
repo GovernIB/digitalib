@@ -15,6 +15,12 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class ScanWebSimpleScanResult {
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+  protected long transactionID;
+
+  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+  protected String transactionWebID;
+
+  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected ScanWebSimpleStatus status;
 
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -40,39 +46,45 @@ public class ScanWebSimpleScanResult {
    */
   @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected ScanWebSimpleArxiuInfo arxiuInfo = null;
-  
-  
+
   /**
    * 
    */
   public ScanWebSimpleScanResult() {
     super();
   }
-  
-  
-  public ScanWebSimpleScanResult(ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
-	      ScanWebSimpleScannedFileInfo scannedFileInfo) {
-	    super();
-	    this.status = status;
-	    this.scannedFile = scannedFile;
-	    this.scannedFileInfo = scannedFileInfo;
-	  }
-  
 
-  public ScanWebSimpleScanResult(ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
+  public ScanWebSimpleScanResult(long transactionID, String transactionWebID,
+      ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
+      ScanWebSimpleScannedFileInfo scannedFileInfo) {
+    super();
+    this.transactionID = transactionID;
+    this.transactionWebID = transactionWebID;
+    this.status = status;
+    this.scannedFile = scannedFile;
+    this.scannedFileInfo = scannedFileInfo;
+  }
+
+  public ScanWebSimpleScanResult(long transactionID, String transactionWebID,
+      ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
       ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile,
       ScanWebSimpleSignedFileInfo signedFileInfo) {
     super();
+    this.transactionID = transactionID;
+    this.transactionWebID = transactionWebID;
     this.status = status;
     this.scannedFile = scannedFile;
     this.scannedFileInfo = scannedFileInfo;
     this.signedFileInfo = signedFileInfo;
   }
 
-  public ScanWebSimpleScanResult(ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
-      ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile, 
+  public ScanWebSimpleScanResult(long transactionID, String transactionWebID,
+      ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
+      ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile,
       ScanWebSimpleSignedFileInfo signedFileInfo, ScanWebSimpleCustodyInfo custodyInfo) {
     super();
+    this.transactionID = transactionID;
+    this.transactionWebID = transactionWebID;
     this.status = status;
     this.scannedFile = scannedFile;
     this.detachedSignatureFile = detachedSignatureFile;
@@ -80,19 +92,21 @@ public class ScanWebSimpleScanResult {
     this.signedFileInfo = signedFileInfo;
     this.custodyInfo = custodyInfo;
   }
-  
-  
-  public ScanWebSimpleScanResult(ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
-	      ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile, 
-	      ScanWebSimpleSignedFileInfo signedFileInfo, ScanWebSimpleArxiuInfo arxiuInfo) {
-	    super();
-	    this.status = status;
-	    this.scannedFile = scannedFile;
-	    this.detachedSignatureFile = detachedSignatureFile;
-	    this.scannedFileInfo = scannedFileInfo;
-	    this.signedFileInfo = signedFileInfo;
-	    this.arxiuInfo = arxiuInfo;
-	  }
+
+  public ScanWebSimpleScanResult(long transactionID, String transactionWebID,
+      ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
+      ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile,
+      ScanWebSimpleSignedFileInfo signedFileInfo, ScanWebSimpleArxiuInfo arxiuInfo) {
+    super();
+    this.transactionID = transactionID;
+    this.transactionWebID = transactionWebID;
+    this.status = status;
+    this.scannedFile = scannedFile;
+    this.detachedSignatureFile = detachedSignatureFile;
+    this.scannedFileInfo = scannedFileInfo;
+    this.signedFileInfo = signedFileInfo;
+    this.arxiuInfo = arxiuInfo;
+  }
 
   public ScanWebSimpleStatus getStatus() {
     return status;
@@ -141,24 +155,45 @@ public class ScanWebSimpleScanResult {
   public void setDetachedSignatureFile(ScanWebSimpleFile detachedSignatureFile) {
     this.detachedSignatureFile = detachedSignatureFile;
   }
-  
-  
 
   public ScanWebSimpleArxiuInfo getArxiuInfo() {
-	return arxiuInfo;
-}
+    return arxiuInfo;
+  }
 
+  public void setArxiuInfo(ScanWebSimpleArxiuInfo arxiuInfo) {
+    this.arxiuInfo = arxiuInfo;
+  }
 
-public void setArxiuInfo(ScanWebSimpleArxiuInfo arxiuInfo) {
-	this.arxiuInfo = arxiuInfo;
-}
+  public long getTransactionID() {
+    return transactionID;
+  }
 
+  public void setTransactionID(long transactionID) {
+    this.transactionID = transactionID;
+  }
 
-public static String toString(ScanWebSimpleScanResult result) {
+  public String getTransactionWebID() {
+    return transactionWebID;
+  }
+
+  public void setTransactionWebID(String transactionWebID) {
+    this.transactionWebID = transactionWebID;
+  }
+
+  public static String toString(ScanWebSimpleScanResult result) {
 
     StringBuffer str = new StringBuffer();
-
+    
     str.append("\n").append("====== SCANWEB =====");
+    
+    str.append("\n").append(" * TransactionID: " + result.getTransactionID());
+    str.append("\n").append(" * TransactionWebID: " + result.getTransactionWebID());
+    
+    
+    if (result.getStatus().getStatus() !=  ScanWebSimpleStatus.STATUS_FINAL_OK) {
+      return str.toString();
+    }
+    
     // Escaneig
     ScanWebSimpleScannedFileInfo scannedFileInfo = result.getScannedFileInfo();
     str.append("\n").append("  + SCANINFO:");
@@ -202,14 +237,16 @@ public static String toString(ScanWebSimpleScanResult result) {
       str.append("\n").append("  + CUSTODIA:");
       str.append("\n").append("      * custodyFileID: " + custody.getCustodyID());
       str.append("\n").append("      * CSV: " + custody.getCsv());
-      str.append("\n").append("      * OriginalFileURL: " + custody.getOriginalFileURL());
-      str.append("\n").append("      * PrintableFileURL: " + custody.getPrintableFileURL());
-      str.append("\n").append("      * ENIFileURL: " + custody.getEniFileURL());
       str.append("\n").append(
           "      * getCsvValidationWeb: " + custody.getCsvValidationWeb());
       str.append("\n").append(
           "      * getCsvGenerationDefinition: "
               + custody.getCsvGenerationDefinition());
+      str.append("\n").append("      * OriginalFileURL: " + custody.getOriginalFileURL());
+      str.append("\n").append("      * PrintableFileURL: " + custody.getPrintableFileURL());
+      str.append("\n").append("      * ENIFileURL: " + custody.getEniFileURL());
+      str.append("\n").append("      * ValidationFileUrl: " + custody.getValidationFileUrl());
+
     }
     
     
@@ -220,18 +257,18 @@ public static String toString(ScanWebSimpleScanResult result) {
       str.append("\n").append("      * expedientID: " + arxiu.getExpedientID());
       str.append("\n").append("      * documentID: " + arxiu.getDocumentID());
       str.append("\n").append("      * CSV: " + arxiu.getCsv());
-      str.append("\n").append("      * OriginalFileURL: " + arxiu.getOriginalFileURL());
-      str.append("\n").append("      * PrintableFileURL: " + arxiu.getPrintableFileURL());
-      str.append("\n").append("      * ENIFileURL: " + arxiu.getEniFileURL());
       str.append("\n").append(
           "      * getCsvValidationWeb: " + arxiu.getCsvValidationWeb());
       str.append("\n").append(
           "      * getCsvGenerationDefinition: "
               + arxiu.getCsvGenerationDefinition());
+      str.append("\n").append("      * OriginalFileURL: " + arxiu.getOriginalFileURL());
+      str.append("\n").append("      * PrintableFileURL: " + arxiu.getPrintableFileURL());
+      str.append("\n").append("      * ENIFileURL: " + arxiu.getEniFileURL());
+      str.append("\n").append("      * ValidationFileUrl: " + arxiu.getValidationFileUrl());
     }
 
     return str.toString();
 
   }
-
 }

@@ -166,6 +166,8 @@ public class ApiScanWebSimpleTester {
       ScanWebSimpleStatus transactionStatus = result.getStatus();
 
       int status = transactionStatus.getStatus();
+      
+      System.out.println(ScanWebSimpleScanResult.toString(result));
 
       switch (status) {
 
@@ -198,8 +200,6 @@ public class ApiScanWebSimpleTester {
 
       case ScanWebSimpleStatus.STATUS_FINAL_OK: // = 2;
       {
-
-        System.out.println(ScanWebSimpleScanResult.toString(result));
 
         {
           File scanFile = new File("scanfile." + result.getScannedFileInfo().getFormatFile());

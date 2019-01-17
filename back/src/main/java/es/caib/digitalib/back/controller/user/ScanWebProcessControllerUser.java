@@ -77,6 +77,8 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
   @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
+  
+
 
   /**
    * 
@@ -297,8 +299,10 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
       TransaccioJPA transaction = transaccioLogicaEjb.crearTransaccio(requestTransaction,
           null, usuariPersona, urlRetorn, ip);
-
+      
       final String transactionWebID = transaction.getTransactionWebId();
+      
+      auditCreateTransaction(usuariPersona, transaction);
 
       // TODO per ara està buit
       final boolean isPublic = false;
@@ -342,9 +346,21 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
   }
 
-  // protected int getTipusPerfil() {
-  // return 1; // Només Escaneig XYZ ZZZ Constants.PERFIL_US_NOMES_ESCANEIG
-  // }
+  protected void auditCreateTransaction(UsuariPersonaJPA usuariPersona,
+      TransaccioJPA transaccio) throws I18NException {
+    final boolean isApp = isPublic();
+    
+    final String additionalInfo = "IP: " + transaccio.getIp() + "\n"
+                                  + "Username: " + usuariPersona.getUsername() + "\n"
+                                  + "TransacctionWebID: " + transaccio.getTransactionWebId() + "\n"
+                                  + "Tipus Transacció: " + I18NUtils.tradueix(new Locale("ca"), "transaccio.tipus." + Math.abs(transaccio.getPerfil().getUsPerfil()));
+    
+    final int auditType =  Constants.AUDIT_TYPE_CREATE_TRANSACTION;
+
+    final String msg = "Creada transacció de Persona amb ID " +  transaccio.getTransaccioID();
+    auditoriaLogicaEjb.audita(transaccio, isApp, msg , additionalInfo, auditType, null, usuariPersona.getUsername());;
+  }
+
 
   @Override
   protected ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
@@ -362,6 +378,10 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     int status = transaccio.getEstatCodi();
 
     log.info(" STATUS =><  " + status);
+    
+   
+    
+    
 
     if (status == ScanWebSimpleStatus.STATUS_FINAL_OK) {
       // TODO  XYZ ZZZ Traduir

@@ -301,6 +301,16 @@
     </definition>
     
     
+    <definition name="auditoriaFormAdmin" extends="admin">
+        <put-attribute name="titol" value="auditoria.auditoria" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaForm.jsp" />
+    </definition>
+    
+    <definition name="auditoriaListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaList.jsp" />
+    </definition>
+    
+    
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">
@@ -343,6 +353,16 @@
     
     <definition name="apiSimpleListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/apiSimpleList.jsp" />
+    </definition>
+
+
+    <definition name="auditoriaFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="auditoria.auditoria" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaForm.jsp" />
+    </definition>
+    
+    <definition name="auditoriaListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaList.jsp" />
     </definition>
 
 

@@ -1,12 +1,42 @@
   
   
-  ALTER TABLE dib_transaccio
-   ALTER COLUMN returnurl DROP NOT NULL;
+ALTER TABLE dib_transaccio ALTER COLUMN returnurl DROP NOT NULL;
    
    
-   ALTER TABLE dib_transaccio RENAME view  TO vista;
+ALTER TABLE dib_transaccio RENAME view  TO vista;
    
-   ALTER TABLE dib_infocustody  ADD COLUMN validationfileurl character varying(255);
+ALTER TABLE dib_infocustody  ADD COLUMN validationfileurl character varying(255);
+   
+   
+CREATE TABLE digitalib.dib_auditoria
+(
+   auditoriaid bigint NOT NULL DEFAULT nextval('dib_digitalib_seq'), 
+   data timestamp without time zone NOT NULL, 
+   transaccioid bigint NOT NULL, 
+   loginuser character varying(255), 
+   tipus integer NOT NULL, 
+   missatge character varying(255) NOT NULL, 
+   additionalinfo character varying(3000), 
+   CONSTRAINT dib_auditoria_pk PRIMARY KEY (auditoriaid)
+);
+
+
+create index dib_auditoria_pk_i on dib_auditoria (auditoriaid);
+
+
+ALTER TABLE dib_auditoria RENAME loginuser  TO username;
+
+ALTER TABLE dib_auditoria ADD COLUMN isapp boolean NOT NULL;
+
+ALTER TABLE dib_auditoria
+  DROP COLUMN username;
+ALTER TABLE dib_auditoria
+  ADD COLUMN usernameaplicacio character varying(255);
+ALTER TABLE dib_auditoria
+  ADD COLUMN usernamepersona character varying(255);
+COMMENT ON COLUMN dib_auditoria.usernameaplicacio IS 'Username d''Aplicacio que realitza aquella acció reportada per l''auditoria.';
+COMMENT ON COLUMN dib_auditoria.usernamepersona IS 'Username de Persona que realitza aquella acció reportada per l''auditoria.';
+
 
 
 

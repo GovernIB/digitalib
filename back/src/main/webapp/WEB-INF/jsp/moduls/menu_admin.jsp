@@ -116,6 +116,13 @@
               key="transaccio.gestio.persona" /></span>
 
       </a></li>
+      
+      
+       <li style="list-style-type: disc; list-style-position: inside;"><a
+        href="<c:url value="/admin/auditoria/persona/list"/>"> <span
+          style="${(fn:contains(url, '/admin/auditoria/persona/'))? "font-weight:bold;" : ""}"><fmt:message
+              key="auditoria.auditoria" /></span>
+      </a></li>
 
      <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
@@ -168,6 +175,12 @@
           style="${(fn:contains(url, '/transaccioaplicacio/'))? "font-weight:bold;" : ""}"><fmt:message
               key="transaccio.gestio.aplicacio" /></span>
 
+      </a></li>
+      
+      <li style="list-style-type: disc; list-style-position: inside;"><a
+        href="<c:url value="/admin/auditoria/aplicacio/list"/>"> <span
+          style="${(fn:contains(url, '/admin/auditoria/persona/'))? "font-weight:bold;" : ""}"><fmt:message
+              key="auditoria.auditoria" /></span>
       </a></li>
 
       <hr style="margin-top: 6px; margin-bottom: 6px;" />

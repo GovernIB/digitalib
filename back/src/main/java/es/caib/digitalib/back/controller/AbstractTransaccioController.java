@@ -462,7 +462,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         // XYZ ZZZ Verificar que es pot esborrar
         // (1) No te fitxer
         // (2) Esta en error i té més d'un dia
-        transaccioLogicaEjb.deleteFull(transaccio, true);
+        transaccioLogicaEjb.deleteFull(transaccio, true, null, LoginInfo.getInstance().getUsername());
 
         createMessageSuccess(request, "success.deleted", transaccioID);
         return getRedirectWhenDelete(request, transaccioID, null);

@@ -1,7 +1,14 @@
 package es.caib.digitalib.back.controller.admin;
 
-import es.caib.digitalib.back.controller.AbstractTransaccioController;
+import javax.servlet.http.HttpServletRequest;
 
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.springframework.web.servlet.ModelAndView;
+
+import es.caib.digitalib.back.controller.AbstractTransaccioController;
+import es.caib.digitalib.back.form.webdb.TransaccioForm;
+import es.caib.digitalib.jpa.TransaccioJPA;
 
 /**
  * 
@@ -25,7 +32,6 @@ public abstract class AbstractTransaccioAdminController extends AbstractTransacc
     return "TransaccioAdmin_FilterForm_" + isUtilitzatPerAplicacio();
   }
 
-
   @Override
   public String getPerfilInfoContextWeb() {
     return PerfilInfoTransaccioAdminController.CONTEXTWEB;
@@ -35,5 +41,21 @@ public abstract class AbstractTransaccioAdminController extends AbstractTransacc
   public boolean isAdmin() {
     return true;
   }
-  
+
+  @Override
+  public TransaccioForm getTransaccioForm(TransaccioJPA _jpa, boolean __isView,
+      HttpServletRequest request, ModelAndView mav) throws I18NException {
+    TransaccioForm form = super.getTransaccioForm(_jpa, __isView, request, mav);
+
+    if (__isView) {
+      // Afegir Boto de Veure Auditoria
+      form.addAdditionalButton(new AdditionalButton("icon-user icon-white",
+          "transaccio.veureauditoria", "/admin/auditoria/transaccio/"
+              + (isUtilitzatPerAplicacio() ? "aplicacio" : "persona") + "/t/"
+              + _jpa.getTransaccioID(), "btn-info"));
+    }
+
+    return form;
+  }
+
 }

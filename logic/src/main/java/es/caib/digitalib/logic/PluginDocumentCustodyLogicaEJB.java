@@ -243,8 +243,8 @@ public class PluginDocumentCustodyLogicaEJB extends
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
-    } catch (Exception e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(Exception): " + e.getMessage();
+    } catch (Throwable e) {
+      String msg = "XYZ ZZZ Error custodiant fitxer firmat(Throwable): " + e.getMessage();
 
       // XYZ ZZZ
       e.printStackTrace();

@@ -19,7 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.logic.AuditoriaLogicaLocal;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
+import es.caib.digitalib.logic.TransaccioPublicLogicaLocal;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.utils.Constants;
@@ -41,6 +43,13 @@ public abstract class AbstractFirmaArxiuParametersController extends
 
   @EJB(mappedName = ScanWebModuleLocal.JNDI_NAME)
   protected ScanWebModuleLocal scanWebModuleEjb;
+  
+
+  @EJB(mappedName = TransaccioPublicLogicaLocal.JNDI_NAME)
+  protected TransaccioPublicLogicaLocal transaccioLogicaEjb;
+  
+  @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
+  protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
   @Override
   public String getPerfilInfoContextWeb() {
@@ -168,6 +177,14 @@ public abstract class AbstractFirmaArxiuParametersController extends
       TransaccioForm transaccioForm, Throwable __e) {
     if (__e == null) {
 
+      final String msg = "Final d'inserció de dades addicionals per escaneig/firma/arxivat";
+      final boolean isApp = (transaccioForm.getTransaccio().getUsuariAplicacioId() != null);
+      final String additionalInfo = null;
+      final int auditType = Constants.AUDIT_TYPE_FINISH_INSERT_DATA;
+     
+        auditoriaLogicaEjb.audita(transaccioForm.getTransaccio(), 
+            msg, additionalInfo, auditType, isApp);
+      
       request.getSession().removeAttribute(HtmlUtils.MISSATGES);
       return "redirect:"
           + request.getSession().getAttribute(
@@ -195,6 +212,16 @@ public abstract class AbstractFirmaArxiuParametersController extends
       swc = scanWebModuleEjb.getScanWebConfig(request, transaccioWebId);
 
       swc.getStatus().setStatus(ScanWebStatus.STATUS_CANCELLED);
+      
+      // AUDITA
+      final String msg = "Cancelada transaccio durant inseció de dades";
+      final boolean isApp = isPublic();
+      final String additionalInfo = null;
+      final int auditType = Constants.AUDIT_TYPE_CANCEL_USER;
+     
+      auditoriaLogicaEjb.audita(transaccioLogicaEjb, (long)transaccioID, 
+            msg, additionalInfo, auditType, isApp);
+      
     }
 
     String finalURL = AbstractScanWebProcessController

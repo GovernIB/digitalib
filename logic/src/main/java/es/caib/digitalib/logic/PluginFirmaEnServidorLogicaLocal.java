@@ -21,7 +21,8 @@ public interface PluginFirmaEnServidorLogicaLocal extends
   public static final String JNDI_NAME = "digitalib/PluginFirmaEnServidorLogicaEJB/local";
   
   
-  public Fitxer firmarFitxerAmbApiFirmaEnServidor(TransaccioJPA transaccio, Fitxer fitxer, Locale locale);
+  public Fitxer firmarFitxerAmbApiFirmaEnServidor(TransaccioJPA transaccio, Fitxer fitxer,
+      Locale locale, String userApp, String userPerson);
 
 
 }

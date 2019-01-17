@@ -62,9 +62,12 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
   
   @EJB(mappedName = es.caib.digitalib.ejb.InfoSignaturaLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.InfoSignaturaLocal infoSignaturaEjb;
+  
+  @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
+  protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
   @Override
-  public Set<Long> deleteFull(Transaccio transaccio, boolean esborrarFitxers) throws I18NException {
+  public Set<Long> deleteFull(Transaccio transaccio, boolean esborrarFitxers, String usernameApp, String usernamePerson) throws I18NException {
     
     Set<Long> fitxers = new HashSet<Long>();
     if (transaccio == null) {
@@ -107,12 +110,16 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     }
     
     
+    final boolean isApp = (transaccio.getUsuariAplicacioId() != null);
+    final String msg = "Esborrada transaccio " +  transaccio.getTransaccioID();
+    final String additionalInfo = null;
+    final int auditType = Constants.AUDIT_TYPE_DELETE_TRANSACTION;
+    auditoriaLogicaEjb.audita(transaccio, isApp, msg, additionalInfo, auditType, usernameApp, usernamePerson);
+    
     return fitxers;
     
   }
 
-
-  
   
   @Override
   @RolesAllowed({"DIB_ADMIN","DIB_USER"})

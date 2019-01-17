@@ -4,6 +4,7 @@ import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.SubQuery;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.ApiScanWebSimple;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuInfo;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfile;
@@ -34,9 +35,12 @@ import es.caib.digitalib.jpa.InfoSignaturaJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;
+import es.caib.digitalib.logic.AuditoriaLogicaLocal;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.ScanWebUtils;
+import es.caib.digitalib.model.bean.AuditoriaBean;
+import es.caib.digitalib.model.entity.Auditoria;
 import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.PerfilUsuariAplicacio;
 import es.caib.digitalib.model.fields.PerfilFields;
@@ -80,6 +84,9 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
   @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
   protected TransaccioLogicaLocal transaccioLogicaEjb;
+  
+  @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
+  protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
   // XYZ ZZZ ZZZ ELIMINAR !!! HA d'ANAR A BBDD !!!!!!!!
   // protected static final Map<String, TransactionInfo> currentTransactions = new
@@ -228,6 +235,10 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     try {
       TransaccioJPA transaccio = transaccioLogicaEjb.crearTransaccio(requestTransaction,
           usuariAplicacio, null, null, ip);
+      
+      auditCreateTransaction(usuariAplicacio, transaccio);
+      
+      
       transactionWebID = transaccio.getTransactionWebId();
     } catch (I18NException e) {
       // XYZ ZZZ YTraduir
@@ -241,6 +252,27 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
     return res;
 
+  }
+  
+  
+  protected void auditCreateTransaction(UsuariAplicacioJPA usuariAplicacio, 
+      TransaccioJPA transaction) throws I18NException {
+    final boolean isApp = true;
+    final String ip = transaction.getIp();
+    final String remoteUsernamePerson = transaction.getFuncionariUsername();
+    
+    final String additionalInfo = "IP: " + ip + "\n"
+                                  + "Aplicacio: " + usuariAplicacio.getUsername() + "\n"
+                                  + "Remote Usuari Persona: " + remoteUsernamePerson + "\n"
+                                  + "TransacctionWebID: " + transaction.getTransactionWebId() + "\n"
+                                  + "Tipus Transacció: " + I18NUtils.tradueix(new Locale("ca"), "transaccio.tipus." + Math.abs(transaction.getPerfil().getUsPerfil()));
+    
+    Auditoria audit = new AuditoriaBean(new Timestamp(System.currentTimeMillis()),
+        transaction.getTransaccioID(), Constants.AUDIT_TYPE_CREATE_TRANSACTION,
+        "Creada transacció d'Aplicació amb ID " +  transaction.getTransaccioID(),
+        additionalInfo,isApp,  usuariAplicacio.getUsername(), remoteUsernamePerson);
+    
+    auditoriaLogicaEjb.create(audit);
   }
 
   @RequestMapping(value = "/" + ApiScanWebSimple.STARTTRANSACTION, method = RequestMethod.POST)
@@ -475,6 +507,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
       // TODO XYZ ZZZ ZZZZ
       ScanWebSimpleScanResult fssr = new ScanWebSimpleScanResult();
+      fssr.setTransactionID(transaccio.getTransaccioID());
+      fssr.setTransactionWebID(transactionWebID);
 
       ScanWebSimpleStatus status = new ScanWebSimpleStatus();
       status.setStatus(transaccio.getEstatCodi());
