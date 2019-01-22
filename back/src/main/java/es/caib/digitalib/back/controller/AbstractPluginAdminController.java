@@ -1,23 +1,33 @@
 package es.caib.digitalib.back.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
-import org.springframework.validation.BindingResult;
+import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.digitalib.back.controller.webdb.PluginController;
 import es.caib.digitalib.back.form.webdb.PluginFilterForm;
 import es.caib.digitalib.back.form.webdb.PluginForm;
 import es.caib.digitalib.jpa.PluginJPA;
+import es.caib.digitalib.logic.PerfilLogicaLocal;
 import es.caib.digitalib.logic.PluginLogicaLocal;
+import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.Plugin;
+import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -29,7 +39,12 @@ public abstract class AbstractPluginAdminController extends PluginController {
 
   @EJB(mappedName = PluginLogicaLocal.JNDI_NAME)
   protected PluginLogicaLocal pluginLogicaEjb;
+  
+  @EJB(mappedName = PerfilLogicaLocal.JNDI_NAME)
+  protected PerfilLogicaLocal perfilLogicaEjb;
 
+  public abstract String getContextWebPlugin();
+  
   public abstract int getTipusDePlugin();
 
   public abstract String getCodeName();
@@ -79,20 +94,88 @@ public abstract class AbstractPluginAdminController extends PluginController {
   public PluginForm getPluginForm(PluginJPA _jpa, boolean __isView,
       HttpServletRequest request, ModelAndView mav) throws I18NException {
     PluginForm pluginForm = super.getPluginForm(_jpa, __isView, request, mav);
+    
+    PluginJPA p = pluginForm.getPlugin();
+    
     if (pluginForm.isNou()) {
-      PluginJPA p = pluginForm.getPlugin();
       p.setActiu(true);
       p.setTipus(getTipusDePlugin());
+    } else {
+      if (p.isActiu()) {
+        pluginForm.addAdditionalButton(new AdditionalButton("icon-ban-circle icon-white", "plugin.desactivar",
+            getContextWebPlugin() + "/desactivarplugin/" + p.getPluginID()  , "btn-warning"));
+      } else {
+        pluginForm.addAdditionalButton(new AdditionalButton("icon-ok-circle icon-white", "plugin.activar",
+            getContextWebPlugin() + "/activarplugin/" + p.getPluginID()  , "btn-success"));
+      }
     }
 
+    Set<Field<?>> readOnly = new HashSet<Field<?>>();
+    readOnly.add(ACTIU);
+    
+    pluginForm.setReadOnlyFields(readOnly);
+    
     pluginForm.addHiddenField(TIPUS);
 
     return pluginForm;
   }
+  
+  @RequestMapping(value = "/activarplugin/{pluginid}", method = RequestMethod.GET)
+  public String pluginActivate(HttpServletRequest request, HttpServletResponse response,
+      @PathVariable Long pluginid) throws I18NException {
 
-  @Override
-  public void preValidate(HttpServletRequest request, PluginForm pluginForm,
-      BindingResult result) throws I18NException {
+    PluginJPA p = pluginLogicaEjb.findByPrimaryKey(pluginid);
+    
+    p.setActiu(true);
+    pluginLogicaEjb.update(p);
+    
+    String msg = createMessageSuccess(request, "success.activarplugin", p.getPluginID());
+    System.out.println("SUCCESS = "+msg);
+    
+    return "redirect:" + getContextWebPlugin() + "/list/";
+
+  }
+  
+  @RequestMapping(value = "/desactivarplugin/{pluginid}", method = RequestMethod.GET)
+  public String pluginDeactivate(HttpServletRequest request, HttpServletResponse response,
+      @PathVariable Long pluginid) throws I18NException {
+
+    PluginJPA p = pluginLogicaEjb.findByPrimaryKey(pluginid);
+    
+    int tipusPlugin = getTipusDePlugin();
+    
+    Where w = null;
+    
+    switch (tipusPlugin) {
+      case Constants.TIPUS_PLUGIN_ARXIU:
+        w = PerfilFields.PLUGINARXIUID.equal(p.getPluginID());
+        break;
+      case Constants.TIPUS_PLUGIN_DOCUMENT_CUSTODY:
+        w = PerfilFields.PLUGINDOCCUSTODYID.equal(p.getPluginID());
+        break;
+      case Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR:
+        w = PerfilFields.PLUGINFIRMASERVIDORID.equal(p.getPluginID());
+        break;
+      case Constants.TIPUS_PLUGIN_SCANWEB:
+        w = PerfilFields.PLUGINSCANWEBID.equal(p.getPluginID()).AND(PerfilFields.PLUGINSCANWEB2ID.equal(p.getPluginID()));
+        break;
+    }
+    
+    List<Perfil> perfils = perfilLogicaEjb.select(w);
+    
+    if (perfils.size() > 0) {
+      Long id = perfils.get(0).getPerfilID();
+      String msg = createMessageError(request, "error.desactivarplugin", id);
+      System.out.println("ERROR = "+msg);
+      
+      return "redirect:" + getContextWebPlugin() + "/" + p.getPluginID() + "/edit";
+    }
+    
+    p.setActiu(false);
+    pluginLogicaEjb.update(p);
+    String msg = createMessageSuccess(request, "success.desactivarplugin", p.getPluginID());
+    
+    return "redirect:" + getContextWebPlugin() + "/list/";
 
   }
 

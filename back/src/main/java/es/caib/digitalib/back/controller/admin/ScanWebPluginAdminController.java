@@ -17,10 +17,12 @@ import es.caib.digitalib.utils.Constants;
  *
  */
 @Controller
-@RequestMapping(value = "/admin/pluginscanweb")
+@RequestMapping(value = ScanWebPluginAdminController.CONTEXTWEB)
 @SessionAttributes(types = { PluginForm.class, PluginFilterForm.class })
 public class ScanWebPluginAdminController extends AbstractPluginAdminController {
 
+  public static final String CONTEXTWEB = "/admin/pluginscanweb";
+  
   @Override
   public String getTileForm() {
     return "pluginScanWebFormAdmin";
@@ -39,6 +41,11 @@ public class ScanWebPluginAdminController extends AbstractPluginAdminController 
   @Override
   public String getCodeName() {
     return "scanwebplugin";
+  }
+
+  @Override
+  public String getContextWebPlugin() {
+    return CONTEXTWEB;
   }
   
 }

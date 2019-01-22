@@ -258,8 +258,10 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 
 		Where w = Where.AND(where,
 				PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_SCANWEB));
+		
+		Where w_actiu = Where.AND(w, PluginFields.ACTIU.equal(true));
 
-		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
+		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w_actiu);
 	}
 
 	@Override
@@ -268,8 +270,10 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 			throws I18NException {
 		Where w = Where.AND(where,
 				PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_SCANWEB));
+		
+		Where w_actiu = Where.AND(w, PluginFields.ACTIU.equal(true));
 
-		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
+		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w_actiu);
 	}
 
 	@Override
@@ -279,7 +283,10 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 
 		Where w = Where.AND(where, PluginFields.TIPUS
 				.equal(Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR));
-		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
+		
+		Where w_actiu = Where.AND(w, PluginFields.ACTIU.equal(true));
+		
+		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w_actiu);
 	}
 
 	@Override
@@ -367,8 +374,10 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 			throws I18NException {
 		Where w = Where.AND(where,
 				PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_ARXIU));
+		
+		Where w_actiu = Where.AND(w, PluginFields.ACTIU.equal(true));
 
-		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
+		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w_actiu);
 	}
 
 	@Override
@@ -378,7 +387,8 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 		Where w = Where.AND(where, PluginFields.TIPUS
 				.equal(Constants.TIPUS_PLUGIN_DOCUMENT_CUSTODY));
 
-		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w);
+		Where w_actiu = Where.AND(w, PluginFields.ACTIU.equal(true));
+		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w_actiu);
 	}
 
 	@Override
