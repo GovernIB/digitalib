@@ -3,7 +3,7 @@
 <c:set var="url" value="${urlActual}" />
 <div>
   <h5>
-    <fmt:message key="usuari.menu" />
+    <fmt:message key="usuariaccions.menu" />
   </h5>
   <ul class="tree" style="margin: 3px; padding: 0px;">
     <%--
@@ -38,7 +38,7 @@
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/user/llistatperfilsdisponibles"/>"> <span
         style="${(fn:contains(url, '/user/llistatperfilsdisponibles'))? "font-weight:bold;" : ""}">
-          <fmt:message key="escanejar" />
+          <fmt:message key="usuari.escanejar" />
       </span>
     </a></li>
 
@@ -50,7 +50,7 @@
       href="<c:url value="/user/transaccio/nomesescaneig/list"/>"> <span
         style="${(fn:contains(url, '/user/transaccio/nomesescaneig/'))? "font-weight:bold;" : ""}">
 
-          <fmt:message key="transaccio.tipus.1.plural" />
+          <fmt:message key="usuari.escanejos" />
       </span>
     </a></li>
 
@@ -59,7 +59,7 @@
       href="<c:url value="/user/transaccio/copiaautentica/list"/>"> <span
         style="${(fn:contains(url, '/user/transaccio/copiaautentica/'))? "font-weight:bold;" : ""}">
 
-          <fmt:message key="transaccio.tipus.2.plural" />
+          <fmt:message key="usuari.copies" />
       </span>
     </a></li>
 
@@ -68,7 +68,7 @@
       href="<c:url value="/user/transaccio/custodia/list"/>"> <span
         style="${(fn:contains(url, '/user/transaccio/custodia/'))? "font-weight:bold;" : ""}">
 
-          <fmt:message key="transaccio.tipus.3.plural" />
+          <fmt:message key="usuari.copiesarxiu" />
       </span>
     </a></li>
 

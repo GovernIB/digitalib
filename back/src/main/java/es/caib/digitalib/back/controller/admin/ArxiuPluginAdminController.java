@@ -28,9 +28,11 @@ import es.caib.digitalib.utils.Constants;
  *
  */
 @Controller
-@RequestMapping(value = "/admin/pluginarxiu")
+@RequestMapping(value = ArxiuPluginAdminController.CONTEXTWEB)
 @SessionAttributes(types = { PluginForm.class, PluginFilterForm.class })
 public class ArxiuPluginAdminController extends AbstractPluginAdminController {
+  
+  public static final String CONTEXTWEB = "/admin/pluginarxiu";
 
   public static final Field<?>[] CAMPS = { TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI,
       TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM, TransaccioFields.ARXIUOPTPARAMORGANS,
@@ -94,6 +96,11 @@ public class ArxiuPluginAdminController extends AbstractPluginAdminController {
 
     }
 
+  }
+
+  @Override
+  public String getContextWebPlugin() {
+    return CONTEXTWEB;
   }
 
 }

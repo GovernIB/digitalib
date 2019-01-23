@@ -17,9 +17,11 @@ import es.caib.digitalib.utils.Constants;
  *
  */
 @Controller
-@RequestMapping(value = "/admin/pluginfirmaenservidor")
+@RequestMapping(value = FirmaEnServidorPluginAdminController.CONTEXTWEB)
 @SessionAttributes(types = { PluginForm.class, PluginFilterForm.class })
 public class FirmaEnServidorPluginAdminController extends AbstractPluginAdminController {
+  
+  public static final String CONTEXTWEB = "/admin/pluginfirmaenservidor";
 
   @Override
   public String getTileForm() {
@@ -39,6 +41,11 @@ public class FirmaEnServidorPluginAdminController extends AbstractPluginAdminCon
   @Override
   public String getCodeName() {
     return "firmaenservidorplugin";
+  }
+
+  @Override
+  public String getContextWebPlugin() {
+    return CONTEXTWEB;
   }
   
 }

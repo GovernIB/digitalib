@@ -190,7 +190,7 @@
       
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/auditoria/aplicacio/list"/>"> <span
-          style="${(fn:contains(url, '/admin/auditoria/persona/'))? "font-weight:bold;" : ""}"><fmt:message
+          style="${(fn:contains(url, '/admin/auditoria/aplicacio/'))? "font-weight:bold;" : ""}"><fmt:message
               key="auditoria.auditoria" /></span>
       </a></li>
 
