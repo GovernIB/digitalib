@@ -19,6 +19,7 @@ import es.caib.digitalib.jpa.FitxerJPA;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.InfoSignaturaJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
+import es.caib.digitalib.jpa.PluginCridadaJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
@@ -54,6 +55,10 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
 
   @EJB(mappedName = es.caib.digitalib.ejb.InfoCustodyLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.InfoCustodyLocal infoCustodyEjb;
+  
+
+  @EJB(mappedName = CridadaPluginLogicaLocal.JNDI_NAME)
+  protected CridadaPluginLogicaLocal pluginCridada;
 
   @Override
   public int getTipusDePlugin() {
@@ -92,8 +97,12 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       return null;
     }
 
+    
+    
+    final String parametresText = null;
+    PluginCridadaJPA monitorIntegracions = pluginCridada.preCridada(perfil.getPluginArxiuID(), "expedientCrear,documentCrear,tancar", transaccio.getUsuariPersonaId(), transaccio.getUsuariAplicacioId(), parametresText);
+    
     InfoSignaturaJPA infoSignatura = transaccio.getInfoSignatura();
-
     try {
 
       // ============ CALCULATS
@@ -308,9 +317,15 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       plugin.expedientTancar(expedientId);
       log.info("XYZ ZZZ  Expedient Tancat... ");
       
+      String uuidDoc = documentCreat.getIdentificador();
+      
+      // Cridades de Plugin
+      pluginCridada.postCridadaOK(monitorIntegracions, "expedientID=" + expedientId 
+           + "\nDocumentID=" + uuidDoc );
+      
       log.info("\n FINAL \n");
 
-      String uuidDoc = documentCreat.getIdentificador();
+      
 
       java.lang.String originalFileUrl = plugin.getOriginalFileUrl(uuidDoc);
       String printableFileUrl = plugin.getPrintableFileUrl(uuidDoc);
@@ -333,43 +348,33 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       infoCust = (InfoCustodyJPA) infoCustodyEjb.create(infoCust);
 
       transaccio.setInfoCustodyID(infoCust.getInfoCustodyID());
-      
-      
-  
 
       return infoCust;
 
-    } catch (I18NException e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(I18NException): "
-          + I18NLogicUtils.getMessage(e, locale);
-
-      // XYZ ZZZ
-      e.printStackTrace();
-
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
-      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
-
-    } catch (ArxiuException e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(CustodyException): "
-          + e.getMessage();
-
-      // XYZ ZZZ
-      e.printStackTrace();
-
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
-      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
-
     } catch (Throwable e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(Throwable): " + e.getMessage();
+      final String msg;
+      
+      if (e instanceof I18NException) {
+        msg = "XYZ ZZZ Error custodiant fitxer firmat(I18NException): "
+            + I18NLogicUtils.getMessage((I18NException)e, locale);
+      } else if (e instanceof ArxiuException) {
+        msg = "XYZ ZZZ Error custodiant fitxer firmat(ArxiuException): "
+            + e.getMessage();
+      } else {
+        msg = "XYZ ZZZ Error custodiant fitxer firmat(" + e.getClass()+ "): " + e.getMessage();
+      }
 
+      
       // XYZ ZZZ
       e.printStackTrace();
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
+      
+      
+      // Cridades de Plugin
+      pluginCridada.postCridadaError(monitorIntegracions, msg + "\n\n" + transaccio.getEstatExcepcio());
     }
 
 

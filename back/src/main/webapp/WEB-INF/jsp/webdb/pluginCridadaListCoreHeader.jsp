@@ -18,6 +18,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.DATA)}">
         <th>${dib:getSortIcons(__theFilterForm,PluginCridadaFields.DATA)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.PLUGINID)}">
+        <th>${dib:getSortIcons(__theFilterForm,PluginCridadaFields.PLUGINID)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.METODEPLUGIN)}">
         <th>${dib:getSortIcons(__theFilterForm,PluginCridadaFields.METODEPLUGIN)}</th>
         </c:if>
@@ -26,9 +29,6 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.TEMPSEXECUCIO)}">
         <th>${dib:getSortIcons(__theFilterForm,PluginCridadaFields.TEMPSEXECUCIO)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.PLUGINID)}">
-        <th>${dib:getSortIcons(__theFilterForm,PluginCridadaFields.PLUGINID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.USUARIPERSONAID)}">
         <th>${dib:getSortIcons(__theFilterForm,PluginCridadaFields.USUARIPERSONAID)}</th>

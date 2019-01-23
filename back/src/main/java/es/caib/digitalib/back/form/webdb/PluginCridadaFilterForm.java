@@ -65,6 +65,28 @@ public class PluginCridadaFilterForm extends DigitalIBBaseFilterForm implements 
   }
 
 
+  private java.lang.Long pluginIDDesde;
+
+  public java.lang.Long getPluginIDDesde() {
+    return this.pluginIDDesde;
+  }
+
+  public void setPluginIDDesde(java.lang.Long pluginIDDesde) {
+    this.pluginIDDesde = pluginIDDesde;
+  }
+
+
+  private java.lang.Long pluginIDFins;
+
+  public java.lang.Long getPluginIDFins() {
+    return this.pluginIDFins;
+  }
+
+  public void setPluginIDFins(java.lang.Long pluginIDFins) {
+    this.pluginIDFins = pluginIDFins;
+  }
+
+
   private java.lang.String metodePlugin;
 
   public java.lang.String getMetodePlugin() {
@@ -117,28 +139,6 @@ public class PluginCridadaFilterForm extends DigitalIBBaseFilterForm implements 
 
   public void setTempsExecucioFins(java.lang.Long tempsExecucioFins) {
     this.tempsExecucioFins = tempsExecucioFins;
-  }
-
-
-  private java.lang.Long pluginIDDesde;
-
-  public java.lang.Long getPluginIDDesde() {
-    return this.pluginIDDesde;
-  }
-
-  public void setPluginIDDesde(java.lang.Long pluginIDDesde) {
-    this.pluginIDDesde = pluginIDDesde;
-  }
-
-
-  private java.lang.Long pluginIDFins;
-
-  public java.lang.Long getPluginIDFins() {
-    return this.pluginIDFins;
-  }
-
-  public void setPluginIDFins(java.lang.Long pluginIDFins) {
-    this.pluginIDFins = pluginIDFins;
   }
 
 
@@ -217,21 +217,21 @@ public class PluginCridadaFilterForm extends DigitalIBBaseFilterForm implements 
     this.pluginCridadaIDFins = __toClone.pluginCridadaIDFins;
     this.dataDesde = __toClone.dataDesde;
     this.dataFins = __toClone.dataFins;
+    this.pluginIDDesde = __toClone.pluginIDDesde;
+    this.pluginIDFins = __toClone.pluginIDFins;
     this.metodePlugin = __toClone.metodePlugin;
     this.tipusResultatDesde = __toClone.tipusResultatDesde;
     this.tipusResultatFins = __toClone.tipusResultatFins;
     this.tempsExecucioDesde = __toClone.tempsExecucioDesde;
     this.tempsExecucioFins = __toClone.tempsExecucioFins;
-    this.pluginIDDesde = __toClone.pluginIDDesde;
-    this.pluginIDFins = __toClone.pluginIDFins;
     this.usuariPersonaIdDesde = __toClone.usuariPersonaIdDesde;
     this.usuariPersonaIdFins = __toClone.usuariPersonaIdFins;
     this.usuariAplicacioIdDesde = __toClone.usuariAplicacioIdDesde;
     this.usuariAplicacioIdFins = __toClone.usuariAplicacioIdFins;
     this.parametresText = __toClone.parametresText;
     this.retornText = __toClone.retornText;
-    this.mapOfValuesForTipusResultat = __toClone.mapOfValuesForTipusResultat;
     this.mapOfPluginForPluginID = __toClone.mapOfPluginForPluginID;
+    this.mapOfValuesForTipusResultat = __toClone.mapOfValuesForTipusResultat;
   }
   
   /* ========= UTILS ========== */
@@ -266,18 +266,6 @@ public class PluginCridadaFilterForm extends DigitalIBBaseFilterForm implements 
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfValuesForTipusResultat;
-
-  public Map<String, String> getMapOfValuesForTipusResultat() {
-    return this.mapOfValuesForTipusResultat;
-  }
-
-  public void setMapOfValuesForTipusResultat(Map<String, String> mapOfValuesForTipusResultat) {
-    this.mapOfValuesForTipusResultat = mapOfValuesForTipusResultat;
-  }
-
-
-
   private Map<String, String> mapOfPluginForPluginID;
 
   public Map<String, String> getMapOfPluginForPluginID() {
@@ -286,6 +274,18 @@ public class PluginCridadaFilterForm extends DigitalIBBaseFilterForm implements 
 
   public void setMapOfPluginForPluginID(Map<String, String> mapOfPluginForPluginID) {
     this.mapOfPluginForPluginID = mapOfPluginForPluginID;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForTipusResultat;
+
+  public Map<String, String> getMapOfValuesForTipusResultat() {
+    return this.mapOfValuesForTipusResultat;
+  }
+
+  public void setMapOfValuesForTipusResultat(Map<String, String> mapOfValuesForTipusResultat) {
+    this.mapOfValuesForTipusResultat = mapOfValuesForTipusResultat;
   }
 
 

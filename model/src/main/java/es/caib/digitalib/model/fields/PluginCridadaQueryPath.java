@@ -19,6 +19,10 @@ public class PluginCridadaQueryPath extends org.fundaciobit.genapp.common.query.
     return new TimestampField(getQueryPath(), PluginCridadaFields.DATA);
   }
 
+  public LongField PLUGINID() {
+    return new LongField(getQueryPath(), PluginCridadaFields.PLUGINID);
+  }
+
   public StringField METODEPLUGIN() {
     return new StringField(getQueryPath(), PluginCridadaFields.METODEPLUGIN);
   }
@@ -29,10 +33,6 @@ public class PluginCridadaQueryPath extends org.fundaciobit.genapp.common.query.
 
   public LongField TEMPSEXECUCIO() {
     return new LongField(getQueryPath(), PluginCridadaFields.TEMPSEXECUCIO);
-  }
-
-  public LongField PLUGINID() {
-    return new LongField(getQueryPath(), PluginCridadaFields.PLUGINID);
   }
 
   public LongField USUARIPERSONAID() {

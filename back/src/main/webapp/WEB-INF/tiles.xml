@@ -319,6 +319,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaList.jsp" />
     </definition>
     
+    <definition name="pluginCridadaFormAdmin" extends="admin">
+        <put-attribute name="titol" value="pluginCridada.pluginCridada" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginCridadaForm.jsp" />
+    </definition>
+    
+    <definition name="pluginCridadaListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginCridadaList.jsp" />
+    </definition>
+    
     
     <!--  ===========  DESENVOLUPAMENT ================== -->
     

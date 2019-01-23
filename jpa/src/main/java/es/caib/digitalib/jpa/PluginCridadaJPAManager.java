@@ -66,8 +66,8 @@ public class PluginCridadaJPAManager
 		return list.toArray(new PluginCridada[list.size()]);
 	};
 
-	public synchronized PluginCridada create( java.sql.Timestamp _data_, java.lang.String _metodePlugin_, int _tipusResultat_, java.lang.Long _tempsExecucio_, long _pluginID_, java.lang.Long _usuariPersonaId_, java.lang.Long _usuariAplicacioId_, java.lang.String _parametresText_, java.lang.Long _parametresFitxerID_, java.lang.String _retornText_, java.lang.Long _retornFitxerID_) throws I18NException {
-		PluginCridadaJPA __bean =  new PluginCridadaJPA(_data_,_metodePlugin_,_tipusResultat_,_tempsExecucio_,_pluginID_,_usuariPersonaId_,_usuariAplicacioId_,_parametresText_,_parametresFitxerID_,_retornText_,_retornFitxerID_);
+	public synchronized PluginCridada create( java.sql.Timestamp _data_, long _pluginID_, java.lang.String _metodePlugin_, int _tipusResultat_, java.lang.Long _tempsExecucio_, java.lang.Long _usuariPersonaId_, java.lang.Long _usuariAplicacioId_, java.lang.String _parametresText_, java.lang.Long _parametresFitxerID_, java.lang.String _retornText_, java.lang.Long _retornFitxerID_) throws I18NException {
+		PluginCridadaJPA __bean =  new PluginCridadaJPA(_data_,_pluginID_,_metodePlugin_,_tipusResultat_,_tempsExecucio_,_usuariPersonaId_,_usuariAplicacioId_,_parametresText_,_parametresFitxerID_,_retornText_,_retornFitxerID_);
 		return create(__bean);
 	}
 

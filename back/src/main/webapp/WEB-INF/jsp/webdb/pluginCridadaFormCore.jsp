@@ -38,6 +38,33 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PluginCridadaFields.PLUGINID)}">
+        <tr id="pluginCridada_pluginID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.PLUGINID])?'pluginCridada.pluginID':__theForm.labels[PluginCridadaFields.PLUGINID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[PluginCridadaFields.PLUGINID]}">
+              <i class="icon-info-sign" title="${__theForm.help[PluginCridadaFields.PLUGINID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="pluginCridada.pluginID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.PLUGINID)}" >
+          <form:hidden path="pluginCridada.pluginID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.pluginCridada.pluginID,__theForm.listOfPluginForPluginID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.PLUGINID)}" >
+          <form:select id="pluginCridada_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="input-xxlarge" path="pluginCridada.pluginID">
+            <c:forEach items="${__theForm.listOfPluginForPluginID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginCridadaFields.METODEPLUGIN)}">
         <tr id="pluginCridada_metodePlugin_rowid">
           <td>
@@ -97,33 +124,6 @@
             <form:errors path="pluginCridada.tempsExecucio" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.TEMPSEXECUCIO)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.TEMPSEXECUCIO)? 'input-mini uneditable-input' : 'input-mini'}"   path="pluginCridada.tempsExecucio"   />
 
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,PluginCridadaFields.PLUGINID)}">
-        <tr id="pluginCridada_pluginID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[PluginCridadaFields.PLUGINID])?'pluginCridada.pluginID':__theForm.labels[PluginCridadaFields.PLUGINID]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[PluginCridadaFields.PLUGINID]}">
-              <i class="icon-info-sign" title="${__theForm.help[PluginCridadaFields.PLUGINID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="pluginCridada.pluginID" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.PLUGINID)}" >
-          <form:hidden path="pluginCridada.pluginID"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.pluginCridada.pluginID,__theForm.listOfPluginForPluginID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginCridadaFields.PLUGINID)}" >
-          <form:select id="pluginCridada_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="input-xxlarge" path="pluginCridada.pluginID">
-            <c:forEach items="${__theForm.listOfPluginForPluginID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
            </td>
         </tr>
         </c:if>
