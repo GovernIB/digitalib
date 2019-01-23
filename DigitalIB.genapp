@@ -7172,6 +7172,9 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="digits"> 
            <int>6</int> 
           </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
+          </void> 
           <void property="javaName"> 
            <string>data</string> 
           </void> 
@@ -7234,6 +7237,9 @@ opcional incluso cuando se genera una firma EPES.</string>
             </void> 
            </array> 
           </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
+          </void> 
           <void property="index"> 
            <string>dib_plugcrid_pluginid_fk_i</string> 
           </void> 
@@ -7295,6 +7301,9 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="digits"> 
            <int>0</int> 
           </void> 
+          <void property="filter"> 
+           <boolean>true</boolean> 
+          </void> 
           <void property="javaName"> 
            <string>metodePlugin</string> 
           </void> 
@@ -7336,6 +7345,9 @@ opcional incluso cuando se genera una firma EPES.</string>
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
+          </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
            <string>tipusResultat</string> 
@@ -7421,6 +7433,9 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="digits"> 
            <int>0</int> 
           </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
+          </void> 
           <void property="javaName"> 
            <string>usuariPersonaId</string> 
           </void> 
@@ -7459,6 +7474,9 @@ opcional incluso cuando se genera una firma EPES.</string>
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
+          </void> 
+          <void property="groupBy"> 
+           <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
            <string>usuariAplicacioId</string> 
@@ -7615,6 +7633,9 @@ opcional incluso cuando se genera una firma EPES.</string>
          <object class="org.fundaciobit.genapp.FieldInfo"> 
           <void property="digits"> 
            <int>0</int> 
+          </void> 
+          <void property="filter"> 
+           <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
            <string>retornText</string> 
