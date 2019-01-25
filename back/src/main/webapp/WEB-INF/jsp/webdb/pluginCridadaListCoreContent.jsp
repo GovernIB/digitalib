@@ -32,6 +32,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.DATA)}">
           <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${pluginCridada.data}" /></td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.PLUGINID)}">
+          <td>
+          <c:set var="tmp">${pluginCridada.pluginID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfPluginForPluginID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.METODEPLUGIN)}">
           <td>
           ${pluginCridada.metodePlugin}
@@ -48,14 +56,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.TEMPSEXECUCIO)}">
           <td>
           ${pluginCridada.tempsExecucio}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.PLUGINID)}">
-          <td>
-          <c:set var="tmp">${pluginCridada.pluginID}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfPluginForPluginID[tmp]}
-          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginCridadaFields.USUARIPERSONAID)}">

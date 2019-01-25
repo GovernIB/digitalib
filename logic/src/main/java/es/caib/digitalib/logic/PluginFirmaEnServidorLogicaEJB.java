@@ -28,6 +28,7 @@ import org.jboss.ejb3.annotation.SecurityDomain;
 
 import es.caib.digitalib.jpa.InfoSignaturaJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
+import es.caib.digitalib.jpa.PluginCridadaJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
@@ -52,6 +53,9 @@ public class PluginFirmaEnServidorLogicaEJB extends
   @EJB(mappedName = es.caib.digitalib.ejb.InfoSignaturaLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.InfoSignaturaLocal infoSignaturaEjb;
 
+  @EJB(mappedName = CridadaPluginLogicaLocal.JNDI_NAME)
+  protected CridadaPluginLogicaLocal pluginCridada;
+
   @Override
   public int getTipusDePlugin() {
     return Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR;
@@ -64,15 +68,13 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
   @Override
   public Fitxer firmarFitxerAmbApiFirmaEnServidor(TransaccioJPA transaccio, Fitxer fitxer,
-      Locale locale,  String userApp, String userPerson) {
+      Locale locale, String userApp, String userPerson) {
 
     PerfilJPA perfil = transaccio.getPerfil();
 
-    
-    log.info("\n\n" +"XYZ ZZZ ZZZ  perfil.getScanFormatFitxer() => " + perfil.getScanFormatFitxer() + "\n\n");
+    log.info("\n\n" + "XYZ ZZZ ZZZ  perfil.getScanFormatFitxer() => "
+        + perfil.getScanFormatFitxer() + "\n\n");
 
-    
-    
     Fitxer fitxerSignat;
     // XYZ ZZZ NOMES SUPORTAM PERFIL PDF
     // XYZ ZZZ NO ESTA BË !!!!!
@@ -101,6 +103,17 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
     String signType = FileInfoSignature.SIGN_TYPE_PADES;
     int signMode = FileInfoSignature.SIGN_MODE_IMPLICIT;
+
+    // Cridades de Plugin
+    final String parametresText = "Tipus: "
+        + signType
+        + "\nMode:"
+        + (signMode == FileInfoSignature.SIGN_MODE_IMPLICIT ? "Implicit/Attached"
+            : "Explicid/Detached");
+    PluginCridadaJPA monitorIntegracions = pluginCridada.preCridada(
+        perfil.getPluginFirmaServidorID(), "filter,signDocuments",
+        transaccio.getUsuariPersonaId(), transaccio.getUsuariAplicacioId(), parametresText);
+
     boolean userRequiresTimeStamp = false;
     boolean epes = true;
     final String username = null;
@@ -190,6 +203,10 @@ public class PluginFirmaEnServidorLogicaEJB extends
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(sss.getErrorException()));
 
+      // Cridades de Plugin
+      pluginCridada.postCridadaError(monitorIntegracions,
+          msg + "\n\n" + transaccio.getEstatExcepcio());
+
       return null;
 
     }
@@ -203,21 +220,28 @@ public class PluginFirmaEnServidorLogicaEJB extends
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(status.getErrorException()));
 
+      // Cridades de Plugin
+      pluginCridada.postCridadaError(monitorIntegracions,
+          msg + "\n\n" + transaccio.getEstatExcepcio());
+
       return null;
+    } else {
+      // Cridades de Plugin
+      pluginCridada.postCridadaOK(monitorIntegracions, "");
+
     }
 
     File fileSigned = status.getSignedData();
-    
+
     String nom = fitxer.getNom();
-    
+
     int punt = nom.lastIndexOf('.');
-    
-    if (punt == -1 ) {
-    	nom = nom + ".signed";    	
+
+    if (punt == -1) {
+      nom = nom + ".signed";
     } else {
-    	nom = nom.substring(0, punt) + "-signed" + nom.substring(punt);    	
+      nom = nom.substring(0, punt) + "-signed" + nom.substring(punt);
     }
-    
 
     fitxerSignat = new FitxerBean("", FileInfoSignature.PDF_MIME_TYPE, nom,
         fileSigned.length());
@@ -237,7 +261,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
       // XYZ ZZZ FALTA INFO
       java.lang.String eniTipoFirma = "TF06";
-      java.lang.String eniPerfilFirma = epes?"EPES":"BES";
+      java.lang.String eniPerfilFirma = epes ? "EPES" : "BES";
       java.lang.String eniRolFirma = null;
 
       java.lang.String eniSignerName = null;
@@ -247,7 +271,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
       Boolean checkAdministrationIdOfSigner = null;
       Boolean checkDocumentModifications = null;
       Boolean checkValidationSignature = null;
-      
+
       log.info("XYZ ZZZ    eniTipoFirma = " + eniTipoFirma);
       log.info("XYZ ZZZ    eniPerfilFirma = " + eniPerfilFirma);
 
@@ -259,9 +283,9 @@ public class PluginFirmaEnServidorLogicaEJB extends
       infoSign = (InfoSignaturaJPA) infoSignaturaEjb.create(infoSign);
 
       transaccio.setInfoSignaturaID(infoSign.getInfoSignaturaID());
-      
+
       log.info("XYZ ZZZ Assignant  Info Signatura a Transaccio: " + infoSign);
-      
+
       transaccio.setInfoSignatura(infoSign);
 
       return fitxerSignat;
@@ -274,12 +298,14 @@ public class PluginFirmaEnServidorLogicaEJB extends
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
 
+      // Cridades de Plugin
+      pluginCridada.postCridadaError(monitorIntegracions,
+          msg + "\n\n" + transaccio.getEstatExcepcio());
+
       return null;
 
     }
 
   }
-
- 
 
 }

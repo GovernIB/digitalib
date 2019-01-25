@@ -13,6 +13,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -125,15 +126,14 @@ public abstract class AbstractPluginAdminController extends PluginController {
       @PathVariable Long pluginid) throws I18NException {
 
     PluginJPA p = pluginLogicaEjb.findByPrimaryKey(pluginid);
-    
+
     p.setActiu(true);
     pluginLogicaEjb.update(p);
-    
-    String msg = createMessageSuccess(request, "success.activarplugin", p.getPluginID());
-    System.out.println("SUCCESS = "+msg);
-    
-    return "redirect:" + getContextWebPlugin() + "/list/";
 
+    String msg = createMessageSuccess(request, "success.activarplugin", p.getPluginID());
+    HtmlUtils.saveMessageSuccess(request, msg);
+
+    return "redirect:" + getContextWebPlugin() + "/list/";
   }
   
   @RequestMapping(value = "/desactivarplugin/{pluginid}", method = RequestMethod.GET)
@@ -157,7 +157,7 @@ public abstract class AbstractPluginAdminController extends PluginController {
         w = PerfilFields.PLUGINFIRMASERVIDORID.equal(p.getPluginID());
         break;
       case Constants.TIPUS_PLUGIN_SCANWEB:
-        w = PerfilFields.PLUGINSCANWEBID.equal(p.getPluginID()).AND(PerfilFields.PLUGINSCANWEB2ID.equal(p.getPluginID()));
+        w = Where.AND(PerfilFields.PLUGINSCANWEBID.equal(p.getPluginID()), PerfilFields.PLUGINSCANWEB2ID.equal(p.getPluginID()));
         break;
     }
     
@@ -174,6 +174,8 @@ public abstract class AbstractPluginAdminController extends PluginController {
     p.setActiu(false);
     pluginLogicaEjb.update(p);
     String msg = createMessageSuccess(request, "success.desactivarplugin", p.getPluginID());
+    
+    HtmlUtils.saveMessageSuccess(request,msg);
     
     return "redirect:" + getContextWebPlugin() + "/list/";
 

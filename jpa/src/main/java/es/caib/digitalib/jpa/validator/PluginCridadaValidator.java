@@ -34,6 +34,10 @@ public class PluginCridadaValidator<T> implements PluginCridadaFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATA)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,PLUGINID, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PLUGINID)));
+
     __vr.rejectIfEmptyOrWhitespace(__target__,METODEPLUGIN, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(METODEPLUGIN)));
@@ -41,10 +45,6 @@ public class PluginCridadaValidator<T> implements PluginCridadaFields {
     __vr.rejectIfEmptyOrWhitespace(__target__,TIPUSRESULTAT, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUSRESULTAT)));
-
-    __vr.rejectIfEmptyOrWhitespace(__target__,PLUGINID, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PLUGINID)));
 
     // Check size
     if (__vr.getFieldErrorCount(METODEPLUGIN) == 0) {

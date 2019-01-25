@@ -32,6 +32,18 @@ public interface Constants {
   public static final String ROLE_CUST = "ROLE_CUST";
   
   
+  
+  // MONITOR INTEGRACIONS (PLUGINCRIDADA)
+  public static final int CRIDADA_PLUGIN_RESULTAT_EN_PROCES = 0;
+  
+  public static final int CRIDADA_PLUGIN_RESULTAT_OK = +1;
+  
+  public static final int  CRIDADA_PLUGIN_RESULTAT_ERROR = -1;
+  
+  
+  
+  
+  
   // AUDITORIA
   
   public static final int AUDIT_TYPE_ANY_ACTION_OVER_TRANSACTION = 0;

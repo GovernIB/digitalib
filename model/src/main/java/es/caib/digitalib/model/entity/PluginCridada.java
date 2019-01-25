@@ -8,6 +8,9 @@ public interface PluginCridada extends org.fundaciobit.genapp.common.IGenAppEnti
 	public java.sql.Timestamp getData();
 	public void setData(java.sql.Timestamp _data_);
 
+	public long getPluginID();
+	public void setPluginID(long _pluginID_);
+
 	public java.lang.String getMetodePlugin();
 	public void setMetodePlugin(java.lang.String _metodePlugin_);
 
@@ -16,9 +19,6 @@ public interface PluginCridada extends org.fundaciobit.genapp.common.IGenAppEnti
 
 	public java.lang.Long getTempsExecucio();
 	public void setTempsExecucio(java.lang.Long _tempsExecucio_);
-
-	public long getPluginID();
-	public void setPluginID(long _pluginID_);
 
 	public java.lang.Long getUsuariPersonaId();
 	public void setUsuariPersonaId(java.lang.Long _usuariPersonaId_);

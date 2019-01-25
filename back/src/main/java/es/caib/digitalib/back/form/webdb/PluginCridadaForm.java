@@ -28,8 +28,8 @@ public class PluginCridadaForm extends DigitalIBBaseForm {
   public PluginCridadaForm(PluginCridadaForm __toClone) {
     super(__toClone);
       this.pluginCridada = __toClone.pluginCridada;
-    this.listOfValuesForTipusResultat = __toClone.listOfValuesForTipusResultat;
     this.listOfPluginForPluginID = __toClone.listOfPluginForPluginID;
+    this.listOfValuesForTipusResultat = __toClone.listOfValuesForTipusResultat;
   }
   
   public PluginCridadaForm(PluginCridadaJPA pluginCridada, boolean nou) {
@@ -73,18 +73,6 @@ public class PluginCridadaForm extends DigitalIBBaseForm {
   public void setRetornFitxerIDDelete(boolean retornFitxerIDDelete) {
     this.retornFitxerIDDelete = retornFitxerIDDelete;
    }
-  private List<StringKeyValue> listOfValuesForTipusResultat;
-
-  public List<StringKeyValue> getListOfValuesForTipusResultat() {
-    return this.listOfValuesForTipusResultat;
-  }
-
-  public void setListOfValuesForTipusResultat(List<StringKeyValue> listOfValuesForTipusResultat) {
-    this.listOfValuesForTipusResultat = listOfValuesForTipusResultat;
-  }
-
-
-
   private List<StringKeyValue> listOfPluginForPluginID;
 
   public List<StringKeyValue> getListOfPluginForPluginID() {
@@ -93,6 +81,18 @@ public class PluginCridadaForm extends DigitalIBBaseForm {
 
   public void setListOfPluginForPluginID(List<StringKeyValue> listOfPluginForPluginID) {
     this.listOfPluginForPluginID = listOfPluginForPluginID;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForTipusResultat;
+
+  public List<StringKeyValue> getListOfValuesForTipusResultat() {
+    return this.listOfValuesForTipusResultat;
+  }
+
+  public void setListOfValuesForTipusResultat(List<StringKeyValue> listOfValuesForTipusResultat) {
+    this.listOfValuesForTipusResultat = listOfValuesForTipusResultat;
   }
 
 

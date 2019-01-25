@@ -25,6 +25,7 @@ import es.caib.digitalib.jpa.FitxerJPA;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.InfoSignaturaJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
+import es.caib.digitalib.jpa.PluginCridadaJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
@@ -44,6 +45,9 @@ public class PluginDocumentCustodyLogicaEJB extends
 
   @EJB(mappedName = es.caib.digitalib.ejb.InfoCustodyLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.InfoCustodyLocal infoCustodyEjb;
+
+  @EJB(mappedName = CridadaPluginLogicaLocal.JNDI_NAME)
+  protected CridadaPluginLogicaLocal pluginCridada;
 
   @Override
   public int getTipusDePlugin() {
@@ -90,6 +94,12 @@ public class PluginDocumentCustodyLogicaEJB extends
 
       return null;
     }
+
+    // Cridades de Plugin
+    final String parametresText = null;
+    PluginCridadaJPA monitorIntegracions = pluginCridada.preCridada(
+        perfil.getPluginDocCustodyID(), "reserveCustodyID, saveAll",
+        transaccio.getUsuariPersonaId(), transaccio.getUsuariAplicacioId(), parametresText);
 
     try {
 
@@ -175,8 +185,10 @@ public class PluginDocumentCustodyLogicaEJB extends
       Metadata[] metadata = new Metadata[] {}; // XYZ ZZZ
 
       plugin.saveAll(custodyID, parameters, document, signatureCustody, metadata);
-      
-      log.info("\n FINAL \n");
+
+      // Cridades de Plugin
+      pluginCridada.postCridadaOK(monitorIntegracions, "custodyID=" + custodyID
+          + "\ndocument=" + document + "\nfirma=" + signatureCustody);
 
       // Per Custòdia
       java.lang.String originalFileUrl = plugin.getOriginalFileUrl(custodyID, parameters);
@@ -186,17 +198,15 @@ public class PluginDocumentCustodyLogicaEJB extends
       java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(custodyID, parameters);
       java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(custodyID,
           parameters);
-      java.lang.String validationFileUrl = plugin.getValidationFileUrl(custodyID,
-          parameters);
+      java.lang.String validationFileUrl = plugin.getValidationFileUrl(custodyID, parameters);
 
       // Només per Arxiu
       final String arxiuExpedientId = null;
       final String arxiuDocumentId = null;
 
-      InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyID ,
-            arxiuExpedientId ,  arxiuDocumentId ,  csv ,  originalFileUrl ,  csvValidationWeb ,
-             csvGenerationDefinition , printableFileUrl ,  eniFileUrl , validationFileUrl);
-
+      InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyID, arxiuExpedientId,
+          arxiuDocumentId, csv, originalFileUrl, csvValidationWeb, csvGenerationDefinition,
+          printableFileUrl, eniFileUrl, validationFileUrl);
 
       infoCust = (InfoCustodyJPA) infoCustodyEjb.create(infoCust);
 
@@ -204,47 +214,23 @@ public class PluginDocumentCustodyLogicaEJB extends
 
       return infoCust;
 
-    } catch (I18NException e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(I18NException): "
-          + I18NLogicUtils.getMessage(e, locale);
-
-      // XYZ ZZZ
-      e.printStackTrace();
-
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
-      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
-
-    } catch (CustodyException e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(CustodyException): "
-          + e.getMessage();
-
-      // XYZ ZZZ
-      e.printStackTrace();
-
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
-      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
-    } catch (NotSupportedCustodyException e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(NotSupportedCustodyException): "
-          + e.getMessage();
-
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
-      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
-
-    } catch (MetadataFormatException e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(MetadataFormatException): "
-          + e.getMessage();
-
-      // XYZ ZZZ
-      e.printStackTrace();
-
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
-      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
     } catch (Throwable e) {
-      String msg = "XYZ ZZZ Error custodiant fitxer firmat(Throwable): " + e.getMessage();
+
+      final String msg;
+      if (e instanceof MetadataFormatException) {
+        msg = "XYZ ZZZ Error custodiant fitxer firmat(MetadataFormatException): "
+            + e.getMessage();
+      } else if (e instanceof NotSupportedCustodyException) {
+        msg = "XYZ ZZZ Error custodiant fitxer firmat(NotSupportedCustodyException): "
+            + e.getMessage();
+      } else if (e instanceof I18NException) {
+        msg = "XYZ ZZZ Error custodiant fitxer firmat(I18NException): "
+            + I18NLogicUtils.getMessage((I18NException) e, locale);
+      } else if (e instanceof CustodyException) {
+        msg = "XYZ ZZZ Error custodiant fitxer firmat(CustodyException): " + e.getMessage();
+      } else {
+        msg = "XYZ ZZZ Error custodiant fitxer firmat(Throwable): " + e.getMessage();
+      }
 
       // XYZ ZZZ
       e.printStackTrace();
@@ -252,6 +238,10 @@ public class PluginDocumentCustodyLogicaEJB extends
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
+
+      // Cridades de Plugin
+      pluginCridada.postCridadaError(monitorIntegracions,
+          msg + "\n\n" + transaccio.getEstatExcepcio());
     }
 
     return null;

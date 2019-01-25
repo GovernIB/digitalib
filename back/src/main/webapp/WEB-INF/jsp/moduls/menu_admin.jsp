@@ -75,11 +75,15 @@
 
     </a></li>
     
-    
-    
-    
-    
-     <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+    <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+      <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/admin/plugincridada/list"/>"> <span
+        style="${(fn:contains(url, '/admin/plugincridada'))? "font-weight:bold;" : ""}"><fmt:message
+            key="monitor.integracions" /></span>
+
+    </a></li>
 
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
