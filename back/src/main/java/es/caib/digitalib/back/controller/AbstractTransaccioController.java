@@ -24,18 +24,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import es.caib.digitalib.back.controller.webdb.TransaccioController;
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.back.utils.Utils;
+import es.caib.digitalib.jpa.FitxerJPA;
+import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.logic.PerfilLogicaLocal;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.logic.utils.EmailUtil;
 import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.model.entity.InfoCustody;
+import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.entity.UsuariPersona;
 import es.caib.digitalib.model.fields.TransaccioFields;
@@ -54,6 +57,9 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
   @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
   protected TransaccioLogicaLocal transaccioLogicaEjb;
+
+  @EJB(mappedName = PerfilLogicaLocal.JNDI_NAME)
+  protected PerfilLogicaLocal perfilLogicaEjb;
 
   public abstract String getPerfilInfoContextWeb();
 
@@ -82,18 +88,18 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     TransaccioForm form = super.getTransaccioForm(_jpa, __isView, request, mav);
 
     //XYZ YYY ZZZ
-//    if (!form.isNou()) {
-//      Set<Field<?>> campsBuits = new HashSet<Field<?>>(
-//          Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
-//
-//      Iterator<Field<?>> it = campsBuits.iterator();
-//      while (it.hasNext()) {
-//        if (it.next().isNotNull()) campsBuits.remove(it.next());
-//      }
-//      
-//      form.setHiddenFields(campsBuits);
-//      
-//    }
+    //    if (!form.isNou()) {
+    //      Set<Field<?>> campsBuits = new HashSet<Field<?>>(
+    //          Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
+    //
+    //      Iterator<Field<?>> it = campsBuits.iterator();
+    //      while (it.hasNext()) {
+    //        if (it.next().isNotNull()) campsBuits.remove(it.next());
+    //      }
+    //      
+    //      form.setHiddenFields(campsBuits);
+    //      
+    //    }
     if (isUtilitzatPerAplicacio()) {
       form.setEntityNameCode("transaccio.aplicacio");
       form.setEntityNameCodePlural("transaccio.aplicacio.plural");
@@ -103,20 +109,20 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       form.setEntityNameCodePlural("transaccio.persona.plural");
       form.addHiddenField(USUARIAPLICACIOID);
     }
-    
+
     if (__isView) {
       // Ocultar tots els camps null
       Utils.hideNullFields(_jpa, form, ALL_TRANSACCIO_FIELDS);
-      
+
       if (_jpa.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
         form.addHiddenField(ESTATCODI);
       }
-      
-      
+
+
       form.addHiddenField(INFOCUSTODYID);
       form.addHiddenField(INFOSIGNATURAID);
       form.addHiddenField(PERFILID);
-      
+
       form.addHiddenField(IP);
       form.addHiddenField(USUARIPERSONAID);
       form.addHiddenField(RETURNURL);
@@ -127,21 +133,20 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             " icon-info-sign icon-white", INFOSIGNATURAID.fullName,
             AbstractInfoSignatureController.getContextWeb(isAdmin())  + "/view" + "/" + _jpa.getInfoSignaturaID() , "btn-info"));
       }
-      
-      
+
+
       // Afegir botos de info cust
       if (_jpa.getInfoCustodyID() != null) {
         form.addAdditionalButton(new AdditionalButton(
             " icon-info-sign icon-white", INFOCUSTODYID.fullName,
             AbstractInfoCustodyController.getContextWeb(isAdmin())  + "/view" + "/" + _jpa.getInfoCustodyID() , "btn-info"));
       }
-      
+
       // Afegir Boto de Veure Perfil
-      form.addAdditionalButton(new AdditionalButton("icon-user icon-white",
-          "transaccio.veureperfil", getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(), "btn-info"));
+      //      form.addAdditionalButton(new AdditionalButton("icon-user icon-white",
+      //          "transaccio.veureperfil", getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(), "btn-info"));
 
     }
-    
 
     return form;
 
@@ -178,10 +183,13 @@ public abstract class AbstractTransaccioController extends TransaccioController 
           "icon-eye-open icon-white", "transaccio.veuredetall", getContextWeb() + "/view/{0}",
           "btn-primary"));
 
-      if (getPerfilInfoContextWeb() != null) {
-        filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-user icon-white",
-            "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", "btn-info"));
-      }
+      //      filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-download-alt icon-white",
+      //                  "transaccio.descarregar", getContextWeb() + "/descarregar/{0}", "btn-info"));
+
+      //      if (getPerfilInfoContextWeb() != null) {
+      //        filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-user icon-white",
+      //            "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", "btn-info"));
+      //      }
 
       List<Field<?>> campsFiltre = filterForm.getDefaultGroupByFields();
       if (isAdmin()) {
@@ -231,16 +239,17 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     return filterForm;
   }
 
-  @RequestMapping(value = "/viewperfil/{transaccioID}", method = RequestMethod.GET)
-  public ModelAndView veurePerfilGet(
-      @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
-      HttpServletResponse response) throws I18NException {
-    Long perfilID = transaccioEjb.executeQueryOne(TransaccioFields.PERFILID,
-        TransaccioFields.TRANSACCIOID.equal(transaccioID));
 
-    return new ModelAndView(new RedirectView(getPerfilInfoContextWeb() + "/view/" + perfilID,
-        true));
-  }
+  //  @RequestMapping(value = "/viewperfil/{transaccioID}", method = RequestMethod.GET)
+  //  public ModelAndView veurePerfilGet(
+  //      @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
+  //      HttpServletResponse response) throws I18NException {
+  //    Long perfilID = transaccioEjb.executeQueryOne(TransaccioFields.PERFILID,
+  //        TransaccioFields.TRANSACCIOID.equal(transaccioID));
+  //
+  //    return new ModelAndView(new RedirectView(getPerfilInfoContextWeb() + "/view/" + perfilID,
+  //        true));
+  //  }
 
   @Override
   public boolean isActiveList() {
@@ -392,13 +401,13 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
       if (transaccio.getPerfil().getUsPerfil() == Constants.PERFIL_US_CUSTODIA_INFO) {
         // Si esta custodiat llavors li hem d'enviar la informació de comunicació
-        
+
 
         StringBuffer stb = new StringBuffer("<br/>");
 
         // XYZ ZZZ TRA Configurable per part de Grup
         stb.append(up.getNom()).append(" ").append(up.getLlinatges())
-            .append(" li envia la referència al següent fitxer:").append("<br/>");
+        .append(" li envia la referència al següent fitxer:").append("<br/>");
 
         InfoCustody info = transaccio.getInfoCustody();
 
@@ -407,7 +416,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         if (info.getCustodyId() == null) {
           // XYZ ZZZ TRA
           stb.append("<li><b>Arxiu::ExpedientID:</b> ").append(info.getArxiuExpedientId())
-              .append("</li>");
+          .append("</li>");
           // XYZ ZZZ TRA
           stb.append("<li><b>Arxiu::DocumentID:</b> ").append(info.getArxiuDocumentId()).append("</li>");
         } else {
@@ -420,7 +429,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         stb.append("<li><b>CSV Validation Web:</b> ").append(info.getCsvValidationWeb()).append("</li>");
         // XYZ ZZZ TRA
         stb.append("<li><b>CSV Generation Definition:</b> ").append(info.getCsvGenerationDefinition())
-            .append("</li>");
+        .append("</li>");
         // XYZ ZZZ TRA
         stb.append("<li><b>Original File URL:</b> ").append(info.getOriginalFileUrl()).append("</li>");
         // XYZ ZZZ TRA
@@ -431,7 +440,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         stb.append("<li><b>Validation File URL:</b> ").append(info.getValidationFileUrl()).append("</li>");
 
         stb.append("</ul>");
-        
+
         message = stb.toString();
 
         fitxer = null;
@@ -488,6 +497,67 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
   }
 
+  @RequestMapping(value = "/descarregar/{transaccioID}", method = RequestMethod.GET)
+  public void descarregarFitxer(
+      @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
+      HttpServletResponse response) throws I18NException { 
+    
+    TransaccioJPA trans = transaccioEjb.findByPrimaryKey(transaccioID);
+    
+    FitxerJPA fitxer = trans.getFitxerEscanejat();
+    FileDownloadController.fullDownload(fitxer.getFitxerID(), fitxer.getNom(), fitxer.getMime(), response);
+  }
+  
+  @RequestMapping(value = "/descarregarimprimible/{transaccioID}", method = RequestMethod.GET)
+  public String descarregarVersioImprible(
+      @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
+      HttpServletResponse response) throws I18NException { 
+    
+    TransaccioJPA trans = transaccioEjb.findByPrimaryKey(transaccioID);
+    InfoCustodyJPA infoCustodyJPA = trans.getInfoCustody();
+    
+    String urlRetorn = "";
+    try {
+      urlRetorn = infoCustodyJPA.getCsvValidationWeb();
+    }
+    catch (NullPointerException e) {
+      
+      HtmlUtils.saveMessageError(request,  "No es pot descarregar la versió imprimible");
+      return "redirect:"+getContextWeb()+"/list";
+       
+    }
+    
+    return "redirect:" + urlRetorn;
+  }
+  
+  private AdditionalButton getDownloadDocButton(Transaccio transaccio) {
+    
+    Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
+    
+    AdditionalButton addButton = null;
+    
+    switch (perfil.getUsPerfil()) {
+    case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
+      addButton = new AdditionalButton("icon-download-alt icon-white",
+          "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}", "btn-info");
+      break;
+    case Constants.PERFIL_US_CUSTODIA_INFO:
+      addButton = new AdditionalButton("icon-download-alt icon-white",
+          "transaccio.descarregar.versioimprimible", getContextWeb() + "/descarregarimprimible/{0}", "btn-info");
+      break;
+    case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
+      addButton = new AdditionalButton("icon-download-alt icon-white",
+          "transaccio.descarregar.versioimprimible", getContextWeb() + "/descarregarimprimible/{0}", "btn-info");
+      break;
+    default:
+      addButton = new AdditionalButton("icon-download-alt icon-white",
+          "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}", "btn-info");
+      break;
+    }
+    
+    return addButton;
+  }
+  
   @Override
   public void postList(HttpServletRequest request, ModelAndView mav,
       TransaccioFilterForm filterForm, List<Transaccio> list) throws I18NException {
@@ -513,6 +583,11 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         delete = false;
       }
 
+      // Afegir boto de Descarrega de document escanejat o de versio imprimible segons si es escaneig o copia autentica
+      AdditionalButton addButton = getDownloadDocButton(transaccio);
+      filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addButton);
+      
+      
       if (delete) {
         AdditionalButton additionalButton = new AdditionalButton("icon-trash icon-white",
             "genapp.delete", getContextWeb() + "/delete/" + transaccio.getTransaccioID(),

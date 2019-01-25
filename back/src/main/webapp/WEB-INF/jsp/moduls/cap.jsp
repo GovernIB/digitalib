@@ -46,9 +46,8 @@
 
       
       <li>
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
-          <i class="icon-user icon-white"></i>
-          <fmt:message key="cap.usuarinom" />: ${ loginInfo.usuariPersona.nom}&nbsp;${ loginInfo.usuariPersona.llinatges}
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: white"> 
+          <i class="icon-user icon-white" style="padding-left: 2px"></i><fmt:message key="cap.usuarinom" />: ${ loginInfo.usuariPersona.nom}&nbsp;${ loginInfo.usuariPersona.llinatges}
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
