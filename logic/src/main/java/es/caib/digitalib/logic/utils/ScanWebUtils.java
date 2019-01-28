@@ -27,7 +27,7 @@ public class ScanWebUtils {
    * @return
    * @throws I18NException
    */
-  public static String formatFileToScanWebApi(int formatType) throws I18NException {
+  public static String formatFileToScanWebApi(int formatType) {
 
     switch (formatType) {
 
@@ -47,8 +47,7 @@ public class ScanWebUtils {
       return IScanWebPlugin.SCANTYPE_GIF; // "gif";
 
     default:
-      throw new I18NException("genapp.comodi",
-          "No s'ha trobat el format de fitxer per escaneig amb ID " + formatType);
+      return null;
 
     }
 

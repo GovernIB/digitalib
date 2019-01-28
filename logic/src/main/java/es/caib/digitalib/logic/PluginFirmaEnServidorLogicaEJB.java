@@ -32,13 +32,19 @@ import es.caib.digitalib.jpa.PluginCridadaJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
+import es.caib.digitalib.logic.utils.DigitalIBTimeStampGenerator;
+import es.caib.digitalib.logic.utils.ScanWebUtils;
+import es.caib.digitalib.logic.utils.SignatureUtils;
 import es.caib.digitalib.model.bean.FitxerBean;
+import es.caib.digitalib.model.entity.ConfiguracioFirma;
 import es.caib.digitalib.model.entity.Fitxer;
+import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**
+ * 
+ * @author anadal(u80067)
  *
- * @author anadal
  */
 @Stateless(name = "PluginFirmaEnServidorLogicaEJB")
 @SecurityDomain("seycon")
@@ -56,6 +62,12 @@ public class PluginFirmaEnServidorLogicaEJB extends
   @EJB(mappedName = CridadaPluginLogicaLocal.JNDI_NAME)
   protected CridadaPluginLogicaLocal pluginCridada;
 
+  @EJB(mappedName = es.caib.digitalib.ejb.ConfiguracioFirmaLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.ConfiguracioFirmaLocal configuracioFirmaEjb;
+
+  @EJB(mappedName = PluginSegellDeTempsLogicaLocal.JNDI_NAME)
+  protected PluginSegellDeTempsLogicaLocal pluginSegellDeTempsEjb;
+
   @Override
   public int getTipusDePlugin() {
     return Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR;
@@ -72,26 +84,53 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
     PerfilJPA perfil = transaccio.getPerfil();
 
-    log.info("\n\n" + "XYZ ZZZ ZZZ  perfil.getScanFormatFitxer() => "
-        + perfil.getScanFormatFitxer() + "\n\n");
+    long confFirmaID = perfil.getConfiguracioFirmaID();
 
-    Fitxer fitxerSignat;
-    // XYZ ZZZ NOMES SUPORTAM PERFIL PDF
-    // XYZ ZZZ NO ESTA BË !!!!!
-    if (IScanWebPlugin.SCANTYPE_PDF.equals(perfil.getScanFormatFitxer())) {
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge("XYZ ZZZ Nomes es suporta el Format de Escaneig PDF. "
-          + "El seu perfil requereix " + perfil.getScanFormatFitxer()
-          + ". Consulti amb el seu Administrador");
-      return null;
+    ConfiguracioFirma confFirma = configuracioFirmaEjb.findByPrimaryKey(confFirmaID);
+
+    // CHECK 1: Si el tipus de Firma és PADES llavors el perfil de SCAN ha de ser PDF
+
+    if (confFirma.getTipusFirmaID() == Constants.TIPUSFIRMA_PADES) {
+
+      log.info("\n\n" + "XYZ ZZZ ZZZ  perfil.getScanFormatFitxer() => "
+          + perfil.getScanFormatFitxer() + "\n\n");
+
+      // XYZ ZZZ NOMES SUPORTAM PERFIL PDF
+      // XYZ ZZZ NO ESTA BÉ !!!!!
+
+      // FORMAT_FILE_PDF
+
+      String scanType = ScanWebUtils.formatFileToScanWebApi(perfil.getScanFormatFitxer());
+
+      if (scanType == null) {
+
+        final String msg = "No s'ha trobat el format de fitxer per escaneig amb ID "
+            + perfil.getScanFormatFitxer();
+
+        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+        transaccio.setEstatMissatge(msg);
+        transaccio.setEstatExcepcio(null);
+
+        return null;
+      }
+
+      if (!IScanWebPlugin.SCANTYPE_PDF.equalsIgnoreCase(scanType)) {
+        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+        transaccio
+            .setEstatMissatge("El perfil de firma PADES només pot signar documents PADES "
+                + "però el format requerit en el Perfil és " + scanType
+                + ". Consulti amb el seu Administrador");
+        return null;
+      }
     }
 
+    Fitxer fitxerSignat;
     ISignatureServerPlugin plugin;
     try {
-      plugin = getInstanceByPluginID(perfil.getPluginFirmaServidorID());
+      plugin = getInstanceByPluginID(confFirma.getPluginFirmaServidorID());
     } catch (I18NException e1) {
 
-      final String msg = "XYZ ZZZ Error Instanciant PLugins de Firma en Servidor: "
+      final String msg = "XYZ ZZZ Error Instanciant Plugin de Firma en Servidor: "
           + I18NLogicUtils.getMessage(e1, locale);
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
@@ -101,152 +140,180 @@ public class PluginFirmaEnServidorLogicaEJB extends
       return null;
     }
 
-    String signType = FileInfoSignature.SIGN_TYPE_PADES;
-    int signMode = FileInfoSignature.SIGN_MODE_IMPLICIT;
-
-    // Cridades de Plugin
-    final String parametresText = "Tipus: "
-        + signType
-        + "\nMode:"
-        + (signMode == FileInfoSignature.SIGN_MODE_IMPLICIT ? "Implicit/Attached"
-            : "Explicid/Detached");
-    PluginCridadaJPA monitorIntegracions = pluginCridada.preCridada(
-        perfil.getPluginFirmaServidorID(), "filter,signDocuments",
-        transaccio.getUsuariPersonaId(), transaccio.getUsuariAplicacioId(), parametresText);
-
-    boolean userRequiresTimeStamp = false;
-    boolean epes = true;
-    final String username = null;
-
-    String languageUI = transaccio.getLanguageUI();
-    String filtreCertificats = "";
-    String administrationID = null; // No te sentit en API Firma En Servidor
-    PolicyInfoSignature policyInfoSignature = null;
-    if (epes) {
-      // XYZ ZZZ
-      policyInfoSignature = new PolicyInfoSignature();
-      policyInfoSignature.setPolicyIdentifier("urn:oid:2.16.724.1.3.1.1.2.1.9");
-      policyInfoSignature.setPolicyIdentifierHash("G7roucf600+f03r/o0bAOQ6WAs0=");
-      policyInfoSignature.setPolicyIdentifierHashAlgorithm("SHA1");
-      policyInfoSignature
-          .setPolicyUrlDocument("https://sede.060.gob.es/politica_de_firma_anexo_1.pdf");
-    }
-
-    CommonInfoSignature commonInfoSignature = new CommonInfoSignature(languageUI,
-        filtreCertificats, username, administrationID, policyInfoSignature);
-
-    String signID = transaccio.getTransactionWebId();
-
-    String name = fitxer.getNom();
-    String reason = "TEST SIGN"; // XYZ ZZZ
-    String location = "Palma"; // XYZ ZZZ
-    String signerEmail = null; // XYZ ZZZ
-    final int signNumber = 1;
-    String languageSign = transaccio.getSignParamLanguageDoc();
-
-    String signAlgorithm = FileInfoSignature.SIGN_ALGORITHM_SHA1;
-
-    int signaturesTableLocation = FileInfoSignature.SIGNATURESTABLELOCATION_WITHOUT;
-    final PdfVisibleSignature pdfInfoSignature = null;
-    final ITimeStampGenerator timeStampGenerator = null;
-
-    // Valors per defcte
-    final SignaturesTableHeader signaturesTableHeader = null;
-    final SecureVerificationCodeStampInfo csvStampInfo = null;
-
-    final File previusSignatureDetachedFile = null;
-    final int signOperation = FileInfoSignature.SIGN_OPERATION_SIGN;
-
-    final String expedientCode = null;
-    // XYZ ZZZ S'ha de demanar ????
-    final String expedientName = null;
-    final String expedientUrl = null;
-    final String procedureCode = null;
-    final String procedureName = null;
-
-    File source = FileSystemManager.getFile(fitxer.getFitxerID());
-
-    // XYZ ZZZ PDF MIME
-    FileInfoSignature fileInfo = new FileInfoSignature(signID, source,
-        previusSignatureDetachedFile, FileInfoSignature.PDF_MIME_TYPE, name, reason, location,
-        signerEmail, signNumber, languageSign, signOperation, signType, signAlgorithm,
-        signMode, signaturesTableLocation, signaturesTableHeader, pdfInfoSignature,
-        csvStampInfo, userRequiresTimeStamp, timeStampGenerator, expedientCode, expedientName,
-        expedientUrl, procedureCode, procedureName);
-
-    final String signaturesSetID = String.valueOf(System.currentTimeMillis());
-    SignaturesSet signaturesSet = new SignaturesSet(signaturesSetID, commonInfoSignature,
-        new FileInfoSignature[] { fileInfo });
-
-    String timestampUrlBase = null;
-
-    Map<String, Object> parameters = new HashMap<String, Object>();
-
-    // TODO Check si passa filtre
-    String error = plugin.filter(signaturesSet, parameters);
-    if (error != null) {
-
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge("XYZ ZZZ Plugin " + plugin.getName(locale)
-          + " No passa el filtre. Raó:  " + error);
-
-      return null;
-    }
-
-    signaturesSet = plugin.signDocuments(signaturesSet, timestampUrlBase, parameters);
-    StatusSignaturesSet sss = signaturesSet.getStatusSignaturesSet();
-
-    if (sss.getStatus() != StatusSignaturesSet.STATUS_FINAL_OK) {
-      String msg = "XYZ ZZZ Error General MSG = " + sss.getErrorMsg();
-
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
-      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(sss.getErrorException()));
-
-      // Cridades de Plugin
-      pluginCridada.postCridadaError(monitorIntegracions,
-          msg + "\n\n" + transaccio.getEstatExcepcio());
-
-      return null;
-
-    }
-
-    FileInfoSignature fis = signaturesSet.getFileInfoSignatureArray()[0];
-    StatusSignature status = fis.getStatusSignature();
-    if (status.getStatus() != StatusSignaturesSet.STATUS_FINAL_OK) {
-      // XYZ ZZZ
-      String msg = "Error Firma 1. MSG = " + status.getErrorMsg();
-      transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
-      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(status.getErrorException()));
-
-      // Cridades de Plugin
-      pluginCridada.postCridadaError(monitorIntegracions,
-          msg + "\n\n" + transaccio.getEstatExcepcio());
-
-      return null;
-    } else {
-      // Cridades de Plugin
-      pluginCridada.postCridadaOK(monitorIntegracions, "");
-
-    }
-
-    File fileSigned = status.getSignedData();
-
-    String nom = fitxer.getNom();
-
-    int punt = nom.lastIndexOf('.');
-
-    if (punt == -1) {
-      nom = nom + ".signed";
-    } else {
-      nom = nom.substring(0, punt) + "-signed" + nom.substring(punt);
-    }
-
-    fitxerSignat = new FitxerBean("", FileInfoSignature.PDF_MIME_TYPE, nom,
-        fileSigned.length());
-
+    PluginCridadaJPA monitorIntegracions = null;
     try {
+      final String signType = convertSignType(confFirma.getTipusFirmaID());
+      // modefirma.false=Implícita (Attached) || modefirma.true=Explícita (Detached)
+      final int signMode = confFirma.isModeDeFirma() ? FileInfoSignature.SIGN_MODE_EXPLICIT
+          : FileInfoSignature.SIGN_MODE_IMPLICIT;
+
+      // Cridades de Plugin
+      final String parametresText = "Tipus: "
+          + signType
+          + "\nMode:"
+          + (signMode == FileInfoSignature.SIGN_MODE_IMPLICIT ? "Implicit/Attached"
+              : "Explicid/Detached");
+      monitorIntegracions = pluginCridada.preCridada(confFirma.getPluginFirmaServidorID(),
+          "filter,signDocuments", transaccio.getUsuariPersonaId(),
+          transaccio.getUsuariAplicacioId(), parametresText);
+
+      boolean epes = confFirma.getUsPoliticaDeFirma() == Constants.US_POLITICA_DE_FIRMA_OBLIGATORI_DEFINIT;
+      final String username = null;
+
+      String languageUI = transaccio.getLanguageUI();
+      String filtreCertificats = "";
+      String administrationID = null; // No te sentit en API Firma En Servidor
+      PolicyInfoSignature policyInfoSignature = null;
+      if (epes) {
+        policyInfoSignature = new PolicyInfoSignature();
+        policyInfoSignature.setPolicyIdentifier(confFirma.getPolicyIdentifier()); // "urn:oid:2.16.724.1.3.1.1.2.1.9");
+        policyInfoSignature.setPolicyIdentifierHash(confFirma.getPolicyIdentifierHash()); // "G7roucf600+f03r/o0bAOQ6WAs0=");
+        policyInfoSignature.setPolicyIdentifierHashAlgorithm(confFirma
+            .getPolicyIdentifierHashAlgorithm()); // "SHA1");
+        policyInfoSignature.setPolicyUrlDocument(confFirma.getPolicyUrlDocument());// "https://sede.060.gob.es/politica_de_firma_anexo_1.pdf");
+      }
+
+      CommonInfoSignature commonInfoSignature = new CommonInfoSignature(languageUI,
+          filtreCertificats, username, administrationID, policyInfoSignature);
+
+      String signID = transaccio.getTransactionWebId();
+
+      String name = fitxer.getNom();
+      String reason = "TEST SIGN"; // XYZ ZZZ
+      String location = "Palma"; // XYZ ZZZ
+      String signerEmail = null; // XYZ ZZZ
+      final int signNumber = 1;
+      String languageSign = transaccio.getSignParamLanguageDoc();
+
+      final String signAlgorithm = getAlgorisme(confFirma.getAlgorismeDeFirmaID()); // FileInfoSignature.SIGN_ALGORITHM_SHA1;
+
+      final int signaturesTableLocation = getPosicioTaulaDeFirmes(confFirma
+          .getPosicioTaulaFirmesID());
+      final PdfVisibleSignature pdfInfoSignature = null;
+      final SignaturesTableHeader signaturesTableHeader = null;
+
+      boolean userRequiresTimeStamp = confFirma.isIncloureSegellDeTemps();
+      final ITimeStampGenerator timeStampGenerator;
+      final String timestampUrlBase;
+      if (userRequiresTimeStamp && confFirma.getPluginSegellatID() != null) {
+
+        // Cridar al plugin per a que firmi
+        // XYZ hauria de cridar a l'altre
+        String absoluteURL = Configuracio.getAppUrl();
+        
+        log.info("\n\n\n XYZ ZZZ absoluteURL ==> " + absoluteURL + "\n\n\n");
+
+        // Segellat de temps
+        timestampUrlBase = SignatureUtils
+            .getAbsoluteURLToTimeStampGeneratorPerFirmaEnServidor(absoluteURL,
+                confFirma.getPluginFirmaServidorID());
+        
+        log.info("\n\n\n XYZ ZZZ timestampUrlBase ==> " + timestampUrlBase + "\n\n\n");
+
+        timeStampGenerator = DigitalIBTimeStampGenerator.getInstance(pluginSegellDeTempsEjb,
+            confFirma.getPluginSegellatID());
+
+      } else {
+        timeStampGenerator = null;
+        timestampUrlBase = null;
+      }
+
+      // Valors per defcte
+      final SecureVerificationCodeStampInfo csvStampInfo = null;
+
+      final File previusSignatureDetachedFile = null;
+
+      // XYZ ZZZ Collir-ho de confFirma.getTipusOperacioFirma()
+      final int signOperation = FileInfoSignature.SIGN_OPERATION_SIGN;
+
+      final String expedientCode = null;
+      // XYZ ZZZ S'ha de demanar ????
+      final String expedientName = null;
+      final String expedientUrl = null;
+      final String procedureCode = null;
+      final String procedureName = null;
+
+      File source = FileSystemManager.getFile(fitxer.getFitxerID());
+
+      // XYZ ZZZ PDF MIME
+      FileInfoSignature fileInfo = new FileInfoSignature(signID, source,
+          previusSignatureDetachedFile, FileInfoSignature.PDF_MIME_TYPE, name, reason,
+          location, signerEmail, signNumber, languageSign, signOperation, signType,
+          signAlgorithm, signMode, signaturesTableLocation, signaturesTableHeader,
+          pdfInfoSignature, csvStampInfo, userRequiresTimeStamp, timeStampGenerator,
+          expedientCode, expedientName, expedientUrl, procedureCode, procedureName);
+
+      final String signaturesSetID = String.valueOf(System.currentTimeMillis());
+      SignaturesSet signaturesSet = new SignaturesSet(signaturesSetID, commonInfoSignature,
+          new FileInfoSignature[] { fileInfo });
+
+      Map<String, Object> parameters = new HashMap<String, Object>();
+
+      // TODO Check si passa filtre
+      String error = plugin.filter(signaturesSet, parameters);
+      if (error != null) {
+
+        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+        transaccio.setEstatMissatge("XYZ ZZZ Plugin " + plugin.getName(locale)
+            + " No passa el filtre. Raó:  " + error);
+
+        return null;
+      }
+
+      signaturesSet = plugin.signDocuments(signaturesSet, timestampUrlBase, parameters);
+      
+      StatusSignaturesSet sss = signaturesSet.getStatusSignaturesSet();
+
+      if (sss.getStatus() != StatusSignaturesSet.STATUS_FINAL_OK) {
+        String msg = "XYZ ZZZ Error General MSG = " + sss.getErrorMsg();
+
+        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+        transaccio.setEstatMissatge(msg);
+        transaccio.setEstatExcepcio(LogicUtils.exceptionToString(sss.getErrorException()));
+
+        // Cridades de Plugin
+        pluginCridada.postCridadaError(monitorIntegracions,
+            msg + "\n\n" + transaccio.getEstatExcepcio());
+
+        return null;
+
+      }
+
+      FileInfoSignature fis = signaturesSet.getFileInfoSignatureArray()[0];
+      StatusSignature status = fis.getStatusSignature();
+      if (status.getStatus() != StatusSignaturesSet.STATUS_FINAL_OK) {
+        // XYZ ZZZ
+        String msg = "Error Firma 1. MSG = " + status.getErrorMsg();
+        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+        transaccio.setEstatMissatge(msg);
+        transaccio.setEstatExcepcio(LogicUtils.exceptionToString(status.getErrorException()));
+
+        // Cridades de Plugin
+        pluginCridada.postCridadaError(monitorIntegracions,
+            msg + "\n\n" + transaccio.getEstatExcepcio());
+
+        return null;
+      } else {
+        // Cridades de Plugin
+        pluginCridada.postCridadaOK(monitorIntegracions, "");
+
+      }
+
+      File fileSigned = status.getSignedData();
+
+      String nom = fitxer.getNom();
+
+      int punt = nom.lastIndexOf('.');
+
+      if (punt == -1) {
+        nom = nom + ".signed";
+      } else {
+        nom = nom.substring(0, punt) + "-signed" + nom.substring(punt);
+      }
+
+      fitxerSignat = new FitxerBean("", FileInfoSignature.PDF_MIME_TYPE, nom,
+          fileSigned.length());
+
       fitxerSignat = fitxerEjb.create(fitxerSignat);
 
       File dest = FileSystemManager.crearFitxer(fileSigned, fitxerSignat.getFitxerID());
@@ -299,10 +366,77 @@ public class PluginFirmaEnServidorLogicaEJB extends
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
 
       // Cridades de Plugin
-      pluginCridada.postCridadaError(monitorIntegracions,
-          msg + "\n\n" + transaccio.getEstatExcepcio());
+      if (monitorIntegracions != null) {
+        pluginCridada.postCridadaError(monitorIntegracions,
+            msg + "\n\n" + transaccio.getEstatExcepcio());
+      }
 
       return null;
+
+    }
+
+  }
+
+  public static int getPosicioTaulaDeFirmes(int pos) {
+
+    switch (pos) {
+
+      default:
+      case Constants.TAULADEFIRMES_SENSETAULA:
+        return FileInfoSignature.SIGNATURESTABLELOCATION_WITHOUT;
+
+      case Constants.TAULADEFIRMES_PRIMERAPAGINA:
+        return FileInfoSignature.SIGNATURESTABLELOCATION_FIRSTPAGE;
+
+      case Constants.TAULADEFIRMES_DARRERAPAGINA:
+        return FileInfoSignature.SIGNATURESTABLELOCATION_LASTPAGE;
+
+    }
+  };
+
+  public static String getAlgorisme(int algo) throws I18NException {
+
+    switch (algo) {
+
+      case Constants.SIGN_ALGORITHM_SHA1WITHRSA:
+        return FileInfoSignature.SIGN_ALGORITHM_SHA1;
+
+      case Constants.SIGN_ALGORITHM_SHA256WITHRSA:
+        return FileInfoSignature.SIGN_ALGORITHM_SHA256;
+
+      case Constants.SIGN_ALGORITHM_SHA384WITHRSA:
+        return FileInfoSignature.SIGN_ALGORITHM_SHA384;
+
+      case Constants.SIGN_ALGORITHM_SHA512WITHRSA:
+        return FileInfoSignature.SIGN_ALGORITHM_SHA512;
+
+      default:
+        // XYZ ZZZ TRA
+        throw new I18NException("Es desconeix el tipus d'algorime de firma amb ID = " + algo);
+
+    }
+
+  };
+
+  public static String convertSignType(int tipusFirma) throws I18NException {
+
+    switch (tipusFirma) {
+
+      case Constants.TIPUSFIRMA_PADES:
+        return FileInfoSignature.SIGN_TYPE_PADES;
+
+      case Constants.TIPUSFIRMA_CADES:
+        return FileInfoSignature.SIGN_TYPE_CADES;
+
+      case Constants.TIPUSFIRMA_XADES:
+        return FileInfoSignature.SIGN_TYPE_XADES;
+
+      case Constants.TIPUSFIRMA_SMIME:
+        return FileInfoSignature.SIGN_TYPE_SMIME;
+
+      default:
+        // XYZ ZZZ TRA
+        throw new I18NException("Es desconeix el tipus de Firma amb ID = " + tipusFirma);
 
     }
 

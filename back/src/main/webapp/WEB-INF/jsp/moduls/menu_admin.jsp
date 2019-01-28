@@ -36,13 +36,22 @@
             key="firmaenservidorplugin.menu" /></span>
 
     </a></li>
-<%--
+    
     <li style="list-style-type: disc; list-style-position: inside;"><a
-      href="<c:url value="/admin/configuraciofirma/list"/>"> <span
-        style="${(fn:contains(url, 'configuraciofirma/'))? "font-weight:bold;" : ""}">Configuracio
-          FIRMA Servidor XYZ ZZZ</span>
+      href="<c:url value="/admin/pluginsegelltemps/list"/>"> <span
+        style="${(fn:contains(url, 'pluginsegelltemps/'))? "font-weight:bold;" : ""}"><fmt:message
+            key="pluginsegelltemps.menu" /></span>
+
     </a></li>
---%>
+
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/admin/conffirma/list"/>"> <span
+        style="${(fn:contains(url, '/admin/conffirma/'))? "font-weight:bold;" : ""}"><fmt:message
+            key="configuracioFirma.configuracioFirma" /></span>
+    </a></li>
+    
+    <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/apisimple/list"/>"> <span
@@ -68,12 +77,7 @@
 
     </a></li>
     
-    <li style="list-style-type: disc; list-style-position: inside;"><a
-      href="<c:url value="/admin/pluginsegelltemps/list"/>"> <span
-        style="${(fn:contains(url, 'pluginsegelltemps/'))? "font-weight:bold;" : ""}"><fmt:message
-            key="pluginsegelltemps.menu" /></span>
 
-    </a></li>
     
 
     <hr style="margin-top: 6px; margin-bottom: 6px;" />

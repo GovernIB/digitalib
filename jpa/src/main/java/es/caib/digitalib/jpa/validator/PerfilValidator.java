@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.query.Field;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.ApiSimpleFields;
+import es.caib.digitalib.model.fields.ConfiguracioFirmaFields;
 import es.caib.digitalib.model.fields.PluginFields;
 import es.caib.digitalib.model.fields.TraduccioFields;
 
@@ -29,6 +30,7 @@ public class PerfilValidator<T> implements PerfilFields {
   /** Constructor */
   public void validate(IValidatorResult<T> __vr, T __target__, boolean __isNou__
     ,es.caib.digitalib.model.dao.IApiSimpleManager __apiSimpleManager
+    ,es.caib.digitalib.model.dao.IConfiguracioFirmaManager __configuracioFirmaManager
     ,es.caib.digitalib.model.dao.IPerfilManager __perfilManager
     ,es.caib.digitalib.model.dao.IPluginManager __pluginManager
     ,es.caib.digitalib.model.dao.ITraduccioManager __traduccioManager) {
@@ -193,16 +195,16 @@ public class PerfilValidator<T> implements PerfilFields {
       }
     }
 
-    if (__vr.getFieldErrorCount(PLUGINFIRMASERVIDORID) == 0) {
-      java.lang.Long __pluginfirmaservidorid = (java.lang.Long)__vr.getFieldValue(__target__,PLUGINFIRMASERVIDORID);
-      if (__pluginfirmaservidorid != null ) {
+    if (__vr.getFieldErrorCount(CONFIGURACIOFIRMAID) == 0) {
+      java.lang.Long __configuraciofirmaid = (java.lang.Long)__vr.getFieldValue(__target__,CONFIGURACIOFIRMAID);
+      if (__configuraciofirmaid != null ) {
         Long __count_ = null;
-        try { __count_ = __pluginManager.count(PluginFields.PLUGINID.equal(__pluginfirmaservidorid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        try { __count_ = __configuracioFirmaManager.count(ConfiguracioFirmaFields.CONFIGURACIOFIRMAID.equal(__configuraciofirmaid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
         if (__count_ == null || __count_ == 0) {        
-          __vr.rejectValue(PLUGINFIRMASERVIDORID, "error.notfound",
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginfirmaservidorid)));
+          __vr.rejectValue(CONFIGURACIOFIRMAID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("configuracioFirma.configuracioFirma"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("configuracioFirma.configuracioFirmaID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__configuraciofirmaid)));
         }
       }
     }

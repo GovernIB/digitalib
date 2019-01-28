@@ -110,14 +110,14 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 				case Constants.PERFIL_US_NOMES_ESCANEIG :
 					filterForm.addHiddenField(TIPUSFIRMA);
 					filterForm.addHiddenField(APISIMPLEID);
-					filterForm.addHiddenField(PLUGINFIRMASERVIDORID);
+					filterForm.addHiddenField(CONFIGURACIOFIRMAID);
 
 					filterForm.getGroupByFields().remove(
 							PerfilFields.TIPUSFIRMA);
 					filterForm.getGroupByFields().remove(
 							PerfilFields.APISIMPLEID);
 					filterForm.getGroupByFields().remove(
-							PerfilFields.PLUGINFIRMASERVIDORID);
+							PerfilFields.CONFIGURACIOFIRMAID);
 
 				case Constants.PERFIL_US_COPIA_AUTENTICA_INFO :
 				case Constants.PERFIL_US_COPIA_AUTENTICA :
@@ -204,7 +204,7 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 			case Constants.PERFIL_US_NOMES_ESCANEIG :
 				perfilForm.addHiddenField(TIPUSFIRMA);
 				perfilForm.addHiddenField(APISIMPLEID);
-				perfilForm.addHiddenField(PLUGINFIRMASERVIDORID);
+				perfilForm.addHiddenField(CONFIGURACIOFIRMAID);
 
 			case Constants.PERFIL_US_COPIA_AUTENTICA_INFO :
 			case Constants.PERFIL_US_COPIA_AUTENTICA :
@@ -276,18 +276,20 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w_actiu);
 	}
 
+	/*
 	@Override
 	public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(
 			HttpServletRequest request, ModelAndView mav, Where where)
 			throws I18NException {
 
-		Where w = Where.AND(where, PluginFields.TIPUS
-				.equal(Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR));
+		Where w = Where.AND(where,
+		    PluginFields.TIPUS.equal(Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR));
 		
 		Where w_actiu = Where.AND(w, PluginFields.ACTIU.equal(true));
 		
 		return pluginRefList.getReferenceList(PluginFields.PLUGINID, w_actiu);
 	}
+	*/
 
 	@Override
 	public List<StringKeyValue> getReferenceListForUsPerfil(
@@ -413,15 +415,15 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 		switch (perfil.getTipusFirma()) {
 
 			case Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE :
-				perfil.setPluginFirmaServidorID(null);
+				perfil.setConfiguracioFirmaID(null);
 				perfil.setApiSimpleID(null);
 				break;
 			case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN :
-				if (perfil.getPluginFirmaServidorID() == null) {
-					result.rejectValue(get(PLUGINFIRMASERVIDORID),
+				if (perfil.getConfiguracioFirmaID() == null) {
+					result.rejectValue(get(CONFIGURACIOFIRMAID),
 							"genapp.validation.required",
 							new Object[]{I18NUtils
-									.tradueix(get(PLUGINFIRMASERVIDORID))},
+									.tradueix(get(CONFIGURACIOFIRMAID))},
 							null);
 				}
 				perfil.setApiSimpleID(null);
@@ -435,7 +437,7 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 							null);
 
 				}
-				perfil.setPluginFirmaServidorID(null);
+				perfil.setConfiguracioFirmaID(null);
 				break;
 		}
 

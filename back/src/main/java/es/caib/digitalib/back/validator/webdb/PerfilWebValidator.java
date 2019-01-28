@@ -29,6 +29,9 @@ public class PerfilWebValidator  implements Validator, PerfilFields {
   @javax.ejb.EJB(mappedName = "digitalib/ApiSimpleEJB/local")
   protected es.caib.digitalib.ejb.ApiSimpleLocal apiSimpleEjb;
 
+  @javax.ejb.EJB(mappedName = "digitalib/ConfiguracioFirmaEJB/local")
+  protected es.caib.digitalib.ejb.ConfiguracioFirmaLocal configuracioFirmaEjb;
+
   @javax.ejb.EJB(mappedName = "digitalib/PerfilEJB/local")
   protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
 
@@ -156,7 +159,7 @@ _ignoreFields.add(DESCRIPCIOID);
 
   }
     validator.validate(wvr, target,
-      isNou, apiSimpleEjb, perfilEjb, pluginEjb, traduccioEjb);
+      isNou, apiSimpleEjb, configuracioFirmaEjb, perfilEjb, pluginEjb, traduccioEjb);
 
   } // Final de metode
 

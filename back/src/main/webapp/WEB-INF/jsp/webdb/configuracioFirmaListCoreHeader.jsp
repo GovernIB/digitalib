@@ -15,6 +15,30 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.CONFIGURACIOFIRMAID)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.CONFIGURACIOFIRMAID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.NOM)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.NOM)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINSEGELLATID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.PLUGINSEGELLATID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.TIPUSOPERACIOFIRMA)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.TIPUSOPERACIOFIRMA)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.TIPUSFIRMAID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.TIPUSFIRMAID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.ALGORISMEDEFIRMAID)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.ALGORISMEDEFIRMAID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.MODEDEFIRMA)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.MODEDEFIRMA)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}</th>
         </c:if>
@@ -30,21 +54,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYURLDOCUMENT)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.POLICYURLDOCUMENT)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.TIPUSOPERACIOFIRMA)}">
-        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.TIPUSOPERACIOFIRMA)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.TIPUSFIRMAID)}">
-        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.TIPUSFIRMAID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.ALGORISMEDEFIRMAID)}">
-        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.ALGORISMEDEFIRMAID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.MODEDEFIRMA)}">
-        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.MODEDEFIRMA)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLITICATAULAFIRMES)}">
-        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.POLITICATAULAFIRMES)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POSICIOTAULAFIRMESID)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.POSICIOTAULAFIRMESID)}</th>
         </c:if>
@@ -56,15 +65,6 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PROPIETATSTAULAFIRMES)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.PROPIETATSTAULAFIRMES)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
-        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
-        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINSEGELLATID)}">
-        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioFirmaFields.PLUGINSEGELLATID)}</th>
         </c:if>
 
 

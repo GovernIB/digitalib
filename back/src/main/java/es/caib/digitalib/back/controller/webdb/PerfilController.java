@@ -74,6 +74,10 @@ public class PerfilController
   @Autowired
   protected ApiSimpleRefList apiSimpleRefList;
 
+  // References 
+  @Autowired
+  protected ConfiguracioFirmaRefList configuracioFirmaRefList;
+
   /**
    * Llistat de totes Perfil
    */
@@ -284,13 +288,13 @@ public class PerfilController
       };
     }
 
-    // Field pluginFirmaServidorID
+    // Field configuracioFirmaID
     {
-      _listSKV = getReferenceListForPluginFirmaServidorID(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForConfiguracioFirmaID(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfPluginForPluginFirmaServidorID(_tmp);
-      if (filterForm.getGroupByFields().contains(PLUGINFIRMASERVIDORID)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, PLUGINFIRMASERVIDORID, false);
+      filterForm.setMapOfConfiguracioFirmaForConfiguracioFirmaID(_tmp);
+      if (filterForm.getGroupByFields().contains(CONFIGURACIOFIRMAID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, CONFIGURACIOFIRMAID, false);
       };
     }
 
@@ -361,7 +365,7 @@ public class PerfilController
     __mapping.put(PLUGINSCANWEB2ID, filterForm.getMapOfPluginForPluginScanWeb2ID());
     __mapping.put(TIPUSFIRMA, filterForm.getMapOfValuesForTipusFirma());
     __mapping.put(APISIMPLEID, filterForm.getMapOfApiSimpleForApiSimpleID());
-    __mapping.put(PLUGINFIRMASERVIDORID, filterForm.getMapOfPluginForPluginFirmaServidorID());
+    __mapping.put(CONFIGURACIOFIRMAID, filterForm.getMapOfConfiguracioFirmaForConfiguracioFirmaID());
     __mapping.put(TIPUSCUSTODIA, filterForm.getMapOfValuesForTipusCustodia());
     __mapping.put(PLUGINARXIUID, filterForm.getMapOfPluginForPluginArxiuID());
     __mapping.put(PLUGINDOCCUSTODYID, filterForm.getMapOfPluginForPluginDocCustodyID());
@@ -482,11 +486,11 @@ public class PerfilController
       perfilForm.setListOfApiSimpleForApiSimpleID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (perfilForm.getListOfPluginForPluginFirmaServidorID() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForPluginFirmaServidorID(request, mav, perfilForm, null);
+    if (perfilForm.getListOfConfiguracioFirmaForConfiguracioFirmaID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForConfiguracioFirmaID(request, mav, perfilForm, null);
 
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      perfilForm.setListOfPluginForPluginFirmaServidorID(_listSKV);
+      perfilForm.setListOfConfiguracioFirmaForConfiguracioFirmaID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfValuesForTipusCustodia() == null) {
@@ -1128,43 +1132,43 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForConfiguracioFirmaID(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
-    if (perfilForm.isHiddenField(PLUGINFIRMASERVIDORID)) {
+    if (perfilForm.isHiddenField(CONFIGURACIOFIRMAID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _where = null;
-    if (perfilForm.isReadOnlyField(PLUGINFIRMASERVIDORID)) {
-      _where = PluginFields.PLUGINID.equal(perfilForm.getPerfil().getPluginFirmaServidorID());
+    if (perfilForm.isReadOnlyField(CONFIGURACIOFIRMAID)) {
+      _where = ConfiguracioFirmaFields.CONFIGURACIOFIRMAID.equal(perfilForm.getPerfil().getConfiguracioFirmaID());
     }
-    return getReferenceListForPluginFirmaServidorID(request, mav, Where.AND(where, _where));
+    return getReferenceListForConfiguracioFirmaID(request, mav, Where.AND(where, _where));
   }
 
 
-  public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForConfiguracioFirmaID(HttpServletRequest request,
        ModelAndView mav, PerfilFilterForm perfilFilterForm,
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (perfilFilterForm.isHiddenField(PLUGINFIRMASERVIDORID)
-      && !perfilFilterForm.isGroupByField(PLUGINFIRMASERVIDORID)) {
+    if (perfilFilterForm.isHiddenField(CONFIGURACIOFIRMAID)
+      && !perfilFilterForm.isGroupByField(CONFIGURACIOFIRMAID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
-    if (!_groupByItemsMap.containsKey(PLUGINFIRMASERVIDORID)) {
+    if (!_groupByItemsMap.containsKey(CONFIGURACIOFIRMAID)) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (Perfil _item : list) {
-        if(_item.getPluginFirmaServidorID() == null) { continue; };
-        _pkList.add(_item.getPluginFirmaServidorID());
+        if(_item.getConfiguracioFirmaID() == null) { continue; };
+        _pkList.add(_item.getConfiguracioFirmaID());
         }
-        _w = PluginFields.PLUGINID.in(_pkList);
+        _w = ConfiguracioFirmaFields.CONFIGURACIOFIRMAID.in(_pkList);
       }
-    return getReferenceListForPluginFirmaServidorID(request, mav, Where.AND(where,_w));
+    return getReferenceListForConfiguracioFirmaID(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForPluginFirmaServidorID(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForConfiguracioFirmaID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
-    return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
+    return configuracioFirmaRefList.getReferenceList(ConfiguracioFirmaFields.CONFIGURACIOFIRMAID, where );
   }
 
 

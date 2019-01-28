@@ -48,8 +48,8 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.APISIMPLEID)}">
         <th>${dib:getSortIcons(__theFilterForm,PerfilFields.APISIMPLEID)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.PLUGINFIRMASERVIDORID)}">
-        <th>${dib:getSortIcons(__theFilterForm,PerfilFields.PLUGINFIRMASERVIDORID)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.CONFIGURACIOFIRMAID)}">
+        <th>${dib:getSortIcons(__theFilterForm,PerfilFields.CONFIGURACIOFIRMAID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.TIPUSCUSTODIA)}">
         <th>${dib:getSortIcons(__theFilterForm,PerfilFields.TIPUSCUSTODIA)}</th>

@@ -5,6 +5,30 @@ public interface ConfiguracioFirma extends org.fundaciobit.genapp.common.IGenApp
 	public long getConfiguracioFirmaID();
 	public void setConfiguracioFirmaID(long _configuracioFirmaID_);
 
+	public java.lang.String getNom();
+	public void setNom(java.lang.String _nom_);
+
+	public long getPluginFirmaServidorID();
+	public void setPluginFirmaServidorID(long _pluginFirmaServidorID_);
+
+	public boolean isIncloureSegellDeTemps();
+	public void setIncloureSegellDeTemps(boolean _incloureSegellDeTemps_);
+
+	public java.lang.Long getPluginSegellatID();
+	public void setPluginSegellatID(java.lang.Long _pluginSegellatID_);
+
+	public int getTipusOperacioFirma();
+	public void setTipusOperacioFirma(int _tipusOperacioFirma_);
+
+	public int getTipusFirmaID();
+	public void setTipusFirmaID(int _tipusFirmaID_);
+
+	public int getAlgorismeDeFirmaID();
+	public void setAlgorismeDeFirmaID(int _algorismeDeFirmaID_);
+
+	public boolean isModeDeFirma();
+	public void setModeDeFirma(boolean _modeDeFirma_);
+
 	public int getUsPoliticaDeFirma();
 	public void setUsPoliticaDeFirma(int _usPoliticaDeFirma_);
 
@@ -20,21 +44,6 @@ public interface ConfiguracioFirma extends org.fundaciobit.genapp.common.IGenApp
 	public java.lang.String getPolicyUrlDocument();
 	public void setPolicyUrlDocument(java.lang.String _policyUrlDocument_);
 
-	public int getTipusOperacioFirma();
-	public void setTipusOperacioFirma(int _tipusOperacioFirma_);
-
-	public int getTipusFirmaID();
-	public void setTipusFirmaID(int _tipusFirmaID_);
-
-	public java.lang.Integer getAlgorismeDeFirmaID();
-	public void setAlgorismeDeFirmaID(java.lang.Integer _algorismeDeFirmaID_);
-
-	public boolean isModeDeFirma();
-	public void setModeDeFirma(boolean _modeDeFirma_);
-
-	public int getPoliticaTaulaFirmes();
-	public void setPoliticaTaulaFirmes(int _politicaTaulaFirmes_);
-
 	public int getPosicioTaulaFirmesID();
 	public void setPosicioTaulaFirmesID(int _posicioTaulaFirmesID_);
 
@@ -46,15 +55,6 @@ public interface ConfiguracioFirma extends org.fundaciobit.genapp.common.IGenApp
 
 	public java.lang.String getPropietatsTaulaFirmes();
 	public void setPropietatsTaulaFirmes(java.lang.String _propietatsTaulaFirmes_);
-
-	public long getPluginFirmaServidorID();
-	public void setPluginFirmaServidorID(long _pluginFirmaServidorID_);
-
-	public boolean isIncloureSegellDeTemps();
-	public void setIncloureSegellDeTemps(boolean _incloureSegellDeTemps_);
-
-	public java.lang.Long getPluginSegellatID();
-	public void setPluginSegellatID(java.lang.Long _pluginSegellatID_);
 
 
 

@@ -22,7 +22,7 @@ private static final long serialVersionUID = -449640516L;
 	java.lang.Long pluginScanWeb2ID;
 	int tipusFirma;
 	java.lang.Long apiSimpleID;
-	java.lang.Long pluginFirmaServidorID;
+	java.lang.Long configuracioFirmaID;
 	int tipusCustodia;
 	java.lang.Long pluginArxiuID;
 	java.lang.Long pluginDocCustodyID;
@@ -35,7 +35,7 @@ private static final long serialVersionUID = -449640516L;
   }
 
   /** Constructor amb tots els camps  */
-  public PerfilBean(long perfilID , java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
+  public PerfilBean(long perfilID , java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long configuracioFirmaID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nomID=nomID;
@@ -48,7 +48,7 @@ private static final long serialVersionUID = -449640516L;
     this.pluginScanWeb2ID=pluginScanWeb2ID;
     this.tipusFirma=tipusFirma;
     this.apiSimpleID=apiSimpleID;
-    this.pluginFirmaServidorID=pluginFirmaServidorID;
+    this.configuracioFirmaID=configuracioFirmaID;
     this.tipusCustodia=tipusCustodia;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
@@ -56,7 +56,7 @@ private static final long serialVersionUID = -449640516L;
     this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor sense valors autoincrementals */
-  public PerfilBean(java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long pluginFirmaServidorID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
+  public PerfilBean(java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long configuracioFirmaID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.codi=codi;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
@@ -68,7 +68,7 @@ private static final long serialVersionUID = -449640516L;
     this.pluginScanWeb2ID=pluginScanWeb2ID;
     this.tipusFirma=tipusFirma;
     this.apiSimpleID=apiSimpleID;
-    this.pluginFirmaServidorID=pluginFirmaServidorID;
+    this.configuracioFirmaID=configuracioFirmaID;
     this.tipusCustodia=tipusCustodia;
     this.pluginArxiuID=pluginArxiuID;
     this.pluginDocCustodyID=pluginDocCustodyID;
@@ -98,7 +98,7 @@ private static final long serialVersionUID = -449640516L;
     this.setPluginScanWeb2ID(__bean.getPluginScanWeb2ID());
     this.setTipusFirma(__bean.getTipusFirma());
     this.setApiSimpleID(__bean.getApiSimpleID());
-    this.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
+    this.setConfiguracioFirmaID(__bean.getConfiguracioFirmaID());
     this.setTipusCustodia(__bean.getTipusCustodia());
     this.setPluginArxiuID(__bean.getPluginArxiuID());
     this.setPluginDocCustodyID(__bean.getPluginDocCustodyID());
@@ -190,11 +190,11 @@ private static final long serialVersionUID = -449640516L;
 		this.apiSimpleID = _apiSimpleID_;
 	};
 
-	public java.lang.Long getPluginFirmaServidorID() {
-		return(pluginFirmaServidorID);
+	public java.lang.Long getConfiguracioFirmaID() {
+		return(configuracioFirmaID);
 	};
-	public void setPluginFirmaServidorID(java.lang.Long _pluginFirmaServidorID_) {
-		this.pluginFirmaServidorID = _pluginFirmaServidorID_;
+	public void setConfiguracioFirmaID(java.lang.Long _configuracioFirmaID_) {
+		this.configuracioFirmaID = _configuracioFirmaID_;
 	};
 
 	public int getTipusCustodia() {
@@ -251,7 +251,7 @@ private static final long serialVersionUID = -449640516L;
     __tmp.setPluginScanWeb2ID(__bean.getPluginScanWeb2ID());
     __tmp.setTipusFirma(__bean.getTipusFirma());
     __tmp.setApiSimpleID(__bean.getApiSimpleID());
-    __tmp.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
+    __tmp.setConfiguracioFirmaID(__bean.getConfiguracioFirmaID());
     __tmp.setTipusCustodia(__bean.getTipusCustodia());
     __tmp.setPluginArxiuID(__bean.getPluginArxiuID());
     __tmp.setPluginDocCustodyID(__bean.getPluginDocCustodyID());

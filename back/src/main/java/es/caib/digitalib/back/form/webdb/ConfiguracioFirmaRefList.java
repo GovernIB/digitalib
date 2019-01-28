@@ -37,7 +37,7 @@ public class ConfiguracioFirmaRefList extends RefListBase
     this.traduccioEjb = __clone.traduccioEjb;
   }
   public ConfiguracioFirmaRefList() {
-    setSelects(new Select<?>[] { CONFIGURACIOFIRMAID.select });
+    setSelects(new Select<?>[] { NOM.select });
     addCampTraduible(FIRMATPERFORMATID.select);
     addCampTraduible(MOTIUDELEGACIOID.select);
   }

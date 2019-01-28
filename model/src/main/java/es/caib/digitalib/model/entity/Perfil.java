@@ -38,8 +38,8 @@ public interface Perfil extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.Long getApiSimpleID();
 	public void setApiSimpleID(java.lang.Long _apiSimpleID_);
 
-	public java.lang.Long getPluginFirmaServidorID();
-	public void setPluginFirmaServidorID(java.lang.Long _pluginFirmaServidorID_);
+	public java.lang.Long getConfiguracioFirmaID();
+	public void setConfiguracioFirmaID(java.lang.Long _configuracioFirmaID_);
 
 	public int getTipusCustodia();
 	public void setTipusCustodia(int _tipusCustodia_);

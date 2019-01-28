@@ -263,25 +263,25 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
   }
 
 
-  private java.lang.Long pluginFirmaServidorIDDesde;
+  private java.lang.Long configuracioFirmaIDDesde;
 
-  public java.lang.Long getPluginFirmaServidorIDDesde() {
-    return this.pluginFirmaServidorIDDesde;
+  public java.lang.Long getConfiguracioFirmaIDDesde() {
+    return this.configuracioFirmaIDDesde;
   }
 
-  public void setPluginFirmaServidorIDDesde(java.lang.Long pluginFirmaServidorIDDesde) {
-    this.pluginFirmaServidorIDDesde = pluginFirmaServidorIDDesde;
+  public void setConfiguracioFirmaIDDesde(java.lang.Long configuracioFirmaIDDesde) {
+    this.configuracioFirmaIDDesde = configuracioFirmaIDDesde;
   }
 
 
-  private java.lang.Long pluginFirmaServidorIDFins;
+  private java.lang.Long configuracioFirmaIDFins;
 
-  public java.lang.Long getPluginFirmaServidorIDFins() {
-    return this.pluginFirmaServidorIDFins;
+  public java.lang.Long getConfiguracioFirmaIDFins() {
+    return this.configuracioFirmaIDFins;
   }
 
-  public void setPluginFirmaServidorIDFins(java.lang.Long pluginFirmaServidorIDFins) {
-    this.pluginFirmaServidorIDFins = pluginFirmaServidorIDFins;
+  public void setConfiguracioFirmaIDFins(java.lang.Long configuracioFirmaIDFins) {
+    this.configuracioFirmaIDFins = configuracioFirmaIDFins;
   }
 
 
@@ -400,8 +400,8 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.tipusFirmaFins = __toClone.tipusFirmaFins;
     this.apiSimpleIDDesde = __toClone.apiSimpleIDDesde;
     this.apiSimpleIDFins = __toClone.apiSimpleIDFins;
-    this.pluginFirmaServidorIDDesde = __toClone.pluginFirmaServidorIDDesde;
-    this.pluginFirmaServidorIDFins = __toClone.pluginFirmaServidorIDFins;
+    this.configuracioFirmaIDDesde = __toClone.configuracioFirmaIDDesde;
+    this.configuracioFirmaIDFins = __toClone.configuracioFirmaIDFins;
     this.tipusCustodiaDesde = __toClone.tipusCustodiaDesde;
     this.tipusCustodiaFins = __toClone.tipusCustodiaFins;
     this.pluginArxiuIDDesde = __toClone.pluginArxiuIDDesde;
@@ -419,7 +419,7 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
     this.mapOfPluginForPluginScanWeb2ID = __toClone.mapOfPluginForPluginScanWeb2ID;
     this.mapOfValuesForTipusFirma = __toClone.mapOfValuesForTipusFirma;
     this.mapOfApiSimpleForApiSimpleID = __toClone.mapOfApiSimpleForApiSimpleID;
-    this.mapOfPluginForPluginFirmaServidorID = __toClone.mapOfPluginForPluginFirmaServidorID;
+    this.mapOfConfiguracioFirmaForConfiguracioFirmaID = __toClone.mapOfConfiguracioFirmaForConfiguracioFirmaID;
     this.mapOfValuesForTipusCustodia = __toClone.mapOfValuesForTipusCustodia;
     this.mapOfPluginForPluginArxiuID = __toClone.mapOfPluginForPluginArxiuID;
     this.mapOfPluginForPluginDocCustodyID = __toClone.mapOfPluginForPluginDocCustodyID;
@@ -566,14 +566,14 @@ public class PerfilFilterForm extends DigitalIBBaseFilterForm implements PerfilF
 
 
 
-  private Map<String, String> mapOfPluginForPluginFirmaServidorID;
+  private Map<String, String> mapOfConfiguracioFirmaForConfiguracioFirmaID;
 
-  public Map<String, String> getMapOfPluginForPluginFirmaServidorID() {
-    return this.mapOfPluginForPluginFirmaServidorID;
+  public Map<String, String> getMapOfConfiguracioFirmaForConfiguracioFirmaID() {
+    return this.mapOfConfiguracioFirmaForConfiguracioFirmaID;
   }
 
-  public void setMapOfPluginForPluginFirmaServidorID(Map<String, String> mapOfPluginForPluginFirmaServidorID) {
-    this.mapOfPluginForPluginFirmaServidorID = mapOfPluginForPluginFirmaServidorID;
+  public void setMapOfConfiguracioFirmaForConfiguracioFirmaID(Map<String, String> mapOfConfiguracioFirmaForConfiguracioFirmaID) {
+    this.mapOfConfiguracioFirmaForConfiguracioFirmaID = mapOfConfiguracioFirmaForConfiguracioFirmaID;
   }
 
 

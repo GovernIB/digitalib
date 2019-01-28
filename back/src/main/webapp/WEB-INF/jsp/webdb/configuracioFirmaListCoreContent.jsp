@@ -29,32 +29,30 @@
           ${configuracioFirma.configuracioFirmaID}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.NOM)}">
           <td>
-          <c:set var="tmp">${configuracioFirma.usPoliticaDeFirma}</c:set>
+          ${configuracioFirma.nom}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
+          <td>
+          <c:set var="tmp">${configuracioFirma.pluginFirmaServidorID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForUsPoliticaDeFirma[tmp]}
+          ${__theFilterForm.mapOfPluginForPluginFirmaServidorID[tmp]}
           </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIER)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
           <td>
-          ${configuracioFirma.policyIdentifier}
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${configuracioFirma.incloureSegellDeTemps?'success':'error'}.png"/>">
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINSEGELLATID)}">
           <td>
-          ${configuracioFirma.policyIdentifierHash}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)}">
-          <td>
-          ${configuracioFirma.policyIdentifierHashAlgorithm}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYURLDOCUMENT)}">
-          <td>
-          ${configuracioFirma.policyUrlDocument}
+          <c:set var="tmp">${configuracioFirma.pluginSegellatID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfPluginForPluginSegellatID[tmp]}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.TIPUSOPERACIOFIRMA)}">
@@ -85,12 +83,32 @@
           <td>
             <fmt:message key="modefirma.${configuracioFirma.modeDeFirma}" />          </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLITICATAULAFIRMES)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}">
           <td>
-          <c:set var="tmp">${configuracioFirma.politicaTaulaFirmes}</c:set>
+          <c:set var="tmp">${configuracioFirma.usPoliticaDeFirma}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForPoliticaTaulaFirmes[tmp]}
+          ${__theFilterForm.mapOfValuesForUsPoliticaDeFirma[tmp]}
           </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIER)}">
+          <td>
+          ${configuracioFirma.policyIdentifier}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)}">
+          <td>
+          ${configuracioFirma.policyIdentifierHash}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)}">
+          <td>
+          ${configuracioFirma.policyIdentifierHashAlgorithm}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYURLDOCUMENT)}">
+          <td>
+          ${configuracioFirma.policyUrlDocument}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POSICIOTAULAFIRMESID)}">
@@ -120,29 +138,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PROPIETATSTAULAFIRMES)}">
           <td>
           ${configuracioFirma.propietatsTaulaFirmes}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
-          <td>
-          <c:set var="tmp">${configuracioFirma.pluginFirmaServidorID}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfPluginForPluginFirmaServidorID[tmp]}
-          </c:if>
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
-          <td>
-            &nbsp;<c:if test="${not empty configuracioFirma.incloureSegellDeTemps}">
-            <img height="18" width="18" src="<c:url value="/img/icn_alert_${configuracioFirma.incloureSegellDeTemps?'success':'error'}.png"/>">
-            </c:if>
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINSEGELLATID)}">
-          <td>
-          <c:set var="tmp">${configuracioFirma.pluginSegellatID}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfPluginForPluginSegellatID[tmp]}
-          </c:if>
           </td>
         </c:if>
 

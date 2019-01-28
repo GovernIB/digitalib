@@ -100,6 +100,28 @@
       <artifactId>pluginsib-scanweb-file</artifactId>
       <version>3.0.0</version>
     </dependency>
+
+    <!-- ====================================== -->
+    <!-- ===  PLUGINS DE SEGELLAT DE TEMPS  === -->
+    <!-- ====================================== -->
+
+    <dependency>
+      <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
+      <artifactId>pluginsib-timestamp-api</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
+      <artifactId>pluginsib-timestamp-catcertrfc</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
+      <artifactId>pluginsib-timestamp-afirmarfc-cliente_tsa_rfc</artifactId>
+      <version>2.0.0</version>
+    </dependency>
     
 
     <!-- PLUGINS FIRMA EN SERVIDOR -->

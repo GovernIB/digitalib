@@ -15,6 +15,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,14 +27,14 @@ import es.caib.digitalib.back.form.webdb.PluginForm;
 import es.caib.digitalib.jpa.PluginJPA;
 import es.caib.digitalib.logic.PerfilLogicaLocal;
 import es.caib.digitalib.logic.PluginLogicaLocal;
-import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.Plugin;
+import es.caib.digitalib.model.fields.ConfiguracioFirmaFields;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.utils.Constants;
 
 /**
  * 
- * @author anadal
+ * @author anadal(u80067)
  *
  */
 public abstract class AbstractPluginAdminController extends PluginController {
@@ -43,6 +44,9 @@ public abstract class AbstractPluginAdminController extends PluginController {
   
   @EJB(mappedName = PerfilLogicaLocal.JNDI_NAME)
   protected PerfilLogicaLocal perfilLogicaEjb;
+  
+  @EJB(mappedName = es.caib.digitalib.ejb.ConfiguracioFirmaLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.ConfiguracioFirmaLocal configuracioFirmaEjb;
 
   public abstract String getContextWebPlugin();
   
@@ -130,7 +134,7 @@ public abstract class AbstractPluginAdminController extends PluginController {
     p.setActiu(true);
     pluginLogicaEjb.update(p);
 
-    String msg = createMessageSuccess(request, "success.activarplugin", p.getPluginID());
+    String msg = I18NUtils.tradueix("success.activarplugin", String.valueOf(p.getPluginID()));
     HtmlUtils.saveMessageSuccess(request, msg);
 
     return "redirect:" + getContextWebPlugin() + "/list/";
@@ -144,36 +148,68 @@ public abstract class AbstractPluginAdminController extends PluginController {
     
     int tipusPlugin = getTipusDePlugin();
     
-    Where w = null;
+    
+    List<String> infoCodiNom;
     
     switch (tipusPlugin) {
       case Constants.TIPUS_PLUGIN_ARXIU:
-        w = PerfilFields.PLUGINARXIUID.equal(p.getPluginID());
+        Where w1 = Where.AND( 
+            PerfilFields.PLUGINARXIUID.equal(p.getPluginID()),
+            PerfilFields.USPERFIL.greaterThan(0)
+            );
+        infoCodiNom = perfilLogicaEjb.executeQuery(PerfilFields.CODI, w1);
         break;
       case Constants.TIPUS_PLUGIN_DOCUMENT_CUSTODY:
-        w = PerfilFields.PLUGINDOCCUSTODYID.equal(p.getPluginID());
+        Where w2 = Where.AND( 
+           PerfilFields.PLUGINDOCCUSTODYID.equal(p.getPluginID()),
+           PerfilFields.USPERFIL.greaterThan(0)
+           );
+        infoCodiNom = perfilLogicaEjb.executeQuery(PerfilFields.CODI, w2);
         break;
       case Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR:
-        w = PerfilFields.PLUGINFIRMASERVIDORID.equal(p.getPluginID());
+        Where w3 = ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID.equal(p.getPluginID());
+        infoCodiNom = configuracioFirmaEjb.executeQuery(ConfiguracioFirmaFields.NOM, w3);
         break;
+        
+      case Constants.TIPUS_PLUGIN_SEGELLDETEMPS:
+        Where w4 = ConfiguracioFirmaFields.PLUGINSEGELLATID.equal(p.getPluginID());
+        infoCodiNom = configuracioFirmaEjb.executeQuery(ConfiguracioFirmaFields.NOM, w4);
+        break;
+        
       case Constants.TIPUS_PLUGIN_SCANWEB:
-        w = Where.AND(PerfilFields.PLUGINSCANWEBID.equal(p.getPluginID()), PerfilFields.PLUGINSCANWEB2ID.equal(p.getPluginID()));
+        Where w5 = Where.AND( 
+            Where.OR(PerfilFields.PLUGINSCANWEBID.equal(p.getPluginID()), PerfilFields.PLUGINSCANWEB2ID.equal(p.getPluginID())),
+            PerfilFields.USPERFIL.greaterThan(0)
+            );
+                
+        infoCodiNom = perfilLogicaEjb.executeQuery(PerfilFields.CODI, w5);
         break;
+        
+      default:
+        // XYZ ZZZ TRA
+        throw new I18NException("genapp.comodi", "No puc trobar plugin de tipus "  + tipusPlugin);
     }
     
-    List<Perfil> perfils = perfilLogicaEjb.select(w);
     
-    if (perfils.size() > 0) {
-      Long id = perfils.get(0).getPerfilID();
-      String msg = createMessageError(request, "error.desactivarplugin", id);
-      System.out.println("ERROR = "+msg);
+    
+    if (infoCodiNom.size() > 0) {
+      String codiNom = infoCodiNom.get(0);
+      String msg;
+      if (tipusPlugin == Constants.TIPUS_PLUGIN_FIRMA_EN_SERVIDOR || tipusPlugin == Constants.TIPUS_PLUGIN_SEGELLDETEMPS) {
+        // No es pot desactivar el plugin perquè el fa servir la configuració de firma amb nom {0}.
+        msg = I18NUtils.tradueix("error.desactivarplugin.2", codiNom);
+      } else {
+        // No es pot desactivar el plugin perquè el fa servir el perfil amb codi {0}.
+        msg = I18NUtils.tradueix("error.desactivarplugin", codiNom);
+      }
+      HtmlUtils.saveMessageError(request, msg);
       
       return "redirect:" + getContextWebPlugin() + "/" + p.getPluginID() + "/edit";
     }
     
     p.setActiu(false);
     pluginLogicaEjb.update(p);
-    String msg = createMessageSuccess(request, "success.desactivarplugin", p.getPluginID());
+    String msg = I18NUtils.tradueix("success.desactivarplugin", p.getCodi());
     
     HtmlUtils.saveMessageSuccess(request,msg);
     

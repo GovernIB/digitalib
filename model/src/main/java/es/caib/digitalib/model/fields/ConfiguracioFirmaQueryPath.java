@@ -15,6 +15,38 @@ public class ConfiguracioFirmaQueryPath extends org.fundaciobit.genapp.common.qu
     return new LongField(getQueryPath(), ConfiguracioFirmaFields.CONFIGURACIOFIRMAID);
   }
 
+  public StringField NOM() {
+    return new StringField(getQueryPath(), ConfiguracioFirmaFields.NOM);
+  }
+
+  public LongField PLUGINFIRMASERVIDORID() {
+    return new LongField(getQueryPath(), ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID);
+  }
+
+  public BooleanField INCLOURESEGELLDETEMPS() {
+    return new BooleanField(getQueryPath(), ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS);
+  }
+
+  public LongField PLUGINSEGELLATID() {
+    return new LongField(getQueryPath(), ConfiguracioFirmaFields.PLUGINSEGELLATID);
+  }
+
+  public IntegerField TIPUSOPERACIOFIRMA() {
+    return new IntegerField(getQueryPath(), ConfiguracioFirmaFields.TIPUSOPERACIOFIRMA);
+  }
+
+  public IntegerField TIPUSFIRMAID() {
+    return new IntegerField(getQueryPath(), ConfiguracioFirmaFields.TIPUSFIRMAID);
+  }
+
+  public IntegerField ALGORISMEDEFIRMAID() {
+    return new IntegerField(getQueryPath(), ConfiguracioFirmaFields.ALGORISMEDEFIRMAID);
+  }
+
+  public BooleanField MODEDEFIRMA() {
+    return new BooleanField(getQueryPath(), ConfiguracioFirmaFields.MODEDEFIRMA);
+  }
+
   public IntegerField USPOLITICADEFIRMA() {
     return new IntegerField(getQueryPath(), ConfiguracioFirmaFields.USPOLITICADEFIRMA);
   }
@@ -35,26 +67,6 @@ public class ConfiguracioFirmaQueryPath extends org.fundaciobit.genapp.common.qu
     return new StringField(getQueryPath(), ConfiguracioFirmaFields.POLICYURLDOCUMENT);
   }
 
-  public IntegerField TIPUSOPERACIOFIRMA() {
-    return new IntegerField(getQueryPath(), ConfiguracioFirmaFields.TIPUSOPERACIOFIRMA);
-  }
-
-  public IntegerField TIPUSFIRMAID() {
-    return new IntegerField(getQueryPath(), ConfiguracioFirmaFields.TIPUSFIRMAID);
-  }
-
-  public IntegerField ALGORISMEDEFIRMAID() {
-    return new IntegerField(getQueryPath(), ConfiguracioFirmaFields.ALGORISMEDEFIRMAID);
-  }
-
-  public BooleanField MODEDEFIRMA() {
-    return new BooleanField(getQueryPath(), ConfiguracioFirmaFields.MODEDEFIRMA);
-  }
-
-  public IntegerField POLITICATAULAFIRMES() {
-    return new IntegerField(getQueryPath(), ConfiguracioFirmaFields.POLITICATAULAFIRMES);
-  }
-
   public IntegerField POSICIOTAULAFIRMESID() {
     return new IntegerField(getQueryPath(), ConfiguracioFirmaFields.POSICIOTAULAFIRMESID);
   }
@@ -71,18 +83,6 @@ public class ConfiguracioFirmaQueryPath extends org.fundaciobit.genapp.common.qu
     return new StringField(getQueryPath(), ConfiguracioFirmaFields.PROPIETATSTAULAFIRMES);
   }
 
-  public LongField PLUGINFIRMASERVIDORID() {
-    return new LongField(getQueryPath(), ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID);
-  }
-
-  public BooleanField INCLOURESEGELLDETEMPS() {
-    return new BooleanField(getQueryPath(), ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS);
-  }
-
-  public LongField PLUGINSEGELLATID() {
-    return new LongField(getQueryPath(), ConfiguracioFirmaFields.PLUGINSEGELLATID);
-  }
-
 
 
   @Override
@@ -92,21 +92,19 @@ public class ConfiguracioFirmaQueryPath extends org.fundaciobit.genapp.common.qu
   }
 
 
-  public TraduccioQueryPath FIRMATPERFORMAT() {
-    return new TraduccioQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return ConfiguracioFirmaQueryPath.this.getQueryPath() + "firmatPerFormat" + ".";
-      }
-    });
-  }
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
 
-  public TraduccioQueryPath MOTIUDELEGACIO() {
-    return new TraduccioQueryPath(new QueryPath() {
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public PerfilQueryPath PERFILS() {
+    return new PerfilQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return ConfiguracioFirmaQueryPath.this.getQueryPath() + "motiuDelegacio" + ".";
+          return ConfiguracioFirmaQueryPath.this.getQueryPath() + "perfils" + ".";
       }
     });
   }
+*/
 
   public PluginQueryPath PLUGINFIRMASERVIDOR() {
     return new PluginQueryPath(new QueryPath() {
@@ -120,6 +118,22 @@ public class ConfiguracioFirmaQueryPath extends org.fundaciobit.genapp.common.qu
     return new PluginQueryPath(new QueryPath() {
       public String getQueryPath() {
           return ConfiguracioFirmaQueryPath.this.getQueryPath() + "pluginSegellat" + ".";
+      }
+    });
+  }
+
+  public TraduccioQueryPath FIRMATPERFORMAT() {
+    return new TraduccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ConfiguracioFirmaQueryPath.this.getQueryPath() + "firmatPerFormat" + ".";
+      }
+    });
+  }
+
+  public TraduccioQueryPath MOTIUDELEGACIO() {
+    return new TraduccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ConfiguracioFirmaQueryPath.this.getQueryPath() + "motiuDelegacio" + ".";
       }
     });
   }

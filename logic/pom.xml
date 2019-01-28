@@ -134,6 +134,12 @@
       <artifactId>pluginsib-arxiu-api</artifactId>
       <version>2.0.0</version>
     </dependency>
+    
+    <dependency>
+      <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
+      <artifactId>pluginsib-timestamp-api</artifactId>
+      <version>2.0.0</version>
+    </dependency>
 
   </dependencies>
 

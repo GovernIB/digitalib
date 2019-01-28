@@ -65,6 +65,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+  <!--  PETICIONS DE SCANWEB -->
 
   <servlet>
     <servlet-name>PluginScanWebRequestsUser</servlet-name>
@@ -86,6 +87,20 @@
     <servlet-name>PluginScanWebRequestsPublic</servlet-name>
     <url-pattern>/public/scanwebmodule/requestPlugin/*</url-pattern>
   </servlet-mapping>
+  
+  
+    <!--  ======  GENERADOR DE SEGELLAT DE TEMPS PER FIRMA EN SERVIDOR ======== -->
+
+  <servlet>
+    <servlet-name>TimeStampGeneratorPerFirmaEnServidorServlet</servlet-name>
+    <servlet-class>es.caib.digitalib.back.controller.common.TimeStampGeneratorPerFirmaEnServidorServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>TimeStampGeneratorPerFirmaEnServidorServlet</servlet-name>
+    <url-pattern>/public/timestampgenerator/*</url-pattern>
+  </servlet-mapping> 
+  
 
 	<!-- Spring 3 UTF-8 Encoding -->
 	<filter>

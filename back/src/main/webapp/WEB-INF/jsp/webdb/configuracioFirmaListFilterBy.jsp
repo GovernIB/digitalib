@@ -68,72 +68,69 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.NOM)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="configuracioFirma.nom" var="nom" />
+              <fmt:message key="genapp.form.searchby" var="cercapernom" >                
+                 <fmt:param value="${nom}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${nom}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapernom}" path="nom" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="configuracioFirma.usPoliticaDeFirma" />:</span>
+              <span class="add-on"><fmt:message key="configuracioFirma.pluginFirmaServidorID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="usPoliticaDeFirmaDesde" />
+              <form:input cssClass="input-append input-small" path="pluginFirmaServidorIDDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="usPoliticaDeFirmaFins" />
+              <form:input cssClass="input-append input-small search-query" path="pluginFirmaServidorIDFins" />
 
             </div>
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.POLICYIDENTIFIER)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="configuracioFirma.policyIdentifier" var="policyIdentifier" />
-              <fmt:message key="genapp.form.searchby" var="cercaperpolicyIdentifier" >                
-                 <fmt:param value="${policyIdentifier}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${policyIdentifier}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperpolicyIdentifier}" path="policyIdentifier" />
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="configuracioFirma.incloureSegellDeTemps" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="incloureSegellDeTempsDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="incloureSegellDeTempsFins" />
+
             </div>
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="configuracioFirma.policyIdentifierHash" var="policyIdentifierHash" />
-              <fmt:message key="genapp.form.searchby" var="cercaperpolicyIdentifierHash" >                
-                 <fmt:param value="${policyIdentifierHash}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${policyIdentifierHash}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperpolicyIdentifierHash}" path="policyIdentifierHash" />
-            </div>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.PLUGINSEGELLATID)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="configuracioFirma.pluginSegellatID" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="pluginSegellatIDDesde" />
 
 
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="configuracioFirma.policyIdentifierHashAlgorithm" var="policyIdentifierHashAlgorithm" />
-              <fmt:message key="genapp.form.searchby" var="cercaperpolicyIdentifierHashAlgorithm" >                
-                 <fmt:param value="${policyIdentifierHashAlgorithm}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${policyIdentifierHashAlgorithm}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperpolicyIdentifierHashAlgorithm}" path="policyIdentifierHashAlgorithm" />
-            </div>
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
 
+              <form:input cssClass="input-append input-small search-query" path="pluginSegellatIDFins" />
 
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.POLICYURLDOCUMENT)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="configuracioFirma.policyUrlDocument" var="policyUrlDocument" />
-              <fmt:message key="genapp.form.searchby" var="cercaperpolicyUrlDocument" >                
-                 <fmt:param value="${policyUrlDocument}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${policyUrlDocument}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperpolicyUrlDocument}" path="policyUrlDocument" />
             </div>
 
 
@@ -210,20 +207,72 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.POLITICATAULAFIRMES)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="configuracioFirma.politicaTaulaFirmes" />:</span>
+              <span class="add-on"><fmt:message key="configuracioFirma.usPoliticaDeFirma" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="politicaTaulaFirmesDesde" />
+              <form:input cssClass="input-append input-small" path="usPoliticaDeFirmaDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="politicaTaulaFirmesFins" />
+              <form:input cssClass="input-append input-small search-query" path="usPoliticaDeFirmaFins" />
 
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.POLICYIDENTIFIER)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="configuracioFirma.policyIdentifier" var="policyIdentifier" />
+              <fmt:message key="genapp.form.searchby" var="cercaperpolicyIdentifier" >                
+                 <fmt:param value="${policyIdentifier}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${policyIdentifier}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperpolicyIdentifier}" path="policyIdentifier" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="configuracioFirma.policyIdentifierHash" var="policyIdentifierHash" />
+              <fmt:message key="genapp.form.searchby" var="cercaperpolicyIdentifierHash" >                
+                 <fmt:param value="${policyIdentifierHash}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${policyIdentifierHash}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperpolicyIdentifierHash}" path="policyIdentifierHash" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="configuracioFirma.policyIdentifierHashAlgorithm" var="policyIdentifierHashAlgorithm" />
+              <fmt:message key="genapp.form.searchby" var="cercaperpolicyIdentifierHashAlgorithm" >                
+                 <fmt:param value="${policyIdentifierHashAlgorithm}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${policyIdentifierHashAlgorithm}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperpolicyIdentifierHashAlgorithm}" path="policyIdentifierHashAlgorithm" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.POLICYURLDOCUMENT)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="configuracioFirma.policyUrlDocument" var="policyUrlDocument" />
+              <fmt:message key="genapp.form.searchby" var="cercaperpolicyUrlDocument" >                
+                 <fmt:param value="${policyUrlDocument}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${policyUrlDocument}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperpolicyUrlDocument}" path="policyUrlDocument" />
             </div>
 
 
@@ -291,60 +340,6 @@
               </fmt:message>
               <span class="add-on"><c:out value="${propietatsTaulaFirmes}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperpropietatsTaulaFirmes}" path="propietatsTaulaFirmes" />
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="configuracioFirma.pluginFirmaServidorID" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="pluginFirmaServidorIDDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="pluginFirmaServidorIDFins" />
-
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="configuracioFirma.incloureSegellDeTemps" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="incloureSegellDeTempsDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="incloureSegellDeTempsFins" />
-
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ConfiguracioFirmaFields.PLUGINSEGELLATID)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="configuracioFirma.pluginSegellatID" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="pluginSegellatIDDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="pluginSegellatIDFins" />
-
             </div>
 
 

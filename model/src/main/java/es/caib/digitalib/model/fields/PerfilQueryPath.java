@@ -59,8 +59,8 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), PerfilFields.APISIMPLEID);
   }
 
-  public LongField PLUGINFIRMASERVIDORID() {
-    return new LongField(getQueryPath(), PerfilFields.PLUGINFIRMASERVIDORID);
+  public LongField CONFIGURACIOFIRMAID() {
+    return new LongField(getQueryPath(), PerfilFields.CONFIGURACIOFIRMAID);
   }
 
   public IntegerField TIPUSCUSTODIA() {
@@ -244,10 +244,10 @@ public class PerfilQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     });
   }
 
-  public PluginQueryPath PLUGINFIRMASERVIDOR() {
-    return new PluginQueryPath(new QueryPath() {
+  public ConfiguracioFirmaQueryPath CONFIGURACIOFIRMA() {
+    return new ConfiguracioFirmaQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PerfilQueryPath.this.getQueryPath() + "pluginFirmaServidor" + ".";
+          return PerfilQueryPath.this.getQueryPath() + "configuracioFirma" + ".";
       }
     });
   }

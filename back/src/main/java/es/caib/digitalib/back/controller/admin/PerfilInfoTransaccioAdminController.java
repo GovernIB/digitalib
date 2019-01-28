@@ -68,14 +68,14 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
     switch (firma) {
     case Constants.TIPUS_FIRMA_EN_SERVIDOR_SENSE:
       perfilForm.addHiddenField(APISIMPLEID);
-      perfilForm.addHiddenField(PLUGINFIRMASERVIDORID);
+      perfilForm.addHiddenField(CONFIGURACIOFIRMAID);
       break;
     case Constants.TIPUS_FIRMA_EN_SERVIDOR_PLUGIN:
       perfilForm.addHiddenField(APISIMPLEID);
       break;
 
     case Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE:
-      perfilForm.addHiddenField(PLUGINFIRMASERVIDORID);
+      perfilForm.addHiddenField(CONFIGURACIOFIRMAID);
       break;
     }
 

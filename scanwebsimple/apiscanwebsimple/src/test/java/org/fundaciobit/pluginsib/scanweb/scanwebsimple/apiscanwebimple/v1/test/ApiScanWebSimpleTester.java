@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 import java.util.Scanner;
 
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.ApiScanWebSimple;
@@ -143,7 +144,15 @@ public class ApiScanWebSimpleTester {
 
       // Servidor TEMPORAL
       String host = Inet4Address.getLocalHost().getHostAddress();
-      final int port = 1989;
+      //final int port = 1989;
+      
+      
+      
+      Random r = new Random();
+      int low = 1900;
+      int high = 2000;
+      final int port = r.nextInt(high-low) + low;
+      
       final String returnUrl = "http://" + host + ":" + port + "/returnurl/" + transactionID;
 
       ScanWebSimpleStartTransactionRequest startTransactionInfo;

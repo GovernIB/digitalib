@@ -313,27 +313,27 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.PLUGINFIRMASERVIDORID)}">
-        <tr id="perfil_pluginFirmaServidorID_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PerfilFields.CONFIGURACIOFIRMAID)}">
+        <tr id="perfil_configuracioFirmaID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[PerfilFields.PLUGINFIRMASERVIDORID])?'perfil.pluginFirmaServidorID':__theForm.labels[PerfilFields.PLUGINFIRMASERVIDORID]}" />
-              <c:if test="${not empty __theForm.help[PerfilFields.PLUGINFIRMASERVIDORID]}">
-              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.PLUGINFIRMASERVIDORID]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[PerfilFields.CONFIGURACIOFIRMAID])?'perfil.configuracioFirmaID':__theForm.labels[PerfilFields.CONFIGURACIOFIRMAID]}" />
+              <c:if test="${not empty __theForm.help[PerfilFields.CONFIGURACIOFIRMAID]}">
+              <i class="icon-info-sign" title="${__theForm.help[PerfilFields.CONFIGURACIOFIRMAID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-          <form:errors path="perfil.pluginFirmaServidorID" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.PLUGINFIRMASERVIDORID)}" >
-          <form:hidden path="perfil.pluginFirmaServidorID"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.perfil.pluginFirmaServidorID,__theForm.listOfPluginForPluginFirmaServidorID)}"  />
+          <form:errors path="perfil.configuracioFirmaID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,PerfilFields.CONFIGURACIOFIRMAID)}" >
+          <form:hidden path="perfil.configuracioFirmaID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.perfil.configuracioFirmaID,__theForm.listOfConfiguracioFirmaForConfiguracioFirmaID)}"  />
           </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.PLUGINFIRMASERVIDORID)}" >
-          <form:select id="perfil_pluginFirmaServidorID"  onchange="if(typeof onChangePluginFirmaServidorID == 'function') {  onChangePluginFirmaServidorID(this); };"  cssClass="input-xxlarge" path="perfil.pluginFirmaServidorID">
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PerfilFields.CONFIGURACIOFIRMAID)}" >
+          <form:select id="perfil_configuracioFirmaID"  onchange="if(typeof onChangeConfiguracioFirmaID == 'function') {  onChangeConfiguracioFirmaID(this); };"  cssClass="input-xxlarge" path="perfil.configuracioFirmaID">
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfPluginForPluginFirmaServidorID}" var="tmp">
+            <c:forEach items="${__theForm.listOfConfiguracioFirmaForConfiguracioFirmaID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

@@ -254,6 +254,7 @@ public class ScanWebSimpleScanResult {
 
     if (arxiu != null) {
       str.append("\n").append("  + ARXIU:");
+      
       str.append("\n").append("      * expedientID: " + arxiu.getExpedientID());
       str.append("\n").append("      * documentID: " + arxiu.getDocumentID());
       str.append("\n").append("      * CSV: " + arxiu.getCsv());

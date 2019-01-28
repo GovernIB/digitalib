@@ -2,25 +2,43 @@
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <un:useConstants var="ConfiguracioFirmaFields" className="es.caib.digitalib.model.fields.ConfiguracioFirmaFields"/>
   
-        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}">
-        <tr id="configuracioFirma_usPoliticaDeFirma_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.NOM)}">
+        <tr id="configuracioFirma_nom_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.USPOLITICADEFIRMA])?'configuracioFirma.usPoliticaDeFirma':__theForm.labels[ConfiguracioFirmaFields.USPOLITICADEFIRMA]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.USPOLITICADEFIRMA]}">
-              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.USPOLITICADEFIRMA]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.NOM])?'configuracioFirma.nom':__theForm.labels[ConfiguracioFirmaFields.NOM]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.NOM]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.NOM]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-          <form:errors path="configuracioFirma.usPoliticaDeFirma" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}" >
-          <form:hidden path="configuracioFirma.usPoliticaDeFirma"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioFirma.usPoliticaDeFirma,__theForm.listOfValuesForUsPoliticaDeFirma)}"  />
+            <form:errors path="configuracioFirma.nom" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.NOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.NOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="configuracioFirma.nom"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
+        <tr id="configuracioFirma_pluginFirmaServidorID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID])?'configuracioFirma.pluginFirmaServidorID':__theForm.labels[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="configuracioFirma.pluginFirmaServidorID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}" >
+          <form:hidden path="configuracioFirma.pluginFirmaServidorID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioFirma.pluginFirmaServidorID,__theForm.listOfPluginForPluginFirmaServidorID)}"  />
           </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}" >
-          <form:select id="configuracioFirma_usPoliticaDeFirma"  onchange="if(typeof onChangeUsPoliticaDeFirma == 'function') {  onChangeUsPoliticaDeFirma(this); };"  cssClass="input-xxlarge" path="configuracioFirma.usPoliticaDeFirma">
-            <c:forEach items="${__theForm.listOfValuesForUsPoliticaDeFirma}" var="tmp">
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}" >
+          <form:select id="configuracioFirma_pluginFirmaServidorID"  onchange="if(typeof onChangePluginFirmaServidorID == 'function') {  onChangePluginFirmaServidorID(this); };"  cssClass="input-xxlarge" path="configuracioFirma.pluginFirmaServidorID">
+            <c:forEach items="${__theForm.listOfPluginForPluginFirmaServidorID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>
@@ -29,74 +47,53 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIER)}">
-        <tr id="configuracioFirma_policyIdentifier_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
+        <tr id="configuracioFirma_incloureSegellDeTemps_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIER])?'configuracioFirma.policyIdentifier':__theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIER]}" />
-              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIER]}">
-              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIER]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS])?'configuracioFirma.incloureSegellDeTemps':__theForm.labels[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="configuracioFirma.policyIdentifier" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIER)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIER)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="configuracioFirma.policyIdentifier"   />
-
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}" >
+              <form:errors path="configuracioFirma.incloureSegellDeTemps" cssClass="errorField alert alert-error" />
+              <form:checkbox onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)? 'false' : 'true'}" path="configuracioFirma.incloureSegellDeTemps" />
+          </c:if>
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}" >
+                <fmt:message key="genapp.checkbox.${__theForm.configuracioFirma.incloureSegellDeTemps}" />
+          </c:if>
            </td>
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)}">
-        <tr id="configuracioFirma_policyIdentifierHash_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.PLUGINSEGELLATID)}">
+        <tr id="configuracioFirma_pluginSegellatID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIERHASH])?'configuracioFirma.policyIdentifierHash':__theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIERHASH]}" />
-              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIERHASH]}">
-              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIERHASH]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.PLUGINSEGELLATID])?'configuracioFirma.pluginSegellatID':__theForm.labels[ConfiguracioFirmaFields.PLUGINSEGELLATID]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.PLUGINSEGELLATID]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.PLUGINSEGELLATID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="configuracioFirma.policyIdentifierHash" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="256" path="configuracioFirma.policyIdentifierHash"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)}">
-        <tr id="configuracioFirma_policyIdentifierHashAlgorithm_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM])?'configuracioFirma.policyIdentifierHashAlgorithm':__theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM]}" />
-              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM]}">
-              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="configuracioFirma.policyIdentifierHashAlgorithm" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="50" path="configuracioFirma.policyIdentifierHashAlgorithm"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.POLICYURLDOCUMENT)}">
-        <tr id="configuracioFirma_policyUrlDocument_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.POLICYURLDOCUMENT])?'configuracioFirma.policyUrlDocument':__theForm.labels[ConfiguracioFirmaFields.POLICYURLDOCUMENT]}" />
-              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.POLICYURLDOCUMENT]}">
-              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.POLICYURLDOCUMENT]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="configuracioFirma.policyUrlDocument" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYURLDOCUMENT)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYURLDOCUMENT)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="configuracioFirma.policyUrlDocument"   />
-
+          <form:errors path="configuracioFirma.pluginSegellatID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.PLUGINSEGELLATID)}" >
+          <form:hidden path="configuracioFirma.pluginSegellatID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioFirma.pluginSegellatID,__theForm.listOfPluginForPluginSegellatID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.PLUGINSEGELLATID)}" >
+          <form:select id="configuracioFirma_pluginSegellatID"  onchange="if(typeof onChangePluginSegellatID == 'function') {  onChangePluginSegellatID(this); };"  cssClass="input-xxlarge" path="configuracioFirma.pluginSegellatID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPluginForPluginSegellatID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>
@@ -206,29 +203,101 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.POLITICATAULAFIRMES)}">
-        <tr id="configuracioFirma_politicaTaulaFirmes_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}">
+        <tr id="configuracioFirma_usPoliticaDeFirma_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.POLITICATAULAFIRMES])?'configuracioFirma.politicaTaulaFirmes':__theForm.labels[ConfiguracioFirmaFields.POLITICATAULAFIRMES]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.POLITICATAULAFIRMES]}">
-              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.POLITICATAULAFIRMES]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.USPOLITICADEFIRMA])?'configuracioFirma.usPoliticaDeFirma':__theForm.labels[ConfiguracioFirmaFields.USPOLITICADEFIRMA]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.USPOLITICADEFIRMA]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.USPOLITICADEFIRMA]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-          <form:errors path="configuracioFirma.politicaTaulaFirmes" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLITICATAULAFIRMES)}" >
-          <form:hidden path="configuracioFirma.politicaTaulaFirmes"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioFirma.politicaTaulaFirmes,__theForm.listOfValuesForPoliticaTaulaFirmes)}"  />
+          <form:errors path="configuracioFirma.usPoliticaDeFirma" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}" >
+          <form:hidden path="configuracioFirma.usPoliticaDeFirma"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioFirma.usPoliticaDeFirma,__theForm.listOfValuesForUsPoliticaDeFirma)}"  />
           </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLITICATAULAFIRMES)}" >
-          <form:select id="configuracioFirma_politicaTaulaFirmes"  onchange="if(typeof onChangePoliticaTaulaFirmes == 'function') {  onChangePoliticaTaulaFirmes(this); };"  cssClass="input-xxlarge" path="configuracioFirma.politicaTaulaFirmes">
-            <c:forEach items="${__theForm.listOfValuesForPoliticaTaulaFirmes}" var="tmp">
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.USPOLITICADEFIRMA)}" >
+          <form:select id="configuracioFirma_usPoliticaDeFirma"  onchange="if(typeof onChangeUsPoliticaDeFirma == 'function') {  onChangeUsPoliticaDeFirma(this); };"  cssClass="input-xxlarge" path="configuracioFirma.usPoliticaDeFirma">
+            <c:forEach items="${__theForm.listOfValuesForUsPoliticaDeFirma}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>
           </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIER)}">
+        <tr id="configuracioFirma_policyIdentifier_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIER])?'configuracioFirma.policyIdentifier':__theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIER]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIER]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIER]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="configuracioFirma.policyIdentifier" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIER)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIER)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="configuracioFirma.policyIdentifier"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)}">
+        <tr id="configuracioFirma_policyIdentifierHash_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIERHASH])?'configuracioFirma.policyIdentifierHash':__theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIERHASH]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIERHASH]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIERHASH]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="configuracioFirma.policyIdentifierHash" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="256" path="configuracioFirma.policyIdentifierHash"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)}">
+        <tr id="configuracioFirma_policyIdentifierHashAlgorithm_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM])?'configuracioFirma.policyIdentifierHashAlgorithm':__theForm.labels[ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="configuracioFirma.policyIdentifierHashAlgorithm" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="50" path="configuracioFirma.policyIdentifierHashAlgorithm"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.POLICYURLDOCUMENT)}">
+        <tr id="configuracioFirma_policyUrlDocument_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.POLICYURLDOCUMENT])?'configuracioFirma.policyUrlDocument':__theForm.labels[ConfiguracioFirmaFields.POLICYURLDOCUMENT]}" />
+              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.POLICYURLDOCUMENT]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.POLICYURLDOCUMENT]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="configuracioFirma.policyUrlDocument" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYURLDOCUMENT)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.POLICYURLDOCUMENT)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="configuracioFirma.policyUrlDocument"   />
+
            </td>
         </tr>
         </c:if>
@@ -347,87 +416,6 @@
                 <li><a href="#" onclick="javascript:var ta=document.getElementById('configuracioFirma.propietatsTaulaFirmes'); ta.wrap='hard';">Hard Wrap</a></li>
               </ul>
               </div>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
-        <tr id="configuracioFirma_pluginFirmaServidorID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID])?'configuracioFirma.pluginFirmaServidorID':__theForm.labels[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID]}">
-              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="configuracioFirma.pluginFirmaServidorID" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}" >
-          <form:hidden path="configuracioFirma.pluginFirmaServidorID"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioFirma.pluginFirmaServidorID,__theForm.listOfPluginForPluginFirmaServidorID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}" >
-          <form:select id="configuracioFirma_pluginFirmaServidorID"  onchange="if(typeof onChangePluginFirmaServidorID == 'function') {  onChangePluginFirmaServidorID(this); };"  cssClass="input-xxlarge" path="configuracioFirma.pluginFirmaServidorID">
-            <c:forEach items="${__theForm.listOfPluginForPluginFirmaServidorID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}">
-        <tr id="configuracioFirma_incloureSegellDeTemps_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS])?'configuracioFirma.incloureSegellDeTemps':__theForm.labels[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS]}" />
-              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS]}">
-              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}" >
-              <form:select cssClass="input-medium" onchange="if(typeof onChangeIncloureSegellDeTemps == 'function') {  onChangeIncloureSegellDeTemps(this); };"  path="configuracioFirma.incloureSegellDeTemps">
-                <form:option value=""><fmt:message key="genapp.checkbox." /></form:option>
-                <form:option value="true" ><fmt:message key="genapp.checkbox.true" /></form:option>
-                <form:option value="false" ><fmt:message key="genapp.checkbox.false" /></form:option>
-              </form:select>
-          </c:if>
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.INCLOURESEGELLDETEMPS)}" >
-                <fmt:message key="genapp.checkbox.${__theForm.configuracioFirma.incloureSegellDeTemps}" />
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioFirmaFields.PLUGINSEGELLATID)}">
-        <tr id="configuracioFirma_pluginSegellatID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[ConfiguracioFirmaFields.PLUGINSEGELLATID])?'configuracioFirma.pluginSegellatID':__theForm.labels[ConfiguracioFirmaFields.PLUGINSEGELLATID]}" />
-              <c:if test="${not empty __theForm.help[ConfiguracioFirmaFields.PLUGINSEGELLATID]}">
-              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioFirmaFields.PLUGINSEGELLATID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="configuracioFirma.pluginSegellatID" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.PLUGINSEGELLATID)}" >
-          <form:hidden path="configuracioFirma.pluginSegellatID"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.configuracioFirma.pluginSegellatID,__theForm.listOfPluginForPluginSegellatID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.PLUGINSEGELLATID)}" >
-          <form:select id="configuracioFirma_pluginSegellatID"  onchange="if(typeof onChangePluginSegellatID == 'function') {  onChangePluginSegellatID(this); };"  cssClass="input-xxlarge" path="configuracioFirma.pluginSegellatID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfPluginForPluginSegellatID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
            </td>
         </tr>
         </c:if>

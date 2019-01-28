@@ -383,8 +383,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       }
 
       // URL on Iniciar el proces de firma
-      // XYZ ZZZ TODO Això ho ha de collir de la propietat URL PortaFIB de
-      // UsuariApplicacioConfig
+      // XYZ ZZZ TODO Això ho ha de collir de la propietat URL 
       // XYZ ZZZ TODO Configurar que si getAppUrl val null llavors llanci excepció
       final String redirectUrl = urlBase + ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
           + "/start/" + transaccio.getTransactionWebId();
@@ -594,16 +593,18 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
           InfoCustodyJPA custody = transaccio.getInfoCustody();
 
           if (custody != null) {
+            
+            String csv = custody.getCsv();
+            String originalFileURL = custody.getOriginalFileUrl();
+            String printableFileURL = custody.getPrintableFileUrl();
+            String eniFileURL = custody.getEniFileUrl();
+            String csvValidationWeb = custody.getCsvValidationWeb();
+            String csvGenerationDefinition = custody.getCsvGenerationDefinition();
+            String validationFileUrl =custody.getValidationFileUrl();
 
-            if (custody.getCustodyId() == null) {
+            if (custody.getCustodyId() != null) {
               String custodyID = custody.getCustodyId();
-              String csv = custody.getCsv();
-              String originalFileURL = custody.getOriginalFileUrl();
-              String printableFileURL = custody.getPrintableFileUrl();
-              String eniFileURL = custody.getEniFileUrl();
-              String csvValidationWeb = custody.getCsvValidationWeb();
-              String csvGenerationDefinition = custody.getCsvGenerationDefinition();
-              String validationFileUrl =custody.getValidationFileUrl();
+              
 
               ScanWebSimpleCustodyInfo custodyInfo = new ScanWebSimpleCustodyInfo(custodyID,
                   csv, originalFileURL, printableFileURL, eniFileURL, csvValidationWeb,
@@ -614,13 +615,6 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
               String expedientID = custody.getArxiuExpedientId();
               String documentID = custody.getArxiuDocumentId();
-              String csv = custody.getCsv();
-              String originalFileURL = custody.getOriginalFileUrl();
-              String printableFileURL = custody.getPrintableFileUrl();
-              String eniFileURL = custody.getEniFileUrl();
-              String csvValidationWeb = custody.getCsvValidationWeb();
-              String csvGenerationDefinition = custody.getCsvGenerationDefinition();
-              String validationFileUrl =custody.getValidationFileUrl();
 
               ScanWebSimpleArxiuInfo arxiuInfo = new ScanWebSimpleArxiuInfo(expedientID,
                   documentID, csv, originalFileURL, printableFileURL, eniFileURL,
@@ -725,125 +719,5 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     }
   }
 
-  /**
-   * 
-   * @author anadal
-   *
-   */
-  /*
-   * public class VirtualSignaturePlugin implements ISignaturePlugin {
-   * 
-   * protected String entitatID;
-   * 
-   * protected List<Long> filterByPluginIDList;
-   * 
-   * 
-   * 
-   * 
-   * public VirtualSignaturePlugin(String entitatID) { super(); this.entitatID = entitatID; }
-   * 
-   * @Override public String getName(Locale locale) { return "VirtualSignaturePlugin"; }
-   * 
-   * public List<Long> getFilterByPluginIDList() { return this.filterByPluginIDList; }
-   * 
-   * @Override public String[] getSupportedSignatureTypes() { return
-   * passarelaDeFirmaWebEjb.getSupportedSignatureTypes(entitatID, getFilterByPluginIDList(),
-   * null); }
-   * 
-   * @Override public String[] getSupportedSignatureAlgorithms(String signType) { return
-   * passarelaDeFirmaWebEjb.getSupportedSignatureAlgorithms(signType, entitatID,
-   * getFilterByPluginIDList(), null); }
-   * 
-   * @Override public List<String> getSupportedBarCodeTypes() { try { return
-   * passarelaDeFirmaWebEjb.getSupportedBarCodeTypes(); } catch (I18NException e) { log.error(
-   * " Error cridant a passarelaDeFirmaWebEjb.getSupportedBarCodeTypes(): " + e.getMessage(),
-   * e); return null; } }
-   * 
-   * 
-   * @return true true indica que el plugin accepta generadors de Segell de Temps definits dins
-   * FileInfoSignature.timeStampGenerator
-   * 
-   * @Override public boolean acceptExternalTimeStampGenerator(String signType) { return false;
-   * }
-   * 
-   * 
-   * 
-   * @return true, indica que el plugin internament ofereix un generador de segellat de temps.
-   * 
-   * @Override public boolean providesTimeStampGenerator(String signType) {
-   * 
-   * // S'ha de fer una cridada a PortaFIB per a que passi per tots // els plugins a veure si
-   * suporten estampació de segellat de temps per // aquest tipus try { return
-   * passarelaDeFirmaWebEjb.providesTimeStampGenerator(signType, entitatID,
-   * getFilterByPluginIDList(), null); } catch (Exception e) { log.error(e.getMessage(), e); }
-   * 
-   * return false;
-   * 
-   * }
-   * 
-   * @Override public boolean acceptExternalRubricGenerator() { return false; }
-   * 
-   * @Override public boolean providesRubricGenerator() { return true; }
-   * 
-   * @Override public boolean acceptExternalSecureVerificationCodeStamper() { return false; }
-   * 
-   * @Override public boolean providesSecureVerificationCodeStamper() { return true; } }
-   */
-
-  /**
-   * 
-   * @author anadal
-   *
-   */
-  /*
-   * public class TransactionInfo {
-   * 
-   * 
-   * public static final int STATUS_RESERVED_ID = 0;
-   * 
-   * public static final int STATUS_IN_PROGRESS = 1;
-   * 
-   * final String transactionID;
-   * 
-   * final ScanWebSimpleGetTransactionIdRequest requestTransactionID;
-   * 
-   * ScanWebSimpleScanResult result = null;
-   * 
-   * public int internalStatus = -1;
-   * 
-   * final Date startTime;
-   * 
-   * *
-   * 
-   * @param transactionID
-   * 
-   * @param startTime
-   * 
-   * @param status
-   * 
-   * public TransactionInfo(String transactionID, ScanWebSimpleGetTransactionIdRequest
-   * requestTransactionID, int internalStatus) { super(); this.transactionID = transactionID;
-   * this.startTime = new Date(); this.requestTransactionID = requestTransactionID;
-   * 
-   * this.internalStatus = internalStatus; }
-   * 
-   * public String getTransactionID() { return transactionID; }
-   * 
-   * public Date getStartTime() { return startTime; }
-   * 
-   * public ScanWebSimpleScanResult getResult() { return result; }
-   * 
-   * public void setResult(ScanWebSimpleScanResult result) { this.result = result; }
-   * 
-   * public ScanWebSimpleGetTransactionIdRequest getRequestTransactionID() { return
-   * requestTransactionID; }
-   * 
-   * public int getInternalStatus() { return internalStatus; }
-   * 
-   * public void setInternalStatus(int internalStatus) { this.internalStatus = internalStatus;
-   * }
-   * 
-   * }
-   */
 
 }

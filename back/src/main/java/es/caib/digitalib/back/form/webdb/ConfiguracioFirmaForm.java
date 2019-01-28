@@ -19,16 +19,15 @@ public class ConfiguracioFirmaForm extends DigitalIBBaseForm {
   public ConfiguracioFirmaForm(ConfiguracioFirmaForm __toClone) {
     super(__toClone);
       this.configuracioFirma = __toClone.configuracioFirma;
-    this.listOfValuesForUsPoliticaDeFirma = __toClone.listOfValuesForUsPoliticaDeFirma;
+    this.listOfPluginForPluginFirmaServidorID = __toClone.listOfPluginForPluginFirmaServidorID;
+    this.listOfPluginForPluginSegellatID = __toClone.listOfPluginForPluginSegellatID;
     this.listOfValuesForTipusOperacioFirma = __toClone.listOfValuesForTipusOperacioFirma;
     this.listOfValuesForTipusFirmaID = __toClone.listOfValuesForTipusFirmaID;
     this.listOfValuesForAlgorismeDeFirmaID = __toClone.listOfValuesForAlgorismeDeFirmaID;
-    this.listOfValuesForPoliticaTaulaFirmes = __toClone.listOfValuesForPoliticaTaulaFirmes;
+    this.listOfValuesForUsPoliticaDeFirma = __toClone.listOfValuesForUsPoliticaDeFirma;
     this.listOfValuesForPosicioTaulaFirmesID = __toClone.listOfValuesForPosicioTaulaFirmesID;
     this.listOfTraduccioForFirmatPerFormatID = __toClone.listOfTraduccioForFirmatPerFormatID;
     this.listOfTraduccioForMotiuDelegacioID = __toClone.listOfTraduccioForMotiuDelegacioID;
-    this.listOfPluginForPluginFirmaServidorID = __toClone.listOfPluginForPluginFirmaServidorID;
-    this.listOfPluginForPluginSegellatID = __toClone.listOfPluginForPluginSegellatID;
   }
   
   public ConfiguracioFirmaForm(ConfiguracioFirmaJPA configuracioFirma, boolean nou) {
@@ -53,14 +52,26 @@ public class ConfiguracioFirmaForm extends DigitalIBBaseForm {
     this.idiomesTraduccio = idiomesTraduccio;
   }
   
-  private List<StringKeyValue> listOfValuesForUsPoliticaDeFirma;
+  private List<StringKeyValue> listOfPluginForPluginFirmaServidorID;
 
-  public List<StringKeyValue> getListOfValuesForUsPoliticaDeFirma() {
-    return this.listOfValuesForUsPoliticaDeFirma;
+  public List<StringKeyValue> getListOfPluginForPluginFirmaServidorID() {
+    return this.listOfPluginForPluginFirmaServidorID;
   }
 
-  public void setListOfValuesForUsPoliticaDeFirma(List<StringKeyValue> listOfValuesForUsPoliticaDeFirma) {
-    this.listOfValuesForUsPoliticaDeFirma = listOfValuesForUsPoliticaDeFirma;
+  public void setListOfPluginForPluginFirmaServidorID(List<StringKeyValue> listOfPluginForPluginFirmaServidorID) {
+    this.listOfPluginForPluginFirmaServidorID = listOfPluginForPluginFirmaServidorID;
+  }
+
+
+
+  private List<StringKeyValue> listOfPluginForPluginSegellatID;
+
+  public List<StringKeyValue> getListOfPluginForPluginSegellatID() {
+    return this.listOfPluginForPluginSegellatID;
+  }
+
+  public void setListOfPluginForPluginSegellatID(List<StringKeyValue> listOfPluginForPluginSegellatID) {
+    this.listOfPluginForPluginSegellatID = listOfPluginForPluginSegellatID;
   }
 
 
@@ -101,14 +112,14 @@ public class ConfiguracioFirmaForm extends DigitalIBBaseForm {
 
 
 
-  private List<StringKeyValue> listOfValuesForPoliticaTaulaFirmes;
+  private List<StringKeyValue> listOfValuesForUsPoliticaDeFirma;
 
-  public List<StringKeyValue> getListOfValuesForPoliticaTaulaFirmes() {
-    return this.listOfValuesForPoliticaTaulaFirmes;
+  public List<StringKeyValue> getListOfValuesForUsPoliticaDeFirma() {
+    return this.listOfValuesForUsPoliticaDeFirma;
   }
 
-  public void setListOfValuesForPoliticaTaulaFirmes(List<StringKeyValue> listOfValuesForPoliticaTaulaFirmes) {
-    this.listOfValuesForPoliticaTaulaFirmes = listOfValuesForPoliticaTaulaFirmes;
+  public void setListOfValuesForUsPoliticaDeFirma(List<StringKeyValue> listOfValuesForUsPoliticaDeFirma) {
+    this.listOfValuesForUsPoliticaDeFirma = listOfValuesForUsPoliticaDeFirma;
   }
 
 
@@ -145,30 +156,6 @@ public class ConfiguracioFirmaForm extends DigitalIBBaseForm {
 
   public void setListOfTraduccioForMotiuDelegacioID(List<StringKeyValue> listOfTraduccioForMotiuDelegacioID) {
     this.listOfTraduccioForMotiuDelegacioID = listOfTraduccioForMotiuDelegacioID;
-  }
-
-
-
-  private List<StringKeyValue> listOfPluginForPluginFirmaServidorID;
-
-  public List<StringKeyValue> getListOfPluginForPluginFirmaServidorID() {
-    return this.listOfPluginForPluginFirmaServidorID;
-  }
-
-  public void setListOfPluginForPluginFirmaServidorID(List<StringKeyValue> listOfPluginForPluginFirmaServidorID) {
-    this.listOfPluginForPluginFirmaServidorID = listOfPluginForPluginFirmaServidorID;
-  }
-
-
-
-  private List<StringKeyValue> listOfPluginForPluginSegellatID;
-
-  public List<StringKeyValue> getListOfPluginForPluginSegellatID() {
-    return this.listOfPluginForPluginSegellatID;
-  }
-
-  public void setListOfPluginForPluginSegellatID(List<StringKeyValue> listOfPluginForPluginSegellatID) {
-    this.listOfPluginForPluginSegellatID = listOfPluginForPluginSegellatID;
   }
 
 

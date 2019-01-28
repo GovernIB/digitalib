@@ -329,6 +329,18 @@
     </definition>
     
     
+    
+    <definition name="configuracioFirmaFormAdmin" extends="admin">
+        <put-attribute name="titol" value="configuracioFirma.configuracioFirma" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioFirmaForm.jsp" />
+    </definition>
+    
+    <definition name="configuracioFirmaListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioFirmaList.jsp" />
+    </definition>
+    
+    
+    
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">

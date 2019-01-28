@@ -43,69 +43,58 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
   }
 
 
-  private java.lang.Integer usPoliticaDeFirmaDesde;
+  private java.lang.String nom;
 
-  public java.lang.Integer getUsPoliticaDeFirmaDesde() {
-    return this.usPoliticaDeFirmaDesde;
+  public java.lang.String getNom() {
+    return this.nom;
   }
 
-  public void setUsPoliticaDeFirmaDesde(java.lang.Integer usPoliticaDeFirmaDesde) {
-    this.usPoliticaDeFirmaDesde = usPoliticaDeFirmaDesde;
-  }
-
-
-  private java.lang.Integer usPoliticaDeFirmaFins;
-
-  public java.lang.Integer getUsPoliticaDeFirmaFins() {
-    return this.usPoliticaDeFirmaFins;
-  }
-
-  public void setUsPoliticaDeFirmaFins(java.lang.Integer usPoliticaDeFirmaFins) {
-    this.usPoliticaDeFirmaFins = usPoliticaDeFirmaFins;
+  public void setNom(java.lang.String nom) {
+    this.nom = nom;
   }
 
 
-  private java.lang.String policyIdentifier;
+  private java.lang.Long pluginFirmaServidorIDDesde;
 
-  public java.lang.String getPolicyIdentifier() {
-    return this.policyIdentifier;
+  public java.lang.Long getPluginFirmaServidorIDDesde() {
+    return this.pluginFirmaServidorIDDesde;
   }
 
-  public void setPolicyIdentifier(java.lang.String policyIdentifier) {
-    this.policyIdentifier = policyIdentifier;
-  }
-
-
-  private java.lang.String policyIdentifierHash;
-
-  public java.lang.String getPolicyIdentifierHash() {
-    return this.policyIdentifierHash;
-  }
-
-  public void setPolicyIdentifierHash(java.lang.String policyIdentifierHash) {
-    this.policyIdentifierHash = policyIdentifierHash;
+  public void setPluginFirmaServidorIDDesde(java.lang.Long pluginFirmaServidorIDDesde) {
+    this.pluginFirmaServidorIDDesde = pluginFirmaServidorIDDesde;
   }
 
 
-  private java.lang.String policyIdentifierHashAlgorithm;
+  private java.lang.Long pluginFirmaServidorIDFins;
 
-  public java.lang.String getPolicyIdentifierHashAlgorithm() {
-    return this.policyIdentifierHashAlgorithm;
+  public java.lang.Long getPluginFirmaServidorIDFins() {
+    return this.pluginFirmaServidorIDFins;
   }
 
-  public void setPolicyIdentifierHashAlgorithm(java.lang.String policyIdentifierHashAlgorithm) {
-    this.policyIdentifierHashAlgorithm = policyIdentifierHashAlgorithm;
+  public void setPluginFirmaServidorIDFins(java.lang.Long pluginFirmaServidorIDFins) {
+    this.pluginFirmaServidorIDFins = pluginFirmaServidorIDFins;
   }
 
 
-  private java.lang.String policyUrlDocument;
+  private java.lang.Long pluginSegellatIDDesde;
 
-  public java.lang.String getPolicyUrlDocument() {
-    return this.policyUrlDocument;
+  public java.lang.Long getPluginSegellatIDDesde() {
+    return this.pluginSegellatIDDesde;
   }
 
-  public void setPolicyUrlDocument(java.lang.String policyUrlDocument) {
-    this.policyUrlDocument = policyUrlDocument;
+  public void setPluginSegellatIDDesde(java.lang.Long pluginSegellatIDDesde) {
+    this.pluginSegellatIDDesde = pluginSegellatIDDesde;
+  }
+
+
+  private java.lang.Long pluginSegellatIDFins;
+
+  public java.lang.Long getPluginSegellatIDFins() {
+    return this.pluginSegellatIDFins;
+  }
+
+  public void setPluginSegellatIDFins(java.lang.Long pluginSegellatIDFins) {
+    this.pluginSegellatIDFins = pluginSegellatIDFins;
   }
 
 
@@ -175,25 +164,69 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
   }
 
 
-  private java.lang.Integer politicaTaulaFirmesDesde;
+  private java.lang.Integer usPoliticaDeFirmaDesde;
 
-  public java.lang.Integer getPoliticaTaulaFirmesDesde() {
-    return this.politicaTaulaFirmesDesde;
+  public java.lang.Integer getUsPoliticaDeFirmaDesde() {
+    return this.usPoliticaDeFirmaDesde;
   }
 
-  public void setPoliticaTaulaFirmesDesde(java.lang.Integer politicaTaulaFirmesDesde) {
-    this.politicaTaulaFirmesDesde = politicaTaulaFirmesDesde;
+  public void setUsPoliticaDeFirmaDesde(java.lang.Integer usPoliticaDeFirmaDesde) {
+    this.usPoliticaDeFirmaDesde = usPoliticaDeFirmaDesde;
   }
 
 
-  private java.lang.Integer politicaTaulaFirmesFins;
+  private java.lang.Integer usPoliticaDeFirmaFins;
 
-  public java.lang.Integer getPoliticaTaulaFirmesFins() {
-    return this.politicaTaulaFirmesFins;
+  public java.lang.Integer getUsPoliticaDeFirmaFins() {
+    return this.usPoliticaDeFirmaFins;
   }
 
-  public void setPoliticaTaulaFirmesFins(java.lang.Integer politicaTaulaFirmesFins) {
-    this.politicaTaulaFirmesFins = politicaTaulaFirmesFins;
+  public void setUsPoliticaDeFirmaFins(java.lang.Integer usPoliticaDeFirmaFins) {
+    this.usPoliticaDeFirmaFins = usPoliticaDeFirmaFins;
+  }
+
+
+  private java.lang.String policyIdentifier;
+
+  public java.lang.String getPolicyIdentifier() {
+    return this.policyIdentifier;
+  }
+
+  public void setPolicyIdentifier(java.lang.String policyIdentifier) {
+    this.policyIdentifier = policyIdentifier;
+  }
+
+
+  private java.lang.String policyIdentifierHash;
+
+  public java.lang.String getPolicyIdentifierHash() {
+    return this.policyIdentifierHash;
+  }
+
+  public void setPolicyIdentifierHash(java.lang.String policyIdentifierHash) {
+    this.policyIdentifierHash = policyIdentifierHash;
+  }
+
+
+  private java.lang.String policyIdentifierHashAlgorithm;
+
+  public java.lang.String getPolicyIdentifierHashAlgorithm() {
+    return this.policyIdentifierHashAlgorithm;
+  }
+
+  public void setPolicyIdentifierHashAlgorithm(java.lang.String policyIdentifierHashAlgorithm) {
+    this.policyIdentifierHashAlgorithm = policyIdentifierHashAlgorithm;
+  }
+
+
+  private java.lang.String policyUrlDocument;
+
+  public java.lang.String getPolicyUrlDocument() {
+    return this.policyUrlDocument;
+  }
+
+  public void setPolicyUrlDocument(java.lang.String policyUrlDocument) {
+    this.policyUrlDocument = policyUrlDocument;
   }
 
 
@@ -274,50 +307,6 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
   }
 
 
-  private java.lang.Long pluginFirmaServidorIDDesde;
-
-  public java.lang.Long getPluginFirmaServidorIDDesde() {
-    return this.pluginFirmaServidorIDDesde;
-  }
-
-  public void setPluginFirmaServidorIDDesde(java.lang.Long pluginFirmaServidorIDDesde) {
-    this.pluginFirmaServidorIDDesde = pluginFirmaServidorIDDesde;
-  }
-
-
-  private java.lang.Long pluginFirmaServidorIDFins;
-
-  public java.lang.Long getPluginFirmaServidorIDFins() {
-    return this.pluginFirmaServidorIDFins;
-  }
-
-  public void setPluginFirmaServidorIDFins(java.lang.Long pluginFirmaServidorIDFins) {
-    this.pluginFirmaServidorIDFins = pluginFirmaServidorIDFins;
-  }
-
-
-  private java.lang.Long pluginSegellatIDDesde;
-
-  public java.lang.Long getPluginSegellatIDDesde() {
-    return this.pluginSegellatIDDesde;
-  }
-
-  public void setPluginSegellatIDDesde(java.lang.Long pluginSegellatIDDesde) {
-    this.pluginSegellatIDDesde = pluginSegellatIDDesde;
-  }
-
-
-  private java.lang.Long pluginSegellatIDFins;
-
-  public java.lang.Long getPluginSegellatIDFins() {
-    return this.pluginSegellatIDFins;
-  }
-
-  public void setPluginSegellatIDFins(java.lang.Long pluginSegellatIDFins) {
-    this.pluginSegellatIDFins = pluginSegellatIDFins;
-  }
-
-
   public ConfiguracioFirmaFilterForm() {
   }
   
@@ -325,20 +314,23 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
     super(__toClone);
     this.configuracioFirmaIDDesde = __toClone.configuracioFirmaIDDesde;
     this.configuracioFirmaIDFins = __toClone.configuracioFirmaIDFins;
-    this.usPoliticaDeFirmaDesde = __toClone.usPoliticaDeFirmaDesde;
-    this.usPoliticaDeFirmaFins = __toClone.usPoliticaDeFirmaFins;
-    this.policyIdentifier = __toClone.policyIdentifier;
-    this.policyIdentifierHash = __toClone.policyIdentifierHash;
-    this.policyIdentifierHashAlgorithm = __toClone.policyIdentifierHashAlgorithm;
-    this.policyUrlDocument = __toClone.policyUrlDocument;
+    this.nom = __toClone.nom;
+    this.pluginFirmaServidorIDDesde = __toClone.pluginFirmaServidorIDDesde;
+    this.pluginFirmaServidorIDFins = __toClone.pluginFirmaServidorIDFins;
+    this.pluginSegellatIDDesde = __toClone.pluginSegellatIDDesde;
+    this.pluginSegellatIDFins = __toClone.pluginSegellatIDFins;
     this.tipusOperacioFirmaDesde = __toClone.tipusOperacioFirmaDesde;
     this.tipusOperacioFirmaFins = __toClone.tipusOperacioFirmaFins;
     this.tipusFirmaIDDesde = __toClone.tipusFirmaIDDesde;
     this.tipusFirmaIDFins = __toClone.tipusFirmaIDFins;
     this.algorismeDeFirmaIDDesde = __toClone.algorismeDeFirmaIDDesde;
     this.algorismeDeFirmaIDFins = __toClone.algorismeDeFirmaIDFins;
-    this.politicaTaulaFirmesDesde = __toClone.politicaTaulaFirmesDesde;
-    this.politicaTaulaFirmesFins = __toClone.politicaTaulaFirmesFins;
+    this.usPoliticaDeFirmaDesde = __toClone.usPoliticaDeFirmaDesde;
+    this.usPoliticaDeFirmaFins = __toClone.usPoliticaDeFirmaFins;
+    this.policyIdentifier = __toClone.policyIdentifier;
+    this.policyIdentifierHash = __toClone.policyIdentifierHash;
+    this.policyIdentifierHashAlgorithm = __toClone.policyIdentifierHashAlgorithm;
+    this.policyUrlDocument = __toClone.policyUrlDocument;
     this.posicioTaulaFirmesIDDesde = __toClone.posicioTaulaFirmesIDDesde;
     this.posicioTaulaFirmesIDFins = __toClone.posicioTaulaFirmesIDFins;
     this.firmatPerFormatIDDesde = __toClone.firmatPerFormatIDDesde;
@@ -346,32 +338,27 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
     this.motiuDelegacioIDDesde = __toClone.motiuDelegacioIDDesde;
     this.motiuDelegacioIDFins = __toClone.motiuDelegacioIDFins;
     this.propietatsTaulaFirmes = __toClone.propietatsTaulaFirmes;
-    this.pluginFirmaServidorIDDesde = __toClone.pluginFirmaServidorIDDesde;
-    this.pluginFirmaServidorIDFins = __toClone.pluginFirmaServidorIDFins;
-    this.pluginSegellatIDDesde = __toClone.pluginSegellatIDDesde;
-    this.pluginSegellatIDFins = __toClone.pluginSegellatIDFins;
-    this.mapOfValuesForUsPoliticaDeFirma = __toClone.mapOfValuesForUsPoliticaDeFirma;
+    this.mapOfPluginForPluginFirmaServidorID = __toClone.mapOfPluginForPluginFirmaServidorID;
+    this.mapOfPluginForPluginSegellatID = __toClone.mapOfPluginForPluginSegellatID;
     this.mapOfValuesForTipusOperacioFirma = __toClone.mapOfValuesForTipusOperacioFirma;
     this.mapOfValuesForTipusFirmaID = __toClone.mapOfValuesForTipusFirmaID;
     this.mapOfValuesForAlgorismeDeFirmaID = __toClone.mapOfValuesForAlgorismeDeFirmaID;
-    this.mapOfValuesForPoliticaTaulaFirmes = __toClone.mapOfValuesForPoliticaTaulaFirmes;
+    this.mapOfValuesForUsPoliticaDeFirma = __toClone.mapOfValuesForUsPoliticaDeFirma;
     this.mapOfValuesForPosicioTaulaFirmesID = __toClone.mapOfValuesForPosicioTaulaFirmesID;
     this.mapOfTraduccioForFirmatPerFormatID = __toClone.mapOfTraduccioForFirmatPerFormatID;
     this.mapOfTraduccioForMotiuDelegacioID = __toClone.mapOfTraduccioForMotiuDelegacioID;
-    this.mapOfPluginForPluginFirmaServidorID = __toClone.mapOfPluginForPluginFirmaServidorID;
-    this.mapOfPluginForPluginSegellatID = __toClone.mapOfPluginForPluginSegellatID;
   }
   
   /* ========= UTILS ========== */
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM }));
   }
 
   @Override
   public List<Field<?>> getDefaultGroupByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { INCLOURESEGELLDETEMPS ,TIPUSFIRMAID }));
   }
 
 
@@ -394,14 +381,26 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfValuesForUsPoliticaDeFirma;
+  private Map<String, String> mapOfPluginForPluginFirmaServidorID;
 
-  public Map<String, String> getMapOfValuesForUsPoliticaDeFirma() {
-    return this.mapOfValuesForUsPoliticaDeFirma;
+  public Map<String, String> getMapOfPluginForPluginFirmaServidorID() {
+    return this.mapOfPluginForPluginFirmaServidorID;
   }
 
-  public void setMapOfValuesForUsPoliticaDeFirma(Map<String, String> mapOfValuesForUsPoliticaDeFirma) {
-    this.mapOfValuesForUsPoliticaDeFirma = mapOfValuesForUsPoliticaDeFirma;
+  public void setMapOfPluginForPluginFirmaServidorID(Map<String, String> mapOfPluginForPluginFirmaServidorID) {
+    this.mapOfPluginForPluginFirmaServidorID = mapOfPluginForPluginFirmaServidorID;
+  }
+
+
+
+  private Map<String, String> mapOfPluginForPluginSegellatID;
+
+  public Map<String, String> getMapOfPluginForPluginSegellatID() {
+    return this.mapOfPluginForPluginSegellatID;
+  }
+
+  public void setMapOfPluginForPluginSegellatID(Map<String, String> mapOfPluginForPluginSegellatID) {
+    this.mapOfPluginForPluginSegellatID = mapOfPluginForPluginSegellatID;
   }
 
 
@@ -442,14 +441,14 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
 
 
 
-  private Map<String, String> mapOfValuesForPoliticaTaulaFirmes;
+  private Map<String, String> mapOfValuesForUsPoliticaDeFirma;
 
-  public Map<String, String> getMapOfValuesForPoliticaTaulaFirmes() {
-    return this.mapOfValuesForPoliticaTaulaFirmes;
+  public Map<String, String> getMapOfValuesForUsPoliticaDeFirma() {
+    return this.mapOfValuesForUsPoliticaDeFirma;
   }
 
-  public void setMapOfValuesForPoliticaTaulaFirmes(Map<String, String> mapOfValuesForPoliticaTaulaFirmes) {
-    this.mapOfValuesForPoliticaTaulaFirmes = mapOfValuesForPoliticaTaulaFirmes;
+  public void setMapOfValuesForUsPoliticaDeFirma(Map<String, String> mapOfValuesForUsPoliticaDeFirma) {
+    this.mapOfValuesForUsPoliticaDeFirma = mapOfValuesForUsPoliticaDeFirma;
   }
 
 
@@ -486,30 +485,6 @@ public class ConfiguracioFirmaFilterForm extends DigitalIBBaseFilterForm impleme
 
   public void setMapOfTraduccioForMotiuDelegacioID(Map<String, String> mapOfTraduccioForMotiuDelegacioID) {
     this.mapOfTraduccioForMotiuDelegacioID = mapOfTraduccioForMotiuDelegacioID;
-  }
-
-
-
-  private Map<String, String> mapOfPluginForPluginFirmaServidorID;
-
-  public Map<String, String> getMapOfPluginForPluginFirmaServidorID() {
-    return this.mapOfPluginForPluginFirmaServidorID;
-  }
-
-  public void setMapOfPluginForPluginFirmaServidorID(Map<String, String> mapOfPluginForPluginFirmaServidorID) {
-    this.mapOfPluginForPluginFirmaServidorID = mapOfPluginForPluginFirmaServidorID;
-  }
-
-
-
-  private Map<String, String> mapOfPluginForPluginSegellatID;
-
-  public Map<String, String> getMapOfPluginForPluginSegellatID() {
-    return this.mapOfPluginForPluginSegellatID;
-  }
-
-  public void setMapOfPluginForPluginSegellatID(Map<String, String> mapOfPluginForPluginSegellatID) {
-    this.mapOfPluginForPluginSegellatID = mapOfPluginForPluginSegellatID;
   }
 
 

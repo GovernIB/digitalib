@@ -32,9 +32,17 @@ public class ConfiguracioFirmaValidator<T> implements ConfiguracioFirmaFields {
     ,es.caib.digitalib.model.dao.ITraduccioManager __traduccioManager) {
 
     // Valors Not Null
-    __vr.rejectIfEmptyOrWhitespace(__target__,USPOLITICADEFIRMA, 
+    __vr.rejectIfEmptyOrWhitespace(__target__,NOM, 
         "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USPOLITICADEFIRMA)));
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,PLUGINFIRMASERVIDORID, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PLUGINFIRMASERVIDORID)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,INCLOURESEGELLDETEMPS, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(INCLOURESEGELLDETEMPS)));
 
     __vr.rejectIfEmptyOrWhitespace(__target__,TIPUSOPERACIOFIRMA, 
         "genapp.validation.required",
@@ -52,19 +60,23 @@ public class ConfiguracioFirmaValidator<T> implements ConfiguracioFirmaFields {
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(MODEDEFIRMA)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,POLITICATAULAFIRMES, 
+    __vr.rejectIfEmptyOrWhitespace(__target__,USPOLITICADEFIRMA, 
         "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(POLITICATAULAFIRMES)));
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USPOLITICADEFIRMA)));
 
     __vr.rejectIfEmptyOrWhitespace(__target__,POSICIOTAULAFIRMESID, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(POSICIOTAULAFIRMESID)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,PLUGINFIRMASERVIDORID, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PLUGINFIRMASERVIDORID)));
-
     // Check size
+    if (__vr.getFieldErrorCount(NOM) == 0) {
+      java.lang.String __nom = (java.lang.String)__vr.getFieldValue(__target__,NOM);
+      if (__nom!= null && __nom.length() > 255) {
+        __vr.rejectValue(NOM, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
     if (__vr.getFieldErrorCount(POLICYIDENTIFIER) == 0) {
       java.lang.String __policyidentifier = (java.lang.String)__vr.getFieldValue(__target__,POLICYIDENTIFIER);
       if (__policyidentifier!= null && __policyidentifier.length() > 100) {
@@ -111,6 +123,17 @@ public class ConfiguracioFirmaValidator<T> implements ConfiguracioFirmaFields {
       // ====== Check Unique MULTIPLES - NOU =======
 
       // Check Unique - no PK
+      if (__vr.getFieldErrorCount(NOM) == 0) {
+        java.lang.String __nom = (java.lang.String)__vr.getFieldValue(__target__,NOM);
+        Long __count_ = null;
+        try { __count_ = __configuracioFirmaManager.count(org.fundaciobit.genapp.common.query.Where.AND(NOM.equal(__nom))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(NOM, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__nom)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
+        }
+      }
+
       // Check Unique - PK no AutoIncrement amb UNA SOLA PK 
     } else {
       // ================ UPDATE
@@ -118,9 +141,47 @@ public class ConfiguracioFirmaValidator<T> implements ConfiguracioFirmaFields {
       // ====== Check Unique MULTIPLES - EDIT  =======
 
       // Check Unique - no PK
+      if (__vr.getFieldErrorCount(NOM) == 0 && __vr.getFieldErrorCount(CONFIGURACIOFIRMAID) == 0) {
+        java.lang.String __nom = (java.lang.String)__vr.getFieldValue(__target__,NOM);
+        java.lang.Long __configuraciofirmaid = (java.lang.Long)__vr.getFieldValue(__target__,CONFIGURACIOFIRMAID);
+        Long __count_ = null;
+        try { __count_ = __configuracioFirmaManager.count(org.fundaciobit.genapp.common.query.Where.AND(NOM.equal(__nom), CONFIGURACIOFIRMAID.notEqual(__configuraciofirmaid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(NOM, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__nom)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
+        }
+      }
+
     }
 
     // Fields with References to Other tables 
+    if (__vr.getFieldErrorCount(PLUGINFIRMASERVIDORID) == 0) {
+      java.lang.Long __pluginfirmaservidorid = (java.lang.Long)__vr.getFieldValue(__target__,PLUGINFIRMASERVIDORID);
+      Long __count_ = null;
+      try { __count_ = __pluginManager.count(PluginFields.PLUGINID.equal(__pluginfirmaservidorid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+      if (__count_ == null || __count_ == 0) {        
+        __vr.rejectValue(PLUGINFIRMASERVIDORID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginfirmaservidorid)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(PLUGINSEGELLATID) == 0) {
+      java.lang.Long __pluginsegellatid = (java.lang.Long)__vr.getFieldValue(__target__,PLUGINSEGELLATID);
+      if (__pluginsegellatid != null ) {
+        Long __count_ = null;
+        try { __count_ = __pluginManager.count(PluginFields.PLUGINID.equal(__pluginsegellatid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(PLUGINSEGELLATID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginsegellatid)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(FIRMATPERFORMATID) == 0) {
       java.lang.Long __firmatperformatid = (java.lang.Long)__vr.getFieldValue(__target__,FIRMATPERFORMATID);
       if (__firmatperformatid != null ) {
@@ -145,32 +206,6 @@ public class ConfiguracioFirmaValidator<T> implements ConfiguracioFirmaFields {
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__motiudelegacioid)));
-        }
-      }
-    }
-
-    if (__vr.getFieldErrorCount(PLUGINFIRMASERVIDORID) == 0) {
-      java.lang.Long __pluginfirmaservidorid = (java.lang.Long)__vr.getFieldValue(__target__,PLUGINFIRMASERVIDORID);
-      Long __count_ = null;
-      try { __count_ = __pluginManager.count(PluginFields.PLUGINID.equal(__pluginfirmaservidorid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-      if (__count_ == null || __count_ == 0) {        
-        __vr.rejectValue(PLUGINFIRMASERVIDORID, "error.notfound",
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginfirmaservidorid)));
-      }
-    }
-
-    if (__vr.getFieldErrorCount(PLUGINSEGELLATID) == 0) {
-      java.lang.Long __pluginsegellatid = (java.lang.Long)__vr.getFieldValue(__target__,PLUGINSEGELLATID);
-      if (__pluginsegellatid != null ) {
-        Long __count_ = null;
-        try { __count_ = __pluginManager.count(PluginFields.PLUGINID.equal(__pluginsegellatid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-        if (__count_ == null || __count_ == 0) {        
-          __vr.rejectValue(PLUGINSEGELLATID, "error.notfound",
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginsegellatid)));
         }
       }
     }

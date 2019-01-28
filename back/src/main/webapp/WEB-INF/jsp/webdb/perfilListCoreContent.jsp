@@ -114,11 +114,11 @@
           </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.PLUGINFIRMASERVIDORID)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.CONFIGURACIOFIRMAID)}">
           <td>
-          <c:set var="tmp">${perfil.pluginFirmaServidorID}</c:set>
+          <c:set var="tmp">${perfil.configuracioFirmaID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfPluginForPluginFirmaServidorID[tmp]}
+          ${__theFilterForm.mapOfConfiguracioFirmaForConfiguracioFirmaID[tmp]}
           </c:if>
           </td>
         </c:if>

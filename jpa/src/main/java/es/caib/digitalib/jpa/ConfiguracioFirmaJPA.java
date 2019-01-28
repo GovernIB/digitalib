@@ -7,12 +7,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import org.hibernate.annotations.Index;
+import org.hibernate.annotations.ForeignKey;
+import java.util.HashSet;
+import javax.persistence.OneToMany;
+import javax.persistence.Entity;
+import java.util.Set;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import org.hibernate.annotations.ForeignKey;
 import javax.persistence.GeneratedValue;
 
 
@@ -31,6 +34,34 @@ private static final long serialVersionUID = 1621981919L;
 	@Index(name="dib_configuraciofirma_pk_i")
 	@Column(name="configuraciofirmaid",nullable = false,length = 19)
 	long configuracioFirmaID;
+
+	@Column(name="nom",nullable = false,unique = true,length = 255)
+	java.lang.String nom;
+
+	@Index(name="dib_conffirma_plugfirma_fk_i")
+	@Column(name="pluginfirmaservidorid",nullable = false,length = 19)
+	long pluginFirmaServidorID;
+
+	@Column(name="inclouresegelldetemps",nullable = false,length = 1)
+	boolean incloureSegellDeTemps;
+
+	@Index(name="dib_conffirma_plugsegell_fk_i")
+	@Column(name="pluginsegellatid",length = 19)
+	java.lang.Long pluginSegellatID;
+
+  /** 0 firma, 1 contrafirma 2, cofirma */
+	@Column(name="tipusoperaciofirma",nullable = false,length = 10)
+	int tipusOperacioFirma;
+
+	@Column(name="tipusfirmaid",nullable = false,length = 10)
+	int tipusFirmaID;
+
+	@Index(name="dib_conffirma_algofirma_fk_i")
+	@Column(name="algorismedefirmaid",nullable = false,length = 10)
+	int algorismeDeFirmaID;
+
+	@Column(name="modedefirma",nullable = false,length = 1)
+	boolean modeDeFirma;
 
   /** -1=> usar politica de firma de l'entitat, 0 => no usar politica de firma,  1=> usar politica d'aquesta configuracio, 2 => L'usuari web o usuari-app elegeixen la politica de firma */
 	@Column(name="uspoliticadefirma",nullable = false,length = 10)
@@ -57,24 +88,6 @@ opcional incluso cuando se genera una firma EPES. */
 	@Column(name="policyurldocument",length = 255)
 	java.lang.String policyUrlDocument;
 
-  /** 0 firma, 1 contrafirma 2, cofirma */
-	@Column(name="tipusoperaciofirma",nullable = false,length = 10)
-	int tipusOperacioFirma;
-
-	@Column(name="tipusfirmaid",nullable = false,length = 10)
-	int tipusFirmaID;
-
-	@Index(name="dib_conffirma_algofirma_fk_i")
-	@Column(name="algorismedefirmaid",nullable = false,length = 10)
-	java.lang.Integer algorismeDeFirmaID;
-
-	@Column(name="modedefirma",nullable = false,length = 1)
-	boolean modeDeFirma;
-
-  /** -1 definit en l'entitat, 0 no es permet taules de firmes, 1  obligatori politica definida en la configuració d'usuari aplicació o entitat, 2 opcional, per defecte el definit a l'entitat */
-	@Column(name="politicataulafirmes",nullable = false,length = 10)
-	int politicaTaulaFirmes;
-
   /**  Valors: SENSETAULA = 0; PRIMERAPAGINA = 1; DARRERAPAGINA = -1 */
 	@Column(name="posiciotaulafirmesid",nullable = false,length = 10)
 	int posicioTaulaFirmesID;
@@ -91,17 +104,6 @@ opcional incluso cuando se genera una firma EPES. */
   @Lob
 	java.lang.String propietatsTaulaFirmes;
 
-	@Index(name="dib_conffirma_plugfirma_fk_i")
-	@Column(name="pluginfirmaservidorid",nullable = false,length = 19)
-	long pluginFirmaServidorID;
-
-	@Column(name="inclouresegelldetemps",length = 1)
-	boolean incloureSegellDeTemps;
-
-	@Index(name="dib_conffirma_plugsegell_fk_i")
-	@Column(name="pluginsegellatid",length = 19)
-	java.lang.Long pluginSegellatID;
-
 
 
   /** Constructor Buit */
@@ -109,77 +111,78 @@ opcional incluso cuando se genera una firma EPES. */
   }
 
   /** Constructor amb tots els camps  */
-  public ConfiguracioFirmaJPA(long configuracioFirmaID , int usPoliticaDeFirma , java.lang.String policyIdentifier , java.lang.String policyIdentifierHash , java.lang.String policyIdentifierHashAlgorithm , java.lang.String policyUrlDocument , int tipusOperacioFirma , int tipusFirmaID , java.lang.Integer algorismeDeFirmaID , boolean modeDeFirma , int politicaTaulaFirmes , int posicioTaulaFirmesID , java.lang.Long firmatPerFormatID , java.lang.Long motiuDelegacioID , java.lang.String propietatsTaulaFirmes , long pluginFirmaServidorID , boolean incloureSegellDeTemps , java.lang.Long pluginSegellatID) {
+  public ConfiguracioFirmaJPA(long configuracioFirmaID , java.lang.String nom , long pluginFirmaServidorID , boolean incloureSegellDeTemps , java.lang.Long pluginSegellatID , int tipusOperacioFirma , int tipusFirmaID , int algorismeDeFirmaID , boolean modeDeFirma , int usPoliticaDeFirma , java.lang.String policyIdentifier , java.lang.String policyIdentifierHash , java.lang.String policyIdentifierHashAlgorithm , java.lang.String policyUrlDocument , int posicioTaulaFirmesID , java.lang.Long firmatPerFormatID , java.lang.Long motiuDelegacioID , java.lang.String propietatsTaulaFirmes) {
     this.configuracioFirmaID=configuracioFirmaID;
+    this.nom=nom;
+    this.pluginFirmaServidorID=pluginFirmaServidorID;
+    this.incloureSegellDeTemps=incloureSegellDeTemps;
+    this.pluginSegellatID=pluginSegellatID;
+    this.tipusOperacioFirma=tipusOperacioFirma;
+    this.tipusFirmaID=tipusFirmaID;
+    this.algorismeDeFirmaID=algorismeDeFirmaID;
+    this.modeDeFirma=modeDeFirma;
     this.usPoliticaDeFirma=usPoliticaDeFirma;
     this.policyIdentifier=policyIdentifier;
     this.policyIdentifierHash=policyIdentifierHash;
     this.policyIdentifierHashAlgorithm=policyIdentifierHashAlgorithm;
     this.policyUrlDocument=policyUrlDocument;
-    this.tipusOperacioFirma=tipusOperacioFirma;
-    this.tipusFirmaID=tipusFirmaID;
-    this.algorismeDeFirmaID=algorismeDeFirmaID;
-    this.modeDeFirma=modeDeFirma;
-    this.politicaTaulaFirmes=politicaTaulaFirmes;
     this.posicioTaulaFirmesID=posicioTaulaFirmesID;
     this.firmatPerFormatID=firmatPerFormatID;
     this.motiuDelegacioID=motiuDelegacioID;
     this.propietatsTaulaFirmes=propietatsTaulaFirmes;
-    this.pluginFirmaServidorID=pluginFirmaServidorID;
-    this.incloureSegellDeTemps=incloureSegellDeTemps;
-    this.pluginSegellatID=pluginSegellatID;
 }
   /** Constructor sense valors autoincrementals */
-  public ConfiguracioFirmaJPA(int usPoliticaDeFirma , java.lang.String policyIdentifier , java.lang.String policyIdentifierHash , java.lang.String policyIdentifierHashAlgorithm , java.lang.String policyUrlDocument , int tipusOperacioFirma , int tipusFirmaID , java.lang.Integer algorismeDeFirmaID , boolean modeDeFirma , int politicaTaulaFirmes , int posicioTaulaFirmesID , java.lang.Long firmatPerFormatID , java.lang.Long motiuDelegacioID , java.lang.String propietatsTaulaFirmes , long pluginFirmaServidorID , boolean incloureSegellDeTemps , java.lang.Long pluginSegellatID) {
+  public ConfiguracioFirmaJPA(java.lang.String nom , long pluginFirmaServidorID , boolean incloureSegellDeTemps , java.lang.Long pluginSegellatID , int tipusOperacioFirma , int tipusFirmaID , int algorismeDeFirmaID , boolean modeDeFirma , int usPoliticaDeFirma , java.lang.String policyIdentifier , java.lang.String policyIdentifierHash , java.lang.String policyIdentifierHashAlgorithm , java.lang.String policyUrlDocument , int posicioTaulaFirmesID , java.lang.Long firmatPerFormatID , java.lang.Long motiuDelegacioID , java.lang.String propietatsTaulaFirmes) {
+    this.nom=nom;
+    this.pluginFirmaServidorID=pluginFirmaServidorID;
+    this.incloureSegellDeTemps=incloureSegellDeTemps;
+    this.pluginSegellatID=pluginSegellatID;
+    this.tipusOperacioFirma=tipusOperacioFirma;
+    this.tipusFirmaID=tipusFirmaID;
+    this.algorismeDeFirmaID=algorismeDeFirmaID;
+    this.modeDeFirma=modeDeFirma;
     this.usPoliticaDeFirma=usPoliticaDeFirma;
     this.policyIdentifier=policyIdentifier;
     this.policyIdentifierHash=policyIdentifierHash;
     this.policyIdentifierHashAlgorithm=policyIdentifierHashAlgorithm;
     this.policyUrlDocument=policyUrlDocument;
-    this.tipusOperacioFirma=tipusOperacioFirma;
-    this.tipusFirmaID=tipusFirmaID;
-    this.algorismeDeFirmaID=algorismeDeFirmaID;
-    this.modeDeFirma=modeDeFirma;
-    this.politicaTaulaFirmes=politicaTaulaFirmes;
     this.posicioTaulaFirmesID=posicioTaulaFirmesID;
     this.firmatPerFormatID=firmatPerFormatID;
     this.motiuDelegacioID=motiuDelegacioID;
     this.propietatsTaulaFirmes=propietatsTaulaFirmes;
-    this.pluginFirmaServidorID=pluginFirmaServidorID;
-    this.incloureSegellDeTemps=incloureSegellDeTemps;
-    this.pluginSegellatID=pluginSegellatID;
 }
   /** Constructor dels valors Not Null */
-  public ConfiguracioFirmaJPA(long configuracioFirmaID , int usPoliticaDeFirma , int tipusOperacioFirma , int tipusFirmaID , java.lang.Integer algorismeDeFirmaID , boolean modeDeFirma , int politicaTaulaFirmes , int posicioTaulaFirmesID , long pluginFirmaServidorID) {
+  public ConfiguracioFirmaJPA(long configuracioFirmaID , java.lang.String nom , long pluginFirmaServidorID , boolean incloureSegellDeTemps , int tipusOperacioFirma , int tipusFirmaID , int algorismeDeFirmaID , boolean modeDeFirma , int usPoliticaDeFirma , int posicioTaulaFirmesID) {
     this.configuracioFirmaID=configuracioFirmaID;
-    this.usPoliticaDeFirma=usPoliticaDeFirma;
+    this.nom=nom;
+    this.pluginFirmaServidorID=pluginFirmaServidorID;
+    this.incloureSegellDeTemps=incloureSegellDeTemps;
     this.tipusOperacioFirma=tipusOperacioFirma;
     this.tipusFirmaID=tipusFirmaID;
     this.algorismeDeFirmaID=algorismeDeFirmaID;
     this.modeDeFirma=modeDeFirma;
-    this.politicaTaulaFirmes=politicaTaulaFirmes;
+    this.usPoliticaDeFirma=usPoliticaDeFirma;
     this.posicioTaulaFirmesID=posicioTaulaFirmesID;
-    this.pluginFirmaServidorID=pluginFirmaServidorID;
 }
   public ConfiguracioFirmaJPA(ConfiguracioFirma __bean) {
     this.setConfiguracioFirmaID(__bean.getConfiguracioFirmaID());
+    this.setNom(__bean.getNom());
+    this.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
+    this.setIncloureSegellDeTemps(__bean.isIncloureSegellDeTemps());
+    this.setPluginSegellatID(__bean.getPluginSegellatID());
+    this.setTipusOperacioFirma(__bean.getTipusOperacioFirma());
+    this.setTipusFirmaID(__bean.getTipusFirmaID());
+    this.setAlgorismeDeFirmaID(__bean.getAlgorismeDeFirmaID());
+    this.setModeDeFirma(__bean.isModeDeFirma());
     this.setUsPoliticaDeFirma(__bean.getUsPoliticaDeFirma());
     this.setPolicyIdentifier(__bean.getPolicyIdentifier());
     this.setPolicyIdentifierHash(__bean.getPolicyIdentifierHash());
     this.setPolicyIdentifierHashAlgorithm(__bean.getPolicyIdentifierHashAlgorithm());
     this.setPolicyUrlDocument(__bean.getPolicyUrlDocument());
-    this.setTipusOperacioFirma(__bean.getTipusOperacioFirma());
-    this.setTipusFirmaID(__bean.getTipusFirmaID());
-    this.setAlgorismeDeFirmaID(__bean.getAlgorismeDeFirmaID());
-    this.setModeDeFirma(__bean.isModeDeFirma());
-    this.setPoliticaTaulaFirmes(__bean.getPoliticaTaulaFirmes());
     this.setPosicioTaulaFirmesID(__bean.getPosicioTaulaFirmesID());
     this.setFirmatPerFormatID(__bean.getFirmatPerFormatID());
     this.setMotiuDelegacioID(__bean.getMotiuDelegacioID());
     this.setPropietatsTaulaFirmes(__bean.getPropietatsTaulaFirmes());
-    this.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
-    this.setIncloureSegellDeTemps(__bean.isIncloureSegellDeTemps());
-    this.setPluginSegellatID(__bean.getPluginSegellatID());
 	}
 
 	public long getConfiguracioFirmaID() {
@@ -187,6 +190,62 @@ opcional incluso cuando se genera una firma EPES. */
 	};
 	public void setConfiguracioFirmaID(long _configuracioFirmaID_) {
 		this.configuracioFirmaID = _configuracioFirmaID_;
+	};
+
+	public java.lang.String getNom() {
+		return(nom);
+	};
+	public void setNom(java.lang.String _nom_) {
+		this.nom = _nom_;
+	};
+
+	public long getPluginFirmaServidorID() {
+		return(pluginFirmaServidorID);
+	};
+	public void setPluginFirmaServidorID(long _pluginFirmaServidorID_) {
+		this.pluginFirmaServidorID = _pluginFirmaServidorID_;
+	};
+
+	public boolean isIncloureSegellDeTemps() {
+		return(incloureSegellDeTemps);
+	};
+	public void setIncloureSegellDeTemps(boolean _incloureSegellDeTemps_) {
+		this.incloureSegellDeTemps = _incloureSegellDeTemps_;
+	};
+
+	public java.lang.Long getPluginSegellatID() {
+		return(pluginSegellatID);
+	};
+	public void setPluginSegellatID(java.lang.Long _pluginSegellatID_) {
+		this.pluginSegellatID = _pluginSegellatID_;
+	};
+
+	public int getTipusOperacioFirma() {
+		return(tipusOperacioFirma);
+	};
+	public void setTipusOperacioFirma(int _tipusOperacioFirma_) {
+		this.tipusOperacioFirma = _tipusOperacioFirma_;
+	};
+
+	public int getTipusFirmaID() {
+		return(tipusFirmaID);
+	};
+	public void setTipusFirmaID(int _tipusFirmaID_) {
+		this.tipusFirmaID = _tipusFirmaID_;
+	};
+
+	public int getAlgorismeDeFirmaID() {
+		return(algorismeDeFirmaID);
+	};
+	public void setAlgorismeDeFirmaID(int _algorismeDeFirmaID_) {
+		this.algorismeDeFirmaID = _algorismeDeFirmaID_;
+	};
+
+	public boolean isModeDeFirma() {
+		return(modeDeFirma);
+	};
+	public void setModeDeFirma(boolean _modeDeFirma_) {
+		this.modeDeFirma = _modeDeFirma_;
 	};
 
 	public int getUsPoliticaDeFirma() {
@@ -224,41 +283,6 @@ opcional incluso cuando se genera una firma EPES. */
 		this.policyUrlDocument = _policyUrlDocument_;
 	};
 
-	public int getTipusOperacioFirma() {
-		return(tipusOperacioFirma);
-	};
-	public void setTipusOperacioFirma(int _tipusOperacioFirma_) {
-		this.tipusOperacioFirma = _tipusOperacioFirma_;
-	};
-
-	public int getTipusFirmaID() {
-		return(tipusFirmaID);
-	};
-	public void setTipusFirmaID(int _tipusFirmaID_) {
-		this.tipusFirmaID = _tipusFirmaID_;
-	};
-
-	public java.lang.Integer getAlgorismeDeFirmaID() {
-		return(algorismeDeFirmaID);
-	};
-	public void setAlgorismeDeFirmaID(java.lang.Integer _algorismeDeFirmaID_) {
-		this.algorismeDeFirmaID = _algorismeDeFirmaID_;
-	};
-
-	public boolean isModeDeFirma() {
-		return(modeDeFirma);
-	};
-	public void setModeDeFirma(boolean _modeDeFirma_) {
-		this.modeDeFirma = _modeDeFirma_;
-	};
-
-	public int getPoliticaTaulaFirmes() {
-		return(politicaTaulaFirmes);
-	};
-	public void setPoliticaTaulaFirmes(int _politicaTaulaFirmes_) {
-		this.politicaTaulaFirmes = _politicaTaulaFirmes_;
-	};
-
 	public int getPosicioTaulaFirmesID() {
 		return(posicioTaulaFirmesID);
 	};
@@ -287,27 +311,6 @@ opcional incluso cuando se genera una firma EPES. */
 		this.propietatsTaulaFirmes = _propietatsTaulaFirmes_;
 	};
 
-	public long getPluginFirmaServidorID() {
-		return(pluginFirmaServidorID);
-	};
-	public void setPluginFirmaServidorID(long _pluginFirmaServidorID_) {
-		this.pluginFirmaServidorID = _pluginFirmaServidorID_;
-	};
-
-	public boolean isIncloureSegellDeTemps() {
-		return(incloureSegellDeTemps);
-	};
-	public void setIncloureSegellDeTemps(boolean _incloureSegellDeTemps_) {
-		this.incloureSegellDeTemps = _incloureSegellDeTemps_;
-	};
-
-	public java.lang.Long getPluginSegellatID() {
-		return(pluginSegellatID);
-	};
-	public void setPluginSegellatID(java.lang.Long _pluginSegellatID_) {
-		this.pluginSegellatID = _pluginSegellatID_;
-	};
-
 
 
   @Override
@@ -321,6 +324,49 @@ opcional incluso cuando se genera una firma EPES. */
       __result = false;
     }
     return __result;
+  }
+
+// EXP  Field:configuraciofirmaid | Table: dib_perfil | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "configuracioFirma")
+	private Set<PerfilJPA> perfils = new HashSet<PerfilJPA>(0);
+	public  Set<PerfilJPA> getPerfils() {
+    return this.perfils;
+  }
+
+	public void setPerfils(Set<PerfilJPA> perfils) {
+	  this.perfils = perfils;
+	}
+
+
+// IMP Field:pluginid | Table: dib_plugin | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="dib_conffirma_plugin_fir_fk")
+	@JoinColumn(name = "pluginfirmaservidorid", referencedColumnName ="pluginID", nullable = false, insertable=false, updatable=false)
+	private PluginJPA pluginFirmaServidor;
+
+	public PluginJPA getPluginFirmaServidor() {
+    return this.pluginFirmaServidor;
+  }
+
+	public  void setPluginFirmaServidor(PluginJPA pluginFirmaServidor) {
+    this.pluginFirmaServidor = pluginFirmaServidor;
+  }
+
+// IMP Field:pluginid | Table: dib_plugin | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="dib_conffirma_plugin_seg_fk")
+	@JoinColumn(name = "pluginsegellatid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
+	private PluginJPA pluginSegellat;
+
+	public PluginJPA getPluginSegellat() {
+    return this.pluginSegellat;
+  }
+
+	public  void setPluginSegellat(PluginJPA pluginSegellat) {
+    this.pluginSegellat = pluginSegellat;
   }
 
 // IMP Field:traduccioid | Table: dib_traduccio | Type: 1  
@@ -373,59 +419,29 @@ opcional incluso cuando se genera una firma EPES. */
   }
 
 
-// IMP Field:pluginid | Table: dib_plugin | Type: 1  
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="dib_conffirma_plugin_fir_fk")
-	@JoinColumn(name = "pluginfirmaservidorid", referencedColumnName ="pluginID", nullable = false, insertable=false, updatable=false)
-	private PluginJPA pluginFirmaServidor;
-
-	public PluginJPA getPluginFirmaServidor() {
-    return this.pluginFirmaServidor;
-  }
-
-	public  void setPluginFirmaServidor(PluginJPA pluginFirmaServidor) {
-    this.pluginFirmaServidor = pluginFirmaServidor;
-  }
-
-// IMP Field:pluginid | Table: dib_plugin | Type: 1  
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="dib_conffirma_plugin_seg_fk")
-	@JoinColumn(name = "pluginsegellatid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
-	private PluginJPA pluginSegellat;
-
-	public PluginJPA getPluginSegellat() {
-    return this.pluginSegellat;
-  }
-
-	public  void setPluginSegellat(PluginJPA pluginSegellat) {
-    this.pluginSegellat = pluginSegellat;
-  }
-
 
  // ---------------  STATIC METHODS ------------------
   public static ConfiguracioFirmaJPA toJPA(ConfiguracioFirma __bean) {
     if (__bean == null) { return null;}
     ConfiguracioFirmaJPA __tmp = new ConfiguracioFirmaJPA();
     __tmp.setConfiguracioFirmaID(__bean.getConfiguracioFirmaID());
+    __tmp.setNom(__bean.getNom());
+    __tmp.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
+    __tmp.setIncloureSegellDeTemps(__bean.isIncloureSegellDeTemps());
+    __tmp.setPluginSegellatID(__bean.getPluginSegellatID());
+    __tmp.setTipusOperacioFirma(__bean.getTipusOperacioFirma());
+    __tmp.setTipusFirmaID(__bean.getTipusFirmaID());
+    __tmp.setAlgorismeDeFirmaID(__bean.getAlgorismeDeFirmaID());
+    __tmp.setModeDeFirma(__bean.isModeDeFirma());
     __tmp.setUsPoliticaDeFirma(__bean.getUsPoliticaDeFirma());
     __tmp.setPolicyIdentifier(__bean.getPolicyIdentifier());
     __tmp.setPolicyIdentifierHash(__bean.getPolicyIdentifierHash());
     __tmp.setPolicyIdentifierHashAlgorithm(__bean.getPolicyIdentifierHashAlgorithm());
     __tmp.setPolicyUrlDocument(__bean.getPolicyUrlDocument());
-    __tmp.setTipusOperacioFirma(__bean.getTipusOperacioFirma());
-    __tmp.setTipusFirmaID(__bean.getTipusFirmaID());
-    __tmp.setAlgorismeDeFirmaID(__bean.getAlgorismeDeFirmaID());
-    __tmp.setModeDeFirma(__bean.isModeDeFirma());
-    __tmp.setPoliticaTaulaFirmes(__bean.getPoliticaTaulaFirmes());
     __tmp.setPosicioTaulaFirmesID(__bean.getPosicioTaulaFirmesID());
     __tmp.setFirmatPerFormatID(__bean.getFirmatPerFormatID());
     __tmp.setMotiuDelegacioID(__bean.getMotiuDelegacioID());
     __tmp.setPropietatsTaulaFirmes(__bean.getPropietatsTaulaFirmes());
-    __tmp.setPluginFirmaServidorID(__bean.getPluginFirmaServidorID());
-    __tmp.setIncloureSegellDeTemps(__bean.isIncloureSegellDeTemps());
-    __tmp.setPluginSegellatID(__bean.getPluginSegellatID());
 		return __tmp;
 	}
 
@@ -455,6 +471,10 @@ opcional incluso cuando se genera una firma EPES. */
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
+    if(!"PerfilJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.perfils) || org.hibernate.Hibernate.isInitialized(__jpa.getPerfils())) ) {
+      __tmp.setPerfils(PerfilJPA.copyJPA(__jpa.getPerfils(), __alreadyCopied,"ConfiguracioFirmaJPA"));
+    }
     // Copia de beans complexes (IMP)
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.motiuDelegacio) || org.hibernate.Hibernate.isInitialized(__jpa.getMotiuDelegacio()) ) ) {

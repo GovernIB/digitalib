@@ -237,19 +237,6 @@ private static final long serialVersionUID = 190357384L;
 	}
 
 
-// EXP  Field:pluginscanweb2id | Table: dib_perfil | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pluginScanWeb2ID")
-	private Set<PerfilJPA> perfil_pluginscanweb2ids = new HashSet<PerfilJPA>(0);
-	public  Set<PerfilJPA> getPerfil_pluginscanweb2ids() {
-    return this.perfil_pluginscanweb2ids;
-  }
-
-	public void setPerfil_pluginscanweb2ids(Set<PerfilJPA> perfil_pluginscanweb2ids) {
-	  this.perfil_pluginscanweb2ids = perfil_pluginscanweb2ids;
-	}
-
-
 // EXP  Field:pluginscanwebid | Table: dib_perfil | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pluginScanWebID")
@@ -263,16 +250,16 @@ private static final long serialVersionUID = 190357384L;
 	}
 
 
-// EXP  Field:pluginfirmaservidorid | Table: dib_perfil | Type: 0  
+// EXP  Field:pluginscanweb2id | Table: dib_perfil | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pluginFirmaServidorID")
-	private Set<PerfilJPA> perfil_pluginfirmaservidorids = new HashSet<PerfilJPA>(0);
-	public  Set<PerfilJPA> getPerfil_pluginfirmaservidorids() {
-    return this.perfil_pluginfirmaservidorids;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pluginScanWeb2ID")
+	private Set<PerfilJPA> perfil_pluginscanweb2ids = new HashSet<PerfilJPA>(0);
+	public  Set<PerfilJPA> getPerfil_pluginscanweb2ids() {
+    return this.perfil_pluginscanweb2ids;
   }
 
-	public void setPerfil_pluginfirmaservidorids(Set<PerfilJPA> perfil_pluginfirmaservidorids) {
-	  this.perfil_pluginfirmaservidorids = perfil_pluginfirmaservidorids;
+	public void setPerfil_pluginscanweb2ids(Set<PerfilJPA> perfil_pluginscanweb2ids) {
+	  this.perfil_pluginscanweb2ids = perfil_pluginscanweb2ids;
 	}
 
 
@@ -339,10 +326,6 @@ private static final long serialVersionUID = 190357384L;
     if(!"PerfilJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.perfil_plugindoccustodyids) || org.hibernate.Hibernate.isInitialized(__jpa.getPerfil_plugindoccustodyids())) ) {
       __tmp.setPerfil_plugindoccustodyids(PerfilJPA.copyJPA(__jpa.getPerfil_plugindoccustodyids(), __alreadyCopied,"PluginJPA"));
-    }
-    if(!"PerfilJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.perfil_pluginfirmaservidorids) || org.hibernate.Hibernate.isInitialized(__jpa.getPerfil_pluginfirmaservidorids())) ) {
-      __tmp.setPerfil_pluginfirmaservidorids(PerfilJPA.copyJPA(__jpa.getPerfil_pluginfirmaservidorids(), __alreadyCopied,"PluginJPA"));
     }
     if(!"ConfiguracioFirmaJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioFirma_pluginfirmaservidorids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioFirma_pluginfirmaservidorids())) ) {
