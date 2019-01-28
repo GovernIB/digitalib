@@ -5,11 +5,11 @@
   <h5><fmt:message key="menuinici" /></h5>
   <ul class="tree" style="margin: 3px; padding: 0px;">
 
-    <li style="list-style-type: disc; list-style-position: inside;">
+    <%-- <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/common/principal.html"/>">
         <span style="${(fn:contains(url, 'principal'))? "font-weight: bold;" : ""}"><fmt:message key="inici.paginainici" /></span>
       </a>
-    </li>
+    </li> --%>
     
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/common/usuaripersona/${loginInfo.usuariPersona.usuariPersonaID}/edit"/>">
