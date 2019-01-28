@@ -30,9 +30,9 @@
     
     %>
     
-    <li ${(empty pipella)?'class="active"' : '' } >
+   <%--  <li ${(empty pipella)?'class="active"' : '' } >
         <a href="<c:url value="/canviarPipella/"/>"><fmt:message key="inici" /></a>
-    </li> 
+    </li>  --%>
 
 <%--  DRAW MENU OPTIONS  
     <c:forEach var="rolG" items="${loginInfo.roles}">
@@ -50,7 +50,7 @@
     --%>
     
     <sec:authorize access="hasRole('ROLE_USER')">
-    <li ${(pipella eq 'user')?'class="active"' : '' }>
+    <li ${(pipella eq 'user' or empty pipella)?'class="active"' : '' }>
        <a href="<c:url value="/canviarPipella/user"/>"><fmt:message key="usuari.rol" /></a>
     </li>
     </sec:authorize>

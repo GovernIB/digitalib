@@ -31,11 +31,15 @@ import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.back.utils.Utils;
+import es.caib.digitalib.jpa.FitxerJPA;
+import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.logic.PerfilLogicaLocal;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.logic.utils.EmailUtil;
 import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.model.entity.InfoCustody;
+import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.entity.UsuariPersona;
 import es.caib.digitalib.model.fields.TransaccioFields;
@@ -54,6 +58,9 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
   @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
   protected TransaccioLogicaLocal transaccioLogicaEjb;
+
+  @EJB(mappedName = PerfilLogicaLocal.JNDI_NAME)
+  protected PerfilLogicaLocal perfilLogicaEjb;
 
   public abstract String getPerfilInfoContextWeb();
 
@@ -81,19 +88,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       HttpServletRequest request, ModelAndView mav) throws I18NException {
     TransaccioForm form = super.getTransaccioForm(_jpa, __isView, request, mav);
 
-    //XYZ YYY ZZZ
-//    if (!form.isNou()) {
-//      Set<Field<?>> campsBuits = new HashSet<Field<?>>(
-//          Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
-//
-//      Iterator<Field<?>> it = campsBuits.iterator();
-//      while (it.hasNext()) {
-//        if (it.next().isNotNull()) campsBuits.remove(it.next());
-//      }
-//      
-//      form.setHiddenFields(campsBuits);
-//      
-//    }
     if (isUtilitzatPerAplicacio()) {
       form.setEntityNameCode("transaccio.aplicacio");
       form.setEntityNameCodePlural("transaccio.aplicacio.plural");
@@ -103,20 +97,20 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       form.setEntityNameCodePlural("transaccio.persona.plural");
       form.addHiddenField(USUARIAPLICACIOID);
     }
-    
+
     if (__isView) {
       // Ocultar tots els camps null
       Utils.hideNullFields(_jpa, form, ALL_TRANSACCIO_FIELDS);
-      
+
       if (_jpa.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
         form.addHiddenField(ESTATCODI);
       }
-      
-      
+
+
       form.addHiddenField(INFOCUSTODYID);
       form.addHiddenField(INFOSIGNATURAID);
       form.addHiddenField(PERFILID);
-      
+
       form.addHiddenField(IP);
       form.addHiddenField(USUARIPERSONAID);
       form.addHiddenField(RETURNURL);
@@ -127,28 +121,24 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             " icon-info-sign icon-white", INFOSIGNATURAID.fullName,
             AbstractInfoSignatureController.getContextWeb(isAdmin())  + "/view" + "/" + _jpa.getInfoSignaturaID() , "btn-info"));
       }
-      
-      
+
       // Afegir botos de info cust
       if (_jpa.getInfoCustodyID() != null) {
         form.addAdditionalButton(new AdditionalButton(
             " icon-info-sign icon-white", INFOCUSTODYID.fullName,
             AbstractInfoCustodyController.getContextWeb(isAdmin())  + "/view" + "/" + _jpa.getInfoCustodyID() , "btn-info"));
       }
-      
-      // Afegir Boto de Veure Perfil
-      form.addAdditionalButton(new AdditionalButton("icon-user icon-white",
-          "transaccio.veureperfil", getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(), "btn-info"));
 
+      // Afegir Boto de Veure Perfil
+      if (isAdmin()) {
+        form.addAdditionalButton(new AdditionalButton("icon-user icon-white",
+            "transaccio.veureperfil", getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(), "btn-info"));
+      }
     }
-    
 
     return form;
 
   }
-
-
-
 
   @Override
   public TransaccioFilterForm getTransaccioFilterForm(Integer pagina, ModelAndView mav,
@@ -178,7 +168,10 @@ public abstract class AbstractTransaccioController extends TransaccioController 
           "icon-eye-open icon-white", "transaccio.veuredetall", getContextWeb() + "/view/{0}",
           "btn-primary"));
 
-      if (getPerfilInfoContextWeb() != null) {
+      //      filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-download-alt icon-white",
+      //                  "transaccio.descarregar", getContextWeb() + "/descarregar/{0}", "btn-info"));
+
+      if (isAdmin() && getPerfilInfoContextWeb() != null) {
         filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-user icon-white",
             "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", "btn-info"));
       }
@@ -230,6 +223,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     return filterForm;
   }
+
 
   @RequestMapping(value = "/viewperfil/{transaccioID}", method = RequestMethod.GET)
   public ModelAndView veurePerfilGet(
@@ -292,14 +286,11 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
 
-    // XYZ ZZZ Falta Traduir
-    __tmp.add(new StringKeyValue("EE01", "EE01 - Original (Llei 11/2007 Art. 30)"));
-    __tmp.add(new StringKeyValue("EE02",
-        "EE02 - Còpia electrònica autèntica amb canvi de format (Llei 11/2007 Art. 30.1)"));
-    __tmp.add(new StringKeyValue("EE03", "EE03 - Còpia electrònica autèntica de document en"
-        + " paper amb canvi de format (Llei 11/2007 Art. 30.2 i 30.3)."));
-    __tmp.add(new StringKeyValue("EE04", "EE04 - Còpia electrònica parcial autèntica."));
-    __tmp.add(new StringKeyValue("EE99", "EE99 - Altres estats d'elaboració."));
+    __tmp.add(new StringKeyValue("EE01", I18NUtils.tradueix("estatelaboracio.ee01")));
+    __tmp.add(new StringKeyValue("EE02", I18NUtils.tradueix("estatelaboracio.ee02")));
+    __tmp.add(new StringKeyValue("EE03", I18NUtils.tradueix("estatelaboracio.ee03")));
+    __tmp.add(new StringKeyValue("EE04", I18NUtils.tradueix("estatelaboracio.ee04")));
+    __tmp.add(new StringKeyValue("EE99", I18NUtils.tradueix("estatelaboracio.ee99")));
 
     return __tmp;
   }
@@ -309,28 +300,27 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
 
-    // XYZ ZZZ Falta Traduir
-    __tmp.add(new StringKeyValue("TD01", "TD01 - RESOLUCIO"));
-    __tmp.add(new StringKeyValue("TD02", "TD02 - ACORD"));
-    __tmp.add(new StringKeyValue("TD03", "TD03 - CONTRACTE"));
-    __tmp.add(new StringKeyValue("TD04", "TD04 - CONVENI"));
-    __tmp.add(new StringKeyValue("TD05", "TD05 - DECLARACIO"));
-    __tmp.add(new StringKeyValue("TD06", "TD06 - COMUNICACIO"));
-    __tmp.add(new StringKeyValue("TD07", "TD07 - NOTIFICACIO"));
-    __tmp.add(new StringKeyValue("TD08", "TD08 - PUBLICACIO"));
-    __tmp.add(new StringKeyValue("TD09", "TD09 - JUSTIFICANT RECEPCIO"));
-    __tmp.add(new StringKeyValue("TD10", "TD10 - ACTA"));
-    __tmp.add(new StringKeyValue("TD11", "TD11 - CERTIFICAT"));
-    __tmp.add(new StringKeyValue("TD12", "TD12 - DILIGENCIA"));
-    __tmp.add(new StringKeyValue("TD13", "TD13 - INFORME"));
-    __tmp.add(new StringKeyValue("TD14", "TD14 - SOLICITUD"));
-    __tmp.add(new StringKeyValue("TD15", "TD15 - DENUNCIA"));
-    __tmp.add(new StringKeyValue("TD16", "TD16 - ALEGACIO"));
-    __tmp.add(new StringKeyValue("TD17", "TD17 - RECURS"));
-    __tmp.add(new StringKeyValue("TD18", "TD18 - COMUNICACIO_CIUTADA"));
-    __tmp.add(new StringKeyValue("TD19", "TD19 - FACTURA"));
-    __tmp.add(new StringKeyValue("TD20", "TD20 - ALTRES_INCAUTATS"));
-    __tmp.add(new StringKeyValue("TD99", "TD99 - ALTRES"));
+    __tmp.add(new StringKeyValue("TD01", I18NUtils.tradueix("documenttipus.td01")));
+    __tmp.add(new StringKeyValue("TD02", I18NUtils.tradueix("documenttipus.td02")));
+    __tmp.add(new StringKeyValue("TD03", I18NUtils.tradueix("documenttipus.td03")));
+    __tmp.add(new StringKeyValue("TD04", I18NUtils.tradueix("documenttipus.td04")));
+    __tmp.add(new StringKeyValue("TD05", I18NUtils.tradueix("documenttipus.td05")));
+    __tmp.add(new StringKeyValue("TD06", I18NUtils.tradueix("documenttipus.td06")));
+    __tmp.add(new StringKeyValue("TD07", I18NUtils.tradueix("documenttipus.td07")));
+    __tmp.add(new StringKeyValue("TD08", I18NUtils.tradueix("documenttipus.td08")));
+    __tmp.add(new StringKeyValue("TD09", I18NUtils.tradueix("documenttipus.td09")));
+    __tmp.add(new StringKeyValue("TD10", I18NUtils.tradueix("documenttipus.td10")));
+    __tmp.add(new StringKeyValue("TD11", I18NUtils.tradueix("documenttipus.td11")));
+    __tmp.add(new StringKeyValue("TD12", I18NUtils.tradueix("documenttipus.td12")));
+    __tmp.add(new StringKeyValue("TD13", I18NUtils.tradueix("documenttipus.td13")));
+    __tmp.add(new StringKeyValue("TD14", I18NUtils.tradueix("documenttipus.td14")));
+    __tmp.add(new StringKeyValue("TD15", I18NUtils.tradueix("documenttipus.td15")));
+    __tmp.add(new StringKeyValue("TD16", I18NUtils.tradueix("documenttipus.td16")));
+    __tmp.add(new StringKeyValue("TD17", I18NUtils.tradueix("documenttipus.td17")));
+    __tmp.add(new StringKeyValue("TD18", I18NUtils.tradueix("documenttipus.td18")));
+    __tmp.add(new StringKeyValue("TD19", I18NUtils.tradueix("documenttipus.td19")));
+    __tmp.add(new StringKeyValue("TD20", I18NUtils.tradueix("documenttipus.td20")));
+    __tmp.add(new StringKeyValue("TD99", I18NUtils.tradueix("documenttipus.td99")));
 
     return __tmp;
   }
@@ -339,20 +329,18 @@ public abstract class AbstractTransaccioController extends TransaccioController 
   public List<StringKeyValue> getReferenceListForArxiuReqParamOrigen(
       HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    // XYZ ZZZ Falta Traduir
-    __tmp.add(new StringKeyValue("0", "Ciutadà"));
-    __tmp.add(new StringKeyValue("1", "Administració"));
+    __tmp.add(new StringKeyValue("0", I18NUtils.tradueix("origen.ciutada")));
+    __tmp.add(new StringKeyValue("1", I18NUtils.tradueix("origen.administracio")));
     return __tmp;
   }
 
   public List<StringKeyValue> getReferenceListForSignParamLanguageDoc(
       HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    // XYZ ZZZ Falta Traduir
-    __tmp.add(new StringKeyValue("ca", "Català"));
-    __tmp.add(new StringKeyValue("es", "Castellà"));
-    __tmp.add(new StringKeyValue("en", "Anglès"));
-    __tmp.add(new StringKeyValue("de", "Alemany"));
+    __tmp.add(new StringKeyValue("ca", I18NUtils.tradueix("idiomadoc.catala")));
+    __tmp.add(new StringKeyValue("es", I18NUtils.tradueix("idiomadoc.castella")));
+    __tmp.add(new StringKeyValue("en", I18NUtils.tradueix("idiomadoc.angles")));
+    __tmp.add(new StringKeyValue("de", I18NUtils.tradueix("idiomadoc.alemany")));
     return __tmp;
   }
 
@@ -392,13 +380,13 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
       if (transaccio.getPerfil().getUsPerfil() == Constants.PERFIL_US_CUSTODIA_INFO) {
         // Si esta custodiat llavors li hem d'enviar la informació de comunicació
-        
+
 
         StringBuffer stb = new StringBuffer("<br/>");
 
         // XYZ ZZZ TRA Configurable per part de Grup
         stb.append(up.getNom()).append(" ").append(up.getLlinatges())
-            .append(" li envia la referència al següent fitxer:").append("<br/>");
+        .append(" li envia la referència al següent fitxer:").append("<br/>");
 
         InfoCustody info = transaccio.getInfoCustody();
 
@@ -407,7 +395,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         if (info.getCustodyId() == null) {
           // XYZ ZZZ TRA
           stb.append("<li><b>Arxiu::ExpedientID:</b> ").append(info.getArxiuExpedientId())
-              .append("</li>");
+          .append("</li>");
           // XYZ ZZZ TRA
           stb.append("<li><b>Arxiu::DocumentID:</b> ").append(info.getArxiuDocumentId()).append("</li>");
         } else {
@@ -420,7 +408,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         stb.append("<li><b>CSV Validation Web:</b> ").append(info.getCsvValidationWeb()).append("</li>");
         // XYZ ZZZ TRA
         stb.append("<li><b>CSV Generation Definition:</b> ").append(info.getCsvGenerationDefinition())
-            .append("</li>");
+        .append("</li>");
         // XYZ ZZZ TRA
         stb.append("<li><b>Original File URL:</b> ").append(info.getOriginalFileUrl()).append("</li>");
         // XYZ ZZZ TRA
@@ -431,7 +419,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         stb.append("<li><b>Validation File URL:</b> ").append(info.getValidationFileUrl()).append("</li>");
 
         stb.append("</ul>");
-        
+
         message = stb.toString();
 
         fitxer = null;
@@ -488,6 +476,67 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
   }
 
+  @RequestMapping(value = "/descarregar/{transaccioID}", method = RequestMethod.GET)
+  public void descarregarFitxer(
+      @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
+      HttpServletResponse response) throws I18NException { 
+    
+    TransaccioJPA trans = transaccioEjb.findByPrimaryKey(transaccioID);
+    
+    FitxerJPA fitxer = trans.getFitxerEscanejat();
+    FileDownloadController.fullDownload(fitxer.getFitxerID(), fitxer.getNom(), fitxer.getMime(), response);
+  }
+  
+  @RequestMapping(value = "/descarregarimprimible/{transaccioID}", method = RequestMethod.GET)
+  public String descarregarVersioImprible(
+      @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
+      HttpServletResponse response) throws I18NException { 
+    
+    TransaccioJPA trans = transaccioEjb.findByPrimaryKey(transaccioID);
+    InfoCustodyJPA infoCustodyJPA = trans.getInfoCustody();
+    
+    String urlRetorn = "";
+    try {
+      urlRetorn = infoCustodyJPA.getCsvValidationWeb();
+    }
+    catch (NullPointerException e) {
+      
+      HtmlUtils.saveMessageError(request,  "XYZ ZZZ No es pot descarregar la versió imprimible");
+      return "redirect:"+getContextWeb()+"/list";
+       
+    }
+    
+    return "redirect:" + urlRetorn;
+  }
+  
+  private AdditionalButton getDownloadDocButton(Transaccio transaccio) {
+    
+    Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
+    
+    AdditionalButton addButton = null;
+    
+    switch (perfil.getUsPerfil()) {
+    case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
+      addButton = new AdditionalButton("icon-download-alt icon-white",
+          "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}", "btn-success");
+      break;
+    case Constants.PERFIL_US_CUSTODIA_INFO:
+      addButton = new AdditionalButton("icon-download-alt icon-white",
+          "transaccio.descarregar.versioimprimible", getContextWeb() + "/descarregarimprimible/{0}", "btn-success");
+      break;
+    case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
+      addButton = new AdditionalButton("icon-download-alt icon-white",
+          "transaccio.descarregar.versioimprimible", getContextWeb() + "/descarregarimprimible/{0}", "btn-success");
+      break;
+    default:
+      addButton = new AdditionalButton("icon-download-alt icon-white",
+          "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}", "btn-success");
+      break;
+    }
+    
+    return addButton;
+  }
+  
   @Override
   public void postList(HttpServletRequest request, ModelAndView mav,
       TransaccioFilterForm filterForm, List<Transaccio> list) throws I18NException {
@@ -513,6 +562,12 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         delete = false;
       }
 
+      if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
+        // Afegir boto de Descarrega de document escanejat o de versio imprimible segons si es escaneig o copia autentica
+        AdditionalButton addButton = getDownloadDocButton(transaccio);
+        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addButton);
+      }
+      
       if (delete) {
         AdditionalButton additionalButton = new AdditionalButton("icon-trash icon-white",
             "genapp.delete", getContextWeb() + "/delete/" + transaccio.getTransaccioID(),
