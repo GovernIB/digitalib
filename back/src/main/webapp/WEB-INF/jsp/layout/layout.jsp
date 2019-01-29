@@ -1,3 +1,4 @@
+<%@page import="es.caib.digitalib.utils.Configuracio"%>
 <%@page import="es.caib.digitalib.back.security.LoginInfo"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 %><%@include file="/WEB-INF/jsp/moduls/includes.jsp"
@@ -25,14 +26,11 @@
   <div class="row-fluid container main">
     
     <ul class="nav nav-tabs custom-submenu">
-    <%
-    //session.setAttribute("pipella", )
-    
-    %>
-    
-   <%--  <li ${(empty pipella)?'class="active"' : '' } >
+    <% if (!Configuracio.isOcultarMenuInici()) {  %>
+    <li ${(empty pipella)?'class="active"' : '' } >
         <a href="<c:url value="/canviarPipella/"/>"><fmt:message key="inici" /></a>
-    </li>  --%>
+    </li>
+    <% } %>
 
 <%--  DRAW MENU OPTIONS  
     <c:forEach var="rolG" items="${loginInfo.roles}">
@@ -50,7 +48,12 @@
     --%>
     
     <sec:authorize access="hasRole('ROLE_USER')">
+    <% if (!Configuracio.isOcultarMenuInici()) {  %>
+    <li ${(pipella eq 'user')?'class="active"' : '' }>
+    <% } %>
+    <% if (Configuracio.isOcultarMenuInici()) {  %>
     <li ${(pipella eq 'user' or empty pipella)?'class="active"' : '' }>
+    <% } %>
        <a href="<c:url value="/canviarPipella/user"/>"><fmt:message key="usuari.rol" /></a>
     </li>
     </sec:authorize>

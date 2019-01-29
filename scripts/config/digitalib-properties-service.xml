@@ -30,6 +30,8 @@
       es.caib.digitalib.encryptkey=1234567890123456
       es.caib.digitalib.name=DigitalIB
       
+      es.caib.digitalib.ocultarmenuinici=false
+      
       
       
       <!-- ======== PLUGIN USER-INFORMATION - DATABASE ======= -->

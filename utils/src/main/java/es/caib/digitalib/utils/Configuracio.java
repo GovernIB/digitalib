@@ -21,6 +21,11 @@ public class Configuracio implements Constants {
   public static boolean isDesenvolupament() {
     return Boolean.getBoolean(DIGITALIB_PROPERTY_BASE + "development");
   }
+  
+  
+  public static boolean isOcultarMenuInici() {
+    return Boolean.getBoolean(DIGITALIB_PROPERTY_BASE + "ocultarmenuinici");
+  }
 
 
   public static String getAppUrl() {
