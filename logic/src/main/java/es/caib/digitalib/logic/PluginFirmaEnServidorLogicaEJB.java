@@ -1,6 +1,7 @@
 package es.caib.digitalib.logic;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -26,13 +27,15 @@ import org.fundaciobit.plugins.signatureserver.api.ISignatureServerPlugin;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
+import com.google.common.hash.Hashing;
+
 import es.caib.digitalib.jpa.InfoSignaturaJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.PluginCridadaJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.logic.utils.DigitalIBTimeStampGenerator;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
-import es.caib.digitalib.logic.utils.DigitalIBTimeStampGenerator;
 import es.caib.digitalib.logic.utils.ScanWebUtils;
 import es.caib.digitalib.logic.utils.SignatureUtils;
 import es.caib.digitalib.model.bean.FitxerBean;
@@ -320,6 +323,10 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
       transaccio.setFitxerSignaturaID(fitxerSignat.getFitxerID());
 
+      String hashSignatura = Hashing.sha256().hashString(String.valueOf(transaccio.getFitxerSignaturaID()), StandardCharsets.UTF_8)
+          .toString();
+      
+      transaccio.setHashFirma(hashSignatura);
       log.info("XYZ ZZZ Guardada Firma a " + dest.getAbsolutePath());
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
