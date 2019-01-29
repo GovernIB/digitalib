@@ -1,7 +1,7 @@
 package es.caib.digitalib.back.controller;
 
 import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Locale;
@@ -358,7 +358,7 @@ public abstract class AbstractScanWebProcessController {
       FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
 
       transaccio.setFitxerEscanejatID(fitxer.getFitxerID());
-      String hashEscaneig = Hashing.sha256().hashString(String.valueOf(transaccio.getFitxerEscanejatID()), StandardCharsets.UTF_8)
+      String hashEscaneig = Hashing.sha256().hashString(String.valueOf(transaccio.getFitxerEscanejatID()), Charset.forName("UTF-8"))
           .toString();
 
       transaccio.setHashEscaneig(hashEscaneig);

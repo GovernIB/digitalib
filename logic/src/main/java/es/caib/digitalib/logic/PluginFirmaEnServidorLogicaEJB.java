@@ -1,7 +1,7 @@
 package es.caib.digitalib.logic;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -323,7 +323,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
       transaccio.setFitxerSignaturaID(fitxerSignat.getFitxerID());
 
-      String hashSignatura = Hashing.sha256().hashString(String.valueOf(transaccio.getFitxerSignaturaID()), StandardCharsets.UTF_8)
+      String hashSignatura = Hashing.sha256().hashString(String.valueOf(transaccio.getFitxerSignaturaID()), Charset.forName("UTF-8"))
           .toString();
       
       transaccio.setHashFirma(hashSignatura);

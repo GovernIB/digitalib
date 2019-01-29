@@ -2,7 +2,6 @@ package es.caib.digitalib.back.controller.user;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
