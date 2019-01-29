@@ -1,6 +1,7 @@
 package es.caib.digitalib.back.controller;
 
 import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Locale;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import com.google.common.hash.Hashing;
 
 import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
 import es.caib.digitalib.back.controller.user.ScanWebProcessControllerUser;
@@ -355,6 +358,10 @@ public abstract class AbstractScanWebProcessController {
       FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
 
       transaccio.setFitxerEscanejatID(fitxer.getFitxerID());
+      String hashEscaneig = Hashing.sha256().hashString(String.valueOf(transaccio.getFitxerEscanejatID()), StandardCharsets.UTF_8)
+          .toString();
+
+      transaccio.setHashEscaneig(hashEscaneig);
       return fitxer;
 
     } catch (I18NException e) {
