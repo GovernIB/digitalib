@@ -3,6 +3,7 @@ package es.caib.digitalib.logic;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Properties;
 
 import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
@@ -24,6 +25,8 @@ import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
 import es.caib.digitalib.model.entity.Fitxer;
+import es.caib.digitalib.model.entity.Plugin;
+import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.utils.Constants;
 import es.caib.plugins.arxiu.api.ArxiuException;
 import es.caib.plugins.arxiu.api.ContingutArxiu;
@@ -81,9 +84,15 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
         + perfil.getPluginArxiuID());
 
     IArxiuPlugin plugin;
+    Properties prop;
     try {
 
       plugin = getInstanceByPluginID(perfil.getPluginArxiuID());
+      
+      Plugin pluginArxiuJPA = this.findByPrimaryKey(perfil.getPluginArxiuID());
+      
+      String propertiesStr = pluginArxiuJPA.getProperties();
+      prop = LogicUtils.stringToProperties(propertiesStr);
 
     } catch (I18NException e1) {
 
@@ -150,51 +159,39 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
         }
 
       }
-      /*
-       * // XYZ ZZZ INFO BBDD ARXIU final String procedimentCodi = "organo1_PRO_123456789";
-       * final String procedimentNom = "Subvenciones empleo"; final String nomExpedient =
-       * "DigitalIB_" + transaccio.getTransactionWebId(); final String organsStr = "A04013511";
-       * final String serieDocumental = "S0001";
-       * 
-       * // XYZ ZZZ Formulari Usuari final String interessatsStr = "12345678X,87654321Z"; final
-       * ContingutOrigen origen = ContingutOrigen.ADMINISTRACIO; // ContingutOrigen.CIUTADA
-       * 
-       * // * ORIGINAL("EE01"): Original (Llei 11/2007 Art. 30)COPIA_CF("EE02"): Còpia
-       * electrònica // * autèntica amb canvi de format (Llei 11/2007 Art.
-       * 30.1).COPIA_DP("EE03"): Còpia // * electrònica autèntica de document en paper amb
-       * canvi de format (Llei 11/2007 Art. 30.2 // * i 30.3).COPIA_PR("EE04"): Còpia
-       * electrònica parcial autèntica.ALTRES("EE99"): Altres // * estats d'elaboració.
-       * 
-       * final DocumentEstatElaboracio documentEstatElaboracio =
-       * DocumentEstatElaboracio.ORIGINAL;
-       * 
-       * // * RESOLUCIO("TD01"), ACORD("TD02"), CONTRACTE("TD03"), CONVENI("TD04"), // *
-       * DECLARACIO("TD05"), COMUNICACIO("TD06"), NOTIFICACIO("TD07"), PUBLICACIO("TD08"), // *
-       * JUSTIFICANT_RECEPCIO("TD09"), ACTA("TD10"), CERTIFICAT("TD11"), DILIGENCIA("TD12"), //
-       * * INFORME("TD13"), SOLICITUD("TD14"), DENUNCIA("TD15"), ALEGACIO("TD16"), // *
-       * RECURS("TD17"), COMUNICACIO_CIUTADA("TD18"), FACTURA("TD19"), // *
-       * ALTRES_INCAUTATS("TD20"), ALTRES("TD99"); // * // * toEnum(TDxx) converteix de TDxx a
-       * DocumentTipus
-       * 
-       * final DocumentTipus documentTipus = DocumentTipus.ACORD;
-       */
-
-      // Map<String, Object> parameters = new HashMap<String, Object>();
-      // parameters.put("transaccio", transaccio);
-      // parameters.put("fitxerFirmat", fitxerFirmat);
-
-      final String procedimentCodi = transaccio.getArxiuOptParamProcedimentCodi();
 
       // XYZ ZZZ On es fica això !!!!!!
-      final String procedimentNom = transaccio.getArxiuOptParamProcedimentNom(); // "Subvenciones empleo";
+      String procedimentNom = transaccio.getArxiuOptParamProcedimentNom(); // "Subvenciones empleo";
+      if (procedimentNom == null) {
+        procedimentNom = prop.getProperty(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM.javaName);
+      }
+      
+      String procedimentCodi = transaccio.getArxiuOptParamProcedimentCodi();
+      if (procedimentCodi == null) {
+        procedimentCodi = prop.getProperty(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI.javaName);
+      }
+      
+      String organsStr = transaccio.getArxiuOptParamOrgans(); // "A04013511";
+      if (organsStr == null) {
+        organsStr = prop.getProperty(TransaccioFields.ARXIUOPTPARAMORGANS.javaName);
+      }
+      
+      String serieDocumental = transaccio.getArxiuOptParamSerieDocumental(); // "S0001";
+      if (serieDocumental == null) {
+        serieDocumental = prop.getProperty(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL.javaName);
+      }
+      
 
+      // XYZ ZZZ Això és per quan l'usuari pugui indicar el nom de l'expedient on vol el document
+      //String custodyOrExpedientID = prop
+      //    .getProperty(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID.javaName);
       final String interessatsStr = transaccio.getArxiuReqParamInteressats();
 
       // XYZ ZZZ Fer un tiquet per posar-ho en una propietat del PLugin ????
       final String nomExpedient = "DigitalIB_" + transaccio.getTransactionWebId();
-      final String organsStr = transaccio.getArxiuOptParamOrgans(); // "A04013511";
-      final String serieDocumental = transaccio.getArxiuOptParamSerieDocumental(); // "S0001";
+      
 
+      
       ExpedientMetadades expedientMetadades = new ExpedientMetadades();
       expedientMetadades.setClassificacio(procedimentCodi);
       expedientMetadades.setDataObertura(new Date());

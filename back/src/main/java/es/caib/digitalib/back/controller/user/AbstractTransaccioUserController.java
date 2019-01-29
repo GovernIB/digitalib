@@ -27,8 +27,7 @@ import es.caib.digitalib.utils.Constants;
  */
 public abstract class AbstractTransaccioUserController extends AbstractTransaccioController {
 
-  @EJB(mappedName = es.caib.digitalib.ejb.UsuariPersonaLocal.JNDI_NAME)
-  protected es.caib.digitalib.ejb.UsuariPersonaLocal usuariPersonaEjb;
+
 
   @Override
   public String getTileForm() {
@@ -45,7 +44,7 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
     return "TransaccioUser_FilterForm_" + getTipusPerfil();
   }
 
-  public abstract int getTipusPerfil();
+
 
   @Override
   public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {

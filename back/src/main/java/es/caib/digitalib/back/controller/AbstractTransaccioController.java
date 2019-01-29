@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.ejb.EJB;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
@@ -43,6 +45,7 @@ import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.entity.UsuariPersona;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.model.fields.UsuariAplicacioFields;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
@@ -62,11 +65,19 @@ public abstract class AbstractTransaccioController extends TransaccioController 
   @EJB(mappedName = PerfilLogicaLocal.JNDI_NAME)
   protected PerfilLogicaLocal perfilLogicaEjb;
 
+  @EJB(mappedName = es.caib.digitalib.ejb.UsuariPersonaLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.UsuariPersonaLocal usuariPersonaEjb;
+
+  @EJB(mappedName = es.caib.digitalib.ejb.UsuariAplicacioLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.UsuariAplicacioLocal usuariAplicacioEjb;
+
   public abstract String getPerfilInfoContextWeb();
 
   public abstract boolean isUtilitzatPerAplicacio();
 
   public abstract boolean isAdmin();
+
+  public abstract int getTipusPerfil();
 
   @Override
   public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
@@ -106,7 +117,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         form.addHiddenField(ESTATCODI);
       }
 
-
       form.addHiddenField(INFOCUSTODYID);
       form.addHiddenField(INFOSIGNATURAID);
       form.addHiddenField(PERFILID);
@@ -117,22 +127,23 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
       // Afegir botos de info sign
       if (_jpa.getInfoSignaturaID() != null) {
-        form.addAdditionalButton(new AdditionalButton(
-            " icon-info-sign icon-white", INFOSIGNATURAID.fullName,
-            AbstractInfoSignatureController.getContextWeb(isAdmin())  + "/view" + "/" + _jpa.getInfoSignaturaID() , "btn-info"));
+        form.addAdditionalButton(new AdditionalButton(" icon-info-sign icon-white",
+            INFOSIGNATURAID.fullName, AbstractInfoSignatureController.getContextWeb(isAdmin())
+                + "/view" + "/" + _jpa.getInfoSignaturaID(), "btn-info"));
       }
 
       // Afegir botos de info cust
       if (_jpa.getInfoCustodyID() != null) {
-        form.addAdditionalButton(new AdditionalButton(
-            " icon-info-sign icon-white", INFOCUSTODYID.fullName,
-            AbstractInfoCustodyController.getContextWeb(isAdmin())  + "/view" + "/" + _jpa.getInfoCustodyID() , "btn-info"));
+        form.addAdditionalButton(new AdditionalButton(" icon-info-sign icon-white",
+            INFOCUSTODYID.fullName, AbstractInfoCustodyController.getContextWeb(isAdmin())
+                + "/view" + "/" + _jpa.getInfoCustodyID(), "btn-info"));
       }
 
       // Afegir Boto de Veure Perfil
       if (isAdmin()) {
         form.addAdditionalButton(new AdditionalButton("icon-user icon-white",
-            "transaccio.veureperfil", getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(), "btn-info"));
+            "transaccio.veureperfil", getContextWeb() + "/viewperfil/"
+                + _jpa.getTransaccioID(), "btn-info"));
       }
     }
 
@@ -168,8 +179,9 @@ public abstract class AbstractTransaccioController extends TransaccioController 
           "icon-eye-open icon-white", "transaccio.veuredetall", getContextWeb() + "/view/{0}",
           "btn-primary"));
 
-      //      filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-download-alt icon-white",
-      //                  "transaccio.descarregar", getContextWeb() + "/descarregar/{0}", "btn-info"));
+      // filterForm.addAdditionalButtonForEachItem(new
+      // AdditionalButton("icon-download-alt icon-white",
+      // "transaccio.descarregar", getContextWeb() + "/descarregar/{0}", "btn-info"));
 
       if (isAdmin() && getPerfilInfoContextWeb() != null) {
         filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-user icon-white",
@@ -223,7 +235,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     return filterForm;
   }
-
 
   @RequestMapping(value = "/viewperfil/{transaccioID}", method = RequestMethod.GET)
   public ModelAndView veurePerfilGet(
@@ -358,10 +369,11 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         return getRedirectWhenCancel(request, transaccioID);
       }
 
-      java.util.regex.Pattern p = java.util.regex.Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+      java.util.regex.Pattern p = java.util.regex.Pattern
+          .compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
       if (!p.matcher(email).matches()) {
-        String __msg = I18NUtils.tradueix("genapp.validation.malformed",
-            email, I18NUtils.tradueix(UsuariPersonaFields.EMAIL.fullName));
+        String __msg = I18NUtils.tradueix("genapp.validation.malformed", email,
+            I18NUtils.tradueix(UsuariPersonaFields.EMAIL.fullName));
         HtmlUtils.saveMessageError(request, __msg);
         return getRedirectWhenCancel(request, transaccioID);
       }
@@ -381,12 +393,11 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       if (transaccio.getPerfil().getUsPerfil() == Constants.PERFIL_US_CUSTODIA_INFO) {
         // Si esta custodiat llavors li hem d'enviar la informació de comunicació
 
-
         StringBuffer stb = new StringBuffer("<br/>");
 
         // XYZ ZZZ TRA Configurable per part de Grup
         stb.append(up.getNom()).append(" ").append(up.getLlinatges())
-        .append(" li envia la referència al següent fitxer:").append("<br/>");
+            .append(" li envia la referència al següent fitxer:").append("<br/>");
 
         InfoCustody info = transaccio.getInfoCustody();
 
@@ -395,9 +406,10 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         if (info.getCustodyId() == null) {
           // XYZ ZZZ TRA
           stb.append("<li><b>Arxiu::ExpedientID:</b> ").append(info.getArxiuExpedientId())
-          .append("</li>");
+              .append("</li>");
           // XYZ ZZZ TRA
-          stb.append("<li><b>Arxiu::DocumentID:</b> ").append(info.getArxiuDocumentId()).append("</li>");
+          stb.append("<li><b>Arxiu::DocumentID:</b> ").append(info.getArxiuDocumentId())
+              .append("</li>");
         } else {
           // XYZ ZZZ TRA
           stb.append("<li><b>CustodyID:</b> ").append(info.getCustodyId()).append("</li>");
@@ -405,18 +417,22 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         // XYZ ZZZ TRA
         stb.append("<li><b>CSV:</b> ").append(info.getCsv()).append("</li>");
         // XYZ ZZZ TRA
-        stb.append("<li><b>CSV Validation Web:</b> ").append(info.getCsvValidationWeb()).append("</li>");
+        stb.append("<li><b>CSV Validation Web:</b> ").append(info.getCsvValidationWeb())
+            .append("</li>");
         // XYZ ZZZ TRA
-        stb.append("<li><b>CSV Generation Definition:</b> ").append(info.getCsvGenerationDefinition())
-        .append("</li>");
+        stb.append("<li><b>CSV Generation Definition:</b> ")
+            .append(info.getCsvGenerationDefinition()).append("</li>");
         // XYZ ZZZ TRA
-        stb.append("<li><b>Original File URL:</b> ").append(info.getOriginalFileUrl()).append("</li>");
+        stb.append("<li><b>Original File URL:</b> ").append(info.getOriginalFileUrl())
+            .append("</li>");
         // XYZ ZZZ TRA
-        stb.append("<li><b>Printable File URL:</b> ").append(info.getPrintableFileUrl()).append("</li>");
+        stb.append("<li><b>Printable File URL:</b> ").append(info.getPrintableFileUrl())
+            .append("</li>");
         // XYZ ZZZ TRA
         stb.append("<li><b>ENI File URL:</b> ").append(info.getEniFileUrl()).append("</li>");
         // XYZ ZZZ TRA
-        stb.append("<li><b>Validation File URL:</b> ").append(info.getValidationFileUrl()).append("</li>");
+        stb.append("<li><b>Validation File URL:</b> ").append(info.getValidationFileUrl())
+            .append("</li>");
 
         stb.append("</ul>");
 
@@ -463,7 +479,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         // XYZ ZZZ Verificar que es pot esborrar
         // (1) No te fitxer
         // (2) Esta en error i té més d'un dia
-        transaccioLogicaEjb.deleteFull(transaccio, true, null, LoginInfo.getInstance().getUsername());
+        transaccioLogicaEjb.deleteFull(transaccio, true, null, LoginInfo.getInstance()
+            .getUsername());
 
         createMessageSuccess(request, "success.deleted", transaccioID);
         return getRedirectWhenDelete(request, transaccioID, null);
@@ -477,66 +494,70 @@ public abstract class AbstractTransaccioController extends TransaccioController 
   }
 
   @RequestMapping(value = "/descarregar/{transaccioID}", method = RequestMethod.GET)
-  public void descarregarFitxer(
-      @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
-      HttpServletResponse response) throws I18NException { 
-    
+  public void descarregarFitxer(@PathVariable("transaccioID") java.lang.Long transaccioID,
+      HttpServletRequest request, HttpServletResponse response) throws I18NException {
+
     TransaccioJPA trans = transaccioEjb.findByPrimaryKey(transaccioID);
-    
+
     FitxerJPA fitxer = trans.getFitxerEscanejat();
-    FileDownloadController.fullDownload(fitxer.getFitxerID(), fitxer.getNom(), fitxer.getMime(), response);
+    FileDownloadController.fullDownload(fitxer.getFitxerID(), fitxer.getNom(),
+        fitxer.getMime(), response);
   }
-  
+
   @RequestMapping(value = "/descarregarimprimible/{transaccioID}", method = RequestMethod.GET)
   public String descarregarVersioImprible(
       @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
-      HttpServletResponse response) throws I18NException { 
-    
+      HttpServletResponse response) throws I18NException {
+
     TransaccioJPA trans = transaccioEjb.findByPrimaryKey(transaccioID);
     InfoCustodyJPA infoCustodyJPA = trans.getInfoCustody();
-    
+
     String urlRetorn = "";
     try {
       urlRetorn = infoCustodyJPA.getCsvValidationWeb();
+    } catch (NullPointerException e) {
+
+      HtmlUtils
+          .saveMessageError(request, "XYZ ZZZ No es pot descarregar la versió imprimible");
+      return "redirect:" + getContextWeb() + "/list";
+
     }
-    catch (NullPointerException e) {
-      
-      HtmlUtils.saveMessageError(request,  "XYZ ZZZ No es pot descarregar la versió imprimible");
-      return "redirect:"+getContextWeb()+"/list";
-       
-    }
-    
+
     return "redirect:" + urlRetorn;
   }
-  
+
   private AdditionalButton getDownloadDocButton(Transaccio transaccio) {
-    
+
     Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
-    
+
     AdditionalButton addButton = null;
-    
+
     switch (perfil.getUsPerfil()) {
-    case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
-      addButton = new AdditionalButton("icon-download-alt icon-white",
-          "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}", "btn-success");
+      case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
+        addButton = new AdditionalButton("icon-download-alt icon-white",
+            "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}",
+            "btn-success");
       break;
-    case Constants.PERFIL_US_CUSTODIA_INFO:
-      addButton = new AdditionalButton("icon-download-alt icon-white",
-          "transaccio.descarregar.versioimprimible", getContextWeb() + "/descarregarimprimible/{0}", "btn-success");
+      case Constants.PERFIL_US_CUSTODIA_INFO:
+        addButton = new AdditionalButton("icon-download-alt icon-white",
+            "transaccio.descarregar.versioimprimible", getContextWeb()
+                + "/descarregarimprimible/{0}", "btn-success");
       break;
-    case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
-      addButton = new AdditionalButton("icon-download-alt icon-white",
-          "transaccio.descarregar.versioimprimible", getContextWeb() + "/descarregarimprimible/{0}", "btn-success");
+      case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
+        addButton = new AdditionalButton("icon-download-alt icon-white",
+            "transaccio.descarregar.versioimprimible", getContextWeb()
+                + "/descarregarimprimible/{0}", "btn-success");
       break;
-    default:
-      addButton = new AdditionalButton("icon-download-alt icon-white",
-          "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}", "btn-success");
+      default:
+        addButton = new AdditionalButton("icon-download-alt icon-white",
+            "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}",
+            "btn-success");
       break;
     }
-    
+
     return addButton;
   }
-  
+
   @Override
   public void postList(HttpServletRequest request, ModelAndView mav,
       TransaccioFilterForm filterForm, List<Transaccio> list) throws I18NException {
@@ -549,25 +570,26 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     for (Transaccio transaccio : list) {
 
-      if (isAdmin) { // XYZ ZZZ Llevar
+      if (isAdmin) {
         delete = true;
-
       } else if (transaccio.getFitxerEscanejatID() == null) {
         delete = true;
-
       } else if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_ERROR) {
         delete = true;
-
+      } else if (/* Es USUARI AND */getTipusPerfil() == Constants.PERFIL_US_NOMES_ESCANEIG_INFO
+          || getTipusPerfil() == Constants.PERFIL_US_COPIA_AUTENTICA_INFO) {
+        delete = true;
       } else {
         delete = false;
       }
 
       if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
-        // Afegir boto de Descarrega de document escanejat o de versio imprimible segons si es escaneig o copia autentica
+        // Afegir boto de Descarrega de document escanejat o de versio imprimible segons si es
+        // escaneig o copia autentica
         AdditionalButton addButton = getDownloadDocButton(transaccio);
         filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addButton);
       }
-      
+
       if (delete) {
         AdditionalButton additionalButton = new AdditionalButton("icon-trash icon-white",
             "genapp.delete", getContextWeb() + "/delete/" + transaccio.getTransaccioID(),
@@ -590,56 +612,49 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     }
 
-    // XYZ ZZZ Ocultar columnes de datafi, missatgeerror, fitxersignat
-    // si tots els valors de les columnes són NULL
-    // Map<Long, String> map;
-    // map = (Map<Long, String>) filterForm.getAdditionalField(USUARICOLUMN).getValueMap();
-    // map.clear();
-    // long key;
-    //
-    // for (Transaccio ua : list) {
-    // key = ua.getTransaccioID();
-    //
-    // SelectMultipleStringKeyValue smskv;
-    // List<StringKeyValue> usuaris;
-    //
-    // if (isUtilitzatPerAplicacio()) {
-    //
-    // smskv = new SelectMultipleStringKeyValue(
-    // TransaccioFields.TRANSACCIOID.select,
-    // new TransaccioQueryPath().USUARIAPLICACIOID().select);
-    //
-    // usuaris = transaccioEjb.executeQuery(smskv,
-    // TransaccioFields.USUARIAPLICACIOID.equal(key));
-    // //usuariAplicacioEjb
-    //
-    // // smskv = new SelectMultipleStringKeyValue(
-    // // PerfilUsuariAplicacioFields.PERFILUSRAPPID.select,
-    // // new PerfilUsuariAplicacioQueryPath().PERFIL().CODI().select);
-    //
-    // // usuaris = perfilUsuariAplicacioEjb.executeQuery(smskv_per_codi,
-    // // PerfilUsuariAplicacioFields.USUARIAPLICACIOID.equal(key));
-    // } else {
-    //
-    // smskv = new SelectMultipleStringKeyValue(
-    // TransaccioFields.TRANSACCIOID.select,
-    // new TransaccioQueryPath().USUARIPERSONAID().select);
-    //
-    // usuaris = transaccioEjb.executeQuery(smskv,
-    // TransaccioFields.USUARIPERSONAID.equal(key));
-    // }
-    //
-    // StringBuffer str = new StringBuffer();
-    //
-    // System.out.println("USUARIS.SIZE = "+ usuaris.size());
-    // for (StringKeyValue per : usuaris) {
-    // System.out.println("KEY = "+per.getKey());
-    // System.out.println("VALUE = "+per.getValue());
-    // str.append(per.getValue());
-    // }
-    //
-    // map.put(key, str.toString());
-    // }
+    if (isAdmin) {
+      // XYZ ZZZ Ocultar columnes de datafi, missatgeerror, fitxersignat
+      // si tots els valors de les columnes són NULL
+      Map<Long, String> map;
+      map = (Map<Long, String>) filterForm.getAdditionalField(USUARICOLUMN).getValueMap();
+      map.clear();
+
+      for (Transaccio ua : list) {
+
+        SelectMultipleStringKeyValue smskv;
+        StringKeyValue usuari;
+        String web;
+
+        if (isUtilitzatPerAplicacio()) {
+
+          smskv = new SelectMultipleStringKeyValue(
+              UsuariAplicacioFields.USUARIAPLICACIOID.select,
+              UsuariAplicacioFields.USERNAME.select);
+
+          usuari = usuariAplicacioEjb.executeQueryOne(smskv,
+              UsuariAplicacioFields.USUARIAPLICACIOID.equal(ua.getUsuariAplicacioId()));
+          
+          web = request.getContextPath() + "/admin/usuariAplicacio/" + ua.getUsuariAplicacioId() + "/edit";
+
+        } else {
+
+          smskv = new SelectMultipleStringKeyValue(UsuariPersonaFields.USUARIPERSONAID.select,
+              UsuariPersonaFields.NOM.select, UsuariPersonaFields.LLINATGES.select);
+
+          usuari = usuariPersonaEjb.executeQueryOne(smskv,
+              UsuariPersonaFields.USUARIPERSONAID.equal(ua.getUsuariPersonaId()));
+          
+          
+          web = request.getContextPath() + "/admin/usuariPersona/" + ua.getUsuariPersonaId() + "/edit";
+
+        }
+
+        if (usuari != null) {
+          map.put(ua.getTransaccioID(), "<a href=\"" + web + "\">"  + usuari.getValue() + "</a>");
+        }
+      }
+
+    }
 
   }
 

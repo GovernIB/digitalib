@@ -61,6 +61,11 @@ public abstract class AbstractFirmaArxiuParametersController extends
     // No serveix per res
     return false;
   }
+  
+  @Override
+  public int getTipusPerfil() {
+    return Constants.PERFIL_US_ALL_INFO; // No s'utilitza per res
+  }
 
   @Override
   public TransaccioForm getTransaccioForm(TransaccioJPA _jpa, boolean __isView,

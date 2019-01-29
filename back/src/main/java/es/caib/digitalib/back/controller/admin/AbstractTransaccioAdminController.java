@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.AbstractTransaccioController;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.utils.Constants;
 
 /**
  * 
@@ -40,6 +41,11 @@ public abstract class AbstractTransaccioAdminController extends AbstractTransacc
   @Override
   public boolean isAdmin() {
     return true;
+  }
+  
+  @Override
+  public int getTipusPerfil() {
+    return Constants.PERFIL_US_ALL_INFO; // No s'utilitza dins ADMIN
   }
 
   @Override
