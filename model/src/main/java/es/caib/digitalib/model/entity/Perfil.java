@@ -23,8 +23,8 @@ public interface Perfil extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.Integer getScanMinimaResolucio();
 	public void setScanMinimaResolucio(java.lang.Integer _scanMinimaResolucio_);
 
-	public int getScanPixelType();
-	public void setScanPixelType(int _scanPixelType_);
+	public java.lang.Integer getScanPixelType();
+	public void setScanPixelType(java.lang.Integer _scanPixelType_);
 
 	public long getPluginScanWebID();
 	public void setPluginScanWebID(long _pluginScanWebID_);

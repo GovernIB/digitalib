@@ -107,6 +107,7 @@ public class PerfilUsuariAplicacioAdminController extends PerfilUsuariAplicacioC
 	  
 	  Where w = Where.AND(
 	      where, 
+	      Where.OR(PerfilFields.UTILITZATPERAPLICACIO.equal(true), PerfilFields.UTILITZATPERAPLICACIO.isNull()), 
 	      PerfilFields.USPERFIL.greaterThan(0),
 	      PerfilFields.PERFILID.notIn(perfilUsuariAplicacioEjb.getSubQuery(PerfilUsuariAplicacioFields.PERFILID, PerfilUsuariAplicacioFields.USUARIAPLICACIOID.equal(idApp)))
 	      );

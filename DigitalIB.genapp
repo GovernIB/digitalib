@@ -5562,7 +5562,7 @@ opcional incluso cuando se genera una firma EPES.</string>
            <string>scanPixelType</string> 
           </void> 
           <void property="javaType"> 
-           <class>int</class> 
+           <class>java.lang.Integer</class> 
           </void> 
           <void property="labels"> 
            <void method="put"> 
@@ -5894,7 +5894,7 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="foreignKeys"> 
            <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
             <void index="0"> 
-             <object id="ForeignKey0" class="org.fundaciobit.genapp.ForeignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>configuraciofirmaid</string> 
               </void> 
@@ -5942,7 +5942,20 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="webFieldInfo"> 
            <object class="org.fundaciobit.genapp.WebFieldInfo"> 
             <void property="foreignKey"> 
-             <object idref="ForeignKey0"/> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>configuraciofirmaid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_perfil_conffirma_cf_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_configuraciofirma</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
             </void> 
             <void property="webtype"> 
              <int>3</int> 
@@ -6174,6 +6187,9 @@ opcional incluso cuando se genera una firma EPES.</string>
           </void> 
           <void property="digits"> 
            <int>0</int> 
+          </void> 
+          <void property="filter"> 
+           <boolean>true</boolean> 
           </void> 
           <void property="javaName"> 
            <string>usPerfil</string> 
@@ -6526,21 +6542,21 @@ opcional incluso cuando se genera una firma EPES.</string>
       <void property="labels"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>PerfilUsuariAplicacio</string> 
+        <string>Perfil d&apos;Usuari Aplicació</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>PerfilUsuariAplicacio</string> 
+        <string>Perfil de Usuario Aplicación</string> 
        </void> 
       </void> 
       <void property="labelsPlural"> 
        <void method="put"> 
         <string>ca</string> 
-        <string>PerfilUsuariAplicacio</string> 
+        <string>Perfils d&apos;Usuari Aplicació</string> 
        </void> 
        <void method="put"> 
         <string>es</string> 
-        <string>PerfilUsuariAplicacio</string> 
+        <string>Perfiles de Usuario Aplicación</string> 
        </void> 
       </void> 
       <void property="multipleUniques"> 

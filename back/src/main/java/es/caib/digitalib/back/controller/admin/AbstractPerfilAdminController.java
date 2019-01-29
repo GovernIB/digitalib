@@ -82,8 +82,7 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 			ocults.remove(CODI);
 			ocults.remove(NOMID);
 			ocults.remove(DESCRIPCIOID);
-
-			filterForm.setHiddenFields(ocults);
+			filterForm.setHiddenFields(ocults);		
 
 			filterForm.setOrderBy(NOMID.fullName);
 
@@ -176,13 +175,19 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 							Constants.TIPUS_CUSTODIA_ARXIU);
 					break;
 			}
-			
+
 			perfilForm.getPerfil().setUtilitzatPerAplicacio(isUtilitzatPerAplicacio());
 
 			if (isUtilitzatPerAplicacio()) {
 			  perfilForm.getPerfil().setUrlBase(Configuracio.getAppUrl());
 			}
 		}
+		
+    // Millores en API i Plugins de ScanWeb #35
+    // Fins que no s'implementi no podram tocar aixó
+    perfilForm.addReadOnlyField(SCANPIXELTYPE);
+    perfilForm.addReadOnlyField(SCANMINIMARESOLUCIO);
+    
 		
     if (isUtilitzatPerAplicacio()) {
       perfilForm.getHiddenFields().remove(URLBASE);

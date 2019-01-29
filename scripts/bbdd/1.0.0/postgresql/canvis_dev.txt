@@ -25,3 +25,14 @@ UPDATE dib_perfil
    
 ALTER TABLE dib_perfil
   ADD CONSTRAINT dib_perfil_conffirma_cf_fk FOREIGN KEY (configuraciofirmaid) REFERENCES dib_configuraciofirma (configuraciofirmaid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+  
+  ---  Arreglar pantalles de Perfil de Menu Admin #34 
+  
+  ALTER TABLE dib_perfil
+   ALTER COLUMN scanpixeltype DROP NOT NULL;
+   
+   ALTER TABLE dib_perfil
+   ALTER COLUMN scanpixeltype DROP DEFAULT;
+   
+   UPDATE dib_perfil SET scanpixeltype=NULL;

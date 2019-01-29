@@ -17,7 +17,7 @@ private static final long serialVersionUID = -449640516L;
 	java.lang.String urlBase;
 	int scanFormatFitxer;
 	java.lang.Integer scanMinimaResolucio;
-	int scanPixelType;
+	java.lang.Integer scanPixelType;
 	long pluginScanWebID;
 	java.lang.Long pluginScanWeb2ID;
 	int tipusFirma;
@@ -35,7 +35,7 @@ private static final long serialVersionUID = -449640516L;
   }
 
   /** Constructor amb tots els camps  */
-  public PerfilBean(long perfilID , java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long configuracioFirmaID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
+  public PerfilBean(long perfilID , java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , java.lang.Integer scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long configuracioFirmaID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.perfilID=perfilID;
     this.codi=codi;
     this.nomID=nomID;
@@ -56,7 +56,7 @@ private static final long serialVersionUID = -449640516L;
     this.utilitzatPerAplicacio=utilitzatPerAplicacio;
 }
   /** Constructor sense valors autoincrementals */
-  public PerfilBean(java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , int scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long configuracioFirmaID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
+  public PerfilBean(java.lang.String codi , java.lang.Long nomID , java.lang.Long descripcioID , java.lang.String urlBase , int scanFormatFitxer , java.lang.Integer scanMinimaResolucio , java.lang.Integer scanPixelType , long pluginScanWebID , java.lang.Long pluginScanWeb2ID , int tipusFirma , java.lang.Long apiSimpleID , java.lang.Long configuracioFirmaID , int tipusCustodia , java.lang.Long pluginArxiuID , java.lang.Long pluginDocCustodyID , int usPerfil , java.lang.Boolean utilitzatPerAplicacio) {
     this.codi=codi;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
@@ -155,10 +155,10 @@ private static final long serialVersionUID = -449640516L;
 		this.scanMinimaResolucio = _scanMinimaResolucio_;
 	};
 
-	public int getScanPixelType() {
+	public java.lang.Integer getScanPixelType() {
 		return(scanPixelType);
 	};
-	public void setScanPixelType(int _scanPixelType_) {
+	public void setScanPixelType(java.lang.Integer _scanPixelType_) {
 		this.scanPixelType = _scanPixelType_;
 	};
 
