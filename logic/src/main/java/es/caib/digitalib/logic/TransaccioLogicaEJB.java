@@ -12,7 +12,6 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
@@ -39,8 +38,8 @@ import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.utils.Constants;
 
 /**
- *
- * @author anadal
+ * 
+ * @author anadal(u80067)
  *
  */
 @Stateless(name = "TransaccioLogicaEJB")
@@ -100,13 +99,15 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       fitxers.add(fs);
     }
 
-    
+ 
+    //log.info("XYZ ZZZ  FFF PRE esborrar fitxers ... " + esborrarFitxers);
     
     if (esborrarFitxers) {
+      //log.info("XYZ ZZZ  FFF Entra a esborrar fitxers " + Arrays.toString(fitxers.toArray()));
       for (Long fid : fitxers) {
         fitxerEjb.delete(fid);   
       }
-      FileSystemManager.eliminarArxius(fitxers);
+      //log.info("XYZ ZZZ  FFF 2222  Esborrat Fitxers Fisics = " + FileSystemManager.eliminarArxius(fitxers));
     }
     
     

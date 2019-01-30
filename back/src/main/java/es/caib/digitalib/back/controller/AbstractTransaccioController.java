@@ -464,33 +464,16 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
   }
+  
+  @Override
+  public void delete(HttpServletRequest request, Transaccio transaccio) throws Exception,I18NException {
 
-  @RequestMapping(value = "/delete/{transaccioID}")
-  public String deleteTransaccio(@PathVariable("transaccioID") java.lang.Long transaccioID,
-      HttpServletRequest request, HttpServletResponse response) {
-
-    try {
-      Transaccio transaccio = transaccioEjb.findByPrimaryKey(transaccioID);
-      if (transaccio == null) {
-        String __msg = createMessageError(request, "error.notfound", transaccioID);
-        return getRedirectWhenDelete(request, transaccioID, new Exception(__msg));
-      } else {
-
-        // XYZ ZZZ Verificar que es pot esborrar
-        // (1) No te fitxer
-        // (2) Esta en error i té més d'un dia
-        transaccioLogicaEjb.deleteFull(transaccio, true, null, LoginInfo.getInstance()
-            .getUsername());
-
-        createMessageSuccess(request, "success.deleted", transaccioID);
-        return getRedirectWhenDelete(request, transaccioID, null);
-      }
-
-    } catch (Throwable e) {
-      String msg = createMessageError(request, "error.deleting", transaccioID, e);
-      log.error(msg, e);
-      return getRedirectWhenDelete(request, transaccioID, e);
-    }
+      // XYZ ZZZ Verificar que es pot esborrar
+      // (1) No te fitxer
+      // (2) Esta en error i té més d'un dia
+      transaccioLogicaEjb.deleteFull(transaccio, true, null, LoginInfo.getInstance()
+          .getUsername());
+    
   }
 
   @RequestMapping(value = "/descarregar/{transaccioID}", method = RequestMethod.GET)
@@ -592,7 +575,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
       if (delete) {
         AdditionalButton additionalButton = new AdditionalButton("icon-trash icon-white",
-            "genapp.delete", getContextWeb() + "/delete/" + transaccio.getTransaccioID(),
+            "genapp.delete",
+            "javascript:openModal('" + request.getContextPath()+ getContextWeb() + "/" + transaccio.getTransaccioID() + "/delete','show');",           
             "btn-danger");
 
         filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), additionalButton);

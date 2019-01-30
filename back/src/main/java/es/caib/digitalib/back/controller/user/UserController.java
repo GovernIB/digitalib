@@ -39,15 +39,19 @@ public class UserController {
 
     UsuariPersonaJPA up = LoginInfo.getInstance().getUsuariPersona();
     ConfiguracioGrupJPA conf;
-    try {
-      conf = configuracioGrupLogicaEjb.findByPrimaryKeyFull(up.getConfiguracioGrupID());
-    } catch (I18NException e) {
-      // XYZ ZZZ
+    if (up.getConfiguracioGrupID() == null) {
       conf = null;
-      e.printStackTrace();
-    } catch (NullPointerException e) {
-      conf = null;
-      e.printStackTrace();
+    } else {
+      try {
+        conf = configuracioGrupLogicaEjb.findByPrimaryKeyFull(up.getConfiguracioGrupID());
+      } catch (I18NException e) {
+        // XYZ ZZZ
+        conf = null;
+        e.printStackTrace();
+      } catch (NullPointerException e) {
+        conf = null;
+        e.printStackTrace();
+      }
     }
 
     if (conf == null) {
