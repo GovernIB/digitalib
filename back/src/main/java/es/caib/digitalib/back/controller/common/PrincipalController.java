@@ -1,6 +1,8 @@
 package es.caib.digitalib.back.controller.common;
 
-import es.caib.digitalib.utils.Configuracio;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
@@ -11,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import es.caib.digitalib.back.security.LoginInfo;
+import es.caib.digitalib.utils.Configuracio;
+import es.caib.digitalib.utils.Constants;
 
 
 /**
@@ -39,6 +41,15 @@ public class PrincipalController {
       session.setAttribute("inicialitzat", true);
     }
 
+    
+    if (Configuracio.isOcultarMenuInici()) {
+      if (LoginInfo.hasRole(Constants.ROLE_USER)) {
+        return new ModelAndView(new RedirectView("/user/llistatperfilsdisponibles", true));
+      }
+      if (LoginInfo.hasRole(Constants.ROLE_ADMIN)) {
+        return new ModelAndView(new RedirectView("/admin/pluginscanweb/list", true));
+      }
+    }
     return new ModelAndView("principal");
 
   }

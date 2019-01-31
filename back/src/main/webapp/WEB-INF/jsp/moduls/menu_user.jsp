@@ -43,9 +43,8 @@
     </a></li>
 
 
-    <hr style="margin-top: 6px; margin-bottom: 6px;" />
-
-
+	<sec:authorize access="hasRole('ROLE_SCAN')">
+	<hr style="margin-top: 6px; margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/user/transaccio/nomesescaneig/list"/>"> <span
         style="${(fn:contains(url, '/user/transaccio/nomesescaneig/'))? "font-weight:bold;" : ""}">
@@ -53,7 +52,10 @@
           <fmt:message key="usuari.escanejos" />
       </span>
     </a></li>
+    </sec:authorize>
 
+    
+    <sec:authorize access="hasRole('ROLE_COAU')">
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/user/transaccio/copiaautentica/list"/>"> <span
@@ -62,7 +64,10 @@
           <fmt:message key="usuari.copies" />
       </span>
     </a></li>
+    </sec:authorize>
 
+    
+    <sec:authorize access="hasRole('ROLE_CUST')">
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/user/transaccio/custodia/list"/>"> <span
@@ -71,6 +76,7 @@
           <fmt:message key="usuari.copiesarxiu" />
       </span>
     </a></li>
+    </sec:authorize>
 
   </ul>
 </div>
