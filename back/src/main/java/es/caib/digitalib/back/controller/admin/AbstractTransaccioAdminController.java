@@ -42,7 +42,12 @@ public abstract class AbstractTransaccioAdminController extends AbstractTransacc
   public boolean isAdmin() {
     return true;
   }
-  
+
+  @Override
+  public boolean isActiveDelete() {
+    return true;
+  }
+
   @Override
   public int getTipusPerfil() {
     return Constants.PERFIL_US_ALL_INFO; // No s'utilitza dins ADMIN
