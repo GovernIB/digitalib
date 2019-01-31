@@ -553,18 +553,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     for (Transaccio transaccio : list) {
 
-      if (isAdmin) {
-        delete = true;
-      } else if (transaccio.getFitxerEscanejatID() == null) {
-        delete = true;
-      } else if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_ERROR) {
-        delete = true;
-      } else if (/* Es USUARI AND */getTipusPerfil() == Constants.PERFIL_US_NOMES_ESCANEIG_INFO
-          || getTipusPerfil() == Constants.PERFIL_US_COPIA_AUTENTICA_INFO) {
-        delete = true;
-      } else {
-        delete = false;
-      }
+      delete = canBeDeleted(isAdmin, (TransaccioJPA)transaccio);
 
       if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
         // Afegir boto de Descarrega de document escanejat o de versio imprimible segons si es
@@ -640,6 +629,28 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     }
 
+  }
+
+  protected boolean canBeDeleted(final boolean isAdmin, Transaccio transaccio) {
+
+    if (transaccio.getFitxerEscanejatID() == null) {
+      return true;
+    }
+    if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_ERROR) {
+      return true;
+    }
+
+    if (isAdmin) {
+      if (transaccio.getInfoCustodyID() == null) {
+        return true;
+      }
+    } else {
+      if (getTipusPerfil() != Constants.PERFIL_US_CUSTODIA_INFO) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
 }
