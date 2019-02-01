@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
@@ -21,6 +23,7 @@ import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalField;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +42,7 @@ import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.PerfilLogicaLocal;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.logic.utils.EmailUtil;
+import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.model.entity.InfoCustody;
 import es.caib.digitalib.model.entity.Perfil;
@@ -380,8 +384,10 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
       final boolean isHtml = true;
 
-      // XYZ ZZZ TRA Configurable per part de Grup
-      String subject = "Enviament de Correu des de DigitalIB";
+      //Hauria de ser configurable des del form d'enviament de correu #79 
+      Locale loc = LocaleContextHolder.getLocale();
+      // "Enviament de Correu des de DigitalIB"
+      String subject = I18NLogicUtils.tradueix(loc, "email.subject");
 
       LoginInfo loginInfo = LoginInfo.getInstance();
 
@@ -396,13 +402,66 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         StringBuffer stb = new StringBuffer("<br/>");
 
         // XYZ ZZZ TRA Configurable per part de Grup
-        stb.append(up.getNom()).append(" ").append(up.getLlinatges())
-            .append(" li envia la referència al següent fitxer:").append("<br/>");
+        // up.getNom()).append(" ").append(up.getLlinatges())   .append(" li envia la referència al següent fitxer:"
+        stb.append(I18NLogicUtils.tradueix(loc, "email.custody.common", up.getNom() + " " +up.getLlinatges())).append("<br/>");
 
         InfoCustody info = transaccio.getInfoCustody();
 
         stb.append("<ul>");
 
+        
+        if (!StringUtils.isEmpty(info.getValidationFileUrl())) {
+          
+          // email.custody.validateurl=Pot accedir a tota la informació del document a través de la següent adreça {0}
+          String msg = I18NLogicUtils.tradueix(loc, "email.custody.validateurl",info.getValidationFileUrl());
+          stb.append("<li>").append(msg).append("</li></ul>");
+          message = stb.toString();
+          fitxer = null;
+          
+        } else if (!StringUtils.isEmpty(info.getCsv()) && !StringUtils.isEmpty(info.getCsvValidationWeb())) {
+          
+          // email.custody.csv=Pot accedir al document a traves de la següent adreça {0} indicant el següent CSV {1}
+          String msg = I18NLogicUtils.tradueix(loc, "email.custody.csv", info.getCsvValidationWeb(), info.getCsv());
+          stb.append("<li>").append(msg).append("</li></ul>");
+          message = stb.toString();
+          fitxer = null;
+          
+        } else if (!StringUtils.isEmpty(info.getOriginalFileUrl()) || !StringUtils.isEmpty(info.getPrintableFileUrl())) {
+          
+          String msg = "";
+          if (!StringUtils.isEmpty(info.getOriginalFileUrl())) {
+            // email.custody.original=Pot accedir al document original a través de la següent adreça {0}
+            msg =  I18NLogicUtils.tradueix(loc, "email.custody.original", info.getOriginalFileUrl());
+          }
+          if (!StringUtils.isEmpty(info.getPrintableFileUrl())) {
+            //email.custody.printable=Pot accedir a la versió imprimible del document a través de la següent adreça {0}
+            msg = msg + I18NLogicUtils.tradueix(loc, "email.custody.printable", info.getPrintableFileUrl());
+          }
+        
+          stb.append("<li>").append(msg).append("</li></ul>");
+          message = stb.toString();
+          fitxer = null;
+          
+        } else if (transaccio.getFitxerSignaturaID() != null) {
+          message = I18NLogicUtils.tradueix(loc, "email.document", up.getNom() + " " + up.getLlinatges()); ;
+
+          fitxer = transaccio.getFitxerSignatura();
+        } else {
+          
+          String msg;
+          if (info.getCustodyId() != null) {
+            // email.custody.error.custody=No es té informació suficient per enviar el document amb custodyID {0}. Consulti amb el seu administrador.
+            msg = I18NLogicUtils.tradueix(loc," email.custody.error.custody", info.getCustodyId());
+            
+          } else {
+            // email.custody.error.arxiu=No es té informació suficient per enviar el document amb ExpedientID {0} i UUID de document {1}. Consulti amb el seu administrador
+            msg = I18NLogicUtils.tradueix(loc,"email.custody.error.arxiu", info.getArxiuExpedientId(), info.getArxiuDocumentId());
+          }
+          HtmlUtils.saveMessageError(request, msg);
+          return getRedirectWhenCancel(request, transaccioID);
+        }
+        
+        /*
         if (info.getCustodyId() == null) {
           // XYZ ZZZ TRA
           stb.append("<li><b>Arxiu::ExpedientID:</b> ").append(info.getArxiuExpedientId())
@@ -433,15 +492,14 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         // XYZ ZZZ TRA
         stb.append("<li><b>Validation File URL:</b> ").append(info.getValidationFileUrl())
             .append("</li>");
+*/
+   
 
-        stb.append("</ul>");
-
-        message = stb.toString();
-
-        fitxer = null;
+        
       } else {
         // XYZ ZZZ Configurable per part de Grup
-        message = up.getNom() + " " + up.getLlinatges() + " li envia el document adjunt.";
+        // {0} li envia el document adjunt.
+        message = I18NLogicUtils.tradueix(loc, "email.document", up.getNom() + " " + up.getLlinatges()); ;
 
         fitxer = transaccio.getFitxerSignaturaID() == null ? transaccio.getFitxerEscanejat()
             : transaccio.getFitxerSignatura();
@@ -451,13 +509,14 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       EmailUtil.postMail(subject, message, isHtml, Configuracio.getAppEmail(), fitxer, email);
 
       // XYZ ZZZ TRA
-      HtmlUtils.saveMessageInfo(request, "Enviat correctament el document a " + email);
+      // email.custody.success=Enviat correctament el document a " + email
+      HtmlUtils.saveMessageSuccess(request, I18NLogicUtils.tradueix(loc, "email.custody.success", email));
 
       return getRedirectWhenCancel(request, transaccioID);
 
     } catch (Throwable e) {
       // XYZ ZZZ TRA
-      String msg = "Error desconegut intentant enviar un correu";
+      String msg = "Error desconegut intentant enviar un correu: " + e.getMessage();
       log.error(msg, e);
       HtmlUtils.saveMessageError(request, msg);
       return getRedirectWhenCancel(request, transaccioID);
