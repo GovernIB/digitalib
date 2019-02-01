@@ -21,12 +21,14 @@ public class Configuracio implements Constants {
   public static boolean isDesenvolupament() {
     return Boolean.getBoolean(DIGITALIB_PROPERTY_BASE + "development");
   }
-  
-  
+
   public static boolean isOcultarMenuInici() {
     return Boolean.getBoolean(DIGITALIB_PROPERTY_BASE + "ocultarmenuinici");
   }
-
+  
+  public static String getConfiguracioGrupPerDefecteEL() {
+    return System.getProperty(DIGITALIB_PROPERTY_BASE + "configuraciogruppereefecteEL");
+  }
 
   public static String getAppUrl() {
     return System.getProperty(DIGITALIB_PROPERTY_BASE + "url");
@@ -44,7 +46,6 @@ public class Configuracio implements Constants {
     return System.getProperty(DIGITALIB_PROPERTY_BASE + "defaultlanguage", "ca");
   }
 
-
   public static byte[] getEncryptKey() {
     return System.getProperty(DIGITALIB_PROPERTY_BASE + "encryptkey", "0123456789123456").getBytes();
   }
@@ -52,6 +53,5 @@ public class Configuracio implements Constants {
   public static Long getMaxUploadSizeInBytes() {
     return Long.getLong(DIGITALIB_PROPERTY_BASE + "maxuploadsizeinbytes");
   }
-
 
 }

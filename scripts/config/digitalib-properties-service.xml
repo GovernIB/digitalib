@@ -31,7 +31,10 @@
       es.caib.digitalib.name=DigitalIB
       
       es.caib.digitalib.ocultarmenuinici=false
-      
+
+      <!-- Parametres: "userinfo" = org.fundaciobit.pluginsib.userinformation.UserInfo   -->
+      #es.caib.digitalib.configuraciogruppereefecteEL=<![CDATA[<#if userinfo?? && userinfo.username??><#if userinfo.username = "test">1078</#if><#if userinfo.username = "admin">1233</#if></#if>]]>
+      es.caib.digitalib.configuraciogruppereefecteEL=
       
       
       <!-- ======== PLUGIN USER-INFORMATION - DATABASE ======= -->

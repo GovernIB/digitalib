@@ -2,7 +2,9 @@ package es.caib.digitalib.back.security;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.naming.InitialContext;
@@ -14,6 +16,7 @@ import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
 import org.fundaciobit.pluginsib.userinformation.UserInfo;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import es.caib.digitalib.back.security.LoginInfo;
 
@@ -138,10 +141,40 @@ public class AuthenticationSuccessListener implements
 
           usuariPersona.setUsername(username);
           usuariPersona.setNif(info.getAdministrationID().toUpperCase());
+          
+          Map<String, Object> parameters = new HashMap<String, Object>();
+
+          parameters.put("userinfo", info);
+          
+          String plantilla = Configuracio.getConfiguracioGrupPerDefecteEL();
+          
+          System.out.println("PLANTILLA: ]" + plantilla+ "[");
+          System.out.println("PLANTILLA: ]" + plantilla+ "[");
+          
+          boolean adjustRolesToConfgrup = false;
+          
+          
+          if (plantilla != null && !plantilla.isEmpty()) {
+          
+             String confIDStr = TemplateEngine.processExpressionLanguage(plantilla, parameters);
+             
+             System.out.println("PLANTILLA VALOR: ]" + confIDStr+ "[");
+                          
+             try {
+               Long confID = Long.parseLong(confIDStr);                              
+               usuariPersona.setConfiguracioGrupID(confID);
+               // Fa check si la configuracioGrup amb ID confID existeix i 
+               // sincronitza roles d'usuari amb perfils de configuraciogrup
+               adjustRolesToConfgrup = true;               
+               
+             } catch(NumberFormatException nfe) {               
+             }
+
+          }
 
           necesitaConfigurar = true;
 
-          usuariPersona = getUsuariPersonaEJB().createFull(usuariPersona);
+          usuariPersona = getUsuariPersonaEJB().createFull(usuariPersona, adjustRolesToConfgrup);
 
           if (isDebug) {
             log.debug("necesitaConfigurarUsuari = " + necesitaConfigurar);

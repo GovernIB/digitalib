@@ -17,11 +17,12 @@ public interface UsuariPersonaLogicaLocal extends es.caib.digitalib.ejb.UsuariPe
   public static final String JNDI_NAME = "digitalib/UsuariPersonaLogicaEJB/local";
 
   /**
-   * 
+   * @param adjustRolesToConfgrup  Fa check si la configuracioGrup amb ID confID existeix i 
+               // sincronitza roles d'usuari amb perfils de configuraciogrup
    * @param usuariPersona
    * @throws I18NException
    */
-  public UsuariPersonaJPA createFull(UsuariPersonaJPA usuariPersona) throws I18NException;
+  public UsuariPersonaJPA createFull(UsuariPersonaJPA usuariPersona, boolean adjustRolesToConfgrup) throws I18NException;
 
   /**
    * 
