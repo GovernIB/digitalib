@@ -73,6 +73,19 @@ public class UsuariPersonaAdminController extends UsuariPersonaController{
 	}
 
 	@Override
+	public UsuariPersonaForm getUsuariPersonaForm(UsuariPersonaJPA _jpa,
+      boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
+	  UsuariPersonaForm form = super.getUsuariPersonaForm(_jpa, __isView, request, mav);
+	  
+	  Set<Field<?>> readOnly = new HashSet<Field<?>>();
+	  readOnly.add(USERNAME);
+	  
+	  form.setReadOnlyFields(readOnly);
+	  
+	  return form;
+	}
+	
+	@Override
 	public UsuariPersonaFilterForm getUsuariPersonaFilterForm(Integer pagina, ModelAndView mav,
 			HttpServletRequest request) throws I18NException {
 		UsuariPersonaFilterForm usuariPersonaFilterForm = super.getUsuariPersonaFilterForm(pagina, mav, request);
@@ -132,49 +145,51 @@ public class UsuariPersonaAdminController extends UsuariPersonaController{
     UsuariPersonaJPA up = logInf.getUsuariPersona();
     
     //Dades normals
-    if (!up.getUsername().equals(usuariPersona.getUsername())) {
-      up.setUsername(usuariPersona.getUsername());
-    } 
-    if (!up.getNif().equals(usuariPersona.getNif())) {
-      up.setNif(usuariPersona.getNif());
-    } 
-    if (!up.getNom().equals(usuariPersona.getNom())) {
-      up.setUsername(usuariPersona.getNom());
-    } 
-    if (!up.getLlinatges().equals(usuariPersona.getLlinatges())) {
-      up.setLlinatges(usuariPersona.getLlinatges());
-    } 
-    if (!up.getEmail().equals(usuariPersona.getEmail())) {
-      up.setEmail(usuariPersona.getEmail());
-    } 
-    if (!up.getIdiomaID().equals(usuariPersona.getIdiomaID())) {
-      up.setIdiomaID(usuariPersona.getIdiomaID());
-    } 
+    if (up.getUsername().equals(usuariPersona.getUsername())) {
+      
+      if (!up.getNif().equals(usuariPersona.getNif())) {
+        up.setNif(usuariPersona.getNif());
+      } 
+      if (!up.getNom().equals(usuariPersona.getNom())) {
+        up.setNom(usuariPersona.getNom());
+      }
+      if (!up.getLlinatges().equals(usuariPersona.getLlinatges())) {
+        up.setLlinatges(usuariPersona.getLlinatges());
+      } 
+      if (!up.getEmail().equals(usuariPersona.getEmail())) {
+        up.setEmail(usuariPersona.getEmail());
+      } 
+      if (!up.getIdiomaID().equals(usuariPersona.getIdiomaID())) {
+        up.setIdiomaID(usuariPersona.getIdiomaID());
+      } 
      
-    //Permisos
-    if (up.isRoleCoAu() != usuariPersona.isRoleCoAu()) 
-      up.setRoleCoAu(usuariPersona.isRoleCoAu());
-    if (up.isRoleCust() != usuariPersona.isRoleCust()) 
-      up.setRoleCust(usuariPersona.isRoleCust());
-    if (up.isRoleScan() != usuariPersona.isRoleScan()) 
-      up.setRoleScan(usuariPersona.isRoleCust());
+      //Permisos
+      if (up.isRoleCoAu() != usuariPersona.isRoleCoAu()) 
+        up.setRoleCoAu(usuariPersona.isRoleCoAu());
+      if (up.isRoleCust() != usuariPersona.isRoleCust()) 
+        up.setRoleCust(usuariPersona.isRoleCust());
+      if (up.isRoleScan() != usuariPersona.isRoleScan()) 
+        up.setRoleScan(usuariPersona.isRoleCust());
+      
+      if (up.isRoleScan())
+        roles.add(new SimpleGrantedAuthority(Constants.ROLE_SCAN));
+      if (up.isRoleCoAu())
+        roles.add(new SimpleGrantedAuthority(Constants.ROLE_COAU));
+      if (up.isRoleCust())
+        roles.add(new SimpleGrantedAuthority(Constants.ROLE_CUST));
     
-    if (up.isRoleScan())
-      roles.add(new SimpleGrantedAuthority(Constants.ROLE_SCAN));
-    if (up.isRoleCoAu())
-      roles.add(new SimpleGrantedAuthority(Constants.ROLE_COAU));
-    if (up.isRoleCust())
-      roles.add(new SimpleGrantedAuthority(Constants.ROLE_CUST));
-    
-    //Configuracio Grup
-    if (up.getConfiguracioGrupID() != usuariPersona.getConfiguracioGrupID()) {
-      ConfiguracioGrupJPA configuracioGrup = configuracioGrupLogicaEjb.findByPrimaryKey(usuariPersona.getConfiguracioGrupID());
-      up.setConfiguracioGrup(configuracioGrup);
+      //Configuracio Grup
+      if (up.getConfiguracioGrupID() != usuariPersona.getConfiguracioGrupID()) {
+        ConfiguracioGrupJPA configuracioGrup = configuracioGrupLogicaEjb.findByPrimaryKey(usuariPersona.getConfiguracioGrupID());
+        up.setConfiguracioGrup(configuracioGrup);
+      }
+      
+      boolean necesitaConfigurar = false;
+      LoginInfo loginInfo = new LoginInfo(user, up, roles, necesitaConfigurar);
+      
+      SecurityContextHolder.getContext().setAuthentication(loginInfo.generateToken());
     }
-    boolean necesitaConfigurar = false;
-    LoginInfo loginInfo = new LoginInfo(user, up, roles, necesitaConfigurar);
     
-    SecurityContextHolder.getContext().setAuthentication(loginInfo.generateToken());
 	}
 	
 

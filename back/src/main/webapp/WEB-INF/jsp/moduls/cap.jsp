@@ -15,7 +15,7 @@
   </c:if>
 
   <div class="aplication-logo pull-left">
-    <img src="<c:url value="/img/app-logo.png"/>"   alt="DigitalIB" title="DigitalIB"/>
+    <a href="/digitalib"><img src="<c:url value="/img/app-logo.png"/>"   alt="DigitalIB" title="DigitalIB"/></a>
   </div>
   
   <div class="pull-right main-menu">
