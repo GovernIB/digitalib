@@ -77,10 +77,13 @@ public class UsuariPersonaAdminController extends UsuariPersonaController{
       boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
 	  UsuariPersonaForm form = super.getUsuariPersonaForm(_jpa, __isView, request, mav);
 	  
-	  Set<Field<?>> readOnly = new HashSet<Field<?>>();
-	  readOnly.add(USERNAME);
+	  if (!form.isNou()) {
+	    Set<Field<?>> readOnly = new HashSet<Field<?>>();
 	  
-	  form.setReadOnlyFields(readOnly);
+  	  readOnly.add(USERNAME);
+  	  
+  	  form.setReadOnlyFields(readOnly);
+	  }
 	  
 	  return form;
 	}
