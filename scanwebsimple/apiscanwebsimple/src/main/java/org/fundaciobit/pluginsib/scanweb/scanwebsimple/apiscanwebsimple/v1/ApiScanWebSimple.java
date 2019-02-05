@@ -33,7 +33,7 @@ import com.sun.jersey.client.urlconnection.HTTPSProperties;
 
 /**
  * 
- * @author anadal
+ * @author anadal(u80067)
  *
  */
 public class ApiScanWebSimple {

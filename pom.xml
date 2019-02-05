@@ -38,11 +38,11 @@
       </snapshots>
     </repository>
 
-    <repository>
-      <id>org.fundaciobit.genapp</id>
-      <name>GenApp Maven Repository</name>
-      <url>https://governib.github.io/maven/maven/</url>
-    </repository>
+   <repository>
+     <id>github-governib-maven-repos</id>
+     <name>GitHub GovernIB Maven Repository</name>
+     <url>http://GovernIB.github.io/maven/maven/</url>
+   </repository>
   </repositories>
 
 

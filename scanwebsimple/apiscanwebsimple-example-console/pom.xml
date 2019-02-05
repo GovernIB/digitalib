@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>    
+  <artifactId>digitalib-scanwebsimple-exampleconsole</artifactId>
+  <groupId>es.caib.digitalib</groupId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <name>ScanWeb Simple - API ScanWeb Simple Example Console</name>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>github-governib-maven-repos</id>
+      <name>GitHub GovernIB Maven Repository</name>
+      <url>http://GovernIB.github.io/maven/maven/</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <artifactId>digitalib-scanwebsimple-api</artifactId>
+      <groupId>es.caib.digitalib</groupId>
+      <version>1.0</version>
+    </dependency>
+  </dependencies>
+
+</project>

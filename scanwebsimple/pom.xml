@@ -6,7 +6,6 @@
   <version>1.0</version>  
   <packaging>pom</packaging>
 
-
   <parent>
     <groupId>es.caib.digitalib</groupId>
     <artifactId>digitalib</artifactId>
@@ -14,7 +13,6 @@
   </parent>
 
   <name>ScanWeb Simple</name>
-
 
   <repositories>
 
@@ -44,8 +42,9 @@
 
   <modules>
     <module>apiscanwebsimple</module>
+    <module>apiscanwebsimple-example-console</module>
     <!-- XYZ ZZZ ZZZ 
-    <module>exempleapiscanwebsimple-war</module> -->
+    <module>apiscanwebsimple-example-war</module> -->
 
   </modules>
 

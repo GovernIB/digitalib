@@ -1,4 +1,4 @@
-package org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebimple.v1.test;
+package org.fundaciobit.pluginsib.scanweb.scanwebsimple.exampleconsole;
 
 import java.awt.Desktop;
 import java.io.BufferedReader;
@@ -36,10 +36,10 @@ import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans
 
 /**
  * 
- * @author anadal
+ * @author anadal(u80067)
  *
  */
-public class ApiScanWebSimpleTester {
+public class ApiScanWebSimpleExampleConsole {
 
   public static void main(String[] args) {
 
@@ -61,29 +61,27 @@ public class ApiScanWebSimpleTester {
         return;
       }
 
-      
       ScanWebSimpleAvailableProfile scanWebProfileSelected = null;
-      
+
       do {
         System.out.println(" ---- Perfils Disponibles ----");
         int i = 1;
         Map<Integer, ScanWebSimpleAvailableProfile> profilesByIndex = new HashMap<Integer, ScanWebSimpleAvailableProfile>();
         for (ScanWebSimpleAvailableProfile profile : profilesList) {
-          System.out.println(i + ".-   + " + profile.getName() + "(CODI: " + profile.getCode() + "): "
-              + profile.getDescription());
+          System.out.println(i + ".-   + " + profile.getName() + "(CODI: " + profile.getCode()
+              + "): " + profile.getDescription());
           profilesByIndex.put(i, profile);
           i++;
         }
         System.out.print(" Seleccioni un perfil: ");
         Scanner in = new Scanner(System.in);
-        
+
         int n = in.nextInt();
 
-        
         scanWebProfileSelected = profilesByIndex.get(n);
 
-      } while(scanWebProfileSelected == null);
-      
+      } while (scanWebProfileSelected == null);
+
       System.out.println(" -----------------------------");
 
       // Recuperar un ID de transacció
@@ -99,40 +97,41 @@ public class ApiScanWebSimpleTester {
 
         switch (scanWebProfileSelected.getProfileType()) {
 
-        case ScanWebSimpleAvailableProfile.PROFILE_TYPE_ONLY_SCAN:
+          case ScanWebSimpleAvailableProfile.PROFILE_TYPE_ONLY_SCAN:
 
-          transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode, view,
-              languageUI, funcionariUsername);
-
-          break;
-
-        case ScanWebSimpleAvailableProfile.PROFILE_TYPE_SCAN_AND_SIGNATURE: {
-          ScanWebSimpleSignatureParameters signatureParameters = getSignatureParameters();
-
-          transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode, view,
-              languageUI, funcionariUsername, signatureParameters);
-        }
+            transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode,
+                view, languageUI, funcionariUsername);
 
           break;
 
-        case ScanWebSimpleAvailableProfile.PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY: {
+          case ScanWebSimpleAvailableProfile.PROFILE_TYPE_SCAN_AND_SIGNATURE: {
+            ScanWebSimpleSignatureParameters signatureParameters = getSignatureParameters();
 
-          ScanWebSimpleSignatureParameters signatureParameters = getSignatureParameters();
+            transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode,
+                view, languageUI, funcionariUsername, signatureParameters);
+          }
 
-          ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
-          arxiuRequiredParameters = getArxiuRequiredParameters();
-
-          // See getArxiuOptionalParameters() sample
-          ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters = null;
-
-          transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode, view,
-              languageUI, funcionariUsername, signatureParameters, arxiuRequiredParameters,
-              arxiuOptionalParameters);
-        }
           break;
 
-        default:
-          throw new Exception("Tipus de perfil desconegut " + scanWebProfileSelected.getProfileType());
+          case ScanWebSimpleAvailableProfile.PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY: {
+
+            ScanWebSimpleSignatureParameters signatureParameters = getSignatureParameters();
+
+            ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
+            arxiuRequiredParameters = getArxiuRequiredParameters();
+
+            // See getArxiuOptionalParameters() sample
+            ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters = null;
+
+            transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode,
+                view, languageUI, funcionariUsername, signatureParameters,
+                arxiuRequiredParameters, arxiuOptionalParameters);
+          }
+          break;
+
+          default:
+            throw new Exception("Tipus de perfil desconegut "
+                + scanWebProfileSelected.getProfileType());
 
         }
 
@@ -144,15 +143,13 @@ public class ApiScanWebSimpleTester {
 
       // Servidor TEMPORAL
       String host = Inet4Address.getLocalHost().getHostAddress();
-      //final int port = 1989;
-      
-      
-      
+      // final int port = 1989;
+
       Random r = new Random();
       int low = 1900;
       int high = 2000;
-      final int port = r.nextInt(high-low) + low;
-      
+      final int port = r.nextInt(high - low) + low;
+
       final String returnUrl = "http://" + host + ":" + port + "/returnurl/" + transactionID;
 
       ScanWebSimpleStartTransactionRequest startTransactionInfo;
@@ -175,70 +172,70 @@ public class ApiScanWebSimpleTester {
       ScanWebSimpleStatus transactionStatus = result.getStatus();
 
       int status = transactionStatus.getStatus();
-      
+
       System.out.println(ScanWebSimpleScanResult.toString(result));
 
       switch (status) {
 
-      case ScanWebSimpleStatus.STATUS_REQUESTED_ID: // = 0;
-        throw new Exception("S'ha rebut un estat inconsistent del procés"
-            + " (requestedid). Pot ser el PLugin no està ben desenvolupat."
-            + " Consulti amb el seu administrador.");
+        case ScanWebSimpleStatus.STATUS_REQUESTED_ID: // = 0;
+          throw new Exception("S'ha rebut un estat inconsistent del procés"
+              + " (requestedid). Pot ser el PLugin no està ben desenvolupat."
+              + " Consulti amb el seu administrador.");
 
-      case ScanWebSimpleStatus.STATUS_IN_PROGRESS: // = 1;
-        throw new Exception("S'ha rebut un estat inconsistent del procés"
-            + " (En Progrés). Pot ser el PLugin no està ben desenvolupat."
-            + " Consulti amb el seu administrador.");
+        case ScanWebSimpleStatus.STATUS_IN_PROGRESS: // = 1;
+          throw new Exception("S'ha rebut un estat inconsistent del procés"
+              + " (En Progrés). Pot ser el PLugin no està ben desenvolupat."
+              + " Consulti amb el seu administrador.");
 
-      case ScanWebSimpleStatus.STATUS_FINAL_ERROR: // = -1;
-      {
-        System.err.println("Error durant la realització de l'escaneig/còpia autèntica: "
-            + transactionStatus.getErrorMessage());
-        String desc = transactionStatus.getErrorStackTrace();
-        if (desc != null) {
-          System.err.println(desc);
-        }
-        return;
-      }
-
-      case ScanWebSimpleStatus.STATUS_CANCELLED: // = -2;
-      {
-        System.err.println("Durant el procés, l'usuari ha cancelat la transacció.");
-        return;
-      }
-
-      case ScanWebSimpleStatus.STATUS_FINAL_OK: // = 2;
-      {
-
+        case ScanWebSimpleStatus.STATUS_FINAL_ERROR: // = -1;
         {
-          File scanFile = new File("scanfile." + result.getScannedFileInfo().getFormatFile());
-
-          FileOutputStream fos = new FileOutputStream(scanFile);
-          fos.write(result.getScannedFile().getData());
-          fos.flush();
-          fos.close();
-
-          System.out.println();
-          System.out.println();
-          System.out.println("Fitxer Escanejat guardat a " + scanFile.getAbsolutePath());
+          System.err.println("Error durant la realització de l'escaneig/còpia autèntica: "
+              + transactionStatus.getErrorMessage());
+          String desc = transactionStatus.getErrorStackTrace();
+          if (desc != null) {
+            System.err.println(desc);
+          }
+          return;
         }
+
+        case ScanWebSimpleStatus.STATUS_CANCELLED: // = -2;
         {
-          ScanWebSimpleFile detachedSignInfo = result.getDetachedSignatureFile();
+          System.err.println("Durant el procés, l'usuari ha cancelat la transacció.");
+          return;
+        }
 
-          if (detachedSignInfo != null) {
-            File detached = new File("detached_sign_scanfile.sig");
+        case ScanWebSimpleStatus.STATUS_FINAL_OK: // = 2;
+        {
 
-            FileOutputStream fos = new FileOutputStream(detached);
-            fos.write(detachedSignInfo.getData());
+          {
+            File scanFile = new File("scanfile." + result.getScannedFileInfo().getFormatFile());
+
+            FileOutputStream fos = new FileOutputStream(scanFile);
+            fos.write(result.getScannedFile().getData());
             fos.flush();
             fos.close();
 
-            System.out.println("Firma Detached del Fitxer Scanejat guardat a "
-                + detached.getAbsolutePath());
+            System.out.println();
+            System.out.println();
+            System.out.println("Fitxer Escanejat guardat a " + scanFile.getAbsolutePath());
           }
-        }
+          {
+            ScanWebSimpleFile detachedSignInfo = result.getDetachedSignatureFile();
 
-      } // Final Case Firma OK
+            if (detachedSignInfo != null) {
+              File detached = new File("detached_sign_scanfile.sig");
+
+              FileOutputStream fos = new FileOutputStream(detached);
+              fos.write(detachedSignInfo.getData());
+              fos.flush();
+              fos.close();
+
+              System.out.println("Firma Detached del Fitxer Scanejat guardat a "
+                  + detached.getAbsolutePath());
+            }
+          }
+
+        } // Final Case Firma OK
       } // Final Switch Firma
 
     } catch (Exception e) {
@@ -297,15 +294,14 @@ public class ApiScanWebSimpleTester {
      * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES
      */
     final String documentTipus = ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_RESOLUCIO;
-    
+
     String ciutadaNif = "11223344C";
 
     String ciutadaNom = "Pep Gonella";
 
     ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
-    arxiuRequiredParameters = new ScanWebSimpleArxiuRequiredParameters(
-        ciutadaNif, ciutadaNom, interessats, origen,
-        documentEstatElaboracio, documentTipus);
+    arxiuRequiredParameters = new ScanWebSimpleArxiuRequiredParameters(ciutadaNif, ciutadaNom,
+        interessats, origen, documentEstatElaboracio, documentTipus);
     return arxiuRequiredParameters;
   }
 
@@ -313,8 +309,6 @@ public class ApiScanWebSimpleTester {
    * 
    */
   public static ScanWebSimpleArxiuOptionalParameters getArxiuOptionalParameters() {
-
-
 
     String procedimentNom = "Subvenciones empleo";
 
@@ -329,8 +323,8 @@ public class ApiScanWebSimpleTester {
     String custodyOrExpedientID = null; // b5d48d50-9e63-4c56-a67a-fe896bdfb130
 
     ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters = null;
-    arxiuOptionalParameters = new ScanWebSimpleArxiuOptionalParameters(
-        procedimentNom, procedimentCodi, organs, serieDocumental, custodyOrExpedientID);
+    arxiuOptionalParameters = new ScanWebSimpleArxiuOptionalParameters(procedimentNom,
+        procedimentCodi, organs, serieDocumental, custodyOrExpedientID);
 
     return arxiuOptionalParameters;
   }

@@ -159,16 +159,16 @@ es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.debug=true
 
 #DES
 es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.url=https://afirmades.caib.es:4430/esb
-es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.username=app1
-es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.password=app1
+es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.username=username
+es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.password=password
 
 #PRE
 #es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.url=https://esbpre.caib.es/
-#es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.username=$test_gdib
-#es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.password=test_gdib
+#es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.username=username_gdib
+#es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.password=password_gdib
 
-#es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.username=$test_gdib
-#es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.password=test_gdib
+#es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.username=username_gdib
+#es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.login.password=password_gdib
 
 
 es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.connexio.ignore_server_certificates=true
@@ -401,8 +401,8 @@ INSERT INTO dib_plugin(pluginid, classe, properties, actiu, tipus, codi, ordre, 
 es.caib.digitalib.plugin.arxiu.caib.base.url=https://afirmades.caib.es:4430/esb
 #es.caib.digitalib.plugin.arxiu.caib.base.url=https://esbpre.caib.es/esb
 es.caib.digitalib.plugin.arxiu.caib.aplicacio.codi=Tests
-es.caib.digitalib.plugin.arxiu.caib.usuari=app1
-es.caib.digitalib.plugin.arxiu.caib.contrasenya=app1
+es.caib.digitalib.plugin.arxiu.caib.usuari=username
+es.caib.digitalib.plugin.arxiu.caib.contrasenya=password
 es.caib.digitalib.plugin.arxiu.caib.conversio.imprimible.url=https://proves.caib.es/concsv/rest/printable/uuid
 es.caib.digitalib.plugin.arxiu.caib.conversio.imprimible.usuari=USUARI
 es.caib.digitalib.plugin.arxiu.caib.conversio.imprimible.contrasenya=PASSWD
