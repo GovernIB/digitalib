@@ -38,8 +38,9 @@ public class UsuariPersonaCommonController extends UsuariPersonaController {
     UsuariPersonaForm usuariPersonaForm = super.getUsuariPersonaForm(_jpa, __isView, request,
         mav);
 
+    usuariPersonaForm.setTitleCode("inici.usuaripersona");
+    
     UsuariPersona up = usuariPersonaForm.getUsuariPersona();
-
     // Comprovam que no es modifiqui un usuari que no es amb el que t'has logueat
     if (!up.getUsername().equals(LoginInfo.getInstance().getUsername())) {
       // XYZ ZZZ Traduir
