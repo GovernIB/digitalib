@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.security.RunAs;
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -12,10 +13,18 @@ import org.apache.tiles.AttributeContext;
 import org.apache.tiles.context.TilesRequestContext;
 import org.apache.tiles.preparer.PreparerException;
 import org.apache.tiles.preparer.ViewPreparerSupport;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+
 import es.caib.digitalib.back.security.LoginInfo;
+
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
+import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.model.fields.TransaccioQueryPath;
+import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.utils.Constants;
 
 
@@ -30,6 +39,9 @@ public class BasePreparer extends ViewPreparerSupport implements Constants {
   
 
   protected final Logger log = Logger.getLogger(getClass());
+  
+  @EJB(mappedName = es.caib.digitalib.ejb.TransaccioLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.TransaccioLocal transaccioEjb;
 
   
 	@Override
@@ -89,6 +101,37 @@ public class BasePreparer extends ViewPreparerSupport implements Constants {
     //avisos.put(rol, <<Number of warnings>>);
     request.put("avisos", avisos); 
 
+    
+    // Mostrar o ocultar Menus de transaccions
+    if (LoginInfo.hasRole(ROLE_USER)) {
+      
+      Long usuariPersonaID  = LoginInfo.getInstance().getUsuariPersona().getUsuariPersonaID();
+      
+      final int[] perfils = new int[] {Constants.PERFIL_US_NOMES_ESCANEIG_INFO, 
+          Constants.PERFIL_US_COPIA_AUTENTICA_INFO, 
+          Constants.PERFIL_US_CUSTODIA_INFO};
+      
+      
+      TransaccioQueryPath tqp = new TransaccioQueryPath();
+      
+
+      for (int tipusPerfil : perfils) {
+
+        try {
+          Long count = transaccioEjb.count(Where.AND(
+              TransaccioFields.USUARIPERSONAID.equal(usuariPersonaID),
+              tqp.PERFIL().USPERFIL().equal(tipusPerfil)));
+          
+          request.put("transaccionsuser_" + tipusPerfil, count);
+          
+        } catch (I18NException e) {
+          log.error("Error calculant el numero de transaccions: " + I18NUtils.getMessage(e), e);
+        }
+      }
+
+      
+    }
+    
     
 
     

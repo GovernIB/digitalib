@@ -122,7 +122,7 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
 
   @Override
   public boolean isActiveDelete() {
-    return false;
+    return true;
   }
 
   @Override
