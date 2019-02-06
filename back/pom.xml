@@ -157,8 +157,8 @@
     </dependency>
 
     <dependency>
-      <artifactId>digitalib-scanwebsimple-api</artifactId>
-      <groupId>es.caib.digitalib</groupId>
+      <artifactId>apiscanwebsimple-api</artifactId>
+      <groupId>org.fundaciobit.pluginsib.scanwebsimple</groupId>
       <version>1.0</version>
       <scope>provided</scope>
     </dependency>

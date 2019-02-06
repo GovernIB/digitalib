@@ -2,12 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>    
-  <artifactId>digitalib-scanwebsimple-exampleconsole</artifactId>
-  <groupId>es.caib.digitalib</groupId>
+  <artifactId>apiscanwebsimple-exampleconsole</artifactId>
+  <groupId>org.fundaciobit.pluginsib.scanwebsimple</groupId>
   <version>1.0.0</version>
   <packaging>jar</packaging>
 
-  <name>ScanWeb Simple - API ScanWeb Simple Example Console</name>
+  <name>API ScanWeb Simple - Example Console</name>
+  
+  <parent>
+    <artifactId>apiscanwebsimple</artifactId>
+    <groupId>org.fundaciobit.pluginsib.scanwebsimple</groupId>
+    <version>1.0.0</version>
+  </parent>
 
   <build>
     <pluginManagement>
@@ -35,8 +41,8 @@
 
   <dependencies>
     <dependency>
-      <artifactId>digitalib-scanwebsimple-api</artifactId>
-      <groupId>es.caib.digitalib</groupId>
+      <artifactId>apiscanwebsimple-api</artifactId>
+      <groupId>org.fundaciobit.pluginsib.scanwebsimple</groupId>
       <version>1.0</version>
     </dependency>
   </dependencies>

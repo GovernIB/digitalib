@@ -5,7 +5,7 @@ import java.util.Set;
 import javax.ejb.Local;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.beans.ScanWebSimpleGetTransactionIdRequest;
 
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.jpa.UsuariAplicacioJPA;

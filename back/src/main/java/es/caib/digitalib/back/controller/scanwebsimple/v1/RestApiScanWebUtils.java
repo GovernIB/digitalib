@@ -4,10 +4,10 @@ import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleError;
-import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleFile;
-import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.exceptions.NoAvailablePluginException;
-import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.exceptions.ServerException;
+import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.beans.ScanWebSimpleError;
+import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.beans.ScanWebSimpleFile;
+import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.exceptions.NoAvailablePluginException;
+import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.exceptions.ServerException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +49,7 @@ public abstract class RestApiScanWebUtils extends RestUtils {
   public ResponseEntity<ScanWebSimpleError> generateNoAvailablePlugin(String language) {
     // TODO XYZ ZZZ Traduir
     String msg;
-    msg = "No s'ha trobat cap plugin que pugui realitzar l'operacio sol·licitades.";
+    msg = "No s'ha trobat cap plugin que pugui realitzar l'operacio sol·licitada.";
    
     return new ResponseEntity<ScanWebSimpleError>(new ScanWebSimpleError(msg,
         NoAvailablePluginException.class.getName()), HttpStatus.INTERNAL_SERVER_ERROR);

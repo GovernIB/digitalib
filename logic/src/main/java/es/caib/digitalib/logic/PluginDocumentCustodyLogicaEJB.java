@@ -18,7 +18,7 @@ import org.fundaciobit.plugins.documentcustody.api.SignatureCustody;
 import org.fundaciobit.plugins.signature.api.FileInfoSignature;
 import org.fundaciobit.pluginsib.core.utils.Metadata;
 import org.fundaciobit.pluginsib.core.utils.MetadataFormatException;
-import org.fundaciobit.pluginsib.scanweb.scanwebsimple.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
+import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.beans.ScanWebSimpleStatus;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import es.caib.digitalib.jpa.FitxerJPA;

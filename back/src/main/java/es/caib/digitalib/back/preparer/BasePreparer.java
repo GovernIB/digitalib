@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.model.fields.TransaccioQueryPath;
-import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.utils.Constants;
 
 
