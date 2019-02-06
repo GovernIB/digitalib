@@ -109,7 +109,7 @@ INSERT INTO dib_plugin(pluginid, classe, properties, actiu, tipus, codi, ordre, 
 #Configuracion para el cliente TSA Java solo RFC#
 #################################################
 #Identificador de la aplicación cliente
-es.caib.digitalib.plugins.timestamp.afirmarfc.applicationid=gobbal.fbit.portafib
+es.caib.digitalib.plugins.timestamp.afirmarfc.applicationid=appID
 
 
 #OID politica de timestamping de la TSA del MINHAP
@@ -258,24 +258,34 @@ es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.hash.algorithm=MD5
 
 # Retorna una URL que apunta a la versió original del document
 # Opcional. Servei Millorat per generar la URL de Custodia emprant EL.
-# Variables addicionals: csv, validationUrl_custodyID, validationUrl_custodyID_URLEncode i validationUrl_custodyID_Hash   
-es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.baseurl_EL=http://10.215.216.175:8080/custodiadigitalib/${csv}
+# Variables addicionals: csv, validationUrl_custodyID, validationUrl_custodyID_URLEncode i validationUrl_custodyID_Hash
+# No funciona   
+# es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.baseurl_EL=https://dev.caib.es/concsv/rest/original/${csv}
 
 # Opcional.Retorna una URL que apunta a la versió imprimible del document
 # Valors de substitució:  
 # ${custodyID} => custodyID | ${custodyID_URLEncode} => URLEncode(custodyID) | ${custodyID_Hash} => Hash(custodyID)
-# es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.printable_file_url_EL=http://portafib.fundaciobit.org/custody/printable/${registre.url}
+# No funciona
+# es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.printable_file_url_EL=https://dev.caib.es/concsv/rest/printable/${csv} 
 
 # Opcional.Retorna una URL que apunta a la versió ENI del document
 # Valors de substitució:  
 # ${custodyID} => custodyID | ${custodyID_URLEncode} => URLEncode(custodyID) | ${custodyID_Hash} => Hash(custodyID)
-# es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.eni_file_url_EL=http://portafib.fundaciobit.org/custody/eni/${registre.url}
+# No funciona
+# es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.eni_file_url_EL=https://dev.caib.es/concsv/enidoc/${csv}
 
 # Web on es pot validar el CSV
-es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.csv_validation_web_EL=http://10.215.216.175:8080/custodiadigitalib/index.jsp
+es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.csv_validation_web_EL=http://dev.caib.es/concsv
 
 # Opcional. URL al document on s''''explica com s''''ha generat el CSV. Si no es defineix retornarà null. 
-es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.csv_generation_definition=http://10.215.216.175:8080/custodiadigitalib/csv_generation.pdf
+# Desconegut
+# es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.csv_generation_definition=
+
+#  Retorna una plana web de validacio del document
+# Valors de substitució:  
+# ${custodyID} => custodyID | ${custodyID_URLEncode} => URLEncode(custodyID) | ${custodyID_Hash} => Hash(custodyID)
+es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.validation_file_url_expressionlanguage=https://dev.caib.es/concsv/hash/${csv}
+
 
 
 # Opcional. Si no definit retorna el custodyID
@@ -413,17 +423,21 @@ es.caib.digitalib.plugin.arxiu.caib.conversio.imprimible.usuari=USUARI
 es.caib.digitalib.plugin.arxiu.caib.conversio.imprimible.contrasenya=PASSWD
 
 
-es.caib.digitalib.plugin.arxiu.caib.original_file_url_EL=http://localhost:28080/concsv/rest/original/uuid/${uuid}
+# No funciona
+# es.caib.digitalib.plugin.arxiu.caib.original_file_url_EL=https://dev.caib.es/concsv/rest/original/${csv}
 
-es.caib.digitalib.plugin.arxiu.caib.printable_file_url_EL=http://localhost:28080/concsv/rest/printable/uuid/${uuid}
+# No funciona
+# es.caib.digitalib.plugin.arxiu.caib.printable_file_url_EL=https://dev.caib.es/concsv/rest/printable/${csv} 
 
-es.caib.digitalib.plugin.arxiu.caib.eni_file_url_EL=http://localhost:28080/concsv/rest/eni/uuid/${uuid}
+# No funciona
+# es.caib.digitalib.plugin.arxiu.caib.eni_file_url_EL=https://dev.caib.es/concsv/enidoc/${csv}
 
-es.caib.digitalib.plugin.arxiu.caib.csv_validation_web_EL=http://dev.caib.es/concsv/
+es.caib.digitalib.plugin.arxiu.caib.csv_validation_web_EL=http://dev.caib.es/concsv
 
-es.caib.digitalib.plugin.arxiu.caib.csv_generation_definition=http://localhost:28080/concsv/csv_generation_definition.pdf
+# Valor Desconegut
+#es.caib.digitalib.plugin.arxiu.caib.csv_generation_definition=
 
-es.caib.digitalib.plugin.arxiu.caib.validation_file_url_EL=http://dev.caib.es/concsv/file?hash=${uuid}
+es.caib.digitalib.plugin.arxiu.caib.validation_file_url_EL=https://dev.caib.es/concsv/hash/${csv}
 
 # NOMES PER DIGITALIB
 
@@ -463,17 +477,17 @@ es.caib.digitalib.plugins.documentcustody.alfresco.site=ODES
 
 # Opcional. Servei per generar la URL de Custodia. Si no es defineix retornarà null. 
 # {0} => custodyID // {1} => URLEncode(custodyID) // {2} => Hash(custodyID)
-es.caib.portafib.plugins.documentcustody.alfresco.baseurl=http://portafib.fundaciobit.org/custody/{2}
+#es.caib.digitalib.plugins.documentcustody.alfresco.baseurl=
 
 # Opcional. Configuració per generar Hash de la baseurl quan {2}
-es.caib.portafib.plugins.documentcustody.alfresco.hash.password=mypass
+es.caib.digitalib.plugins.documentcustody.alfresco.hash.password=mypass
 #  MD2, MD5, SHA,SHA-256,SHA-384,SHA-512
-es.caib.portafib.plugins.documentcustody.alfresco.hash.algorithm=MD5
+es.caib.digitalib.plugins.documentcustody.alfresco.hash.algorithm=MD5
 
 # Retorna una URL que apunta a la versió original del document
 # Opcional. Servei Millorat per generar la URL de Custodia emprant EL.
 # Variables adicionals: validationUrl_custodyID, validationUrl_custodyID_URLEncode i validationUrl_custodyID_Hash
-es.caib.portafib.plugins.documentcustody.alfresco.baseurl_expressionlanguage=http://portafib.fundaciobit.org/custody/${registre.url}
+es.caib.digitalib.plugins.documentcustody.alfresco.baseurl_expressionlanguage=http://portafib.fundaciobit.org/custody/${registre.url}
 
 # Opcional.Retorna una URL que apunta a la versió imprimible del document
 # Valors de substitució:  
@@ -483,12 +497,12 @@ es.caib.portafib.plugins.documentcustody.alfresco.baseurl_expressionlanguage=htt
 # Opcional.Retorna una URL que apunta a la versió ENI del document
 # Valors de substitució:  
 # ${custodyID} => custodyID | ${custodyID_URLEncode} => URLEncode(custodyID) | ${custodyID_Hash} => Hash(custodyID)
-#es.caib.portafib.plugins.documentcustody.alfresco.eni_file_url_expressionlanguage=http://portafib.fundaciobit.org/custody/eni/${registre.url}
+#es.caib.digitalib.plugins.documentcustody.alfresco.eni_file_url_expressionlanguage=http://portafib.fundaciobit.org/custody/eni/${registre.url}
 
 #  Retorna una plana web de validacio del document
 # Valors de substitució:  
 # ${custodyID} => custodyID | ${custodyID_URLEncode} => URLEncode(custodyID) | ${custodyID_Hash} => Hash(custodyID)
-#es.caib.portafib.plugins.documentcustody.alfresco.validation_file_url_expressionlanguage=http://portafib.fundaciobit.org/custody/validationfile/${custodyID}
+es.caib.digitalib.plugins.documentcustody.alfresco.validation_file_url_expressionlanguage=https://dev.caib.es/concsv/hash/${csv}
 
 
 # Opcional. Servei per generar el CSV. Si no es defineix retornarà null. 
@@ -507,35 +521,35 @@ es.caib.exemple.plugins.documentcustody.alfresco.csv_expressionlanguage=${custod
 
 
 # Opcional. Su no definit retorna custodyID
-# es.caib.portafib.plugins.documentcustody.alfresco.specialValue_EL=${registre.id}
+# es.caib.digitalib.plugins.documentcustody.alfresco.specialValue_EL=${registre.id}
 
 # Opcional. Serveix per generar els CustodyID a partir d''una EL 
-#es.caib.portafib.plugins.documentcustody.alfresco.generate_custodyid_expressionlanguage=${registre.id}
+#es.caib.digitalib.plugins.documentcustody.alfresco.generate_custodyid_expressionlanguage=${registre.id}
 
 # NO SUPORTAT EN ALFRESCO  !!!!!!  Prefix a afegir al nom dels fitxers creats
-# es.caib.portafib.plugins.documentcustody.alfresco.prefix=
+# es.caib.digitalib.plugins.documentcustody.alfresco.prefix=
 
 # Opcional crea estructures del tipus /1971/08/12/Entrada/123455
-es.caib.portafib.plugins.documentcustody.alfresco.folder_expressionlanguage=${registre.data?string["yyyy/MM/dd"]}/<#if  registro.origen??>Salida<#else>Entrada</#if>/${registre.id}/
+es.caib.digitalib.plugins.documentcustody.alfresco.folder_expressionlanguage=${registre.data?string["yyyy/MM/dd"]}/<#if  registro.origen??>Salida<#else>Entrada</#if>/${registre.id}/
 
 # Opcional. Metadades Automàtiques
-es.caib.portafib.plugins.documentcustody.alfresco.automaticmetadata_items=1
+es.caib.digitalib.plugins.documentcustody.alfresco.automaticmetadata_items=1
 
-es.caib.portafib.plugins.documentcustody.alfresco.automatic_metadata.1.name=eni:v_nti
-es.caib.portafib.plugins.documentcustody.alfresco.automatic_metadata.1.valueEL=http://administracionelectronica.gob.es/ENI/XSD/v1.0/documento-e
+es.caib.digitalib.plugins.documentcustody.alfresco.automatic_metadata.1.name=eni:v_nti
+es.caib.digitalib.plugins.documentcustody.alfresco.automatic_metadata.1.valueEL=http://administracionelectronica.gob.es/ENI/XSD/v1.0/documento-e
 
-#es.caib.portafib.plugins.documentcustody.alfresco.automatic_metadata.2.name=eni:origen
-es.caib.portafib.plugins.documentcustody.alfresco.automatic_metadata.2.valueEL=${registre.origen}
+#es.caib.digitalib.plugins.documentcustody.alfresco.automatic_metadata.2.name=eni:origen
+es.caib.digitalib.plugins.documentcustody.alfresco.automatic_metadata.2.valueEL=${registre.origen}
 
 # 1=Administracion || 0=Ciudadano
-#es.caib.portafib.plugins.documentcustody.alfresco.automatic_metadata.22.name=eni:origenStr
-#es.caib.portafib.plugins.documentcustody.alfresco.automatic_metadata.22.valueEL=<#if registre.origen == 1>Administracion<#elseif registre.origen == 0>Ciudadano<#else>DESCONEGUT ${registre.origen}</#if>
+#es.caib.digitalib.plugins.documentcustody.alfresco.automatic_metadata.22.name=eni:origenStr
+#es.caib.digitalib.plugins.documentcustody.alfresco.automatic_metadata.22.valueEL=<#if registre.origen == 1>Administracion<#elseif registre.origen == 0>Ciudadano<#else>DESCONEGUT ${registre.origen}</#if>
 
-#es.caib.portafib.plugins.documentcustody.alfresco.automatic_metadata.3.name=eni:estado_elaboracion
-#es.caib.portafib.plugins.documentcustody.alfresco.automatic_metadata.3.valueEL=${registre.estadoElaboracion}
+#es.caib.digitalib.plugins.documentcustody.alfresco.automatic_metadata.3.name=eni:estado_elaboracion
+#es.caib.digitalib.plugins.documentcustody.alfresco.automatic_metadata.3.valueEL=${registre.estadoElaboracion}
 
-#es.caib.portafib.plugins.documentcustody.alfresco.automatic_metadata.4.name=eni:tipo_doc_ENI
-es.caib.portafib.plugins.documentcustody.alfresco.automatic_metadata.4.valueEL=${registre.tipoDocumental}', false, 2, 'DOCCUST_ALFRESCO', 3, 'Document Custody d''Alfresco 5.x', 'Document Custody d''Alfresco 5.x');
+#es.caib.digitalib.plugins.documentcustody.alfresco.automatic_metadata.4.name=eni:tipo_doc_ENI
+es.caib.digitalib.plugins.documentcustody.alfresco.automatic_metadata.4.valueEL=${registre.tipoDocumental}', false, 2, 'DOCCUST_ALFRESCO', 3, 'Document Custody d''Alfresco 5.x', 'Document Custody d''Alfresco 5.x');
 
 
 INSERT INTO dib_idioma(idiomaid, nom, suportat, ordre) VALUES ('ca', 'Català', true, 0);
