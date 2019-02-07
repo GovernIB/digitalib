@@ -284,7 +284,7 @@ es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.csv_validation_web_EL
 #  Retorna una plana web de validacio del document
 # Valors de substitució:  
 # ${custodyID} => custodyID | ${custodyID_URLEncode} => URLEncode(custodyID) | ${custodyID_Hash} => Hash(custodyID)
-es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.validation_file_url_expressionlanguage=https://dev.caib.es/concsv/hash/${csv}
+es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.validation_file_url_EL=https://dev.caib.es/concsv/hash/${csv}
 
 
 
