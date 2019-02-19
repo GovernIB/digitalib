@@ -1,5 +1,8 @@
 package es.caib.digitalib.back.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,10 +39,12 @@ import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.back.utils.Utils;
+import es.caib.digitalib.ejb.InfoCustodyLocal;
 import es.caib.digitalib.jpa.FitxerJPA;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.PerfilLogicaLocal;
+import es.caib.digitalib.logic.PluginArxiuLogicaLocal;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.logic.utils.EmailUtil;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
@@ -53,6 +58,9 @@ import es.caib.digitalib.model.fields.UsuariAplicacioFields;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
+import es.caib.plugins.arxiu.api.Document;
+import es.caib.plugins.arxiu.api.DocumentContingut;
+import es.caib.plugins.arxiu.api.IArxiuPlugin;
 
 /**
  * 
@@ -62,12 +70,20 @@ import es.caib.digitalib.utils.Constants;
 public abstract class AbstractTransaccioController extends TransaccioController {
 
   public static final int USUARICOLUMN = 1;
+  private static final String PDF = "PDF";
+  private static final String ENI = "ENI";
 
   @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
   protected TransaccioLogicaLocal transaccioLogicaEjb;
 
+  @EJB(mappedName = InfoCustodyLocal.JNDI_NAME)
+  protected InfoCustodyLocal infoCustodyEjb;
+  
   @EJB(mappedName = PerfilLogicaLocal.JNDI_NAME)
   protected PerfilLogicaLocal perfilLogicaEjb;
+  
+  @EJB(mappedName = PluginArxiuLogicaLocal.JNDI_NAME)
+  protected PluginArxiuLogicaLocal pluginArxiuLogicaEjb;
 
   @EJB(mappedName = es.caib.digitalib.ejb.UsuariPersonaLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.UsuariPersonaLocal usuariPersonaEjb;
@@ -361,7 +377,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
   @RequestMapping(value = "/enviaremail")
   public String enviaremail(@RequestParam("transaccioID") java.lang.Long transaccioID,
-      @RequestParam("email") String email, HttpServletRequest request,
+      @RequestParam("email") String email, @RequestParam("content") String contingutExtra, HttpServletRequest request,
       HttpServletResponse response) {
 
     try {
@@ -375,11 +391,16 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
       java.util.regex.Pattern p = java.util.regex.Pattern
           .compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
-      if (!p.matcher(email).matches()) {
-        String __msg = I18NUtils.tradueix("genapp.validation.malformed", email,
-            I18NUtils.tradueix(UsuariPersonaFields.EMAIL.fullName));
-        HtmlUtils.saveMessageError(request, __msg);
-        return getRedirectWhenCancel(request, transaccioID);
+      
+      String[] emails = email.split(",");
+      for (String em : emails) {
+        em = em.trim();
+        if (!p.matcher(em).matches()) {
+          String __msg = I18NUtils.tradueix("genapp.validation.malformed", em,
+              I18NUtils.tradueix(UsuariPersonaFields.EMAIL.fullName));
+          HtmlUtils.saveMessageError(request, __msg);
+          return getRedirectWhenCancel(request, transaccioID);
+        }
       }
 
       final boolean isHtml = true;
@@ -393,7 +414,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
       UsuariPersona up = loginInfo.getUsuariPersona();
 
-      final String message;
+      String message;
       final Fitxer fitxer;
 
       if (transaccio.getPerfil().getUsPerfil() == Constants.PERFIL_US_CUSTODIA_INFO) {
@@ -421,7 +442,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         } else if (!StringUtils.isEmpty(info.getCsv()) && !StringUtils.isEmpty(info.getCsvValidationWeb())) {
           
           // email.custody.csv=Pot accedir al document a traves de la següent adreça {0} indicant el següent CSV {1}
-          String msg = I18NLogicUtils.tradueix(loc, "email.custody.csv", info.getCsvValidationWeb(), info.getCsv());
+          //String msg = I18NLogicUtils.tradueix(loc, "email.custody.csv", info.getCsvValidationWeb(), info.getCsv());
+          String msg = I18NLogicUtils.tradueix(loc, "email.custody.csvurl", "<a href=\"" + info.getCsvValidationWeb() + "view.xhtml?hash=" + info.getCsv()+"\">aquí</a>");
           stb.append("<li>").append(msg).append("</li></ul>");
           message = stb.toString();
           fitxer = null;
@@ -443,7 +465,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
           fitxer = null;
           
         } else if (transaccio.getFitxerSignaturaID() != null) {
-          message = I18NLogicUtils.tradueix(loc, "email.document", up.getNom() + " " + up.getLlinatges()); ;
+          message = I18NLogicUtils.tradueix(loc, "email.document", up.getNom() + " " + up.getLlinatges());
 
           fitxer = transaccio.getFitxerSignatura();
         } else {
@@ -499,18 +521,30 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       } else {
         // XYZ ZZZ Configurable per part de Grup
         // {0} li envia el document adjunt.
-        message = I18NLogicUtils.tradueix(loc, "email.document", up.getNom() + " " + up.getLlinatges()); ;
+        message = I18NLogicUtils.tradueix(loc, "email.document", up.getNom() + " " + up.getLlinatges()); 
 
         fitxer = transaccio.getFitxerSignaturaID() == null ? transaccio.getFitxerEscanejat()
             : transaccio.getFitxerSignatura();
 
       }
 
-      EmailUtil.postMail(subject, message, isHtml, Configuracio.getAppEmail(), fitxer, email);
-
-      // XYZ ZZZ TRA
-      // email.custody.success=Enviat correctament el document a " + email
-      HtmlUtils.saveMessageSuccess(request, I18NLogicUtils.tradueix(loc, "email.custody.success", email));
+      StringBuffer bff = new StringBuffer("<br/>----------------------------------------------------------------------------------------"
+          + "<br><br>"+I18NLogicUtils.tradueix(loc, "email.addicional")+"<br><br>   ");
+      contingutExtra = bff.toString() + "\""+ contingutExtra;
+      bff = new StringBuffer("<br><br/>----------------------------------------------------------------------------------------");
+      contingutExtra = contingutExtra + "\"" + bff.toString();
+      
+      message += contingutExtra;
+      
+      for (String em : emails) {
+        em = em.trim();
+        
+        EmailUtil.postMail(subject, message, isHtml, Configuracio.getAppEmail(), fitxer, em);
+     //  XYZ ZZZ TRA
+        // email.custody.success=Enviat correctament el document a " + email
+        HtmlUtils.saveMessageSuccess(request, I18NLogicUtils.tradueix(loc, "email.custody.success", em));
+      }
+      
 
       return getRedirectWhenCancel(request, transaccioID);
 
@@ -545,32 +579,133 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     FileDownloadController.fullDownload(fitxer.getFitxerID(), fitxer.getNom(),
         fitxer.getMime(), response);
   }
+  
+  @RequestMapping(value = "/descarregarfirmat/{transaccioID}", method = RequestMethod.GET)
+  public void descarregarFitxerFirmat(@PathVariable("transaccioID") java.lang.Long transaccioID,
+      HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
+    TransaccioJPA trans = transaccioEjb.findByPrimaryKey(transaccioID);
+
+    FitxerJPA fitxer = trans.getFitxerSignatura();
+    FileDownloadController.fullDownload(fitxer.getFitxerID(), fitxer.getNom(),
+        fitxer.getMime(), response);
+  }
+
+  @RequestMapping(value = "/descarregaroriginal/{transaccioID}", method = RequestMethod.GET)
+  public String descarregarOriginal(
+      @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
+      HttpServletResponse response) throws I18NException {
+
+    TransaccioJPA transaccio = transaccioLogicaEjb.findByPrimaryKey(transaccioID);
+
+    InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
+    Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
+    
+    IArxiuPlugin arxiuPlugin = pluginArxiuLogicaEjb.getInstanceByPluginID(perfil.getPluginArxiuID());    
+    
+    Document original = arxiuPlugin.documentDetalls(infoCustody.getArxiuDocumentId(), null, true);
+    
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    try {
+      baos.write(original.getContingut().getContingut());
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    
+    response = prepareAndDownload(baos, response, transaccio, PDF);
+    
+    return response.toString();
+  }
+  
+  
+  @RequestMapping(value = "/descarregarenidoc/{transaccioID}", method = RequestMethod.GET)
+  public String descarregarEnidoc(
+      @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
+      HttpServletResponse response) throws I18NException {
+
+    TransaccioJPA transaccio = transaccioLogicaEjb.findByPrimaryKey(transaccioID);
+
+    InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
+    Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
+    
+    IArxiuPlugin arxiuPlugin = pluginArxiuLogicaEjb.getInstanceByPluginID(perfil.getPluginArxiuID());    
+    
+    String enidoc = arxiuPlugin.documentExportarEni(infoCustody.getArxiuDocumentId());
+    
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    try {
+      baos.write(enidoc.getBytes());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    
+    response = prepareAndDownload(baos, response, transaccio, ENI);
+    
+    return response.toString();
+
+  }
+  
   @RequestMapping(value = "/descarregarimprimible/{transaccioID}", method = RequestMethod.GET)
   public String descarregarVersioImprible(
       @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
 
-    TransaccioJPA trans = transaccioEjb.findByPrimaryKey(transaccioID);
-    InfoCustodyJPA infoCustodyJPA = trans.getInfoCustody();
+    TransaccioJPA transaccio = transaccioLogicaEjb.findByPrimaryKey(transaccioID);
 
-    String urlRetorn = "";
+    InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
+    Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
+    
+    IArxiuPlugin arxiuPlugin = pluginArxiuLogicaEjb.getInstanceByPluginID(perfil.getPluginArxiuID());    
+    
+    DocumentContingut imprimible = arxiuPlugin.documentImprimible(infoCustody.getArxiuDocumentId());
+    
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
     try {
-      urlRetorn = infoCustodyJPA.getCsvValidationWeb();
-    } catch (NullPointerException e) {
-
-      HtmlUtils
-          .saveMessageError(request, "XYZ ZZZ No es pot descarregar la versió imprimible");
-      return "redirect:" + getContextWeb() + "/list";
-
+      baos.write(imprimible.getContingut());
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    
+    response = prepareAndDownload(baos, response, transaccio, PDF);
+    
+    return response.toString();
 
-    return "redirect:" + urlRetorn;
   }
 
-  private AdditionalButton getDownloadDocButton(Transaccio transaccio) {
+  private HttpServletResponse prepareAndDownload(ByteArrayOutputStream baos, HttpServletResponse response, TransaccioJPA transaccio, String format) {
+    
+    String documentName = transaccio.getNom();
+    
+    if (format.equals(PDF)) {
+      response.setContentType("application/pdf");
+      
+      if (documentName != null && !documentName.toLowerCase().endsWith(".pdf")) {
+          documentName += ".pdf";
+      }
+      
+    } else if (format.equals(ENI)) {
+      response.setContentType("text/xml");
+      
+      if (documentName != null && !documentName.toLowerCase().endsWith(".xml")) {
+          documentName += ".xml";
+      }
+    }
+    response.setHeader("Content-disposition", "attachment; filename="+documentName);
+    
+    OutputStream out;
+    try {
+      out = response.getOutputStream();
+      out.write(baos.toByteArray());
+      out.flush();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    
+    return response;
+  }
 
-    Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
+  private AdditionalButton getDownloadDocButton(Transaccio transaccio, Perfil perfil) {
 
     AdditionalButton addButton = null;
 
@@ -580,15 +715,15 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}",
             "btn-success");
       break;
-      case Constants.PERFIL_US_CUSTODIA_INFO:
-        addButton = new AdditionalButton("icon-download-alt icon-white",
-            "transaccio.descarregar.versioimprimible", getContextWeb()
-                + "/descarregarimprimible/{0}", "btn-success");
-      break;
       case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
         addButton = new AdditionalButton("icon-download-alt icon-white",
-            "transaccio.descarregar.versioimprimible", getContextWeb()
-                + "/descarregarimprimible/{0}", "btn-success");
+            "transaccio.descarregar.firmat", getContextWeb()
+                + "/descarregarfirmat/{0}", "btn-success");
+      break;
+      case Constants.PERFIL_US_CUSTODIA_INFO:
+        addButton = new AdditionalButton("icon-download-alt icon-white",
+            "transaccio.descarregar.imprimible", getContextWeb()
+                + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
       break;
       default:
         addButton = new AdditionalButton("icon-download-alt icon-white",
@@ -617,8 +752,38 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
         // Afegir boto de Descarrega de document escanejat o de versio imprimible segons si es
         // escaneig o copia autentica
-        AdditionalButton addButton = getDownloadDocButton(transaccio);
-        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addButton);
+        
+        Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
+        
+        if (perfil.getUsPerfil() == Constants.PERFIL_US_CUSTODIA_INFO) {
+
+          InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
+          
+          if (!infoCustody.getOriginalFileUrl().isEmpty() || infoCustody.getOriginalFileUrl() != null) {
+            AdditionalButton addOriginalButton = new AdditionalButton("icon-download-alt icon-white",
+                "transaccio.descarregar.original", getContextWeb()
+                    + "/descarregaroriginal/{0}", "btn-success\" target=\"_blank");
+            
+            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addOriginalButton);
+          } 
+          if (!infoCustody.getPrintableFileUrl().isEmpty() || infoCustody.getPrintableFileUrl() != null) {
+            AdditionalButton addImprimibleButton = new AdditionalButton("icon-print icon-white",
+                "transaccio.descarregar.imprimible", getContextWeb()
+                    + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
+            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addImprimibleButton);
+          }
+          if (!infoCustody.getEniFileUrl().isEmpty() || infoCustody.getEniFileUrl() != null) {
+            AdditionalButton addEniButton = new AdditionalButton("icon-file icon-white",
+                "transaccio.descarregar.enidoc", getContextWeb()
+                    + "/descarregarenidoc/{0}", "btn-success\" target=\"_blank");
+            
+            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addEniButton);
+          } 
+        } else {
+        
+          AdditionalButton addButton = getDownloadDocButton(transaccio, perfil);
+          filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addButton);
+        }
       }
 
       if (delete) {
@@ -633,7 +798,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       if (!isAdmin && transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
 
         AdditionalButton additionalButton = new AdditionalButton("icon-envelope icon-white",
-            "enviar.email", "javascript:enviarEmail(" + transaccio.getTransaccioID() + ")",
+            "enviar.email", "javascript:enviarEmail(" + transaccio.getTransaccioID() + ", 'show')",
             "btn-warning");
 
         // getContextWeb() + "/enviaremail/" + transaccio.getTransaccioID()
