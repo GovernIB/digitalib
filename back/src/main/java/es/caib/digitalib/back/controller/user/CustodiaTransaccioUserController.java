@@ -22,11 +22,5 @@ public class CustodiaTransaccioUserController extends AbstractTransaccioUserCont
   public int getTipusPerfil() {
     return Constants.PERFIL_US_CUSTODIA_INFO;
   }
-  
-  
-  @Override
-  public boolean isActiveDelete() {
-    return false;
-  }
 
 }

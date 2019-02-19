@@ -35,7 +35,7 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
 
   @Override
   public boolean isActiveList() {
-    return true;
+    return false;
   }
 
   @Override
@@ -97,6 +97,7 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
     }
     
     Utils.hideNullFields(perfilForm.getPerfil(), perfilForm, ALL_PERFIL_FIELDS);
+    perfilForm.setCancelButtonVisible(false);
 
     return perfilForm;
   }

@@ -9,7 +9,7 @@
 <c:if test="${not empty loginInfo.usuariPersona.configuracioGrup}" >
   <div class="logo pull-left" >
     <a href="<c:out value="${loginInfo.usuariPersona.configuracioGrup.suportWeb}"/>" target="_blank">    
-    <img src="<c:url value="${dib:fileUrl(loginInfo.usuariPersona.configuracioGrup.logoHeader)}"/>" title="${loginInfo.usuariPersona.configuracioGrup.nom}" alt="${loginInfo.usuariPersona.configuracioGrup.nom}" />
+    <img style="height:46px; padding:8px 24px 0px 12px"src="<c:url value="${dib:fileUrl(loginInfo.usuariPersona.configuracioGrup.logoHeader)}"/>" title="${loginInfo.usuariPersona.configuracioGrup.nom}" alt="${loginInfo.usuariPersona.configuracioGrup.nom}" />
     </a>
   </div>
   </c:if>

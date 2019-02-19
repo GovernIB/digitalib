@@ -220,7 +220,7 @@ public class UsuariPersonaAdminController extends UsuariPersonaController{
 			for (StringKeyValue confgrup : confgrups) {
 
 				str.append("<a href=\""
-						+ request.getContextPath() + ConfiguracioGrupAdminController.CONTEXTWEB + up.getConfiguracioGrupID()
+						+ request.getContextPath() + ConfiguracioGrupAdminController.CONTEXTWEB + "/"+ up.getConfiguracioGrupID()
 						+ "/edit\">" + confgrup.getValue() + "</a><br/>\n");
 
 				map.put(key, str.toString());
