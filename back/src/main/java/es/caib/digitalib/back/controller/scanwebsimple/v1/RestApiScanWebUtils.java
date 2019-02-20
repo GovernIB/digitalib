@@ -3,11 +3,11 @@ package es.caib.digitalib.back.controller.scanwebsimple.v1;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleError;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleFile;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.NoAvailablePluginException;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.ServerException;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.beans.ScanWebSimpleError;
-import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.beans.ScanWebSimpleFile;
-import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.exceptions.NoAvailablePluginException;
-import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.exceptions.ServerException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

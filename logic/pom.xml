@@ -28,7 +28,7 @@
   
     <dependency>
       <artifactId>apiscanwebsimple-api</artifactId>
-      <groupId>org.fundaciobit.pluginsib.scanwebsimple</groupId>
+      <groupId>org.fundaciobit.apisib.apiscanwebsimple</groupId>
       <version>1.0</version>
     </dependency>  
 

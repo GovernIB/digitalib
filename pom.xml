@@ -9,7 +9,7 @@
 
   <modules>	
     <!--   -->  
-    <module>scanwebsimple</module>
+    <module>apiscanwebsimple</module>
     <module>model</module>
     <module>jpa</module>
     <module>ejb</module>

@@ -9,11 +9,11 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuRequiredParameters;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.plugins.signature.api.FileInfoSignature;
-import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.beans.ScanWebSimpleArxiuRequiredParameters;
-import org.fundaciobit.pluginsib.apiscanwebsimple.api.v1.beans.ScanWebSimpleStatus;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import es.caib.digitalib.jpa.FitxerJPA;
