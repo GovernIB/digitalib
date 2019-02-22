@@ -26,6 +26,7 @@ import es.caib.digitalib.logic.ScanWebModuleLocal;
 import es.caib.digitalib.logic.TransaccioPublicLogicaLocal;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -114,15 +115,18 @@ public abstract class AbstractFirmaArxiuParametersController extends
        * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
        */
 
-      hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANIF);
-      hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANOM);
+//    hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANIF);
+//    hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANOM);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMDOCESTATELABORA);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMINTERESSATS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORIGEN);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORGANS);
 
+    if (Configuracio.isCAIB()) {
+      transaccioForm.addReadOnlyField(ARXIUREQPARAMDOCESTATELABORA);
       transaccioForm.getTransaccio().setArxiuReqParamDocEstatElabora("EE03");
+    }
       
     }
 
