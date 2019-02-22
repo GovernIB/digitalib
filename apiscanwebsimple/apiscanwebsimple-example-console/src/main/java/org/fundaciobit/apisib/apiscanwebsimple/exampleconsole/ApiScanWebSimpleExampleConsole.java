@@ -33,6 +33,7 @@ import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleScanResult;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleSignatureParameters;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStartTransactionRequest;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.jersey.ApiScanWebSimpleJersey;
 
 /**
  * 
@@ -388,7 +389,7 @@ public class ApiScanWebSimpleExampleConsole {
 
     prop.load(new FileInputStream(new File("./apiscanwebsimple.properties")));
 
-    return new ApiScanWebSimple(prop.getProperty("endpoint"), prop.getProperty("username"),
+    return new ApiScanWebSimpleJersey(prop.getProperty("endpoint"), prop.getProperty("username"),
         prop.getProperty("password"));
 
   }

@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 /**
  * 
  * @author anadal
@@ -15,13 +13,13 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ScanWebSimpleValidationInfo {
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected Boolean checkAdministrationIDOfSigner;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected Boolean checkDocumentModifications;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected Boolean checkValidationSignature;
 
   public ScanWebSimpleValidationInfo() {

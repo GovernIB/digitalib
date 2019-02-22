@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * 
@@ -13,16 +12,12 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ScanWebSimpleFile {
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected java.lang.String nom;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected java.lang.String mime;
   
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected byte[] data;
 
   /** Constructor Buit */

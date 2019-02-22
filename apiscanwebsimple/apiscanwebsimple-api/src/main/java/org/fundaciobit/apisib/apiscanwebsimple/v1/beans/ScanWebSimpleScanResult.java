@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 /**
  * Resultat d'un Escaneig o Copia Autentica
  * 
@@ -14,40 +12,39 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ScanWebSimpleScanResult {
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected long transactionID;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String transactionWebID;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected ScanWebSimpleStatus status;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected ScanWebSimpleFile scannedFile;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected ScanWebSimpleFile detachedSignatureFile;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected ScanWebSimpleScannedFileInfo scannedFileInfo;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected ScanWebSimpleSignedFileInfo signedFileInfo;
 
   /**
    * Informacio de Custòdia
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected ScanWebSimpleCustodyInfo custodyInfo = null;
 
   /**
    * Informació de Arxiu
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected ScanWebSimpleArxiuInfo arxiuInfo = null;
 
   /**

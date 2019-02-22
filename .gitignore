@@ -96,3 +96,9 @@
 /apiscanwebsimple/compil.bat
 /apiscanwebsimple/apiscanwebsimple-api/scanfile.pdf
 /apiscanwebsimple/apiscanwebsimple-example-console/scanfile.pdf
+/apiscanwebsimple/apiscanwebsimple-jersey/scanfile.pdf
+/apiscanwebsimple/apiscanwebsimple-jersey/.settings
+/apiscanwebsimple/apiscanwebsimple-jersey/target
+/apiscanwebsimple/apiscanwebsimple-jersey/.classpath
+/apiscanwebsimple/apiscanwebsimple-jersey/.project
+/apiscanwebsimple/apiscanwebsimple-jersey/detached_sign_scanfile.sig

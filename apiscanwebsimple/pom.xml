@@ -10,6 +10,7 @@
 
   <modules>
     <module>apiscanwebsimple-api</module>
+    <module>apiscanwebsimple-jersey</module>
     <module>apiscanwebsimple-example-console</module>
     <!-- XYZ ZZZ ZZZ 
     <module>apiscanwebsimple-example-war</module> -->

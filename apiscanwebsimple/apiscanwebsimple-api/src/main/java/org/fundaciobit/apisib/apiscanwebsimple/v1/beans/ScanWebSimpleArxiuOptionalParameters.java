@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * 
@@ -17,24 +16,19 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ScanWebSimpleArxiuOptionalParameters {
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String procedimentNom; // = "Subvenciones empleo"
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String procedimentCodi; // = "organo1_PRO_123456789";
 
   // "A04013511";
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected List<String> organs; // = "A04013511";
 
   // = "S0001"
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String serieDocumental;
 
   /**
    * Si val null llavors en crearà un de nou
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String custodyOrExpedientID;
 
   public ScanWebSimpleArxiuOptionalParameters() {

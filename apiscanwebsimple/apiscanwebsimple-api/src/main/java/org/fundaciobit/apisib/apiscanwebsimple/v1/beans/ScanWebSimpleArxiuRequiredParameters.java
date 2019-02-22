@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 
 /**
  * 
@@ -69,21 +69,20 @@ public class ScanWebSimpleArxiuRequiredParameters {
   public static final String DOCUMENTTIPUS_ALTRES_INCAUTATS = "TD20";
   public static final String DOCUMENTTIPUS_ALTRES = "TD99";
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String ciutadaNif;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String ciutadaNom;
 
   // "12345678X,87654321Z"
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected List<String> interessats;
 
   /**
    * @see ScanWebSimpleArxiuRequiredParameters.ORIGEN_CIUTADA
    * @see ScanWebSimpleArxiuRequiredParameters.ORIGEN_ADMINISTRACIO
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected int origen; // ContingutOrigen.CIUTADA
 
   /**
@@ -92,7 +91,7 @@ public class ScanWebSimpleArxiuRequiredParameters {
    * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_COPIA_DP
    * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_COPIA_PR
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String documentEstatElaboracio;
 
   /**
@@ -118,7 +117,7 @@ public class ScanWebSimpleArxiuRequiredParameters {
    * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES_INCAUTATS
    * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String documentTipus;
 
   public ScanWebSimpleArxiuRequiredParameters() {

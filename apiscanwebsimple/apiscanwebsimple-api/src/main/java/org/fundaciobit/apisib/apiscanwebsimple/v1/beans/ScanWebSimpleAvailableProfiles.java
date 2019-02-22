@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 
 /**
  * 
@@ -17,7 +17,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ScanWebSimpleAvailableProfiles {
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected List<ScanWebSimpleAvailableProfile> availableProfiles = null;
 
   /**

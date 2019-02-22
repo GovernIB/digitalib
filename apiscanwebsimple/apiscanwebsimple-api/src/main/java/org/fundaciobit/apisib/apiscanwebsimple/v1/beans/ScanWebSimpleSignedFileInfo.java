@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * 
@@ -69,26 +68,26 @@ public class ScanWebSimpleSignedFileInfo {
    * eEMGDE.Firma.Firmante.EnCalidadDe(eEMGDE17.5.3): Firmante; Cofirmante; Contrafirmante
    * 
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected Integer signOperation;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String signType;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String signAlgorithm;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected Integer signMode;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected Integer signaturesTableLocation;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected Boolean timeStampIncluded;
 
   /** BES(falsE) o EPES(true) **/
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected Boolean policyIncluded;
 
   /**
@@ -105,7 +104,7 @@ public class ScanWebSimpleSignedFileInfo {
    * TF06. MetadataConstants.ENI_TIPO_FIRMA = "eni:tipoFirma";
    * 
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String eniTipoFirma;
 
   /**
@@ -119,27 +118,27 @@ public class ScanWebSimpleSignedFileInfo {
    * 
    * - MetadataConstants.ENI_PERFIL_FIRMA = "eni:perfil_firma";
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String eniPerfilFirma;
 
   /**
    * - eEMGDE.Firma.RolFirma (eEMGDE17.2): Esquemas desarrollados a nivel local y que pueden
    * incluir valores como válida, autentica, refrenda, visa, representa, testimonia, etc..
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String eniRolFirma;
 
   /**
    * eEMGDE.Firma.Firmante.NombreApellidos (eEMGDE17.5.1): Texto libre. Nombre o razón social
    * de los firmantes.
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String eniSignerName;
 
   /**
    * eEMGDE.Firma.Firmante (eEMGDE17.5.2). NúmeroIdentificacionFirmantes
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String eniSignerAdministrationId;
 
   /**
@@ -147,20 +146,20 @@ public class ScanWebSimpleSignedFileInfo {
    * confianza de la firma utilizado. Ejemplos: Nick, PIN ciudadano, Firma electrónica
    * avanzada, Claves concertadas, Firma electrónica avanzada basada en certificados, CSV, ..
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String eniSignLevel;
 
   /**
    * Informació de les validacions realitzades
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected ScanWebSimpleValidationInfo validationInfo = null;
 
   /**
    * eEMGDE.Firma.InformacionAdicional (eEMGDE17.5.5) Ofrecer cualquier otra información que se
    * considere útil acerca del firmante.
    * */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected List<ScanWebSimpleKeyValue> additionInformation = null;
 
   public ScanWebSimpleSignedFileInfo() {

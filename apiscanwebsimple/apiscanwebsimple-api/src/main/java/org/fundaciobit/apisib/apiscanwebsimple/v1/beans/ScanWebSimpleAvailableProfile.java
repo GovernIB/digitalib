@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * 
@@ -19,16 +18,16 @@ public class ScanWebSimpleAvailableProfile {
   public static final int PROFILE_TYPE_SCAN_AND_SIGNATURE = 2;
   public static final int PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY = 3;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String code;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String name;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String description;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected int profileType;
 
   /**

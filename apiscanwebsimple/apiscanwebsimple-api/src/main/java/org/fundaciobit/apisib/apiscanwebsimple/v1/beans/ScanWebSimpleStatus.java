@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * 
@@ -30,10 +29,10 @@ public class ScanWebSimpleStatus {
 
   protected int status = STATUS_REQUESTED_ID;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String errorMessage;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String errorStackTrace;
 
   /**

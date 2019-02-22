@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * 
@@ -32,19 +31,15 @@ public class ScanWebSimpleScannedFileInfo {
   public static final int PIXEL_TYPE_COLOR = 2;
 
   /** Pixel Type.  Null significa que no ho sab. Exemples: B&W Gray Color **/
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected Integer pixelType;
 
   /** píxeles por pulgada.  Null significa que no ho sab. Exemples: 100, 150, 20, ... 300, ... **/
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected Integer pppResolution;
 
   /** Null significa que no ho sab. Exemples BMP JPEG TIFF PNG PDF **/
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String formatFile;
 
   /** Null significa que no ho sab. **/
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected Boolean ocr;
 
   public ScanWebSimpleScannedFileInfo() {

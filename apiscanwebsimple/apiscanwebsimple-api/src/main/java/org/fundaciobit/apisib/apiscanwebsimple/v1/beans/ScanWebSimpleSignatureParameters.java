@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 /**
  * 
  * @author anadal(u80067)
@@ -15,13 +13,13 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ScanWebSimpleSignatureParameters {
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String languageDoc;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String funcionariNom;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String funcionariNif;
 
   public ScanWebSimpleSignatureParameters() {

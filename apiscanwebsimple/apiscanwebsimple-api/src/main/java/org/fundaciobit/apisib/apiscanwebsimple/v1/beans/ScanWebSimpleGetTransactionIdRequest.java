@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 
 /**
  * 
@@ -20,25 +20,20 @@ public class ScanWebSimpleGetTransactionIdRequest {
   public static final int VIEW_IFRAME = 1; // "iframe";
 
   // Perfil d'Escaneig definit en el servidor intermig
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String scanWebProfile;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected int view;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String languageUI;
 
   /**
    * Obligatori tant si es funcionari com si no (~ usernameRequest)
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected String funcionariUsername;
 
   /**
    * Obligatori si el perfil requereix firma
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
   protected ScanWebSimpleSignatureParameters signatureParameters;
 
   /**

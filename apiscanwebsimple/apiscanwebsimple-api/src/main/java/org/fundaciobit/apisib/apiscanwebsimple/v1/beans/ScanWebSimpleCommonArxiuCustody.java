@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * 
@@ -16,28 +15,28 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class ScanWebSimpleCommonArxiuCustody {
 
   /** eEMGDE.Firma.FormatoFirma.ValorCSV (eEMGDE17.3) */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String csv;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String originalFileURL;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String printableFileURL;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String eniFileURL;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String csvValidationWeb;
 
   /**
    * eEMGDE.DefinicionGeneracionCSV (eEMGDE17.4):
    */
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String csvGenerationDefinition;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String validationFileUrl;
 
   public ScanWebSimpleCommonArxiuCustody() {

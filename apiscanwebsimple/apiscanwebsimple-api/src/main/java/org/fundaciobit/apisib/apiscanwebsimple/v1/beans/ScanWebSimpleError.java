@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 /**
  * Classe encarregada d'enviar excepcions des del servidor al client
  * 
@@ -16,13 +14,13 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ScanWebSimpleError {
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String message;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String type;
 
-  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+
   protected String stackTrace;
 
   /**
