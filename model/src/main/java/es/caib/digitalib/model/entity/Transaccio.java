@@ -95,14 +95,14 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.String getArxiuReqParamCiutadaNom();
 	public void setArxiuReqParamCiutadaNom(java.lang.String _arxiuReqParamCiutadaNom_);
 
+	public java.lang.String getArxiuReqParamOrgans();
+	public void setArxiuReqParamOrgans(java.lang.String _arxiuReqParamOrgans_);
+
 	public java.lang.String getArxiuOptParamProcedimentCodi();
 	public void setArxiuOptParamProcedimentCodi(java.lang.String _arxiuOptParamProcedimentCodi_);
 
 	public java.lang.String getArxiuOptParamProcedimentNom();
 	public void setArxiuOptParamProcedimentNom(java.lang.String _arxiuOptParamProcedimentNom_);
-
-	public java.lang.String getArxiuOptParamOrgans();
-	public void setArxiuOptParamOrgans(java.lang.String _arxiuOptParamOrgans_);
 
 	public java.lang.String getArxiuOptParamSerieDocumental();
 	public void setArxiuOptParamSerieDocumental(java.lang.String _arxiuOptParamSerieDocumental_);

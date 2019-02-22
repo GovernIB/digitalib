@@ -105,14 +105,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMCIUTADANOM)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMCIUTADANOM)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMORGANS)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMORGANS)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMORGANS)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUOPTPARAMORGANS)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL)}</th>

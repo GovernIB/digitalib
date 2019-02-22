@@ -1,26 +1,11 @@
 package org.fundaciobit.apisib.apiscanwebsimple.v1;
 
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfiles;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleError;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleScanResult;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStartTransactionRequest;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.AbstractScanWebSimpleException;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.CancelledUserException;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.ClientException;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.NoAvailablePluginException;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.ServerException;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.TimeOutException;
 
 
 /**

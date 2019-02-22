@@ -43,9 +43,9 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final StringField ARXIUREQPARAMINTERESSATS = new StringField(_TABLE_MODEL, "arxiuReqParamInteressats", "arxiureqparaminteressats");
 	 public static final StringField ARXIUREQPARAMCIUTADANIF = new StringField(_TABLE_MODEL, "arxiuReqParamCiutadaNif", "arxiureqparamciutadanif");
 	 public static final StringField ARXIUREQPARAMCIUTADANOM = new StringField(_TABLE_MODEL, "arxiuReqParamCiutadaNom", "arxiureqparamciutadanom");
+	 public static final StringField ARXIUREQPARAMORGANS = new StringField(_TABLE_MODEL, "arxiuReqParamOrgans", "arxiureqparamorgans");
 	 public static final StringField ARXIUOPTPARAMPROCEDIMENTCODI = new StringField(_TABLE_MODEL, "arxiuOptParamProcedimentCodi", "arxiuoptparamprocedimentcodi");
 	 public static final StringField ARXIUOPTPARAMPROCEDIMENTNOM = new StringField(_TABLE_MODEL, "arxiuOptParamProcedimentNom", "arxiuoptparamprocedimentnom");
-	 public static final StringField ARXIUOPTPARAMORGANS = new StringField(_TABLE_MODEL, "arxiuOptParamOrgans", "arxiuoptparamorgans");
 	 public static final StringField ARXIUOPTPARAMSERIEDOCUMENTAL = new StringField(_TABLE_MODEL, "arxiuOptParamSerieDocumental", "arxiuoptparamseriedocumental");
 	 public static final StringField ARXIUOPTPARAMCUSTODYOREXPEDIENTID = new StringField(_TABLE_MODEL, "arxiuOptParamCustodyOrExpedientId", "arxiuoptparamcustorexpid");
 	 public static final LongField PERFILID = new LongField(_TABLE_MODEL, "perfilID", "perfilid");
@@ -85,9 +85,9 @@ public interface TransaccioFields extends java.io.Serializable {
     ARXIUREQPARAMINTERESSATS,
     ARXIUREQPARAMCIUTADANIF,
     ARXIUREQPARAMCIUTADANOM,
+    ARXIUREQPARAMORGANS,
     ARXIUOPTPARAMPROCEDIMENTCODI,
     ARXIUOPTPARAMPROCEDIMENTNOM,
-    ARXIUOPTPARAMORGANS,
     ARXIUOPTPARAMSERIEDOCUMENTAL,
     ARXIUOPTPARAMCUSTODYOREXPEDIENTID,
     PERFILID,

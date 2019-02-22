@@ -244,6 +244,14 @@ public class TransaccioValidator<T> implements TransaccioFields {
       }
     }
     
+    if (__vr.getFieldErrorCount(ARXIUREQPARAMORGANS) == 0) {
+      java.lang.String __arxiureqparamorgans = (java.lang.String)__vr.getFieldValue(__target__,ARXIUREQPARAMORGANS);
+      if (__arxiureqparamorgans!= null && __arxiureqparamorgans.length() > 255) {
+        __vr.rejectValue(ARXIUREQPARAMORGANS, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMORGANS)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+    
     if (__vr.getFieldErrorCount(ARXIUOPTPARAMPROCEDIMENTCODI) == 0) {
       java.lang.String __arxiuoptparamprocedimentcodi = (java.lang.String)__vr.getFieldValue(__target__,ARXIUOPTPARAMPROCEDIMENTCODI);
       if (__arxiuoptparamprocedimentcodi!= null && __arxiuoptparamprocedimentcodi.length() > 255) {
@@ -257,14 +265,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
       if (__arxiuoptparamprocedimentnom!= null && __arxiuoptparamprocedimentnom.length() > 255) {
         __vr.rejectValue(ARXIUOPTPARAMPROCEDIMENTNOM, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUOPTPARAMPROCEDIMENTNOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(ARXIUOPTPARAMORGANS) == 0) {
-      java.lang.String __arxiuoptparamorgans = (java.lang.String)__vr.getFieldValue(__target__,ARXIUOPTPARAMORGANS);
-      if (__arxiuoptparamorgans!= null && __arxiuoptparamorgans.length() > 255) {
-        __vr.rejectValue(ARXIUOPTPARAMORGANS, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUOPTPARAMORGANS)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
     

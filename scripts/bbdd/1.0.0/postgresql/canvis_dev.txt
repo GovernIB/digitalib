@@ -1,38 +1,22 @@
   
 
 
---  CONFIGURACIO FIRMA (24/01/2019)
-
-
-ALTER TABLE dib_configuraciofirma
-  DROP COLUMN politicataulafirmes;
-ALTER TABLE dib_configuraciofirma
-  ADD COLUMN nom character varying(255) NOT NULL;
-ALTER TABLE dib_configuraciofirma
-  ADD CONSTRAINT dib_conffirma_nom_uk UNIQUE (nom);
+ALTER TABLE dib_transaccio RENAME arxiuoptparamorgans TO arxiureqparamorgans;
+COMMENT ON COLUMN dib_transaccio.arxiureqparamorgans IS '
 
   
-  ALTER TABLE dib_perfil RENAME pluginfirmaservidorid  TO configuraciofirmaid;
-ALTER TABLE dib_perfil
-  DROP CONSTRAINT dib_perfil_plugin_firma_fk;
+  
+ALTER TABLE dib_configuraciogrup ADD COLUMN codidir3perdefecte character varying(50) NOT NULL DEFAULT 'A04003003';
+  
 
   
-INSERT INTO dib_configuraciofirma VALUES (2098, 0, NULL, NULL, NULL, NULL, 0, 0, 0, false, NULL, 2097, 0, 2096, NULL, true, 1002, 'MINIAPPLET AMB SEGELL DE TEMPS');
-INSERT INTO dib_configuraciofirma VALUES (22, 0, NULL, NULL, NULL, NULL, 0, 0, 0, false, NULL, 2094, 0, NULL, NULL, false, 1003, 'AFIRMA Federat Sense Segell');
   
-UPDATE dib_perfil
-   SET  configuraciofirmaid=22 WHERE configuraciofirmaid is not null;
-   
-ALTER TABLE dib_perfil
-  ADD CONSTRAINT dib_perfil_conffirma_cf_fk FOREIGN KEY (configuraciofirmaid) REFERENCES dib_configuraciofirma (configuraciofirmaid) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
   
-  ---  Arreglar pantalles de Perfil de Menu Admin #34 
-  
-  ALTER TABLE dib_perfil
-   ALTER COLUMN scanpixeltype DROP NOT NULL;
-   
-   ALTER TABLE dib_perfil
-   ALTER COLUMN scanpixeltype DROP DEFAULT;
-   
-   UPDATE dib_perfil SET scanpixeltype=NULL;
+ (1) Eliminar entrada  del final arxiuOptParamOrgans=A04013511 plugin ARXIU i DOC.CUST.ARXIU
+ (2) En DOC.CUST.ARXIU substituir "es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.organs_EL=A04013511" per "es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.organs_EL=${transaccio.arxiuReqParamOrgans}"
+ 
+ 
+ if (!infoCustody.getOriginalFileUrl().isEmpty() || infoCustody.getOriginalFileUrl() != null) {
+ 
+ 
+ if (infoCustody.getEniFileUrl() != null && !infoCustody.getEniFileUrl().isEmpty()) {

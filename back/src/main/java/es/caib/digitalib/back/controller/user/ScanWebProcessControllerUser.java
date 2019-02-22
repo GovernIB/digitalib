@@ -1,7 +1,6 @@
 package es.caib.digitalib.back.controller.user;
 
 import java.net.URL;
-import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -253,20 +252,18 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
               .getProperty(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM.javaName);
           String procedimentCodi = prop
               .getProperty(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI.javaName);
-          List<String> organs = LogicUtils.stringToListString(prop
-              .getProperty(TransaccioFields.ARXIUOPTPARAMORGANS.javaName));
           String serieDocumental = prop
               .getProperty(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL.javaName);
           String custodyOrExpedientID = prop
               .getProperty(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID.javaName);
 
-          if (procedimentNom == null && procedimentCodi == null && organs == null
+          if (procedimentNom == null && procedimentCodi == null 
               && serieDocumental == null && custodyOrExpedientID == null) {
             // SI tot val null no feim res
           } else {
             ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters;
             arxiuOptionalParameters = new ScanWebSimpleArxiuOptionalParameters(procedimentNom,
-                procedimentCodi, organs, serieDocumental, custodyOrExpedientID);
+                procedimentCodi, serieDocumental, custodyOrExpedientID);
 
             requestTransaction.setArxiuOptionalParameters(arxiuOptionalParameters);
           }

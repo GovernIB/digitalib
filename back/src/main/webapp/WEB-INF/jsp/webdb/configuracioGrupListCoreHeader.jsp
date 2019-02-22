@@ -36,6 +36,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.ADREZA)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.ADREZA)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.CODIDIR3PERDEFECTE)}">
+        <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.CODIDIR3PERDEFECTE)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}">
         <th>${dib:getSortIcons(__theFilterForm,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}</th>
         </c:if>

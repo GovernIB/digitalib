@@ -20,6 +20,7 @@ public interface ConfiguracioGrupFields extends java.io.Serializable {
 	 public static final LongField LOGOHEADERID = new LongField(_TABLE_MODEL, "logoHeaderID", "logoheaderid");
 	 public static final LongField LOGOFOOTERID = new LongField(_TABLE_MODEL, "logoFooterID", "logofooterid");
 	 public static final StringField ADREZA = new StringField(_TABLE_MODEL, "adreza", "adreza");
+	 public static final StringField CODIDIR3PERDEFECTE = new StringField(_TABLE_MODEL, "codiDir3PerDefecte", "codidir3perdefecte");
 	 public static final LongField PERFILNOMESESCANEIGID = new LongField(_TABLE_MODEL, "perfilNomesEscaneigID", "perfilnomesescaneigid");
 	 public static final LongField PERFILNOMESESCANEIG2ID = new LongField(_TABLE_MODEL, "perfilNomesEscaneig2ID", "perfilnomesescaneig2id");
 	 public static final LongField PERFILCOPIAAUTENTICAID = new LongField(_TABLE_MODEL, "perfilCopiaAutenticaID", "perfilcopiaautenticaid");
@@ -37,6 +38,7 @@ public interface ConfiguracioGrupFields extends java.io.Serializable {
     LOGOHEADERID,
     LOGOFOOTERID,
     ADREZA,
+    CODIDIR3PERDEFECTE,
     PERFILNOMESESCANEIGID,
     PERFILNOMESESCANEIG2ID,
     PERFILCOPIAAUTENTICAID,

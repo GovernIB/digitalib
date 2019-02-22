@@ -213,7 +213,7 @@ es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.serie_documental_EL=<
 #es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.serie_documental_EL=FBIT
 
 #  Separats per comma
-es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.organs_EL=A04013511
+es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.organs_EL=${transaccio.arxiuReqParamOrgans}
 
 # ADMINISTRACION=1 //  CIUDADANO=0
 es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.origen_document_EL=${transaccio.arxiuReqParamOrigen}
@@ -322,7 +322,6 @@ es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.documentelectronic.au
 
 arxiuOptParamProcedimentCodi=organo1_PRO_123456789
 arxiuOptParamProcedimentNom=Subvenciones empleo
-arxiuOptParamOrgans=A04013511
 arxiuOptParamSerieDocumental=S0001', true, 2, 'DOCCUST_ARXIU_CAIB', 2, 'Document Custody Arxiu CAIB', 'Document Custody Arxiu CAIB');
 INSERT INTO dib_plugin(pluginid, classe, properties, actiu, tipus, codi, ordre, nom, descripcio) VALUES (1274, 'org.fundaciobit.plugins.documentcustody.filesystem.FileSystemDocumentCustodyPlugin', '#Class: org.fundaciobit.plugins.documentcustody.filesystem.FileSystemDocumentCustodyPlugin
 
@@ -443,7 +442,6 @@ es.caib.digitalib.plugin.arxiu.caib.validation_file_url_EL=https://dev.caib.es/c
 
 arxiuOptParamProcedimentCodi=organo1_PRO_123456789
 arxiuOptParamProcedimentNom=Subvenciones empleo
-arxiuOptParamOrgans=A04013511
 arxiuOptParamSerieDocumental=S0001', true, 3, 'ARXIU_CAIB', 1, 'Arxiu CAIB', 'Arxiu CAIB');
 INSERT INTO dib_plugin(pluginid, classe, properties, actiu, tipus, codi, ordre, nom, descripcio) VALUES (2204, 'org.fundaciobit.plugins.documentcustody.alfresco.base.AlfrescoBaseDocumentCustodyPlugin', '# CLASS: org.fundaciobit.plugins.documentcustody.alfresco.base.AlfrescoBaseDocumentCustodyPlugin
 
@@ -620,10 +618,10 @@ INSERT INTO dib_perfil(perfilid, pluginscanwebid, configuraciofirmaid, pluginarx
 
 
 
-INSERT INTO dib_configuraciogrup(configuraciogrupid, nom, suportweb, suportemail, suporttelefon, logoheaderid, logofooterid, perfilnomesescaneigid, perfilcopiaautenticaid, perfilcustodiaid, adreza, perfilnomesescaneig2id, perfilcopiaautentica2id, perfilcustodia2id) VALUES (1233, 'Govern de les Illes Balears', 'http://suport.caib.es', 'suport@caib.es', '97117171', 1231, 1232, NULL, NULL, 1308, '<p>Carrer de Sant Pere, 7</p>
+INSERT INTO dib_configuraciogrup(configuraciogrupid, nom, suportweb, suportemail, suporttelefon, logoheaderid, logofooterid, perfilnomesescaneigid, perfilcopiaautenticaid, perfilcustodiaid, adreza, perfilnomesescaneig2id, perfilcopiaautentica2id, perfilcustodia2id,codidir3perdefecte ) VALUES (1233, 'Govern de les Illes Balears', 'http://suport.caib.es', 'suport@caib.es', '97117171', 1231, 1232, NULL, NULL, 1308, '<p>Carrer de Sant Pere, 7</p>
 <p>07012 Palma</p>
-<p>Illes Balears</p>', NULL, NULL, NULL);
-INSERT INTO dib_configuraciogrup(configuraciogrupid, nom, suportweb, suportemail, suporttelefon, logoheaderid, logofooterid, perfilnomesescaneigid, perfilcopiaautenticaid, perfilcustodiaid, adreza, perfilnomesescaneig2id, perfilcopiaautentica2id, perfilcustodia2id) VALUES (1078, 'FundacioBit', 'http://fundaciobit.org', 'otae@fundaciobit.org', '123456789', 1076, 1077, 1005, 1008, NULL, '<p>Fundaci&oacute; Bit - Balears d''Innovaci&oacute; i Tecnologia<br /> Centre Empresarial Son Espanyol<br /> C/ Laura Bassi 07121 ParcBit<br /> Telf. 971.784.730 Telf. Directe 971.177283 Ext 77283</p>', NULL, 1509, NULL);
+<p>Illes Balears</p>', NULL, NULL, NULL, 'A04003003');
+INSERT INTO dib_configuraciogrup(configuraciogrupid, nom, suportweb, suportemail, suporttelefon, logoheaderid, logofooterid, perfilnomesescaneigid, perfilcopiaautenticaid, perfilcustodiaid, adreza, perfilnomesescaneig2id, perfilcopiaautentica2id, perfilcustodia2id, codidir3perdefecte) VALUES (1078, 'FundacioBit', 'http://fundaciobit.org', 'otae@fundaciobit.org', '123456789', 1076, 1077, 1005, 1008, NULL, '<p>Fundaci&oacute; Bit - Balears d''Innovaci&oacute; i Tecnologia<br /> Centre Empresarial Son Espanyol<br /> C/ Laura Bassi 07121 ParcBit<br /> Telf. 971.784.730 Telf. Directe 971.177283 Ext 77283</p>', NULL, 1509, NULL, 'A04013625');
 
 
 

@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,14 +30,15 @@ import es.caib.digitalib.utils.Constants;
 @RequestMapping(value = ArxiuPluginAdminController.CONTEXTWEB)
 @SessionAttributes(types = { PluginForm.class, PluginFilterForm.class })
 public class ArxiuPluginAdminController extends AbstractPluginAdminController {
-  
+
   public static final String CONTEXTWEB = "/admin/pluginarxiu";
 
   public static final Field<?>[] CAMPS = { TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI,
-      TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM, TransaccioFields.ARXIUOPTPARAMORGANS,
+      TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM,
+      // TransaccioFields.ARXIUREQPARAMORGANS,
       TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL
-      //TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID 
-      };
+  // TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID
+  };
 
   @Override
   public PluginForm getPluginForm(PluginJPA _jpa, boolean __isView,
@@ -91,7 +91,8 @@ public class ArxiuPluginAdminController extends AbstractPluginAdminController {
       String value = prop.getProperty(javaName);
 
       if (value == null || value.trim().isEmpty()) {
-        result.rejectValue(PluginFields.PROPERTIES.fullName, "error.propietatrequerida", new Object[]{I18NUtils.tradueix(field.fullName)},"No hi ha propietat " + field.fullName );
+        result.rejectValue(PluginFields.PROPERTIES.fullName, "error.propietatrequerida",
+            new Object[] { field.javaName }, "No hi ha propietat " + field.fullName);
       }
 
     }

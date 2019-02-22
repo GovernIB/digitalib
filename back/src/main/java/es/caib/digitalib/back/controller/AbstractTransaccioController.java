@@ -759,20 +759,20 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
           InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
           
-          if (!infoCustody.getOriginalFileUrl().isEmpty() || infoCustody.getOriginalFileUrl() != null) {
+          if (infoCustody.getOriginalFileUrl()!= null && !infoCustody.getOriginalFileUrl().isEmpty()) {
             AdditionalButton addOriginalButton = new AdditionalButton("icon-download-alt icon-white",
                 "transaccio.descarregar.original", getContextWeb()
                     + "/descarregaroriginal/{0}", "btn-success\" target=\"_blank");
             
             filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addOriginalButton);
           } 
-          if (!infoCustody.getPrintableFileUrl().isEmpty() || infoCustody.getPrintableFileUrl() != null) {
+          if (infoCustody.getPrintableFileUrl() != null && !infoCustody.getPrintableFileUrl().isEmpty()) {
             AdditionalButton addImprimibleButton = new AdditionalButton("icon-print icon-white",
                 "transaccio.descarregar.imprimible", getContextWeb()
                     + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
             filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addImprimibleButton);
           }
-          if (!infoCustody.getEniFileUrl().isEmpty() || infoCustody.getEniFileUrl() != null) {
+          if (infoCustody.getEniFileUrl() != null && !infoCustody.getEniFileUrl().isEmpty()) {
             AdditionalButton addEniButton = new AdditionalButton("icon-file icon-white",
                 "transaccio.descarregar.enidoc", getContextWeb()
                     + "/descarregarenidoc/{0}", "btn-success\" target=\"_blank");

@@ -299,7 +299,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         t.setArxiuReqParamDocumentTipus(arxiuReqParams.getDocumentTipus());
         t.setArxiuReqParamOrigen(arxiuReqParams.getOrigen());
         t.setArxiuReqParamInteressats(LogicUtils.listToString(arxiuReqParams.getInteressats()));
-        
+        t.setArxiuReqParamOrgans(LogicUtils.listToString(arxiuReqParams.getOrgans()));
         t.setArxiuReqParamCiutadaNif(arxiuReqParams.getCiutadaNif());
         t.setArxiuReqParamCiutadaNom(arxiuReqParams.getCiutadaNom());
       }
@@ -311,7 +311,6 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
           .getArxiuOptionalParameters();
       if (arxiuOptParams != null) {
         t.setArxiuOptParamCustodyOrExpedientId(arxiuOptParams.getCustodyOrExpedientID());
-        t.setArxiuOptParamOrgans(LogicUtils.listToString(arxiuOptParams.getOrgans()));
         t.setArxiuOptParamProcedimentCodi(arxiuOptParams.getProcedimentCodi());
         t.setArxiuOptParamProcedimentNom(arxiuOptParams.getProcedimentNom());
         t.setArxiuOptParamSerieDocumental(arxiuOptParams.getSerieDocumental());

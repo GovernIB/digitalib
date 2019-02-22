@@ -55,7 +55,8 @@
         perfilnomesescaneigid number(19,0),
         suportemail varchar2(255 char),
         suporttelefon varchar2(255 char),
-        suportweb varchar2(255 char)
+        suportweb varchar2(255 char),
+        codidir3perdefecte varchar2(50) not null
     );
 
     create table dib_estadistica (
@@ -184,7 +185,7 @@
     create table dib_transaccio (
         transaccioid number(19,0) not null,
         arxiuoptparamcustorexpid varchar2(255 char),
-        arxiuoptparamorgans varchar2(255 char),
+        arxiureqparamorgans varchar2(255 char),
         arxiuoptparamprocedimentcodi varchar2(255 char),
         arxiuoptparamprocedimentnom varchar2(255 char),
         arxiuoptparamseriedocumental varchar2(255 char),
@@ -220,7 +221,8 @@
         webid varchar2(100 char) not null,
         usuariaplicacioid number(19,0),
         usuaripersonaid number(19,0),
-        vista number(10,0) not null
+        vista number(10,0) not null,
+        codidir3unitatfuncionari varchar2(50 char)
     );
 
     create table dib_usuariaplicacio (

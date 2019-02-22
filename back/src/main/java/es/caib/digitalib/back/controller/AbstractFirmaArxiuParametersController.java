@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
@@ -18,6 +19,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
+import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.AuditoriaLogicaLocal;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
@@ -102,14 +104,12 @@ public abstract class AbstractFirmaArxiuParametersController extends
        * // XYZ ZZZ Per DEBUG
        * hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI);
        * hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM);
-       * hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMORGANS);
        * hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL);
        * hiddenFields.remove(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
        * 
        * // XYZ ZZZ Per Debug
        * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI);
        * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM);
-       * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMORGANS);
        * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL);
        * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
        */
@@ -120,6 +120,7 @@ public abstract class AbstractFirmaArxiuParametersController extends
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMINTERESSATS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORIGEN);
+      hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORGANS);
 
       transaccioForm.getTransaccio().setArxiuReqParamDocEstatElabora("EE03");
       
@@ -173,9 +174,38 @@ public abstract class AbstractFirmaArxiuParametersController extends
         ValidationUtils.rejectIfEmptyOrWhitespace(result, field.fullName,
             "genapp.validation.required", new Object[] { I18NUtils.tradueix(field.fullName) });
       }
+      
+      
+      if (isPublic()) {
+        // Si la petició arriba des d'APP llavors, requerim que ens afegeixin in organ
+        ValidationUtils.rejectIfEmptyOrWhitespace(result, TransaccioFields.ARXIUREQPARAMORGANS.fullName,
+            "genapp.validation.required", new Object[] { I18NUtils.tradueix(TransaccioFields.ARXIUREQPARAMORGANS.fullName) });
+      }
+      
+      
     }
 
   }
+  
+  
+  @Override
+  public TransaccioJPA update(HttpServletRequest request, TransaccioJPA transaccio)
+      throws Exception,I18NException, I18NValidationException {
+
+    final String dir3 = transaccio.getArxiuReqParamOrgans();
+    
+    log.info("\n\n  XYZ ZZZZZ  PRE UPDATE: dir3 -> ]" + dir3 + "[" );
+
+    if (!isPublic() &&  (dir3== null || dir3.isEmpty())) {
+       // Obtenim el codidir3 per defecte de la ConfiguracioGrup
+       transaccio.setArxiuReqParamOrgans(
+        LoginInfo.getInstance().getUsuariPersona().getConfiguracioGrup().getCodiDir3PerDefecte());
+    }
+
+    return super.update(request, transaccio);
+  }
+ 
+  
 
   @Override
   public String getRedirectWhenModified(HttpServletRequest request,

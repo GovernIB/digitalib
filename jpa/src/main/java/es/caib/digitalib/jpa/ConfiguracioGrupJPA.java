@@ -59,6 +59,9 @@ private static final long serialVersionUID = -185147282L;
   @Lob
 	java.lang.String adreza;
 
+	@Column(name="codidir3perdefecte",nullable = false,length = 50)
+	java.lang.String codiDir3PerDefecte;
+
 	@Index(name="dib_cfggrup_perfilscan_fk_i")
 	@Column(name="perfilnomesescaneigid",length = 19)
 	java.lang.Long perfilNomesEscaneigID;
@@ -90,7 +93,7 @@ private static final long serialVersionUID = -185147282L;
   }
 
   /** Constructor amb tots els camps  */
-  public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilNomesEscaneig2ID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCopiaAutentica2ID , java.lang.Long perfilCustodiaID , java.lang.Long perfilCustodia2ID) {
+  public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.String codiDir3PerDefecte , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilNomesEscaneig2ID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCopiaAutentica2ID , java.lang.Long perfilCustodiaID , java.lang.Long perfilCustodia2ID) {
     this.configuracioGrupID=configuracioGrupID;
     this.nom=nom;
     this.suportWeb=suportWeb;
@@ -99,6 +102,7 @@ private static final long serialVersionUID = -185147282L;
     this.logoHeaderID=logoHeaderID;
     this.logoFooterID=logoFooterID;
     this.adreza=adreza;
+    this.codiDir3PerDefecte=codiDir3PerDefecte;
     this.perfilNomesEscaneigID=perfilNomesEscaneigID;
     this.perfilNomesEscaneig2ID=perfilNomesEscaneig2ID;
     this.perfilCopiaAutenticaID=perfilCopiaAutenticaID;
@@ -107,7 +111,7 @@ private static final long serialVersionUID = -185147282L;
     this.perfilCustodia2ID=perfilCustodia2ID;
 }
   /** Constructor sense valors autoincrementals */
-  public ConfiguracioGrupJPA(java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilNomesEscaneig2ID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCopiaAutentica2ID , java.lang.Long perfilCustodiaID , java.lang.Long perfilCustodia2ID) {
+  public ConfiguracioGrupJPA(java.lang.String nom , java.lang.String suportWeb , java.lang.String suportEmail , java.lang.String suportTelefon , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.String codiDir3PerDefecte , java.lang.Long perfilNomesEscaneigID , java.lang.Long perfilNomesEscaneig2ID , java.lang.Long perfilCopiaAutenticaID , java.lang.Long perfilCopiaAutentica2ID , java.lang.Long perfilCustodiaID , java.lang.Long perfilCustodia2ID) {
     this.nom=nom;
     this.suportWeb=suportWeb;
     this.suportEmail=suportEmail;
@@ -115,6 +119,7 @@ private static final long serialVersionUID = -185147282L;
     this.logoHeaderID=logoHeaderID;
     this.logoFooterID=logoFooterID;
     this.adreza=adreza;
+    this.codiDir3PerDefecte=codiDir3PerDefecte;
     this.perfilNomesEscaneigID=perfilNomesEscaneigID;
     this.perfilNomesEscaneig2ID=perfilNomesEscaneig2ID;
     this.perfilCopiaAutenticaID=perfilCopiaAutenticaID;
@@ -123,12 +128,13 @@ private static final long serialVersionUID = -185147282L;
     this.perfilCustodia2ID=perfilCustodia2ID;
 }
   /** Constructor dels valors Not Null */
-  public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , long logoHeaderID , long logoFooterID , java.lang.String adreza) {
+  public ConfiguracioGrupJPA(long configuracioGrupID , java.lang.String nom , long logoHeaderID , long logoFooterID , java.lang.String adreza , java.lang.String codiDir3PerDefecte) {
     this.configuracioGrupID=configuracioGrupID;
     this.nom=nom;
     this.logoHeaderID=logoHeaderID;
     this.logoFooterID=logoFooterID;
     this.adreza=adreza;
+    this.codiDir3PerDefecte=codiDir3PerDefecte;
 }
   public ConfiguracioGrupJPA(ConfiguracioGrup __bean) {
     this.setConfiguracioGrupID(__bean.getConfiguracioGrupID());
@@ -139,6 +145,7 @@ private static final long serialVersionUID = -185147282L;
     this.setLogoHeaderID(__bean.getLogoHeaderID());
     this.setLogoFooterID(__bean.getLogoFooterID());
     this.setAdreza(__bean.getAdreza());
+    this.setCodiDir3PerDefecte(__bean.getCodiDir3PerDefecte());
     this.setPerfilNomesEscaneigID(__bean.getPerfilNomesEscaneigID());
     this.setPerfilNomesEscaneig2ID(__bean.getPerfilNomesEscaneig2ID());
     this.setPerfilCopiaAutenticaID(__bean.getPerfilCopiaAutenticaID());
@@ -205,6 +212,13 @@ private static final long serialVersionUID = -185147282L;
 	};
 	public void setAdreza(java.lang.String _adreza_) {
 		this.adreza = _adreza_;
+	};
+
+	public java.lang.String getCodiDir3PerDefecte() {
+		return(codiDir3PerDefecte);
+	};
+	public void setCodiDir3PerDefecte(java.lang.String _codiDir3PerDefecte_) {
+		this.codiDir3PerDefecte = _codiDir3PerDefecte_;
 	};
 
 	public java.lang.Long getPerfilNomesEscaneigID() {
@@ -410,6 +424,7 @@ private static final long serialVersionUID = -185147282L;
     __tmp.setLogoHeaderID(__bean.getLogoHeaderID());
     __tmp.setLogoFooterID(__bean.getLogoFooterID());
     __tmp.setAdreza(__bean.getAdreza());
+    __tmp.setCodiDir3PerDefecte(__bean.getCodiDir3PerDefecte());
     __tmp.setPerfilNomesEscaneigID(__bean.getPerfilNomesEscaneigID());
     __tmp.setPerfilNomesEscaneig2ID(__bean.getPerfilNomesEscaneig2ID());
     __tmp.setPerfilCopiaAutenticaID(__bean.getPerfilCopiaAutenticaID());

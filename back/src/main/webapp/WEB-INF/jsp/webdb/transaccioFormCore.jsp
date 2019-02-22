@@ -708,6 +708,24 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUREQPARAMORGANS)}">
+        <tr id="transaccio_arxiuReqParamOrgans_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUREQPARAMORGANS])?'transaccio.arxiuReqParamOrgans':__theForm.labels[TransaccioFields.ARXIUREQPARAMORGANS]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUREQPARAMORGANS]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUREQPARAMORGANS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.arxiuReqParamOrgans" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMORGANS)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMORGANS)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.arxiuReqParamOrgans"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)}">
         <tr id="transaccio_arxiuOptParamProcedimentCodi_rowid">
           <td>
@@ -739,24 +757,6 @@
             <td>
             <form:errors path="transaccio.arxiuOptParamProcedimentNom" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.arxiuOptParamProcedimentNom"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMORGANS)}">
-        <tr id="transaccio_arxiuOptParamOrgans_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUOPTPARAMORGANS])?'transaccio.arxiuOptParamOrgans':__theForm.labels[TransaccioFields.ARXIUOPTPARAMORGANS]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUOPTPARAMORGANS]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUOPTPARAMORGANS]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="transaccio.arxiuOptParamOrgans" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMORGANS)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUOPTPARAMORGANS)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.arxiuOptParamOrgans"   />
 
            </td>
         </tr>

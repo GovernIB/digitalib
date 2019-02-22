@@ -71,6 +71,11 @@
           ${configuracioGrup.adreza}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.CODIDIR3PERDEFECTE)}">
+          <td>
+          ${configuracioGrup.codiDir3PerDefecte}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}">
           <td>
           <c:set var="tmp">${configuracioGrup.perfilNomesEscaneigID}</c:set>

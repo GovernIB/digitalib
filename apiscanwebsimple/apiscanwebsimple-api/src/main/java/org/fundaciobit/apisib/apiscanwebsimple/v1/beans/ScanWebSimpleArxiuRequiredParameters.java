@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
-
 /**
  * 
  * @author anadal(u80067)
@@ -71,7 +69,6 @@ public class ScanWebSimpleArxiuRequiredParameters {
 
   protected String ciutadaNif;
 
-
   protected String ciutadaNom;
 
   // "12345678X,87654321Z"
@@ -117,8 +114,12 @@ public class ScanWebSimpleArxiuRequiredParameters {
    * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES_INCAUTATS
    * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES
    */
-
   protected String documentTipus;
+
+  /**
+   * Codi DIR3 dels organs afectats
+   */
+  protected List<String> organs; // = "A04013511";
 
   public ScanWebSimpleArxiuRequiredParameters() {
     super();
@@ -126,7 +127,7 @@ public class ScanWebSimpleArxiuRequiredParameters {
 
   public ScanWebSimpleArxiuRequiredParameters(String ciutadaNif, String ciutadaNom,
       List<String> interessats, int origen, String documentEstatElaboracio,
-      String documentTipus) {
+      String documentTipus, List<String> organs) {
     super();
     this.ciutadaNif = ciutadaNif;
     this.ciutadaNom = ciutadaNom;
@@ -134,6 +135,7 @@ public class ScanWebSimpleArxiuRequiredParameters {
     this.origen = origen;
     this.documentEstatElaboracio = documentEstatElaboracio;
     this.documentTipus = documentTipus;
+    this.organs = organs;
   }
 
   public List<String> getInteressats() {
@@ -182,6 +184,14 @@ public class ScanWebSimpleArxiuRequiredParameters {
 
   public void setCiutadaNom(String ciutadaNom) {
     this.ciutadaNom = ciutadaNom;
+  }
+
+  public List<String> getOrgans() {
+    return organs;
+  }
+
+  public void setOrgans(List<String> organs) {
+    this.organs = organs;
   }
 
 }

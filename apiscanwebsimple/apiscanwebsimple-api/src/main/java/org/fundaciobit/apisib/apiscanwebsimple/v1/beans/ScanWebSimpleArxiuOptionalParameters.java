@@ -1,11 +1,8 @@
 package org.fundaciobit.apisib.apiscanwebsimple.v1.beans;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-
 
 /**
  * 
@@ -20,9 +17,6 @@ public class ScanWebSimpleArxiuOptionalParameters {
 
   protected String procedimentCodi; // = "organo1_PRO_123456789";
 
-  // "A04013511";
-  protected List<String> organs; // = "A04013511";
-
   // = "S0001"
   protected String serieDocumental;
 
@@ -36,11 +30,10 @@ public class ScanWebSimpleArxiuOptionalParameters {
   }
 
   public ScanWebSimpleArxiuOptionalParameters(String procedimentNom, String procedimentCodi,
-      List<String> organs, String serieDocumental, String custodyOrExpedientID) {
+      String serieDocumental, String custodyOrExpedientID) {
     super();
     this.procedimentNom = procedimentNom;
     this.procedimentCodi = procedimentCodi;
-    this.organs = organs;
     this.serieDocumental = serieDocumental;
     this.custodyOrExpedientID = custodyOrExpedientID;
   }
@@ -59,14 +52,6 @@ public class ScanWebSimpleArxiuOptionalParameters {
 
   public void setProcedimentCodi(String procedimentCodi) {
     this.procedimentCodi = procedimentCodi;
-  }
-
-  public List<String> getOrgans() {
-    return organs;
-  }
-
-  public void setOrgans(List<String> organs) {
-    this.organs = organs;
   }
 
   public String getSerieDocumental() {

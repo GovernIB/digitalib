@@ -135,16 +135,16 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new StringField(getQueryPath(), TransaccioFields.ARXIUREQPARAMCIUTADANOM);
   }
 
+  public StringField ARXIUREQPARAMORGANS() {
+    return new StringField(getQueryPath(), TransaccioFields.ARXIUREQPARAMORGANS);
+  }
+
   public StringField ARXIUOPTPARAMPROCEDIMENTCODI() {
     return new StringField(getQueryPath(), TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI);
   }
 
   public StringField ARXIUOPTPARAMPROCEDIMENTNOM() {
     return new StringField(getQueryPath(), TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM);
-  }
-
-  public StringField ARXIUOPTPARAMORGANS() {
-    return new StringField(getQueryPath(), TransaccioFields.ARXIUOPTPARAMORGANS);
   }
 
   public StringField ARXIUOPTPARAMSERIEDOCUMENTAL() {

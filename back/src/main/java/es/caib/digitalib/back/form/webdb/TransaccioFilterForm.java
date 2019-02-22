@@ -439,6 +439,17 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.String arxiuReqParamOrgans;
+
+  public java.lang.String getArxiuReqParamOrgans() {
+    return this.arxiuReqParamOrgans;
+  }
+
+  public void setArxiuReqParamOrgans(java.lang.String arxiuReqParamOrgans) {
+    this.arxiuReqParamOrgans = arxiuReqParamOrgans;
+  }
+
+
   private java.lang.String arxiuOptParamProcedimentCodi;
 
   public java.lang.String getArxiuOptParamProcedimentCodi() {
@@ -458,17 +469,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setArxiuOptParamProcedimentNom(java.lang.String arxiuOptParamProcedimentNom) {
     this.arxiuOptParamProcedimentNom = arxiuOptParamProcedimentNom;
-  }
-
-
-  private java.lang.String arxiuOptParamOrgans;
-
-  public java.lang.String getArxiuOptParamOrgans() {
-    return this.arxiuOptParamOrgans;
-  }
-
-  public void setArxiuOptParamOrgans(java.lang.String arxiuOptParamOrgans) {
-    this.arxiuOptParamOrgans = arxiuOptParamOrgans;
   }
 
 
@@ -603,9 +603,9 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.arxiuReqParamInteressats = __toClone.arxiuReqParamInteressats;
     this.arxiuReqParamCiutadaNif = __toClone.arxiuReqParamCiutadaNif;
     this.arxiuReqParamCiutadaNom = __toClone.arxiuReqParamCiutadaNom;
+    this.arxiuReqParamOrgans = __toClone.arxiuReqParamOrgans;
     this.arxiuOptParamProcedimentCodi = __toClone.arxiuOptParamProcedimentCodi;
     this.arxiuOptParamProcedimentNom = __toClone.arxiuOptParamProcedimentNom;
-    this.arxiuOptParamOrgans = __toClone.arxiuOptParamOrgans;
     this.arxiuOptParamSerieDocumental = __toClone.arxiuOptParamSerieDocumental;
     this.arxiuOptParamCustodyOrExpedientId = __toClone.arxiuOptParamCustodyOrExpedientId;
     this.perfilIDDesde = __toClone.perfilIDDesde;

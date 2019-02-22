@@ -538,6 +538,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.ARXIUREQPARAMORGANS)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="transaccio.arxiuReqParamOrgans" var="arxiuReqParamOrgans" />
+              <fmt:message key="genapp.form.searchby" var="cercaperarxiuReqParamOrgans" >                
+                 <fmt:param value="${arxiuReqParamOrgans}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${arxiuReqParamOrgans}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperarxiuReqParamOrgans}" path="arxiuReqParamOrgans" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -560,19 +573,6 @@
               </fmt:message>
               <span class="add-on"><c:out value="${arxiuOptParamProcedimentNom}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperarxiuOptParamProcedimentNom}" path="arxiuOptParamProcedimentNom" />
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.ARXIUOPTPARAMORGANS)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.arxiuOptParamOrgans" var="arxiuOptParamOrgans" />
-              <fmt:message key="genapp.form.searchby" var="cercaperarxiuOptParamOrgans" >                
-                 <fmt:param value="${arxiuOptParamOrgans}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${arxiuOptParamOrgans}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperarxiuOptParamOrgans}" path="arxiuOptParamOrgans" />
             </div>
 
 

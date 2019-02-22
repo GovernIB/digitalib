@@ -165,7 +165,8 @@ CREATE TABLE dib_configuraciogrup (
     adreza text DEFAULT '  '::text NOT NULL,
     perfilnomesescaneig2id bigint,
     perfilcopiaautentica2id bigint,
-    perfilcustodia2id bigint
+    perfilcustodia2id bigint,
+    codidir3perdefecte character varying(50) NOT NULL
 );
 
 
@@ -441,7 +442,7 @@ CREATE TABLE dib_transaccio (
     arxiureqparamorigen integer,
     arxiuoptparamprocedimentcodi character varying(255),
     arxiuoptparamprocedimentnom character varying(255),
-    arxiuoptparamorgans character varying(255),
+    arxiureqparamorgans character varying(255),
     arxiuoptparamseriedocumental character varying(255),
     arxiuoptparamcustorexpid character varying(255),
     nom character varying(255)

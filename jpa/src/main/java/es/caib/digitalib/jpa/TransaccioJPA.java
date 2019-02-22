@@ -131,15 +131,15 @@ private static final long serialVersionUID = 760472444L;
 	@Column(name="arxiureqparamciutadanom",length = 255)
 	java.lang.String arxiuReqParamCiutadaNom;
 
+  /** Codi DIR3 dels organs afectats separats per comes */
+	@Column(name="arxiureqparamorgans",length = 255)
+	java.lang.String arxiuReqParamOrgans;
+
 	@Column(name="arxiuoptparamprocedimentcodi",length = 255)
 	java.lang.String arxiuOptParamProcedimentCodi;
 
 	@Column(name="arxiuoptparamprocedimentnom",length = 255)
 	java.lang.String arxiuOptParamProcedimentNom;
-
-  /** Codi DIR3 dels organs afectats separats per comes */
-	@Column(name="arxiuoptparamorgans",length = 255)
-	java.lang.String arxiuOptParamOrgans;
 
 	@Column(name="arxiuoptparamseriedocumental",length = 255)
 	java.lang.String arxiuOptParamSerieDocumental;
@@ -166,7 +166,7 @@ private static final long serialVersionUID = 760472444L;
   }
 
   /** Constructor amb tots els camps  */
-  public TransaccioJPA(long transaccioID , java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , boolean infoScanOcr , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamLanguageDoc , java.lang.String arxiuReqParamDocEstatElabora , java.lang.String arxiuReqParamDocumentTipus , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamOrgans , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID) {
+  public TransaccioJPA(long transaccioID , java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , boolean infoScanOcr , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamLanguageDoc , java.lang.String arxiuReqParamDocEstatElabora , java.lang.String arxiuReqParamDocumentTipus , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuReqParamOrgans , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID) {
     this.transaccioID=transaccioID;
     this.nom=nom;
     this.transactionWebId=transactionWebId;
@@ -198,9 +198,9 @@ private static final long serialVersionUID = 760472444L;
     this.arxiuReqParamInteressats=arxiuReqParamInteressats;
     this.arxiuReqParamCiutadaNif=arxiuReqParamCiutadaNif;
     this.arxiuReqParamCiutadaNom=arxiuReqParamCiutadaNom;
+    this.arxiuReqParamOrgans=arxiuReqParamOrgans;
     this.arxiuOptParamProcedimentCodi=arxiuOptParamProcedimentCodi;
     this.arxiuOptParamProcedimentNom=arxiuOptParamProcedimentNom;
-    this.arxiuOptParamOrgans=arxiuOptParamOrgans;
     this.arxiuOptParamSerieDocumental=arxiuOptParamSerieDocumental;
     this.arxiuOptParamCustodyOrExpedientId=arxiuOptParamCustodyOrExpedientId;
     this.perfilID=perfilID;
@@ -208,7 +208,7 @@ private static final long serialVersionUID = 760472444L;
     this.infoCustodyID=infoCustodyID;
 }
   /** Constructor sense valors autoincrementals */
-  public TransaccioJPA(java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , boolean infoScanOcr , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamLanguageDoc , java.lang.String arxiuReqParamDocEstatElabora , java.lang.String arxiuReqParamDocumentTipus , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamOrgans , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID) {
+  public TransaccioJPA(java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , boolean infoScanOcr , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamLanguageDoc , java.lang.String arxiuReqParamDocEstatElabora , java.lang.String arxiuReqParamDocumentTipus , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuReqParamOrgans , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID) {
     this.nom=nom;
     this.transactionWebId=transactionWebId;
     this.dataInici=dataInici;
@@ -239,9 +239,9 @@ private static final long serialVersionUID = 760472444L;
     this.arxiuReqParamInteressats=arxiuReqParamInteressats;
     this.arxiuReqParamCiutadaNif=arxiuReqParamCiutadaNif;
     this.arxiuReqParamCiutadaNom=arxiuReqParamCiutadaNom;
+    this.arxiuReqParamOrgans=arxiuReqParamOrgans;
     this.arxiuOptParamProcedimentCodi=arxiuOptParamProcedimentCodi;
     this.arxiuOptParamProcedimentNom=arxiuOptParamProcedimentNom;
-    this.arxiuOptParamOrgans=arxiuOptParamOrgans;
     this.arxiuOptParamSerieDocumental=arxiuOptParamSerieDocumental;
     this.arxiuOptParamCustodyOrExpedientId=arxiuOptParamCustodyOrExpedientId;
     this.perfilID=perfilID;
@@ -292,9 +292,9 @@ private static final long serialVersionUID = 760472444L;
     this.setArxiuReqParamInteressats(__bean.getArxiuReqParamInteressats());
     this.setArxiuReqParamCiutadaNif(__bean.getArxiuReqParamCiutadaNif());
     this.setArxiuReqParamCiutadaNom(__bean.getArxiuReqParamCiutadaNom());
+    this.setArxiuReqParamOrgans(__bean.getArxiuReqParamOrgans());
     this.setArxiuOptParamProcedimentCodi(__bean.getArxiuOptParamProcedimentCodi());
     this.setArxiuOptParamProcedimentNom(__bean.getArxiuOptParamProcedimentNom());
-    this.setArxiuOptParamOrgans(__bean.getArxiuOptParamOrgans());
     this.setArxiuOptParamSerieDocumental(__bean.getArxiuOptParamSerieDocumental());
     this.setArxiuOptParamCustodyOrExpedientId(__bean.getArxiuOptParamCustodyOrExpedientId());
     this.setPerfilID(__bean.getPerfilID());
@@ -523,6 +523,13 @@ private static final long serialVersionUID = 760472444L;
 		this.arxiuReqParamCiutadaNom = _arxiuReqParamCiutadaNom_;
 	};
 
+	public java.lang.String getArxiuReqParamOrgans() {
+		return(arxiuReqParamOrgans);
+	};
+	public void setArxiuReqParamOrgans(java.lang.String _arxiuReqParamOrgans_) {
+		this.arxiuReqParamOrgans = _arxiuReqParamOrgans_;
+	};
+
 	public java.lang.String getArxiuOptParamProcedimentCodi() {
 		return(arxiuOptParamProcedimentCodi);
 	};
@@ -535,13 +542,6 @@ private static final long serialVersionUID = 760472444L;
 	};
 	public void setArxiuOptParamProcedimentNom(java.lang.String _arxiuOptParamProcedimentNom_) {
 		this.arxiuOptParamProcedimentNom = _arxiuOptParamProcedimentNom_;
-	};
-
-	public java.lang.String getArxiuOptParamOrgans() {
-		return(arxiuOptParamOrgans);
-	};
-	public void setArxiuOptParamOrgans(java.lang.String _arxiuOptParamOrgans_) {
-		this.arxiuOptParamOrgans = _arxiuOptParamOrgans_;
 	};
 
 	public java.lang.String getArxiuOptParamSerieDocumental() {
@@ -705,9 +705,9 @@ private static final long serialVersionUID = 760472444L;
     __tmp.setArxiuReqParamInteressats(__bean.getArxiuReqParamInteressats());
     __tmp.setArxiuReqParamCiutadaNif(__bean.getArxiuReqParamCiutadaNif());
     __tmp.setArxiuReqParamCiutadaNom(__bean.getArxiuReqParamCiutadaNom());
+    __tmp.setArxiuReqParamOrgans(__bean.getArxiuReqParamOrgans());
     __tmp.setArxiuOptParamProcedimentCodi(__bean.getArxiuOptParamProcedimentCodi());
     __tmp.setArxiuOptParamProcedimentNom(__bean.getArxiuOptParamProcedimentNom());
-    __tmp.setArxiuOptParamOrgans(__bean.getArxiuOptParamOrgans());
     __tmp.setArxiuOptParamSerieDocumental(__bean.getArxiuOptParamSerieDocumental());
     __tmp.setArxiuOptParamCustodyOrExpedientId(__bean.getArxiuOptParamCustodyOrExpedientId());
     __tmp.setPerfilID(__bean.getPerfilID());

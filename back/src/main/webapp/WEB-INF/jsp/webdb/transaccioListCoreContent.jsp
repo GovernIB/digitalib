@@ -199,6 +199,11 @@
           ${transaccio.arxiuReqParamCiutadaNom}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMORGANS)}">
+          <td>
+          ${transaccio.arxiuReqParamOrgans}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)}">
           <td>
           ${transaccio.arxiuOptParamProcedimentCodi}
@@ -207,11 +212,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)}">
           <td>
           ${transaccio.arxiuOptParamProcedimentNom}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMORGANS)}">
-          <td>
-          ${transaccio.arxiuOptParamOrgans}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL)}">

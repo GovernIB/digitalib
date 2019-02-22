@@ -299,10 +299,12 @@ public class ApiScanWebSimpleExampleConsole {
     String ciutadaNif = "11223344C";
 
     String ciutadaNom = "Pep Gonella";
+    
+    List<String> organs = new ArrayList<String>(Arrays.asList("A04013511"));
 
     ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
     arxiuRequiredParameters = new ScanWebSimpleArxiuRequiredParameters(ciutadaNif, ciutadaNom,
-        interessats, origen, documentEstatElaboracio, documentTipus);
+        interessats, origen, documentEstatElaboracio, documentTipus, organs);
     return arxiuRequiredParameters;
   }
 
@@ -315,8 +317,6 @@ public class ApiScanWebSimpleExampleConsole {
 
     String procedimentCodi = "organo1_PRO_123456789";
 
-    List<String> organs = new ArrayList<String>(Arrays.asList("A04013511"));
-
     String serieDocumental = null; // = "S0001"
 
     // Que ho generi automàticament
@@ -325,7 +325,7 @@ public class ApiScanWebSimpleExampleConsole {
 
     ScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters = null;
     arxiuOptionalParameters = new ScanWebSimpleArxiuOptionalParameters(procedimentNom,
-        procedimentCodi, organs, serieDocumental, custodyOrExpedientID);
+        procedimentCodi, serieDocumental, custodyOrExpedientID);
 
     return arxiuOptionalParameters;
   }

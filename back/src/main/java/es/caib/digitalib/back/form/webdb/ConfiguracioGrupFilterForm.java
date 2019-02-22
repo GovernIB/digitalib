@@ -98,6 +98,17 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
   }
 
 
+  private java.lang.String codiDir3PerDefecte;
+
+  public java.lang.String getCodiDir3PerDefecte() {
+    return this.codiDir3PerDefecte;
+  }
+
+  public void setCodiDir3PerDefecte(java.lang.String codiDir3PerDefecte) {
+    this.codiDir3PerDefecte = codiDir3PerDefecte;
+  }
+
+
   private java.lang.Long perfilNomesEscaneigIDDesde;
 
   public java.lang.Long getPerfilNomesEscaneigIDDesde() {
@@ -242,6 +253,7 @@ public class ConfiguracioGrupFilterForm extends DigitalIBBaseFilterForm implemen
     this.suportEmail = __toClone.suportEmail;
     this.suportTelefon = __toClone.suportTelefon;
     this.adreza = __toClone.adreza;
+    this.codiDir3PerDefecte = __toClone.codiDir3PerDefecte;
     this.perfilNomesEscaneigIDDesde = __toClone.perfilNomesEscaneigIDDesde;
     this.perfilNomesEscaneigIDFins = __toClone.perfilNomesEscaneigIDFins;
     this.perfilNomesEscaneig2IDDesde = __toClone.perfilNomesEscaneig2IDDesde;

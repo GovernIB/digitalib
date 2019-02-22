@@ -170,11 +170,9 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       if (procedimentCodi == null) {
         procedimentCodi = prop.getProperty(TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI.javaName);
       }
-      
-      String organsStr = transaccio.getArxiuOptParamOrgans(); // "A04013511";
-      if (organsStr == null) {
-        organsStr = prop.getProperty(TransaccioFields.ARXIUOPTPARAMORGANS.javaName);
-      }
+
+      // No hauria de ser null
+      String organsStr = transaccio.getArxiuReqParamOrgans(); // "A04013511";
       
       String serieDocumental = transaccio.getArxiuOptParamSerieDocumental(); // "S0001";
       if (serieDocumental == null) {
@@ -206,6 +204,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       expedient.setNom(nomExpedient);
       // expedient.setVersio("1.0");
       expedient.setMetadades(expedientMetadades);
+
 
       if (transaccio.getArxiuOptParamCustodyOrExpedientId() != null) {
         // XYZ ZZZ Falta implementar que s'hagi definit un EXPEDIENT

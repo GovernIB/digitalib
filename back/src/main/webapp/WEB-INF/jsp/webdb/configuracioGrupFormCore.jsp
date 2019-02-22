@@ -179,6 +179,24 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.CODIDIR3PERDEFECTE)}">
+        <tr id="configuracioGrup_codiDir3PerDefecte_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ConfiguracioGrupFields.CODIDIR3PERDEFECTE])?'configuracioGrup.codiDir3PerDefecte':__theForm.labels[ConfiguracioGrupFields.CODIDIR3PERDEFECTE]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[ConfiguracioGrupFields.CODIDIR3PERDEFECTE]}">
+              <i class="icon-info-sign" title="${__theForm.help[ConfiguracioGrupFields.CODIDIR3PERDEFECTE]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="configuracioGrup.codiDir3PerDefecte" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.CODIDIR3PERDEFECTE)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ConfiguracioGrupFields.CODIDIR3PERDEFECTE)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="50" path="configuracioGrup.codiDir3PerDefecte"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}">
         <tr id="configuracioGrup_perfilNomesEscaneigID_rowid">
           <td>
