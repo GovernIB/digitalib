@@ -9,14 +9,3 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparamorgans IS '
 ALTER TABLE dib_configuraciogrup ADD COLUMN codidir3perdefecte character varying(50) NOT NULL DEFAULT 'A04003003';
   
 
-  
-  
-  
- (1) Eliminar entrada  del final arxiuOptParamOrgans=A04013511 plugin ARXIU i DOC.CUST.ARXIU
- (2) En DOC.CUST.ARXIU substituir "es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.organs_EL=A04013511" per "es.caib.digitalib.plugins.documentcustody.arxiudigitalcaib.organs_EL=${transaccio.arxiuReqParamOrgans}"
- 
- 
- if (!infoCustody.getOriginalFileUrl().isEmpty() || infoCustody.getOriginalFileUrl() != null) {
- 
- 
- if (infoCustody.getEniFileUrl() != null && !infoCustody.getEniFileUrl().isEmpty()) {
