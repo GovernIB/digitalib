@@ -7,12 +7,7 @@ import java.util.List;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
-import javax.jms.ObjectMessage;
-import javax.jms.Queue;
-import javax.jms.QueueConnection;
-import javax.jms.QueueConnectionFactory;
-import javax.jms.QueueSender;
-import javax.jms.QueueSession;
+
 import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -25,8 +20,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
-import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
-import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.utils.Constants;
@@ -136,51 +129,5 @@ public class EmailUtil {
 
   }
 
-
-
-
-  public static void enviarMails(List<EmailInfo> emailInfos) throws I18NException {
-    try {
-      if (emailInfos == null || emailInfos.size() == 0) {
-        return;
-      }
-  
-      // Esperarem a començar l'enviament mig segon per cada email 
-      long date = new Date().getTime() + emailInfos.size() * 500;
-  
-      InitialContext ic = new InitialContext();
-      final Queue queue = (Queue) ic.lookup(Constants.MAIL_QUEUE);
-      final QueueConnectionFactory factory;
-      factory = (QueueConnectionFactory) ic.lookup("java:/ConnectionFactory");
-      final QueueConnection connection = factory.createQueueConnection();
-      final QueueSession session = connection.createQueueSession(false,
-          QueueSession.AUTO_ACKNOWLEDGE);
-  
-      // TODO Cridar configuracio
-      // Temps entre enviaments de correu, per no saturar el servidor
-      final Integer sleep = 5;
-  
-      int counter = 0;
-      for (EmailInfo emailInfo : emailInfos) {
-        counter++;
-  
-        ObjectMessage message = session.createObjectMessage();
-  
-        // Esperamos x segundos entre cada mensaje
-        message.setLongProperty("JMS_JBOSS_SCHEDULED_DELIVERY", date + sleep * counter);
-        message.setObject(emailInfo);
-        final QueueSender sender = session.createSender(queue);
-        sender.send(message);
-      }
-  
-      session.close();
-      connection.close();
-      
-    } catch(Exception e) {
-      throw new I18NException(e, "error.unknown",
-          new I18NArgumentString("Error enviant mail: " + e.getMessage()));
-    }
-
-  }
 
 }

@@ -13,8 +13,6 @@ public interface Constants {
 
   public static final String MAIL_SERVICE = "java:/es.caib.digitalib.mail";
 
-  public static final String MAIL_QUEUE = "jms/DigitalIBMailsQueue";
-
   public static final String DIB_ADMIN = "DIB_ADMIN";
 
   public static final String DIB_USER = "DIB_USER";
@@ -30,42 +28,33 @@ public interface Constants {
   public static final String ROLE_COAU = "ROLE_COAU";
   // ROLE CUST
   public static final String ROLE_CUST = "ROLE_CUST";
-  
-  
-  
+
   // MONITOR INTEGRACIONS (PLUGINCRIDADA)
   public static final int CRIDADA_PLUGIN_RESULTAT_EN_PROCES = 0;
-  
-  public static final int CRIDADA_PLUGIN_RESULTAT_OK = +1;
-  
-  public static final int  CRIDADA_PLUGIN_RESULTAT_ERROR = -1;
-  
-  
-  
-  
-  
-  // AUDITORIA
-  
-  public static final int AUDIT_TYPE_ANY_ACTION_OVER_TRANSACTION = 0;
-  
-  public static final int AUDIT_TYPE_CREATE_TRANSACTION = 1;
-  
-  public static final int AUDIT_TYPE_FINISH_INSERT_DATA = 2;
-  
-  public static final int AUDIT_TYPE_FINISH_SCAN = 3;
-  
-  public static final int AUDIT_TYPE_SIGN_INFO = 4;
-  
-  public static final int AUDIT_TYPE_CUSTODY_INFO = 5;
-  
-  public static final int AUDIT_TYPE_END_TRANSACITION = 6;
-  
-  public static final int AUDIT_TYPE_CANCEL_USER = 10;
-  
-  public static final int AUDIT_TYPE_DELETE_TRANSACTION = 20;
 
-  
-  
+  public static final int CRIDADA_PLUGIN_RESULTAT_OK = +1;
+
+  public static final int CRIDADA_PLUGIN_RESULTAT_ERROR = -1;
+
+  // AUDITORIA
+
+  public static final int AUDIT_TYPE_ANY_ACTION_OVER_TRANSACTION = 0;
+
+  public static final int AUDIT_TYPE_CREATE_TRANSACTION = 1;
+
+  public static final int AUDIT_TYPE_FINISH_INSERT_DATA = 2;
+
+  public static final int AUDIT_TYPE_FINISH_SCAN = 3;
+
+  public static final int AUDIT_TYPE_SIGN_INFO = 4;
+
+  public static final int AUDIT_TYPE_CUSTODY_INFO = 5;
+
+  public static final int AUDIT_TYPE_END_TRANSACITION = 6;
+
+  public static final int AUDIT_TYPE_CANCEL_USER = 10;
+
+  public static final int AUDIT_TYPE_DELETE_TRANSACTION = 20;
 
   // TIPUS DE PLUGINS
 
