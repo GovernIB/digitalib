@@ -68,7 +68,6 @@ public class ScanWebSimpleSignedFileInfo {
    * eEMGDE.Firma.Firmante.EnCalidadDe(eEMGDE17.5.3): Firmante; Cofirmante; Contrafirmante
    * 
    */
-
   protected Integer signOperation;
 
 

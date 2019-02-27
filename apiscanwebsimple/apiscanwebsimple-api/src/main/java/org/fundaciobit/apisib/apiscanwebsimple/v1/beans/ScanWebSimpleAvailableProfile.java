@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 /**
  * 
  * @author anadal
@@ -18,15 +17,11 @@ public class ScanWebSimpleAvailableProfile {
   public static final int PROFILE_TYPE_SCAN_AND_SIGNATURE = 2;
   public static final int PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY = 3;
 
-
   protected String code;
-
 
   protected String name;
 
-
   protected String description;
-
 
   protected int profileType;
 
