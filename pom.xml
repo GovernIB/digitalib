@@ -8,12 +8,11 @@
   <name>DigitalIB</name>
 
   <modules>	
-    <!--   -->  
     <module>apiscanwebsimple</module>
     <module>model</module>
     <module>jpa</module>
     <module>ejb</module>
-    <module>persistence</module>
+    <module>persistence</module> 
     <module>scripts</module>
     <module>utils</module> 
     <module>logic</module>
@@ -71,7 +70,84 @@
     <global.version>${project.version}</global.version>
     <hibernate.version>3.3.2.GA</hibernate.version>
     <hibernate.annotations.version>3.4.0.GA</hibernate.annotations.version>
+    <iscaib>false</iscaib>
   </properties>
+
+
+  <profiles>
+    <profile>
+      <id>caib</id>
+      <properties>
+        <iscaib>true</iscaib>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.google.code.maven-replacer-plugin</groupId>
+            <artifactId>maven-replacer-plugin</artifactId>
+            <version>1.4.0</version>
+            <inherited>true</inherited>
+            <executions>
+              <execution>
+                 <phase>process-sources</phase> 
+                <goals>
+                  <goal>replace</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+               <ignoreErrors>true</ignoreErrors>
+              <file>./persistence/jta/src/main/resources/META-INF/persistence.xml</file>
+              <outputFile>./persistence/jta/src/main/resources/META-INF/persistence.xml</outputFile>
+              <replacements>
+                <replacement>
+                  <token>        &lt;properties&gt;&#13;&#10;&#13;&#10;        &lt;/properties&gt;</token>
+                  <value>        &lt;properties&gt;&#13;&#10;             &lt;property name=&quot;hibernate.dialect&quot; value=&quot;org.hibernate.dialect.Oracle10gDialect&quot;/&gt;&#13;&#10;        &lt;/properties&gt;</value>
+                </replacement>
+              </replacements>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>nocaib</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.google.code.maven-replacer-plugin</groupId>
+            <artifactId>maven-replacer-plugin</artifactId>
+            <version>1.4.0</version>
+            <inherited>true</inherited>
+            <executions>
+              <execution>
+                 
+                 <phase>process-sources</phase> 
+                <goals>
+                  <goal>replace</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+               <ignoreErrors>true</ignoreErrors>
+              <file>./persistence/jta/src/main/resources/META-INF/persistence.xml</file>
+              <outputFile>./persistence/jta/src/main/resources/META-INF/persistence.xml</outputFile>
+              <replacements>
+                <replacement>
+                <token>        &lt;properties&gt;&#13;&#10;             &lt;property name=&quot;hibernate.dialect&quot; value=&quot;org.hibernate.dialect.Oracle10gDialect&quot;/&gt;&#13;&#10;        &lt;/properties&gt;</token>
+                <value>        &lt;properties&gt;&#13;&#10;&#13;&#10;        &lt;/properties&gt;</value>
+                </replacement>
+              </replacements>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 
   <build>
     <pluginManagement>
@@ -134,6 +210,8 @@
           </replacements>
         </configuration>
       </plugin>
+
+
 
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
