@@ -103,3 +103,4 @@
 /apiscanwebsimple/apiscanwebsimple-jersey/.project
 /apiscanwebsimple/apiscanwebsimple-jersey/detached_sign_scanfile.sig
 /scripts/config/digitalib-mailsqueue-service.xml
+/apiscanwebsimple/apiscanwebsimple-example-console/src/main/java/org/fundaciobit/apisib/apiscanwebsimple/exampleconsole/JsonSchemaGenerator.java
