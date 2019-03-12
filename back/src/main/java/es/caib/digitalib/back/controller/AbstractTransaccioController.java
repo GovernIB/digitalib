@@ -195,18 +195,16 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       filterForm.setOrderBy(TransaccioFields.DATAFI.fullName);
       filterForm.setOrderAsc(false);
 
-      filterForm.addAdditionalButtonForEachItem(new AdditionalButton(
+      if (isAdmin()) {
+        filterForm.addAdditionalButtonForEachItem(new AdditionalButton(      
           "icon-eye-open icon-white", "transaccio.veuredetall", getContextWeb() + "/view/{0}",
           "btn-primary"));
-
-      // filterForm.addAdditionalButtonForEachItem(new
-      // AdditionalButton("icon-download-alt icon-white",
-      // "transaccio.descarregar", getContextWeb() + "/descarregar/{0}", "btn-info"));
-
-      if (isAdmin() && getPerfilInfoContextWeb() != null) {
-        filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-user icon-white",
-            "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", "btn-info"));
-      }
+        
+        if (getPerfilInfoContextWeb() != null) {
+          filterForm.addAdditionalButtonForEachItem(new AdditionalButton("icon-user icon-white",
+              "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", "btn-info"));
+        }
+      } 
 
       List<Field<?>> campsFiltre = filterForm.getDefaultGroupByFields();
       if (isAdmin()) {
@@ -772,7 +770,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
             filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addImprimibleButton);
           }
-          if (infoCustody.getEniFileUrl() != null && !infoCustody.getEniFileUrl().isEmpty()) {
+          if (isAdmin && infoCustody.getEniFileUrl() != null && !infoCustody.getEniFileUrl().isEmpty()) {
             AdditionalButton addEniButton = new AdditionalButton("icon-file icon-white",
                 "transaccio.descarregar.enidoc", getContextWeb()
                     + "/descarregarenidoc/{0}", "btn-success\" target=\"_blank");

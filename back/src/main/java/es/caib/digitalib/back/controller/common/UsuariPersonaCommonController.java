@@ -59,6 +59,7 @@ public class UsuariPersonaCommonController extends UsuariPersonaController {
     usuariPersonaForm.addReadOnlyField(CONFIGURACIOGRUPID);
 
     usuariPersonaForm.setDeleteButtonVisible(false);
+    usuariPersonaForm.setCancelButtonVisible(false);
     
     return usuariPersonaForm;
   }
