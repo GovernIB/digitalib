@@ -121,7 +121,7 @@ public abstract class AbstractFirmaArxiuParametersController extends
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMINTERESSATS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORIGEN);
-      hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORGANS);
+//      hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORGANS);
 
     if (Configuracio.isCAIB()) {
       transaccioForm.addReadOnlyField(ARXIUREQPARAMDOCESTATELABORA);
