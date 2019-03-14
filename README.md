@@ -1,10 +1,10 @@
-# DigitalIB 1.0 (digitalib-1.0)
+# ![Logo](https://github.com/GovernIB/maven/blob/binaris/digitalib/logo.png) DigitalIB 1.0 (digitalib-1.0)
  *Digitalitzador de documents*
 
 Nom | Descripció | Enllaç
 ------------ | ------------- | -------------
-Digitalib_Manual_instalacio.odt | -- | [Document](./doc/Digitalib_Manual_instalacio.odt)
-Manual_Integracio_v1_0.odt | -- | [Document](./doc/Manual_Integracio_v1_0.odt)
+Digitalib_Manual_instalacio.odt | Manual d'instal·lació de l'aplicació | [Document](./doc/Digitalib_Manual_instalacio.odt)
+Manual_Integracio_v1_0.odt | Manual d'integració | [Document](./doc/Manual_Integracio_v1_0.odt)
 
 ***Descripció***
 
