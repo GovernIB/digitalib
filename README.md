@@ -11,5 +11,5 @@
 
 Digitalitzador de documents en paper, a documents electrònics vàlids i conformes, aplicant un segell electrònic i retornant a la aplicació tant el document digitalitzat com les metadades de la digitalització.
 
+***Documentació***
 
-Digitalització IB &amp; Còpia Autèntica &amp; Còpia Autèntica amb Custòdia
