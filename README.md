@@ -13,3 +13,4 @@ Digitalitzador de documents en paper, a documents electrònics vàlids i conform
 
 ***Documentació***
 
+[Documentació de branca](../../tree/digitalib-1.0/README.md#documentaci%C3%B3)
