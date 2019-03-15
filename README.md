@@ -2,6 +2,10 @@
  *Digitalitzador de documents*
 
 
+***Versió estable***
+
+> - No hi ha versió estable
+
 ***Descripció***
 
 Digitalitzador de documents en paper, a documents electrònics vàlids i conformes, aplicant un segell electrònic i retornant a la aplicació tant el document digitalitzat com les metadades de la digitalització.
