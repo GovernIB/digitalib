@@ -8321,11 +8321,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>Nom</string> 
+            <string>Nom del document</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>Nombre</string> 
+            <string>Nombre del documento</string> 
            </void> 
           </void> 
           <void property="showInReferenceList"> 
