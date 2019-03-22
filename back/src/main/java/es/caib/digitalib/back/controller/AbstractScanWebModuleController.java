@@ -141,11 +141,15 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     
     // XYZ ZZZ  S'ha d'obtenir la URL BASE de la transaccio (l'enviada inicialment des de javascript) 
     
+    TransaccioJPA transaccio = transaccioLogicaEjb
+        .searchTransaccioByTransactionWebID(transactionWebID);
+    
     String relativeControllerBase = getRelativeControllerBase(request, getContextWeb());
     String relativeRequestPluginBasePath = getRequestPluginBasePath(relativeControllerBase,
     		transactionWebID);
 
-    String absoluteControllerBase = getAbsoluteControllerBase(request, getContextWeb());
+    String absoluteControllerBase = getAbsoluteControllerBase(transaccio.getPerfil().getUrlBase(),
+        getContextWeb());
     String absoluteRequestPluginBasePath = getRequestPluginBasePath(absoluteControllerBase,
     		transactionWebID);
     
@@ -158,8 +162,7 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     urlToPluginWebPage = scanWebModuleEjb.scanDocument(request, absoluteRequestPluginBasePath,
         relativeRequestPluginBasePath, transactionWebID, pluginID);
 
-    TransaccioJPA transaccio = transaccioLogicaEjb
-            .searchTransaccioByTransactionWebID(transactionWebID);
+
     
     Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
     
@@ -268,8 +271,11 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
 
   protected void requestPlugin(HttpServletRequest request, HttpServletResponse response,
       String scanWebID, String query, boolean isPost) throws Exception, I18NException {
+    
+    final String transactionWebID = scanWebID;
+    TransaccioJPA trans = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
 
-    String absoluteRequestPluginBasePath = getAbsoluteRequestPluginBasePath(request,
+    String absoluteRequestPluginBasePath = getAbsoluteRequestPluginBasePath(trans.getPerfil().getUrlBase(),
         getContextWeb(), scanWebID);
     String relativeRequestPluginBasePath = getRelativeRequestPluginBasePath(request,
         getContextWeb(), scanWebID);
@@ -357,30 +363,25 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     return isPublic ? CONTEXTWEB_PUBLIC : CONTEXTWEB_USER;
   }
 
-  /* XYZ ZZZ ESBORRARARAR * */
-
-  public static String getAbsoluteURLBase(HttpServletRequest request) {
-    return request.getScheme() + "://" + request.getServerName() + ":"
-        + +request.getServerPort() + request.getContextPath();
-  }
-
   public static String getRelativeURLBase(HttpServletRequest request) {
     return request.getContextPath();
   }
 
-  protected static String getAbsoluteControllerBase(HttpServletRequest request,
+  
+  protected static String getAbsoluteControllerBase(String urlBase,
       String webContext) {
-    return getAbsoluteURLBase(request) + webContext;
+    return urlBase + webContext;
   }
+  
 
   public static String getRelativeControllerBase(HttpServletRequest request, String webContext) {
     return getRelativeURLBase(request) + webContext;
   }
 
-  protected static String getAbsoluteRequestPluginBasePath(HttpServletRequest request,
+  protected static String getAbsoluteRequestPluginBasePath(String baseUrl,
       String webContext, String scanWebID) {
 
-    String base = getAbsoluteControllerBase(request, webContext);
+    String base = baseUrl + webContext; // getAbsoluteControllerBase(request, webContext);
     return getRequestPluginBasePath(base, scanWebID);
   }
 

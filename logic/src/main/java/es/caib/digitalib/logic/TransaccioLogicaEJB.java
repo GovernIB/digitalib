@@ -177,8 +177,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
   @PermitAll
   public TransaccioJPA crearTransaccio(
       ScanWebSimpleGetTransactionIdRequest requestTransaction,
-      UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String returnURL,
-      String ip) throws I18NException {
+      UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, 
+      String urlBase, String returnURL, String ip) throws I18NException {
 
     String scanWebProfile = requestTransaction.getScanWebProfile();
 
@@ -233,6 +233,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     clonedPerfil.setUtilitzatPerAplicacio(usuariAplicacio != null);
     clonedPerfil.setNomID(null);
     clonedPerfil.setDescripcioID(null);
+    if (urlBase != null) {
+      clonedPerfil.setUrlBase(urlBase);
+    }
     
 
     // XYZ ZZZ ZZZ Falten altres comprovacions

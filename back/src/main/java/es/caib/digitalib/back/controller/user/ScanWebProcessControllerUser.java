@@ -295,7 +295,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       }
 
       TransaccioJPA transaction = transaccioLogicaEjb.crearTransaccio(requestTransaction,
-          null, usuariPersona, urlRetorn, ip);
+          null, usuariPersona, baseUrl, urlRetorn, ip);
       
       final String transactionWebID = transaction.getTransactionWebId();
       

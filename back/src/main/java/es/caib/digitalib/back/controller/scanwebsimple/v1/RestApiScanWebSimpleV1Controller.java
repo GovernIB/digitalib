@@ -234,7 +234,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     String transactionWebID;
     try {
       TransaccioJPA transaccio = transaccioLogicaEjb.crearTransaccio(requestTransaction,
-          usuariAplicacio, null, null, ip);
+          usuariAplicacio, null, null, null, ip);
       
       auditCreateTransaction(usuariAplicacio, transaccio);
       
