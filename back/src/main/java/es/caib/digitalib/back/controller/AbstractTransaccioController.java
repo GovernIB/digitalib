@@ -145,19 +145,19 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       form.addHiddenField(USUARIPERSONAID);
       form.addHiddenField(RETURNURL);
 
-//      // Afegir botos de info sign
-//      if (_jpa.getInfoSignaturaID() != null) {
-//        form.addAdditionalButton(new AdditionalButton(" icon-info-sign icon-white",
-//            INFOSIGNATURAID.fullName, AbstractInfoSignatureController.getContextWeb(isAdmin())
-//                + "/view" + "/" + _jpa.getInfoSignaturaID(), "btn-info"));
-//      }
-//
-//      // Afegir botos de info cust
-//      if (_jpa.getInfoCustodyID() != null) {
-//        form.addAdditionalButton(new AdditionalButton(" icon-info-sign icon-white",
-//            INFOCUSTODYID.fullName, AbstractInfoCustodyController.getContextWeb(isAdmin())
-//                + "/view" + "/" + _jpa.getInfoCustodyID(), "btn-info"));
-//      }
+      // Afegir botos de info sign
+      if (_jpa.getInfoSignaturaID() != null) {
+        form.addAdditionalButton(new AdditionalButton(" icon-info-sign icon-white",
+            INFOSIGNATURAID.fullName, AbstractInfoSignatureController.getContextWeb(isAdmin())
+                + "/view" + "/" + _jpa.getInfoSignaturaID(), "btn-info"));
+      }
+
+      // Afegir botos de info cust
+      if (_jpa.getInfoCustodyID() != null) {
+        form.addAdditionalButton(new AdditionalButton(" icon-info-sign icon-white",
+            INFOCUSTODYID.fullName, AbstractInfoCustodyController.getContextWeb(isAdmin())
+                + "/view" + "/" + _jpa.getInfoCustodyID(), "btn-info"));
+      }
 
       // Afegir Boto de Veure Perfil
       if (isAdmin()) {
@@ -192,7 +192,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
       filterForm.setHiddenFields(ocults);
 
-      filterForm.setOrderBy(TransaccioFields.DATAFI.fullName);
+      filterForm.setOrderBy(TransaccioFields.TRANSACCIOID.fullName);
+      
       filterForm.setOrderAsc(false);
 
 
@@ -758,21 +759,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
           InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
           TransaccioJPA _jpa = transaccioLogicaEjb.findByPrimaryKeyFull(transaccio.getTransaccioID());
           
-          // Afegir botos de info sign
-          if (_jpa.getInfoSignaturaID() != null) {
-            AdditionalButton addInfoSignButton = new AdditionalButton(" icon-pencil icon-white",
-                INFOSIGNATURAID.fullName, AbstractInfoSignatureController.getContextWeb(isAdmin())
-                    + "/view" + "/" + _jpa.getInfoSignaturaID(), "btn-info");
-            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addInfoSignButton);
-          }
-
-          // Afegir botos de info cust
-          if (_jpa.getInfoCustodyID() != null) {
-            AdditionalButton addInfoArxiuButton = new AdditionalButton(" icon-folder-open icon-white",
-                INFOCUSTODYID.fullName, AbstractInfoCustodyController.getContextWeb(isAdmin())
-                    + "/view" + "/" + _jpa.getInfoCustodyID(), "btn-info");
-            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addInfoArxiuButton);
-          }
           
           if (infoCustody.getOriginalFileUrl()!= null && !infoCustody.getOriginalFileUrl().isEmpty()) {
             AdditionalButton addOriginalButton = new AdditionalButton("icon-download-alt icon-white",

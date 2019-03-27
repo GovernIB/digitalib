@@ -37,7 +37,7 @@
   <c:forEach items="${plugins}" var="plugin">
      <button type="button" class="btn btn-large btn-block btn-primary" onclick="location.href='<c:url value="${scancontext}/showscanwebmodule/${plugin.pluginID}/${scanWebID}"/>'">
      <b>${plugin.nom}</b><br>
-     <small>
+     <small style="color: white">
      <i>${plugin.descripcio}</i>
      </small>
      </button>

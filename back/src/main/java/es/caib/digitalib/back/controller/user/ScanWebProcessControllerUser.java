@@ -396,7 +396,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
         break;
         case Constants.PERFIL_US_CUSTODIA_INFO:
           mav.addObject("urlRetorn", request.getContextPath()
-              + "/user/transaccio/custodia/view/" + transaccio.getTransaccioID());
+              + "/user/transaccio/custodia/list/");
         break;
 
         default:
