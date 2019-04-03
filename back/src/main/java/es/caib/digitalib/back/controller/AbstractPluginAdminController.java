@@ -186,8 +186,7 @@ public abstract class AbstractPluginAdminController extends PluginController {
         break;
         
       default:
-        // XYZ ZZZ TRA
-        throw new I18NException("genapp.comodi", "No puc trobar plugin de tipus "  + tipusPlugin);
+        throw new I18NException("genapp.comodi", I18NUtils.tradueix("plugin.tipus.notrobat", String.valueOf(tipusPlugin)));
     }
     
     

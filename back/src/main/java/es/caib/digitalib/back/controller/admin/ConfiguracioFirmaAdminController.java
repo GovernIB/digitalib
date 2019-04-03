@@ -181,7 +181,6 @@ public class ConfiguracioFirmaAdminController extends ConfiguracioFirmaControlle
   public List<StringKeyValue> getReferenceListForUsPoliticaDeFirma(HttpServletRequest request,
       ModelAndView mav, Where where) throws I18NException {
 
-    // XYZ ZZZ FALTEN TRADUCCIONS !!!!
 
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
     __tmp.add(new StringKeyValue("" + Constants.US_POLITICA_DE_FIRMA_NO_USAR, I18NUtils

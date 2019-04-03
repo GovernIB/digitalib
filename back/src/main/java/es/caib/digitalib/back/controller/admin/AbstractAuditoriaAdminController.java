@@ -15,6 +15,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -96,8 +97,7 @@ public abstract class AbstractAuditoriaAdminController extends AuditoriaControll
    Long c = transaccioEjb.count(TransaccioFields.TRANSACCIOID.equal(auditoria.getTransaccioId()));
 
    if (c == null || c == 0) {
-     // XYZ ZZZ TRA
-     HtmlUtils.saveMessageInfo(request, "La transacció ha sigut esborrada");
+     HtmlUtils.saveMessageInfo(request, I18NUtils.tradueix("auditoria.transaccio.esborrada"));
    } else {
      String baseUrl;
      if (auditoriaForm.getAuditoria().isIsApp()) {
@@ -115,8 +115,7 @@ public abstract class AbstractAuditoriaAdminController extends AuditoriaControll
      Long uaID = usuariAplicacioEjb.executeQueryOne(UsuariAplicacioFields.USUARIAPLICACIOID,
          UsuariAplicacioFields.USERNAME.equal(auditoria.getUsernameAplicacio()));
      if (uaID == null) {
-       // XYZ ZZZ TRA
-       HtmlUtils.saveMessageInfo(request, "L'usuari aplicació ha sigut esborrat");
+       HtmlUtils.saveMessageInfo(request, I18NUtils.tradueix("auditoria.usuari.aplicacio.esborrat"));
      } else {
        auditoriaForm.addAdditionalButton(new AdditionalButton(
            " icon-info-sign icon-white", UsuariAplicacioFields._TABLE_TRANSLATION,
@@ -129,8 +128,7 @@ public abstract class AbstractAuditoriaAdminController extends AuditoriaControll
      Long uaID = usuariPersonaEjb.executeQueryOne(UsuariPersonaFields.USUARIPERSONAID,
          UsuariPersonaFields.USERNAME.equal(auditoria.getUsernamePersona()));
      if (uaID == null) {
-       // XYZ ZZZ TRA
-       HtmlUtils.saveMessageInfo(request, "L'usuari persona ha sigut esborrat");
+       HtmlUtils.saveMessageInfo(request, I18NUtils.tradueix("auditoria.usuari.persona.esborrat"));
      } else {
        auditoriaForm.addAdditionalButton(new AdditionalButton(
            " icon-info-sign icon-white", UsuariPersonaFields._TABLE_TRANSLATION,
@@ -223,24 +221,19 @@ public abstract class AbstractAuditoriaAdminController extends AuditoriaControll
   public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
       ModelAndView mav, Where where)  throws I18NException {
    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-   // XYZ ZZZ TRA
-   __tmp.add(new StringKeyValue("" + Constants.AUDIT_TYPE_ANY_ACTION_OVER_TRANSACTION , "Acció genèrica"));
-   __tmp.add(new StringKeyValue("" + Constants.AUDIT_TYPE_CREATE_TRANSACTION, "Creació"));
-   __tmp.add(new StringKeyValue("" + Constants.AUDIT_TYPE_FINISH_INSERT_DATA, "Finalitzada Inserció Dades"));
-   __tmp.add(new StringKeyValue("" + Constants.AUDIT_TYPE_FINISH_SCAN, "Finalitzat Escaneig"));
+   __tmp.add(new StringKeyValue(String.valueOf(Constants.AUDIT_TYPE_ANY_ACTION_OVER_TRANSACTION) , I18NUtils.tradueix("auditoria.tipus."+Constants.AUDIT_TYPE_ANY_ACTION_OVER_TRANSACTION)));
+   __tmp.add(new StringKeyValue(String.valueOf(Constants.AUDIT_TYPE_CREATE_TRANSACTION), I18NUtils.tradueix("auditoria.tipus."+Constants.AUDIT_TYPE_CREATE_TRANSACTION)));
+   __tmp.add(new StringKeyValue(String.valueOf(Constants.AUDIT_TYPE_FINISH_INSERT_DATA), I18NUtils.tradueix("auditoria.tipus."+Constants.AUDIT_TYPE_FINISH_INSERT_DATA)));
+   __tmp.add(new StringKeyValue(String.valueOf(Constants.AUDIT_TYPE_FINISH_SCAN), I18NUtils.tradueix("auditoria.tipus."+Constants.AUDIT_TYPE_FINISH_SCAN)));
    
-   __tmp.add(new StringKeyValue("" + Constants.AUDIT_TYPE_SIGN_INFO, "Informació de Firma"));
-   __tmp.add(new StringKeyValue("" + Constants.AUDIT_TYPE_CUSTODY_INFO, "Informació d'Arxivat"));
-   __tmp.add(new StringKeyValue("" + Constants.AUDIT_TYPE_END_TRANSACITION, "Finalitzada Transacció"));
+   __tmp.add(new StringKeyValue(String.valueOf(Constants.AUDIT_TYPE_SIGN_INFO), I18NUtils.tradueix("auditoria.tipus."+Constants.AUDIT_TYPE_SIGN_INFO)));
+   __tmp.add(new StringKeyValue(String.valueOf(Constants.AUDIT_TYPE_CUSTODY_INFO), I18NUtils.tradueix("auditoria.tipus."+Constants.AUDIT_TYPE_CUSTODY_INFO)));
+   __tmp.add(new StringKeyValue(String.valueOf(Constants.AUDIT_TYPE_END_TRANSACITION), I18NUtils.tradueix("auditoria.tipus."+Constants.AUDIT_TYPE_END_TRANSACITION)));
 
-   __tmp.add(new StringKeyValue("" + Constants.AUDIT_TYPE_CANCEL_USER, "Cancel·lat"));
+   __tmp.add(new StringKeyValue(String.valueOf(Constants.AUDIT_TYPE_CANCEL_USER), I18NUtils.tradueix("auditoria.tipus."+Constants.AUDIT_TYPE_CANCEL_USER)));
 
-   __tmp.add(new StringKeyValue("" + Constants.AUDIT_TYPE_DELETE_TRANSACTION, "Esborrat"));
-   
-//   __tmp.add(new StringKeyValue("3" , "3"));
-//   __tmp.add(new StringKeyValue("4" , "4"));
-//   __tmp.add(new StringKeyValue("5" , "5"));
-//   __tmp.add(new StringKeyValue("6" , "6"));
+   __tmp.add(new StringKeyValue(String.valueOf(Constants.AUDIT_TYPE_DELETE_TRANSACTION), I18NUtils.tradueix("auditoria.tipus."+Constants.AUDIT_TYPE_DELETE_TRANSACTION)));
+
    return __tmp;
  }
   

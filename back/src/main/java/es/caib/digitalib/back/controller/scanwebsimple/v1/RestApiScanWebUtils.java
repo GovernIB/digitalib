@@ -8,6 +8,7 @@ import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleFile;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.NoAvailablePluginException;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.ServerException;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,9 +48,8 @@ public abstract class RestApiScanWebUtils extends RestUtils {
 
  
   public ResponseEntity<ScanWebSimpleError> generateNoAvailablePlugin(String language) {
-    // TODO XYZ ZZZ Traduir
     String msg;
-    msg = "No s'ha trobat cap plugin que pugui realitzar l'operacio sol·licitada.";
+    msg = I18NUtils.tradueix("plugin.notfound");
    
     return new ResponseEntity<ScanWebSimpleError>(new ScanWebSimpleError(msg,
         NoAvailablePluginException.class.getName()), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -245,8 +245,7 @@ public abstract class RestApiScanWebUtils extends RestUtils {
 
     // Checks Globals
     if (loginInfo.getUsuariPersona() != null) {
-      // TODO XYZ ZZZ Traduir
-      throw new RestException("Aquest servei només el poden fer servir els usuari-aplicació");
+      throw new RestException(I18NUtils.tradueix("excepcio.restriccio.usuari.aplicacio"));
     }
 
     // Checks usuari aplicacio

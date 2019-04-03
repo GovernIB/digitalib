@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-
-
-
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.core.utils.Base64;
 import org.jboss.web.tomcat.security.login.WebAuthentication;
 import org.springframework.http.HttpHeaders;
@@ -53,20 +51,20 @@ public class RestUtils {
     try {
       String authHeader = request.getHeader(javax.ws.rs.core.HttpHeaders.AUTHORIZATION);
       if (authHeader == null || authHeader.trim().length() == 0) {
-        final String msg = "No conte capçalera d'autenticació";
+        final String msg = I18NUtils.tradueix("autenticacio.capsalera.no");
         log.warn(" XYZ ZZZ autenticate:: " + msg);
         return msg;
       }
       StringTokenizer st = new StringTokenizer(authHeader);
       if (!st.hasMoreTokens()) {
-        final String msg = "La capçalera d'autenticació està buida";
+        final String msg = I18NUtils.tradueix("autenticacio.capsalera.buida");
         log.warn(" XYZ ZZZ autenticate:: " + msg);
         return msg;
       }
       String basic = st.nextToken();
 
       if (!basic.equalsIgnoreCase("Basic")) {
-        final String msg = "Tipus d'autenticació no suportat " + basic;
+        final String msg = I18NUtils.tradueix("autenticacio.tipus.notsuportat", basic);
         log.warn(" XYZ ZZZ autenticate:: " + msg);
         return msg;
       }
@@ -75,7 +73,7 @@ public class RestUtils {
       log.info("XYZ ZZZ autenticate::Credentials: " + credentials);
       int p = credentials.indexOf(":");
       if (p == -1) {
-        final String msg = "Credentials amb format incorrecte: " + credentials;
+        final String msg = I18NUtils.tradueix("autenticacio.credencials.format.incorrecte", credentials);
         log.warn(" XYZ ZZZ autenticate:: " + msg);
         return msg;
       }
@@ -102,7 +100,7 @@ public class RestUtils {
       log.info("XYZ ZZZ autenticate:: POST AUTENTICATE " + request.getUserPrincipal());
       
       if (!autenticat) {
-        final String msg = "Usuari o contrasenya incorrectes";
+        final String msg = I18NUtils.tradueix("autenticacio.credencials.incorrecte");
         log.error(" XYZ ZZZ autenticate:: " + msg);
         return msg;
       }
@@ -116,7 +114,7 @@ public class RestUtils {
           usuariAplicacioList = usuariAplicacioEjb.select(UsuariAplicacioFields.USERNAME.equal(username));
         } catch (I18NException e) {
           // XYZ ZZZ Idioma ????
-          String msg = "Error consultant UsuariAplicació amb username '" + username + "':" 
+          String msg = I18NUtils.tradueix("autenticacio.error.consulta.usuariapp", username) 
               + I18NLogicUtils.getMessage(e, new Locale(locale));
           log.error(msg,e);
 
@@ -125,8 +123,7 @@ public class RestUtils {
         
         
         if (usuariAplicacioList == null || usuariAplicacioList.size() == 0) {
-          final String msg = "L'usuari " + username
-              + " està autenticat però no s'ha donat d'alta en el DigitalIB";
+          final String msg = I18NUtils.tradueix("autenticacio.usuari.noalta", username);
           log.error(" XYZ ZZZ autenticate:: " + msg);
           return msg;
         }
@@ -134,8 +131,7 @@ public class RestUtils {
         UsuariAplicacio usuariAplicacio = usuariAplicacioList.get(0);
         
         if (!usuariAplicacio.isActiu()) {
-          // XYZ ZZZ Idioma ????
-          return "L'usuari aplicació " + usuariAplicacio.getUsername() + " no està actiu";
+          return I18NUtils.tradueix("autenticacio.usuari.noactiu", usuariAplicacio.getUsername());
         }
        
         Set<GrantedAuthority> seyconAuthorities = new HashSet<GrantedAuthority>();
@@ -159,7 +155,7 @@ public class RestUtils {
 
     } catch (Exception e) {
 
-      final String msg = "Error desconegut intentant autenticar petició REST: " + e.getMessage();
+      final String msg = I18NUtils.tradueix("autenticacio.error.desconegut.rest") + e.getMessage();
       log.error(" XYZ ZZZ autenticate:: " + msg, e);
       return msg;
     }

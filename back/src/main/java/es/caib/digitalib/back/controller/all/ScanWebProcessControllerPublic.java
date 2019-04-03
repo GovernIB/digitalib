@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,16 +40,13 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
       transaccio = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
 
       if (transaccio == null) {
-        // XYZ ZZZ ZZZ Traduir
-        throw new Exception("NO existeix la transacció amb ID " + transactionWebID);
+        throw new Exception(I18NUtils.tradueix("transaccio.noexisteix", transactionWebID));
       }
 
       languageUI = transaccio.getLanguageUI();
 
       if (transaccio.getEstatCodi() < 0) {
-        // XYZ ZZZ ZZZ Traduir
-        String msg = "La transacció amb ID " + transactionWebID + " te un estat no vàlid ("
-            + transaccio.getEstatCodi() + ") per iniciar el proces d'escaneig.";
+        String msg = I18NUtils.tradueix("transaccio.estat.novalid", String.valueOf(transactionWebID), String.valueOf(transaccio.getEstatCodi()));
         throw new Exception(msg);
       }
     }

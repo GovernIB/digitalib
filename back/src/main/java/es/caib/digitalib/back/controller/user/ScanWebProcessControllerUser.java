@@ -127,7 +127,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       if (usuariPersonaID == null) {
         // XYZ ZZZ Traduir
         HtmlUtils.saveMessageError(request,
-            "No hi ha informació d'aquet usuari. Consulti amb el seu administrador");
+            I18NUtils.tradueix("scanwebget.usuari.noinfo"));
         ModelAndView mav = new ModelAndView(new RedirectView("/canviarPipella/user", true));
         return mav;
       }
@@ -137,11 +137,10 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       Long configGrupID = usuariPersona.getConfiguracioGrupID();
 
       if (configGrupID == null) {
-        // XYZ ZZZ Traduir
         HtmlUtils
             .saveMessageError(
                 request,
-                "No està assignat a cap Configuració de Grup. Contacti amb el seu administrador per solventar aquest problema.");
+                I18NUtils.tradueix("scanwebget.usuari.nogrup"));
         ModelAndView mav = new ModelAndView(new RedirectView("/canviarPipella/user", true));
         return mav;
       }
@@ -167,8 +166,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
         break;
 
         default:
-          // XYZ ZZZ Traduir
-          HtmlUtils.saveMessageError(request, "Tipus Perfil desconegut " + tipusPerfil);
+          HtmlUtils.saveMessageError(request, I18NUtils.tradueix("scanwebget.perfil.desconegut", String.valueOf(tipusPerfil)));
           ModelAndView mav = new ModelAndView(new RedirectView(request.getContextPath()
               + "/canviarPipella/user", false));
           return mav;
@@ -331,10 +329,9 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
     } catch (I18NException e) {
 
-      // XYZ ZZZ
       e.printStackTrace();
 
-      HtmlUtils.saveMessageError(request, "Error general iniciant el proces d'escaneig: "
+      HtmlUtils.saveMessageError(request, I18NUtils.tradueix("scanwebget.error.general")
           + I18NUtils.getMessage(e));
       ModelAndView mav = new ModelAndView(new RedirectView(request.getContextPath()
           + "/canviarPipella/user", false));
@@ -354,7 +351,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     
     final int auditType =  Constants.AUDIT_TYPE_CREATE_TRANSACTION;
 
-    final String msg = "Creada transacció de Persona amb ID " +  transaccio.getTransaccioID();
+    final String msg = I18NUtils.tradueix("transaccio.aplicacio.crear", String.valueOf(transaccio.getTransaccioID()));
     auditoriaLogicaEjb.audita(transaccio, isApp, msg , additionalInfo, auditType, null, usuariPersona.getUsername());;
   }
 
@@ -381,9 +378,8 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     
 
     if (status == ScanWebSimpleStatus.STATUS_FINAL_OK) {
-      // TODO  XYZ ZZZ Traduir
       HtmlUtils
-          .saveMessageSuccess(request, "Operacio realitzada correctament");
+          .saveMessageSuccess(request, I18NUtils.tradueix("scanwebget.operacio.ok"));
 
       switch (transaccio.getPerfil().getUsPerfil()) {
         case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
@@ -400,7 +396,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
         break;
 
         default:
-          // XYZ ZZZ Llançar error
+          throw new Exception(I18NUtils.tradueix("scanwebget.operacio.error"));
       }
 
     } else {
@@ -409,26 +405,23 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
         switch (status) {
           case ScanWebSimpleStatus.STATUS_IN_PROGRESS:
-            // XYZ ZZZ
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-            transaccio.setEstatMissatge("Estat inconsistent: EN PROGRESS");
+            transaccio.setEstatMissatge(I18NUtils.tradueix("scanwebget.operacio.inconsistent.progress"));
           break;
           case ScanWebSimpleStatus.STATUS_EXPIRED:
-            // XYZ ZZZ
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-            transaccio.setEstatMissatge("Estat inconsistent: EXPIRED");
+            transaccio.setEstatMissatge(I18NUtils.tradueix("scanwebget.operacio.inconsistent.expirat"));
           break;
           case ScanWebSimpleStatus.STATUS_REQUESTED_ID:
-            // XYZ ZZZ
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-            transaccio.setEstatMissatge("Estat inconsistent: REQUESTEDID");
+            transaccio.setEstatMissatge(I18NUtils.tradueix("scanwebget.operacio.inconsistent.requested"));
           break;
           case ScanWebSimpleStatus.STATUS_CANCELLED:
             // OK
           break;
 
           default:
-            transaccio.setEstatMissatge("Estat final desconegut: " + status);
+            transaccio.setEstatMissatge(I18NUtils.tradueix("scanwebget.operacio.desconegut", String.valueOf(status)));
         }
         transaccioLogicaEjb.update(transaccio);
 

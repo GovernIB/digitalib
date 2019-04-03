@@ -1,5 +1,18 @@
 package es.caib.digitalib.back.controller.scanwebsimple.v1;
 
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import org.fundaciobit.apisib.apiscanwebsimple.v1.ApiScanWebSimple;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuInfo;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfile;
@@ -48,19 +61,6 @@ import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
-
-import javax.ejb.EJB;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created 19/11/18 10:10
@@ -114,7 +114,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
       // Checks Globals
       if (loginInfo.getUsuariPersona() != null) {
-        throw new Exception("Aquest servei només el poden fer servir el usuariAPP XYZ ZZZ");
+        throw new Exception(I18NUtils.tradueix("excepcio.nomes.usuariapp"));
       }
 
       // Checks usuari aplicacio
@@ -155,8 +155,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
     } catch (Throwable th) {
 
-      // XYZ ZZZ Traduir XYZ ZZZ ZZZ
-      String msg = "Error desconegut retornant el perfils d'un usuari aplicacio: "
+      String msg = I18NUtils.tradueix("error.desconegut.retornar.usuaris")
           + th.getMessage();
 
       log.error(msg, th);
@@ -184,21 +183,20 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     try {
       cleanExpiredTransactions();
     } catch (I18NException e2) {
-      // XYZ ZZZ ZZZ
-      String msg = "Error fent neteja de transaccions caducades: "
+      String msg = I18NUtils.tradueix("error.neteja.traduccions.caducades")
           + I18NLogicUtils.getMessage(e2, new Locale(language));
       return generateServerError(msg, e2.getCause());
     }
 
     // Check de requestTransactionID
     if (requestTransaction == null) {
-      return generateServerError("El parametre d'entrada no pot ser null.");
+      return generateServerError(I18NUtils.tradueix("error.entrada.parametre.null"));
     }
 
     // Valida Idioma
     String lang = requestTransaction.getLanguageUI();
     if (lang == null || lang.trim().length() == 0) {
-      return generateServerError("El camp LanguageUI del tipus FirmaSimpleCommonInfo no pot ser null o buit.");
+      return generateServerError(I18NUtils.tradueix("error.language.notnull"));
     }
 
     // XYZ ZZZ ZZZ Valida Idioma DOC
@@ -206,7 +204,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     // Valida Perfil
     String scanWebProfile = requestTransaction.getScanWebProfile();
     if (scanWebProfile == null || scanWebProfile.trim().length() == 0) {
-      return generateServerError("El camp scanWebProfile no pot ser null o buit.");
+      return generateServerError(I18NUtils.tradueix("error.scanwebprofile.notnull"));
     }
 
     UsuariAplicacioJPA usuariAplicacio = usuariAplicacioCache.get();
@@ -218,9 +216,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
         || view == ScanWebSimpleGetTransactionIdRequest.VIEW_IFRAME) {
       // OK
     } else {
-      // XYZ ZZZ ZZZ
-      String msg = "La transacció s'ha intentat crear amb un id de vista desconegut (" + view
-          + ")";
+      String msg = I18NUtils.tradueix("error.transaccio.desconegut.idvista", String.valueOf(view));
       return generateServerError(msg);
 
     }
@@ -241,9 +237,9 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       
       transactionWebID = transaccio.getTransactionWebId();
     } catch (I18NException e) {
-      // XYZ ZZZ YTraduir
-      return generateServerError("Error creant la transaccio amb Perfil: "
-          + I18NLogicUtils.getMessage(e, new Locale(lang)));
+      String msg = I18NUtils.tradueix("error.transaccio.crear")
+          + I18NLogicUtils.getMessage(e, new Locale(lang));
+      return generateServerError(msg);
     }
 
     HttpHeaders headers = addAccessControllAllowOrigin();
@@ -269,7 +265,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     
     Auditoria audit = new AuditoriaBean(new Timestamp(System.currentTimeMillis()),
         transaction.getTransaccioID(), Constants.AUDIT_TYPE_CREATE_TRANSACTION,
-        "Creada transacció d'Aplicació amb ID " +  transaction.getTransaccioID(),
+        I18NUtils.tradueix("transaccio.aplicacio.crear",String.valueOf(transaction.getTransaccioID())),
         additionalInfo,isApp,  usuariAplicacio.getUsername(), remoteUsernamePerson);
     
     auditoriaLogicaEjb.create(audit);
@@ -295,8 +291,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
     try {
       cleanExpiredTransactions();
     } catch (I18NException e2) {
-      // XYZ ZZZ ZZZ
-      String msg = "Error fent neteja de transaccions caducades: "
+      String msg = I18NUtils.tradueix("error.transaccio.neteja.caducats")
           + I18NLogicUtils.getMessage(e2, new Locale(languageUI));
       return generateServerError(msg, e2.getCause());
     }
@@ -314,15 +309,12 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
         transaccio = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
         if (transaccio == null) {
-          // XYZ ZZZ ZZZ
-          String msg = "NO existeix la transacció amb ID " + transactionWebID;
+          String msg = I18NUtils.tradueix("transaccio.noexisteix", transactionWebID);
           return generateServerError(msg);
         }
 
         if (transaccio.getEstatCodi() < 0) {
-          // XYZ ZZZ ZZZ
-          String msg = "La transacció amb ID " + transactionWebID + " te un estat no vàlid ("
-              + transaccio.getEstatCodi() + ") per iniciar el proces d'escaneig.";
+          String msg = I18NUtils.tradueix("transaccio.estat.novalid", String.valueOf(transactionWebID), String.valueOf(transaccio.getEstatCodi()));
           return generateServerError(msg);
         }
 
@@ -416,8 +408,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
     } catch (Throwable th) {
 
-      // XYZ ZZZ ZZZ TRADUIR
-      String msg = "Error desconegut iniciant el proces de Firma: " + th.getMessage();
+      String msg = I18NUtils.tradueix("error.desconegut.firma") + th.getMessage();
 
       log.error(msg, th);
 
@@ -453,8 +444,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       return re;
 
     } catch (Throwable th) {
-      final String msg = "Error desconegut intentant recuperar informació de l'estat de la transacció: "
-          + transactionID + ": " + th.getMessage();
+      final String msg = I18NUtils.tradueix("error.desconegut.transaccio.estat.informacio", transactionID)
+          + ": " + th.getMessage();
 
       log.error(msg, th);
 
@@ -484,7 +475,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
       cleanExpiredTransactions();
     } catch (I18NException e2) {
       // XYZ ZZZ ZZZ
-      String msg = "Error fent neteja de transaccions caducades: "
+      String msg = I18NUtils.tradueix("error.transaccio.neteja.caducats")
           + I18NLogicUtils.getMessage(e2, new Locale(languageUI));
       return generateServerError(msg, e2.getCause());
     }
@@ -647,9 +638,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils {
 
     } catch (Throwable th) {
 
-      // TRADUIR
-      final String msg = "Error desconegut intentant recuperar resultat de"
-          + " l'escaneig amb numero transacció: " + transactionWebID + ": " + th.getMessage();
+      final String msg = I18NUtils.tradueix("error.desconegut.transaccio.numero.escaneig", transactionWebID) 
+          + ": " + th.getMessage();
 
       log.error(msg, th);
 

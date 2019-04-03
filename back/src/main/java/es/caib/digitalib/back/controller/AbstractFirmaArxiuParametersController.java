@@ -216,7 +216,7 @@ public abstract class AbstractFirmaArxiuParametersController extends
       TransaccioForm transaccioForm, Throwable __e) {
     if (__e == null) {
 
-      final String msg = "Final d'inserció de dades addicionals per escaneig/firma/arxivat";
+      final String msg = I18NUtils.tradueix("transaccio.firma.insercio.dades.ok");
       final boolean isApp = (transaccioForm.getTransaccio().getUsuariAplicacioId() != null);
       final String additionalInfo = null;
       final int auditType = Constants.AUDIT_TYPE_FINISH_INSERT_DATA;
@@ -253,7 +253,7 @@ public abstract class AbstractFirmaArxiuParametersController extends
       swc.getStatus().setStatus(ScanWebStatus.STATUS_CANCELLED);
       
       // AUDITA
-      final String msg = "Cancelada transaccio durant inseció de dades";
+      final String msg = I18NUtils.tradueix("transaccio.firma.insercio.dades.cancelat");
       final boolean isApp = isPublic();
       final String additionalInfo = null;
       final int auditType = Constants.AUDIT_TYPE_CANCEL_USER;

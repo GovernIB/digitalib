@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,7 +60,7 @@ public class UserController {
       HtmlUtils
           .saveMessageError(
               request,
-              "XYZ ZZZ No té Configuració de Grup assignada. Consulti amb el seu administrador per solucionar el problema");
+              I18NUtils.tradueix("scanwebget.usuari.nogrup"));
 
     } else if (conf.getPerfilCopiaAutenticaID() == null
         && conf.getPerfilNomesEscaneigID() == null && conf.getPerfilCustodiaID() == null
@@ -69,7 +70,7 @@ public class UserController {
       HtmlUtils
           .saveMessageError(
               request,
-              "XYZ ZZZ La Configuració de Grup que té Assignada no té cap perfil d'escaneig actiu. Consulti amb el seu administrador per solucionar el problema");
+              I18NUtils.tradueix("usercontroller.grup.perfilscan.no"));
 
     } else {
       
@@ -92,11 +93,10 @@ public class UserController {
           || ((conf.getPerfilCustodiaID() != null || conf.getPerfilCustodia2ID() != null) && LoginInfo.hasRole(Constants.ROLE_CUST))) {
         // OK
       } else {
-  
-          HtmlUtils
+            HtmlUtils
               .saveMessageError(
                   request,
-                  "XYZ ZZZ Cap dels perfils d'escaneig, disponibles a Configuració de Grup, no corresponen amb els permisos d'escaneig que té vosté. Consulti amb el seu administrador per solucionar el problema");
+                  I18NUtils.tradueix("usercontroller.perfilscan.permisos.no"));
       }
     }
 

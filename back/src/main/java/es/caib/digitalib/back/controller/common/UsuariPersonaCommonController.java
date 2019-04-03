@@ -3,6 +3,7 @@ package es.caib.digitalib.back.controller.common;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,9 +44,8 @@ public class UsuariPersonaCommonController extends UsuariPersonaController {
     UsuariPersona up = usuariPersonaForm.getUsuariPersona();
     // Comprovam que no es modifiqui un usuari que no es amb el que t'has logueat
     if (!up.getUsername().equals(LoginInfo.getInstance().getUsername())) {
-      // XYZ ZZZ Traduir
       throw new I18NException("error.unknown",
-          "No es pot modificar un usuari persona que no és el teu");
+          I18NUtils.tradueix("error.desconegut.modificar.persona"));
     }
 
     if (usuariPersonaForm.getUsuariPersona().getEmail() != null) {

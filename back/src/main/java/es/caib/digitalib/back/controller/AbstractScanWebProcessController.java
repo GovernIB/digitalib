@@ -133,8 +133,7 @@ public abstract class AbstractScanWebProcessController {
 
       transaccio = transaccioLogicaEjb.searchTransaccioByTransactionWebID(transactionWebID);
       if (transaccio == null) {
-        // XYZ ZZZ ZZZ
-        throw new Exception("NO existeix la transacció amb ID " + transactionWebID);
+        throw new Exception(I18NUtils.tradueix("transaccio.noexisteix", transactionWebID));
       }
 
       // if (transaccio.getEstatcodi() < 0) {
@@ -156,7 +155,7 @@ public abstract class AbstractScanWebProcessController {
     // Auditoria
     final boolean isApp = isPublic();
     {
-      final String msg = "Finalitzat proces d'escaneig (" + status + ")";
+      final String msg = I18NUtils.tradueix("scanwebprocess.scan.proces.ok", String.valueOf(status));
       final int auditType = Constants.AUDIT_TYPE_FINISH_SCAN;
       String additionalInfo = scanCodeToString(status, swc);
       auditoriaLogicaEjb.audita(transaccio, msg, additionalInfo, auditType, isApp);
@@ -225,11 +224,9 @@ public abstract class AbstractScanWebProcessController {
 
           transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
           if (listDocs.size() == 0) {
-            // XYZ ZZZ Traduir
-            transaccio.setEstatMissatge(" L'usuari no ha escanejat cap fitxer.");
+            transaccio.setEstatMissatge(I18NUtils.tradueix("scanwebprocess.scan.fitxer.no"));
           } else {
-            // XYZ ZZZ Traduir
-            transaccio.setEstatMissatge(" L'usuari ha escanejat més d'1 fitxer.");
+            transaccio.setEstatMissatge(I18NUtils.tradueix("scanwebprocess.scan.fitxer.molts"));
           }
         }
       }
@@ -249,9 +246,7 @@ public abstract class AbstractScanWebProcessController {
       break;
 
       default: {
-        // XYZ ZZZ Traduir
-        String inconsistentState = "El mòdul d´escaneig ha finalitzat inesperadament"
-            + " amb un codi d'estat desconegut " + status;
+        String inconsistentState = I18NUtils.tradueix("scanwebprocess.scan.proces.error.desconegut", String.valueOf(status));
         transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
         transaccio.setEstatMissatge(inconsistentState);
         transaccio.setEstatExcepcio(new Exception().toString()); // XYZ
@@ -266,14 +261,13 @@ public abstract class AbstractScanWebProcessController {
     if (transaccio.getEstatCodi() != ScanWebStatus.STATUS_FINAL_OK) {
 
       if (transaccio.getEstatMissatge() == null) {
-        // XYZ ZZZ
         transaccio
-            .setEstatMissatge("Error desconegut ja que no s'ha definit el missatge de l'error !!!!!");
+            .setEstatMissatge(I18NUtils.tradueix("scanwebprocess.transaccio.missatge.error.desconegut"));
       }
 
-      final String msg = "Error durant el procés de Digitalització (" + status + ")";
+      final String msg = I18NUtils.tradueix("scanwebprocess.scan.proces.digitalitzacio.error", String.valueOf(status));
       final int auditType = Constants.AUDIT_TYPE_ANY_ACTION_OVER_TRANSACTION;
-      final String additionalInfo = "Error Missatge: " + transaccio.getEstatMissatge();
+      final String additionalInfo = I18NUtils.tradueix("scanwebprocess.scan.proces.error.missatge", transaccio.getEstatMissatge());
       // XYZ ZZZ falta afegir Excepció sense superar el 300 caracters
 
       auditoriaLogicaEjb.audita(transaccio, msg, additionalInfo, auditType, isApp);
@@ -311,31 +305,30 @@ public abstract class AbstractScanWebProcessController {
    */
   protected String scanCodeToString(int status, ScanWebConfig swc) {
 
-    // XYZ ZZZ Traduir
     final String additionalInfo;
     switch (status) {
       case ScanWebStatus.STATUS_FINAL_OK:
-        additionalInfo = "Estat: FINAL OK";
+        additionalInfo = I18NUtils.tradueix("scanwebprocess.scan.estat.ok");
       break;
       case ScanWebStatus.STATUS_IN_PROGRESS:
-        additionalInfo = "Estat: EN PROGRES";
+        additionalInfo = I18NUtils.tradueix("scanwebprocess.scan.estat.progres");
       break;
 
       case ScanWebStatus.STATUS_FINAL_ERROR:
-        additionalInfo = "Estat: FINAL ERROR\n" + "Error: " + swc.getStatus().getErrorMsg();
+        additionalInfo = I18NUtils.tradueix("scanwebprocess.scan.estat.error") + "\nError: " + swc.getStatus().getErrorMsg();
       // XYZ ZZZ Afegir Excepció si no val null. Controlar que no superi màxim
 
       break;
       case ScanWebStatus.STATUS_CANCELLED:
-        additionalInfo = "Estat: CANCELAT";
+        additionalInfo = I18NUtils.tradueix("scanwebprocess.scan.estat.cancelat");
       break;
 
       case ScanWebStatus.STATUS_INITIALIZING:
-        additionalInfo = "Estat: INICIALITZANT";
+        additionalInfo = I18NUtils.tradueix("scanwebprocess.scan.estat.inicialitzant");
       break;
 
       default:
-        additionalInfo = "Estat: [DESCONEGUT]";
+        additionalInfo = I18NUtils.tradueix("scanwebprocess.scan.estat.desconegut");
       break;
     }
 
@@ -367,7 +360,7 @@ public abstract class AbstractScanWebProcessController {
     } catch (I18NException e) {
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge("XYZ ZZZ Error intentant recuperar el fitxer escanejat: "
+      transaccio.setEstatMissatge(I18NUtils.tradueix("scanwebprocess.scan.fitxer.recuperar.error")
           + I18NUtils.getMessage(e));
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
 
@@ -389,14 +382,14 @@ public abstract class AbstractScanWebProcessController {
 
     Locale locale = new Locale(transaccio.getLanguageUI());
     
-    String tipusStr = (tipus == Constants.TIPUS_CUSTODIA_ARXIU ? "de Custòdia (API Document Custody)" : "d'Arxivat (API Arxiu)");
+    String tipusStr = (tipus == Constants.TIPUS_CUSTODIA_ARXIU ? I18NUtils.tradueix("scanwebprocess.scan.custodia") : I18NUtils.tradueix("scanwebprocess.scan.arxiu"));
     
     final boolean isApp = isPublic();
     
     final int auditType = Constants.AUDIT_TYPE_CUSTODY_INFO;
     String[] users;
     {
-      final String msg = "Inici Procés "+ tipusStr;
+      final String msg = I18NUtils.tradueix("scanwebprocess.scan.inici")+ tipusStr;
       final String additionalInfo = null;
       users = auditoriaLogicaEjb.audita(transaccio, msg, additionalInfo, auditType, isApp);
     }
@@ -416,7 +409,7 @@ public abstract class AbstractScanWebProcessController {
 
     {
       final String additionalInfo;
-      String msg = "Final Procés " + tipusStr + ": ";
+      String msg = I18NUtils.tradueix("scanwebprocess.scan.final") + tipusStr + ": ";
       if (infoCust == null) {
         msg = msg + "ERROR";
         additionalInfo = null;
@@ -455,8 +448,7 @@ public abstract class AbstractScanWebProcessController {
     final int auditType = Constants.AUDIT_TYPE_SIGN_INFO;
     String[] users;
     {
-      final String msg = "Inici Procés de Firma ("
-          + (isApiFirmaSimple ? "Api Firma Simple" : "Api Firma en Servidor") + ")";
+      final String msg = I18NUtils.tradueix("scanwebprocess.scan.inici.firma", (isApiFirmaSimple ? "Api Firma Simple" : "Api Firma en Servidor"));
       users = auditoriaLogicaEjb.audita(transaccio, msg, additionalInfo, auditType, isApp);
     }
 
@@ -466,9 +458,9 @@ public abstract class AbstractScanWebProcessController {
       // throw new Exception();
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge("XYZ ZZZ TIPUS_APIFIRMASIMPLE_EN_SERVIDOR no suportat  ");
+      transaccio.setEstatMissatge(I18NUtils.tradueix("scanwebprocess.scan.firmasimple.suportat.no"));
 
-      final String msg = "APIFIRMASIMPLE_EN_SERVIDOR no suportada";
+      final String msg = I18NUtils.tradueix("scanwebprocess.scan.firmasimple.suportat.no");
       auditoriaLogicaEjb.audita(transaccio, isApp, msg, additionalInfo, auditType, users[0],
           users[1]);
 

@@ -528,7 +528,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       }
 
       StringBuffer bff = new StringBuffer("<br/>----------------------------------------------------------------------------------------"
-          + "<br><br>"+I18NLogicUtils.tradueix(loc, "email.addicional")+"<br><br>   ");
+          + "<br><br>"+I18NUtils.tradueix("email.addicional")+"<br><br>   ");
       contingutExtra = bff.toString() + "\""+ contingutExtra;
       bff = new StringBuffer("<br><br/>----------------------------------------------------------------------------------------");
       contingutExtra = contingutExtra + "\"" + bff.toString();
@@ -539,8 +539,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         em = em.trim();
         
         EmailUtil.postMail(subject, message, isHtml, Configuracio.getAppEmail(), fitxer, em);
-     //  XYZ ZZZ TRA
-        // email.custody.success=Enviat correctament el document a " + email
         HtmlUtils.saveMessageSuccess(request, I18NLogicUtils.tradueix(loc, "email.custody.success", em));
       }
       
@@ -548,8 +546,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
       return getRedirectWhenCancel(request, transaccioID);
 
     } catch (Throwable e) {
-      // XYZ ZZZ TRA
-      String msg = "Error desconegut intentant enviar un correu: " + e.getMessage();
+      String msg = I18NUtils.tradueix("transaccio.mail.enviar.error.desconegut", e.getMessage());
       log.error(msg, e);
       HtmlUtils.saveMessageError(request, msg);
       return getRedirectWhenCancel(request, transaccioID);
@@ -757,8 +754,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         if (perfil.getUsPerfil() == Constants.PERFIL_US_CUSTODIA_INFO) {
 
           InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
-          TransaccioJPA _jpa = transaccioLogicaEjb.findByPrimaryKeyFull(transaccio.getTransaccioID());
-          
           
           if (infoCustody.getOriginalFileUrl()!= null && !infoCustody.getOriginalFileUrl().isEmpty()) {
             AdditionalButton addOriginalButton = new AdditionalButton("icon-download-alt icon-white",
@@ -801,8 +796,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         AdditionalButton additionalButton = new AdditionalButton("icon-envelope icon-white",
             "enviar.email", "javascript:enviarEmail(" + transaccio.getTransaccioID() + ", 'show')",
             "btn-warning");
-
-        // getContextWeb() + "/enviaremail/" + transaccio.getTransaccioID()
 
         filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), additionalButton);
 
