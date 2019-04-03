@@ -42,6 +42,7 @@ import es.caib.digitalib.model.entity.Plugin;
 import es.caib.digitalib.model.entity.UsuariPersona;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
+import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -391,8 +392,13 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
               + "/user/transaccio/copiaautentica/view/" + transaccio.getTransaccioID());
         break;
         case Constants.PERFIL_US_CUSTODIA_INFO:
-          mav.addObject("urlRetorn", request.getContextPath()
+          if (Configuracio.isCAIB()) {
+            mav.addObject("urlRetorn", request.getContextPath()          
               + "/user/transaccio/custodia/list/");
+          } else {
+            mav.addObject("urlRetorn", request.getContextPath()          
+                + "/user/transaccio/custodia/view/" + transaccio.getTransaccioID());
+          }
         break;
 
         default:
