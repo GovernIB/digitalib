@@ -13,6 +13,7 @@ import es.caib.digitalib.back.form.webdb.UsuariPersonaForm;
 import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.jpa.UsuariPersonaJPA;
 import es.caib.digitalib.model.entity.UsuariPersona;
+import es.caib.digitalib.utils.Configuracio;
 
 /**
  * 
@@ -53,11 +54,19 @@ public class UsuariPersonaCommonController extends UsuariPersonaController {
     }
     usuariPersonaForm.addReadOnlyField(USERNAME);
     usuariPersonaForm.addReadOnlyField(NIF);
-    usuariPersonaForm.addReadOnlyField(ROLECOAU);
-    usuariPersonaForm.addReadOnlyField(ROLESCAN);
-    usuariPersonaForm.addReadOnlyField(ROLECUST);
-    usuariPersonaForm.addReadOnlyField(CONFIGURACIOGRUPID);
-
+    
+    if (Configuracio.isCAIB()) {
+      usuariPersonaForm.addHiddenField(CONFIGURACIOGRUPID);
+      usuariPersonaForm.addHiddenField(ROLECUST);
+      usuariPersonaForm.addHiddenField(ROLECOAU);
+      usuariPersonaForm.addHiddenField(ROLESCAN);
+    } else {
+      usuariPersonaForm.addReadOnlyField(ROLECOAU);
+      usuariPersonaForm.addReadOnlyField(ROLESCAN);
+      usuariPersonaForm.addReadOnlyField(ROLECUST);
+      usuariPersonaForm.addReadOnlyField(CONFIGURACIOGRUPID);
+    }
+        
     usuariPersonaForm.setDeleteButtonVisible(false);
     usuariPersonaForm.setCancelButtonVisible(false);
     
