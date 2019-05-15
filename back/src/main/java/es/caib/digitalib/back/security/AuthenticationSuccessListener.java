@@ -17,9 +17,6 @@ import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
 import org.fundaciobit.pluginsib.userinformation.UserInfo;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
-
-import es.caib.digitalib.back.security.LoginInfo;
-
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
@@ -96,7 +93,14 @@ public class AuthenticationSuccessListener implements
 
     boolean necesitaConfigurar = false;
 
-    if (usuariPersona == null) {
+    // Si és CAIB, sense rol no feim res 
+    boolean potEntrar = true;
+    if (Configuracio.isCAIB()) {
+      if (!containsRoleUser && !containsRoleAdmin) {
+        potEntrar = false;
+      }
+    }
+    if (usuariPersona == null && potEntrar) {
       // Revisar si és un Administrador que entra per primera vegada
       // if (isDebug) {
       // log.debug("Configuracio.getDefaultEntity() = ]" +
