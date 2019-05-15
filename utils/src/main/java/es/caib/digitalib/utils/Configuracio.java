@@ -53,5 +53,9 @@ public class Configuracio implements Constants {
   public static Long getMaxUploadSizeInBytes() {
     return Long.getLong(DIGITALIB_PROPERTY_BASE + "maxuploadsizeinbytes");
   }
+  
+  public static String getPublicCsvUrl() {
+    return System.getProperty(DIGITALIB_PROPERTY_BASE + "publiccsvurl");
+  }
 
 }

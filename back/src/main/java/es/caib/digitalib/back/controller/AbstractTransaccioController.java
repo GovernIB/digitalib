@@ -442,7 +442,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
           
           // email.custody.csv=Pot accedir al document a traves de la següent adreça {0} indicant el següent CSV {1}
           //String msg = I18NLogicUtils.tradueix(loc, "email.custody.csv", info.getCsvValidationWeb(), info.getCsv());
-          String msg = I18NLogicUtils.tradueix(loc, "email.custody.csvurl", "<a href=\"" + info.getCsvValidationWeb() + "view.xhtml?hash=" + info.getCsv()+"\">aquí</a>");
+          String msg = I18NLogicUtils.tradueix(loc, "email.custody.csvurl", "<a href=\"" + Configuracio.getPublicCsvUrl() + "view.xhtml?hash=" + info.getCsv()+"\">aquí</a>");
           stb.append("<li>").append(msg).append("</li></ul>");
           message = stb.toString();
           fitxer = null;
