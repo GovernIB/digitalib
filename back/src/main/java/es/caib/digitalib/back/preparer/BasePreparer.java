@@ -16,14 +16,13 @@ import org.apache.tiles.preparer.ViewPreparerSupport;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-
-import es.caib.digitalib.back.security.LoginInfo;
-
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
+import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.model.fields.TransaccioQueryPath;
+import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 
@@ -117,9 +116,13 @@ public class BasePreparer extends ViewPreparerSupport implements Constants {
       for (int tipusPerfil : perfils) {
 
         try {
-          Long count = transaccioEjb.count(Where.AND(
+          Where w = Where.AND(
               TransaccioFields.USUARIPERSONAID.equal(usuariPersonaID),
-              tqp.PERFIL().USPERFIL().equal(tipusPerfil)));
+              tqp.PERFIL().USPERFIL().equal(tipusPerfil));
+          if (Configuracio.isCAIB()) {
+            w = Where.AND(TransaccioFields.ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_OK), w);
+          }
+          Long count = transaccioEjb.count(w);
           
           request.put("transaccionsuser_" + tipusPerfil, count);
           

@@ -17,6 +17,7 @@ import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.model.fields.TransaccioQueryPath;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
+import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -64,8 +65,11 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
       wPerfil = tqp.PERFIL().USPERFIL().equal(tipusPerfil);
     }
 
-    return Where.AND(TransaccioFields.USUARIPERSONAID.equal(usuariPersonaID), wPerfil);
-
+    wPerfil = Where.AND(TransaccioFields.USUARIPERSONAID.equal(usuariPersonaID), wPerfil);
+    if (Configuracio.isCAIB()) {
+      wPerfil = Where.AND(TransaccioFields.ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_OK), wPerfil);
+    }
+    return wPerfil;
   }
 
   @Override

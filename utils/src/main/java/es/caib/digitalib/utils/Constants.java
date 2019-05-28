@@ -156,4 +156,11 @@ public interface Constants {
   // 1=> usar politica d'aquesta configuracio
   public static final int US_POLITICA_DE_FIRMA_OBLIGATORI_DEFINIT = 1;
 
+  public static final int TRANSACCIO_ESTAT_CODI_EXPIRAT = -3;
+  public static final int TRANSACCIO_ESTAT_CODI_CANCELAT = -2;
+  public static final int TRANSACCIO_ESTAT_CODI_ERROR = -1;
+  public static final int TRANSACCIO_ESTAT_CODI_ID = 0;
+  public static final int TRANSACCIO_ESTAT_CODI_ENPROGRES = 1;
+  public static final int TRANSACCIO_ESTAT_CODI_OK = 2;
+  
 }
