@@ -9284,11 +9284,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[Sign] Funcionari Nom</string> 
+            <string>Funcionari Nom</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[Sign] Funcionario Nombre</string> 
+            <string>Funcionario Nombre</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -9323,11 +9323,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[Sign] Funcionari NIF</string> 
+            <string>Funcionari NIF</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[Sign] Funcionario NIF</string> 
+            <string>Funcionario NIF</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -9362,11 +9362,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[Sign] Idioma Document</string> 
+            <string>Idioma Document</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[Sign] Idioma Documento</string> 
+            <string>Idioma Documento</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -9407,11 +9407,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiureqparam] Document Estat Elaboració</string> 
+            <string>Document Estat Elaboració</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiureqparam] Documento Estato Elaboración</string> 
+            <string>Documento Estato Elaboración</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -9452,11 +9452,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiureqparam] Document Tipus</string> 
+            <string>Document Tipus</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiureqparam] Documento Tipo</string> 
+            <string>Documento Tipo</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -9498,11 +9498,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiureqparam] Origen</string> 
+            <string>Origen</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiureqparam] Origen</string> 
+            <string>Origen</string> 
            </void> 
           </void> 
           <void property="minAllowedValue"> 
@@ -9543,11 +9543,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiureqparam] Interessats</string> 
+            <string>Interessats</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiureqparam] Interesados</string> 
+            <string>Interesados</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -9582,11 +9582,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiureqparam] Ciutada Nif</string> 
+            <string>Ciutada Nif</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiureqparam] Ciudadano Nif</string> 
+            <string>Ciudadano Nif</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -9621,11 +9621,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiureqparam] Ciutadà Nom</string> 
+            <string>Ciutadà Nom</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiureqparam] Ciudadano Nombre</string> 
+            <string>Ciudadano Nombre</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -9663,11 +9663,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiureqparam] Codi DIR3 de la Unitat del Funcionari</string> 
+            <string>Codi DIR3 de la Unitat del Funcionari</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiureqparam] Código DIR3 de la Unidad del Funcionario</string> 
+            <string>Código DIR3 de la Unidad del Funcionario</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -9702,11 +9702,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiuoptparam] Procediment Codi</string> 
+            <string>Procediment Codi</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiuoptparam] Procedimiento Código</string> 
+            <string>Procedimiento Código</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -9741,11 +9741,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiuoptparam] Procediment Nom</string> 
+            <string>Procediment Nom</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiuoptparam] Procedimiento Nombre</string> 
+            <string>Procedimiento Nombre</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -9780,11 +9780,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiuoptparam] Serie Documental</string> 
+            <string>Serie Documental</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiuoptparam] Serie Documental</string> 
+            <string>Serie Documental</string> 
            </void> 
           </void> 
           <void property="size"> 
@@ -9819,11 +9819,11 @@ opcional incluso cuando se genera una firma EPES.</string>
           <void property="labels"> 
            <void method="put"> 
             <string>ca</string> 
-            <string>[arxiuoptparam] Custòdia ID / Expedient ID</string> 
+            <string>Custòdia ID / Expedient ID</string> 
            </void> 
            <void method="put"> 
             <string>es</string> 
-            <string>[arxiuoptparam] Custodia ID / Expediente ID</string> 
+            <string>Custodia ID / Expediente ID</string> 
            </void> 
           </void> 
           <void property="size"> 
