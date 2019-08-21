@@ -177,7 +177,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
       }
 
       CommonInfoSignature commonInfoSignature = new CommonInfoSignature(languageUI,
-          filtreCertificats, username, administrationID, policyInfoSignature);
+          filtreCertificats, username, administrationID);
 
       String signID = transaccio.getTransactionWebId();
 
@@ -244,6 +244,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
           location, signerEmail, signNumber, languageSign, signOperation, signType,
           signAlgorithm, signMode, signaturesTableLocation, signaturesTableHeader,
           pdfInfoSignature, csvStampInfo, userRequiresTimeStamp, timeStampGenerator,
+          policyInfoSignature,
           expedientCode, expedientName, expedientUrl, procedureCode, procedureName);
 
       final String signaturesSetID = String.valueOf(System.currentTimeMillis());

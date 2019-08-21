@@ -29,7 +29,8 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 		<class>es.caib.digitalib.jpa.UsuariPersonaJPA</class>
 
         <properties>
-
+            <property name="hibernate.dialect" value="${es.caib.digitalib.hibernate.dialect}" />
+            <property name="hibernate.query.substitutions" value="${es.caib.digitalib.hibernate.query.substitutions}"/>
         </properties>
     </persistence-unit>
 </persistence>
