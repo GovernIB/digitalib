@@ -83,15 +83,17 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
       transaccioFilterForm.setEntityNameCode("transaccio.tipus." + Math.abs(tipusPerfil));
       transaccioFilterForm.setEntityNameCodePlural("transaccio.tipus." + Math.abs(tipusPerfil)
           + ".plural");
+      
+      List<Field<?>> campsFiltre = transaccioFilterForm.getDefaultGroupByFields();
+
+      campsFiltre.remove(TransaccioFields.USUARIPERSONAID);
+      campsFiltre.remove(TransaccioFields.USUARIAPLICACIOID);
+
+      transaccioFilterForm.setGroupByFields(campsFiltre);
 
     }
 
-    List<Field<?>> campsFiltre = transaccioFilterForm.getDefaultGroupByFields();
-
-    campsFiltre.remove(TransaccioFields.USUARIPERSONAID);
-    campsFiltre.remove(TransaccioFields.USUARIAPLICACIOID);
-
-    transaccioFilterForm.setGroupByFields(campsFiltre);
+    
 
     return transaccioFilterForm;
   }

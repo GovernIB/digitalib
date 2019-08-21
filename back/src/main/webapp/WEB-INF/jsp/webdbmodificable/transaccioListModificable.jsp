@@ -21,7 +21,7 @@
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true"><fmt:message key="genapp.cancel"/></button>
-	        <button class="btn btn-success" type="button" onclick="submitForm()"><fmt:message key="email.modal.enviar"/></button>
+	        <button class="btn btn-success" type="button" onclick="submitFormEmail()"><fmt:message key="email.modal.enviar"/></button>
 		</div>
 	</div>
 </div>
@@ -31,18 +31,17 @@
 
 <script>
 
-function enviarEmail(transaccioID,accio) {
-	document.getElementById("transaccioID").value= transaccioID;
-	$('#modalEmail').modal(accio);
-
+  function enviarEmail(transaccioID,accio) {
+	  document.getElementById("transaccioID").value= transaccioID;
+	  $('#modalEmail').modal(accio);
   }
-  function submitForm() {
-      
-	var form = document.getElementById("transaccioFilterForm");
-	      
-	form.action = "<c:url value="${contexte}/enviaremail"/>";
-	     
-	form.submit();  
+
+  function submitFormEmail() {
+  	var form = document.getElementById("transaccioFilterForm");
+  	      
+  	form.action = "<c:url value="${contexte}/enviaremail"/>";
+  	     
+  	form.submit();  
   }
   
   
