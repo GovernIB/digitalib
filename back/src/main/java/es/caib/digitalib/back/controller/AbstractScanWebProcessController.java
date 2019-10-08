@@ -382,7 +382,7 @@ public abstract class AbstractScanWebProcessController {
 
     Locale locale = new Locale(transaccio.getLanguageUI());
     
-    String tipusStr = (tipus == Constants.TIPUS_CUSTODIA_ARXIU ? I18NUtils.tradueix("scanwebprocess.scan.custodia") : I18NUtils.tradueix("scanwebprocess.scan.arxiu"));
+    String tipusStr = (tipus == Constants.TIPUS_CUSTODIA_ARXIU ? I18NUtils.tradueix("scanwebprocess.scan.arxiu") : I18NUtils.tradueix("scanwebprocess.scan.custodia"));
     
     final boolean isApp = isPublic();
     

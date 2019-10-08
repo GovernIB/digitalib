@@ -604,7 +604,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
   @RequestMapping(value = "/descarregaroriginal/{transaccioID}", method = RequestMethod.GET)
   public void descarregarOriginal(
       @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
-      HttpServletResponse response) throws I18NException {
+      HttpServletResponse response) throws I18NException, IOException {
     
     final String format = PDF;
     TipusFile tipusFile = TipusFile.ORIGINAL;
@@ -613,7 +613,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
   }
 
   protected void internalDownload(java.lang.Long transaccioID, HttpServletResponse response,
-      final String format, TipusFile tipusFile) throws I18NException {
+      final String format, TipusFile tipusFile) throws I18NException, IOException {
     
     if (transaccioID == null) {
       return;
@@ -623,8 +623,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
     Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
-    
-
     
     int tipusCustodia = perfil.getTipusCustodia();
     
@@ -710,7 +708,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
   @RequestMapping(value = "/descarregarenidoc/{transaccioID}", method = RequestMethod.GET)
   public void descarregarEnidoc(
       @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
-      HttpServletResponse response) throws I18NException {
+      HttpServletResponse response) throws I18NException, IOException {
 
     
     final String format = ENI;
@@ -745,7 +743,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
   @RequestMapping(value = "/descarregarimprimible/{transaccioID}", method = RequestMethod.GET)
   public void descarregarVersioImprible(
       @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
-      HttpServletResponse response) throws I18NException {
+      HttpServletResponse response) throws I18NException, IOException {
     
     
     final String format = PDF;
@@ -801,45 +799,47 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     response.setContentLength(data.length);
     
     OutputStream out;
+    
     try {
       out = response.getOutputStream();
       out.write(data);
       out.flush();
+      out.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
     
   }
 
-  private AdditionalButton getDownloadDocButton(Transaccio transaccio, Perfil perfil) {
-
-    AdditionalButton addButton = null;
-
-    switch (perfil.getUsPerfil()) {
-      case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
-        addButton = new AdditionalButton("icon-download-alt icon-white",
-            "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}",
-            "btn-success");
-      break;
-      case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
-        addButton = new AdditionalButton("icon-download-alt icon-white",
-            "transaccio.descarregar.firmat", getContextWeb()
-                + "/descarregarfirmat/{0}", "btn-success");
-      break;
-      case Constants.PERFIL_US_CUSTODIA_INFO:
-        addButton = new AdditionalButton("icon-download-alt icon-white",
-            "transaccio.descarregar.imprimible", getContextWeb()
-                + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
-      break;
-      default:
-        addButton = new AdditionalButton("icon-download-alt icon-white",
-            "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}",
-            "btn-success");
-      break;
-    }
-
-    return addButton;
-  }
+//  private AdditionalButton getDownloadDocButton(Transaccio transaccio, Perfil perfil) {
+//
+//    AdditionalButton addButton = null;
+//
+//    switch (perfil.getUsPerfil()) {
+//      case Constants.PERFIL_US_NOMES_ESCANEIG_INFO:
+//        addButton = new AdditionalButton("icon-download-alt icon-white",
+//            "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}",
+//            "btn-success");
+//      break;
+//      case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
+//        addButton = new AdditionalButton("icon-download-alt icon-white",
+//            "transaccio.descarregar.firmat", getContextWeb()
+//                + "/descarregarfirmat/{0}", "btn-success");
+//      break;
+//      case Constants.PERFIL_US_CUSTODIA_INFO:
+//        addButton = new AdditionalButton("icon-download-alt icon-white",
+//            "transaccio.descarregar.imprimible", getContextWeb()
+//                + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
+//      break;
+//      default: // cas de PERFIL_US_NOMES_ESCANEIG_INFO
+//        addButton = new AdditionalButton("icon-download-alt icon-white",
+//            "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}",
+//            "btn-success");
+//      break;
+//    }
+//
+//    return addButton;
+//  }
 
   @Override
   public void postList(HttpServletRequest request, ModelAndView mav,
@@ -861,34 +861,77 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         
         Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
         
-        if (perfil.getUsPerfil() == Constants.PERFIL_US_CUSTODIA_INFO) {
-
-          InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
-
-          if (infoCustody.getOriginalFileUrl()!= null && !infoCustody.getOriginalFileUrl().isEmpty()) {
-            AdditionalButton addOriginalButton = new AdditionalButton("icon-download-alt icon-white",
-                "transaccio.descarregar.original", getContextWeb()
-                    + "/descarregaroriginal/{0}", "btn-success\" target=\"_blank");
+        switch (perfil.getUsPerfil()) {
+            case Constants.PERFIL_US_CUSTODIA_INFO:
+                AdditionalButton addOriginalButton = new AdditionalButton("icon-download-alt icon-white",
+                        "transaccio.descarregar.original", getContextWeb()
+                            + "/descarregaroriginal/{0}", "btn-success\" target=\"_blank");
+            	AdditionalButton addImprimibleButton = new AdditionalButton("icon-print icon-white",
+                        "transaccio.descarregar.imprimible", getContextWeb()
+                            + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
             
-            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addOriginalButton);
-          } 
-          if (infoCustody.getPrintableFileUrl() != null && !infoCustody.getPrintableFileUrl().isEmpty()) {
-            AdditionalButton addImprimibleButton = new AdditionalButton("icon-print icon-white",
-                "transaccio.descarregar.imprimible", getContextWeb()
-                    + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
-            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addImprimibleButton);
-          }
-          if (isAdmin && infoCustody.getEniFileUrl() != null && !infoCustody.getEniFileUrl().isEmpty()) {
-            AdditionalButton addEniButton = new AdditionalButton("icon-file icon-white",
-                "transaccio.descarregar.enidoc", getContextWeb()
-                    + "/descarregarenidoc/{0}", "btn-success\" target=\"_blank");
+                filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addOriginalButton);
+                filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addImprimibleButton);
             
-            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addEniButton);
-          } 
-        } else {
-          AdditionalButton addButton = getDownloadDocButton(transaccio, perfil);
-          filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addButton);
+                if (isAdmin) {
+                    AdditionalButton addEniButton = new AdditionalButton("icon-file icon-white",
+                        "transaccio.descarregar.enidoc", getContextWeb()
+                            + "/descarregarenidoc/{0}", "btn-success\" target=\"_blank");
+                    
+                    filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addEniButton);
+                }
+                break;
+            case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
+                AdditionalButton addFirmatButton = new AdditionalButton("icon-download-alt icon-white",
+                        "transaccio.descarregar.firmat", getContextWeb()
+                            + "/descarregarfirmat/{0}", "btn-success");
+                filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addFirmatButton);
+                
+                break;
+            default: // cas de PERFIL_US_NOMES_ESCANEIG_INFO
+                AdditionalButton addEscaneigButton = new AdditionalButton("icon-download-alt icon-white",
+                     "transaccio.descarregar.escaneig", getContextWeb() + "/descarregar/{0}",
+                     "btn-success");
+                filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addEscaneigButton);
+                break;	
         }
+        
+//        if (usPerfil == Constants.PERFIL_US_CUSTODIA_INFO) {
+//
+////          InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
+//
+////          if (infoCustody.getOriginalFileUrl()!= null && !infoCustody.getOriginalFileUrl().isEmpty()) {
+//            AdditionalButton addOriginalButton = new AdditionalButton("icon-download-alt icon-white",
+//                "transaccio.descarregar.original", getContextWeb()
+//                    + "/descarregaroriginal/{0}", "btn-success\" target=\"_blank");
+//            
+//            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addOriginalButton);
+////          } 
+////          if (infoCustody.getPrintableFileUrl() != null && !infoCustody.getPrintableFileUrl().isEmpty()) {
+//            AdditionalButton addImprimibleButton = new AdditionalButton("icon-print icon-white",
+//                "transaccio.descarregar.imprimible", getContextWeb()
+//                    + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
+//            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addImprimibleButton);
+////          }
+////          if (isAdmin && infoCustody.getEniFileUrl() != null && !infoCustody.getEniFileUrl().isEmpty()) {
+//          if (isAdmin) {
+//            AdditionalButton addEniButton = new AdditionalButton("icon-file icon-white",
+//                "transaccio.descarregar.enidoc", getContextWeb()
+//                    + "/descarregarenidoc/{0}", "btn-success\" target=\"_blank");
+//            
+//            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addEniButton);
+//          } 
+
+//        } 
+//        else if {
+////          AdditionalButton addButton = getDownloadDocButton(transaccio, perfil);
+//          AdditionalButton addButton = new AdditionalButton("icon-download-alt icon-white",
+//                    "transaccio.descarregar.firmat", getContextWeb()
+//                        + "/descarregarfirmat/{0}", "btn-success");
+//        	
+//        	
+//          filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addButton);
+//        }
       }
 
       if (delete) {
