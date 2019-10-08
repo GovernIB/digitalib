@@ -389,8 +389,11 @@ public class ApiScanWebSimpleExampleConsole {
 
     prop.load(new FileInputStream(new File("./apiscanwebsimple.properties")));
 
+    // En entorns CAIB aquesta variable ha de valer false
+    final boolean ignoreServerCertificates = true;
+    
     return new ApiScanWebSimpleJersey(prop.getProperty("endpoint"), prop.getProperty("username"),
-        prop.getProperty("password"));
+        prop.getProperty("password"), ignoreServerCertificates);
 
   }
 
