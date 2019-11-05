@@ -11,9 +11,12 @@ import javax.net.ssl.X509TrustManager;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.ApiScanWebSimple;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfile;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfiles;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleError;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleProfileRequest;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleResultRequest;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleScanResult;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStartTransactionRequest;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
@@ -39,7 +42,6 @@ import com.sun.jersey.client.urlconnection.HTTPSProperties;
  *
  */
 public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
-
 
   protected final String endPointBase;
 
@@ -92,6 +94,7 @@ public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
    * @return
    * @throws Exception
    */
+  @Override
   public ScanWebSimpleAvailableProfiles getAvailableProfiles(String locale) throws Exception {
 
     ClientResponse response = commonCall(locale, AVAILABLEPROFILES);
@@ -104,11 +107,26 @@ public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
 
   /**
    * 
+   */
+  @Override
+  public ScanWebSimpleAvailableProfile getProfile(ScanWebSimpleProfileRequest profileRequest)
+      throws Exception {
+    ClientResponse response = commonCall(profileRequest, GETPROFILE);
+
+    ScanWebSimpleAvailableProfile result = response
+        .getEntity(ScanWebSimpleAvailableProfile.class);
+
+    return result;
+  }
+
+  /**
+   * 
    * 
    * @param signaturesSet
    * @return Retorna l'ID de la transacció
    * @throws Exception
    */
+  @Override
   public String getTransactionID(ScanWebSimpleGetTransactionIdRequest getTransactionRequest)
       throws Exception {
 
@@ -127,6 +145,7 @@ public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
    * @return Retorna la URL on redireccionar per realitzar l'Escaneig o Copia Autentica
    * @throws Exception
    */
+  @Override
   public String startTransaction(ScanWebSimpleStartTransactionRequest startTransactionInfo)
       throws Exception {
 
@@ -146,7 +165,7 @@ public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
    * @return
    * @throws Exception
    */
-
+  @Override
   public ScanWebSimpleStatus getTransactionStatus(String transactionID) throws Exception {
 
     ClientResponse response = commonCall(transactionID, TRANSACTIONSTATUS);
@@ -156,6 +175,8 @@ public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
     return result;
   }
 
+
+
   /**
    * Retorna el resultat i les fitxers signats de les firmes enviades.
    * 
@@ -163,9 +184,11 @@ public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
    * @return
    * @throws Exception
    */
-  public ScanWebSimpleScanResult getScanWebResult(String transactionID) throws Exception {
+  @Override
+  public ScanWebSimpleScanResult getScanWebResult(
+      ScanWebSimpleResultRequest resultRequest) throws Exception {
 
-    ClientResponse response = commonCall(transactionID, SCANWEBRESULT);
+    ClientResponse response = commonCall(resultRequest, SCANWEBRESULT);
 
     ScanWebSimpleScanResult result = response.getEntity(ScanWebSimpleScanResult.class);
 
@@ -177,6 +200,7 @@ public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
    * @param transactionID
    * @throws Exception
    */
+  @Override
   public void closeTransaction(String transactionID) throws Exception {
 
     commonCall(transactionID, CLOSETRANSACTION);
@@ -220,17 +244,17 @@ public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
       if (endPoint.toLowerCase().startsWith("https") && ignoreServerCertificates) {
         // Ignorar Certificats de la part servidora
         HostnameVerifier hostnameVerifier = HttpsURLConnection.getDefaultHostnameVerifier();
-        
+
         SSLContext ctx = SSLContext.getInstance("SSL");
         ctx.init(null, new TrustManager[] { new InsecureTrustManager() }, null);
         config.getProperties().put(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES,
             new HTTPSProperties(hostnameVerifier, ctx));
-      } 
-      
+      }
+
       config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
-      
+
       client = Client.create(config);
-      
+
       if (this.username != null) {
         client.addFilter(new HTTPBasicAuthFilter(this.username, this.password));
       }
@@ -253,11 +277,6 @@ public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
       return response;
     } else {
 
-      
-      System.out.println("XYZ ZZZ response.getStatus() => ]" + response.getStatus() + "[");
-      
-      
-      
       // Miram si ho podem transformar a ApiSimpleError
       ScanWebSimpleError simple = null;
       try {
@@ -267,11 +286,11 @@ public class ApiScanWebSimpleJersey implements ApiScanWebSimple {
         e.printStackTrace();
       }
 
-       System.out.println("XYZ ZZZ ERROR SIMPLE: ]" + simple + "[");
+      //System.out.println("ERROR SIMPLE: ]" + simple + "[");
 
       if (simple != null) {
         String tipus = simple.getType();
-        System.out.println("XYZ ZZZ ERROR TIPUS: ]" + tipus + "[");
+        //System.out.println(" ERROR TIPUS: ]" + tipus + "[");
 
         if (tipus != null && tipus.trim().length() != 0) {
 

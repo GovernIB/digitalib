@@ -222,7 +222,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
 
       log.info("XYZ ZZZ  Creant document ... ");
       final DocumentMetadades documentMetadades = new DocumentMetadades();
-      final ContingutOrigen origen = (transaccio.getArxiuReqParamOrigen() == ScanWebSimpleArxiuRequiredParameters.ORIGEN_ADMINISTRACIO) ? ContingutOrigen.ADMINISTRACIO
+      final ContingutOrigen origen = (transaccio.getArxiuReqParamOrigen() == ScanWebSimpleArxiuRequiredParameters.DOCUMENTORIGEN_ADMINISTRACIO) ? ContingutOrigen.ADMINISTRACIO
           : ContingutOrigen.CIUTADA;
       documentMetadades.setOrigen(origen);
       documentMetadades.setOrgans(LogicUtils.stringToListString(organsStr));

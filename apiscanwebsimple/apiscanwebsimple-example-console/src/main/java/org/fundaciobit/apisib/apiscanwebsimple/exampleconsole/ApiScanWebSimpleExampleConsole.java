@@ -29,6 +29,8 @@ import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleAvailablePr
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfiles;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleFile;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleProfileRequest;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleResultRequest;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleScanResult;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleSignatureParameters;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStartTransactionRequest;
@@ -85,8 +87,13 @@ public class ApiScanWebSimpleExampleConsole {
 
       System.out.println(" -----------------------------");
 
-      // Recuperar un ID de transacció
+      // Només per provar el mètode getProfile(). Es pot comentar aquesta linia
+      scanWebProfileSelected = api.getProfile(new ScanWebSimpleProfileRequest(
+          scanWebProfileSelected.getCode(), languageUI));
 
+      // Recuperar un ID de transacció
+      boolean returnScannedFile;
+      boolean returnSignedFile;
       {
 
         final String profileCode = scanWebProfileSelected.getCode();
@@ -103,6 +110,9 @@ public class ApiScanWebSimpleExampleConsole {
             transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode,
                 view, languageUI, funcionariUsername);
 
+            returnScannedFile = true;
+            returnSignedFile = false;
+
           break;
 
           case ScanWebSimpleAvailableProfile.PROFILE_TYPE_SCAN_AND_SIGNATURE: {
@@ -110,6 +120,10 @@ public class ApiScanWebSimpleExampleConsole {
 
             transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode,
                 view, languageUI, funcionariUsername, signatureParameters);
+
+            returnScannedFile = false;
+            returnSignedFile = true;
+
           }
 
           break;
@@ -127,6 +141,12 @@ public class ApiScanWebSimpleExampleConsole {
             transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode,
                 view, languageUI, funcionariUsername, signatureParameters,
                 arxiuRequiredParameters, arxiuOptionalParameters);
+
+            returnScannedFile = false;
+            // returnSignedFile hauria de ser false ja que l'hauriem de poder obtenir
+            // a partir de la URL de descarrega d'Arxiu o Custòdia
+            returnSignedFile = true;
+
           }
           break;
 
@@ -168,13 +188,23 @@ public class ApiScanWebSimpleExampleConsole {
 
       readFromSocket(port);
 
-      ScanWebSimpleScanResult result = api.getScanWebResult(transactionID);
+      System.out.println(" Descarregant Informació dels Resultat:");
+      System.out.println("     * TransaccioID = " + transactionID);
+      System.out.println("     * returnScannedFile = " + returnScannedFile);
+      System.out.println("     * returnSignedFile = " + returnSignedFile);
+
+      ScanWebSimpleResultRequest resultRequest = new ScanWebSimpleResultRequest(transactionID,
+          returnScannedFile, returnSignedFile);
+
+      ScanWebSimpleScanResult result = api.getScanWebResult(resultRequest);
 
       ScanWebSimpleStatus transactionStatus = result.getStatus();
 
       int status = transactionStatus.getStatus();
 
       System.out.println(ScanWebSimpleScanResult.toString(result));
+      System.out.println();
+      System.out.println();
 
       switch (status) {
 
@@ -208,8 +238,9 @@ public class ApiScanWebSimpleExampleConsole {
         case ScanWebSimpleStatus.STATUS_FINAL_OK: // = 2;
         {
 
-          {
-            File scanFile = new File("scanfile." + result.getScannedFileInfo().getFormatFile());
+          if (result.getScannedFile() != null) {
+            File scanFile = new File(transactionID + ".scanfile."
+                + result.getScannedFileInfo().getFormatFile());
 
             FileOutputStream fos = new FileOutputStream(scanFile);
             fos.write(result.getScannedFile().getData());
@@ -220,20 +251,34 @@ public class ApiScanWebSimpleExampleConsole {
             System.out.println();
             System.out.println("Fitxer Escanejat guardat a " + scanFile.getAbsolutePath());
           }
-          {
-            ScanWebSimpleFile detachedSignInfo = result.getDetachedSignatureFile();
 
-            if (detachedSignInfo != null) {
-              File detached = new File("detached_sign_scanfile.sig");
+          ScanWebSimpleFile signedFile = result.getSignedFile();
 
-              FileOutputStream fos = new FileOutputStream(detached);
-              fos.write(detachedSignInfo.getData());
-              fos.flush();
-              fos.close();
+          if (signedFile != null) {
+            File signed = new File(transactionID + ".signed." + signedFile.getNom());
 
-              System.out.println("Firma Detached del Fitxer Scanejat guardat a "
-                  + detached.getAbsolutePath());
-            }
+            FileOutputStream fos = new FileOutputStream(signed);
+            fos.write(signedFile.getData());
+            fos.flush();
+            fos.close();
+
+            System.out.println("Firma del Fitxer Escanejat guardat a "
+                + signed.getAbsolutePath());
+          }
+
+          ScanWebSimpleFile detachedSignedFile = result.getDetachedSignatureFile();
+
+          if (detachedSignedFile != null) {
+            File detached = new File(transactionID + ".detached_sign."
+                + detachedSignedFile.getNom());
+
+            FileOutputStream fos = new FileOutputStream(detached);
+            fos.write(detachedSignedFile.getData());
+            fos.flush();
+            fos.close();
+
+            System.out.println("Document Detached de la Firma (Document Escanejat) guardat a "
+                + detached.getAbsolutePath());
           }
 
         } // Final Case Firma OK
@@ -254,14 +299,14 @@ public class ApiScanWebSimpleExampleConsole {
   }
 
   public static ScanWebSimpleArxiuRequiredParameters getArxiuRequiredParameters() {
-    final List<String> interessats = new ArrayList<String>(Arrays.asList("12345678X",
+    final List<String> personesInteressades = new ArrayList<String>(Arrays.asList("12345678X",
         "87654321Z"));
 
     /**
      * ScanWebSimpleArxiuRequiredParameters.CIUTADA
      * ScanWebSimpleArxiuRequiredParameters.ORIGEN_ADMINISTRACIO
      */
-    final int origen = ScanWebSimpleArxiuRequiredParameters.ORIGEN_ADMINISTRACIO;
+    final int origen = ScanWebSimpleArxiuRequiredParameters.DOCUMENTORIGEN_ADMINISTRACIO;
 
     /**
      * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_ORIGINAL
@@ -269,7 +314,7 @@ public class ApiScanWebSimpleExampleConsole {
      * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_COPIA_DP
      * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_COPIA_PR
      */
-    final String documentEstatElaboracio = ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_ORIGINAL;
+    final String documentEstatElaboracio = ScanWebSimpleArxiuRequiredParameters.DOCUMENTELABORATIONSTATE_ORIGINAL;
 
     /**
      * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_RESOLUCIO
@@ -294,17 +339,17 @@ public class ApiScanWebSimpleExampleConsole {
      * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES_INCAUTATS
      * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES
      */
-    final String documentTipus = ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_RESOLUCIO;
+    final String documentTipus = ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_RESOLUCIO;
 
     String ciutadaNif = "11223344C";
 
     String ciutadaNom = "Pep Gonella";
-    
-    List<String> organs = new ArrayList<String>(Arrays.asList("A04013511"));
+
+    List<String> organsAfectats = new ArrayList<String>(Arrays.asList("A04013511"));
 
     ScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
     arxiuRequiredParameters = new ScanWebSimpleArxiuRequiredParameters(ciutadaNif, ciutadaNom,
-        interessats, origen, documentEstatElaboracio, documentTipus, organs);
+        documentEstatElaboracio, documentTipus, origen, personesInteressades, organsAfectats);
     return arxiuRequiredParameters;
   }
 
@@ -362,7 +407,7 @@ public class ApiScanWebSimpleExampleConsole {
       String s;
       System.err.println(" =========================== ");
       while ((s = in.readLine()) != null) {
-        System.out.println(s);
+        System.err.println(s);
         break;
       }
       System.err.println(" =========================== ");
@@ -391,10 +436,9 @@ public class ApiScanWebSimpleExampleConsole {
 
     // En entorns CAIB aquesta variable ha de valer false
     final boolean ignoreServerCertificates = true;
-    
-    return new ApiScanWebSimpleJersey(prop.getProperty("endpoint"), prop.getProperty("username"),
-        prop.getProperty("password"), ignoreServerCertificates);
 
+    return new ApiScanWebSimpleJersey(prop.getProperty("endpoint"),
+        prop.getProperty("username"), prop.getProperty("password"), ignoreServerCertificates);
   }
 
 }

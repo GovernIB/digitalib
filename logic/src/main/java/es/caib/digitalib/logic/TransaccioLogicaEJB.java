@@ -269,11 +269,11 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       if (signParams != null) {
         // XYZ ZZZ Check not null
         
-        log.info("\n\n XYZ ZZZ ZZZ CREAR TRANSACCIO POSAM LANGDOC A " + signParams.getLanguageDoc() +"\n\n");
+        log.info("\n\n XYZ ZZZ ZZZ CREAR TRANSACCIO POSAM LANGDOC A " + signParams.getDocumentLanguage() +"\n\n");
         
-        t.setSignParamLanguageDoc(signParams.getLanguageDoc());
-        t.setSignParamFuncionariNom(signParams.getFuncionariNom());
-        t.setSignParamFuncionariNif(signParams.getFuncionariNif());
+        t.setSignParamLanguageDoc(signParams.getDocumentLanguage());
+        t.setSignParamFuncionariNom(signParams.getFunctionaryFullName());
+        t.setSignParamFuncionariNif(signParams.getFunctionaryAdministrationID());
       }
     }
 
@@ -298,13 +298,13 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         // XYZ ZZZ
         // arxiuReqParams.getOrigen() => Valor Valid
   
-        t.setArxiuReqParamDocEstatElabora(arxiuReqParams.getDocumentEstatElaboracio());
-        t.setArxiuReqParamDocumentTipus(arxiuReqParams.getDocumentTipus());
-        t.setArxiuReqParamOrigen(arxiuReqParams.getOrigen());
-        t.setArxiuReqParamInteressats(LogicUtils.listToString(arxiuReqParams.getInteressats()));
-        t.setArxiuReqParamOrgans(LogicUtils.listToString(arxiuReqParams.getOrgans()));
-        t.setArxiuReqParamCiutadaNif(arxiuReqParams.getCiutadaNif());
-        t.setArxiuReqParamCiutadaNom(arxiuReqParams.getCiutadaNom());
+        t.setArxiuReqParamDocEstatElabora(arxiuReqParams.getDocumentElaborationState());
+        t.setArxiuReqParamDocumentTipus(arxiuReqParams.getDocumentType());
+        t.setArxiuReqParamOrigen(arxiuReqParams.getDocumentOrigen());
+        t.setArxiuReqParamInteressats(LogicUtils.listToString(arxiuReqParams.getInterestedPersons()));
+        t.setArxiuReqParamOrgans(LogicUtils.listToString(arxiuReqParams.getAffectedOrganisms()));
+        t.setArxiuReqParamCiutadaNif(arxiuReqParams.getCitizenAdministrationID());
+        t.setArxiuReqParamCiutadaNom(arxiuReqParams.getCitizenFullName());
       }
     
 
@@ -313,10 +313,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       ScanWebSimpleArxiuOptionalParameters arxiuOptParams = requestTransaction
           .getArxiuOptionalParameters();
       if (arxiuOptParams != null) {
-        t.setArxiuOptParamCustodyOrExpedientId(arxiuOptParams.getCustodyOrExpedientID());
-        t.setArxiuOptParamProcedimentCodi(arxiuOptParams.getProcedimentCodi());
-        t.setArxiuOptParamProcedimentNom(arxiuOptParams.getProcedimentNom());
-        t.setArxiuOptParamSerieDocumental(arxiuOptParams.getSerieDocumental());
+        t.setArxiuOptParamCustodyOrExpedientId(arxiuOptParams.getCustodyIDOrExpedientID());
+        t.setArxiuOptParamProcedimentCodi(arxiuOptParams.getProcedureCode());
+        t.setArxiuOptParamProcedimentNom(arxiuOptParams.getProcedureName());
+        t.setArxiuOptParamSerieDocumental(arxiuOptParams.getDocumentarySerie());
       }
     }
 

@@ -13,61 +13,61 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ScanWebSimpleArxiuOptionalParameters {
 
-  protected String procedimentNom; // = "Subvenciones empleo"
+  protected String procedureName; // = "Subvenciones empleo"
 
-  protected String procedimentCodi; // = "organo1_PRO_123456789";
+  protected String procedureCode; // = "organo1_PRO_123456789";
 
-  // = "S0001"
-  protected String serieDocumental;
+  /** Serie Documental = "S0001" */
+  protected String documentarySerie;
 
   /**
-   * Si val null llavors en crearà un de nou
+   * Custòdia o expedient ja existent. Si val null llavors en crearà un de nou
    */
-  protected String custodyOrExpedientID;
+  protected String custodyIDOrExpedientID;
 
   public ScanWebSimpleArxiuOptionalParameters() {
     super();
   }
 
-  public ScanWebSimpleArxiuOptionalParameters(String procedimentNom, String procedimentCodi,
-      String serieDocumental, String custodyOrExpedientID) {
+  public ScanWebSimpleArxiuOptionalParameters(String procedureName, String procedureCode,
+      String documentarySerie, String custodyIDOrExpedientID) {
     super();
-    this.procedimentNom = procedimentNom;
-    this.procedimentCodi = procedimentCodi;
-    this.serieDocumental = serieDocumental;
-    this.custodyOrExpedientID = custodyOrExpedientID;
+    this.procedureName = procedureName;
+    this.procedureCode = procedureCode;
+    this.documentarySerie = documentarySerie;
+    this.custodyIDOrExpedientID = custodyIDOrExpedientID;
   }
 
-  public String getProcedimentNom() {
-    return procedimentNom;
+  public String getProcedureName() {
+    return procedureName;
   }
 
-  public void setProcedimentNom(String procedimentNom) {
-    this.procedimentNom = procedimentNom;
+  public void setProcedureName(String procedureName) {
+    this.procedureName = procedureName;
   }
 
-  public String getProcedimentCodi() {
-    return procedimentCodi;
+  public String getProcedureCode() {
+    return procedureCode;
   }
 
-  public void setProcedimentCodi(String procedimentCodi) {
-    this.procedimentCodi = procedimentCodi;
+  public void setProcedureCode(String procedureCode) {
+    this.procedureCode = procedureCode;
   }
 
-  public String getSerieDocumental() {
-    return serieDocumental;
+  public String getDocumentarySerie() {
+    return documentarySerie;
   }
 
-  public void setSerieDocumental(String serieDocumental) {
-    this.serieDocumental = serieDocumental;
+  public void setDocumentarySerie(String documentarySerie) {
+    this.documentarySerie = documentarySerie;
   }
 
-  public String getCustodyOrExpedientID() {
-    return custodyOrExpedientID;
+  public String getCustodyIDOrExpedientID() {
+    return custodyIDOrExpedientID;
   }
 
-  public void setCustodyOrExpedientID(String custodyOrExpedientID) {
-    this.custodyOrExpedientID = custodyOrExpedientID;
+  public void setCustodyIDOrExpedientID(String custodyIDOrExpedientID) {
+    this.custodyIDOrExpedientID = custodyIDOrExpedientID;
   }
 
 }

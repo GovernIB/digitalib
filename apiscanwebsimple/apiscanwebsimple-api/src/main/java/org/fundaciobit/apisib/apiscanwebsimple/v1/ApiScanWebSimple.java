@@ -1,8 +1,11 @@
 package org.fundaciobit.apisib.apiscanwebsimple.v1;
 
 
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfile;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleAvailableProfiles;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleProfileRequest;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleResultRequest;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleScanResult;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStartTransactionRequest;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
@@ -16,8 +19,11 @@ import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 public interface ApiScanWebSimple {
 
   // Nom de les operacions en constants
-  public static final String AVAILABLEPROFILES = "getAvailableProfiles";
 
+  public static final String AVAILABLEPROFILES = "getAvailableProfiles";
+  
+  public static final String GETPROFILE = "getProfile";
+  
   public static final String GETTRANSACTIONID = "getTransactionID";
 
   public static final String STARTTRANSACTION = "startTransaction";
@@ -34,6 +40,14 @@ public interface ApiScanWebSimple {
    * @throws Exception
    */
   public ScanWebSimpleAvailableProfiles getAvailableProfiles(String locale) throws Exception;
+  
+  
+  /**
+   * 
+   * @return
+   * @throws Exception
+   */
+  public ScanWebSimpleAvailableProfile getProfile(ScanWebSimpleProfileRequest profileRequest) throws Exception;
 
   /**
    * 
@@ -42,7 +56,7 @@ public interface ApiScanWebSimple {
    * @return Retorna l'ID de la transacció
    * @throws Exception
    */
-  public String getTransactionID(ScanWebSimpleGetTransactionIdRequest getTransactionRequest)
+  public String getTransactionID(ScanWebSimpleGetTransactionIdRequest transactionRequest)
       throws Exception;
 
   /**
@@ -63,15 +77,16 @@ public interface ApiScanWebSimple {
    */
 
   public ScanWebSimpleStatus getTransactionStatus(String transactionID) throws Exception;
-
+ 
   /**
-   * Retorna el resultat i les fitxers signats de les firmes enviades.
+   * Retorna fitxers i informació del resultat d'escaneig, firma i/o arxivat. 
+   * Permet elegir quins fitxers descarregar
    * 
-   * @param transactionID
+   * 
    * @return
    * @throws Exception
    */
-  public ScanWebSimpleScanResult getScanWebResult(String transactionID) throws Exception;
+  public ScanWebSimpleScanResult getScanWebResult(ScanWebSimpleResultRequest resultRequest) throws Exception;
 
   /**
    * 

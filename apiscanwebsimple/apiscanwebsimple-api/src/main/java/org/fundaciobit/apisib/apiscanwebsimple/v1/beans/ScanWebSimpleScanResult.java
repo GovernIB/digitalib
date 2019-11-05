@@ -14,37 +14,32 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ScanWebSimpleScanResult {
 
-
   protected long transactionID;
-
 
   protected String transactionWebID;
 
-
   protected ScanWebSimpleStatus status;
 
+  protected ScanWebSimpleFormMetadatas formMetadatas;
 
   protected ScanWebSimpleFile scannedFile;
 
-
-  protected ScanWebSimpleFile detachedSignatureFile;
-
-
   protected ScanWebSimpleScannedFileInfo scannedFileInfo;
 
+  protected ScanWebSimpleFile signedFile;
+
+  protected ScanWebSimpleFile detachedSignatureFile;
 
   protected ScanWebSimpleSignedFileInfo signedFileInfo;
 
   /**
-   * Informacio de Custòdia
+   * Informacio de Plugin de Custòdia
    */
-
   protected ScanWebSimpleCustodyInfo custodyInfo = null;
 
   /**
-   * Informació de Arxiu
+   * Informació de Plugin d'Arxiu
    */
-
   protected ScanWebSimpleArxiuInfo arxiuInfo = null;
 
   /**
@@ -55,56 +50,30 @@ public class ScanWebSimpleScanResult {
   }
 
   public ScanWebSimpleScanResult(long transactionID, String transactionWebID,
-      ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
-      ScanWebSimpleScannedFileInfo scannedFileInfo) {
+      ScanWebSimpleStatus status) {
     super();
     this.transactionID = transactionID;
     this.transactionWebID = transactionWebID;
     this.status = status;
-    this.scannedFile = scannedFile;
-    this.scannedFileInfo = scannedFileInfo;
   }
 
   public ScanWebSimpleScanResult(long transactionID, String transactionWebID,
-      ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
-      ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile,
-      ScanWebSimpleSignedFileInfo signedFileInfo) {
+      ScanWebSimpleStatus status, ScanWebSimpleFormMetadatas formMetadatas,
+      ScanWebSimpleFile scannedFile, ScanWebSimpleScannedFileInfo scannedFileInfo,
+      ScanWebSimpleFile signedFile, ScanWebSimpleFile detachedSignatureFile,
+      ScanWebSimpleSignedFileInfo signedFileInfo, ScanWebSimpleCustodyInfo custodyInfo,
+      ScanWebSimpleArxiuInfo arxiuInfo) {
     super();
     this.transactionID = transactionID;
     this.transactionWebID = transactionWebID;
     this.status = status;
+    this.formMetadatas = formMetadatas;
     this.scannedFile = scannedFile;
     this.scannedFileInfo = scannedFileInfo;
-    this.signedFileInfo = signedFileInfo;
-  }
-
-  public ScanWebSimpleScanResult(long transactionID, String transactionWebID,
-      ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
-      ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile,
-      ScanWebSimpleSignedFileInfo signedFileInfo, ScanWebSimpleCustodyInfo custodyInfo) {
-    super();
-    this.transactionID = transactionID;
-    this.transactionWebID = transactionWebID;
-    this.status = status;
-    this.scannedFile = scannedFile;
+    this.signedFile = signedFile;
     this.detachedSignatureFile = detachedSignatureFile;
-    this.scannedFileInfo = scannedFileInfo;
     this.signedFileInfo = signedFileInfo;
     this.custodyInfo = custodyInfo;
-  }
-
-  public ScanWebSimpleScanResult(long transactionID, String transactionWebID,
-      ScanWebSimpleStatus status, ScanWebSimpleFile scannedFile,
-      ScanWebSimpleScannedFileInfo scannedFileInfo, ScanWebSimpleFile detachedSignatureFile,
-      ScanWebSimpleSignedFileInfo signedFileInfo, ScanWebSimpleArxiuInfo arxiuInfo) {
-    super();
-    this.transactionID = transactionID;
-    this.transactionWebID = transactionWebID;
-    this.status = status;
-    this.scannedFile = scannedFile;
-    this.detachedSignatureFile = detachedSignatureFile;
-    this.scannedFileInfo = scannedFileInfo;
-    this.signedFileInfo = signedFileInfo;
     this.arxiuInfo = arxiuInfo;
   }
 
@@ -180,20 +149,69 @@ public class ScanWebSimpleScanResult {
     this.transactionWebID = transactionWebID;
   }
 
+  public ScanWebSimpleFormMetadatas getFormMetadatas() {
+    return formMetadatas;
+  }
+
+  public void setFormMetadatas(ScanWebSimpleFormMetadatas formMetadatas) {
+    this.formMetadatas = formMetadatas;
+  }
+
+  public ScanWebSimpleFile getSignedFile() {
+    return signedFile;
+  }
+
+  public void setSignedFile(ScanWebSimpleFile signedFile) {
+    this.signedFile = signedFile;
+  }
+
   public static String toString(ScanWebSimpleScanResult result) {
 
     StringBuffer str = new StringBuffer();
-    
+
     str.append("\n").append("====== SCANWEB =====");
-    
+
     str.append("\n").append(" * TransactionID: " + result.getTransactionID());
     str.append("\n").append(" * TransactionWebID: " + result.getTransactionWebID());
-    
-    
-    if (result.getStatus().getStatus() !=  ScanWebSimpleStatus.STATUS_FINAL_OK) {
+
+    int status = result.getStatus().getStatus();
+    String statusStr;
+    switch (status) {
+      case ScanWebSimpleStatus.STATUS_REQUESTED_ID:
+        statusStr = "REQUESTED_ID";
+      break;
+
+      case ScanWebSimpleStatus.STATUS_IN_PROGRESS:
+        statusStr = "";
+      break;
+
+      case ScanWebSimpleStatus.STATUS_FINAL_OK:
+        statusStr = "FINAL_OK";
+      break;
+
+      default:
+      case ScanWebSimpleStatus.STATUS_FINAL_ERROR:
+        statusStr = "ERROR => " + result.getStatus().getErrorMessage();
+      break;
+
+      case ScanWebSimpleStatus.STATUS_CANCELLED:
+        statusStr = "CANCELLED => " + result.getStatus().getErrorMessage();
+      break;
+
+      case ScanWebSimpleStatus.STATUS_EXPIRED:
+        statusStr = "EXPIRED";
+      break;
+
+    }
+    str.append("\n").append(" * Estat: ").append(statusStr);
+
+    if (status != ScanWebSimpleStatus.STATUS_FINAL_OK) {
       return str.toString();
     }
-    
+
+    // Form metadatas
+    str.append("\n").append(ScanWebSimpleFormMetadatas.toString(result.getFormMetadatas()));
+
     // Escaneig
     ScanWebSimpleScannedFileInfo scannedFileInfo = result.getScannedFileInfo();
     str.append("\n").append("  + SCANINFO:");
@@ -206,17 +224,17 @@ public class ScanWebSimpleScanResult {
 
       switch (scannedFileInfo.getPixelType()) {
 
-      case ScanWebSimpleScannedFileInfo.PIXEL_TYPE_BLACK_WHITE:
-        pixelType = "B&W";
+        case ScanWebSimpleScannedFileInfo.PIXEL_TYPE_BLACK_WHITE:
+          pixelType = "B&W";
         break;
-      case ScanWebSimpleScannedFileInfo.PIXEL_TYPE_GRAY:
-        pixelType = "Gris";
+        case ScanWebSimpleScannedFileInfo.PIXEL_TYPE_GRAY:
+          pixelType = "Gris";
         break;
-      case ScanWebSimpleScannedFileInfo.PIXEL_TYPE_COLOR:
-        pixelType = "Color";
+        case ScanWebSimpleScannedFileInfo.PIXEL_TYPE_COLOR:
+          pixelType = "Color";
         break;
-      default:
-        pixelType = "--DESCONEGUT--";
+        default:
+          pixelType = "--DESCONEGUT--";
 
       }
     } else {
@@ -230,6 +248,7 @@ public class ScanWebSimpleScanResult {
     // Signatura
     str.append("\n").append(ScanWebSimpleSignedFileInfo.toString(result.getSignedFileInfo()));
 
+    // ARXIU i CUSTODIA
     ScanWebSimpleCustodyInfo custody = result.getCustodyInfo();
 
     if (custody != null) {
@@ -237,32 +256,27 @@ public class ScanWebSimpleScanResult {
       str.append("\n").append("  + CUSTODIA:");
       str.append("\n").append("      * custodyFileID: " + custody.getCustodyID());
       str.append("\n").append("      * CSV: " + custody.getCsv());
+      str.append("\n").append("      * getCsvValidationWeb: " + custody.getCsvValidationWeb());
       str.append("\n").append(
-          "      * getCsvValidationWeb: " + custody.getCsvValidationWeb());
-      str.append("\n").append(
-          "      * getCsvGenerationDefinition: "
-              + custody.getCsvGenerationDefinition());
+          "      * getCsvGenerationDefinition: " + custody.getCsvGenerationDefinition());
       str.append("\n").append("      * OriginalFileURL: " + custody.getOriginalFileURL());
       str.append("\n").append("      * PrintableFileURL: " + custody.getPrintableFileURL());
       str.append("\n").append("      * ENIFileURL: " + custody.getEniFileURL());
       str.append("\n").append("      * ValidationFileUrl: " + custody.getValidationFileUrl());
 
     }
-    
-    
+
     ScanWebSimpleArxiuInfo arxiu = result.getArxiuInfo();
 
     if (arxiu != null) {
       str.append("\n").append("  + ARXIU:");
-      
+
       str.append("\n").append("      * expedientID: " + arxiu.getExpedientID());
       str.append("\n").append("      * documentID: " + arxiu.getDocumentID());
       str.append("\n").append("      * CSV: " + arxiu.getCsv());
+      str.append("\n").append("      * getCsvValidationWeb: " + arxiu.getCsvValidationWeb());
       str.append("\n").append(
-          "      * getCsvValidationWeb: " + arxiu.getCsvValidationWeb());
-      str.append("\n").append(
-          "      * getCsvGenerationDefinition: "
-              + arxiu.getCsvGenerationDefinition());
+          "      * getCsvGenerationDefinition: " + arxiu.getCsvGenerationDefinition());
       str.append("\n").append("      * OriginalFileURL: " + arxiu.getOriginalFileURL());
       str.append("\n").append("      * PrintableFileURL: " + arxiu.getPrintableFileURL());
       str.append("\n").append("      * ENIFileURL: " + arxiu.getEniFileURL());

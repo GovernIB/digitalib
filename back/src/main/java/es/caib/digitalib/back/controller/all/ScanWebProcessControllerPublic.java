@@ -59,13 +59,19 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
       urlBase = Configuracio.getAppUrl();
     }
 
-    log.info(" XYZ ZZZ URLBASE = " + urlBase);
+    boolean isDebug = log.isDebugEnabled();
+    
+    if (isDebug) {
+      log.debug(" URLBASE = " + urlBase);
+    }
 
     final String urlFinal = AbstractScanWebProcessController.getFinalURL(urlBase, transactionWebID, isPublic()); 
         
     //final String urlFinal =  urlBase + SCANWEB_CONTEXTPATH + SCANWEB_CONTEXTPATH_FINAL + "/"   + transactionWebID;
 
-    log.info(" XYZ ZZZ URLFINAL = " + urlFinal);
+    if (isDebug) {
+      log.info(" URLFINAL = " + urlFinal);
+    }
 
     /*
      * final String scanType = ScanWebUtils.formatFileToScanWebApi(transaccio.getPerfil()

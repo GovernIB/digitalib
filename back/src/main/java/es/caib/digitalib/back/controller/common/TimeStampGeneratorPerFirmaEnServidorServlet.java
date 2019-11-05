@@ -57,14 +57,14 @@ public class TimeStampGeneratorPerFirmaEnServidorServlet extends HttpServlet {
     
     // XYZ ZZZ
 
-    final boolean debug = true; // log.isDebugEnabled();
+    final boolean debug =log.isDebugEnabled();
 
     if (debug) {
-      log.info("XYZ ZZZ Entra a processServlet ...");
+      log.info("Entra a processServlet ...");
       log.info(AbstractWebPlugin.servletRequestInfoToStr(request));
     }
 
-    //                                {plugin}/signaturesSetID/signIndex
+    // {plugin}/signaturesSetID/signIndex
     // uri = /common/timestampgenerator/666/1466408733012148444/0
     String uri = request.getRequestURI();
 

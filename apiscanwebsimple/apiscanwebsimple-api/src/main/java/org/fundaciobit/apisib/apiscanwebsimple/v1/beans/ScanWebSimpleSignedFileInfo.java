@@ -82,11 +82,9 @@ public class ScanWebSimpleSignedFileInfo {
 
   protected Integer signaturesTableLocation;
 
-
   protected Boolean timeStampIncluded;
 
   /** BES(falsE) o EPES(true) **/
-
   protected Boolean policyIncluded;
 
   /**
@@ -103,7 +101,6 @@ public class ScanWebSimpleSignedFileInfo {
    * TF06. MetadataConstants.ENI_TIPO_FIRMA = "eni:tipoFirma";
    * 
    */
-
   protected String eniTipoFirma;
 
   /**
@@ -117,27 +114,23 @@ public class ScanWebSimpleSignedFileInfo {
    * 
    * - MetadataConstants.ENI_PERFIL_FIRMA = "eni:perfil_firma";
    */
-
   protected String eniPerfilFirma;
 
   /**
    * - eEMGDE.Firma.RolFirma (eEMGDE17.2): Esquemas desarrollados a nivel local y que pueden
    * incluir valores como válida, autentica, refrenda, visa, representa, testimonia, etc..
    */
-
   protected String eniRolFirma;
 
   /**
    * eEMGDE.Firma.Firmante.NombreApellidos (eEMGDE17.5.1): Texto libre. Nombre o razón social
    * de los firmantes.
    */
-
   protected String eniSignerName;
 
   /**
    * eEMGDE.Firma.Firmante (eEMGDE17.5.2). NúmeroIdentificacionFirmantes
    */
-
   protected String eniSignerAdministrationId;
 
   /**
@@ -145,20 +138,18 @@ public class ScanWebSimpleSignedFileInfo {
    * confianza de la firma utilizado. Ejemplos: Nick, PIN ciudadano, Firma electrónica
    * avanzada, Claves concertadas, Firma electrónica avanzada basada en certificados, CSV, ..
    */
-
   protected String eniSignLevel;
 
   /**
    * Informació de les validacions realitzades
    */
-
   protected ScanWebSimpleValidationInfo validationInfo = null;
 
   /**
    * eEMGDE.Firma.InformacionAdicional (eEMGDE17.5.5) Ofrecer cualquier otra información que se
    * considere útil acerca del firmante.
-   * */
-
+   *
+   */
   protected List<ScanWebSimpleKeyValue> additionInformation = null;
 
   public ScanWebSimpleSignedFileInfo() {

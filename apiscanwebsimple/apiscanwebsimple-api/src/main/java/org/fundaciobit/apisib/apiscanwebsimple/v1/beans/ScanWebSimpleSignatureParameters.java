@@ -13,49 +13,46 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ScanWebSimpleSignatureParameters {
 
+  protected String documentLanguage;
 
-  protected String languageDoc;
+  protected String functionaryFullName = null;
 
-
-  protected String funcionariNom;
-
-
-  protected String funcionariNif;
+  protected String functionaryAdministrationID = null;
 
   public ScanWebSimpleSignatureParameters() {
     super();
   }
 
-  public ScanWebSimpleSignatureParameters(String languageDoc, String funcionariNom,
-      String funcionariNif) {
+  public ScanWebSimpleSignatureParameters(String documentLanguage, String functionaryFullName,
+      String functionaryAdministrationID) {
     super();
-    this.languageDoc = languageDoc;
-    this.funcionariNom = funcionariNom;
-    this.funcionariNif = funcionariNif;
+    this.documentLanguage = documentLanguage;
+    this.functionaryFullName = functionaryFullName;
+    this.functionaryAdministrationID = functionaryAdministrationID;
   }
 
-  public String getLanguageDoc() {
-    return languageDoc;
+  public String getDocumentLanguage() {
+    return documentLanguage;
   }
 
-  public void setLanguageDoc(String languageDoc) {
-    this.languageDoc = languageDoc;
+  public void setDocumentLanguage(String documentLanguage) {
+    this.documentLanguage = documentLanguage;
   }
 
-  public String getFuncionariNom() {
-    return funcionariNom;
+  public String getFunctionaryFullName() {
+    return functionaryFullName;
   }
 
-  public void setFuncionariNom(String funcionariNom) {
-    this.funcionariNom = funcionariNom;
+  public void setFunctionaryFullName(String functionaryFullName) {
+    this.functionaryFullName = functionaryFullName;
   }
 
-  public String getFuncionariNif() {
-    return funcionariNif;
+  public String getFunctionaryAdministrationID() {
+    return functionaryAdministrationID;
   }
 
-  public void setFuncionariNif(String funcionariNif) {
-    this.funcionariNif = funcionariNif;
+  public void setFunctionaryAdministrationID(String functionaryAdministrationID) {
+    this.functionaryAdministrationID = functionaryAdministrationID;
   }
 
 }

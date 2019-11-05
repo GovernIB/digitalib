@@ -35,7 +35,7 @@
 <%--  frameborder='3' --%>
 
 
-<iframe src="${urlToSelectPluginPage}" style="background-color: white; min-height:200px" frameborder='0' width="100%" height="400px"  id="myiframe" scrolling="auto">
+<iframe src="${urlToSelectPluginPage}" style="background-color: white; min-height:200px;" frameborder='0' width="100%" height="400px"  id="myiframe" scrolling="auto">
 <p>NO IFRAME</p>
 </iframe>
 <br/>

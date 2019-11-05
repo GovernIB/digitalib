@@ -15,183 +15,203 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ScanWebSimpleArxiuRequiredParameters {
 
-  public final static int ORIGEN_CIUTADA = 0;
-  public final static int ORIGEN_ADMINISTRACIO = 1;
+  public final static int DOCUMENTORIGEN_CIUTADA = 0;
+  public final static int DOCUMENTORIGEN_ADMINISTRACIO = 1;
 
   /**
    * Original (Llei 11/2007 Art. 30)
    * 
    * @return
    */
-  public final static String DOCUMENTESTATELABORACIO_ORIGINAL = "EE01";
+  public final static String DOCUMENTELABORATIONSTATE_ORIGINAL = "EE01";
 
   /**
    * Còpia electrònica autèntica amb canvi de format (Llei 11/2007 Art. 30.1).
    */
-  public final static String DOCUMENTESTATELABORACIO_COPIA_CF = "EE02";
+  public final static String DOCUMENTELABORATIONSTATE_COPIA_CF = "EE02";
 
   /**
    * Còpia electrònica autèntica de document en paper amb canvi de format (Llei 11/2007 Art.
    * 30.2 i 30.3).
    */
-  public final static String DOCUMENTESTATELABORACIO_COPIA_DP = "EE03";
+  public final static String DOCUMENTELABORATIONSTATE_COPIA_DP = "EE03";
   /**
    * Còpia electrònica parcial autèntica.
    */
-  public final static String DOCUMENTESTATELABORACIO_COPIA_PR = "EE04";
+  public final static String DOCUMENTELABORATIONSTATE_COPIA_PR = "EE04";
 
   /**
    * ALTRES("EE99"): Altres estats d'elaboració.
    */
-  public final static String DOCUMENTESTATELABORACIO_ALTRES = "EE99";
+  public final static String DOCUMENTELABORATIONSTATE_ALTRES = "EE99";
 
-  public static final String DOCUMENTTIPUS_RESOLUCIO = "TD01";
-  public static final String DOCUMENTTIPUS_ACORD = "TD02";
-  public static final String DOCUMENTTIPUS_CONTRACTE = "TD03";
-  public static final String DOCUMENTTIPUS_CONVENI = "TD04";
-  public static final String DOCUMENTTIPUS_DECLARACIO = "TD05";
-  public static final String DOCUMENTTIPUS_COMUNICACIO = "TD06";
-  public static final String DOCUMENTTIPUS_NOTIFICACIO = "TD07";
-  public static final String DOCUMENTTIPUS_PUBLICACIO = "TD08";
-  public static final String DOCUMENTTIPUS_JUSTIFICANT_RECEPCIO = "TD09";
-  public static final String DOCUMENTTIPUS_ACTA = "TD10";
-  public static final String DOCUMENTTIPUS_CERTIFICAT = "TD11";
-  public static final String DOCUMENTTIPUS_DILIGENCIA = "TD12";
-  public static final String DOCUMENTTIPUS_INFORME = "TD13";
-  public static final String DOCUMENTTIPUS_SOLICITUD = "TD14";
-  public static final String DOCUMENTTIPUS_DENUNCIA = "TD15";
-  public static final String DOCUMENTTIPUS_ALEGACIO = "TD16";
-  public static final String DOCUMENTTIPUS_RECURS = "TD17";
-  public static final String DOCUMENTTIPUS_COMUNICACIO_CIUTADA = "TD18";
-  public static final String DOCUMENTTIPUS_FACTURA = "TD19";
-  public static final String DOCUMENTTIPUS_ALTRES_INCAUTATS = "TD20";
-  public static final String DOCUMENTTIPUS_ALTRES = "TD99";
-
-  protected String ciutadaNif;
-
-  protected String ciutadaNom;
-
-  // "12345678X,87654321Z"
-
-  protected List<String> interessats;
+  public static final String DOCUMENTTYPE_RESOLUCIO = "TD01";
+  public static final String DOCUMENTTYPE_ACORD = "TD02";
+  public static final String DOCUMENTTYPE_CONTRACTE = "TD03";
+  public static final String DOCUMENTTYPE_CONVENI = "TD04";
+  public static final String DOCUMENTTYPE_DECLARACIO = "TD05";
+  public static final String DOCUMENTTYPE_COMUNICACIO = "TD06";
+  public static final String DOCUMENTTYPE_NOTIFICACIO = "TD07";
+  public static final String DOCUMENTTYPE_PUBLICACIO = "TD08";
+  public static final String DOCUMENTTYPE_JUSTIFICANT_RECEPCIO = "TD09";
+  public static final String DOCUMENTTYPE_ACTA = "TD10";
+  public static final String DOCUMENTTYPE_CERTIFICAT = "TD11";
+  public static final String DOCUMENTTYPE_DILIGENCIA = "TD12";
+  public static final String DOCUMENTTYPE_INFORME = "TD13";
+  public static final String DOCUMENTTYPE_SOLICITUD = "TD14";
+  public static final String DOCUMENTTYPE_DENUNCIA = "TD15";
+  public static final String DOCUMENTTYPE_ALEGACIO = "TD16";
+  public static final String DOCUMENTTYPE_RECURS = "TD17";
+  public static final String DOCUMENTTYPE_COMUNICACIO_CIUTADA = "TD18";
+  public static final String DOCUMENTTYPE_FACTURA = "TD19";
+  public static final String DOCUMENTTYPE_ALTRES_INCAUTATS = "TD20";
+  public static final String DOCUMENTTYPE_ALTRES = "TD99";
 
   /**
-   * @see ScanWebSimpleArxiuRequiredParameters.ORIGEN_CIUTADA
-   * @see ScanWebSimpleArxiuRequiredParameters.ORIGEN_ADMINISTRACIO
+   * NIF del ciutadà
    */
-
-  protected int origen; // ContingutOrigen.CIUTADA
+  protected String citizenAdministrationID;
 
   /**
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_ORIGINAL
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_COPIA_CF
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_COPIA_DP
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTESTATELABORACIO_COPIA_PR
+   * Nom complet del ciutada
    */
-
-  protected String documentEstatElaboracio;
+  protected String citizenFullName;
 
   /**
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_RESOLUCIO
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ACORD
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_CONTRACTE
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_CONVENI
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_DECLARACIO
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_COMUNICACIO
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_NOTIFICACIO
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_PUBLICACIO
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_JUSTIFICANT_RECEPCIO
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ACTA
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_CERTIFICAT
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_DILIGENCIA
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_INFORME
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_SOLICITUD
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_DENUNCIA
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALEGACIO
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_RECURS
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_COMUNICACIO_CIUTADA
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_FACTURA
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES_INCAUTATS
-   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTIPUS_ALTRES
+   * Document Estat Elaboració EE01 - Original EE02 - Còpia electrònica autèntica amb canvi de
+   * format EE03 - Còpia electrònica autèntica de document en paper EE04 - Còpia electrònica
+   * parcial autèntica EE99 - Altres
+   * 
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTELABORATIONSTATE_ORIGINAL
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTELABORATIONSTATE_COPIA_CF
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTELABORATIONSTATE_COPIA_DP
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTELABORATIONSTATE_COPIA_PR
    */
-  protected String documentTipus;
+
+  protected String documentElaborationState;
 
   /**
-   * Codi DIR3 dels organs afectats
+   * /** Document Tipus: TD01 - Resolució,TD02 - Acord,TD03 - Contracte,TD04 - Conveni, TD05 -
+   * Declaració,TD06 - Comunicació,TD07 - Notificació,TD08 - Publicació, TD09 - Justificant
+   * recepció,TD10 - Acta,TD11 - Certificat,TD12 - Diligència, TD13 - Informe,TD14 -
+   * Sol·licitud,TD15 - Denúncia, TD16 - Al·legació,TD17 - Recurs,TD18 - Comunicació
+   * ciutadà,TD19 - Factura, TD20 - Altres incautats,TD99 - Altres,
+   *
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_RESOLUCIO
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_ACORD
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_CONTRACTE
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_CONVENI
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_DECLARACIO
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_COMUNICACIO
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_NOTIFICACIO
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_PUBLICACIO
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_JUSTIFICANT_RECEPCIO
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_ACTA
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_CERTIFICAT
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_DILIGENCIA
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_INFORME
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_SOLICITUD
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_DENUNCIA
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_ALEGACIO
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_RECURS
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_COMUNICACIO_CIUTADA
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_FACTURA
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_ALTRES_INCAUTATS
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_ALTRES
    */
-  protected List<String> organs; // = "A04013511";
+  protected String documentType;
+
+  /**
+   *
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTORIGEN_CIUTADA
+   * @see ScanWebSimpleArxiuRequiredParameters.DOCUMENTORIGEN_ADMINISTRACIO Origen: 1
+   *      =>Administració 0 =>Ciutadà
+   */
+  protected Integer documentOrigen = null;
+
+  /**
+   * Llista de NIFs (AdministrationIDs) deles persones relacionaes/interesades en aquest
+   * document
+   */
+  protected List<String> interestedPersons; // "12345678X,87654321Z"
+
+  /**
+   * Codi DIR3 dels organs afectats si són administracions públiques o CIF si són empreses
+   * externes
+   */
+  protected List<String> affectedOrganisms; // = "A04013511";
 
   public ScanWebSimpleArxiuRequiredParameters() {
     super();
   }
 
-  public ScanWebSimpleArxiuRequiredParameters(String ciutadaNif, String ciutadaNom,
-      List<String> interessats, int origen, String documentEstatElaboracio,
-      String documentTipus, List<String> organs) {
+  public ScanWebSimpleArxiuRequiredParameters(String citizenAdministrationID,
+      String citizenFullName, String documentElaborationState, String documentType,
+      Integer documentOrigen, List<String> interestedPersons, List<String> affectedOrganisms) {
     super();
-    this.ciutadaNif = ciutadaNif;
-    this.ciutadaNom = ciutadaNom;
-    this.interessats = interessats;
-    this.origen = origen;
-    this.documentEstatElaboracio = documentEstatElaboracio;
-    this.documentTipus = documentTipus;
-    this.organs = organs;
+    this.citizenAdministrationID = citizenAdministrationID;
+    this.citizenFullName = citizenFullName;
+    this.documentElaborationState = documentElaborationState;
+    this.documentType = documentType;
+    this.documentOrigen = documentOrigen;
+    this.interestedPersons = interestedPersons;
+    this.affectedOrganisms = affectedOrganisms;
   }
 
-  public List<String> getInteressats() {
-    return interessats;
+  public String getCitizenAdministrationID() {
+    return citizenAdministrationID;
   }
 
-  public void setInteressats(List<String> interessats) {
-    this.interessats = interessats;
+  public void setCitizenAdministrationID(String citizenAdministrationID) {
+    this.citizenAdministrationID = citizenAdministrationID;
   }
 
-  public int getOrigen() {
-    return origen;
+  public String getCitizenFullName() {
+    return citizenFullName;
   }
 
-  public void setOrigen(int origen) {
-    this.origen = origen;
+  public void setCitizenFullName(String citizenFullName) {
+    this.citizenFullName = citizenFullName;
   }
 
-  public String getDocumentEstatElaboracio() {
-    return documentEstatElaboracio;
+  public String getDocumentElaborationState() {
+    return documentElaborationState;
   }
 
-  public void setDocumentEstatElaboracio(String documentEstatElaboracio) {
-    this.documentEstatElaboracio = documentEstatElaboracio;
+  public void setDocumentElaborationState(String documentElaborationState) {
+    this.documentElaborationState = documentElaborationState;
   }
 
-  public String getDocumentTipus() {
-    return documentTipus;
+  public String getDocumentType() {
+    return documentType;
   }
 
-  public void setDocumentTipus(String documentTipus) {
-    this.documentTipus = documentTipus;
+  public void setDocumentType(String documentType) {
+    this.documentType = documentType;
   }
 
-  public String getCiutadaNif() {
-    return ciutadaNif;
+  public Integer getDocumentOrigen() {
+    return documentOrigen;
   }
 
-  public void setCiutadaNif(String ciutadaNif) {
-    this.ciutadaNif = ciutadaNif;
+  public void setDocumentOrigen(Integer documentOrigen) {
+    this.documentOrigen = documentOrigen;
   }
 
-  public String getCiutadaNom() {
-    return ciutadaNom;
+  public List<String> getInterestedPersons() {
+    return interestedPersons;
   }
 
-  public void setCiutadaNom(String ciutadaNom) {
-    this.ciutadaNom = ciutadaNom;
+  public void setInterestedPersons(List<String> interestedPersons) {
+    this.interestedPersons = interestedPersons;
   }
 
-  public List<String> getOrgans() {
-    return organs;
+  public List<String> getAffectedOrganisms() {
+    return affectedOrganisms;
   }
 
-  public void setOrgans(List<String> organs) {
-    this.organs = organs;
+  public void setAffectedOrganisms(List<String> affectedOrganisms) {
+    this.affectedOrganisms = affectedOrganisms;
   }
 
 }
