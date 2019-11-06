@@ -13,6 +13,7 @@ import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -92,8 +93,6 @@ public class ApiScanWebSimpleExampleConsole {
           scanWebProfileSelected.getCode(), languageUI));
 
       // Recuperar un ID de transacció
-      boolean returnScannedFile;
-      boolean returnSignedFile;
       {
 
         final String profileCode = scanWebProfileSelected.getCode();
@@ -110,9 +109,6 @@ public class ApiScanWebSimpleExampleConsole {
             transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode,
                 view, languageUI, funcionariUsername);
 
-            returnScannedFile = true;
-            returnSignedFile = false;
-
           break;
 
           case ScanWebSimpleAvailableProfile.PROFILE_TYPE_SCAN_AND_SIGNATURE: {
@@ -120,9 +116,6 @@ public class ApiScanWebSimpleExampleConsole {
 
             transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode,
                 view, languageUI, funcionariUsername, signatureParameters);
-
-            returnScannedFile = false;
-            returnSignedFile = true;
 
           }
 
@@ -141,11 +134,6 @@ public class ApiScanWebSimpleExampleConsole {
             transacctionIdRequest = new ScanWebSimpleGetTransactionIdRequest(profileCode,
                 view, languageUI, funcionariUsername, signatureParameters,
                 arxiuRequiredParameters, arxiuOptionalParameters);
-
-            returnScannedFile = false;
-            // returnSignedFile hauria de ser false ja que l'hauriem de poder obtenir
-            // a partir de la URL de descarrega d'Arxiu o Custòdia
-            returnSignedFile = true;
 
           }
           break;
@@ -188,6 +176,9 @@ public class ApiScanWebSimpleExampleConsole {
 
       readFromSocket(port);
 
+      // Segons el tipus de perfil ja ho omplirà automàticament
+      Boolean returnScannedFile = null;
+      Boolean returnSignedFile = null;
       System.out.println(" Descarregant Informació dels Resultat:");
       System.out.println("     * TransaccioID = " + transactionID);
       System.out.println("     * returnScannedFile = " + returnScannedFile);

@@ -15,16 +15,25 @@ public class ScanWebSimpleResultRequest {
 
   protected String transactionID;
 
-  protected boolean returnScannedFile = true;
+  protected Boolean returnScannedFile = null;
 
-  protected boolean returnSignedFile = false;
+  protected Boolean returnSignedFile = null;
 
   public ScanWebSimpleResultRequest() {
     super();
   }
 
-  public ScanWebSimpleResultRequest(String transactionID, boolean returnScannedFile,
-      boolean returnSignedFile) {
+  
+  
+  public ScanWebSimpleResultRequest(String transactionID) {
+    super();
+    this.transactionID = transactionID;
+  }
+
+
+
+  public ScanWebSimpleResultRequest(String transactionID, Boolean returnScannedFile,
+      Boolean returnSignedFile) {
     super();
     this.transactionID = transactionID;
     this.returnScannedFile = returnScannedFile;
@@ -39,19 +48,19 @@ public class ScanWebSimpleResultRequest {
     this.transactionID = transactionID;
   }
 
-  public boolean isReturnScannedFile() {
+  public Boolean isReturnScannedFile() {
     return returnScannedFile;
   }
 
-  public void setReturnScannedFile(boolean returnScannedFile) {
+  public void setReturnScannedFile(Boolean returnScannedFile) {
     this.returnScannedFile = returnScannedFile;
   }
 
-  public boolean isReturnSignedFile() {
+  public Boolean isReturnSignedFile() {
     return returnSignedFile;
   }
 
-  public void setReturnSignedFile(boolean returnSignedFile) {
+  public void setReturnSignedFile(Boolean returnSignedFile) {
     this.returnSignedFile = returnSignedFile;
   }
 

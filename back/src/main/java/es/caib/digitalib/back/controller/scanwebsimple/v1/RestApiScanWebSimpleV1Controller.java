@@ -812,12 +812,17 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
             additionalMetadatas);
 
       }
+      
+      final int tipusPerfil = transaccio.getPerfil().getUsPerfil();
+      final boolean perfilFirmaOArxiu = (tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA_INFO
+          || tipusPerfil == Constants.PERFIL_US_CUSTODIA_INFO);
 
       final ScanWebSimpleFile scannedFile;
       final ScanWebSimpleScannedFileInfo scannedFileInfo;
       {
 
-        if (resultRequest.isReturnScannedFile()) {
+        Boolean returnScannedFile = resultRequest.isReturnScannedFile(); 
+        if ((returnScannedFile == null && !perfilFirmaOArxiu) || Boolean.TRUE.equals(returnScannedFile)) {
 
           // Document escanejat
           long scannedFileID = transaccio.getFitxerEscanejatID();
@@ -849,20 +854,21 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
 
       }
 
-      final int tipusPerfil = transaccio.getPerfil().getUsPerfil();
+      
 
       final ScanWebSimpleSignedFileInfo signedFileInfo;
       final ScanWebSimpleFile signedFile;
       final ScanWebSimpleFile detachedSignatureFile;
       // XYZ ZZZ Falta Informacio de Firma
-      if (tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA_INFO
-          || tipusPerfil == Constants.PERFIL_US_CUSTODIA_INFO) {
+      
+      if (perfilFirmaOArxiu) {
 
         InfoSignaturaJPA infoSign = transaccio.getInfoSignatura();
 
         Integer signMode = infoSign.getSignMode();
 
-        if (resultRequest.isReturnSignedFile()) {
+        Boolean returnSignedFile = resultRequest.isReturnSignedFile(); 
+        if (returnSignedFile == null || returnSignedFile == true) {
 
           // Document Signat
           {
