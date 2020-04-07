@@ -9,7 +9,7 @@
   <parent>
     <groupId>es.caib.digitalib</groupId>
     <artifactId>digitalib</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
   </parent>
 
   <name>DigitalIB TEST - JPA</name>
@@ -35,7 +35,7 @@
     <dependency>
       <groupId>es.caib.digitalib</groupId>
       <artifactId>digitalib-persistence-resourcelocal</artifactId>  
-      <version>1.0.0</version>
+      <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
     
