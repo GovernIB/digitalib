@@ -12,6 +12,7 @@ public interface IDigitalIBDaoManagers {
 	public IIdiomaManager getIdiomaManager();
 	public IInfoCustodyManager getInfoCustodyManager();
 	public IInfoSignaturaManager getInfoSignaturaManager();
+	public IMetadadaManager getMetadadaManager();
 	public IPerfilManager getPerfilManager();
 	public IPerfilUsuariAplicacioManager getPerfilUsuariAplicacioManager();
 	public IPluginManager getPluginManager();

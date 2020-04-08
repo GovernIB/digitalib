@@ -3,6 +3,8 @@ package es.caib.digitalib.back.controller;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleScannedFileInfo;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -20,6 +23,9 @@ import org.fundaciobit.plugins.scanweb.api.ScanWebConfig;
 import org.fundaciobit.plugins.scanweb.api.ScanWebStatus;
 import org.fundaciobit.plugins.scanweb.api.ScannedDocument;
 import org.fundaciobit.plugins.scanweb.api.ScannedPlainFile;
+import org.fundaciobit.pluginsib.core.utils.ISO8601;
+import org.fundaciobit.pluginsib.core.utils.Metadata;
+import org.fundaciobit.pluginsib.core.utils.MetadataConstants;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,10 +37,12 @@ import com.google.common.hash.Hashing;
 import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
 import es.caib.digitalib.back.controller.user.ScanWebProcessControllerUser;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
+import es.caib.digitalib.jpa.MetadadaJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.AuditoriaLogicaLocal;
 import es.caib.digitalib.logic.FitxerLogicaLocal;
+import es.caib.digitalib.logic.MetadadaLogicaLocal;
 import es.caib.digitalib.logic.PluginArxiuLogicaLocal;
 import es.caib.digitalib.logic.PluginDocumentCustodyLogicaLocal;
 import es.caib.digitalib.logic.PluginFirmaEnServidorLogicaLocal;
@@ -84,6 +92,9 @@ public abstract class AbstractScanWebProcessController {
 
   @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
   protected AuditoriaLogicaLocal auditoriaLogicaEjb;
+  
+  @EJB(mappedName = MetadadaLogicaLocal.JNDI_NAME)
+  protected MetadadaLogicaLocal metadadaLogicaEjb;
 
   public static String getFinalURL(String baseURL, String transactionWebID, boolean isPublic) {
     String cp = isPublic ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
@@ -219,6 +230,90 @@ public abstract class AbstractScanWebProcessController {
             }
             break;
           }
+          
+          // Recollir Metadades del PLugin
+          
+          log.info("XYZ ZZZ  transaccio.getEstatCodi(Ok = 2) =>  " + transaccio.getEstatCodi());
+          
+          if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
+            List<Metadata> metadades = swc.getScannedFiles().get(0).getMetadatas();
+            log.info("XYZ ZZZ   Metadades transacció " + transaccio.getTransaccioID());
+            
+            
+            for (Metadata metadata : metadades) {
+              final String name = metadata.getKey();
+              final String value = metadata.getValue();
+
+              log.info("XYZ ZZZ   Metadada["+ name + "] => " + value);
+
+              if (MetadataConstants.PAPER_SIZE.equals(name)) {
+                transaccio.setInfoScanPaperSize(value);
+              } else if (MetadataConstants.OCR.equals(name)) {
+                if ("true".equalsIgnoreCase(value)) {
+                   transaccio.setInfoScanOcr(true);
+                } else if ("false".equalsIgnoreCase(value)) {
+                  transaccio.setInfoScanOcr(false);
+                } else {
+                  transaccio.setInfoScanOcr(null);
+                }
+              } else if (MetadataConstants.FUNCTIONARY_FULLNAME.equals(name)) {
+                if (isEmpty(transaccio.getSignParamFuncionariNom())) {
+                  transaccio.setSignParamFuncionariNom(value);
+                }
+              } else if (MetadataConstants.FUNCTIONARY_USERNAME.equals(name)) {
+                if (isEmpty(transaccio.getFuncionariUsername())) {
+                  transaccio.setFuncionariUsername(value);
+                }
+              } else if (MetadataConstants.FUNCTIONARY_ADMINISTRATIONID.equals(name)) {
+                if (isEmpty(transaccio.getSignParamFuncionariNif())) {
+                  transaccio.setSignParamFuncionariNif(value);
+                }
+              } else if (MetadataConstants.RESOLUTION.equals(name)) {
+                try {
+                  transaccio.setInfoScanResolucioPpp(Integer.valueOf(value));
+                } catch(NumberFormatException nfe) {
+                  log.error("Error processant Resolution: " + name + " => ]" + value + "[", nfe);
+                }
+                
+              } else if (MetadataConstants.PROFUNDIDAD_COLOR.equals(name)) {
+                try {
+                  int bits = Integer.valueOf(value);
+                  if (bits == 8) {
+                    transaccio.setInfoScanPixelType(MetadataConstants.PROFUNDIDAD_COLOR_GRAY);
+                  } else if (bits < 8) {
+                     transaccio.setInfoScanPixelType(MetadataConstants.PROFUNDIDAD_COLOR_BW);
+                  } else {
+                     transaccio.setInfoScanPixelType(MetadataConstants.PROFUNDIDAD_COLOR_DEEP_COLOR);
+                  }
+                } catch(NumberFormatException nfe) {
+                  log.error("Error processant PixelType: " + name + " => ]" + value + "[", nfe);
+                }
+              } else if (MetadataConstants.ENI_TIPO_DOCUMENTAL.equals(name)) {
+                
+                if (transaccio.getArxiuReqParamDocumentTipus() == null) {
+                  transaccio.setArxiuReqParamDocumentTipus(value);
+                }
+              } else if (MetadataConstants.ENI_IDIOMA.equals(name)) {
+                
+                if (transaccio.getSignParamLanguageDoc() == null) {
+                  transaccio.setSignParamLanguageDoc(value);
+                }
+              } else if (MetadataConstants.ENI_FECHA_INICIO.equals(name)) {
+                // DATA CAPTURA
+                try {
+                   Date data = ISO8601.ISO8601ToDate(value);
+                   transaccio.setInfoScanDataCaptura(new Timestamp(data.getTime()));
+                } catch(ParseException e) {
+                  log.error("Error processant DataCaptura(FechaInicio): " + name + " => ]" + value + "[", e);
+                }
+                
+              } else {
+                // afegir a taula de metadades
+                metadadaLogicaEjb.create(transaccio.getTransaccioID(), name, value);
+              }
+            }
+
+          }
 
         } else {
 
@@ -297,6 +392,13 @@ public abstract class AbstractScanWebProcessController {
     return mav;
   }
 
+  
+  public static boolean isEmpty(String str) {
+    return  str == null || str.trim().length() == 0;
+  }
+  
+  
+  
   /**
    * 
    * @param status

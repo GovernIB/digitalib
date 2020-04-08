@@ -29,6 +29,7 @@ public class TransaccioForm extends DigitalIBBaseForm {
     super(__toClone);
       this.transaccio = __toClone.transaccio;
     this.listOfValuesForEstatCodi = __toClone.listOfValuesForEstatCodi;
+    this.listOfValuesForInfoScanPixelType = __toClone.listOfValuesForInfoScanPixelType;
     this.listOfValuesForView = __toClone.listOfValuesForView;
     this.listOfValuesForSignParamLanguageDoc = __toClone.listOfValuesForSignParamLanguageDoc;
     this.listOfValuesForArxiuReqParamDocEstatElabora = __toClone.listOfValuesForArxiuReqParamDocEstatElabora;
@@ -88,6 +89,18 @@ public class TransaccioForm extends DigitalIBBaseForm {
 
   public void setListOfValuesForEstatCodi(List<StringKeyValue> listOfValuesForEstatCodi) {
     this.listOfValuesForEstatCodi = listOfValuesForEstatCodi;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForInfoScanPixelType;
+
+  public List<StringKeyValue> getListOfValuesForInfoScanPixelType() {
+    return this.listOfValuesForInfoScanPixelType;
+  }
+
+  public void setListOfValuesForInfoScanPixelType(List<StringKeyValue> listOfValuesForInfoScanPixelType) {
+    this.listOfValuesForInfoScanPixelType = listOfValuesForInfoScanPixelType;
   }
 
 

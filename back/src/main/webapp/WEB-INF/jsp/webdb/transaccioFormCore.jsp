@@ -378,6 +378,24 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANPAPERSIZE)}">
+        <tr id="transaccio_infoScanPaperSize_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANPAPERSIZE])?'transaccio.infoScanPaperSize':__theForm.labels[TransaccioFields.INFOSCANPAPERSIZE]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.INFOSCANPAPERSIZE]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOSCANPAPERSIZE]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.infoScanPaperSize" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANPAPERSIZE)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANPAPERSIZE)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="transaccio.infoScanPaperSize"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANPIXELTYPE)}">
         <tr id="transaccio_infoScanPixelType_rowid">
           <td>
@@ -389,9 +407,20 @@
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.infoScanPixelType" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANPIXELTYPE)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANPIXELTYPE)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.infoScanPixelType"   />
-
+          <form:errors path="transaccio.infoScanPixelType" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANPIXELTYPE)}" >
+          <form:hidden path="transaccio.infoScanPixelType"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.infoScanPixelType,__theForm.listOfValuesForInfoScanPixelType)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANPIXELTYPE)}" >
+          <form:select id="transaccio_infoScanPixelType"  onchange="if(typeof onChangeInfoScanPixelType == 'function') {  onChangeInfoScanPixelType(this); };"  cssClass="input-xxlarge" path="transaccio.infoScanPixelType">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForInfoScanPixelType}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>
@@ -435,6 +464,42 @@
           <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANOCR)}" >
                 <fmt:message key="genapp.checkbox.${__theForm.transaccio.infoScanOcr}" />
           </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANDATACAPTURA)}">
+        <tr id="transaccio_infoScanDataCaptura_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANDATACAPTURA])?'transaccio.infoScanDataCaptura':__theForm.labels[TransaccioFields.INFOSCANDATACAPTURA]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.INFOSCANDATACAPTURA]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOSCANDATACAPTURA]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="transaccio.infoScanDataCaptura" cssClass="errorField alert alert-error" />
+              <div id="infoScanDataCaptura" class="input-append">
+                <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANDATACAPTURA)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANDATACAPTURA)? 'input-medium uneditable-input' : 'input-medium'}"  path="transaccio.infoScanDataCaptura" />
+                <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANDATACAPTURA)}" >
+                <span class="add-on">
+                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+              </c:if>
+              </div>
+              <script type="text/javascript">                
+                $(function() {
+                  $('#infoScanDataCaptura').datetimepicker({
+                    language: '${lang}',
+                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
+                    format:  '${gen:getJSDateTimePattern()}',
+                    pickTime: true,
+                    weekStart: ${gen:getFirstDayOfTheWeek()}
+                  });
+                });
+              </script>
            </td>
         </tr>
         </c:if>

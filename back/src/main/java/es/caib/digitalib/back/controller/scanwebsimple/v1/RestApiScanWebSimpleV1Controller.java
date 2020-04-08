@@ -40,6 +40,8 @@ import org.fundaciobit.genapp.common.query.SubQuery;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.plugins.signature.api.FileInfoSignature;
+import org.fundaciobit.pluginsib.core.utils.ISO8601;
+import org.fundaciobit.pluginsib.core.utils.MetadataConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -63,8 +65,10 @@ import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.ScanWebUtils;
 import es.caib.digitalib.model.bean.AuditoriaBean;
 import es.caib.digitalib.model.entity.Auditoria;
+import es.caib.digitalib.model.entity.Metadada;
 import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.PerfilUsuariAplicacio;
+import es.caib.digitalib.model.fields.MetadadaFields;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
@@ -79,8 +83,8 @@ import es.caib.digitalib.utils.Constants;
  */
 @Controller
 @RequestMapping(value = RestApiScanWebSimpleV1Controller.CONTEXT)
-public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implements
-    ApiScanWebSimple {
+public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils
+    implements ApiScanWebSimple {
 
   public static final String CONTEXT = "/common/rest/apiscanwebsimple/v1";
 
@@ -99,10 +103,14 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
   @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
   protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
+  @EJB(mappedName = es.caib.digitalib.ejb.MetadadaLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.MetadadaLocal metadadaEjb;
+
   @Autowired
   private HttpServletRequest request;
 
-  @RequestMapping(value = "/" + ApiScanWebSimple.AVAILABLEPROFILES, method = RequestMethod.POST)
+  @RequestMapping(value = "/"
+      + ApiScanWebSimple.AVAILABLEPROFILES, method = RequestMethod.POST)
   @ResponseBody
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
@@ -173,8 +181,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
 
           PerfilJPA perfil = (PerfilJPA) p;
           ScanWebSimpleAvailableProfile ap = new ScanWebSimpleAvailableProfile(
-              perfil.getCodi(), perfil.getNom().getTraduccio(locale).getValor(), perfil
-                  .getDescripcio().getTraduccio(locale).getValor(), perfil.getUsPerfil());
+              perfil.getCodi(), perfil.getNom().getTraduccio(locale).getValor(),
+              perfil.getDescripcio().getTraduccio(locale).getValor(), perfil.getUsPerfil());
           list.add(ap);
         }
 
@@ -252,9 +260,9 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
           PerfilUsuariAplicacioFields.PERFILID,
           PerfilUsuariAplicacioFields.USUARIAPLICACIOID.equal(usuariAplicacioID));
 
-      List<Perfil> perfils = perfilEjb.select(Where.AND(
-          PerfilFields.CODI.equal(profileRequest.getProfileCode()),
-          PerfilFields.PERFILID.in(subquery)));
+      List<Perfil> perfils = perfilEjb
+          .select(Where.AND(PerfilFields.CODI.equal(profileRequest.getProfileCode()),
+              PerfilFields.PERFILID.in(subquery)));
 
       ScanWebSimpleAvailableProfile fsap = null;
 
@@ -263,9 +271,9 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
         String locale = profileRequest.getLocale();
 
         PerfilJPA perfil = (PerfilJPA) perfils.get(0);
-        fsap = new ScanWebSimpleAvailableProfile(perfil.getCodi(), perfil.getNom()
-            .getTraduccio(locale).getValor(), perfil.getDescripcio().getTraduccio(locale)
-            .getValor(), perfil.getUsPerfil());
+        fsap = new ScanWebSimpleAvailableProfile(perfil.getCodi(),
+            perfil.getNom().getTraduccio(locale).getValor(),
+            perfil.getDescripcio().getTraduccio(locale).getValor(), perfil.getUsPerfil());
 
       }
 
@@ -384,27 +392,18 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
     final String ip = transaction.getIp();
     final String remoteUsernamePerson = transaction.getFuncionariUsername();
 
-    final String additionalInfo = "IP: "
-        + ip
-        + "\n"
-        + "Aplicacio: "
-        + usuariAplicacio.getUsername()
-        + "\n"
-        + "Remote Usuari Persona: "
-        + remoteUsernamePerson
-        + "\n"
-        + "TransacctionWebID: "
-        + transaction.getTransactionWebId()
-        + "\n"
-        + "Tipus Transacció: "
+    final String additionalInfo = "IP: " + ip + "\n" + "Aplicacio: "
+        + usuariAplicacio.getUsername() + "\n" + "Remote Usuari Persona: "
+        + remoteUsernamePerson + "\n" + "TransacctionWebID: "
+        + transaction.getTransactionWebId() + "\n" + "Tipus Transacció: "
         + I18NUtils.tradueix(new Locale("ca"),
             "transaccio.tipus." + Math.abs(transaction.getPerfil().getUsPerfil()));
 
     Auditoria audit = new AuditoriaBean(new Timestamp(System.currentTimeMillis()),
         transaction.getTransaccioID(), Constants.AUDIT_TYPE_CREATE_TRANSACTION,
         I18NUtils.tradueix("transaccio.aplicacio.crear",
-            String.valueOf(transaction.getTransaccioID())), additionalInfo, isApp,
-        usuariAplicacio.getUsername(), remoteUsernamePerson);
+            String.valueOf(transaction.getTransaccioID())),
+        additionalInfo, isApp, usuariAplicacio.getUsername(), remoteUsernamePerson);
 
     auditoriaLogicaEjb.create(audit);
   }
@@ -557,7 +556,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
 
   }
 
-  @RequestMapping(value = "/" + ApiScanWebSimple.TRANSACTIONSTATUS, method = RequestMethod.POST)
+  @RequestMapping(value = "/"
+      + ApiScanWebSimple.TRANSACTIONSTATUS, method = RequestMethod.POST)
   @ResponseBody
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
@@ -621,53 +621,48 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
   }
 
   /*
-  @RequestMapping(value = "/" + ApiScanWebSimple.SCANWEBRESULT, method = RequestMethod.POST)
-  @ResponseBody
-  @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
-  public ResponseEntity<?> getScanWebResult(@RequestBody String transactionWebID,
-      HttpServletRequest request) {
-
-    log.info(" XYZ ZZZ getSignaturesResult => ENTRA");
-
-    String error = autenticate(request, "ca", usuariAplicacioEjb);
-    if (error != null) {
-      return generateServerError(error, HttpStatus.UNAUTHORIZED);
-    }
-    try {
-      ScanWebSimpleScanResult fssr = getScanWebResult(transactionWebID);
-
-      HttpHeaders headers = addAccessControllAllowOrigin();
-      ResponseEntity<?> re = new ResponseEntity<ScanWebSimpleScanResult>(fssr, headers,
-          HttpStatus.OK);
-      log.info(" XYZ ZZZ getScanWebResult => FINAL OK");
-      return re;
-
-    } catch (Throwable th) {
-
-      final String msg = I18NUtils.tradueix("error.desconegut.transaccio.numero.escaneig",
-          transactionWebID) + ": " + th.getMessage();
-
-      log.error(msg, th);
-
-      return generateServerError(msg, th);
-    }
-
-  }
-
-  @Override
-  public ScanWebSimpleScanResult getScanWebResult(String transactionID) throws Exception {
-
-    boolean returnScannedFile = true;
-    boolean returnSignedFile = true;
-
-    ScanWebSimpleResultRequest resultRequest = new ScanWebSimpleResultRequest(transactionID,
-        returnScannedFile, returnSignedFile);
-
-    return getScanWebResultSelectFiles(resultRequest);
-
-  }
-  */
+   * @RequestMapping(value = "/" + ApiScanWebSimple.SCANWEBRESULT, method = RequestMethod.POST)
+   * 
+   * @ResponseBody
+   * 
+   * @Produces(MediaType.APPLICATION_JSON)
+   * 
+   * @Consumes(MediaType.APPLICATION_JSON) public ResponseEntity<?>
+   * getScanWebResult(@RequestBody String transactionWebID, HttpServletRequest request) {
+   * 
+   * log.info(" XYZ ZZZ getSignaturesResult => ENTRA");
+   * 
+   * String error = autenticate(request, "ca", usuariAplicacioEjb); if (error != null) { return
+   * generateServerError(error, HttpStatus.UNAUTHORIZED); } try { ScanWebSimpleScanResult fssr
+   * = getScanWebResult(transactionWebID);
+   * 
+   * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> re = new
+   * ResponseEntity<ScanWebSimpleScanResult>(fssr, headers, HttpStatus.OK);
+   * log.info(" XYZ ZZZ getScanWebResult => FINAL OK"); return re;
+   * 
+   * } catch (Throwable th) {
+   * 
+   * final String msg = I18NUtils.tradueix("error.desconegut.transaccio.numero.escaneig",
+   * transactionWebID) + ": " + th.getMessage();
+   * 
+   * log.error(msg, th);
+   * 
+   * return generateServerError(msg, th); }
+   * 
+   * }
+   * 
+   * @Override public ScanWebSimpleScanResult getScanWebResult(String transactionID) throws
+   * Exception {
+   * 
+   * boolean returnScannedFile = true; boolean returnSignedFile = true;
+   * 
+   * ScanWebSimpleResultRequest resultRequest = new ScanWebSimpleResultRequest(transactionID,
+   * returnScannedFile, returnSignedFile);
+   * 
+   * return getScanWebResultSelectFiles(resultRequest);
+   * 
+   * }
+   */
 
   @RequestMapping(value = "/" + ApiScanWebSimple.SCANWEBRESULT, method = RequestMethod.POST)
   @ResponseBody
@@ -701,8 +696,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
   }
 
   @Override
-  public ScanWebSimpleScanResult getScanWebResult(
-      ScanWebSimpleResultRequest resultRequest) throws Exception {
+  public ScanWebSimpleScanResult getScanWebResult(ScanWebSimpleResultRequest resultRequest)
+      throws Exception {
 
     String transactionWebID = resultRequest.getTransactionID();
 
@@ -785,8 +780,8 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
           }
 
           arxiuRequiredParameters = new ScanWebSimpleArxiuRequiredParameters(
-              citizenAdministrationID, citizenFullName, documentElaborationState,
-              documentType, documentOrigen, interestedPersons, affectedOrganisms);
+              citizenAdministrationID, citizenFullName, documentElaborationState, documentType,
+              documentOrigen, interestedPersons, affectedOrganisms);
         }
 
         /**
@@ -805,14 +800,34 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
 
         }
 
-        final List<ScanWebSimpleKeyValue> additionalMetadatas = null;
+        // Metadades Addicionals
+        final List<ScanWebSimpleKeyValue> additionalMetadatas = new ArrayList<ScanWebSimpleKeyValue>();
+        List<Metadada> metadades = metadadaEjb
+            .select(MetadadaFields.TRANSACCIOID.equal(transactionID));
+        if (metadades != null && !metadades.isEmpty()) {
+          for (Metadada metadada : metadades) {
+            additionalMetadatas
+                .add(new ScanWebSimpleKeyValue(metadada.getNom(), metadada.getValor()));
+          }
+        }
 
+        if (transaccio.getInfoScanPaperSize() != null) {
+          additionalMetadatas.add(new ScanWebSimpleKeyValue(MetadataConstants.PAPER_SIZE,
+              transaccio.getInfoScanPaperSize()));
+        }
+
+        if (transaccio.getInfoScanDataCaptura() != null) {
+          additionalMetadatas.add(new ScanWebSimpleKeyValue(MetadataConstants.ENI_FECHA_INICIO,
+              ISO8601.dateToISO8601(transaccio.getInfoScanDataCaptura())));
+        }
+
+        // objecte Complet
         formMetadatas = new ScanWebSimpleFormMetadatas(transactionName, functionaryUsername,
             signatureParameters, arxiuRequiredParameters, arxiuOptionalParameters,
             additionalMetadatas);
 
       }
-      
+
       final int tipusPerfil = transaccio.getPerfil().getUsPerfil();
       final boolean perfilFirmaOArxiu = (tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA_INFO
           || tipusPerfil == Constants.PERFIL_US_CUSTODIA_INFO);
@@ -821,8 +836,9 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
       final ScanWebSimpleScannedFileInfo scannedFileInfo;
       {
 
-        Boolean returnScannedFile = resultRequest.isReturnScannedFile(); 
-        if ((returnScannedFile == null && !perfilFirmaOArxiu) || Boolean.TRUE.equals(returnScannedFile)) {
+        Boolean returnScannedFile = resultRequest.isReturnScannedFile();
+        if ((returnScannedFile == null && !perfilFirmaOArxiu)
+            || Boolean.TRUE.equals(returnScannedFile)) {
 
           // Document escanejat
           long scannedFileID = transaccio.getFitxerEscanejatID();
@@ -841,33 +857,49 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils implem
 
         // Informació de Document escanejat
         // XYZ ZZZ ZZZ
-        Integer pixelType = null;
-        Integer pppResolution = null;
-        String formatFile = ScanWebUtils.formatFileToScanWebApi(transaccio.getPerfil()
-            .getScanFormatFitxer());
+        Integer pixelType;
+        if (transaccio.getInfoScanPixelType() == null) {
+          pixelType = null;
+        } else {
+          switch (transaccio.getInfoScanPixelType()) {
+            case MetadataConstants.PROFUNDIDAD_COLOR_GRAY:
+              pixelType = ScanWebSimpleScannedFileInfo.PIXEL_TYPE_GRAY;
+            break;
+            case MetadataConstants.PROFUNDIDAD_COLOR_BW:
+              pixelType = ScanWebSimpleScannedFileInfo.PIXEL_TYPE_BLACK_WHITE;
+            break;
+            case MetadataConstants.PROFUNDIDAD_COLOR_DEEP_COLOR:
+              pixelType = ScanWebSimpleScannedFileInfo.PIXEL_TYPE_COLOR;
+            break;
 
-        // S'ha de treure de Perfil
-        // XYZ ZZZ ZZZ
-        Boolean ocr = null;
+            default:
+              pixelType = transaccio.getInfoScanPixelType();
+
+          }
+        }
+
+        Integer pppResolution = transaccio.getInfoScanResolucioPpp();
+        String formatFile = ScanWebUtils
+            .formatFileToScanWebApi(transaccio.getPerfil().getScanFormatFitxer());
+
+        Boolean ocr = transaccio.getInfoScanOcr();
         scannedFileInfo = new ScanWebSimpleScannedFileInfo(pixelType, pppResolution,
             formatFile, ocr);
 
       }
 
-      
-
       final ScanWebSimpleSignedFileInfo signedFileInfo;
       final ScanWebSimpleFile signedFile;
       final ScanWebSimpleFile detachedSignatureFile;
       // XYZ ZZZ Falta Informacio de Firma
-      
+
       if (perfilFirmaOArxiu) {
 
         InfoSignaturaJPA infoSign = transaccio.getInfoSignatura();
 
         Integer signMode = infoSign.getSignMode();
 
-        Boolean returnSignedFile = resultRequest.isReturnSignedFile(); 
+        Boolean returnSignedFile = resultRequest.isReturnSignedFile();
         if (returnSignedFile == null || returnSignedFile == true) {
 
           // Document Signat

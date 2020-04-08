@@ -50,14 +50,20 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.String getHashFirma();
 	public void setHashFirma(java.lang.String _hashFirma_);
 
+	public java.lang.String getInfoScanPaperSize();
+	public void setInfoScanPaperSize(java.lang.String _infoScanPaperSize_);
+
 	public java.lang.Integer getInfoScanPixelType();
 	public void setInfoScanPixelType(java.lang.Integer _infoScanPixelType_);
 
 	public java.lang.Integer getInfoScanResolucioPpp();
 	public void setInfoScanResolucioPpp(java.lang.Integer _infoScanResolucioPpp_);
 
-	public boolean isInfoScanOcr();
-	public void setInfoScanOcr(boolean _infoScanOcr_);
+	public java.lang.Boolean getInfoScanOcr();
+	public void setInfoScanOcr(java.lang.Boolean _infoScanOcr_);
+
+	public java.sql.Timestamp getInfoScanDataCaptura();
+	public void setInfoScanDataCaptura(java.sql.Timestamp _infoScanDataCaptura_);
 
 	public java.lang.Integer getView();
 	public void setView(java.lang.Integer _view_);

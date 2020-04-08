@@ -376,6 +376,17 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     __tmp.add(new StringKeyValue("de", I18NUtils.tradueix("idiomadoc.alemany")));
     return __tmp;
   }
+  
+  @Override
+  public List<StringKeyValue> getReferenceListForInfoScanPixelType(HttpServletRequest request,
+      ModelAndView mav, Where where)  throws I18NException {
+   List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+   __tmp.add(new StringKeyValue("1" , "BW"));
+   __tmp.add(new StringKeyValue("8" , "GRAY"));
+   __tmp.add(new StringKeyValue("32" , "COLOR"));
+   return __tmp;
+ }
+  
 
   @RequestMapping(value = "/enviaremail")
   public String enviaremail(@RequestParam("transaccioID") java.lang.Long transaccioID,

@@ -60,6 +60,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHFIRMA)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.HASHFIRMA)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANPAPERSIZE)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANPAPERSIZE)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANPIXELTYPE)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANPIXELTYPE)}</th>
         </c:if>
@@ -68,6 +71,9 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANOCR)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANOCR)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANDATACAPTURA)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANDATACAPTURA)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.VIEW)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.VIEW)}</th>

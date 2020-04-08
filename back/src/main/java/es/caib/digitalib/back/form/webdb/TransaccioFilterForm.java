@@ -241,6 +241,17 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.String infoScanPaperSize;
+
+  public java.lang.String getInfoScanPaperSize() {
+    return this.infoScanPaperSize;
+  }
+
+  public void setInfoScanPaperSize(java.lang.String infoScanPaperSize) {
+    this.infoScanPaperSize = infoScanPaperSize;
+  }
+
+
   private java.lang.Integer infoScanPixelTypeDesde;
 
   public java.lang.Integer getInfoScanPixelTypeDesde() {
@@ -282,6 +293,28 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setInfoScanResolucioPppFins(java.lang.Integer infoScanResolucioPppFins) {
     this.infoScanResolucioPppFins = infoScanResolucioPppFins;
+  }
+
+
+  private java.sql.Timestamp infoScanDataCapturaDesde;
+
+  public java.sql.Timestamp getInfoScanDataCapturaDesde() {
+    return this.infoScanDataCapturaDesde;
+  }
+
+  public void setInfoScanDataCapturaDesde(java.sql.Timestamp infoScanDataCapturaDesde) {
+    this.infoScanDataCapturaDesde = infoScanDataCapturaDesde;
+  }
+
+
+  private java.sql.Timestamp infoScanDataCapturaFins;
+
+  public java.sql.Timestamp getInfoScanDataCapturaFins() {
+    return this.infoScanDataCapturaFins;
+  }
+
+  public void setInfoScanDataCapturaFins(java.sql.Timestamp infoScanDataCapturaFins) {
+    this.infoScanDataCapturaFins = infoScanDataCapturaFins;
   }
 
 
@@ -585,10 +618,13 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.estatExcepcio = __toClone.estatExcepcio;
     this.hashEscaneig = __toClone.hashEscaneig;
     this.hashFirma = __toClone.hashFirma;
+    this.infoScanPaperSize = __toClone.infoScanPaperSize;
     this.infoScanPixelTypeDesde = __toClone.infoScanPixelTypeDesde;
     this.infoScanPixelTypeFins = __toClone.infoScanPixelTypeFins;
     this.infoScanResolucioPppDesde = __toClone.infoScanResolucioPppDesde;
     this.infoScanResolucioPppFins = __toClone.infoScanResolucioPppFins;
+    this.infoScanDataCapturaDesde = __toClone.infoScanDataCapturaDesde;
+    this.infoScanDataCapturaFins = __toClone.infoScanDataCapturaFins;
     this.viewDesde = __toClone.viewDesde;
     this.viewFins = __toClone.viewFins;
     this.languageUI = __toClone.languageUI;
@@ -615,6 +651,7 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.infoCustodyIDDesde = __toClone.infoCustodyIDDesde;
     this.infoCustodyIDFins = __toClone.infoCustodyIDFins;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
+    this.mapOfValuesForInfoScanPixelType = __toClone.mapOfValuesForInfoScanPixelType;
     this.mapOfValuesForView = __toClone.mapOfValuesForView;
     this.mapOfValuesForSignParamLanguageDoc = __toClone.mapOfValuesForSignParamLanguageDoc;
     this.mapOfValuesForArxiuReqParamDocEstatElabora = __toClone.mapOfValuesForArxiuReqParamDocEstatElabora;
@@ -665,6 +702,18 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setMapOfValuesForEstatCodi(Map<String, String> mapOfValuesForEstatCodi) {
     this.mapOfValuesForEstatCodi = mapOfValuesForEstatCodi;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForInfoScanPixelType;
+
+  public Map<String, String> getMapOfValuesForInfoScanPixelType() {
+    return this.mapOfValuesForInfoScanPixelType;
+  }
+
+  public void setMapOfValuesForInfoScanPixelType(Map<String, String> mapOfValuesForInfoScanPixelType) {
+    this.mapOfValuesForInfoScanPixelType = mapOfValuesForInfoScanPixelType;
   }
 
 

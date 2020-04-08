@@ -75,6 +75,10 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new StringField(getQueryPath(), TransaccioFields.HASHFIRMA);
   }
 
+  public StringField INFOSCANPAPERSIZE() {
+    return new StringField(getQueryPath(), TransaccioFields.INFOSCANPAPERSIZE);
+  }
+
   public IntegerField INFOSCANPIXELTYPE() {
     return new IntegerField(getQueryPath(), TransaccioFields.INFOSCANPIXELTYPE);
   }
@@ -85,6 +89,10 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
 
   public BooleanField INFOSCANOCR() {
     return new BooleanField(getQueryPath(), TransaccioFields.INFOSCANOCR);
+  }
+
+  public TimestampField INFOSCANDATACAPTURA() {
+    return new TimestampField(getQueryPath(), TransaccioFields.INFOSCANDATACAPTURA);
   }
 
   public IntegerField VIEW() {
@@ -175,6 +183,20 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
         : this.parentQueryPath.getQueryPath());
   }
 
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public MetadadaQueryPath METADADAS() {
+    return new MetadadaQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return TransaccioQueryPath.this.getQueryPath() + "metadadas" + ".";
+      }
+    });
+  }
+*/
 
   public FitxerQueryPath FITXERESCANEJAT() {
     return new FitxerQueryPath(new QueryPath() {

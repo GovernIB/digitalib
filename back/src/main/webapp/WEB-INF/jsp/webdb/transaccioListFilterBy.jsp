@@ -318,6 +318,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANPAPERSIZE)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="transaccio.infoScanPaperSize" var="infoScanPaperSize" />
+              <fmt:message key="genapp.form.searchby" var="cercaperinfoScanPaperSize" >                
+                 <fmt:param value="${infoScanPaperSize}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${infoScanPaperSize}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperinfoScanPaperSize}" path="infoScanPaperSize" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANPIXELTYPE)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
@@ -354,23 +367,51 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANOCR)}">
-            <%-- FILTRE NUMERO --%>      
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANDATACAPTURA)}">
+            <%-- FILTRE DATE --%>
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="transaccio.infoScanOcr" />:</span>
-
+              <span class="add-on"><fmt:message key="transaccio.infoScanDataCaptura" />:</span>
               <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="infoScanOcrDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="infoScanOcrFins" />
-
+              <div id="infoScanDataCapturaDesde" class="input-append">
+                <form:input cssClass="input-large" path="infoScanDataCapturaDesde" />
+                <span class="add-on">
+                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+              </div>
+              <script type="text/javascript">                
+                $(function() {
+                  $('#infoScanDataCapturaDesde').datetimepicker({
+                    language: '${lang}',
+                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
+                    format:  '${gen:getJSDateTimePattern()}',
+                    pickTime: true,
+                    weekStart: ${gen:getFirstDayOfTheWeek()}
+                  });
+                });
+              </script>
+              <span class="add-on"><fmt:message key="genapp.to" /></span>              
+              <div id="infoScanDataCapturaFins" class="input-append">
+                <form:input cssClass="input-large" path="infoScanDataCapturaFins" />
+                <span class="add-on">
+                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+              </div>
+              <script type="text/javascript">                
+                $(function() {
+                  $('#infoScanDataCapturaFins').datetimepicker({
+                    language: '${lang}',
+                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
+                    format:  '${gen:getJSDateTimePattern()}',
+                    pickTime: true,
+                    weekStart: ${gen:getFirstDayOfTheWeek()}
+                  });
+                });
+              </script>
             </div>
 
-
+    
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.VIEW)}">
             <%-- FILTRE NUMERO --%>      

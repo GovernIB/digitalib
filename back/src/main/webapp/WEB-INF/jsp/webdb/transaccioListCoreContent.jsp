@@ -107,9 +107,17 @@
           ${transaccio.hashFirma}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANPAPERSIZE)}">
+          <td>
+          ${transaccio.infoScanPaperSize}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANPIXELTYPE)}">
           <td>
-          ${transaccio.infoScanPixelType}
+          <c:set var="tmp">${transaccio.infoScanPixelType}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForInfoScanPixelType[tmp]}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANRESOLUCIOPPP)}">
@@ -123,6 +131,9 @@
             <img height="18" width="18" src="<c:url value="/img/icn_alert_${transaccio.infoScanOcr?'success':'error'}.png"/>">
             </c:if>
           </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANDATACAPTURA)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${transaccio.infoScanDataCaptura}" /></td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.VIEW)}">
           <td>

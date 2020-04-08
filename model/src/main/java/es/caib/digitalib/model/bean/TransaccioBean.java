@@ -26,9 +26,11 @@ private static final long serialVersionUID = 2099592239L;
 	java.lang.String hashEscaneig;
 	java.lang.Long fitxerSignaturaID;
 	java.lang.String hashFirma;
+	java.lang.String infoScanPaperSize;
 	java.lang.Integer infoScanPixelType;
 	java.lang.Integer infoScanResolucioPpp;
-	boolean infoScanOcr;
+	java.lang.Boolean infoScanOcr;
+	java.sql.Timestamp infoScanDataCaptura;
 	java.lang.Integer view;
 	java.lang.String languageUI;
 	java.lang.String funcionariUsername;
@@ -56,7 +58,7 @@ private static final long serialVersionUID = 2099592239L;
   }
 
   /** Constructor amb tots els camps  */
-  public TransaccioBean(long transaccioID , java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , boolean infoScanOcr , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamLanguageDoc , java.lang.String arxiuReqParamDocEstatElabora , java.lang.String arxiuReqParamDocumentTipus , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuReqParamOrgans , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID) {
+  public TransaccioBean(long transaccioID , java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.String infoScanPaperSize , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , java.lang.Boolean infoScanOcr , java.sql.Timestamp infoScanDataCaptura , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamLanguageDoc , java.lang.String arxiuReqParamDocEstatElabora , java.lang.String arxiuReqParamDocumentTipus , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuReqParamOrgans , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID) {
     this.transaccioID=transaccioID;
     this.nom=nom;
     this.transactionWebId=transactionWebId;
@@ -73,9 +75,11 @@ private static final long serialVersionUID = 2099592239L;
     this.hashEscaneig=hashEscaneig;
     this.fitxerSignaturaID=fitxerSignaturaID;
     this.hashFirma=hashFirma;
+    this.infoScanPaperSize=infoScanPaperSize;
     this.infoScanPixelType=infoScanPixelType;
     this.infoScanResolucioPpp=infoScanResolucioPpp;
     this.infoScanOcr=infoScanOcr;
+    this.infoScanDataCaptura=infoScanDataCaptura;
     this.view=view;
     this.languageUI=languageUI;
     this.funcionariUsername=funcionariUsername;
@@ -98,7 +102,7 @@ private static final long serialVersionUID = 2099592239L;
     this.infoCustodyID=infoCustodyID;
 }
   /** Constructor sense valors autoincrementals */
-  public TransaccioBean(java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , boolean infoScanOcr , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamLanguageDoc , java.lang.String arxiuReqParamDocEstatElabora , java.lang.String arxiuReqParamDocumentTipus , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuReqParamOrgans , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID) {
+  public TransaccioBean(java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.String infoScanPaperSize , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , java.lang.Boolean infoScanOcr , java.sql.Timestamp infoScanDataCaptura , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamLanguageDoc , java.lang.String arxiuReqParamDocEstatElabora , java.lang.String arxiuReqParamDocumentTipus , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuReqParamOrgans , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID) {
     this.nom=nom;
     this.transactionWebId=transactionWebId;
     this.dataInici=dataInici;
@@ -114,9 +118,11 @@ private static final long serialVersionUID = 2099592239L;
     this.hashEscaneig=hashEscaneig;
     this.fitxerSignaturaID=fitxerSignaturaID;
     this.hashFirma=hashFirma;
+    this.infoScanPaperSize=infoScanPaperSize;
     this.infoScanPixelType=infoScanPixelType;
     this.infoScanResolucioPpp=infoScanResolucioPpp;
     this.infoScanOcr=infoScanOcr;
+    this.infoScanDataCaptura=infoScanDataCaptura;
     this.view=view;
     this.languageUI=languageUI;
     this.funcionariUsername=funcionariUsername;
@@ -167,9 +173,11 @@ private static final long serialVersionUID = 2099592239L;
     this.setHashEscaneig(__bean.getHashEscaneig());
     this.setFitxerSignaturaID(__bean.getFitxerSignaturaID());
     this.setHashFirma(__bean.getHashFirma());
+    this.setInfoScanPaperSize(__bean.getInfoScanPaperSize());
     this.setInfoScanPixelType(__bean.getInfoScanPixelType());
     this.setInfoScanResolucioPpp(__bean.getInfoScanResolucioPpp());
-    this.setInfoScanOcr(__bean.isInfoScanOcr());
+    this.setInfoScanOcr(__bean.getInfoScanOcr());
+    this.setInfoScanDataCaptura(__bean.getInfoScanDataCaptura());
     this.setView(__bean.getView());
     this.setLanguageUI(__bean.getLanguageUI());
     this.setFuncionariUsername(__bean.getFuncionariUsername());
@@ -308,6 +316,13 @@ private static final long serialVersionUID = 2099592239L;
 		this.hashFirma = _hashFirma_;
 	};
 
+	public java.lang.String getInfoScanPaperSize() {
+		return(infoScanPaperSize);
+	};
+	public void setInfoScanPaperSize(java.lang.String _infoScanPaperSize_) {
+		this.infoScanPaperSize = _infoScanPaperSize_;
+	};
+
 	public java.lang.Integer getInfoScanPixelType() {
 		return(infoScanPixelType);
 	};
@@ -322,11 +337,18 @@ private static final long serialVersionUID = 2099592239L;
 		this.infoScanResolucioPpp = _infoScanResolucioPpp_;
 	};
 
-	public boolean isInfoScanOcr() {
+	public java.lang.Boolean getInfoScanOcr() {
 		return(infoScanOcr);
 	};
-	public void setInfoScanOcr(boolean _infoScanOcr_) {
+	public void setInfoScanOcr(java.lang.Boolean _infoScanOcr_) {
 		this.infoScanOcr = _infoScanOcr_;
+	};
+
+	public java.sql.Timestamp getInfoScanDataCaptura() {
+		return(infoScanDataCaptura);
+	};
+	public void setInfoScanDataCaptura(java.sql.Timestamp _infoScanDataCaptura_) {
+		this.infoScanDataCaptura = _infoScanDataCaptura_;
 	};
 
 	public java.lang.Integer getView() {
@@ -492,9 +514,11 @@ private static final long serialVersionUID = 2099592239L;
     __tmp.setHashEscaneig(__bean.getHashEscaneig());
     __tmp.setFitxerSignaturaID(__bean.getFitxerSignaturaID());
     __tmp.setHashFirma(__bean.getHashFirma());
+    __tmp.setInfoScanPaperSize(__bean.getInfoScanPaperSize());
     __tmp.setInfoScanPixelType(__bean.getInfoScanPixelType());
     __tmp.setInfoScanResolucioPpp(__bean.getInfoScanResolucioPpp());
-    __tmp.setInfoScanOcr(__bean.isInfoScanOcr());
+    __tmp.setInfoScanOcr(__bean.getInfoScanOcr());
+    __tmp.setInfoScanDataCaptura(__bean.getInfoScanDataCaptura());
     __tmp.setView(__bean.getView());
     __tmp.setLanguageUI(__bean.getLanguageUI());
     __tmp.setFuncionariUsername(__bean.getFuncionariUsername());

@@ -234,7 +234,7 @@ public class ScanWebSimpleScanResult {
           pixelType = "Color";
         break;
         default:
-          pixelType = "--DESCONEGUT--";
+          pixelType = "--VALOR DESCONEGUT (" + scannedFileInfo.getPixelType() +  ")--";
 
       }
     } else {

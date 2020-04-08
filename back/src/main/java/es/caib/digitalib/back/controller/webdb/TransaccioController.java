@@ -204,6 +204,16 @@ public class TransaccioController
       };
     }
 
+    // Field infoScanPixelType
+    {
+      _listSKV = getReferenceListForInfoScanPixelType(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForInfoScanPixelType(_tmp);
+      if (filterForm.getGroupByFields().contains(INFOSCANPIXELTYPE)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, INFOSCANPIXELTYPE, false);
+      };
+    }
+
 
       fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, INFOSCANOCR);
 
@@ -303,6 +313,7 @@ public class TransaccioController
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(ESTATCODI, filterForm.getMapOfValuesForEstatCodi());
+    __mapping.put(INFOSCANPIXELTYPE, filterForm.getMapOfValuesForInfoScanPixelType());
     __mapping.put(VIEW, filterForm.getMapOfValuesForView());
     __mapping.put(SIGNPARAMLANGUAGEDOC, filterForm.getMapOfValuesForSignParamLanguageDoc());
     __mapping.put(ARXIUREQPARAMDOCESTATELABORA, filterForm.getMapOfValuesForArxiuReqParamDocEstatElabora());
@@ -364,6 +375,13 @@ public class TransaccioController
 
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       transaccioForm.setListOfValuesForEstatCodi(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (transaccioForm.getListOfValuesForInfoScanPixelType() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForInfoScanPixelType(request, mav, transaccioForm, null);
+
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      transaccioForm.setListOfValuesForInfoScanPixelType(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfValuesForView() == null) {
@@ -797,6 +815,37 @@ public java.lang.Long stringToPK(String value) {
     __tmp.add(new StringKeyValue("0" , "0"));
     __tmp.add(new StringKeyValue("1" , "1"));
     __tmp.add(new StringKeyValue("2" , "2"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForInfoScanPixelType(HttpServletRequest request,
+       ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
+    if (transaccioForm.isHiddenField(INFOSCANPIXELTYPE)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForInfoScanPixelType(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForInfoScanPixelType(HttpServletRequest request,
+       ModelAndView mav, TransaccioFilterForm transaccioFilterForm,
+       List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (transaccioFilterForm.isHiddenField(INFOSCANPIXELTYPE)
+      && !transaccioFilterForm.isGroupByField(INFOSCANPIXELTYPE)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForInfoScanPixelType(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForInfoScanPixelType(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("8" , "8"));
+    __tmp.add(new StringKeyValue("32" , "32"));
     return __tmp;
   }
 

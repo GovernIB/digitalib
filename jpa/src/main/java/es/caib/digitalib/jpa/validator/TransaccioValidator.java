@@ -131,6 +131,14 @@ public class TransaccioValidator<T> implements TransaccioFields {
       }
     }
     
+    if (__vr.getFieldErrorCount(INFOSCANPAPERSIZE) == 0) {
+      java.lang.String __infoscanpapersize = (java.lang.String)__vr.getFieldValue(__target__,INFOSCANPAPERSIZE);
+      if (__infoscanpapersize!= null && __infoscanpapersize.length() > 100) {
+        __vr.rejectValue(INFOSCANPAPERSIZE, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(INFOSCANPAPERSIZE)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+    
     if (__vr.getFieldErrorCount(LANGUAGEUI) == 0) {
       java.lang.String __languageui = (java.lang.String)__vr.getFieldValue(__target__,LANGUAGEUI);
       if (__languageui!= null && __languageui.length() > 10) {

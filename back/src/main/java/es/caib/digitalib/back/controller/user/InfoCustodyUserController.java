@@ -17,12 +17,8 @@ import es.caib.digitalib.back.controller.AbstractInfoCustodyController;
 import es.caib.digitalib.back.form.webdb.InfoCustodyFilterForm;
 import es.caib.digitalib.back.form.webdb.InfoCustodyForm;
 import es.caib.digitalib.back.utils.Utils;
-import es.caib.digitalib.ejb.InfoCustodyLocal;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
-import es.caib.digitalib.jpa.TransaccioJPA;
-import es.caib.digitalib.logic.ConfiguracioGrupLogicaLocal;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
-import es.caib.digitalib.model.entity.InfoCustody;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.TransaccioFields;
 

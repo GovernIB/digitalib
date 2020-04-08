@@ -28,9 +28,11 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final StringField HASHESCANEIG = new StringField(_TABLE_MODEL, "hashEscaneig", "hashescaneig");
 	 public static final LongField FITXERSIGNATURAID = new LongField(_TABLE_MODEL, "fitxerSignaturaID", "fitxersignaturaid");
 	 public static final StringField HASHFIRMA = new StringField(_TABLE_MODEL, "hashFirma", "hashfirma");
+	 public static final StringField INFOSCANPAPERSIZE = new StringField(_TABLE_MODEL, "infoScanPaperSize", "infoscanpapersize");
 	 public static final IntegerField INFOSCANPIXELTYPE = new IntegerField(_TABLE_MODEL, "infoScanPixelType", "infoscanpixeltype");
 	 public static final IntegerField INFOSCANRESOLUCIOPPP = new IntegerField(_TABLE_MODEL, "infoScanResolucioPpp", "infoscanresolucioppp");
 	 public static final BooleanField INFOSCANOCR = new BooleanField(_TABLE_MODEL, "infoScanOcr", "infoscanocr");
+	 public static final TimestampField INFOSCANDATACAPTURA = new TimestampField(_TABLE_MODEL, "infoScanDataCaptura", "infoscandatacaptura");
 	 public static final IntegerField VIEW = new IntegerField(_TABLE_MODEL, "view", "vista");
 	 public static final StringField LANGUAGEUI = new StringField(_TABLE_MODEL, "languageUI", "languageui");
 	 public static final StringField FUNCIONARIUSERNAME = new StringField(_TABLE_MODEL, "funcionariUsername", "funcionariusername");
@@ -70,9 +72,11 @@ public interface TransaccioFields extends java.io.Serializable {
     HASHESCANEIG,
     FITXERSIGNATURAID,
     HASHFIRMA,
+    INFOSCANPAPERSIZE,
     INFOSCANPIXELTYPE,
     INFOSCANRESOLUCIOPPP,
     INFOSCANOCR,
+    INFOSCANDATACAPTURA,
     VIEW,
     LANGUAGEUI,
     FUNCIONARIUSERNAME,

@@ -466,6 +466,16 @@
     </definition>
 
 
+    <definition name="metadadaFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="metadada.metadada" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/metadadaForm.jsp" />
+    </definition>
+    
+    <definition name="metadadaListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/metadadaList.jsp" />
+    </definition>
+
+
     <definition name="perfilFormWebDB" extends="webdb">
         <put-attribute name="titol" value="perfil.perfil" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
