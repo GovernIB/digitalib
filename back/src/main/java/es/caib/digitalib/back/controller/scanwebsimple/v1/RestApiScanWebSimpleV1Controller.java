@@ -862,13 +862,13 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils
           pixelType = null;
         } else {
           switch (transaccio.getInfoScanPixelType()) {
-            case MetadataConstants.PROFUNDIDAD_COLOR_GRAY:
+            case MetadataConstants.ProfundidadColorConstants.GRAY:
               pixelType = ScanWebSimpleScannedFileInfo.PIXEL_TYPE_GRAY;
             break;
-            case MetadataConstants.PROFUNDIDAD_COLOR_BW:
+            case MetadataConstants.ProfundidadColorConstants.BW:
               pixelType = ScanWebSimpleScannedFileInfo.PIXEL_TYPE_BLACK_WHITE;
             break;
-            case MetadataConstants.PROFUNDIDAD_COLOR_DEEP_COLOR:
+            case MetadataConstants.ProfundidadColorConstants.COLOR:
               pixelType = ScanWebSimpleScannedFileInfo.PIXEL_TYPE_COLOR;
             break;
 

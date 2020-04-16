@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleScannedFileInfo;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -37,7 +36,6 @@ import com.google.common.hash.Hashing;
 import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
 import es.caib.digitalib.back.controller.user.ScanWebProcessControllerUser;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
-import es.caib.digitalib.jpa.MetadadaJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.AuditoriaLogicaLocal;
@@ -268,22 +266,22 @@ public abstract class AbstractScanWebProcessController {
                 if (isEmpty(transaccio.getSignParamFuncionariNif())) {
                   transaccio.setSignParamFuncionariNif(value);
                 }
-              } else if (MetadataConstants.RESOLUTION.equals(name)) {
+              } else if (MetadataConstants.EEMGDE_RESOLUCION.equals(name)) {
                 try {
                   transaccio.setInfoScanResolucioPpp(Integer.valueOf(value));
                 } catch(NumberFormatException nfe) {
                   log.error("Error processant Resolution: " + name + " => ]" + value + "[", nfe);
                 }
                 
-              } else if (MetadataConstants.PROFUNDIDAD_COLOR.equals(name)) {
+              } else if (MetadataConstants.EEMGDE_PROFUNDIDAD_COLOR.equals(name)) {
                 try {
                   int bits = Integer.valueOf(value);
                   if (bits == 8) {
-                    transaccio.setInfoScanPixelType(MetadataConstants.PROFUNDIDAD_COLOR_GRAY);
+                    transaccio.setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.GRAY);
                   } else if (bits < 8) {
-                     transaccio.setInfoScanPixelType(MetadataConstants.PROFUNDIDAD_COLOR_BW);
+                     transaccio.setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.BW);
                   } else {
-                     transaccio.setInfoScanPixelType(MetadataConstants.PROFUNDIDAD_COLOR_DEEP_COLOR);
+                     transaccio.setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.COLOR);
                   }
                 } catch(NumberFormatException nfe) {
                   log.error("Error processant PixelType: " + name + " => ]" + value + "[", nfe);
