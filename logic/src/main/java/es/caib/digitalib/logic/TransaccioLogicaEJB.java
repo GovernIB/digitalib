@@ -77,6 +77,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       return fitxers;
     }
     
+    metadadaLogicaEjb.delete(MetadadaFields.TRANSACCIOID.equal(transaccio.getTransaccioID()));
+    
     delete(transaccio.getTransaccioID());
     
     Long pid = transaccio.getPerfilID();
@@ -94,7 +96,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       infoSignaturaEjb.delete(is);
     }
     
-    metadadaLogicaEjb.delete(MetadadaFields.TRANSACCIOID.equal(transaccio.getTransaccioID()));
+    
 
     Long fe = transaccio.getFitxerEscanejatID();
     if (fe != null) {
