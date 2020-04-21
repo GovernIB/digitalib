@@ -31,6 +31,7 @@ import es.caib.digitalib.jpa.UsuariPersonaJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
 import es.caib.digitalib.model.entity.Transaccio;
+import es.caib.digitalib.model.fields.MetadadaFields;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioQueryPath;
@@ -50,7 +51,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
   @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
   
-  @EJB(mappedName = "digitalib/FitxerEJB/local")
+  @EJB(mappedName =FitxerLocal.JNDI_NAME)
   protected FitxerLocal fitxerEjb;
 
   @EJB(mappedName = es.caib.digitalib.ejb.PerfilUsuariAplicacioLocal.JNDI_NAME)
@@ -64,6 +65,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
   
   @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
   protected AuditoriaLogicaLocal auditoriaLogicaEjb;
+  
+  @EJB(mappedName = MetadadaLogicaLocal.JNDI_NAME)
+  protected MetadadaLogicaLocal metadadaLogicaEjb;
 
   @Override
   public Set<Long> deleteFull(Transaccio transaccio, boolean esborrarFitxers, String usernameApp, String usernamePerson) throws I18NException {
@@ -89,6 +93,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     if (is != null) {
       infoSignaturaEjb.delete(is);
     }
+    
+    metadadaLogicaEjb.delete(MetadadaFields.TRANSACCIOID.equal(transaccio.getTransaccioID()));
 
     Long fe = transaccio.getFitxerEscanejatID();
     if (fe != null) {
