@@ -52,7 +52,6 @@
 /.project
 /.settings/org.eclipse.m2e.core.prefs
 /back/.tern-project
-
 /scanwebsimple/apiscanwebsimple/target
 /scanwebsimple/apiscanwebsimple/.settings
 /scanwebsimple/apiscanwebsimple/scanfile.pdf
@@ -74,11 +73,7 @@
 /scanwebsimple/apiscanwebsimple-example-console/target
 /scanwebsimple/apiscanwebsimple-example-console/.classpath
 /scanwebsimple/apiscanwebsimple-example-war
-/scanwebsimple/apiscanwebsimple-example-console/.settings
-/scanwebsimple/apiscanwebsimple-example-console/target
 /scanwebsimple/apiscanwebsimple-example-console/apiscanwebsimple.properties
-/scanwebsimple/apiscanwebsimple-example-console/.classpath
-/scanwebsimple/apiscanwebsimple-example-console/.project
 /apiscanwebsimple/apiscanwebsimple-api/detached_sign_scanfile.sig
 /apiscanwebsimple/apiscanwebsimple-api/.classpath
 /apiscanwebsimple/apiscanwebsimple-api/.gitignore
@@ -89,9 +84,6 @@
 /apiscanwebsimple/apiscanwebsimple-example-console/.gitignore
 /apiscanwebsimple/apiscanwebsimple-example-console/.settings
 /apiscanwebsimple/apiscanwebsimple-api/.settings
-/apiscanwebsimple/apiscanwebsimple-api/.classpath
-/apiscanwebsimple/apiscanwebsimple-api/.project
-/apiscanwebsimple/apiscanwebsimple-api/detached_sign_scanfile.sig
 /apiscanwebsimple/apiscanwebsimple-example-war
 /apiscanwebsimple/compil.bat
 /apiscanwebsimple/apiscanwebsimple-api/scanfile.pdf
@@ -104,3 +96,6 @@
 /apiscanwebsimple/apiscanwebsimple-jersey/detached_sign_scanfile.sig
 /scripts/config/digitalib-mailsqueue-service.xml
 /apiscanwebsimple/apiscanwebsimple-example-console/src/main/java/org/fundaciobit/apisib/apiscanwebsimple/exampleconsole/JsonSchemaGenerator.java
+# Fitxers de projecte de IntelliJ IDEA
+*.iml
+.idea/
