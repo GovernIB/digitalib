@@ -491,10 +491,10 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparamorigen IS '0 Ciutada
 --
 -- TOC entry 2203 (class 0 OID 0)
 -- Dependencies: 184
--- Name: COLUMN dib_transaccio.arxiuoptparamorgans; Type: COMMENT; Schema: digitalib; Owner: digitalib
+-- Name: COLUMN dib_transaccio.arxiureqparamorgans; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
-COMMENT ON COLUMN dib_transaccio.arxiuoptparamorgans IS 'Codi DIR3 dels organs afectats separats per comes';
+COMMENT ON COLUMN dib_transaccio.arxiureqparamorgans IS 'Codi DIR3 dels organs afectats separats per comes';
 
 
 --
