@@ -4,13 +4,13 @@
 
   <groupId>es.caib.digitalib</groupId>
   <artifactId>digitalib-persistence-resourcelocal</artifactId>  
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <packaging>jar</packaging>
 
   <parent>
     <groupId>es.caib.digitalib</groupId>
     <artifactId>digitalib-persistence</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
   </parent>
 
   <name>DigitalIB Persistence Resource Local</name>
