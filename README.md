@@ -1,7 +1,6 @@
 # ![Logo](https://github.com/GovernIB/maven/blob/binaris/digitalib/logo.png) DigitalIB 1.0 (digitalib-1.0)
  *Digitalitzador de documents*
 
-
 ***Versió estable***
 
 > - No hi ha versió estable
