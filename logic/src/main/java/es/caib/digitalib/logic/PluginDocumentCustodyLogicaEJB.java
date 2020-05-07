@@ -1,6 +1,8 @@
 package es.caib.digitalib.logic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -181,10 +183,46 @@ public class PluginDocumentCustodyLogicaEJB extends
             signedData, signatureTypeDC, attachedDocument);
       }
 
-      // XYZ ZZZ Falten metadades
-      Metadata[] metadata = new Metadata[] {}; // XYZ ZZZ
+      // ============ METADADES =================
+      
 
-      plugin.saveAll(custodyID, parameters, document, signatureCustody, metadata);
+      List<Metadata> metadadesAddicionals = new ArrayList<Metadata>();
+      
+      // Resolució
+      Integer resolucio = transaccio.getInfoScanResolucioPpp();
+      if (resolucio != null) {
+        log.info("\n\n  RESOLUCIO: " + resolucio );
+        metadadesAddicionals.add(new Metadata("eni:resolucion", resolucio));
+      }
+      // Idioma del Document
+      String languageDoc = transaccio.getSignParamLanguageDoc();
+      if (languageDoc != null) {
+        log.info("\n\n  LANGUAGEDOC: " + languageDoc );
+        metadadesAddicionals.add(new Metadata("eni:idioma", languageDoc));
+      }
+      // Profunditat de Color
+      Integer profundidad_color = transaccio.getInfoScanPixelType();
+      if (profundidad_color != null) {
+        metadadesAddicionals.add(new Metadata("eni:profundidad_color", profundidad_color));
+      }
+
+
+      metadadesAddicionals.add(new Metadata("eni:tamano_logico",
+          FileSystemManager.getFile(transaccio.getFitxerEscanejatID()).length()));
+      
+      metadadesAddicionals.add(new Metadata("eni:unidades","bytes"));
+      
+      // XYZ ZZZ ESBORRAR !!!!!
+      /*
+      metadadesAddicionals.add(new Metadata("eni:id_origen", "S_3456789_2020_ES"));
+      metadadesAddicionals.add(new Metadata("eni:subtipo_doc", "Especial CAIB"));
+      */
+
+
+      // ============= GUARDAR  !!!
+
+      plugin.saveAll(custodyID, parameters, document, signatureCustody,
+          metadadesAddicionals.toArray(new Metadata[metadadesAddicionals.size()]));
 
       // Cridades de Plugin
       pluginCridada.postCridadaOK(monitorIntegracions, "custodyID=" + custodyID

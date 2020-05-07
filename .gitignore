@@ -91,3 +91,4 @@
 # Fitxers de projecte de IntelliJ IDEA
 *.iml
 .idea/
+/apiscanwebsimple/target

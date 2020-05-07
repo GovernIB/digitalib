@@ -2,7 +2,9 @@ package es.caib.digitalib.logic;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.security.RunAs;
@@ -14,6 +16,7 @@ import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.plugins.signature.api.FileInfoSignature;
+import org.fundaciobit.pluginsib.core.utils.Metadata;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import es.caib.digitalib.jpa.FitxerJPA;
@@ -234,6 +237,42 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
           .getArxiuReqParamDocumentTipus()));
       documentMetadades.setFormat(documentFormat);
       documentMetadades.setExtensio(documentExtensio);
+
+      Map<String, Object> metadadesAddicionals = new HashMap<String, Object>();
+      
+      // Resolució
+      Integer resolucio = transaccio.getInfoScanResolucioPpp();
+      log.info("\n\n SSS RESOLUCIO: " + resolucio );
+      if (resolucio != null) {        
+        metadadesAddicionals.put("eni:resolucion", resolucio);
+      }
+      // Idioma del Document
+      String languageDoc = transaccio.getSignParamLanguageDoc();
+      log.info("\n\n  SSS LANGUAGEDOC: " + languageDoc );
+      if (languageDoc != null) {
+        
+        metadadesAddicionals.put("eni:idioma", languageDoc);
+      }
+      // Profunditat de Color
+      Integer profundidad_color = transaccio.getInfoScanPixelType();
+      log.info("\n\n  SSS PROFUNDITAT COLOR: " + profundidad_color );
+      if (profundidad_color != null) {        
+        metadadesAddicionals.put("eni:profundidad_color", profundidad_color);
+      }
+
+      metadadesAddicionals.put("eni:tamano_logico",
+          FileSystemManager.getFile(transaccio.getFitxerEscanejatID()).length());
+      
+      metadadesAddicionals.put("eni:unidades","bytes");
+      
+      // XYZ ZZZ ESBORRAR !!!!!
+      /*
+      metadadesAddicionals.put("eni:id_origen", "S_3456789_2020_ES");
+      metadadesAddicionals.put("eni:subtipo_doc", "Especial CAIB");
+      */
+      
+
+      documentMetadades.setMetadadesAddicionals(metadadesAddicionals);
 
       DocumentContingut documentContingut;
       Firma firma;
