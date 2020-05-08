@@ -1,8 +1,11 @@
 package es.caib.digitalib.logic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
@@ -175,7 +178,29 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       }
 
       // No hauria de ser null
-      String organsStr = transaccio.getArxiuReqParamOrgans(); // "A04013511";
+      List<String> organs;
+      String firstOrgan;
+      {
+        final String organsStr = transaccio.getArxiuReqParamOrgans(); // "A04013511";
+        
+        if (organsStr == null) {
+          organs = null;
+        } else if (organsStr.trim().length() == 0) {
+          organs = null;
+        } else {
+          List<String> tmp = LogicUtils.stringToListString(organsStr);
+          organs = new ArrayList<String>();
+          for (String organ : tmp) {
+            if (organ.trim().length() != 0) {
+              organs.add(organ);
+            }
+          }
+          if (organs.size() == 0) {
+            organs = null;
+          }
+        }
+        firstOrgan = (organs == null)? null : organs.get(0);
+      }
       
       String serieDocumental = transaccio.getArxiuOptParamSerieDocumental(); // "S0001";
       if (serieDocumental == null) {
@@ -199,7 +224,8 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
 
       expedientMetadades.setInteressats(LogicUtils.stringToListString(interessatsStr));
       expedientMetadades.setMetadadesAddicionals(null);
-      expedientMetadades.setOrgans(LogicUtils.stringToListString(organsStr));
+      
+      expedientMetadades.setOrgans(organs);
       expedientMetadades.setSerieDocumental(serieDocumental);
       // expedientMetadades.setVersioNti(versioNti);
 
@@ -228,7 +254,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       final ContingutOrigen origen = (transaccio.getArxiuReqParamOrigen() == ScanWebSimpleArxiuRequiredParameters.DOCUMENTORIGEN_ADMINISTRACIO) ? ContingutOrigen.ADMINISTRACIO
           : ContingutOrigen.CIUTADA;
       documentMetadades.setOrigen(origen);
-      documentMetadades.setOrgans(LogicUtils.stringToListString(organsStr));
+      documentMetadades.setOrgans(organs);
       documentMetadades.setDataCaptura(new Date());
 
       documentMetadades.setEstatElaboracio(DocumentEstatElaboracio.toEnum(transaccio
@@ -265,9 +291,17 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       
       metadadesAddicionals.put("eni:unidades","bytes");
       
+      
+      
+      //  ES_<Órgano>_<AAAA>_<ID_específico>  ==>  "ES_3456789_2020_ES"
+      if (firstOrgan != null) {
+        String idOrigen = "ES_" + firstOrgan + "_" + Calendar.getInstance().get(Calendar.YEAR) + "_" + Constants.PREFIX +  transaccio.getTransaccioID();
+        metadadesAddicionals.put("eni:id_origen", idOrigen);
+      }
+      
       // XYZ ZZZ ESBORRAR !!!!!
       /*
-      metadadesAddicionals.put("eni:id_origen", "S_3456789_2020_ES");
+      
       metadadesAddicionals.put("eni:subtipo_doc", "Especial CAIB");
       */
       

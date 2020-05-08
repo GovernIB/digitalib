@@ -16,6 +16,8 @@ public interface Constants {
   public static final String DIB_ADMIN = "DIB_ADMIN";
 
   public static final String DIB_USER = "DIB_USER";
+  
+  public static final String PREFIX = "DIB";
 
   // ROLE ADMIN
   public static final String ROLE_ADMIN = "ROLE_ADMIN";

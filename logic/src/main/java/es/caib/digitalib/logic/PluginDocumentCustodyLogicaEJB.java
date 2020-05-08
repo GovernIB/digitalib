@@ -1,6 +1,7 @@
 package es.caib.digitalib.logic;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -32,6 +33,7 @@ import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
 import es.caib.digitalib.model.entity.Fitxer;
+import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -184,8 +186,6 @@ public class PluginDocumentCustodyLogicaEJB extends
       }
 
       // ============ METADADES =================
-      
-
       List<Metadata> metadadesAddicionals = new ArrayList<Metadata>();
       
       // Resolució
@@ -212,9 +212,40 @@ public class PluginDocumentCustodyLogicaEJB extends
       
       metadadesAddicionals.add(new Metadata("eni:unidades","bytes"));
       
+      //  ES_<Órgano>_<AAAA>_<ID_específico>  ==>  "ES_3456789_2020_ES"
+      // No hauria de ser null
+      List<String> organs;
+      String firstOrgan;
+      {
+        final String organsStr = transaccio.getArxiuReqParamOrgans(); // "A04013511";
+        
+        if (organsStr == null) {
+          organs = null;
+        } else if (organsStr.trim().length() == 0) {
+          organs = null;
+        } else {
+          List<String> tmp = LogicUtils.stringToListString(organsStr);
+          organs = new ArrayList<String>();
+          for (String organ : tmp) {
+            if (organ.trim().length() != 0) {
+              organs.add(organ);
+            }
+          }
+          if (organs.size() == 0) {
+            organs = null;
+          }
+        }
+        firstOrgan = (organs == null)? null : organs.get(0);
+      }
+      
+      if (firstOrgan != null) {
+        String idOrigen = "ES_" + firstOrgan + "_" + Calendar.getInstance().get(Calendar.YEAR) + "_" + Constants.PREFIX + transaccio.getTransaccioID();
+        metadadesAddicionals.add(new Metadata("eni:id_origen", idOrigen));
+      }
+      
+      
       // XYZ ZZZ ESBORRAR !!!!!
       /*
-      metadadesAddicionals.add(new Metadata("eni:id_origen", "S_3456789_2020_ES"));
       metadadesAddicionals.add(new Metadata("eni:subtipo_doc", "Especial CAIB"));
       */
 
