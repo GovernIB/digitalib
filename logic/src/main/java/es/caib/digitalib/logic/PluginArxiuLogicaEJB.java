@@ -262,7 +262,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       documentMetadades.setExtensio(documentExtensio);
 
       // ================== METADADES ==================
-      java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(null);
+      java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition("unknown");
       
       Map<String, Object> metadadesAddicionals = new HashMap<String, Object>();
       
