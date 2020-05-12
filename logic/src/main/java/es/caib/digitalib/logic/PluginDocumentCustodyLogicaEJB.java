@@ -11,6 +11,7 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.apache.log4j.Logger;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -33,7 +34,6 @@ import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
 import es.caib.digitalib.model.entity.Fitxer;
-import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -186,68 +186,11 @@ public class PluginDocumentCustodyLogicaEJB extends
       }
 
       // ============ METADADES =================
-      List<Metadata> metadadesAddicionals = new ArrayList<Metadata>();
       
-      // Resolució
-      Integer resolucio = transaccio.getInfoScanResolucioPpp();
-      if (resolucio != null) {
-        log.info("\n\n  RESOLUCIO: " + resolucio );
-        metadadesAddicionals.add(new Metadata("eni:resolucion", resolucio));
-      }
-      // Idioma del Document
-      String languageDoc = transaccio.getSignParamLanguageDoc();
-      if (languageDoc != null) {
-        log.info("\n\n  LANGUAGEDOC: " + languageDoc );
-        metadadesAddicionals.add(new Metadata("eni:idioma", languageDoc));
-      }
-      // Profunditat de Color
-      Integer profundidad_color = transaccio.getInfoScanPixelType();
-      if (profundidad_color != null) {
-        metadadesAddicionals.add(new Metadata("eni:profundidad_color", profundidad_color));
-      }
+      java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(custodyID,
+          parameters);
 
-
-      metadadesAddicionals.add(new Metadata("eni:tamano_logico",
-          FileSystemManager.getFile(transaccio.getFitxerEscanejatID()).length()));
-      
-      metadadesAddicionals.add(new Metadata("eni:unidades","bytes"));
-      
-      //  ES_<Órgano>_<AAAA>_<ID_específico>  ==>  "ES_3456789_2020_ES"
-      // No hauria de ser null
-      List<String> organs;
-      String firstOrgan;
-      {
-        final String organsStr = transaccio.getArxiuReqParamOrgans(); // "A04013511";
-        
-        if (organsStr == null) {
-          organs = null;
-        } else if (organsStr.trim().length() == 0) {
-          organs = null;
-        } else {
-          List<String> tmp = LogicUtils.stringToListString(organsStr);
-          organs = new ArrayList<String>();
-          for (String organ : tmp) {
-            if (organ.trim().length() != 0) {
-              organs.add(organ);
-            }
-          }
-          if (organs.size() == 0) {
-            organs = null;
-          }
-        }
-        firstOrgan = (organs == null)? null : organs.get(0);
-      }
-      
-      if (firstOrgan != null) {
-        String idOrigen = "ES_" + firstOrgan + "_" + Calendar.getInstance().get(Calendar.YEAR) + "_" + Constants.PREFIX + transaccio.getTransaccioID();
-        metadadesAddicionals.add(new Metadata("eni:id_origen", idOrigen));
-      }
-      
-      
-      // XYZ ZZZ ESBORRAR !!!!!
-      /*
-      metadadesAddicionals.add(new Metadata("eni:subtipo_doc", "Especial CAIB"));
-      */
+      List<Metadata> metadadesAddicionals = generaMetadades(transaccio, csvGenerationDefinition, log);
 
 
       // ============= GUARDAR  !!!
@@ -265,8 +208,6 @@ public class PluginDocumentCustodyLogicaEJB extends
       String eniFileUrl = plugin.getEniFileUrl(custodyID, parameters);
       java.lang.String csv = plugin.getCsv(custodyID, parameters);
       java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(custodyID, parameters);
-      java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(custodyID,
-          parameters);
       java.lang.String validationFileUrl = plugin.getValidationFileUrl(custodyID, parameters);
 
       // Només per Arxiu
@@ -315,6 +256,84 @@ public class PluginDocumentCustodyLogicaEJB extends
 
     return null;
 
+  }
+
+  public static  List<Metadata> generaMetadades(TransaccioJPA transaccio,String csvGenerationDefinition, Logger log) {
+    List<Metadata> metadadesAddicionals = new ArrayList<Metadata>();
+    
+    // Resolució
+    Integer resolucio = transaccio.getInfoScanResolucioPpp();
+    if (resolucio != null) {
+      log.info("\n\n  RESOLUCIO: " + resolucio );
+      metadadesAddicionals.add(new Metadata("eni:resolucion", resolucio));
+    }
+    // Idioma del Document
+    String languageDoc = transaccio.getSignParamLanguageDoc();
+    if (languageDoc != null) {
+      log.info("\n\n  LANGUAGEDOC: " + languageDoc );
+      metadadesAddicionals.add(new Metadata("eni:idioma", languageDoc));
+    }
+    // Profunditat de Color
+    Integer profundidad_color = transaccio.getInfoScanPixelType();
+    if (profundidad_color != null) {
+      metadadesAddicionals.add(new Metadata("eni:profundidad_color", profundidad_color));
+    }
+
+    // Identificador único del procedimiento administrativo con el que se relaciona el expediente.
+    {
+      String procCodi = transaccio.getArxiuOptParamProcedimentCodi();
+      if (procCodi != null && procCodi.trim().length() != 0) {
+        metadadesAddicionals.add(new Metadata("eni:id_tramite", procCodi));
+      }
+    }
+
+    metadadesAddicionals.add(new Metadata("eni:tamano_logico",
+        FileSystemManager.getFile(transaccio.getFitxerEscanejatID()).length()));
+    
+    metadadesAddicionals.add(new Metadata("eni:unidades","bytes"));
+    
+    // Referencia a la disposición normativa que define la creación y uso del CSV correspondiente.
+    if (csvGenerationDefinition!= null && csvGenerationDefinition.trim().length() != 0) {
+      metadadesAddicionals.add(new Metadata("eni:def_csv",csvGenerationDefinition));
+    }
+    
+    //  ES_<Órgano>_<AAAA>_<ID_específico>  ==>  "ES_3456789_2020_ES"
+    // No hauria de ser null
+    List<String> organs;
+    String firstOrgan;
+    {
+      final String organsStr = transaccio.getArxiuReqParamOrgans(); // "A04013511";
+      
+      if (organsStr == null) {
+        organs = null;
+      } else if (organsStr.trim().length() == 0) {
+        organs = null;
+      } else {
+        List<String> tmp = LogicUtils.stringToListString(organsStr);
+        organs = new ArrayList<String>();
+        for (String organ : tmp) {
+          if (organ.trim().length() != 0) {
+            organs.add(organ);
+          }
+        }
+        if (organs.size() == 0) {
+          organs = null;
+        }
+      }
+      firstOrgan = (organs == null)? null : organs.get(0);
+    }
+    
+    if (firstOrgan != null) {
+      String idOrigen = "ES_" + firstOrgan + "_" + Calendar.getInstance().get(Calendar.YEAR) + "_" + Constants.PREFIX + transaccio.getTransaccioID();
+      metadadesAddicionals.add(new Metadata("eni:id_origen", idOrigen));
+    }
+    
+    
+    // XYZ ZZZ ESBORRAR !!!!!
+    /*
+    metadadesAddicionals.add(new Metadata("eni:subtipo_doc", "Especial CAIB"));
+    */
+    return metadadesAddicionals;
   }
 
 }

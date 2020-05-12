@@ -2,7 +2,6 @@ package es.caib.digitalib.logic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -179,7 +178,6 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
 
       // No hauria de ser null
       List<String> organs;
-      String firstOrgan;
       {
         final String organsStr = transaccio.getArxiuReqParamOrgans(); // "A04013511";
         
@@ -199,7 +197,6 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
             organs = null;
           }
         }
-        firstOrgan = (organs == null)? null : organs.get(0);
       }
       
       String serieDocumental = transaccio.getArxiuOptParamSerieDocumental(); // "S0001";
@@ -264,8 +261,24 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       documentMetadades.setFormat(documentFormat);
       documentMetadades.setExtensio(documentExtensio);
 
+      // ================== METADADES ==================
+      java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(null);
+      
       Map<String, Object> metadadesAddicionals = new HashMap<String, Object>();
       
+      {
+        List<Metadata> metadades = PluginDocumentCustodyLogicaEJB.generaMetadades(transaccio, csvGenerationDefinition, log);
+        if (metadades != null && metadades.size() != 0) {
+          for (Metadata metadata : metadades) {
+            metadadesAddicionals.put(metadata.getKey(), metadata.getValue());
+          }
+        }
+      }
+      
+      
+      
+      /* XYZ ZZZ ZZZ Esborrar */
+      /*
       // Resolució
       Integer resolucio = transaccio.getInfoScanResolucioPpp();
       log.info("\n\n SSS RESOLUCIO: " + resolucio );
@@ -294,13 +307,14 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       
       
       //  ES_<Órgano>_<AAAA>_<ID_específico>  ==>  "ES_3456789_2020_ES"
+      String firstOrgan = "A04013625";
       if (firstOrgan != null) {
         String idOrigen = "ES_" + firstOrgan + "_" + Calendar.getInstance().get(Calendar.YEAR) + "_" + Constants.PREFIX +  transaccio.getTransaccioID();
         metadadesAddicionals.put("eni:id_origen", idOrigen);
       }
       
       // XYZ ZZZ ESBORRAR !!!!!
-      /*
+      
       
       metadadesAddicionals.put("eni:subtipo_doc", "Especial CAIB");
       */
@@ -404,7 +418,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       
       
       java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(uuidDoc);
-      java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition(uuidDoc);
+      
       java.lang.String validationFileUrl = plugin.getValidationFileUrl(uuidDoc);
 
       // Només per DocumentCustody
