@@ -262,7 +262,10 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       documentMetadades.setExtensio(documentExtensio);
 
       // ================== METADADES ==================
-      java.lang.String csvGenerationDefinition = plugin.getCsvGenerationDefinition("unknown");
+      
+      // Si posam alguna cosa llavors peta  [HTTP_500, COD_021] nodeId is not valid (unknown)
+      // El plugin internament ja actualitza aquesta dada
+      java.lang.String csvGenerationDefinition = null; 
       
       Map<String, Object> metadadesAddicionals = new HashMap<String, Object>();
       

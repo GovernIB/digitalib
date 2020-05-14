@@ -22,6 +22,7 @@ import org.fundaciobit.plugins.documentcustody.api.NotSupportedCustodyException;
 import org.fundaciobit.plugins.documentcustody.api.SignatureCustody;
 import org.fundaciobit.plugins.signature.api.FileInfoSignature;
 import org.fundaciobit.pluginsib.core.utils.Metadata;
+import org.fundaciobit.pluginsib.core.utils.MetadataConstants;
 import org.fundaciobit.pluginsib.core.utils.MetadataFormatException;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
@@ -297,35 +298,51 @@ public class PluginDocumentCustodyLogicaEJB extends
       metadadesAddicionals.add(new Metadata("eni:def_csv",csvGenerationDefinition));
     }
     
-    //  ES_<Órgano>_<AAAA>_<ID_específico>  ==>  "ES_3456789_2020_ES"
-    // No hauria de ser null
-    List<String> organs;
-    String firstOrgan;
-    {
-      final String organsStr = transaccio.getArxiuReqParamOrgans(); // "A04013511";
-      
-      if (organsStr == null) {
-        organs = null;
-      } else if (organsStr.trim().length() == 0) {
-        organs = null;
-      } else {
-        List<String> tmp = LogicUtils.stringToListString(organsStr);
-        organs = new ArrayList<String>();
-        for (String organ : tmp) {
-          if (organ.trim().length() != 0) {
-            organs.add(organ);
-          }
-        }
-        if (organs.size() == 0) {
-          organs = null;
-        }
-      }
-      firstOrgan = (organs == null)? null : organs.get(0);
-    }
     
-    if (firstOrgan != null) {
-      String idOrigen = "ES_" + firstOrgan + "_" + Calendar.getInstance().get(Calendar.YEAR) + "_" + Constants.PREFIX + transaccio.getTransaccioID();
-      metadadesAddicionals.add(new Metadata("eni:id_origen", idOrigen));
+    String estatElabora =transaccio.getArxiuReqParamDocEstatElabora();
+    
+    if (estatElabora != null && 
+          (
+            // EE02
+            MetadataConstants.EstadoElaboracionConstants.ESTADO_ELABORACION_COPIA_CF.equals(estatElabora)
+            // EE03
+            || MetadataConstants.EstadoElaboracionConstants.ESTADO_ELABORACION_COPIA_DP.equals(estatElabora)
+            // EE04
+            || MetadataConstants.EstadoElaboracionConstants.ESTADO_ELABORACION_COPIA_PR.equals(estatElabora)
+          )) {
+        
+   
+    
+        //  ES_<Órgano>_<AAAA>_<ID_específico>  ==>  "ES_3456789_2020_ES"
+        // No hauria de ser null
+        List<String> organs;
+        String firstOrgan;
+        {
+          final String organsStr = transaccio.getArxiuReqParamOrgans(); // "A04013511";
+          
+          if (organsStr == null) {
+            organs = null;
+          } else if (organsStr.trim().length() == 0) {
+            organs = null;
+          } else {
+            List<String> tmp = LogicUtils.stringToListString(organsStr);
+            organs = new ArrayList<String>();
+            for (String organ : tmp) {
+              if (organ.trim().length() != 0) {
+                organs.add(organ);
+              }
+            }
+            if (organs.size() == 0) {
+              organs = null;
+            }
+          }
+          firstOrgan = (organs == null)? null : organs.get(0);
+        }
+        
+        if (firstOrgan != null) {
+          String idOrigen = "ES_" + firstOrgan + "_" + Calendar.getInstance().get(Calendar.YEAR) + "_" + Constants.PREFIX + transaccio.getTransaccioID();
+          metadadesAddicionals.add(new Metadata("eni:id_origen", idOrigen));
+        }
     }
     
     
