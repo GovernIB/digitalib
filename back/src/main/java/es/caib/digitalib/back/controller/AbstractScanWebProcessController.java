@@ -318,6 +318,8 @@ public abstract class AbstractScanWebProcessController {
             }
 
           }
+          
+          
         } else {
 
           transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);

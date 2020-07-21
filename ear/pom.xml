@@ -4,13 +4,13 @@
 
   <groupId>es.caib.digitalib</groupId>
   <artifactId>digitalib-ear</artifactId>  
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <packaging>ear</packaging>
 
   <parent>
     <groupId>es.caib.digitalib</groupId>
     <artifactId>digitalib</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
   </parent>
 
   <name>DigitalIB Ear</name>
