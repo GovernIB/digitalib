@@ -259,6 +259,7 @@ public class InfoCustodyController
       postValidate(request,infoCustodyForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         infoCustody = create(request, infoCustody);
@@ -353,6 +354,7 @@ public class InfoCustodyController
       postValidate(request, infoCustodyForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         infoCustody = update(request, infoCustody);

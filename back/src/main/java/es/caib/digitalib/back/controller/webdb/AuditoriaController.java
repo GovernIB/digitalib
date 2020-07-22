@@ -259,7 +259,9 @@ public class AuditoriaController
     if (auditoriaForm.getListOfValuesForTipus() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForTipus(request, mav, auditoriaForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       auditoriaForm.setListOfValuesForTipus(_listSKV);
     }
     
@@ -285,6 +287,7 @@ public class AuditoriaController
       postValidate(request,auditoriaForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         auditoria = create(request, auditoria);
@@ -379,6 +382,7 @@ public class AuditoriaController
       postValidate(request, auditoriaForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         auditoria = update(request, auditoria);
@@ -566,7 +570,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
        ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
     if (auditoriaForm.isHiddenField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForTipus(request, mav, where);
   }
@@ -577,7 +581,7 @@ public java.lang.Long stringToPK(String value) {
        List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (auditoriaFilterForm.isHiddenField(TIPUS)
       && !auditoriaFilterForm.isGroupByField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForTipus(request, mav, Where.AND(where,_w));

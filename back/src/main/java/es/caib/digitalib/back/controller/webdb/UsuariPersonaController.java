@@ -284,14 +284,18 @@ public class UsuariPersonaController
     if (usuariPersonaForm.getListOfIdiomaForIdiomaID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForIdiomaID(request, mav, usuariPersonaForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       usuariPersonaForm.setListOfIdiomaForIdiomaID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (usuariPersonaForm.getListOfConfiguracioGrupForConfiguracioGrupID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForConfiguracioGrupID(request, mav, usuariPersonaForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       usuariPersonaForm.setListOfConfiguracioGrupForConfiguracioGrupID(_listSKV);
     }
     
@@ -317,6 +321,7 @@ public class UsuariPersonaController
       postValidate(request,usuariPersonaForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         usuariPersona = create(request, usuariPersona);
@@ -411,6 +416,7 @@ public class UsuariPersonaController
       postValidate(request, usuariPersonaForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         usuariPersona = update(request, usuariPersona);
@@ -598,7 +604,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForIdiomaID(HttpServletRequest request,
        ModelAndView mav, UsuariPersonaForm usuariPersonaForm, Where where)  throws I18NException {
     if (usuariPersonaForm.isHiddenField(IDIOMAID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (usuariPersonaForm.isReadOnlyField(IDIOMAID)) {
@@ -613,7 +619,7 @@ public java.lang.Long stringToPK(String value) {
        List<UsuariPersona> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (usuariPersonaFilterForm.isHiddenField(IDIOMAID)
       && !usuariPersonaFilterForm.isGroupByField(IDIOMAID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(IDIOMAID)) {
@@ -637,7 +643,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForConfiguracioGrupID(HttpServletRequest request,
        ModelAndView mav, UsuariPersonaForm usuariPersonaForm, Where where)  throws I18NException {
     if (usuariPersonaForm.isHiddenField(CONFIGURACIOGRUPID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (usuariPersonaForm.isReadOnlyField(CONFIGURACIOGRUPID)) {
@@ -652,7 +658,7 @@ public java.lang.Long stringToPK(String value) {
        List<UsuariPersona> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (usuariPersonaFilterForm.isHiddenField(CONFIGURACIOGRUPID)
       && !usuariPersonaFilterForm.isGroupByField(CONFIGURACIOGRUPID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(CONFIGURACIOGRUPID)) {

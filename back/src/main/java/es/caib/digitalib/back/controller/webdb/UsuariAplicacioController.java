@@ -271,6 +271,7 @@ public class UsuariAplicacioController
       postValidate(request,usuariAplicacioForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         usuariAplicacio = create(request, usuariAplicacio);
@@ -365,6 +366,7 @@ public class UsuariAplicacioController
       postValidate(request, usuariAplicacioForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         usuariAplicacio = update(request, usuariAplicacio);

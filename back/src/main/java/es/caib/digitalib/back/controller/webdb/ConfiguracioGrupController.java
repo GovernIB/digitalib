@@ -318,42 +318,54 @@ public class ConfiguracioGrupController
     if (configuracioGrupForm.getListOfPerfilForPerfilNomesEscaneigID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPerfilNomesEscaneigID(request, mav, configuracioGrupForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       configuracioGrupForm.setListOfPerfilForPerfilNomesEscaneigID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (configuracioGrupForm.getListOfPerfilForPerfilNomesEscaneig2ID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPerfilNomesEscaneig2ID(request, mav, configuracioGrupForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       configuracioGrupForm.setListOfPerfilForPerfilNomesEscaneig2ID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (configuracioGrupForm.getListOfPerfilForPerfilCopiaAutenticaID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPerfilCopiaAutenticaID(request, mav, configuracioGrupForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       configuracioGrupForm.setListOfPerfilForPerfilCopiaAutenticaID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (configuracioGrupForm.getListOfPerfilForPerfilCopiaAutentica2ID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPerfilCopiaAutentica2ID(request, mav, configuracioGrupForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       configuracioGrupForm.setListOfPerfilForPerfilCopiaAutentica2ID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (configuracioGrupForm.getListOfPerfilForPerfilCustodiaID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPerfilCustodiaID(request, mav, configuracioGrupForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       configuracioGrupForm.setListOfPerfilForPerfilCustodiaID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (configuracioGrupForm.getListOfPerfilForPerfilCustodia2ID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPerfilCustodia2ID(request, mav, configuracioGrupForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       configuracioGrupForm.setListOfPerfilForPerfilCustodia2ID(_listSKV);
     }
     
@@ -383,6 +395,7 @@ public class ConfiguracioGrupController
 
       if (result.hasErrors()) {
         afm.processErrorFilesWithoutThrowException(); // FILE
+        result.reject("error.form");
         return getTileForm();
       } else {
         configuracioGrup = create(request, configuracioGrup);
@@ -482,6 +495,7 @@ public class ConfiguracioGrupController
 
       if (result.hasErrors()) {
         afm.processErrorFilesWithoutThrowException(); // FILE
+        result.reject("error.form");
         return getTileForm();
       } else {
         configuracioGrup = update(request, configuracioGrup);
@@ -703,7 +717,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPerfilNomesEscaneigID(HttpServletRequest request,
        ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
     if (configuracioGrupForm.isHiddenField(PERFILNOMESESCANEIGID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (configuracioGrupForm.isReadOnlyField(PERFILNOMESESCANEIGID)) {
@@ -718,7 +732,7 @@ public java.lang.Long stringToPK(String value) {
        List<ConfiguracioGrup> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (configuracioGrupFilterForm.isHiddenField(PERFILNOMESESCANEIGID)
       && !configuracioGrupFilterForm.isGroupByField(PERFILNOMESESCANEIGID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PERFILNOMESESCANEIGID)) {
@@ -743,7 +757,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPerfilNomesEscaneig2ID(HttpServletRequest request,
        ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
     if (configuracioGrupForm.isHiddenField(PERFILNOMESESCANEIG2ID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (configuracioGrupForm.isReadOnlyField(PERFILNOMESESCANEIG2ID)) {
@@ -758,7 +772,7 @@ public java.lang.Long stringToPK(String value) {
        List<ConfiguracioGrup> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (configuracioGrupFilterForm.isHiddenField(PERFILNOMESESCANEIG2ID)
       && !configuracioGrupFilterForm.isGroupByField(PERFILNOMESESCANEIG2ID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PERFILNOMESESCANEIG2ID)) {
@@ -783,7 +797,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPerfilCopiaAutenticaID(HttpServletRequest request,
        ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
     if (configuracioGrupForm.isHiddenField(PERFILCOPIAAUTENTICAID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (configuracioGrupForm.isReadOnlyField(PERFILCOPIAAUTENTICAID)) {
@@ -798,7 +812,7 @@ public java.lang.Long stringToPK(String value) {
        List<ConfiguracioGrup> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (configuracioGrupFilterForm.isHiddenField(PERFILCOPIAAUTENTICAID)
       && !configuracioGrupFilterForm.isGroupByField(PERFILCOPIAAUTENTICAID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PERFILCOPIAAUTENTICAID)) {
@@ -823,7 +837,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPerfilCopiaAutentica2ID(HttpServletRequest request,
        ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
     if (configuracioGrupForm.isHiddenField(PERFILCOPIAAUTENTICA2ID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (configuracioGrupForm.isReadOnlyField(PERFILCOPIAAUTENTICA2ID)) {
@@ -838,7 +852,7 @@ public java.lang.Long stringToPK(String value) {
        List<ConfiguracioGrup> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (configuracioGrupFilterForm.isHiddenField(PERFILCOPIAAUTENTICA2ID)
       && !configuracioGrupFilterForm.isGroupByField(PERFILCOPIAAUTENTICA2ID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PERFILCOPIAAUTENTICA2ID)) {
@@ -863,7 +877,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPerfilCustodiaID(HttpServletRequest request,
        ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
     if (configuracioGrupForm.isHiddenField(PERFILCUSTODIAID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (configuracioGrupForm.isReadOnlyField(PERFILCUSTODIAID)) {
@@ -878,7 +892,7 @@ public java.lang.Long stringToPK(String value) {
        List<ConfiguracioGrup> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (configuracioGrupFilterForm.isHiddenField(PERFILCUSTODIAID)
       && !configuracioGrupFilterForm.isGroupByField(PERFILCUSTODIAID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PERFILCUSTODIAID)) {
@@ -903,7 +917,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPerfilCustodia2ID(HttpServletRequest request,
        ModelAndView mav, ConfiguracioGrupForm configuracioGrupForm, Where where)  throws I18NException {
     if (configuracioGrupForm.isHiddenField(PERFILCUSTODIA2ID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (configuracioGrupForm.isReadOnlyField(PERFILCUSTODIA2ID)) {
@@ -918,7 +932,7 @@ public java.lang.Long stringToPK(String value) {
        List<ConfiguracioGrup> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (configuracioGrupFilterForm.isHiddenField(PERFILCUSTODIA2ID)
       && !configuracioGrupFilterForm.isGroupByField(PERFILCUSTODIA2ID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PERFILCUSTODIA2ID)) {

@@ -5,6 +5,7 @@ import es.caib.digitalib.model.dao.*;
 public interface IDigitalIBDaoManagers {
 	public IApiSimpleManager getApiSimpleManager();
 	public IAuditoriaManager getAuditoriaManager();
+	public IAvisManager getAvisManager();
 	public IConfiguracioFirmaManager getConfiguracioFirmaManager();
 	public IConfiguracioGrupManager getConfiguracioGrupManager();
 	public IEstadisticaManager getEstadisticaManager();

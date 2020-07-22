@@ -373,70 +373,90 @@ public class TransaccioController
     if (transaccioForm.getListOfValuesForEstatCodi() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForEstatCodi(request, mav, transaccioForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       transaccioForm.setListOfValuesForEstatCodi(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfValuesForInfoScanPixelType() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForInfoScanPixelType(request, mav, transaccioForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       transaccioForm.setListOfValuesForInfoScanPixelType(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfValuesForView() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForView(request, mav, transaccioForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       transaccioForm.setListOfValuesForView(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfValuesForSignParamLanguageDoc() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForSignParamLanguageDoc(request, mav, transaccioForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       transaccioForm.setListOfValuesForSignParamLanguageDoc(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfValuesForArxiuReqParamDocEstatElabora() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForArxiuReqParamDocEstatElabora(request, mav, transaccioForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       transaccioForm.setListOfValuesForArxiuReqParamDocEstatElabora(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfValuesForArxiuReqParamDocumentTipus() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForArxiuReqParamDocumentTipus(request, mav, transaccioForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       transaccioForm.setListOfValuesForArxiuReqParamDocumentTipus(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfValuesForArxiuReqParamOrigen() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForArxiuReqParamOrigen(request, mav, transaccioForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       transaccioForm.setListOfValuesForArxiuReqParamOrigen(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfPerfilForPerfilID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPerfilID(request, mav, transaccioForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       transaccioForm.setListOfPerfilForPerfilID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfInfoSignaturaForInfoSignaturaID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForInfoSignaturaID(request, mav, transaccioForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       transaccioForm.setListOfInfoSignaturaForInfoSignaturaID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfInfoCustodyForInfoCustodyID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForInfoCustodyID(request, mav, transaccioForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       transaccioForm.setListOfInfoCustodyForInfoCustodyID(_listSKV);
     }
     
@@ -466,6 +486,7 @@ public class TransaccioController
 
       if (result.hasErrors()) {
         afm.processErrorFilesWithoutThrowException(); // FILE
+        result.reject("error.form");
         return getTileForm();
       } else {
         transaccio = create(request, transaccio);
@@ -565,6 +586,7 @@ public class TransaccioController
 
       if (result.hasErrors()) {
         afm.processErrorFilesWithoutThrowException(); // FILE
+        result.reject("error.form");
         return getTileForm();
       } else {
         transaccio = update(request, transaccio);
@@ -788,7 +810,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request,
        ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
     if (transaccioForm.isHiddenField(ESTATCODI)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForEstatCodi(request, mav, where);
   }
@@ -799,7 +821,7 @@ public java.lang.Long stringToPK(String value) {
        List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (transaccioFilterForm.isHiddenField(ESTATCODI)
       && !transaccioFilterForm.isGroupByField(ESTATCODI)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForEstatCodi(request, mav, Where.AND(where,_w));
@@ -822,7 +844,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForInfoScanPixelType(HttpServletRequest request,
        ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
     if (transaccioForm.isHiddenField(INFOSCANPIXELTYPE)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForInfoScanPixelType(request, mav, where);
   }
@@ -833,7 +855,7 @@ public java.lang.Long stringToPK(String value) {
        List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (transaccioFilterForm.isHiddenField(INFOSCANPIXELTYPE)
       && !transaccioFilterForm.isGroupByField(INFOSCANPIXELTYPE)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForInfoScanPixelType(request, mav, Where.AND(where,_w));
@@ -853,7 +875,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForView(HttpServletRequest request,
        ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
     if (transaccioForm.isHiddenField(VIEW)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForView(request, mav, where);
   }
@@ -864,7 +886,7 @@ public java.lang.Long stringToPK(String value) {
        List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (transaccioFilterForm.isHiddenField(VIEW)
       && !transaccioFilterForm.isGroupByField(VIEW)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForView(request, mav, Where.AND(where,_w));
@@ -883,7 +905,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForSignParamLanguageDoc(HttpServletRequest request,
        ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
     if (transaccioForm.isHiddenField(SIGNPARAMLANGUAGEDOC)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForSignParamLanguageDoc(request, mav, where);
   }
@@ -894,7 +916,7 @@ public java.lang.Long stringToPK(String value) {
        List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (transaccioFilterForm.isHiddenField(SIGNPARAMLANGUAGEDOC)
       && !transaccioFilterForm.isGroupByField(SIGNPARAMLANGUAGEDOC)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForSignParamLanguageDoc(request, mav, Where.AND(where,_w));
@@ -915,7 +937,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForArxiuReqParamDocEstatElabora(HttpServletRequest request,
        ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
     if (transaccioForm.isHiddenField(ARXIUREQPARAMDOCESTATELABORA)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForArxiuReqParamDocEstatElabora(request, mav, where);
   }
@@ -926,7 +948,7 @@ public java.lang.Long stringToPK(String value) {
        List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (transaccioFilterForm.isHiddenField(ARXIUREQPARAMDOCESTATELABORA)
       && !transaccioFilterForm.isGroupByField(ARXIUREQPARAMDOCESTATELABORA)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForArxiuReqParamDocEstatElabora(request, mav, Where.AND(where,_w));
@@ -948,7 +970,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForArxiuReqParamDocumentTipus(HttpServletRequest request,
        ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
     if (transaccioForm.isHiddenField(ARXIUREQPARAMDOCUMENTTIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForArxiuReqParamDocumentTipus(request, mav, where);
   }
@@ -959,7 +981,7 @@ public java.lang.Long stringToPK(String value) {
        List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (transaccioFilterForm.isHiddenField(ARXIUREQPARAMDOCUMENTTIPUS)
       && !transaccioFilterForm.isGroupByField(ARXIUREQPARAMDOCUMENTTIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForArxiuReqParamDocumentTipus(request, mav, Where.AND(where,_w));
@@ -997,7 +1019,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForArxiuReqParamOrigen(HttpServletRequest request,
        ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
     if (transaccioForm.isHiddenField(ARXIUREQPARAMORIGEN)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForArxiuReqParamOrigen(request, mav, where);
   }
@@ -1008,7 +1030,7 @@ public java.lang.Long stringToPK(String value) {
        List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (transaccioFilterForm.isHiddenField(ARXIUREQPARAMORIGEN)
       && !transaccioFilterForm.isGroupByField(ARXIUREQPARAMORIGEN)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForArxiuReqParamOrigen(request, mav, Where.AND(where,_w));
@@ -1027,7 +1049,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPerfilID(HttpServletRequest request,
        ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
     if (transaccioForm.isHiddenField(PERFILID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (transaccioForm.isReadOnlyField(PERFILID)) {
@@ -1042,7 +1064,7 @@ public java.lang.Long stringToPK(String value) {
        List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (transaccioFilterForm.isHiddenField(PERFILID)
       && !transaccioFilterForm.isGroupByField(PERFILID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PERFILID)) {
@@ -1066,7 +1088,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForInfoSignaturaID(HttpServletRequest request,
        ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
     if (transaccioForm.isHiddenField(INFOSIGNATURAID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (transaccioForm.isReadOnlyField(INFOSIGNATURAID)) {
@@ -1081,7 +1103,7 @@ public java.lang.Long stringToPK(String value) {
        List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (transaccioFilterForm.isHiddenField(INFOSIGNATURAID)
       && !transaccioFilterForm.isGroupByField(INFOSIGNATURAID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(INFOSIGNATURAID)) {
@@ -1106,7 +1128,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForInfoCustodyID(HttpServletRequest request,
        ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
     if (transaccioForm.isHiddenField(INFOCUSTODYID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (transaccioForm.isReadOnlyField(INFOCUSTODYID)) {
@@ -1121,7 +1143,7 @@ public java.lang.Long stringToPK(String value) {
        List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (transaccioFilterForm.isHiddenField(INFOCUSTODYID)
       && !transaccioFilterForm.isGroupByField(INFOCUSTODYID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(INFOCUSTODYID)) {

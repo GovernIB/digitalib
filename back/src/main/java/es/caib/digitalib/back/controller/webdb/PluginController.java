@@ -259,7 +259,9 @@ public class PluginController
     if (pluginForm.getListOfValuesForTipus() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForTipus(request, mav, pluginForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       pluginForm.setListOfValuesForTipus(_listSKV);
     }
     
@@ -285,6 +287,7 @@ public class PluginController
       postValidate(request,pluginForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         plugin = create(request, plugin);
@@ -379,6 +382,7 @@ public class PluginController
       postValidate(request, pluginForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         plugin = update(request, plugin);
@@ -566,7 +570,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
        ModelAndView mav, PluginForm pluginForm, Where where)  throws I18NException {
     if (pluginForm.isHiddenField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForTipus(request, mav, where);
   }
@@ -577,7 +581,7 @@ public java.lang.Long stringToPK(String value) {
        List<Plugin> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (pluginFilterForm.isHiddenField(TIPUS)
       && !pluginFilterForm.isGroupByField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForTipus(request, mav, Where.AND(where,_w));

@@ -256,7 +256,9 @@ public class EstadisticaController
     if (estadisticaForm.getListOfValuesForTipus() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForTipus(request, mav, estadisticaForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       estadisticaForm.setListOfValuesForTipus(_listSKV);
     }
     
@@ -282,6 +284,7 @@ public class EstadisticaController
       postValidate(request,estadisticaForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         estadistica = create(request, estadistica);
@@ -376,6 +379,7 @@ public class EstadisticaController
       postValidate(request, estadisticaForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         estadistica = update(request, estadistica);
@@ -563,7 +567,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
        ModelAndView mav, EstadisticaForm estadisticaForm, Where where)  throws I18NException {
     if (estadisticaForm.isHiddenField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForTipus(request, mav, where);
   }
@@ -574,7 +578,7 @@ public java.lang.Long stringToPK(String value) {
        List<Estadistica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (estadisticaFilterForm.isHiddenField(TIPUS)
       && !estadisticaFilterForm.isGroupByField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForTipus(request, mav, Where.AND(where,_w));

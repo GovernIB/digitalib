@@ -127,6 +127,7 @@ public abstract class AbstractScanWebProcessController {
 
   }
 
+  @SuppressWarnings("deprecation")
   protected ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
       String transactionWebID) throws I18NException, Exception {
     final boolean debug = log.isDebugEnabled();

@@ -46,7 +46,7 @@
    <string>digitalib</string> 
   </void> 
   <void property="tables"> 
-   <array class="org.fundaciobit.genapp.TableInfo" length="19"> 
+   <array class="org.fundaciobit.genapp.TableInfo" length="20"> 
     <void index="0"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
@@ -838,6 +838,426 @@
      </object> 
     </void> 
     <void index="2"> 
+     <object class="org.fundaciobit.genapp.TableInfo"> 
+      <void property="fields"> 
+       <array class="org.fundaciobit.genapp.FieldInfo" length="7"> 
+        <void index="0"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="PK"> 
+           <string>dib_avis_pk</string> 
+          </void> 
+          <void property="autoIncrement"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="defaultValue"> 
+           <string>nextval(&apos;dib_digitalib_seq&apos;::regclass)</string> 
+          </void> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="index"> 
+           <string>dib_avis_pk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>avisID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>ID</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>ID</string> 
+           </void> 
+          </void> 
+          <void property="notNullable"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>avisid</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"/> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="1"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>traduccioid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_avis_traduccio_desc_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_traduccio</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_avis_descripcioid_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>descripcioID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Descripció</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Descripción</string> 
+           </void> 
+          </void> 
+          <void property="notNullable"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="showInReferenceList"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>descripcioid</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>traduccioid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_avis_traduccio_desc_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_traduccio</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="2"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="defaultValue"> 
+           <string>0</string> 
+          </void> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>tipus</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>int</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Tipus</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Tipo</string> 
+           </void> 
+          </void> 
+          <void property="minAllowedValue"> 
+           <string>0,1,2,3</string> 
+          </void> 
+          <void property="notNullable"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="size"> 
+           <int>10</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>tipus</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>4</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>16</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="3"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>6</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>dataInici</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.sql.Timestamp</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Data Inici</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Fecha Inicio</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>29</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>datainici</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>93</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>7</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="4"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>6</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>dataFi</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.sql.Timestamp</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Data fi</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Fecha Fin</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>35</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>datafi</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>93</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>7</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="5"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="foreignKeys"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+            <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>configuraciogrupid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_avis_cfggrup_configgrup_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_configuraciogrup</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+           </array> 
+          </void> 
+          <void property="index"> 
+           <string>dib_avis_configgrupid_fk_i</string> 
+          </void> 
+          <void property="javaName"> 
+           <string>configGrupID</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>java.lang.Long</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Configuració de Grup</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Configuración de Grupo</string> 
+           </void> 
+          </void> 
+          <void property="size"> 
+           <int>19</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>configgrupid</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-5</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="foreignKey"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>configuraciogrupid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_avis_confgrup_grupid_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_configuraciogrup</string> 
+              </void> 
+              <void property="type"> 
+               <int>1</int> 
+              </void> 
+             </object> 
+            </void> 
+            <void property="webtype"> 
+             <int>3</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void index="6"> 
+         <object class="org.fundaciobit.genapp.FieldInfo"> 
+          <void property="digits"> 
+           <int>0</int> 
+          </void> 
+          <void property="javaName"> 
+           <string>bloquejar</string> 
+          </void> 
+          <void property="javaType"> 
+           <class>boolean</class> 
+          </void> 
+          <void property="labels"> 
+           <void method="put"> 
+            <string>ca</string> 
+            <string>Ocultar botons escaneig</string> 
+           </void> 
+           <void method="put"> 
+            <string>es</string> 
+            <string>Ocultar botones escaneo</string> 
+           </void> 
+          </void> 
+          <void property="notNullable"> 
+           <boolean>true</boolean> 
+          </void> 
+          <void property="size"> 
+           <int>1</int> 
+          </void> 
+          <void property="sqlName"> 
+           <string>bloquejar</string> 
+          </void> 
+          <void property="sqlType"> 
+           <int>-7</int> 
+          </void> 
+          <void property="webFieldInfo"> 
+           <object class="org.fundaciobit.genapp.WebFieldInfo"> 
+            <void property="webtype"> 
+             <int>4</int> 
+            </void> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+       </array> 
+      </void> 
+      <void property="generate"> 
+       <boolean>true</boolean> 
+      </void> 
+      <void property="labels"> 
+       <void method="put"> 
+        <string>ca</string> 
+        <string>Avís</string> 
+       </void> 
+       <void method="put"> 
+        <string>es</string> 
+        <string>Aviso</string> 
+       </void> 
+      </void> 
+      <void property="labelsPlural"> 
+       <void method="put"> 
+        <string>ca</string> 
+        <string>Avisos</string> 
+       </void> 
+       <void method="put"> 
+        <string>es</string> 
+        <string>Avisos</string> 
+       </void> 
+      </void> 
+      <void property="name"> 
+       <string>dib_avis</string> 
+      </void> 
+      <void property="nameJava"> 
+       <string>Avis</string> 
+      </void> 
+      <void property="shortName"> 
+       <string>avis</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void index="3"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="18"> 
@@ -1862,7 +2282,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="3"> 
+    <void index="4"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="15"> 
@@ -1881,8 +2301,21 @@ opcional incluso cuando se genera una firma EPES.</string>
            <int>0</int> 
           </void> 
           <void property="foreignKeys"> 
-           <array class="org.fundaciobit.genapp.ForeignKey" length="1"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="2"> 
             <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>configgrupid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_avis_cfggrup_configgrup_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_avis</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="1"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>configuraciogrupid</string> 
@@ -2862,7 +3295,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="4"> 
+    <void index="5"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="7"> 
@@ -3204,7 +3637,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="5"> 
+    <void index="6"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="5"> 
@@ -3550,7 +3983,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="6"> 
+    <void index="7"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="4"> 
@@ -3797,7 +4230,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="7"> 
+    <void index="8"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="11"> 
@@ -4317,7 +4750,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="8"> 
+    <void index="9"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="17"> 
@@ -5077,7 +5510,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="9"> 
+    <void index="10"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="4"> 
@@ -5338,7 +5771,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="10"> 
+    <void index="11"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="18"> 
@@ -6618,7 +7051,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="11"> 
+    <void index="12"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="3"> 
@@ -6897,7 +7330,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="12"> 
+    <void index="13"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="9"> 
@@ -7429,7 +7862,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="13"> 
+    <void index="14"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="12"> 
@@ -8104,7 +8537,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="14"> 
+    <void index="15"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="1"> 
@@ -8126,8 +8559,21 @@ opcional incluso cuando se genera una firma EPES.</string>
            <int>0</int> 
           </void> 
           <void property="foreignKeys"> 
-           <array class="org.fundaciobit.genapp.ForeignKey" length="5"> 
+           <array class="org.fundaciobit.genapp.ForeignKey" length="6"> 
             <void index="0"> 
+             <object class="org.fundaciobit.genapp.ForeignKey"> 
+              <void property="field"> 
+               <string>descripcioid</string> 
+              </void> 
+              <void property="name"> 
+               <string>dib_avis_traduccio_desc_fk</string> 
+              </void> 
+              <void property="table"> 
+               <string>dib_avis</string> 
+              </void> 
+             </object> 
+            </void> 
+            <void index="1"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>firmatperformatid</string> 
@@ -8140,7 +8586,7 @@ opcional incluso cuando se genera una firma EPES.</string>
               </void> 
              </object> 
             </void> 
-            <void index="1"> 
+            <void index="2"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>motiudelegacioid</string> 
@@ -8153,7 +8599,7 @@ opcional incluso cuando se genera una firma EPES.</string>
               </void> 
              </object> 
             </void> 
-            <void index="2"> 
+            <void index="3"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>nomid</string> 
@@ -8166,7 +8612,7 @@ opcional incluso cuando se genera una firma EPES.</string>
               </void> 
              </object> 
             </void> 
-            <void index="3"> 
+            <void index="4"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>descripcioid</string> 
@@ -8179,7 +8625,7 @@ opcional incluso cuando se genera una firma EPES.</string>
               </void> 
              </object> 
             </void> 
-            <void index="4"> 
+            <void index="5"> 
              <object class="org.fundaciobit.genapp.ForeignKey"> 
               <void property="field"> 
                <string>traducciomapid</string> 
@@ -8280,7 +8726,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="15"> 
+    <void index="16"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="3"> 
@@ -8502,7 +8948,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="16"> 
+    <void index="17"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="41"> 
@@ -10476,7 +10922,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="17"> 
+    <void index="18"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="9"> 
@@ -10940,7 +11386,7 @@ opcional incluso cuando se genera una firma EPES.</string>
       </void> 
      </object> 
     </void> 
-    <void index="18"> 
+    <void index="19"> 
      <object class="org.fundaciobit.genapp.TableInfo"> 
       <void property="fields"> 
        <array class="org.fundaciobit.genapp.FieldInfo" length="11"> 

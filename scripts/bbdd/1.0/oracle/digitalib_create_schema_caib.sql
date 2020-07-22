@@ -20,6 +20,16 @@
         usernamepersona varchar2(255 char)
     );
 
+    create table dib_avis (
+        avisid number(19,0) not null,
+        bloquejar number(1,0) not null,
+        configgrupid number(19,0),
+        datafi timestamp,
+        datainici timestamp,
+        descripcioid number(19,0) not null,
+        tipus number(10,0) not null
+    );
+
     create table dib_configuraciofirma (
         configuraciofirmaid number(19,0) not null,
         algorismedefirmaid number(10,0) not null,
@@ -44,6 +54,7 @@
     create table dib_configuraciogrup (
         configuraciogrupid number(19,0) not null,
         adreza clob not null,
+        codidir3perdefecte varchar2(50 char) not null,
         logofooterid number(19,0) not null,
         logoheaderid number(19,0) not null,
         nom varchar2(100 char) not null,
@@ -117,6 +128,13 @@
         timestampincluded number(1,0)
     );
 
+    create table dib_metadada (
+        metadadaid number(19,0) not null,
+        nom varchar2(255 char) not null,
+        transaccioid number(19,0) not null,
+        valor varchar2(3000 char) not null
+    );
+
     create table dib_perfil (
         perfilid number(19,0) not null,
         apisimpleid number(19,0),
@@ -184,7 +202,6 @@
     create table dib_transaccio (
         transaccioid number(19,0) not null,
         arxiuoptparamcustorexpid varchar2(255 char),
-        arxiuoptparamorgans varchar2(255 char),
         arxiuoptparamprocedimentcodi varchar2(255 char),
         arxiuoptparamprocedimentnom varchar2(255 char),
         arxiuoptparamseriedocumental varchar2(255 char),
@@ -193,6 +210,7 @@
         arxiureqparamdocestatelabora varchar2(4 char),
         arxiureqparamdocumenttipus varchar2(4 char),
         arxiureqparaminteressats varchar2(255 char),
+        arxiureqparamorgans varchar2(255 char),
         arxiureqparamorigen number(10,0),
         datafi timestamp,
         datainici timestamp not null,
@@ -205,7 +223,9 @@
         hashescaneig varchar2(255 char),
         hashfirma varchar2(255 char),
         infocustodyid number(19,0),
+        infoscandatacaptura timestamp,
         infoscanocr number(1,0),
+        infoscanpapersize varchar2(100 char),
         infoscanpixeltype number(10,0),
         infoscanresolucioppp number(10,0),
         infosignaturaid number(19,0),
@@ -255,6 +275,9 @@
  -- INICI Indexes
     create index dib_apisimple_pk_i on dib_apisimple (apisimpleid);
     create index dib_auditoria_pk_i on dib_auditoria (auditoriaid);
+    create index dib_avis_configgrupid_fk_i on dib_avis (configgrupid);
+    create index dib_avis_descripcioid_fk_i on dib_avis (descripcioid);
+    create index dib_avis_pk_i on dib_avis (avisid);
     create index dib_conffirma_firmatper_fk_i on dib_configuraciofirma (firmatperformatid);
     create index dib_conffirma_algofirma_fk_i on dib_configuraciofirma (algorismedefirmaid);
     create index dib_configuraciofirma_pk_i on dib_configuraciofirma (configuraciofirmaid);
@@ -275,6 +298,8 @@
     create index dib_idioma_pk_i on dib_idioma (idiomaid);
     create index dib_infocustody_pk_i on dib_infocustody (infocustodyid);
     create index dib_infosignatura_pk_i on dib_infosignatura (infosignaturaid);
+    create index dib_metadada_transaccioid_fk_i on dib_metadada (transaccioid);
+    create index dib_metadada_pk_i on dib_metadada (metadadaid);
     create index dib_perfil_plugscanwebid_fk_i on dib_perfil (pluginscanwebid);
     create index dib_perfil_plugin_pdcid_fk_i on dib_perfil (plugindoccustodyid);
     create index dib_perfil_pluginarxiuid_fk_i on dib_perfil (pluginarxiuid);
@@ -310,6 +335,8 @@
 
     alter table dib_auditoria add constraint dib_auditoria_pk primary key (auditoriaid);
 
+    alter table dib_avis add constraint dib_avis_pk primary key (avisid);
+
     alter table dib_configuraciofirma add constraint dib_configuraciofirma_pk primary key (configuraciofirmaid);
 
     alter table dib_configuraciogrup add constraint dib_configuraciogrup_pk primary key (configuraciogrupid);
@@ -323,6 +350,8 @@
     alter table dib_infocustody add constraint dib_infocustody_pk primary key (infocustodyid);
 
     alter table dib_infosignatura add constraint dib_infosignatura_pk primary key (infosignaturaid);
+
+    alter table dib_metadada add constraint dib_metadada_pk primary key (metadadaid);
 
     alter table dib_perfil add constraint dib_perfil_pk primary key (perfilid);
 
@@ -345,6 +374,16 @@
  -- FINAL PK's
 
  -- INICI FK's
+
+    alter table dib_avis 
+        add constraint dib_avis_cfggrup_configgrup_fk 
+        foreign key (configgrupid) 
+        references dib_configuraciogrup;
+
+    alter table dib_avis 
+        add constraint dib_avis_traduccio_desc_fk 
+        foreign key (descripcioid) 
+        references dib_traduccio;
 
     alter table dib_configuraciofirma 
         add constraint dib_conffirma_traduccio_md_fk 
@@ -405,6 +444,11 @@
         add constraint dib_cfggrup_perfil_scan_fk 
         foreign key (perfilnomesescaneigid) 
         references dib_perfil;
+
+    alter table dib_metadada 
+        add constraint dib_meta_transaccio_trans_fk 
+        foreign key (transaccioid) 
+        references dib_transaccio;
 
     alter table dib_perfil 
         add constraint dib_perfil_conffirma_cf_fk 
@@ -526,6 +570,7 @@
  -- INICI GRANTS
     grant select,insert,delete,update on dib_apisimple to www_digitalib;
     grant select,insert,delete,update on dib_auditoria to www_digitalib;
+    grant select,insert,delete,update on dib_avis to www_digitalib;
     grant select,insert,delete,update on dib_configuraciofirma to www_digitalib;
     grant select,insert,delete,update on dib_configuraciogrup to www_digitalib;
     grant select,insert,delete,update on dib_estadistica to www_digitalib;
@@ -533,6 +578,7 @@
     grant select,insert,delete,update on dib_idioma to www_digitalib;
     grant select,insert,delete,update on dib_infocustody to www_digitalib;
     grant select,insert,delete,update on dib_infosignatura to www_digitalib;
+    grant select,insert,delete,update on dib_metadada to www_digitalib;
     grant select,insert,delete,update on dib_perfil to www_digitalib;
     grant select,insert,delete,update on dib_perfilusrapp to www_digitalib;
     grant select,insert,delete,update on dib_plugin to www_digitalib;
@@ -546,11 +592,11 @@
  -- FINAL GRANTS
 
  -- INICI LOBS
-    alter table dib_configuraciofirma move lob (propietatstaulafirmes) store as dib_configfirma_propietats_lob (tablespace digitalib_lob index dib_configfirma_propietats_lob_i);
-    alter table dib_configuraciogrup move lob (adreza) store as dib_configgrup_adreza_lob (tablespace digitalib_lob index dib_configgrup_adreza_lob_i);
+    alter table dib_configuraciofirma move lob (propietatstaulafirmes) store as dib_conffirma_proptaulafirmes (tablespace digitalib_lob index dib_conffirma_proptaulafirmes_i);
+    alter table dib_configuraciogrup move lob (adreza) store as dib_configuraciogrup_adreza (tablespace digitalib_lob index dib_configuraciogrup_adreza_i);
     alter table dib_plugin move lob (properties) store as dib_plugin_properties_lob (tablespace digitalib_lob index dib_plugin_properties_lob_i);
-    alter table dib_plugincridada move lob (parametrestext) store as dib_plugincridada_paramstext (tablespace digitalib_lob index dib_plugincridada_paramstext_i);
-    alter table dib_plugincridada move lob (retorntext) store as dib_plugincridada_retorntext (tablespace digitalib_lob index dib_plugincridada_retorntext_i);
+    alter table dib_plugincridada move lob (parametrestext) store as dib_plugincridada_paramtext (tablespace digitalib_lob index dib_plugincridada_paramtext_i);
+    alter table dib_plugincridada move lob (retorntext) store as dib_plugincridada_rettext (tablespace digitalib_lob index dib_plugincridada_rettext_i);
     alter table dib_transaccio move lob (estatexcepcio) store as dib_transaccio_estatexcepcio (tablespace digitalib_lob index dib_transaccio_estatexcepcio_i);
  -- FINAL LOBS
 

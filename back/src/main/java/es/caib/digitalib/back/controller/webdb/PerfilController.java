@@ -440,84 +440,108 @@ public class PerfilController
     if (perfilForm.getListOfValuesForScanFormatFitxer() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForScanFormatFitxer(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfValuesForScanFormatFitxer(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfValuesForScanMinimaResolucio() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForScanMinimaResolucio(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfValuesForScanMinimaResolucio(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfValuesForScanPixelType() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForScanPixelType(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfValuesForScanPixelType(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfPluginForPluginScanWebID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPluginScanWebID(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfPluginForPluginScanWebID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfPluginForPluginScanWeb2ID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPluginScanWeb2ID(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfPluginForPluginScanWeb2ID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfValuesForTipusFirma() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForTipusFirma(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfValuesForTipusFirma(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfApiSimpleForApiSimpleID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForApiSimpleID(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfApiSimpleForApiSimpleID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfConfiguracioFirmaForConfiguracioFirmaID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForConfiguracioFirmaID(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfConfiguracioFirmaForConfiguracioFirmaID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfValuesForTipusCustodia() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForTipusCustodia(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfValuesForTipusCustodia(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfPluginForPluginArxiuID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPluginArxiuID(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfPluginForPluginArxiuID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfPluginForPluginDocCustodyID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForPluginDocCustodyID(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfPluginForPluginDocCustodyID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (perfilForm.getListOfValuesForUsPerfil() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForUsPerfil(request, mav, perfilForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       perfilForm.setListOfValuesForUsPerfil(_listSKV);
     }
     
@@ -550,6 +574,7 @@ public class PerfilController
       postValidate(request,perfilForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         perfil = create(request, perfil);
@@ -644,6 +669,7 @@ public class PerfilController
       postValidate(request, perfilForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         perfil = update(request, perfil);
@@ -832,7 +858,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(NOMID)
       && !perfilFilterForm.isGroupByField(NOMID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(NOMID)) {
@@ -858,7 +884,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(DESCRIPCIOID)
       && !perfilFilterForm.isGroupByField(DESCRIPCIOID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(DESCRIPCIOID)) {
@@ -883,7 +909,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForScanFormatFitxer(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(SCANFORMATFITXER)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForScanFormatFitxer(request, mav, where);
   }
@@ -894,7 +920,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(SCANFORMATFITXER)
       && !perfilFilterForm.isGroupByField(SCANFORMATFITXER)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForScanFormatFitxer(request, mav, Where.AND(where,_w));
@@ -916,7 +942,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForScanMinimaResolucio(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(SCANMINIMARESOLUCIO)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForScanMinimaResolucio(request, mav, where);
   }
@@ -927,7 +953,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(SCANMINIMARESOLUCIO)
       && !perfilFilterForm.isGroupByField(SCANMINIMARESOLUCIO)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForScanMinimaResolucio(request, mav, Where.AND(where,_w));
@@ -955,7 +981,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForScanPixelType(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(SCANPIXELTYPE)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForScanPixelType(request, mav, where);
   }
@@ -966,7 +992,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(SCANPIXELTYPE)
       && !perfilFilterForm.isGroupByField(SCANPIXELTYPE)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForScanPixelType(request, mav, Where.AND(where,_w));
@@ -986,7 +1012,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPluginScanWebID(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(PLUGINSCANWEBID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (perfilForm.isReadOnlyField(PLUGINSCANWEBID)) {
@@ -1001,7 +1027,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(PLUGINSCANWEBID)
       && !perfilFilterForm.isGroupByField(PLUGINSCANWEBID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PLUGINSCANWEBID)) {
@@ -1025,7 +1051,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPluginScanWeb2ID(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(PLUGINSCANWEB2ID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (perfilForm.isReadOnlyField(PLUGINSCANWEB2ID)) {
@@ -1040,7 +1066,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(PLUGINSCANWEB2ID)
       && !perfilFilterForm.isGroupByField(PLUGINSCANWEB2ID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PLUGINSCANWEB2ID)) {
@@ -1065,7 +1091,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForTipusFirma(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(TIPUSFIRMA)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForTipusFirma(request, mav, where);
   }
@@ -1076,7 +1102,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(TIPUSFIRMA)
       && !perfilFilterForm.isGroupByField(TIPUSFIRMA)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForTipusFirma(request, mav, Where.AND(where,_w));
@@ -1095,7 +1121,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForApiSimpleID(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(APISIMPLEID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (perfilForm.isReadOnlyField(APISIMPLEID)) {
@@ -1110,7 +1136,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(APISIMPLEID)
       && !perfilFilterForm.isGroupByField(APISIMPLEID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(APISIMPLEID)) {
@@ -1135,7 +1161,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForConfiguracioFirmaID(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(CONFIGURACIOFIRMAID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (perfilForm.isReadOnlyField(CONFIGURACIOFIRMAID)) {
@@ -1150,7 +1176,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(CONFIGURACIOFIRMAID)
       && !perfilFilterForm.isGroupByField(CONFIGURACIOFIRMAID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(CONFIGURACIOFIRMAID)) {
@@ -1175,7 +1201,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForTipusCustodia(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(TIPUSCUSTODIA)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForTipusCustodia(request, mav, where);
   }
@@ -1186,7 +1212,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(TIPUSCUSTODIA)
       && !perfilFilterForm.isGroupByField(TIPUSCUSTODIA)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForTipusCustodia(request, mav, Where.AND(where,_w));
@@ -1205,7 +1231,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPluginArxiuID(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(PLUGINARXIUID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (perfilForm.isReadOnlyField(PLUGINARXIUID)) {
@@ -1220,7 +1246,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(PLUGINARXIUID)
       && !perfilFilterForm.isGroupByField(PLUGINARXIUID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PLUGINARXIUID)) {
@@ -1245,7 +1271,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPluginDocCustodyID(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(PLUGINDOCCUSTODYID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (perfilForm.isReadOnlyField(PLUGINDOCCUSTODYID)) {
@@ -1260,7 +1286,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(PLUGINDOCCUSTODYID)
       && !perfilFilterForm.isGroupByField(PLUGINDOCCUSTODYID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(PLUGINDOCCUSTODYID)) {
@@ -1285,7 +1311,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForUsPerfil(HttpServletRequest request,
        ModelAndView mav, PerfilForm perfilForm, Where where)  throws I18NException {
     if (perfilForm.isHiddenField(USPERFIL)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForUsPerfil(request, mav, where);
   }
@@ -1296,7 +1322,7 @@ public java.lang.Long stringToPK(String value) {
        List<Perfil> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (perfilFilterForm.isHiddenField(USPERFIL)
       && !perfilFilterForm.isGroupByField(USPERFIL)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForUsPerfil(request, mav, Where.AND(where,_w));

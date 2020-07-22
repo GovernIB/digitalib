@@ -76,9 +76,6 @@
             key="doccustodyplugin.menu" /></span>
 
     </a></li>
-    
-
-    
 
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
@@ -86,9 +83,7 @@
       href="<c:url value="/admin/plugincridada/list"/>"> <span
         style="${(fn:contains(url, '/admin/plugincridada'))? "font-weight:bold;" : ""}"><fmt:message
             key="monitor.integracions" /></span>
-
     </a></li>
-
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/fitxersorfes/list"/>"> <span
@@ -96,8 +91,14 @@
             key="fitxers.orfes" /></span>
 
     </a></li>
-    
-    
+
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/admin/avis/list"/>"> <span
+        style="${(fn:contains(url, '/admin/avis'))? "font-weight:bold;" : ""}"><fmt:message
+            key="avis.avis.plural" /></span>
+
+    </a></li>
+
 </div>
 </div>
 <div class="thumbnail" style="margin-top: 20px;">

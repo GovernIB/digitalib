@@ -341,6 +341,17 @@
     
     
     
+    <definition name="avisFormAdmin" extends="admin">
+        <put-attribute name="titol" value="avis.avis" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/avisForm.jsp" />
+    </definition>
+    
+    <definition name="avisListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/avisList.jsp" />
+    </definition>
+    
+    
+    
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">
@@ -393,6 +404,16 @@
     
     <definition name="auditoriaListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaList.jsp" />
+    </definition>
+
+
+    <definition name="avisFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="avis.avis" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/avisForm.jsp" />
+    </definition>
+    
+    <definition name="avisListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/avisList.jsp" />
     </definition>
 
 

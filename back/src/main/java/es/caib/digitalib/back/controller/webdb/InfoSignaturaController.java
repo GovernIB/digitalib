@@ -293,21 +293,27 @@ public class InfoSignaturaController
     if (infoSignaturaForm.getListOfValuesForSignOperation() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForSignOperation(request, mav, infoSignaturaForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       infoSignaturaForm.setListOfValuesForSignOperation(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (infoSignaturaForm.getListOfValuesForSignMode() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForSignMode(request, mav, infoSignaturaForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       infoSignaturaForm.setListOfValuesForSignMode(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (infoSignaturaForm.getListOfValuesForSignaturesTableLocation() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForSignaturesTableLocation(request, mav, infoSignaturaForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       infoSignaturaForm.setListOfValuesForSignaturesTableLocation(_listSKV);
     }
     
@@ -333,6 +339,7 @@ public class InfoSignaturaController
       postValidate(request,infoSignaturaForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         infoSignatura = create(request, infoSignatura);
@@ -427,6 +434,7 @@ public class InfoSignaturaController
       postValidate(request, infoSignaturaForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         infoSignatura = update(request, infoSignatura);
@@ -614,7 +622,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForSignOperation(HttpServletRequest request,
        ModelAndView mav, InfoSignaturaForm infoSignaturaForm, Where where)  throws I18NException {
     if (infoSignaturaForm.isHiddenField(SIGNOPERATION)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForSignOperation(request, mav, where);
   }
@@ -625,7 +633,7 @@ public java.lang.Long stringToPK(String value) {
        List<InfoSignatura> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (infoSignaturaFilterForm.isHiddenField(SIGNOPERATION)
       && !infoSignaturaFilterForm.isGroupByField(SIGNOPERATION)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForSignOperation(request, mav, Where.AND(where,_w));
@@ -645,7 +653,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForSignMode(HttpServletRequest request,
        ModelAndView mav, InfoSignaturaForm infoSignaturaForm, Where where)  throws I18NException {
     if (infoSignaturaForm.isHiddenField(SIGNMODE)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForSignMode(request, mav, where);
   }
@@ -656,7 +664,7 @@ public java.lang.Long stringToPK(String value) {
        List<InfoSignatura> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (infoSignaturaFilterForm.isHiddenField(SIGNMODE)
       && !infoSignaturaFilterForm.isGroupByField(SIGNMODE)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForSignMode(request, mav, Where.AND(where,_w));
@@ -675,7 +683,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForSignaturesTableLocation(HttpServletRequest request,
        ModelAndView mav, InfoSignaturaForm infoSignaturaForm, Where where)  throws I18NException {
     if (infoSignaturaForm.isHiddenField(SIGNATURESTABLELOCATION)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     return getReferenceListForSignaturesTableLocation(request, mav, where);
   }
@@ -686,7 +694,7 @@ public java.lang.Long stringToPK(String value) {
        List<InfoSignatura> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (infoSignaturaFilterForm.isHiddenField(SIGNATURESTABLELOCATION)
       && !infoSignaturaFilterForm.isGroupByField(SIGNATURESTABLELOCATION)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     return getReferenceListForSignaturesTableLocation(request, mav, Where.AND(where,_w));
