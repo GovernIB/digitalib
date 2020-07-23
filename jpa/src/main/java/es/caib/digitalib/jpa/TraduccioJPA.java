@@ -77,6 +77,19 @@ private static final long serialVersionUID = -326205279L;
     return __result;
   }
 
+// EXP  Field:descripcioid | Table: dib_avis | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
+	private Set<AvisJPA> aviss = new HashSet<AvisJPA>(0);
+	public  Set<AvisJPA> getAviss() {
+    return this.aviss;
+  }
+
+	public void setAviss(Set<AvisJPA> aviss) {
+	  this.aviss = aviss;
+	}
+
+
 // EXP  Field:firmatperformatid | Table: dib_configuraciofirma | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "firmatPerFormatID")
@@ -198,6 +211,10 @@ private static final long serialVersionUID = -326205279L;
     if(!"PerfilJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.perfil_descripcioids) || org.hibernate.Hibernate.isInitialized(__jpa.getPerfil_descripcioids())) ) {
       __tmp.setPerfil_descripcioids(PerfilJPA.copyJPA(__jpa.getPerfil_descripcioids(), __alreadyCopied,"TraduccioJPA"));
+    }
+    if(!"AvisJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.aviss) || org.hibernate.Hibernate.isInitialized(__jpa.getAviss())) ) {
+      __tmp.setAviss(AvisJPA.copyJPA(__jpa.getAviss(), __alreadyCopied,"TraduccioJPA"));
     }
     if(!"ConfiguracioFirmaJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioFirma_firmatperformatids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioFirma_firmatperformatids())) ) {

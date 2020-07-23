@@ -85,6 +85,20 @@ public class ConfiguracioGrupQueryPath extends org.fundaciobit.genapp.common.que
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
+  public AvisQueryPath AVISS() {
+    return new AvisQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return ConfiguracioGrupQueryPath.this.getQueryPath() + "aviss" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
   public UsuariPersonaQueryPath USUARIPERSONAS() {
     return new UsuariPersonaQueryPath(new QueryPath() {
       public String getQueryPath() {

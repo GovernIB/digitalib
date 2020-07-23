@@ -278,6 +278,19 @@ private static final long serialVersionUID = -185147282L;
     return __result;
   }
 
+// EXP  Field:configgrupid | Table: dib_avis | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "configuracioGrup")
+	private Set<AvisJPA> aviss = new HashSet<AvisJPA>(0);
+	public  Set<AvisJPA> getAviss() {
+    return this.aviss;
+  }
+
+	public void setAviss(Set<AvisJPA> aviss) {
+	  this.aviss = aviss;
+	}
+
+
 // EXP  Field:configuraciogrupid | Table: dib_usuaripersona | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "configuracioGrup")
@@ -464,6 +477,10 @@ private static final long serialVersionUID = -185147282L;
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
+    if(!"AvisJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.aviss) || org.hibernate.Hibernate.isInitialized(__jpa.getAviss())) ) {
+      __tmp.setAviss(AvisJPA.copyJPA(__jpa.getAviss(), __alreadyCopied,"ConfiguracioGrupJPA"));
+    }
     if(!"UsuariPersonaJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.usuariPersonas) || org.hibernate.Hibernate.isInitialized(__jpa.getUsuariPersonas())) ) {
       __tmp.setUsuariPersonas(UsuariPersonaJPA.copyJPA(__jpa.getUsuariPersonas(), __alreadyCopied,"ConfiguracioGrupJPA"));

@@ -92,3 +92,4 @@
 *.iml
 .idea/
 /apiscanwebsimple/target
+/back/src/main/resources/logicmissatges_en.properties

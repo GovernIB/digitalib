@@ -45,6 +45,25 @@
       </ul>
     </li>
 
+    <%-- Avis --%>
+    <li>
+      <a href="#" role="branch" class="tree-toggle ${fn:contains(url, 'avis/')? "" : "closed"}" data-toggle="branch" data-value="suportada"><span style="${fn:contains(url, 'avis/')? "font-weight: bold;" : ""}"><fmt:message key="avis.avis"/></span></a>
+      <ul class="${fn:contains(url, 'avis/')? "branch in" : "branch"}">
+        <li style="list-style-type: disc; list-style-position: inside;" ><a href="<c:url value="/webdb/avis/new"/>" ><span style="${(fn:contains(url, 'avis/') && fn:contains(url, '/new'))? "font-weight: bold;" : ""}" >
+       <fmt:message var="entityname" key="avis.avis"/>
+       <fmt:message key="genapp.createtitle" >
+         <fmt:param value="${entityname}"/>
+       </fmt:message>
+       </span></a></li>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/avis/list/1"/>" ><span style="${(fn:contains(url, 'avis/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+        <fmt:message key="genapp.listtitle" >
+         <fmt:param value="${entityname}"/>
+       </fmt:message>
+        </span></a>
+        </li>
+      </ul>
+    </li>
+
     <%-- ConfiguracioFirma --%>
     <li>
       <a href="#" role="branch" class="tree-toggle ${fn:contains(url, 'configuracioFirma/')? "" : "closed"}" data-toggle="branch" data-value="suportada"><span style="${fn:contains(url, 'configuracioFirma/')? "font-weight: bold;" : ""}"><fmt:message key="configuracioFirma.configuracioFirma"/></span></a>

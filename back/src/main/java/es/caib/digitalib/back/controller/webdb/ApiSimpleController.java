@@ -259,6 +259,7 @@ public class ApiSimpleController
       postValidate(request,apiSimpleForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         apiSimple = create(request, apiSimple);
@@ -353,6 +354,7 @@ public class ApiSimpleController
       postValidate(request, apiSimpleForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         apiSimple = update(request, apiSimple);

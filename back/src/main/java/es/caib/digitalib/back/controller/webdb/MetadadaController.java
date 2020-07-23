@@ -260,7 +260,9 @@ public class MetadadaController
     if (metadadaForm.getListOfTransaccioForTransaccioID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForTransaccioID(request, mav, metadadaForm, null);
 
+ if (!_listSKV.isEmpty())    {
       java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
       metadadaForm.setListOfTransaccioForTransaccioID(_listSKV);
     }
     
@@ -286,6 +288,7 @@ public class MetadadaController
       postValidate(request,metadadaForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         metadada = create(request, metadada);
@@ -380,6 +383,7 @@ public class MetadadaController
       postValidate(request, metadadaForm, result);
 
       if (result.hasErrors()) {
+        result.reject("error.form");
         return getTileForm();
       } else {
         metadada = update(request, metadada);
@@ -567,7 +571,7 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForTransaccioID(HttpServletRequest request,
        ModelAndView mav, MetadadaForm metadadaForm, Where where)  throws I18NException {
     if (metadadaForm.isHiddenField(TRANSACCIOID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _where = null;
     if (metadadaForm.isReadOnlyField(TRANSACCIOID)) {
@@ -582,7 +586,7 @@ public java.lang.Long stringToPK(String value) {
        List<Metadada> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (metadadaFilterForm.isHiddenField(TRANSACCIOID)
       && !metadadaFilterForm.isGroupByField(TRANSACCIOID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
     }
     Where _w = null;
     if (!_groupByItemsMap.containsKey(TRANSACCIOID)) {
