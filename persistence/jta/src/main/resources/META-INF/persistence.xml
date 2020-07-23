@@ -32,6 +32,8 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
         <properties>
             <property name="hibernate.dialect" value="${es.caib.digitalib.hibernate.dialect}" />
             <property name="hibernate.query.substitutions" value="${es.caib.digitalib.hibernate.query.substitutions}"/>
+			<property name="hibernate.show_sql" value="${es.caib.digitalib.hibernate.show_sql}"/>
+			<property name="hibernate.format_sql" value="${es.caib.digitalib.hibernate.format_sql}"/>
         </properties>
     </persistence-unit>
 </persistence>
