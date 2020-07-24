@@ -9,9 +9,9 @@
   <c:forEach items="${missatges}" var="tipusList" varStatus="status">
     
       <c:forEach items="${tipusList.value}" var="msg" >
-      <div class="alert alert-${tipusList.key}">
+      <div class="alert alert-${tipusList.key} text-center">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-      ${msg}
+          <span style="font-size: 20px; font-weight: bolder;">${msg}</span>
       </div>
       </c:forEach>
     
