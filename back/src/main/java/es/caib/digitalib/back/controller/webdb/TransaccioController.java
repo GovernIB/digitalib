@@ -593,7 +593,8 @@ public class TransaccioController
         afm.postPersistFiles(); // FILE
         createMessageSuccess(request, "success.modification", transaccio.getTransaccioID());
         status.setComplete();
-        return getRedirectWhenModified(request, transaccioForm, null);
+        String r = getRedirectWhenModified(request, transaccioForm, null);
+        return r;
       }
     } catch (Throwable __e) {
       afm.processErrorFilesWithoutThrowException(); // FILE

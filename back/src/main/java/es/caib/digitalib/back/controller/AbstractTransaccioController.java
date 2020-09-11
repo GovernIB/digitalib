@@ -101,6 +101,77 @@ public abstract class AbstractTransaccioController extends TransaccioController 
   public abstract boolean isAdmin();
 
   public abstract int getTipusPerfil();
+  
+  
+  
+
+/*
+  // XYZ ZZZ
+  @RequestMapping(value = "/{transaccioID}/edit", method = RequestMethod.GET)
+  public ModelAndView editarTransaccioGet(@PathVariable("transaccioID") java.lang.Long transaccioID,
+      HttpServletRequest request,
+      HttpServletResponse response) throws I18NException {
+    
+    
+    ModelAndView mav = super.editAndViewTransaccioGet(transaccioID,
+        request, response, false);
+    
+     Map<String, Object> map =  mav.getModel();
+        
+     log.info("\n\n\n ==============================  GET ::  INICI ===================\n");
+     for (Map.Entry<String, Object> e : map.entrySet()) {
+        log.info(e.getKey() + " => " + e.getValue());
+    }
+     
+     log.info(" ============================== GET :: FINAL ===================\n");
+     
+        
+      return mav;
+  }
+  
+  
+  // XYZ ZZZ
+  @Override
+  @RequestMapping(value = "/{transaccioID}/edit", method = RequestMethod.POST)
+  public String editarTransaccioPost(@ModelAttribute @Valid TransaccioForm transaccioForm,
+      BindingResult result, SessionStatus status, HttpServletRequest request,
+      HttpServletResponse response) throws I18NException {
+  
+    log.info("\n ==============================  POST OK :: BEGIN ===================\n" 
+     +" TF => " + transaccioForm        
+        + "\n");
+    
+    
+    String r = super.editarTransaccioPost(transaccioForm, result, status, request, response);
+    
+    
+    log.info("\n ==============================  POST OK :: FINAL " + r + " ===================\n");
+    
+    return r;
+    
+  }
+  
+  
+  
+  
+
+  // XYZ ZZZ
+  @RequestMapping(value = "/{transaccioID}/null") // , method = RequestMethod.POST
+  public String editarTransaccioPostNull(@ModelAttribute @Valid TransaccioForm transaccioForm,
+      //BindingResult result, SessionStatus status,
+      @PathVariable("transaccioID") java.lang.Long transaccioID,
+      HttpServletRequest request,
+      HttpServletResponse response) throws I18NException {
+    
+    log.error("\n  PASSA PER  editarTransaccioPostNULL  \n");
+    
+    //return this.editarTransaccioPost(transaccioForm, result, status, request, response);
+    
+    return "redirect:" + getContextWeb() + "/" + transaccioID + "/edit" ;
+  
+  }
+  */
+
 
   @Override
   public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {

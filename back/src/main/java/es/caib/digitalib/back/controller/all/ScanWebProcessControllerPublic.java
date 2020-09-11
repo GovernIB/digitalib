@@ -96,7 +96,7 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
     // final boolean fullView = (transaccio.getView() ==
     // ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN);
 
-    ModelAndView mav = startScanWebProcess(request, transaccio, isPublic, urlFinal, urlBase);
+    ModelAndView mav = startScanWebProcess(request, response, transaccio, isPublic, urlFinal, urlBase);
 
     // , fullView, Math.abs(transaccio.getPerfil().getUsPerfil()), isPublic);
 

@@ -96,7 +96,8 @@ public class ApiScanWebSimpleExampleConsole {
       {
 
         final String profileCode = scanWebProfileSelected.getCode();
-        final int view = ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN;
+        final int view = ScanWebSimpleGetTransactionIdRequest.VIEW_IFRAME;
+        //ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN;
 
         String funcionariUsername = "u00666";
 

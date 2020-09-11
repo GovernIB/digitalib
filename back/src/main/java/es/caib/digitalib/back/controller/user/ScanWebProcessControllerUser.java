@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
@@ -94,9 +95,8 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
   public static final String SCANWEB_SESSION_TRANSACCIO = "SCANWEB_SESSION_TRANSACCIO";
 
   @RequestMapping(value = "/start", method = RequestMethod.POST)
-  public ModelAndView scanWebGet(HttpServletRequest request,
-
-  @RequestParam("perfil_tipus") int tipusPerfil, @RequestParam("perfil_pos") int pos,
+  public ModelAndView scanWebGet(HttpServletRequest request, HttpServletResponse response,
+      @RequestParam("perfil_tipus") int tipusPerfil, @RequestParam("perfil_pos") int pos,
       @RequestParam("url_user") String baseUrlFull
   // , @PathVariable("baseURL64") String baseURL64
   ) throws Exception {
@@ -318,7 +318,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
       // final boolean fullView = (transaction.getView() ==
       // ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN);
 
-      ModelAndView mav = startScanWebProcess(request, transaction, isPublic, urlFinal, baseUrl);
+      ModelAndView mav = startScanWebProcess(request, response,  transaction, isPublic, urlFinal, baseUrl);
       // XYZ ZZZ
       // , swc, baseUrl,
       // AbstractScanWebModuleController.getContextWeb(isPublic),

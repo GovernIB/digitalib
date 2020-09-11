@@ -1,7 +1,10 @@
 package es.caib.digitalib.back.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.ejb.EJB;
@@ -18,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import es.caib.digitalib.back.controller.AbstractScanWebProcessController.UrlSelectScanModule;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.jpa.TransaccioJPA;
@@ -34,8 +38,8 @@ import es.caib.digitalib.utils.Constants;
  * @author anadal(u80067)
  *
  */
-public abstract class AbstractFirmaArxiuParametersController extends
-    AbstractTransaccioController {
+public abstract class AbstractFirmaArxiuParametersController
+    extends AbstractTransaccioController {
 
   public static final String CONTEXTWEB_PUBLIC = "/public/firmaarxiuparameters";
 
@@ -46,11 +50,10 @@ public abstract class AbstractFirmaArxiuParametersController extends
 
   @EJB(mappedName = ScanWebModuleLocal.JNDI_NAME)
   protected ScanWebModuleLocal scanWebModuleEjb;
-  
 
   @EJB(mappedName = TransaccioPublicLogicaLocal.JNDI_NAME)
   protected TransaccioPublicLogicaLocal transaccioLogicaEjb;
-  
+
   @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
   protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
@@ -58,13 +61,13 @@ public abstract class AbstractFirmaArxiuParametersController extends
   public String getPerfilInfoContextWeb() {
     return null;
   }
-  
+
   @Override
   public boolean isAdmin() {
     // No serveix per res
     return false;
   }
-  
+
   @Override
   public int getTipusPerfil() {
     return Constants.PERFIL_US_ALL_INFO; // No s'utilitza per res
@@ -115,19 +118,19 @@ public abstract class AbstractFirmaArxiuParametersController extends
        * transaccioForm.addReadOnlyField(TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID);
        */
 
-//    hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANIF);
-//    hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANOM);
+      // hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANIF);
+      // hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANOM);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMDOCESTATELABORA);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMINTERESSATS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORIGEN);
-//      hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORGANS);
+      // hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORGANS);
 
-    if (Configuracio.isCAIB()) {
-      transaccioForm.addReadOnlyField(ARXIUREQPARAMDOCESTATELABORA);
-      transaccioForm.getTransaccio().setArxiuReqParamDocEstatElabora("EE03");
-    }
-      
+      if (Configuracio.isCAIB()) {
+        transaccioForm.addReadOnlyField(ARXIUREQPARAMDOCESTATELABORA);
+        transaccioForm.getTransaccio().setArxiuReqParamDocEstatElabora("EE03");
+      }
+
     }
 
     transaccioForm.setTitleCode("dadesrequerides");
@@ -169,47 +172,46 @@ public abstract class AbstractFirmaArxiuParametersController extends
 
       Field<?>[] reqFields = { TransaccioFields.ARXIUREQPARAMDOCESTATELABORA,
           TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS, TransaccioFields.ARXIUREQPARAMORIGEN
-      // TransaccioFields.ARXIUREQPARAMCIUTADANIF, No és obligatori
-      // TransaccioFields.ARXIUREQPARAMCIUTADANOM, No és obligatori
-      // TransaccioFields.ARXIUREQPARAMINTERESSATS, No és obligatori
+          // TransaccioFields.ARXIUREQPARAMCIUTADANIF, No és obligatori
+          // TransaccioFields.ARXIUREQPARAMCIUTADANOM, No és obligatori
+          // TransaccioFields.ARXIUREQPARAMINTERESSATS, No és obligatori
       };
 
       for (Field<?> field : reqFields) {
         ValidationUtils.rejectIfEmptyOrWhitespace(result, field.fullName,
             "genapp.validation.required", new Object[] { I18NUtils.tradueix(field.fullName) });
       }
-      
-      
+
       if (isPublic()) {
         // Si la petició arriba des d'APP llavors, requerim que ens afegeixin in organ
-        ValidationUtils.rejectIfEmptyOrWhitespace(result, TransaccioFields.ARXIUREQPARAMORGANS.fullName,
-            "genapp.validation.required", new Object[] { I18NUtils.tradueix(TransaccioFields.ARXIUREQPARAMORGANS.fullName) });
+        ValidationUtils.rejectIfEmptyOrWhitespace(result,
+            TransaccioFields.ARXIUREQPARAMORGANS.fullName, "genapp.validation.required",
+            new Object[] {
+                I18NUtils.tradueix(TransaccioFields.ARXIUREQPARAMORGANS.fullName) });
       }
-      
-      
+
     }
 
   }
-  
-  
+
   @Override
   public TransaccioJPA update(HttpServletRequest request, TransaccioJPA transaccio)
-      throws Exception,I18NException, I18NValidationException {
+      throws Exception, I18NException, I18NValidationException {
 
     final String dir3 = transaccio.getArxiuReqParamOrgans();
-    
-    log.info("\n\n  XYZ ZZZZZ  PRE UPDATE: dir3 -> ]" + dir3 + "[" );
 
-    if (!isPublic() &&  (dir3== null || dir3.isEmpty())) {
-       // Obtenim el codidir3 per defecte de la ConfiguracioGrup
-       transaccio.setArxiuReqParamOrgans(
-        LoginInfo.getInstance().getUsuariPersona().getConfiguracioGrup().getCodiDir3PerDefecte());
+    log.info("\n\n  XYZ ZZZZZ  PRE UPDATE: dir3 -> ]" + dir3 + "[");
+
+    if (!isPublic() && (dir3 == null || dir3.isEmpty())) {
+      // Obtenim el codidir3 per defecte de la ConfiguracioGrup
+      transaccio.setArxiuReqParamOrgans(LoginInfo.getInstance().getUsuariPersona()
+          .getConfiguracioGrup().getCodiDir3PerDefecte());
     }
 
     return super.update(request, transaccio);
   }
- 
-  
+
+  public static long lastCheck = 0;
 
   @Override
   public String getRedirectWhenModified(HttpServletRequest request,
@@ -220,21 +222,85 @@ public abstract class AbstractFirmaArxiuParametersController extends
       final boolean isApp = (transaccioForm.getTransaccio().getUsuariAplicacioId() != null);
       final String additionalInfo = null;
       final int auditType = Constants.AUDIT_TYPE_FINISH_INSERT_DATA;
-     
-        auditoriaLogicaEjb.audita(transaccioForm.getTransaccio(), 
-            msg, additionalInfo, auditType, isApp);
-      
+
+      auditoriaLogicaEjb.audita(transaccioForm.getTransaccio(), msg, additionalInfo, auditType,
+          isApp);
+
       request.getSession().removeAttribute(HtmlUtils.MISSATGES);
-      return "redirect:"
-          + request.getSession().getAttribute(
-              AbstractScanWebProcessController.SESSION_URL_TO_SELECT_SCANWEB_MODULE);
+
+      String url = (String) request.getSession()
+          .getAttribute(AbstractScanWebProcessController.SESSION_URL_TO_SELECT_SCANWEB_MODULE);
+
+      log.info(
+          " XYZ ZZZ ZZZ ============== AbstractFirmaArxiuParametersController::getRedirectWhenModified GET SESSION_URL_TO_SELECT_SCANWEB_MODULE => "
+              + url);
+
+      log.info(
+          " XYZ ZZZ ZZZ ============== AbstractFirmaArxiuParametersController::getTransactionId => "
+              + transaccioForm.getTransaccio().getTransaccioID());
+      synchronized (AbstractScanWebProcessController.transID2Url) {
+
+        if (url == null) {
+          final Map<Long, UrlSelectScanModule> transID2Url = AbstractScanWebProcessController.transID2Url;
+          AbstractScanWebProcessController.UrlSelectScanModule urlInfo;
+          urlInfo = transID2Url.get(transaccioForm.getTransaccio().getTransaccioID());
+
+          if (urlInfo == null) {
+
+            if (transID2Url.isEmpty()) {
+              log.info(
+                  " XYZ ZZZ ZZZ ============== AbstractFirmaArxiuParametersController:: ES BUIT !!!!!");
+            } else {
+              for (Long k : transID2Url.keySet()) {
+                log.info(" XYZ ZZZ  KEYS[" + k + "]");
+              }
+            }
+          } else {
+            url = urlInfo.urlToSelectPluginPage;
+          }
+        }
+
+        AbstractScanWebProcessController.transID2Url
+            .remove(transaccioForm.getTransaccio().getTransaccioID());
+
+        long now = System.currentTimeMillis();
+        if (lastCheck < (now - 5 * 60000)) { // Cada 2 minuts farem neteja
+
+          List<Long> aEsborrar = new ArrayList<Long>();
+          for (Map.Entry<Long, UrlSelectScanModule> info : AbstractScanWebProcessController.transID2Url
+              .entrySet()) {
+            final long MINUTS_30 = 1000 * 60 * 30;
+            if ((info.getValue().startDate + MINUTS_30) < now) {
+              // L'esborram
+              aEsborrar.add(info.getKey());
+            }
+
+          }
+
+          for (Long id : aEsborrar) {
+            AbstractScanWebProcessController.transID2Url.remove(id);
+          }
+
+          lastCheck = now;
+
+        }
+      }
+
+      log.info(
+          " XYZ ZZZ ZZZ ============== AbstractFirmaArxiuParametersController::getRedirectWhenModified FINAL => "
+              + url);
+
+      return "redirect:" + url;
     } else {
+      // log.info("\n =====================
+      // AbstractFirmaArxiuParametersController::getTileForm() " + getTileForm());
       return getTileForm();
     }
   }
 
   @Override
-  public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long transaccioID) {
+  public String getRedirectWhenCancel(HttpServletRequest request,
+      java.lang.Long transaccioID) {
 
     String transaccioWebId = null;
     try {
@@ -251,20 +317,20 @@ public abstract class AbstractFirmaArxiuParametersController extends
       swc = scanWebModuleEjb.getScanWebConfig(request, transaccioWebId);
 
       swc.getStatus().setStatus(ScanWebStatus.STATUS_CANCELLED);
-      
+
       // AUDITA
       final String msg = I18NUtils.tradueix("transaccio.firma.insercio.dades.cancelat");
       final boolean isApp = isPublic();
       final String additionalInfo = null;
       final int auditType = Constants.AUDIT_TYPE_CANCEL_USER;
-     
-      auditoriaLogicaEjb.audita(transaccioLogicaEjb, (long)transaccioID, 
-            msg, additionalInfo, auditType, isApp);
-      
+
+      auditoriaLogicaEjb.audita(transaccioLogicaEjb, (long) transaccioID, msg, additionalInfo,
+          auditType, isApp);
+
     }
 
-    String finalURL = AbstractScanWebProcessController
-        .getFinalURL("", transaccioWebId, isPublic());
+    String finalURL = AbstractScanWebProcessController.getFinalURL("", transaccioWebId,
+        isPublic());
 
     log.warn("XYZ ZZZ URL despres de CANCEL.LAR: " + finalURL);
 
@@ -280,7 +346,7 @@ public abstract class AbstractFirmaArxiuParametersController extends
 
   @Override
   public String getSessionAttributeFilterForm() {
-    return "FirmaArxiuParameters_FilterForm";
+    return "FirmaArxiuParameters_FilterForm_" + isPublic();
   }
 
   @Override

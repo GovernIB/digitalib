@@ -5,8 +5,10 @@ import java.nio.charset.Charset;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -187,85 +189,87 @@ public abstract class AbstractScanWebProcessController {
 
             // Recollir Metadades del PLugin
             List<Metadata> metadades = swc.getScannedFiles().get(0).getMetadatas();
-            log.info("XYZ ZZZ   Metadades transacció " + transaccio.getTransaccioID());
-
-            for (Metadata metadata : metadades) {
-              final String name = metadata.getKey();
-              final String value = metadata.getValue();
-
-              log.info("XYZ ZZZ   Metadada[" + name + "] => " + value);
-
-              if (MetadataConstants.PAPER_SIZE.equals(name)) {
-                transaccio.setInfoScanPaperSize(value);
-              } else if (MetadataConstants.OCR.equals(name)) {
-                if ("true".equalsIgnoreCase(value)) {
-                  transaccio.setInfoScanOcr(true);
-                } else if ("false".equalsIgnoreCase(value)) {
-                  transaccio.setInfoScanOcr(false);
-                } else {
-                  transaccio.setInfoScanOcr(null);
-                }
-              } else if (MetadataConstants.FUNCTIONARY_FULLNAME.equals(name)) {
-                if (isEmpty(transaccio.getSignParamFuncionariNom())) {
-                  transaccio.setSignParamFuncionariNom(value);
-                }
-              } else if (MetadataConstants.FUNCTIONARY_USERNAME.equals(name)) {
-                if (isEmpty(transaccio.getFuncionariUsername())) {
-                  transaccio.setFuncionariUsername(value);
-                }
-              } else if (MetadataConstants.FUNCTIONARY_ADMINISTRATIONID.equals(name)) {
-                if (isEmpty(transaccio.getSignParamFuncionariNif())) {
-                  transaccio.setSignParamFuncionariNif(value);
-                }
-              } else if (MetadataConstants.EEMGDE_RESOLUCION.equals(name)) {
-                try {
-                  transaccio.setInfoScanResolucioPpp(Integer.valueOf(value));
-                } catch (NumberFormatException nfe) {
-                  log.error("Error processant Resolution: " + name + " => ]" + value + "[",
-                      nfe);
-                }
-
-              } else if (MetadataConstants.EEMGDE_PROFUNDIDAD_COLOR.equals(name)) {
-                try {
-                  int bits = Integer.valueOf(value);
-                  if (bits == 8) {
-                    transaccio.setInfoScanPixelType(
-                        MetadataConstants.ProfundidadColorConstants.GRAY);
-                  } else if (bits < 8) {
-                    transaccio
-                        .setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.BW);
+            if (metadades != null) {
+              log.info("XYZ ZZZ   Metadades transacció " + transaccio.getTransaccioID());
+  
+              for (Metadata metadata : metadades) {
+                final String name = metadata.getKey();
+                final String value = metadata.getValue();
+  
+                log.info("XYZ ZZZ   Metadada[" + name + "] => " + value);
+  
+                if (MetadataConstants.PAPER_SIZE.equals(name)) {
+                  transaccio.setInfoScanPaperSize(value);
+                } else if (MetadataConstants.OCR.equals(name)) {
+                  if ("true".equalsIgnoreCase(value)) {
+                    transaccio.setInfoScanOcr(true);
+                  } else if ("false".equalsIgnoreCase(value)) {
+                    transaccio.setInfoScanOcr(false);
                   } else {
-                    transaccio.setInfoScanPixelType(
-                        MetadataConstants.ProfundidadColorConstants.COLOR);
+                    transaccio.setInfoScanOcr(null);
                   }
-                } catch (NumberFormatException nfe) {
-                  log.error("Error processant PixelType: " + name + " => ]" + value + "[",
-                      nfe);
+                } else if (MetadataConstants.FUNCTIONARY_FULLNAME.equals(name)) {
+                  if (isEmpty(transaccio.getSignParamFuncionariNom())) {
+                    transaccio.setSignParamFuncionariNom(value);
+                  }
+                } else if (MetadataConstants.FUNCTIONARY_USERNAME.equals(name)) {
+                  if (isEmpty(transaccio.getFuncionariUsername())) {
+                    transaccio.setFuncionariUsername(value);
+                  }
+                } else if (MetadataConstants.FUNCTIONARY_ADMINISTRATIONID.equals(name)) {
+                  if (isEmpty(transaccio.getSignParamFuncionariNif())) {
+                    transaccio.setSignParamFuncionariNif(value);
+                  }
+                } else if (MetadataConstants.EEMGDE_RESOLUCION.equals(name)) {
+                  try {
+                    transaccio.setInfoScanResolucioPpp(Integer.valueOf(value));
+                  } catch (NumberFormatException nfe) {
+                    log.error("Error processant Resolution: " + name + " => ]" + value + "[",
+                        nfe);
+                  }
+  
+                } else if (MetadataConstants.EEMGDE_PROFUNDIDAD_COLOR.equals(name)) {
+                  try {
+                    int bits = Integer.valueOf(value);
+                    if (bits == 8) {
+                      transaccio.setInfoScanPixelType(
+                          MetadataConstants.ProfundidadColorConstants.GRAY);
+                    } else if (bits < 8) {
+                      transaccio
+                          .setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.BW);
+                    } else {
+                      transaccio.setInfoScanPixelType(
+                          MetadataConstants.ProfundidadColorConstants.COLOR);
+                    }
+                  } catch (NumberFormatException nfe) {
+                    log.error("Error processant PixelType: " + name + " => ]" + value + "[",
+                        nfe);
+                  }
+                } else if (MetadataConstants.ENI_TIPO_DOCUMENTAL.equals(name)) {
+  
+                  if (transaccio.getArxiuReqParamDocumentTipus() == null) {
+                    transaccio.setArxiuReqParamDocumentTipus(value);
+                  }
+                } else if (MetadataConstants.ENI_IDIOMA.equals(name)
+                    || MetadataConstants.EEMGDE_IDIOMA.equals(name)) {
+  
+                  if (transaccio.getSignParamLanguageDoc() == null) {
+                    transaccio.setSignParamLanguageDoc(value);
+                  }
+                } else if (MetadataConstants.ENI_FECHA_INICIO.equals(name)) {
+                  // DATA CAPTURA
+                  try {
+                    Date data = ISO8601.ISO8601ToDate(value);
+                    transaccio.setInfoScanDataCaptura(new Timestamp(data.getTime()));
+                  } catch (ParseException e) {
+                    log.error("Error processant DataCaptura(FechaInicio): " + name + " => ]"
+                        + value + "[", e);
+                  }
+  
+                } else {
+                  // afegir a taula de metadades
+                  metadadaLogicaEjb.create(transaccio.getTransaccioID(), name, value);
                 }
-              } else if (MetadataConstants.ENI_TIPO_DOCUMENTAL.equals(name)) {
-
-                if (transaccio.getArxiuReqParamDocumentTipus() == null) {
-                  transaccio.setArxiuReqParamDocumentTipus(value);
-                }
-              } else if (MetadataConstants.ENI_IDIOMA.equals(name)
-                  || MetadataConstants.EEMGDE_IDIOMA.equals(name)) {
-
-                if (transaccio.getSignParamLanguageDoc() == null) {
-                  transaccio.setSignParamLanguageDoc(value);
-                }
-              } else if (MetadataConstants.ENI_FECHA_INICIO.equals(name)) {
-                // DATA CAPTURA
-                try {
-                  Date data = ISO8601.ISO8601ToDate(value);
-                  transaccio.setInfoScanDataCaptura(new Timestamp(data.getTime()));
-                } catch (ParseException e) {
-                  log.error("Error processant DataCaptura(FechaInicio): " + name + " => ]"
-                      + value + "[", e);
-                }
-
-              } else {
-                // afegir a taula de metadades
-                metadadaLogicaEjb.create(transaccio.getTransaccioID(), name, value);
               }
             }
 
@@ -604,6 +608,25 @@ public abstract class AbstractScanWebProcessController {
   }
 
   public abstract boolean isPublic();
+  
+  
+  
+  public static class UrlSelectScanModule {
+    
+      final long startDate;
+      
+      final String urlToSelectPluginPage;
+
+      public UrlSelectScanModule(String urlToSelectPluginPage) {
+        super();
+        this.startDate = System.currentTimeMillis();
+        this.urlToSelectPluginPage = urlToSelectPluginPage;
+      }
+      
+  }
+  
+  
+  public static final Map<Long,UrlSelectScanModule> transID2Url = new HashMap<Long, UrlSelectScanModule>();
 
   /**
    * 
@@ -613,7 +636,7 @@ public abstract class AbstractScanWebProcessController {
    * @return
    * @throws Exception
    */
-  public ModelAndView startScanWebProcess(HttpServletRequest request,
+  public ModelAndView startScanWebProcess(HttpServletRequest request, HttpServletResponse response,
       TransaccioJPA transaction, boolean isPublic, String urlFinal, String urlBase)
       throws Exception, I18NException {
 
@@ -640,6 +663,17 @@ public abstract class AbstractScanWebProcessController {
 
     request.getSession().setAttribute(SESSION_URL_TO_SELECT_SCANWEB_MODULE,
         urlToSelectPluginPage);
+    
+    //if (log.isDebugEnabled()) 
+    { // XYZ ZZZ
+      log.info(" SET SESSION_URL_TO_SELECT_SCANWEB_MODULE => " + urlToSelectPluginPage);
+      log.info(" getTransaccioID => " +  transaction.getTransaccioID());
+    }
+
+    synchronized (transID2Url) {
+      transID2Url.put(transaction.getTransaccioID(), new UrlSelectScanModule(urlToSelectPluginPage));
+    }
+
     final String urlToRequestFirmaArxiuParameters = urlBase
         + (isPublic ? AbstractFirmaArxiuParametersController.CONTEXTWEB_PUBLIC
             : AbstractFirmaArxiuParametersController.CONTEXTWEB_USER)
@@ -651,5 +685,6 @@ public abstract class AbstractScanWebProcessController {
 
     return mav;
   }
+  
 
 }
