@@ -53,6 +53,7 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final LongField PERFILID = new LongField(_TABLE_MODEL, "perfilID", "perfilid");
 	 public static final LongField INFOSIGNATURAID = new LongField(_TABLE_MODEL, "infoSignaturaID", "infosignaturaid");
 	 public static final LongField INFOCUSTODYID = new LongField(_TABLE_MODEL, "infoCustodyID", "infocustodyid");
+	 public static final LongField TRANSACCIOMULTIPLEID = new LongField(_TABLE_MODEL, "transaccioMultipleID", "transmultipleid");
 
 
   public static final Field<?>[] ALL_TRANSACCIO_FIELDS = {
@@ -96,7 +97,8 @@ public interface TransaccioFields extends java.io.Serializable {
     ARXIUOPTPARAMCUSTODYOREXPEDIENTID,
     PERFILID,
     INFOSIGNATURAID,
-    INFOCUSTODYID
+    INFOCUSTODYID,
+    TRANSACCIOMULTIPLEID
   };
 
 

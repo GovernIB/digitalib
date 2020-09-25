@@ -175,6 +175,7 @@
             <url-pattern>/user/scanwebmodule/requestPlugin/*</url-pattern>
             <!--  REST Autenticació per Codi -->
             <url-pattern>/common/rest/apiscanwebsimple/v1/*</url-pattern>
+            <url-pattern>/common/rest/apimassivescanwebsimple/v1/*</url-pattern>
             <!--  ScanWeb de peticions via REST -->            
             <url-pattern>/public/*</url-pattern>
         </web-resource-collection>

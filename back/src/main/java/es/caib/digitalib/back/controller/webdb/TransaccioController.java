@@ -74,6 +74,10 @@ public class TransaccioController
   @Autowired
   protected InfoCustodyRefList infoCustodyRefList;
 
+  // References 
+  @Autowired
+  protected TransaccioMultipleRefList transaccioMultipleRefList;
+
   /**
    * Llistat de totes Transaccio
    */
@@ -297,6 +301,16 @@ public class TransaccioController
       };
     }
 
+    // Field transaccioMultipleID
+    {
+      _listSKV = getReferenceListForTransaccioMultipleID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfTransaccioMultipleForTransaccioMultipleID(_tmp);
+      if (filterForm.getGroupByFields().contains(TRANSACCIOMULTIPLEID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, TRANSACCIOMULTIPLEID, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -322,6 +336,7 @@ public class TransaccioController
     __mapping.put(PERFILID, filterForm.getMapOfPerfilForPerfilID());
     __mapping.put(INFOSIGNATURAID, filterForm.getMapOfInfoSignaturaForInfoSignaturaID());
     __mapping.put(INFOCUSTODYID, filterForm.getMapOfInfoCustodyForInfoCustodyID());
+    __mapping.put(TRANSACCIOMULTIPLEID, filterForm.getMapOfTransaccioMultipleForTransaccioMultipleID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -459,6 +474,15 @@ public class TransaccioController
     }
       transaccioForm.setListOfInfoCustodyForInfoCustodyID(_listSKV);
     }
+    // Comprovam si ja esta definida la llista
+    if (transaccioForm.getListOfTransaccioMultipleForTransaccioMultipleID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForTransaccioMultipleID(request, mav, transaccioForm, null);
+
+ if (!_listSKV.isEmpty())    {
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
+      transaccioForm.setListOfTransaccioMultipleForTransaccioMultipleID(_listSKV);
+    }
     
   }
 
@@ -593,8 +617,7 @@ public class TransaccioController
         afm.postPersistFiles(); // FILE
         createMessageSuccess(request, "success.modification", transaccio.getTransaccioID());
         status.setComplete();
-        String r = getRedirectWhenModified(request, transaccioForm, null);
-        return r;
+        return getRedirectWhenModified(request, transaccioForm, null);
       }
     } catch (Throwable __e) {
       afm.processErrorFilesWithoutThrowException(); // FILE
@@ -1163,6 +1186,46 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForInfoCustodyID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return infoCustodyRefList.getReferenceList(InfoCustodyFields.INFOCUSTODYID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTransaccioMultipleID(HttpServletRequest request,
+       ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
+    if (transaccioForm.isHiddenField(TRANSACCIOMULTIPLEID)) {
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
+    }
+    Where _where = null;
+    if (transaccioForm.isReadOnlyField(TRANSACCIOMULTIPLEID)) {
+      _where = TransaccioMultipleFields.TRANSMULTIPLEID.equal(transaccioForm.getTransaccio().getTransaccioMultipleID());
+    }
+    return getReferenceListForTransaccioMultipleID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTransaccioMultipleID(HttpServletRequest request,
+       ModelAndView mav, TransaccioFilterForm transaccioFilterForm,
+       List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (transaccioFilterForm.isHiddenField(TRANSACCIOMULTIPLEID)
+      && !transaccioFilterForm.isGroupByField(TRANSACCIOMULTIPLEID)) {
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(TRANSACCIOMULTIPLEID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Transaccio _item : list) {
+        if(_item.getTransaccioMultipleID() == null) { continue; };
+        _pkList.add(_item.getTransaccioMultipleID());
+        }
+        _w = TransaccioMultipleFields.TRANSMULTIPLEID.in(_pkList);
+      }
+    return getReferenceListForTransaccioMultipleID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTransaccioMultipleID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return transaccioMultipleRefList.getReferenceList(TransaccioMultipleFields.TRANSMULTIPLEID, where );
   }
 
 

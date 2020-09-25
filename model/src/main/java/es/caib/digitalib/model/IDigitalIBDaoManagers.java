@@ -20,6 +20,7 @@ public interface IDigitalIBDaoManagers {
 	public IPluginCridadaManager getPluginCridadaManager();
 	public ITraduccioManager getTraduccioManager();
 	public ITransaccioManager getTransaccioManager();
+	public ITransaccioMultipleManager getTransaccioMultipleManager();
 	public IUsuariAplicacioManager getUsuariAplicacioManager();
 	public IUsuariPersonaManager getUsuariPersonaManager();
 

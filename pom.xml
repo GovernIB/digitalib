@@ -9,6 +9,7 @@
 
   <modules>	
     <module>apiscanwebsimple</module>
+    <module>apimassivescanwebsimple</module>
     <module>model</module>
     <module>jpa</module>
     <module>testjpa</module>

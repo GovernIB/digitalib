@@ -93,3 +93,17 @@
 .idea/
 /apiscanwebsimple/target
 /back/src/main/resources/logicmissatges_en.properties
+/apimassivescanwebsimple/apimassivescanwebsimple-api/.project
+/apimassivescanwebsimple/apimassivescanwebsimple-api/.settings
+/apimassivescanwebsimple/apimassivescanwebsimple-api/.classpath
+/apimassivescanwebsimple/apimassivescanwebsimple-example-console/.settings
+/apimassivescanwebsimple/apimassivescanwebsimple-example-console/.classpath
+/apimassivescanwebsimple/apimassivescanwebsimple-example-console/.project
+/apimassivescanwebsimple/apimassivescanwebsimple-example-console/target
+/apimassivescanwebsimple/apimassivescanwebsimple-jersey/scanfile.pdf
+/apimassivescanwebsimple/apimassivescanwebsimple-jersey/.settings
+/apimassivescanwebsimple/apimassivescanwebsimple-jersey/target
+/apimassivescanwebsimple/apimassivescanwebsimple-jersey/.classpath
+/apimassivescanwebsimple/apimassivescanwebsimple-jersey/.project
+/apimassivescanwebsimple/apimassivescanwebsimple-jersey/detached_sign_scanfile.sig
+/apimassivescanwebsimple/compil.bat

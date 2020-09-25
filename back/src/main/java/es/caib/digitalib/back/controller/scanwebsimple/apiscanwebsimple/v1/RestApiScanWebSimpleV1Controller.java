@@ -1,4 +1,4 @@
-package es.caib.digitalib.back.controller.scanwebsimple.v1;
+package es.caib.digitalib.back.controller.scanwebsimple.apiscanwebsimple.v1;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -53,6 +53,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
+import es.caib.digitalib.back.controller.scanwebsimple.RestApiScanWebUtils;
 import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.InfoSignaturaJPA;
@@ -1066,6 +1067,11 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils
   @Override
   public void closeTransaction(String transactionID) throws Exception {
 
+    try {
+      cleanExpiredTransactions();
+    } catch(Throwable th) {      
+    }
+    
   }
 
   public static long lastCheckExpiredTransaccions = 0;

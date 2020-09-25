@@ -204,6 +204,19 @@ private static final long serialVersionUID = -252813913L;
 	}
 
 
+// EXP  Field:fitxerescanejatid | Table: dib_transmultiple | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxerEscanejatID")
+	private Set<TransaccioMultipleJPA> transaccioMultiples = new HashSet<TransaccioMultipleJPA>(0);
+	public  Set<TransaccioMultipleJPA> getTransaccioMultiples() {
+    return this.transaccioMultiples;
+  }
+
+	public void setTransaccioMultiples(Set<TransaccioMultipleJPA> transaccioMultiples) {
+	  this.transaccioMultiples = transaccioMultiples;
+	}
+
+
 
   @javax.persistence.Transient
   javax.activation.DataHandler data;
@@ -296,6 +309,10 @@ private static final long serialVersionUID = -252813913L;
     if(!"PluginCridadaJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginCridada_parametresfitxerids) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginCridada_parametresfitxerids())) ) {
       __tmp.setPluginCridada_parametresfitxerids(PluginCridadaJPA.copyJPA(__jpa.getPluginCridada_parametresfitxerids(), __alreadyCopied,"FitxerJPA"));
+    }
+    if(!"TransaccioMultipleJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.transaccioMultiples) || org.hibernate.Hibernate.isInitialized(__jpa.getTransaccioMultiples())) ) {
+      __tmp.setTransaccioMultiples(TransaccioMultipleJPA.copyJPA(__jpa.getTransaccioMultiples(), __alreadyCopied,"FitxerJPA"));
     }
     if(!"TransaccioJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.transaccio_fitxerescanejatids) || org.hibernate.Hibernate.isInitialized(__jpa.getTransaccio_fitxerescanejatids())) ) {

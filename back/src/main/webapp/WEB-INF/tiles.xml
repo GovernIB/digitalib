@@ -77,6 +77,16 @@
     </definition>
     
     
+    
+    <definition name="transaccionsmassives_public" extends="user.emptylayout">
+        <put-attribute name="titol" value="transaccio.transaccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/transaccionsmassives.jsp" />
+    </definition>
+    
+    
+    
+    
+    
 
     <!--  ===========  COMMON  ================== -->
 
@@ -554,6 +564,16 @@
     
     <definition name="transaccioListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioList.jsp" />
+    </definition>
+
+
+    <definition name="transaccioMultipleFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="transaccioMultiple.transaccioMultiple" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioMultipleForm.jsp" />
+    </definition>
+    
+    <definition name="transaccioMultipleListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioMultipleList.jsp" />
     </definition>
 
 

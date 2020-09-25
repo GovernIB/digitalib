@@ -58,10 +58,6 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
 
   public static final String CONTEXTWEB = "/user/scan";
 
-  /** Logger for this class and subclasses */
-  /*
-   * protected final Logger log = Logger.getLogger(getClass());
-   */
 
   @EJB(mappedName = es.caib.digitalib.ejb.UsuariPersonaLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.UsuariPersonaLocal usuariPersonaEjb;
@@ -98,13 +94,8 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
   public ModelAndView scanWebGet(HttpServletRequest request, HttpServletResponse response,
       @RequestParam("perfil_tipus") int tipusPerfil, @RequestParam("perfil_pos") int pos,
       @RequestParam("url_user") String baseUrlFull
-  // , @PathVariable("baseURL64") String baseURL64
   ) throws Exception {
 
-    // String requestURL = request.getRequestURL().toString();
-    // log.info("XYZ ZZZ requestURL = " + requestURL);
-    //
-    // String baseUrlFull = requestURL.split("/start/" + tipusPerfil +"/")[1];
 
     log.info("XYZ ZZZ baseUrlFull = " + baseUrlFull);
 

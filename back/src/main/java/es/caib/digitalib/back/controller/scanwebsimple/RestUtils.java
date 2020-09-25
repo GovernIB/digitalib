@@ -1,4 +1,4 @@
-package es.caib.digitalib.back.controller.scanwebsimple.v1;
+package es.caib.digitalib.back.controller.scanwebsimple;
 
 
 import java.util.HashSet;

@@ -593,6 +593,28 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.Long transaccioMultipleIDDesde;
+
+  public java.lang.Long getTransaccioMultipleIDDesde() {
+    return this.transaccioMultipleIDDesde;
+  }
+
+  public void setTransaccioMultipleIDDesde(java.lang.Long transaccioMultipleIDDesde) {
+    this.transaccioMultipleIDDesde = transaccioMultipleIDDesde;
+  }
+
+
+  private java.lang.Long transaccioMultipleIDFins;
+
+  public java.lang.Long getTransaccioMultipleIDFins() {
+    return this.transaccioMultipleIDFins;
+  }
+
+  public void setTransaccioMultipleIDFins(java.lang.Long transaccioMultipleIDFins) {
+    this.transaccioMultipleIDFins = transaccioMultipleIDFins;
+  }
+
+
   public TransaccioFilterForm() {
   }
   
@@ -650,6 +672,8 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.infoSignaturaIDFins = __toClone.infoSignaturaIDFins;
     this.infoCustodyIDDesde = __toClone.infoCustodyIDDesde;
     this.infoCustodyIDFins = __toClone.infoCustodyIDFins;
+    this.transaccioMultipleIDDesde = __toClone.transaccioMultipleIDDesde;
+    this.transaccioMultipleIDFins = __toClone.transaccioMultipleIDFins;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
     this.mapOfValuesForInfoScanPixelType = __toClone.mapOfValuesForInfoScanPixelType;
     this.mapOfValuesForView = __toClone.mapOfValuesForView;
@@ -660,13 +684,14 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.mapOfPerfilForPerfilID = __toClone.mapOfPerfilForPerfilID;
     this.mapOfInfoSignaturaForInfoSignaturaID = __toClone.mapOfInfoSignaturaForInfoSignaturaID;
     this.mapOfInfoCustodyForInfoCustodyID = __toClone.mapOfInfoCustodyForInfoCustodyID;
+    this.mapOfTransaccioMultipleForTransaccioMultipleID = __toClone.mapOfTransaccioMultipleForTransaccioMultipleID;
   }
   
   /* ========= UTILS ========== */
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TRANSACCIOID ,NOM ,TRANSACTIONWEBID ,RETURNURL ,ESTATMISSATGE }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TRANSACCIOID ,NOM ,TRANSACTIONWEBID ,RETURNURL ,ESTATMISSATGE ,TRANSACCIOMULTIPLEID }));
   }
 
   @Override
@@ -810,6 +835,18 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setMapOfInfoCustodyForInfoCustodyID(Map<String, String> mapOfInfoCustodyForInfoCustodyID) {
     this.mapOfInfoCustodyForInfoCustodyID = mapOfInfoCustodyForInfoCustodyID;
+  }
+
+
+
+  private Map<String, String> mapOfTransaccioMultipleForTransaccioMultipleID;
+
+  public Map<String, String> getMapOfTransaccioMultipleForTransaccioMultipleID() {
+    return this.mapOfTransaccioMultipleForTransaccioMultipleID;
+  }
+
+  public void setMapOfTransaccioMultipleForTransaccioMultipleID(Map<String, String> mapOfTransaccioMultipleForTransaccioMultipleID) {
+    this.mapOfTransaccioMultipleForTransaccioMultipleID = mapOfTransaccioMultipleForTransaccioMultipleID;
   }
 
 

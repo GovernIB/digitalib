@@ -38,6 +38,9 @@ public class TransaccioWebValidator  implements Validator, TransaccioFields {
   @javax.ejb.EJB(mappedName = "digitalib/TransaccioEJB/local")
   protected es.caib.digitalib.ejb.TransaccioLocal transaccioEjb;
 
+  @javax.ejb.EJB(mappedName = "digitalib/TransaccioMultipleEJB/local")
+  protected es.caib.digitalib.ejb.TransaccioMultipleLocal transaccioMultipleEjb;
+
 
 
   public TransaccioWebValidator() {
@@ -70,7 +73,7 @@ public class TransaccioWebValidator  implements Validator, TransaccioFields {
       // Fitxers 
     }
     validator.validate(wvr, target,
-      isNou, infoCustodyEjb, infoSignaturaEjb, perfilEjb, transaccioEjb);
+      isNou, infoCustodyEjb, infoSignaturaEjb, perfilEjb, transaccioEjb, transaccioMultipleEjb);
 
   } // Final de metode
 

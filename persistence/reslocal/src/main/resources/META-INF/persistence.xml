@@ -27,6 +27,7 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 		<class>es.caib.digitalib.jpa.TraduccioJPA</class>
 		<class>es.caib.digitalib.jpa.TraduccioMapJPA</class>
 		<class>es.caib.digitalib.jpa.TransaccioJPA</class>
+		<class>es.caib.digitalib.jpa.TransaccioMultipleJPA</class>
 		<class>es.caib.digitalib.jpa.UsuariAplicacioJPA</class>
 		<class>es.caib.digitalib.jpa.UsuariPersonaJPA</class>
 

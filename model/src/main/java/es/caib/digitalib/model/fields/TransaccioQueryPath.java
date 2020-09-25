@@ -175,6 +175,10 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new LongField(getQueryPath(), TransaccioFields.INFOCUSTODYID);
   }
 
+  public LongField TRANSACCIOMULTIPLEID() {
+    return new LongField(getQueryPath(), TransaccioFields.TRANSACCIOMULTIPLEID);
+  }
+
 
 
   @Override
@@ -234,6 +238,14 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new InfoCustodyQueryPath(new QueryPath() {
       public String getQueryPath() {
           return TransaccioQueryPath.this.getQueryPath() + "infoCustody" + ".";
+      }
+    });
+  }
+
+  public TransaccioMultipleQueryPath TRANSACCIOMULTIPLE() {
+    return new TransaccioMultipleQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return TransaccioQueryPath.this.getQueryPath() + "transaccioMultiple" + ".";
       }
     });
   }

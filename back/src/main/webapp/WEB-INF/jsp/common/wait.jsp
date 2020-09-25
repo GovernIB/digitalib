@@ -13,7 +13,8 @@
     </iframe>     
 </td></tr>
 <tr><td align="center" colspan="3">
-   <i><fmt:message key="esperarfirmacustodia" /></i>
+
+   <i><fmt:message key="${missatgeespera}" /></i>
 </td></tr>
 </table>
 <form id="reloadform" action="<c:url value="${finalURL}"/>">

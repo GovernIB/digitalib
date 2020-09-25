@@ -259,6 +259,14 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.TRANSACCIOMULTIPLEID)}">
+          <td>
+          <c:set var="tmp">${transaccio.transaccioMultipleID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfTransaccioMultipleForTransaccioMultipleID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

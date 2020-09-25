@@ -23,6 +23,7 @@ public final class DigitalIBJPADaoManagers implements IDigitalIBDaoManagers{
    private final PluginCridadaJPAManager dib_plugincridada;
    private final TraduccioJPAManager dib_traduccio;
    private final TransaccioJPAManager dib_transaccio;
+   private final TransaccioMultipleJPAManager dib_transmultiple;
    private final UsuariAplicacioJPAManager dib_usuariaplicacio;
    private final UsuariPersonaJPAManager dib_usuaripersona;
 
@@ -44,6 +45,7 @@ public final class DigitalIBJPADaoManagers implements IDigitalIBDaoManagers{
     this.dib_plugincridada = new PluginCridadaJPAManager(__em);
     this.dib_traduccio = new TraduccioJPAManager(__em);
     this.dib_transaccio = new TransaccioJPAManager(__em);
+    this.dib_transmultiple = new TransaccioMultipleJPAManager(__em);
     this.dib_usuariaplicacio = new UsuariAplicacioJPAManager(__em);
     this.dib_usuaripersona = new UsuariPersonaJPAManager(__em);
   }
@@ -114,6 +116,10 @@ public final class DigitalIBJPADaoManagers implements IDigitalIBDaoManagers{
 
 	public ITransaccioManager getTransaccioManager() {
 	  return this.dib_transaccio;
+	};
+
+	public ITransaccioMultipleManager getTransaccioMultipleManager() {
+	  return this.dib_transmultiple;
 	};
 
 	public IUsuariAplicacioManager getUsuariAplicacioManager() {

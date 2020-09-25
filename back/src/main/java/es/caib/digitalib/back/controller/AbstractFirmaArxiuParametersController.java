@@ -136,11 +136,11 @@ public abstract class AbstractFirmaArxiuParametersController
     transaccioForm.setTitleCode("dadesrequerides");
 
     transaccioForm.setHiddenFields(hiddenFields);
+    
+    transaccioForm.setDeleteButtonVisible(false);
 
     // XYZ ZZZ Obtenir idioma per defecte
     transaccioForm.getTransaccio().setSignParamLanguageDoc("ca");
-
-    transaccioForm.setDeleteButtonVisible(false);
 
     return transaccioForm;
   }

@@ -330,6 +330,25 @@
       </ul>
     </li>
 
+    <%-- TransaccioMultiple --%>
+    <li>
+      <a href="#" role="branch" class="tree-toggle ${fn:contains(url, 'transaccioMultiple/')? "" : "closed"}" data-toggle="branch" data-value="suportada"><span style="${fn:contains(url, 'transaccioMultiple/')? "font-weight: bold;" : ""}"><fmt:message key="transaccioMultiple.transaccioMultiple"/></span></a>
+      <ul class="${fn:contains(url, 'transaccioMultiple/')? "branch in" : "branch"}">
+        <li style="list-style-type: disc; list-style-position: inside;" ><a href="<c:url value="/webdb/transaccioMultiple/new"/>" ><span style="${(fn:contains(url, 'transaccioMultiple/') && fn:contains(url, '/new'))? "font-weight: bold;" : ""}" >
+       <fmt:message var="entityname" key="transaccioMultiple.transaccioMultiple"/>
+       <fmt:message key="genapp.createtitle" >
+         <fmt:param value="${entityname}"/>
+       </fmt:message>
+       </span></a></li>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/transaccioMultiple/list/1"/>" ><span style="${(fn:contains(url, 'transaccioMultiple/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+        <fmt:message key="genapp.listtitle" >
+         <fmt:param value="${entityname}"/>
+       </fmt:message>
+        </span></a>
+        </li>
+      </ul>
+    </li>
+
     <%-- UsuariAplicacio --%>
     <li>
       <a href="#" role="branch" class="tree-toggle ${fn:contains(url, 'usuariAplicacio/')? "" : "closed"}" data-toggle="branch" data-value="suportada"><span style="${fn:contains(url, 'usuariAplicacio/')? "font-weight: bold;" : ""}"><fmt:message key="usuariAplicacio.usuariAplicacio"/></span></a>

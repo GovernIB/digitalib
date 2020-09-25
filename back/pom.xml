@@ -171,6 +171,13 @@
       <version>1.0.0</version>
       <scope>provided</scope>
     </dependency>
+    
+    <dependency>
+      <artifactId>apimassivescanwebsimple-jersey</artifactId>
+      <groupId>org.fundaciobit.apisib.apimassivescanwebsimple</groupId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>
 
     <dependency>
       <groupId>org.fundaciobit.pluginsib.utils</groupId>
@@ -356,7 +363,14 @@
       <artifactId>guava</artifactId>
       <version>20.0</version>
     </dependency>
-
+    
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.5.2</version>
+        <scope>test</scope>
+    </dependency>
+    
   </dependencies>
 
   <build>

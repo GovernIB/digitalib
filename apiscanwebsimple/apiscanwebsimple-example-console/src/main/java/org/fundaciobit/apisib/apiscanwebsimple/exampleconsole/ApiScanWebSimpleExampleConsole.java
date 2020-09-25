@@ -55,7 +55,6 @@ public class ApiScanWebSimpleExampleConsole {
       api = getApiScanWebSimple();
 
       // Recuperar Perfils disponibles
-
       ScanWebSimpleAvailableProfiles profiles = api.getAvailableProfiles(languageUI);
 
       List<ScanWebSimpleAvailableProfile> profilesList = profiles.getAvailableProfiles();

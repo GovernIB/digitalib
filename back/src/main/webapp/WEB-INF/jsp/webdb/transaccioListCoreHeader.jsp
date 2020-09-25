@@ -135,6 +135,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOCUSTODYID)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOCUSTODYID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.TRANSACCIOMULTIPLEID)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.TRANSACCIOMULTIPLEID)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

@@ -2,6 +2,7 @@ package es.caib.digitalib.back.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalField;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -922,6 +924,9 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), additionalButton);
 
       }
+      
+      
+      
 
     }
 
@@ -965,11 +970,42 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         if (usuari != null) {
           map.put(ua.getTransaccioID(), "<a href=\"" + web + "\">"  + usuari.getValue() + "</a>");
         }
-      }
+        
+        
+        // Transaccions  Massives
+        if (ua.getTransaccioMultipleID() != null) {
+          AdditionalButton additionalButton = new AdditionalButton("icon-list-alt icon-white",
+              "transaccioMultiple.transaccioMultiple",
+                getContextWeb() +  AGRUPA_PER_TRANSACCIO_MULTIPLE  + "/" +  ua.getTransaccioMultipleID(),           
+              "btn-danger");
 
+          filterForm.addAdditionalButtonByPK(ua.getTransaccioID(), additionalButton);
+        }
+      }
     }
 
   }
+  
+  public static final String AGRUPA_PER_TRANSACCIO_MULTIPLE = "/transaccionsMultiples";
+  
+  @RequestMapping(value = AGRUPA_PER_TRANSACCIO_MULTIPLE + "/{transaccioMultipleID}", method = RequestMethod.GET)
+  public ModelAndView agrupaPerTransaccioMultiple( HttpServletRequest request,
+      HttpServletResponse response, @ModelAttribute TransaccioFilterForm filterForm,
+      @PathVariable("transaccioMultipleID") java.lang.Long transaccioMultipleID) throws IOException {
+    
+    ArrayList<Field<?>> filterByFields = new ArrayList<Field<?>>();
+    filterByFields.add(TRANSACCIOMULTIPLEID);
+
+    filterForm.setFilterByFields(filterByFields);
+    
+    filterForm.setTransaccioMultipleIDDesde(transaccioMultipleID);
+    filterForm.setTransaccioMultipleIDFins(transaccioMultipleID);
+
+    return new ModelAndView(new RedirectView(getContextWeb() + "/list", true));
+  
+  }
+  
+  
 
   protected boolean canBeDeleted(final boolean isAdmin, Transaccio transaccio) {
 

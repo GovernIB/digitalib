@@ -7,6 +7,7 @@ import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.model.fields.InfoCustodyFields;
 import es.caib.digitalib.model.fields.InfoSignaturaFields;
 import es.caib.digitalib.model.fields.PerfilFields;
+import es.caib.digitalib.model.fields.TransaccioMultipleFields;
 
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
@@ -31,7 +32,8 @@ public class TransaccioValidator<T> implements TransaccioFields {
     ,es.caib.digitalib.model.dao.IInfoCustodyManager __infoCustodyManager
     ,es.caib.digitalib.model.dao.IInfoSignaturaManager __infoSignaturaManager
     ,es.caib.digitalib.model.dao.IPerfilManager __perfilManager
-    ,es.caib.digitalib.model.dao.ITransaccioManager __transaccioManager) {
+    ,es.caib.digitalib.model.dao.ITransaccioManager __transaccioManager
+    ,es.caib.digitalib.model.dao.ITransaccioMultipleManager __transaccioMultipleManager) {
 
     // Valors Not Null
     __vr.rejectIfEmptyOrWhitespace(__target__,TRANSACTIONWEBID, 
@@ -367,6 +369,20 @@ public class TransaccioValidator<T> implements TransaccioFields {
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("infoCustody.infoCustody"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("infoCustody.infoCustodyID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__infocustodyid)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(TRANSACCIOMULTIPLEID) == 0) {
+      java.lang.Long __transacciomultipleid = (java.lang.Long)__vr.getFieldValue(__target__,TRANSACCIOMULTIPLEID);
+      if (__transacciomultipleid != null ) {
+        Long __count_ = null;
+        try { __count_ = __transaccioMultipleManager.count(TransaccioMultipleFields.TRANSMULTIPLEID.equal(__transacciomultipleid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(TRANSACCIOMULTIPLEID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("transaccioMultiple.transaccioMultiple"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("transaccioMultiple.transmultipleid"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__transacciomultipleid)));
         }
       }
     }

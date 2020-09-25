@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -18,19 +19,25 @@
 
 
   <dependencies>
-  
+
     <dependency>
       <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
       <artifactId>pluginsib-userinformation-api</artifactId>
       <version>2.0.0</version>
       <scope>provided</scope>
     </dependency>
-  
+
     <dependency>
       <artifactId>apiscanwebsimple-api</artifactId>
       <groupId>org.fundaciobit.apisib.apiscanwebsimple</groupId>
       <version>1.0</version>
-    </dependency>  
+    </dependency>
+
+    <dependency>
+      <artifactId>apimassivescanwebsimple-api</artifactId>
+      <groupId>org.fundaciobit.apisib.apimassivescanwebsimple</groupId>
+      <version>1.0</version>
+    </dependency>
 
     <dependency>
       <groupId>es.caib.digitalib</groupId>
@@ -102,14 +109,37 @@
       <version>2.2</version>
       <scope>provided</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>20.0</version>
-	</dependency>
-    
-    <!--  =====  PLUGINS IB  -->
+    </dependency>
+
+
+    <!-- Split PDF -->
+
+    <dependency>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>pdfbox</artifactId>
+      <version>2.0.21</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>pdfbox-tools</artifactId>
+      <version>2.0.21</version>
+    </dependency>
+
+
+    <!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>javase</artifactId>
+      <version>2.2</version> <!--  2.2  3.3.0 -->
+    </dependency>
+
+    <!-- ===== PLUGINS IB -->
 
     <dependency>
       <groupId>org.fundaciobit.pluginsib.core</groupId>
@@ -122,25 +152,25 @@
       <artifactId>pluginsib-scanweb-api</artifactId>
       <version>3.0.0</version>
     </dependency>
-    
+
     <dependency>
       <artifactId>pluginsib-signatureserver-api</artifactId>
       <groupId>org.fundaciobit.pluginsib.signatureserver</groupId>
       <version>3.0.0</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.fundaciobit.pluginsib.documentcustody</groupId>
       <artifactId>pluginsib-documentcustody-api</artifactId>
       <version>4.0.0</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.fundaciobit.pluginsib.arxiu</groupId>
       <artifactId>pluginsib-arxiu-api</artifactId>
       <version>2.0.3</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
       <artifactId>pluginsib-timestamp-api</artifactId>
