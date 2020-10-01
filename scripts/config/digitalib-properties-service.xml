@@ -38,6 +38,10 @@
       #es.caib.digitalib.configuraciogruppereefecteEL=<![CDATA[<#if userinfo?? && userinfo.username??><#if userinfo.username = "test">1078</#if><#if userinfo.username = "admin">1233</#if></#if>]]>
       es.caib.digitalib.configuraciogruppereefecteEL=
       
+      <!-- Opcional. Indica el tamany màxim en bytes que ha de tenir un fitxer escanejat.
+        En el cas de l'escaneig múltiple aquest valor s'aplica a cada un dels subdocuments. -->
+      es.caib.digitalib.maxsizeforscanneddocument=
+      
       
       <!-- ======== PLUGIN USER-INFORMATION - DATABASE ======= -->
       es.caib.digitalib.userinformationplugin=org.fundaciobit.plugins.userinformation.database.DataBaseUserInformationPlugin

@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.AbstractScanWebProcessController.UrlSelectScanModule;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.back.security.LoginInfo;
+import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.AuditoriaLogicaLocal;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
@@ -94,9 +95,17 @@ public abstract class AbstractFirmaArxiuParametersController
       hiddenFields.remove(TransaccioFields.SIGNPARAMFUNCIONARINIF);
       hiddenFields.remove(TransaccioFields.SIGNPARAMFUNCIONARINOM);
 
-      transaccioForm.addReadOnlyField(TransaccioFields.FUNCIONARIUSERNAME);
-      transaccioForm.addReadOnlyField(TransaccioFields.SIGNPARAMFUNCIONARINIF);
-      transaccioForm.addReadOnlyField(TransaccioFields.SIGNPARAMFUNCIONARINOM);
+      TransaccioJPA tra = transaccioForm.getTransaccio();
+      
+      if(!Utils.isEmpty(tra.getFuncionariUsername())) {
+        transaccioForm.addReadOnlyField(TransaccioFields.FUNCIONARIUSERNAME);
+      }
+      if(!Utils.isEmpty(tra.getSignParamFuncionariNif())) {
+        transaccioForm.addReadOnlyField(TransaccioFields.SIGNPARAMFUNCIONARINIF);
+      }
+      if(!Utils.isEmpty(tra.getSignParamFuncionariNom())) {
+        transaccioForm.addReadOnlyField(TransaccioFields.SIGNPARAMFUNCIONARINOM);
+      }
 
       hiddenFields.remove(TransaccioFields.SIGNPARAMLANGUAGEDOC);
     }

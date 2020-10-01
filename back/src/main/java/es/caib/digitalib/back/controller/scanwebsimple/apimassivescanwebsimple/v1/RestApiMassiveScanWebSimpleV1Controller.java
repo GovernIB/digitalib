@@ -149,38 +149,6 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
 
   }
 
-  public abstract class RestCaller<R> {
-
-    public final String locale;
-
-    public RestCaller(String locale) {
-      this.locale = locale;
-    }
-
-    public final ResponseEntity<?> cridada() {
-      try {
-
-        String error = autenticate(request, locale, usuariAplicacioEjb);
-        if (error != null) {
-          return generateServerError(error, HttpStatus.UNAUTHORIZED);
-        }
-
-        R fsap = cridadaReal();
-
-        HttpHeaders headers = addAccessControllAllowOrigin();
-        return new ResponseEntity<R>(fsap, headers, HttpStatus.OK);
-
-      } catch (Throwable th) {
-        String msg = th.getMessage();
-        log.error(msg, th);
-        return generateServerError(msg, th);
-      }
-    }
-
-    public abstract R cridadaReal() throws Exception;
-
-  }
-
   @Override
   public MassiveScanWebSimpleFile getSeparatorPage(String locale) throws Exception {
 
@@ -209,26 +177,34 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public ResponseEntity<?> getAvailableProfilesRest(@RequestBody String locale) {
-    try {
 
-      String error = autenticate(request, locale, usuariAplicacioEjb);
-      if (error != null) {
-        return generateServerError(error, HttpStatus.UNAUTHORIZED);
+    RestCaller<MassiveScanWebSimpleAvailableProfiles> restCaller = new RestCaller<MassiveScanWebSimpleAvailableProfiles>(
+        locale) {
+      @Override
+      public MassiveScanWebSimpleAvailableProfiles cridadaReal() throws Exception {
+        return getAvailableProfiles(this.locale);
       }
+    };
 
-      MassiveScanWebSimpleAvailableProfiles fsap = getAvailableProfiles(locale);
+    return restCaller.cridada();
 
-      HttpHeaders headers = addAccessControllAllowOrigin();
-      ResponseEntity<?> re = new ResponseEntity<MassiveScanWebSimpleAvailableProfiles>(fsap,
-          headers, HttpStatus.OK);
-
-      return re;
-
-    } catch (Throwable th) {
-      String msg = th.getMessage();
-      log.error(msg, th);
-      return generateServerError(msg, th);
-    }
+    /*
+     * try {
+     * 
+     * String error = autenticate(request, locale, usuariAplicacioEjb); if (error != null) {
+     * return generateServerError(error, HttpStatus.UNAUTHORIZED); }
+     * 
+     * MassiveScanWebSimpleAvailableProfiles fsap = getAvailableProfiles(locale);
+     * 
+     * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> re = new
+     * ResponseEntity<MassiveScanWebSimpleAvailableProfiles>(fsap, headers, HttpStatus.OK);
+     * 
+     * return re;
+     * 
+     * 
+     * } catch (Throwable th) { String msg = th.getMessage(); log.error(msg, th); return
+     * generateServerError(msg, th); }
+     */
 
   }
 
@@ -298,7 +274,7 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public ResponseEntity<?> getProfileRest(
-      @RequestBody MassiveScanWebSimpleProfileRequest profileRequest) throws Exception {
+      @RequestBody final MassiveScanWebSimpleProfileRequest profileRequest) throws Exception {
 
     String locale;
     if (profileRequest == null || profileRequest.getLocale() == null) {
@@ -307,25 +283,31 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
       locale = profileRequest.getLocale();
     }
 
-    String error = autenticate(request, locale, usuariAplicacioEjb);
-    if (error != null) {
-      return generateServerError(error, HttpStatus.UNAUTHORIZED);
-    }
+    RestCaller<MassiveScanWebSimpleAvailableProfile> restCaller = new RestCaller<MassiveScanWebSimpleAvailableProfile>(
+        locale) {
+      @Override
+      public MassiveScanWebSimpleAvailableProfile cridadaReal() throws Exception {
+        return getProfile(profileRequest);
+      }
+    };
 
-    try {
-      MassiveScanWebSimpleAvailableProfile prof = getProfile(profileRequest);
+    return restCaller.cridada();
 
-      HttpHeaders headers = addAccessControllAllowOrigin();
-      ResponseEntity<?> re = new ResponseEntity<MassiveScanWebSimpleAvailableProfile>(prof,
-          headers, HttpStatus.OK);
-
-      return re;
-
-    } catch (Throwable th) {
-      String msg = th.getMessage();
-      log.error(msg, th);
-      return generateServerError(msg, th);
-    }
+    /*
+     * 
+     * String error = autenticate(request, locale, usuariAplicacioEjb); if (error != null) {
+     * return generateServerError(error, HttpStatus.UNAUTHORIZED); }
+     * 
+     * try { MassiveScanWebSimpleAvailableProfile prof = getProfile(profileRequest);
+     * 
+     * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> re = new
+     * ResponseEntity<MassiveScanWebSimpleAvailableProfile>(prof, headers, HttpStatus.OK);
+     * 
+     * return re;
+     * 
+     * } catch (Throwable th) { String msg = th.getMessage(); log.error(msg, th); return
+     * generateServerError(msg, th); }
+     */
   }
 
   /**
@@ -386,28 +368,31 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public ResponseEntity<?> getTransactionIDRest(
-      @RequestBody MassiveScanWebSimpleGetTransactionIdRequest requestTransaction) {
+      @RequestBody final MassiveScanWebSimpleGetTransactionIdRequest requestTransaction) {
 
     String language = "ca";
 
-    String error = autenticate(request, language, usuariAplicacioEjb);
-    if (error != null) {
-      return generateServerError(error, HttpStatus.UNAUTHORIZED);
-    }
+    RestCaller<String> restCaller = new RestCaller<String>(language) {
+      @Override
+      public String cridadaReal() throws Exception {
+        return getTransactionID(requestTransaction);
+      }
+    };
 
-    try {
-      String transactionWebID = getTransactionID(requestTransaction);
+    return restCaller.cridada();
 
-      HttpHeaders headers = addAccessControllAllowOrigin();
-      ResponseEntity<?> res = new ResponseEntity<String>(transactionWebID, headers,
-          HttpStatus.OK);
-
-      return res;
-    } catch (Throwable th) {
-      String msg = th.getMessage();
-      log.error(msg, th);
-      return generateServerError(msg, th);
-    }
+    /*
+     * String error = autenticate(request, language, usuariAplicacioEjb); if (error != null) {
+     * return generateServerError(error, HttpStatus.UNAUTHORIZED); }
+     * 
+     * try { String transactionWebID = getTransactionID(requestTransaction);
+     * 
+     * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> res = new
+     * ResponseEntity<String>(transactionWebID, headers, HttpStatus.OK);
+     * 
+     * return res; } catch (Throwable th) { String msg = th.getMessage(); log.error(msg, th);
+     * return generateServerError(msg, th); }
+     */
   }
 
   @Override
@@ -433,7 +418,13 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
       throw new Exception(I18NUtils.tradueix("error.entrada.parametre.null"));
     }
 
-    // Valida Idioma
+    // Valida NOm de la Transacció
+    String transactionName = requestTransaction.getTransactionName();
+    if (transactionName == null || transactionName.trim().length() == 0) {
+      throw new Exception(I18NUtils.tradueix("error.transactionname.notnull"));
+    }
+
+    // Valida Idioma UI
     String lang = requestTransaction.getLanguageUI();
     if (lang == null || lang.trim().length() == 0) {
       throw new Exception(I18NUtils.tradueix("error.language.notnull"));
@@ -508,8 +499,8 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
   @ResponseBody
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ResponseEntity<?> startTransaction(HttpServletRequest request,
-      @RequestBody MassiveScanWebSimpleStartTransactionRequest startTransactionRequest) {
+  public ResponseEntity<?> startTransactionRest(HttpServletRequest request,
+      @RequestBody final MassiveScanWebSimpleStartTransactionRequest startTransactionRequest) {
 
     String languageUI = "ca";
 
@@ -517,27 +508,32 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
         " XYZ ZZZ eNTRA A startTransaction => MassiveScanWebSimpleStartTransactionRequest: "
             + startTransactionRequest);
 
-    String error = autenticate(request, languageUI, usuariAplicacioEjb);
-    if (error != null) {
-      return generateServerError(error, HttpStatus.UNAUTHORIZED);
-    }
+    RestCaller<String> restCaller = new RestCaller<String>(languageUI) {
+      @Override
+      public String cridadaReal() throws Exception {
+        return startTransaction(startTransactionRequest);
+      }
+    };
 
-    try {
+    return restCaller.cridada();
 
-      String redirectUrl = startTransaction(startTransactionRequest);
-
-      HttpHeaders headers = addAccessControllAllowOrigin();
-      ResponseEntity<?> re = new ResponseEntity<String>(redirectUrl, headers, HttpStatus.OK);
-      log.info(" XYZ ZZZ SURT DE startTransaction => FINAL OK");
-
-      return re;
-
-    } catch (Throwable th) {
-      String msg = th.getMessage();
-      log.error(msg, th);
-      return generateServerError(msg, th);
-    }
-
+    /*
+     * String error = autenticate(request, languageUI, usuariAplicacioEjb); if (error != null)
+     * { return generateServerError(error, HttpStatus.UNAUTHORIZED); }
+     * 
+     * try {
+     * 
+     * String redirectUrl = startTransaction(startTransactionRequest);
+     * 
+     * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> re = new
+     * ResponseEntity<String>(redirectUrl, headers, HttpStatus.OK);
+     * log.info(" XYZ ZZZ SURT DE startTransaction => FINAL OK");
+     * 
+     * return re;
+     * 
+     * } catch (Throwable th) { String msg = th.getMessage(); log.error(msg, th); return
+     * generateServerError(msg, th); }
+     */
   }
 
   @Override
@@ -658,31 +654,39 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
   @ResponseBody
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ResponseEntity<?> getMassiveTransactionStatusRest(@RequestBody String transactionID) {
+  public ResponseEntity<?> getMassiveTransactionStatusRest(
+      @RequestBody final String transactionID) {
 
     log.info(" XYZ ZZZ ENTRA A getTransactionStatus => " + transactionID);
 
-    String error = autenticate(request, "ca", usuariAplicacioEjb);
-    if (error != null) {
-      return generateServerError(error, HttpStatus.UNAUTHORIZED);
-    }
+    String languageUI = "ca";
 
-    try {
-      MassiveScanWebSimpleStatus status = getMassiveTransactionStatus(transactionID);
+    RestCaller<MassiveScanWebSimpleStatus> restCaller = new RestCaller<MassiveScanWebSimpleStatus>(
+        languageUI) {
+      @Override
+      public MassiveScanWebSimpleStatus cridadaReal() throws Exception {
+        return getMassiveTransactionStatus(transactionID);
+      }
+    };
 
-      HttpHeaders headers = addAccessControllAllowOrigin();
-      ResponseEntity<?> re = new ResponseEntity<MassiveScanWebSimpleStatus>(status, headers,
-          HttpStatus.OK);
-      log.info(" XYZ ZZZ surt de  getTransactionStatus => FINAL OK");
+    return restCaller.cridada();
 
-      return re;
-
-    } catch (Throwable th) {
-      final String msg = I18NUtils.tradueix("error.desconegut.transaccio.estat.informacio",
-          transactionID) + ": " + th.getMessage();
-      log.error(msg, th);
-      return generateServerError(msg, th);
-    }
+    /*
+     * String error = autenticate(request, "ca", usuariAplicacioEjb); if (error != null) {
+     * return generateServerError(error, HttpStatus.UNAUTHORIZED); }
+     * 
+     * try { MassiveScanWebSimpleStatus status = getMassiveTransactionStatus(transactionID);
+     * 
+     * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> re = new
+     * ResponseEntity<MassiveScanWebSimpleStatus>(status, headers, HttpStatus.OK);
+     * log.info(" XYZ ZZZ surt de  getTransactionStatus => FINAL OK");
+     * 
+     * return re;
+     * 
+     * } catch (Throwable th) { final String msg =
+     * I18NUtils.tradueix("error.desconegut.transaccio.estat.informacio", transactionID) + ": "
+     * + th.getMessage(); log.error(msg, th); return generateServerError(msg, th); }
+     */
 
   }
 
@@ -699,31 +703,40 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
   @ResponseBody
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ResponseEntity<?> getSubTransactionStatusRest(@RequestBody String transactionID) {
+  public ResponseEntity<?> getSubTransactionStatusRest(
+      @RequestBody final String transactionID) {
 
     log.info(" XYZ ZZZ ENTRA A getSUBTransactionStatus => " + transactionID);
 
-    String error = autenticate(request, "ca", usuariAplicacioEjb);
-    if (error != null) {
-      return generateServerError(error, HttpStatus.UNAUTHORIZED);
-    }
+    String languageUI = "ca";
 
-    try {
-      MassiveScanWebSimpleStatus status = getSubTransactionStatus(transactionID);
+    RestCaller<MassiveScanWebSimpleStatus> restCaller = new RestCaller<MassiveScanWebSimpleStatus>(
+        languageUI) {
+      @Override
+      public MassiveScanWebSimpleStatus cridadaReal() throws Exception {
+        return getSubTransactionStatus(transactionID);
+      }
+    };
 
-      HttpHeaders headers = addAccessControllAllowOrigin();
-      ResponseEntity<?> re = new ResponseEntity<MassiveScanWebSimpleStatus>(status, headers,
-          HttpStatus.OK);
-      log.info(" XYZ ZZZ surt de  getSUBTransactionStatus => FINAL OK");
+    return restCaller.cridada();
 
-      return re;
-
-    } catch (Throwable th) {
-      final String msg = I18NUtils.tradueix("error.desconegut.transaccio.estat.informacio",
-          transactionID) + ": " + th.getMessage();
-      log.error(msg, th);
-      return generateServerError(msg, th);
-    }
+    /*
+     * 
+     * String error = autenticate(request, "ca", usuariAplicacioEjb); if (error != null) {
+     * return generateServerError(error, HttpStatus.UNAUTHORIZED); }
+     * 
+     * try { MassiveScanWebSimpleStatus status = getSubTransactionStatus(transactionID);
+     * 
+     * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> re = new
+     * ResponseEntity<MassiveScanWebSimpleStatus>(status, headers, HttpStatus.OK);
+     * log.info(" XYZ ZZZ surt de  getSUBTransactionStatus => FINAL OK");
+     * 
+     * return re;
+     * 
+     * } catch (Throwable th) { final String msg =
+     * I18NUtils.tradueix("error.desconegut.transaccio.estat.informacio", transactionID) + ": "
+     * + th.getMessage(); log.error(msg, th); return generateServerError(msg, th); }
+     */
 
   }
 
@@ -766,81 +779,41 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
 
   }
 
-  /*
-   * @RequestMapping(value = "/" + ApiMassiveScanWebSimple.SCANWEBRESULT, method =
-   * RequestMethod.POST)
-   * 
-   * @ResponseBody
-   * 
-   * @Produces(MediaType.APPLICATION_JSON)
-   * 
-   * @Consumes(MediaType.APPLICATION_JSON) public ResponseEntity<?>
-   * getScanWebResult(@RequestBody String transactionWebID, HttpServletRequest request) {
-   * 
-   * log.info(" XYZ ZZZ getSignaturesResult => ENTRA");
-   * 
-   * String error = autenticate(request, "ca", usuariAplicacioEjb); if (error != null) { return
-   * generateServerError(error, HttpStatus.UNAUTHORIZED); } try {
-   * MassiveScanWebSimpleScanResult fssr = getScanWebResult(transactionWebID);
-   * 
-   * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> re = new
-   * ResponseEntity<ScanWebSimpleScanResult>(fssr, headers, HttpStatus.OK);
-   * log.info(" XYZ ZZZ getScanWebResult => FINAL OK"); return re;
-   * 
-   * } catch (Throwable th) {
-   * 
-   * final String msg = I18NUtils.tradueix("error.desconegut.transaccio.numero.escaneig",
-   * transactionWebID) + ": " + th.getMessage();
-   * 
-   * log.error(msg, th);
-   * 
-   * return generateServerError(msg, th); }
-   * 
-   * }
-   * 
-   * @Override public MassiveScanWebSimpleScanResult getScanWebResult(String transactionID)
-   * throws Exception {
-   * 
-   * boolean returnScannedFile = true; boolean returnSignedFile = true;
-   * 
-   * MassiveScanWebSimpleResultRequest resultRequest = new
-   * MassiveScanWebSimpleResultRequest(transactionID, returnScannedFile, returnSignedFile);
-   * 
-   * return getScanWebResultSelectFiles(resultRequest);
-   * 
-   * }
-   */
-
   @RequestMapping(value = "/"
       + ApiMassiveScanWebSimple.GETSUBTRANSACTIONRESULT, method = RequestMethod.POST)
   @ResponseBody
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public ResponseEntity<?> getScanWebResultRest(
-      @RequestBody MassiveScanWebSimpleSubtransactionResultRequest resultRequest) {
+  public ResponseEntity<?> getSubtransactionResultRest(
+      @RequestBody final MassiveScanWebSimpleSubtransactionResultRequest resultRequest) {
 
-    // XYZ ZZZ ZZZ
-    String locale = "ca";
-    String error = autenticate(request, locale, usuariAplicacioEjb);
-    if (error != null) {
-      return generateServerError(error, HttpStatus.UNAUTHORIZED);
-    }
+    String languageUI = "ca";
 
-    try {
-      MassiveScanWebSimpleSubtransactionResult prof = getSubTransactionResult(resultRequest);
+    RestCaller<MassiveScanWebSimpleSubtransactionResult> restCaller = new RestCaller<MassiveScanWebSimpleSubtransactionResult>(
+        languageUI) {
+      @Override
+      public MassiveScanWebSimpleSubtransactionResult cridadaReal() throws Exception {
+        return getSubTransactionResult(resultRequest);
+      }
+    };
 
-      HttpHeaders headers = addAccessControllAllowOrigin();
-      ResponseEntity<?> re = new ResponseEntity<MassiveScanWebSimpleSubtransactionResult>(prof,
-          headers, HttpStatus.OK);
+    return restCaller.cridada();
 
-      return re;
-
-    } catch (Throwable th) {
-      String msg = th.getMessage();
-      log.error(msg, th);
-      return generateServerError(msg, th);
-    }
-
+    /*
+     * String error = autenticate(request, locale, usuariAplicacioEjb); if (error != null) {
+     * return generateServerError(error, HttpStatus.UNAUTHORIZED); }
+     * 
+     * try { MassiveScanWebSimpleSubtransactionResult prof =
+     * getSubTransactionResult(resultRequest);
+     * 
+     * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> re = new
+     * ResponseEntity<MassiveScanWebSimpleSubtransactionResult>(prof, headers, HttpStatus.OK);
+     * 
+     * return re;
+     * 
+     * } catch (Throwable th) { String msg = th.getMessage(); log.error(msg, th); return
+     * generateServerError(msg, th); }
+     */
   }
 
   @Override
@@ -1277,30 +1250,36 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public ResponseEntity<?> getSubTransactionsOfTransactionRest(
-      @RequestBody String transactionID) {
+      @RequestBody final String transactionID) {
 
     String language = "ca";
 
-    String error = autenticate(request, language, usuariAplicacioEjb);
-    if (error != null) {
-      return generateServerError(error, HttpStatus.UNAUTHORIZED);
-    }
+    RestCaller<MassiveScanWebSimpleSubTransactionsOfTransaction> restCaller;
+    restCaller = new RestCaller<MassiveScanWebSimpleSubTransactionsOfTransaction>(language) {
+      @Override
+      public MassiveScanWebSimpleSubTransactionsOfTransaction cridadaReal() throws Exception {
+        return getSubTransactionsOfTransaction(transactionID);
+      }
+    };
 
-    try {
-      MassiveScanWebSimpleSubTransactionsOfTransaction subs = getSubTransactionsOfTransaction(
-          transactionID);
+    return restCaller.cridada();
 
-      HttpHeaders headers = addAccessControllAllowOrigin();
-      ResponseEntity<?> res = new ResponseEntity<MassiveScanWebSimpleSubTransactionsOfTransaction>(
-          subs, headers, HttpStatus.OK);
-
-      return res;
-    } catch (Throwable th) {
-      String msg = th.getMessage();
-      log.error(msg, th);
-      return generateServerError(msg, th);
-    }
-
+    /*
+     * String language = "ca";
+     **
+     * String error = autenticate(request, language, usuariAplicacioEjb); if (error != null) {
+     * return generateServerError(error, HttpStatus.UNAUTHORIZED); }
+     * 
+     * try { MassiveScanWebSimpleSubTransactionsOfTransaction subs =
+     * getSubTransactionsOfTransaction( transactionID);
+     * 
+     * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> res = new
+     * ResponseEntity<MassiveScanWebSimpleSubTransactionsOfTransaction>( subs, headers,
+     * HttpStatus.OK);
+     * 
+     * return res; } catch (Throwable th) { String msg = th.getMessage(); log.error(msg, th);
+     * return generateServerError(msg, th); }
+     */
   }
 
   @Override
@@ -1339,6 +1318,38 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
 
       throw new Exception(getMessageFromI18nException(locale, i18n));
     }
+  }
+
+  public abstract class RestCaller<R> {
+
+    public final String locale;
+
+    public RestCaller(String locale) {
+      this.locale = locale;
+    }
+
+    public final ResponseEntity<?> cridada() {
+      try {
+
+        String error = autenticate(request, locale, usuariAplicacioEjb);
+        if (error != null) {
+          return generateServerError(error, HttpStatus.UNAUTHORIZED);
+        }
+
+        R fsap = cridadaReal();
+
+        HttpHeaders headers = addAccessControllAllowOrigin();
+        return new ResponseEntity<R>(fsap, headers, HttpStatus.OK);
+
+      } catch (Throwable th) {
+        String msg = th.getMessage();
+        log.error(msg, th);
+        return generateServerError(msg, th);
+      }
+    }
+
+    public abstract R cridadaReal() throws Exception;
+
   }
 
 }

@@ -25,7 +25,7 @@ public class Configuracio implements Constants {
   public static boolean isOcultarMenuInici() {
     return Boolean.getBoolean(DIGITALIB_PROPERTY_BASE + "ocultarmenuinici");
   }
-  
+
   public static String getConfiguracioGrupPerDefecteEL() {
     return System.getProperty(DIGITALIB_PROPERTY_BASE + "configuraciogruppereefecteEL");
   }
@@ -56,6 +56,15 @@ public class Configuracio implements Constants {
   
   public static String getPublicCsvUrl() {
     return System.getProperty(DIGITALIB_PROPERTY_BASE + "publiccsvurl");
+  }
+  
+  public static Long getMaxSizeForScannedDocument() {
+    String strVal = System.getProperty(DIGITALIB_PROPERTY_BASE + "maxsizeforscanneddocument");
+    if (strVal == null || strVal.trim().length() == 0) {
+      return null;
+    } else {
+      return Long.valueOf(strVal);
+    }
   }
 
 }

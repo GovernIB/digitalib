@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
-
 /**
  * 
  * @author anadal
@@ -25,6 +23,8 @@ public class MassiveScanWebSimpleGetTransactionIdRequest {
   protected int view;
 
   protected String languageUI;
+
+  protected String transactionName;
 
   /**
    * Obligatori tant si es funcionari com si no (~ usernameRequest)
@@ -55,9 +55,10 @@ public class MassiveScanWebSimpleGetTransactionIdRequest {
    * @param languageUI
    * @param funcionariUsername
    */
-  public MassiveScanWebSimpleGetTransactionIdRequest(String scanWebProfile, int view,
-      String languageUI, String funcionariUsername) {
+  public MassiveScanWebSimpleGetTransactionIdRequest(String transactionName,
+      String scanWebProfile, int view, String languageUI, String funcionariUsername) {
     super();
+    this.transactionName = transactionName;
     this.scanWebProfile = scanWebProfile;
     this.view = view;
     this.languageUI = languageUI;
@@ -73,10 +74,11 @@ public class MassiveScanWebSimpleGetTransactionIdRequest {
    * @param funcionariUsername
    * @param signatureParameters
    */
-  public MassiveScanWebSimpleGetTransactionIdRequest(String scanWebProfile, int view,
-      String languageUI, String funcionariUsername,
+  public MassiveScanWebSimpleGetTransactionIdRequest(String transactionName,
+      String scanWebProfile, int view, String languageUI, String funcionariUsername,
       MassiveScanWebSimpleSignatureParameters signatureParameters) {
     super();
+    this.transactionName = transactionName;
     this.scanWebProfile = scanWebProfile;
     this.view = view;
     this.languageUI = languageUI;
@@ -95,12 +97,13 @@ public class MassiveScanWebSimpleGetTransactionIdRequest {
    * @param arxiuRequiredParameters
    * @param arxiuOptionalParameters
    */
-  public MassiveScanWebSimpleGetTransactionIdRequest(String scanWebProfile, int view,
-      String languageUI, String funcionariUsername,
+  public MassiveScanWebSimpleGetTransactionIdRequest(String transactionName,
+      String scanWebProfile, int view, String languageUI, String funcionariUsername,
       MassiveScanWebSimpleSignatureParameters signatureParameters,
       MassiveScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters,
       MassiveScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters) {
     super();
+    this.transactionName = transactionName;
     this.scanWebProfile = scanWebProfile;
     this.view = view;
     this.languageUI = languageUI;
@@ -146,7 +149,8 @@ public class MassiveScanWebSimpleGetTransactionIdRequest {
     return signatureParameters;
   }
 
-  public void setSignatureParameters(MassiveScanWebSimpleSignatureParameters signatureParameters) {
+  public void setSignatureParameters(
+      MassiveScanWebSimpleSignatureParameters signatureParameters) {
     this.signatureParameters = signatureParameters;
   }
 
@@ -166,6 +170,14 @@ public class MassiveScanWebSimpleGetTransactionIdRequest {
   public void setArxiuOptionalParameters(
       MassiveScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters) {
     this.arxiuOptionalParameters = arxiuOptionalParameters;
+  }
+
+  public String getTransactionName() {
+    return transactionName;
+  }
+
+  public void setTransactionName(String transactionName) {
+    this.transactionName = transactionName;
   }
 
 }

@@ -376,7 +376,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     }
 
     MassiveScanWebSimpleGetTransactionIdRequest requestTransaction = new MassiveScanWebSimpleGetTransactionIdRequest(
-        scanWebProfile, view, languageUI, funcionariUsername, signatureParameters,
+        "", scanWebProfile, view, languageUI, funcionariUsername, signatureParameters,
         arxiuRequiredParameters, arxiuOptionalParameters);
 
     boolean isMassive = false;
@@ -465,7 +465,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     // XYZ ZZZ ZZZ Falten altres comprovacions
     TransaccioJPA t = new TransaccioJPA();
 
-    t.setNom("");
+    t.setNom(requestTransaction.getTransactionName());
     t.setTransactionWebId(transactionWebID);
     t.setDataInici(new Timestamp(System.currentTimeMillis()));
     if (usuariAplicacio != null) {

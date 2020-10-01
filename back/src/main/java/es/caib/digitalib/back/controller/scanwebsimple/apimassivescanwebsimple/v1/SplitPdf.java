@@ -86,6 +86,8 @@ public class SplitPdf {
       final int x = 140;
       final int y = 365;
       final int side = 310;
+    
+      
       rectangle.setLowerLeftX(x);
       rectangle.setLowerLeftY(y);
       rectangle.setUpperRightX(x + side);
@@ -98,9 +100,6 @@ public class SplitPdf {
         PDPage page2 = document.getPage(page - 1);
         
         crops.add(page2.getCropBox());
-        
-        System.out.println(" GET CROP BOX: " + page2.getCropBox());
-        
 
         page2.setCropBox(rectangle);
       }
@@ -183,11 +182,11 @@ public class SplitPdf {
     } else {
       log.info("   XYZ ZZZ ZZZZZ extractPagesFromPDF => TROBATS SEPARADORS: " + qrPages.size());
       // 2) Un ou plusieurs QR code = au moins deux documents
-      // System.out.println("longueur liste: " + qrPages.size());
+      //log.info("Llista items: " + qrPages.size());
       int start = 1;
       int count = 1;
       for (int index = 0; index < qrPages.size(); index++) {
-        //System.out.println("trobat QR  en pagina " + qrPages.get(index));
+        //log.info("trobat QR  en pagina " + qrPages.get(index));
 
         if (qrPages.get(index) != 1) {
 

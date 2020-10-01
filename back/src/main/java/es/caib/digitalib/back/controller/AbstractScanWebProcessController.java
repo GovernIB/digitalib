@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleStatus;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
@@ -43,6 +44,7 @@ import es.caib.digitalib.back.controller.all.FirmaArxiuParametersPublicControlle
 import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
 import es.caib.digitalib.back.controller.scanwebsimple.apimassivescanwebsimple.v1.SplitPdf;
 import es.caib.digitalib.back.controller.user.ScanWebProcessControllerUser;
+import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.jpa.FitxerJPA;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
@@ -61,12 +63,15 @@ import es.caib.digitalib.model.bean.FitxerBean;
 import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.TransaccioMultiple;
+import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**
+ * 
+ * @author anadal (u80067)
  *
- * @author anadal
  */
 public abstract class AbstractScanWebProcessController {
 
@@ -75,16 +80,14 @@ public abstract class AbstractScanWebProcessController {
   private static final String SCANWEB_CONTEXTPATH_ESPERA = "/wait";
 
   public static final String SCANWEB_CONTEXTPATH_UPDATE_MASSIVE = "/updatemassive";
-  
+
   public static final String SCANWEB_CONTEXTPATH_WAIT_MASSIVE = "/waitmassive";
-  
+
   public static final String SCANWEB_CONTEXTPATH_RETURNTOORIGEN_MASSIVE = "/returnmassive";
 
   public static final String SESSION_URL_TO_SELECT_SCANWEB_MODULE = "SESSION_URL_TO_SELECT_SCANWEB_MODULE";
 
-  public static final String SESSION_MASIVE_POINTER_POST_SCAN = "SESSION_MASIVE_POINTER_POST_SCAN";  
-  
-  
+  public static final String SESSION_MASIVE_POINTER_POST_SCAN = "SESSION_MASIVE_POINTER_POST_SCAN";
 
   protected final Logger log = Logger.getLogger(this.getClass());
 
@@ -114,11 +117,9 @@ public abstract class AbstractScanWebProcessController {
 
   @EJB(mappedName = MetadadaLogicaLocal.JNDI_NAME)
   protected MetadadaLogicaLocal metadadaLogicaEjb;
-  
+
   @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
-  
-  
 
   public static String getFinalURL(String baseURL, String transactionWebID, boolean isPublic) {
     String cp = isPublic ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
@@ -134,16 +135,18 @@ public abstract class AbstractScanWebProcessController {
     String cp = isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
         : ScanWebProcessControllerUser.CONTEXTWEB;
     String finalURL = cp + SCANWEB_CONTEXTPATH_FINAL + "/" + transactionWebID;
-    
-    Long transMultipleID = transaccioLogicaEjb.executeQueryOne(TransaccioFields.TRANSACCIOMULTIPLEID, TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
+
+    Long transMultipleID = transaccioLogicaEjb.executeQueryOne(
+        TransaccioFields.TRANSACCIOMULTIPLEID,
+        TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
 
     ModelAndView mav;
 
     mav = new ModelAndView(isPublic() ? "public_wait" : "wait");
     mav.addObject("finalURL", finalURL);
-    
+
     if (transMultipleID == null) {
-         // Peticio Senzilla
+      // Peticio Senzilla
       mav.addObject("missatgeespera", "esperarfirmacustodia");
     } else {
       // Peticio Multiple
@@ -222,24 +225,37 @@ public abstract class AbstractScanWebProcessController {
 
           if (transaccio.getTransaccioMultipleID() == null) {
             // Procés simple
-            
-            log.info("\n\n XYZ ZZZ  Escaneig Simple FS: " + transaccio.getFitxerEscanejat() + "\n\n");
-            
-            procesDeFirmaCustodia(request, infos, transaccio.getPerfil().getUsPerfil());
-            
-            
-            log.info("\n\n XYZ ZZZ  FINAL Escaneig Simple: STATUS[ " + transaccio.getEstatCodi() + "] \n\n");
-            
-          } else {
-            
-            log.info("\n\n XYZ ZZZ  Escaneig MASSIU: #subdocs " + infos.size() + " \n\n");
-            
-            // Procés massiu: demanar informacio per cada subfitxer
-            String cp = isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
-                : ScanWebProcessControllerUser.CONTEXTWEB;
-            String massiveInfo = cp + SCANWEB_CONTEXTPATH_UPDATE_MASSIVE + "/"
-                + transaccio.getTransaccioMultipleID();
 
+            log.info("\n\n XYZ ZZZ  Escaneig Simple FS: " + transaccio.getFitxerEscanejat()
+                + "\n\n");
+
+            procesDeFirmaCustodia(request, infos, transaccio.getPerfil().getUsPerfil());
+
+            log.info("\n\n XYZ ZZZ  FINAL Escaneig Simple: STATUS[ "
+                + transaccio.getEstatCodi() + "] \n\n");
+
+          } else {
+
+            log.info("\n\n XYZ ZZZ  Escaneig MASSIU: #subdocs " + infos.size() + " \n\n");
+
+            // Procés massiu: demanar informacio per cada subfitxer si totes les dades ens les
+            // han definit
+            int usPerfil = perfilEjb.executeQueryOne(PerfilFields.USPERFIL,
+                PerfilFields.PERFILID.equal(transaccio.getPerfilID()));
+            boolean isComplete = comprovarSiTotesTransaccionsSonCompletes(infos, usPerfil);
+
+            final String cp = isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
+                : ScanWebProcessControllerUser.CONTEXTWEB;
+
+            final String massiveInfo;
+
+            if (isComplete) {
+              massiveInfo = cp + SCANWEB_CONTEXTPATH_RETURNTOORIGEN_MASSIVE + "/"
+                  + transaccio.getTransactionWebId();
+            } else {
+              massiveInfo = cp + SCANWEB_CONTEXTPATH_UPDATE_MASSIVE + "/"
+                  + transaccio.getTransaccioMultipleID();
+            }
             return new ModelAndView(new RedirectView(massiveInfo, true));
           }
 
@@ -283,9 +299,8 @@ public abstract class AbstractScanWebProcessController {
     }
 
     // String languageUI = transaccio.getLanguageui();
-    
+
     log.info("XYZ ZZZ finalProcesDeScanWeb  STATUS => " + transaccio.getEstatCodi());
-    
 
     if (transaccio.getEstatCodi() != ScanWebStatus.STATUS_FINAL_OK) {
 
@@ -309,6 +324,49 @@ public abstract class AbstractScanWebProcessController {
     transaccioLogicaEjb.update(transaccio);
 
     return returnToOrigen(transaccio);
+  }
+
+  protected boolean comprovarSiTotesTransaccionsSonCompletes(
+      Map<Long, FitxerEscanejatInfo> infos, int usPerfil) {
+    switch (usPerfil) {
+
+      case Constants.PERFIL_US_CUSTODIA_INFO: {
+        for (FitxerEscanejatInfo info : infos.values()) {
+          TransaccioJPA trans = info.transaccio;
+
+          if (Utils.isEmpty(trans.getArxiuReqParamDocEstatElabora())
+              || Utils.isEmpty(trans.getArxiuReqParamDocumentTipus())
+              || Utils.isEmpty(trans.getArxiuReqParamOrigen())) {
+            return false;
+          }
+        }
+      }
+
+      case Constants.PERFIL_US_COPIA_AUTENTICA_INFO: {
+        for (FitxerEscanejatInfo info : infos.values()) {
+          TransaccioJPA trans = info.transaccio;
+          if (Utils.isEmpty(trans.getFuncionariUsername())
+              || Utils.isEmpty(trans.getSignParamFuncionariNif())
+              || Utils.isEmpty(trans.getSignParamFuncionariNom())
+              || Utils.isEmpty(trans.getSignParamLanguageDoc())) {
+            return false;
+          }
+        }
+      }
+
+      default:
+      case Constants.PERFIL_US_NOMES_ESCANEIG_INFO: {
+
+        for (FitxerEscanejatInfo info : infos.values()) {
+          if (Utils.isEmpty(info.transaccio.getNom())) {
+            return false;
+          }
+        }
+      }
+
+    }
+
+    return true;
   }
 
   protected Map<Long, FitxerEscanejatInfo> processScannedFile(HttpServletRequest request,
@@ -338,15 +396,15 @@ public abstract class AbstractScanWebProcessController {
               transaccio.setInfoScanOcr(null);
             }
           } else if (MetadataConstants.FUNCTIONARY_FULLNAME.equals(name)) {
-            if (isEmpty(transaccio.getSignParamFuncionariNom())) {
+            if (Utils.isEmpty(transaccio.getSignParamFuncionariNom())) {
               transaccio.setSignParamFuncionariNom(value);
             }
           } else if (MetadataConstants.FUNCTIONARY_USERNAME.equals(name)) {
-            if (isEmpty(transaccio.getFuncionariUsername())) {
+            if (Utils.isEmpty(transaccio.getFuncionariUsername())) {
               transaccio.setFuncionariUsername(value);
             }
           } else if (MetadataConstants.FUNCTIONARY_ADMINISTRATIONID.equals(name)) {
-            if (isEmpty(transaccio.getSignParamFuncionariNif())) {
+            if (Utils.isEmpty(transaccio.getSignParamFuncionariNif())) {
               transaccio.setSignParamFuncionariNif(value);
             }
           } else if (MetadataConstants.EEMGDE_RESOLUCION.equals(name)) {
@@ -428,11 +486,15 @@ public abstract class AbstractScanWebProcessController {
 
     for (TransaccioJPA transaccio : transaccions) {
 
-      // TransaccioJPA transaccio = info.transaccio;
+      if (transaccio.getEstatCodi() < 0) {
+        // Hi ha error: no feim res
+        continue;
+      }
 
       Fitxer fitxer = transaccio.getFitxerEscanejat();
-          
-      log.info("\n\n XYZ ZZZ   Fitxer Escanejat: " + fitxer + "  ||   TRANSACCIO: " + transaccio.getTransaccioID() +  "\n\n");
+
+      log.info("\n\n XYZ ZZZ   Fitxer Escanejat: " + fitxer + "  ||   TRANSACCIO: "
+          + transaccio.getTransaccioID() + "\n\n");
 
       transactionWebID = transaccio.getTransactionWebId();
 
@@ -443,7 +505,7 @@ public abstract class AbstractScanWebProcessController {
 
           scanWebModuleEjb.closeScanWebProcess(request, transactionWebID);
           if (fitxer == null) {
-             log.error("Per alguna causa desconeguda el fitxer escanejat val NULL (Escaneig)");
+            log.error("Per alguna causa desconeguda el fitxer escanejat val NULL (Escaneig)");
           } else {
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
           }
@@ -454,7 +516,8 @@ public abstract class AbstractScanWebProcessController {
 
           scanWebModuleEjb.closeScanWebProcess(request, transactionWebID);
           if (fitxer == null) {
-            log.error("Per alguna causa desconeguda el fitxer escanejat val NULL (Escaneig + Firma)");
+            log.error(
+                "Per alguna causa desconeguda el fitxer escanejat val NULL (Escaneig + Firma)");
           } else {
             Fitxer fitxerFirmat = firmarFitxer(transaccio, fitxer);
             if (fitxerFirmat != null) {
@@ -469,7 +532,8 @@ public abstract class AbstractScanWebProcessController {
           scanWebModuleEjb.closeScanWebProcess(request, transactionWebID);
 
           if (fitxer == null) {
-            log.error("Per alguna causa desconeguda el fitxer escanejat val NULL (Escaneig + Firma + Custòdia)");
+            log.error(
+                "Per alguna causa desconeguda el fitxer escanejat val NULL (Escaneig + Firma + Custòdia)");
           } else {
             Fitxer fitxerFirmat = firmarFitxer(transaccio, fitxer);
 
@@ -486,13 +550,13 @@ public abstract class AbstractScanWebProcessController {
           }
         }
         break;
-      }; // Final switch
-      
-      
+      }
+      ; // Final switch
+
       transaccioLogicaEjb.update(transaccio);
-      
-      
-    }; // Final For
+
+    }
+    ; // Final For
   }
 
   protected ModelAndView returnToOrigen(TransaccioJPA transaccio) throws I18NException {
@@ -514,10 +578,6 @@ public abstract class AbstractScanWebProcessController {
     }
 
     return mav;
-  }
-
-  public static boolean isEmpty(String str) {
-    return str == null || str.trim().length() == 0;
   }
 
   /**
@@ -612,148 +672,193 @@ public abstract class AbstractScanWebProcessController {
       TransaccioJPA transaccioOriginal, List<ScannedDocument> listDocs) throws I18NException {
 
     Map<Long, FitxerEscanejatInfo> allFiles = new TreeMap<Long, AbstractScanWebProcessController.FitxerEscanejatInfo>();
-    {
-      ScannedDocument sd = listDocs.get(0);
 
-      ScannedPlainFile scannedFile = sd.getScannedPlainFile();
+    ScannedDocument sd = listDocs.get(0);
 
-      byte[] data = scannedFile.getData();
+    ScannedPlainFile scannedFile = sd.getScannedPlainFile();
 
-      if (transaccioOriginal.getTransaccioMultipleID() == null) {
+    byte[] data = scannedFile.getData();
 
-        // ES UNA TRANSACCIO SIMPLE
-        log.info("XYZ ZZZ ZZZZZ\n\n recuperarDocumentEscanejat::ES UNA TRANSACCIO SIMPLE ");
+    Long maxBytes = Configuracio.getMaxSizeForScannedDocument();
 
-        FitxerJPA fitxer = new FitxerJPA("", scannedFile.getMime(), scannedFile.getName(),
-            data.length);
-        
-        fitxer = (FitxerJPA)fitxerEjb.create(fitxer);
+    if (transaccioOriginal.getTransaccioMultipleID() == null) {
+
+      // ES UNA TRANSACCIO SIMPLE
+      log.info("XYZ ZZZ ZZZZZ\n\n recuperarDocumentEscanejat::ES UNA TRANSACCIO SIMPLE ");
+
+      FitxerJPA fitxer;
+
+      // Comprobar limit de tamany
+      if (maxBytes == null || maxBytes > data.length) {
+
+        fitxer = new FitxerJPA("", scannedFile.getMime(), scannedFile.getName(), data.length);
+
+        fitxer = (FitxerJPA) fitxerEjb.create(fitxer);
 
         final long fileID = fitxer.getFitxerID();
 
         FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fileID);
 
         transaccioOriginal.setFitxerEscanejatID(fileID);
-        
+
         transaccioLogicaEjb.update(transaccioOriginal);
-        
-        log.info("XYZ ZZZ SIMPLE  PRIMER FITXER : " + fitxer + " Per transaccio " + transaccioOriginal.getTransaccioID());
-        
+
+        log.info("XYZ ZZZ SIMPLE  PRIMER FITXER : " + fitxer + " Per transaccio "
+            + transaccioOriginal.getTransaccioID());
+
         transaccioOriginal.setFitxerEscanejat(fitxer);
-
-        allFiles.put(transaccioOriginal.getTransaccioID(),
-            new FitxerEscanejatInfo(transaccioOriginal, fitxer, data));
-
       } else {
+        exceededTheMaximumLength(transaccioOriginal, maxBytes, data.length, "SIMPLE");
+        fitxer = null;
+      }
 
-        // TRANSACCIO MASSIVA
-        log.info("XYZ ZZZ ZZZZZ\n\n recuperarDocumentEscanejat::ES UNA TRANSACCIO MASSIVA ");
+      allFiles.put(transaccioOriginal.getTransaccioID(),
+          new FitxerEscanejatInfo(transaccioOriginal, fitxer, data));
 
-        // Split del document !!!!!
-        File destDir = new File(FileSystemManager.getFilesPath(), "MASSIVE_TRANSACCTIONS");
-        destDir.mkdirs();
-        File[] fitxers;
-        try {
-          fitxers = SplitPdf.detectPagesWithQR(destDir, data,
-              transaccioOriginal.getTransaccioID() + "_"
-                  + transaccioOriginal.getTransactionWebId());
-        } catch (Exception e) {
-          String msg = "Error desconegut fent Split del document: " + e.getMessage();
-          log.error(msg, e);
-          throw new I18NException("comodi", msg);
-        }
+    } else {
+
+      // TRANSACCIO MASSIVA
+      log.info("XYZ ZZZ ZZZZZ\n\n recuperarDocumentEscanejat::ES UNA TRANSACCIO MASSIVA ");
+
+      // Split del document !!!!!
+      File destDir = new File(FileSystemManager.getFilesPath(), "MASSIVE_TRANSACCTIONS");
+      destDir.mkdirs();
+      File[] fitxers;
+      try {
+        fitxers = SplitPdf.detectPagesWithQR(destDir, data,
+            transaccioOriginal.getTransaccioID() + "_"
+                + transaccioOriginal.getTransactionWebId());
+      } catch (Exception e) {
+        String msg = "Error desconegut fent Split del document: " + e.getMessage();
+        log.error(msg, e);
+        throw new I18NException("comodi", msg);
+      }
+
+      log.info("XYZ ZZZ ZZZZZ\n\n recuperarDocumentEscanejat:: subFitxer despres de SPLIT => "
+          + fitxers.length);
+
+      {
+        // Moure fitxer escanejat a Transaccio Multiple
+
+        TransaccioMultiple tm = transaccioLogicaEjb
+            .findTransaccioMultipleByPrimaryKey(transaccioOriginal.getTransaccioMultipleID());
+
+        Fitxer fitxer = new FitxerBean("", scannedFile.getMime(), scannedFile.getName(),
+            data.length);
+
+        fitxer = fitxerEjb.create(fitxer);
+
+        tm.setFitxerEscanejatID(fitxer.getFitxerID());
+        tm.setDescripcio(transaccioOriginal.getNom());
+
+        transaccioLogicaEjb.updateTransaccioMultiple(tm);
+
+        FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
+
+      }
+
+      for (int i = 0; i < fitxers.length; i++) {
         
+        File file = fitxers[i];
         
-        log.info("XYZ ZZZ ZZZZZ\n\n recuperarDocumentEscanejat:: subFitxer despres de SPLIT => " + fitxers.length);
-
-        {
-          // Moure fitxer escanejat a Transaccio Multiple
-
-          TransaccioMultiple tm = transaccioLogicaEjb.findTransaccioMultipleByPrimaryKey(transaccioOriginal.getTransaccioMultipleID());
-
-          Fitxer fitxer = new FitxerBean("", scannedFile.getMime(), scannedFile.getName(),
-              data.length);
-
-          fitxer = fitxerEjb.create(fitxer);
-
-          tm.setFitxerEscanejatID(fitxer.getFitxerID());
-          tm.setDescripcio(transaccioOriginal.getNom());
+        // Comprobar limit de tamany
+        
+        if (i == 0) {
+          // El primer fitxer el posam dins la transaccio original
           
-          transaccioLogicaEjb.updateTransaccioMultiple(tm);
+          if (maxBytes == null || maxBytes > file.length()) {
 
-          FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
-
-        }
-      
-
-        for (int i = 0; i < fitxers.length; i++) {
-
-          if (i == 0) {
-            // El primer fitxer el posam dins la transaccio original
-            File file = fitxers[i];
-
-            FitxerJPA fitxer = new FitxerJPA("", "application/pdf", fitxers[i].getName(),
+            FitxerJPA fitxer = new FitxerJPA("", "application/pdf", 
+                 transaccioOriginal.getTransactionWebId() + "_" +  fitxers[i].getName(),
                 fitxers[i].length());
-            fitxer = (FitxerJPA)fitxerEjb.create(fitxer);
-
+            fitxer = (FitxerJPA) fitxerEjb.create(fitxer);
+  
             final long fileID = fitxer.getFitxerID();
-
+  
             FileSystemManager.sobreescriureFitxer(file, fileID);
-
+  
+            String nom = transaccioOriginal.getNom();
+  
+            transaccioOriginal.setNom(nom + " " + (i + 1) + "/" + fitxers.length);
+  
             transaccioOriginal.setFitxerEscanejatID(fileID);
-            
+  
             transaccioLogicaEjb.update(transaccioOriginal);
-            
-            log.info("XYZ ZZZ  PRIMER FITXER : " + fitxer + " Per transaccio " + transaccioOriginal.getTransaccioID());
-            
+  
+            log.info("XYZ ZZZ  PRIMER FITXER : " + fitxer + " Per transaccio "
+                + transaccioOriginal.getTransaccioID());
+  
             transaccioOriginal.setFitxerEscanejat(fitxer);
-
+  
             FitxerEscanejatInfo fei = new FitxerEscanejatInfo(transaccioOriginal, fitxer,
                 FileSystemManager.getFile(fitxer.getFitxerID()));
-
+  
             allFiles.put(transaccioOriginal.getTransaccioID(), fei);
-
+          
           } else {
+            exceededTheMaximumLength(transaccioOriginal, maxBytes, file.length(), "MULTIPLE 0");
+            
+            FitxerEscanejatInfo fei = new FitxerEscanejatInfo(transaccioOriginal, null, (File)null);
+  
+            allFiles.put(transaccioOriginal.getTransaccioID(), fei);
+          }
 
-            // clonar transaccioOriginal
-            TransaccioJPA transaccio = TransaccioJPA.toJPA(transaccioOriginal);
+        } else {
 
+          // clonar transaccioOriginal
+          TransaccioJPA transaccio = TransaccioJPA.toJPA(transaccioOriginal);
+
+          String nom = transaccio.getNom();
+
+          transaccioOriginal.setNom(nom + " " + (i + 1) + "/" + fitxers.length);
+          
+          transaccio.setTransaccioID(0);
+          transaccio.setEstatCodi(MassiveScanWebSimpleStatus.STATUS_IN_PROGRESS);
+          transaccio.setEstatExcepcio(null);
+          transaccio.setEstatMissatge(null);
+          
+          transaccio.setFitxerEscanejatID(null);
+          transaccio.setFitxerEscanejat(null);
+          transaccio.setHashEscaneig(null);
+          
+          transaccio.setTransactionWebId(transaccioLogicaEjb.generateTransactionWebID());
+          
+          // crear transaccio
+          transaccio = (TransaccioJPA) transaccioLogicaEjb.create(transaccio);
+
+          if (maxBytes == null || maxBytes > file.length()) {
             // fer nou fitxer
-            FitxerJPA fitxer = new FitxerJPA("", "application/pdf", fitxers[i].getName(),
-                fitxers[i].length());
+            FitxerJPA fitxer = new FitxerJPA("", "application/pdf", transaccio.getTransactionWebId() + "_" + file.getName(),
+               file.length());
 
-            fitxer = (FitxerJPA)fitxerEjb.create(fitxer);
-
+            fitxer = (FitxerJPA) fitxerEjb.create(fitxer);
+  
             final long fileID = fitxer.getFitxerID();
+  
+            FileSystemManager.sobreescriureFitxer(file, fileID);
 
-            FileSystemManager.sobreescriureFitxer(fitxers[i], fileID);
-
-            transaccio.setTransaccioID(0);
             transaccio.setFitxerEscanejatID(fileID);
-            
-            transaccio.setTransactionWebId(transaccioLogicaEjb.generateTransactionWebID());
-                       
-            
+  
             String hashEscaneig = Hashing.sha256()
-                .hashString(String.valueOf(fileID),
-                    Charset.forName("UTF-8"))
-                .toString();
-
+                .hashString(String.valueOf(fileID), Charset.forName("UTF-8")).toString();
+  
             transaccio.setHashEscaneig(hashEscaneig);
-            
+  
+            transaccioLogicaEjb.update(transaccio);
 
-            // crear transaccio
-            transaccio = (TransaccioJPA) transaccioLogicaEjb.create(transaccio);
-            
             transaccio.setFitxerEscanejat(fitxer);
             transaccio.setPerfil(transaccioOriginal.getPerfil());
-
-
+  
             FitxerEscanejatInfo fei = new FitxerEscanejatInfo(transaccio, fitxer,
                 FileSystemManager.getFile(fileID));
-
+  
             allFiles.put(transaccio.getTransaccioID(), fei);
-
+          } else {
+            exceededTheMaximumLength(transaccio, maxBytes, file.length(), "MULTIPLE " + i);
+            
+            FitxerEscanejatInfo fei = new FitxerEscanejatInfo(transaccio, null, (File)null);
+  
+            allFiles.put(transaccio.getTransaccioID(), fei);
           }
 
         }
@@ -762,51 +867,25 @@ public abstract class AbstractScanWebProcessController {
 
     }
 
-    /*
-    for (Map.Entry<Long, FitxerEscanejatInfo> entry : allFiles.entrySet()) {
-
-      FitxerEscanejatInfo fei = entry.getValue();
-      TransaccioJPA transaccio = fei.transaccio;
-
-      try {
-        Fitxer f = fitxerEjb.create(fei.fitxer);
-
-        if (fei.dataFile != null) {
-          FileSystemManager.sobreescriureFitxer(fei.dataFile, f.getFitxerID());
-        } else if (fei.dataByteArray != null) {
-          FileSystemManager.crearFitxer(new ByteArrayInputStream(fei.dataByteArray),
-              f.getFitxerID());
-        } else {
-          // XYZ ZZZ
-          throw new I18NException("comodi", "No trobam dades per la transacció "
-              + transaccio.getTransaccioID() + "(" + transaccio.getNom() + ")");
-        }
-
-        transaccio.setFitxerEscanejatID(f.getFitxerID());
-        String hashEscaneig = Hashing.sha256()
-            .hashString(String.valueOf(transaccio.getFitxerEscanejatID()),
-                Charset.forName("UTF-8"))
-            .toString();
-
-        transaccio.setHashEscaneig(hashEscaneig);
-
-      } catch (I18NException e) {
-
-        transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-        transaccio
-            .setEstatMissatge(I18NUtils.tradueix("scanwebprocess.scan.fitxer.recuperar.error")
-                + I18NUtils.getMessage(e));
-        transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
-
-      }
-    }
-    */
-
     return allFiles;
 
   }
 
+  protected void exceededTheMaximumLength(TransaccioJPA transaccio,
+      Long maxBytes, long fileSize, String place) throws I18NException {
+    
+    // XYZ ZZZ TRADUCCIO
+    String msg = "XYZ ZZZ " + place + " :: FITXER MASSA GRAN !!!!! : Fitxer " + fileSize
+        + " ||  Maxbytes: " + maxBytes + " || trans: "
+        + transaccio.getTransaccioID();
 
+    log.error(msg);
+
+    transaccio.setEstatMissatge(msg);
+    transaccio.setEstatCodi(MassiveScanWebSimpleStatus.STATUS_FINAL_ERROR);
+
+    transaccioLogicaEjb.update(transaccio);
+  }
 
   protected InfoCustodyJPA custodia(TransaccioJPA transaccio, Fitxer fitxerFirmat) {
 
@@ -874,7 +953,7 @@ public abstract class AbstractScanWebProcessController {
 
   protected Fitxer firmarFitxer(TransaccioJPA transaccio, Fitxer fitxer) {
 
-    PerfilJPA perfil =  transaccio.getPerfil();
+    PerfilJPA perfil = transaccio.getPerfil();
 
     log.info(
         " XYZ ZZZ AbstractScanWebProcessController:firmarFitxer():: PERFIL PRE = " + perfil);
@@ -973,10 +1052,8 @@ public abstract class AbstractScanWebProcessController {
 
     final String urlToSelectPluginPage = urlBase + contextWeb + "/selectscanwebmodule/"
         + scanWebID;
-    
-    
+
     request.getSession().removeAttribute(SESSION_MASIVE_POINTER_POST_SCAN);
-    
 
     ModelAndView mav = new ModelAndView(viewModel);
     mav.addObject("scanWebID", scanWebID);
@@ -995,10 +1072,18 @@ public abstract class AbstractScanWebProcessController {
           new UrlSelectScanModule(urlToSelectPluginPage));
     }
 
-    final String urlToRequestFirmaArxiuParameters = urlBase
-        + (isPublic ? AbstractFirmaArxiuParametersController.CONTEXTWEB_PUBLIC
-            : AbstractFirmaArxiuParametersController.CONTEXTWEB_USER)
-        + "/" + transaction.getTransaccioID() + "/edit";
+    final String urlToRequestFirmaArxiuParameters;
+
+    // Si es transacció multiple i nom no és buit, llavors anam directament a escaneig.
+    if (transaction.getTransaccioMultipleID() != null && transaction.getNom() != null
+        && transaction.getNom().trim().length() != 0) {
+      urlToRequestFirmaArxiuParameters = urlToSelectPluginPage;
+    } else {
+      urlToRequestFirmaArxiuParameters = urlBase
+          + (isPublic ? AbstractFirmaArxiuParametersController.CONTEXTWEB_PUBLIC
+              : AbstractFirmaArxiuParametersController.CONTEXTWEB_USER)
+          + "/" + transaction.getTransaccioID() + "/edit";
+    }
 
     mav.addObject("urlToSelectPluginPage", urlToRequestFirmaArxiuParameters);
 
@@ -1013,137 +1098,118 @@ public abstract class AbstractScanWebProcessController {
   @RequestMapping(value = SCANWEB_CONTEXTPATH_UPDATE_MASSIVE
       + "/{transaccioMultipleID}", method = RequestMethod.GET)
   public ModelAndView demanarInformacioPeticioMassivaGet(HttpServletRequest request,
-      HttpServletResponse response, @PathVariable("transaccioMultipleID") Long transaccioMultipleID)
+      HttpServletResponse response,
+      @PathVariable("transaccioMultipleID") Long transaccioMultipleID)
       throws Exception, I18NException {
-    /*  XYZ ZZZ
-     * String cp = isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH :
+    /*
+     * XYZ ZZZ String cp = isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH :
      * ScanWebProcessControllerUser.CONTEXTWEB; String finalURL = cp +
      * SCANWEB_CONTEXTPATH_FINAL + "/" + transactionWebID;
      */
-    List<TransaccioJPA> transaccions = transaccioLogicaEjb.searchMassiveTransaccioByTransaccioMultipleID(transaccioMultipleID);
+    List<TransaccioJPA> transaccions = transaccioLogicaEjb
+        .searchMassiveTransaccioByTransaccioMultipleID(transaccioMultipleID);
 
-    //String submitURL = (isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH : ScanWebProcessControllerUser.CONTEXTWEB) +  SCANWEB_CONTEXTPATH_UPDATE_MASSIVE + "/" + transactionWebID;
+    // String submitURL = (isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH :
+    // ScanWebProcessControllerUser.CONTEXTWEB) + SCANWEB_CONTEXTPATH_UPDATE_MASSIVE + "/" +
+    // transactionWebID;
 
-    Integer pos = (Integer)request.getSession().getAttribute(SESSION_MASIVE_POINTER_POST_SCAN);
-    
-    
+    Integer pos = (Integer) request.getSession()
+        .getAttribute(SESSION_MASIVE_POINTER_POST_SCAN);
+
     if (pos == null) {
-      
+
       log.info(" XYZ ZZZ  demanarInformacioPeticioMassivaGet:: PRIMERA ENTRADA ");
       pos = 0;
-      
+
     } else {
-      
+
       int next = pos + 1;
       if (next >= transaccions.size()) {
-        
-        
+
         log.info(" XYZ ZZZ  demanarInformacioPeticioMassivaGet:: DARRERA ENTRADA ");
-        
+
         // ANAR A WAIT DE MASSIVE
-        String waitUrl = getContextWeb()  + SCANWEB_CONTEXTPATH_WAIT_MASSIVE + "/" + transaccions.get(0).getTransactionWebId();
+        String waitUrl = getContextWeb() + SCANWEB_CONTEXTPATH_WAIT_MASSIVE + "/"
+            + transaccions.get(0).getTransactionWebId();
         ModelAndView mav = new ModelAndView(new RedirectView(waitUrl, true));
         return mav;
       }
       pos = next;
     }
-    
+
     request.getSession().setAttribute(SESSION_MASIVE_POINTER_POST_SCAN, pos);
-        
-    {   
-        String cp = isPublic() ? FirmaArxiuParametersPublicController.CONTEXTWEB_PUBLIC : FirmaArxiuParametersPublicController.CONTEXTWEB_USER;
-        String redirect = cp  + "/" + transaccions.get(pos).getTransaccioID() + "/edit" ; 
-        
-        log.info(" XYZ ZZZ   Redireccionam a " + redirect);
-        
-        ModelAndView mav = new ModelAndView(new RedirectView(redirect, true));
 
-       // TODO XYZ ZZZ Això necessita un altre vista si suportessim AUTENTICAT
-       // mav = new ModelAndView("transaccionsmassives_public");
-       // mav.addObject("transaccions", transaccions);
+    {
+      String cp = isPublic() ? FirmaArxiuParametersPublicController.CONTEXTWEB_PUBLIC
+          : FirmaArxiuParametersPublicController.CONTEXTWEB_USER;
+      String redirect = cp + "/" + transaccions.get(pos).getTransaccioID() + "/edit";
 
-        return mav;
+      log.info(" XYZ ZZZ   Redireccionam a " + redirect);
+
+      ModelAndView mav = new ModelAndView(new RedirectView(redirect, true));
+
+      // TODO XYZ ZZZ Això necessita un altre vista si suportessim AUTENTICAT
+      // mav = new ModelAndView("transaccionsmassives_public");
+      // mav.addObject("transaccions", transaccions);
+
+      return mav;
 
     }
 
   }
 
   protected String getContextWeb() {
-    
+
     return isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
         : ScanWebProcessControllerUser.CONTEXTWEB;
 
   }
 
-  
-
-  @RequestMapping(value = SCANWEB_CONTEXTPATH_WAIT_MASSIVE + "/{transaccioWebID}", method = RequestMethod.GET)
+  @RequestMapping(value = SCANWEB_CONTEXTPATH_WAIT_MASSIVE
+      + "/{transaccioWebID}", method = RequestMethod.GET)
   public ModelAndView finalPeticioMassiva(HttpServletRequest request,
       HttpServletResponse response, @PathVariable("transaccioWebID") String transaccioWebID)
       throws Exception, I18NException {
-    
-    
-    String finalMassiveURL = getContextWeb() + SCANWEB_CONTEXTPATH_RETURNTOORIGEN_MASSIVE + "/" + transaccioWebID;
-    
+
+    String finalMassiveURL = getContextWeb() + SCANWEB_CONTEXTPATH_RETURNTOORIGEN_MASSIVE + "/"
+        + transaccioWebID;
+
     ModelAndView mav;
     mav = new ModelAndView(isPublic() ? "public_wait" : "wait");
     mav.addObject("finalURL", finalMassiveURL);
     mav.addObject("missatgeespera", "esperarfirmacustodia");
-    
+
     return mav;
 
-    
-
   }
-  
-  @RequestMapping(value = SCANWEB_CONTEXTPATH_RETURNTOORIGEN_MASSIVE + "/{transaccioWebID}", method = RequestMethod.GET)
+
+  @RequestMapping(value = SCANWEB_CONTEXTPATH_RETURNTOORIGEN_MASSIVE
+      + "/{transaccioWebID}", method = RequestMethod.GET)
   public ModelAndView returnOrigenMassiva(HttpServletRequest request,
       HttpServletResponse response, @PathVariable("transaccioWebID") String transaccioWebID)
       throws Exception, I18NException {
-    
-    List<TransaccioJPA> transaccions = transaccioLogicaEjb.searchMassiveTransaccioByTransactionWebID(transaccioWebID);
-    
-    //Long perfilID = transaccioLogicaEjb.executeQueryOne(TransaccioFields.PERFILID, TransaccioFields.TRANSACCIOID.equal(transaccioID));
-    
-    
-    // XYZ ZZZ ZZZ  OPTIMITZAR  Cec que transaccions.get(0).getPerfil() funciona !!!!
-    
+
+    List<TransaccioJPA> transaccions = transaccioLogicaEjb
+        .searchMassiveTransaccioByTransactionWebID(transaccioWebID);
+
+    // Long perfilID = transaccioLogicaEjb.executeQueryOne(TransaccioFields.PERFILID,
+    // TransaccioFields.TRANSACCIOID.equal(transaccioID));
+
+    // XYZ ZZZ ZZZ OPTIMITZAR Crec que transaccions.get(0).getPerfil() funciona !!!!
+
     Perfil perfil = perfilEjb.findByPrimaryKey(transaccions.get(0).getPerfilID());
-    
-    int usPerfil = perfil.getUsPerfil(); 
-    
+
+    int usPerfil = perfil.getUsPerfil();
+
     procesDeFirmaCustodia(request, transaccions, usPerfil);
-    
+
     for (TransaccioJPA transaccio : transaccions) {
       transaccio.setDataFi(new Timestamp(System.currentTimeMillis()));
       transaccioLogicaEjb.update(transaccio);
     }
-    
-    return returnToOrigen(transaccions.get(0));
-      
-  }
-  
-  /*
-  @RequestMapping(value = SCANWEB_CONTEXTPATH_UPDATE_MASSIVE + "/final/{transactionWebID}", method = RequestMethod.POST)
-  public ModelAndView demanarInformacioPeticioMassivaFinal(HttpServletRequest request,
-      HttpServletResponse response, @PathVariable("transactionWebID") String transactionWebID)
-      throws Exception, I18NException {
-    List<TransaccioJPA> transaccions = transaccioLogicaEjb.searchMassiveTransaccioByTransactionWebID(transactionWebID);
-
-    // XYZ ZZZ ZZZ   FALTA ACTUALITZAR AMB DADES 
-    
-    
-    Perfil perfil = perfilEjb.findByPrimaryKey(transaccions.get(0).getPerfilID());
-    
-    int usPerfil = perfil.getUsPerfil(); 
-    
-    procesDeFirmaCustodia(request, transaccions, usPerfil);
-
 
     return returnToOrigen(transaccions.get(0));
 
   }
-  */
-  
 
 }

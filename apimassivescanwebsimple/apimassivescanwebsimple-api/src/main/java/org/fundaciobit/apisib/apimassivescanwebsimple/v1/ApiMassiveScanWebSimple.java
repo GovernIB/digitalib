@@ -40,17 +40,14 @@ public interface ApiMassiveScanWebSimple {
 
   public static final String CLOSETRANSACTION = "closeTransaction";
 
-  
-  
+
   /**
    * Retorna un fitxer PDF que s'usarà com a separador en el fitxers massius
    * @return
    * @throws Exception
    */
   public MassiveScanWebSimpleFile getSeparatorPage(String locale) throws Exception;
-  
-  
-  
+
   /**
    * 
    * @return
