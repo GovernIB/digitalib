@@ -237,10 +237,17 @@
         signparamfuncionarinif varchar2(255 char),
         signparamfuncionarinom varchar2(255 char),
         signparamlanguagedoc varchar2(10 char),
+        transmultipleid number(19,0),
         webid varchar2(100 char) not null,
         usuariaplicacioid number(19,0),
         usuaripersonaid number(19,0),
         vista number(10,0) not null
+    );
+
+    create table dib_transmultiple (
+        transmultipleid number(19,0) not null,
+        descripcio varchar2(256 char) not null,
+        fitxerescanejatid number(19,0)
     );
 
     create table dib_usuariaplicacio (
@@ -319,11 +326,14 @@
     create index dib_plugincridada_pk_i on dib_plugincridada (plugincridadaid);
     create index dib_traduccio_pk_i on dib_traduccio (traduccioid);
     create index dib_transaccio_infocustid_fk_i on dib_transaccio (infocustodyid);
+    create index dib_transaccio_transmulid_fk_i on dib_transaccio (transmultipleid);
     create index dib_transaccio_perfilid_fk_i on dib_transaccio (perfilid);
     create index dib_transaccio_infosignid_fk_i on dib_transaccio (infosignaturaid);
     create index dib_transaccio_filesign_fk_i on dib_transaccio (fitxersignaturaid);
     create index dib_transaccio_fileplain_fk_i on dib_transaccio (fitxerescanejatid);
     create index dib_transaccio_pk_i on dib_transaccio (transaccioid);
+    create index dib_transmultiple_pk_i on dib_transmultiple (transmultipleid);
+    create index dib_transmul_fscaned_fk_i on dib_transmultiple (fitxerescanejatid);
     create index dib_usuariaplicacio_pk_i on dib_usuariaplicacio (usuariaplicacioid);
     create index dib_usrperson_idiomaid_fk_i on dib_usuaripersona (idiomaid);
     create index dib_usuaripersona_pk_i on dib_usuaripersona (usuaripersonaid);
@@ -366,6 +376,8 @@
     alter table dib_traducciomap add constraint dib_traducmap_pk primary key (traducciomapid, idiomaid);
 
     alter table dib_transaccio add constraint dib_transaccio_pk primary key (transaccioid);
+
+    alter table dib_transmultiple add constraint dib_transmultiple_pk primary key (transmultipleid);
 
     alter table dib_usuariaplicacio add constraint dib_usuariaplicacio_pk primary key (usuariaplicacioid);
 
@@ -545,6 +557,16 @@
         foreign key (perfilid) 
         references dib_perfil;
 
+    alter table dib_transaccio 
+        add constraint dib_transaccio_transmul_tm_fk 
+        foreign key (transmultipleid) 
+        references dib_transmultiple;
+
+    alter table dib_transmultiple 
+        add constraint dib_transmul_fitxer_fies_fk 
+        foreign key (fitxerescanejatid) 
+        references dib_fitxer;
+
     alter table dib_usuaripersona 
         add constraint dib_usrperson_cfggrup_conf_fk 
         foreign key (configuraciogrupid) 
@@ -586,17 +608,18 @@
     grant select,insert,delete,update on dib_traduccio to www_digitalib;
     grant select,insert,delete,update on dib_traducciomap to www_digitalib;
     grant select,insert,delete,update on dib_transaccio to www_digitalib;
+    grant select,insert,delete,update on dib_transmultiple to www_digitalib;
     grant select,insert,delete,update on dib_usuariaplicacio to www_digitalib;
     grant select,insert,delete,update on dib_usuaripersona to www_digitalib;
     grant select on dib_digitalib_seq to www_digitalib;
  -- FINAL GRANTS
 
  -- INICI LOBS
-    alter table dib_configuraciofirma move lob (propietatstaulafirmes) store as dib_conffirma_proptaulafirmes (tablespace digitalib_lob index dib_conffirma_proptaulafirmes_i);
-    alter table dib_configuraciogrup move lob (adreza) store as dib_configuraciogrup_adreza (tablespace digitalib_lob index dib_configuraciogrup_adreza_i);
+    alter table dib_configuraciofirma move lob (propietatstaulafirmes) store as dib_cfgfirma_proptaufirma (tablespace digitalib_lob index dib_cfgfirma_proptaufirma_i);
+    alter table dib_configuraciogrup move lob (adreza) store as dib_configgrup_adreza_lob (tablespace digitalib_lob index dib_configgrup_adreza_lob_i);
     alter table dib_plugin move lob (properties) store as dib_plugin_properties_lob (tablespace digitalib_lob index dib_plugin_properties_lob_i);
-    alter table dib_plugincridada move lob (parametrestext) store as dib_plugincridada_paramtext (tablespace digitalib_lob index dib_plugincridada_paramtext_i);
-    alter table dib_plugincridada move lob (retorntext) store as dib_plugincridada_rettext (tablespace digitalib_lob index dib_plugincridada_rettext_i);
+    alter table dib_plugincridada move lob (parametrestext) store as dib_plugincridada_paramstext (tablespace digitalib_lob index dib_plugincridada_paramstext_i);
+    alter table dib_plugincridada move lob (retorntext) store as dib_plugincridada_retorntext (tablespace digitalib_lob index dib_plugincridada_retorntext_i);
     alter table dib_transaccio move lob (estatexcepcio) store as dib_transaccio_estatexcepcio (tablespace digitalib_lob index dib_transaccio_estatexcepcio_i);
  -- FINAL LOBS
 

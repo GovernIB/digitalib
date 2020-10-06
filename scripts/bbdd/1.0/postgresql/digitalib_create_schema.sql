@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.5
 -- Dumped by pg_dump version 9.3.5
--- Started on 2020-07-22 12:34:39
+-- Started on 2020-10-06 12:57:19
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -26,7 +26,7 @@ ALTER SCHEMA digitalib OWNER TO digitalib;
 SET search_path = digitalib, pg_catalog;
 
 --
--- TOC entry 171 (class 1259 OID 97828)
+
 -- Name: dib_digitalib_seq; Type: SEQUENCE; Schema: digitalib; Owner: digitalib
 --
 
@@ -45,7 +45,6 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 185 (class 1259 OID 98194)
 -- Name: dib_apisimple; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -62,7 +61,6 @@ CREATE TABLE dib_apisimple (
 ALTER TABLE digitalib.dib_apisimple OWNER TO digitalib;
 
 --
--- TOC entry 189 (class 1259 OID 98720)
 -- Name: dib_auditoria; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -82,7 +80,6 @@ CREATE TABLE dib_auditoria (
 ALTER TABLE digitalib.dib_auditoria OWNER TO digitalib;
 
 --
--- TOC entry 2218 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dib_auditoria.usernameaplicacio; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -91,7 +88,6 @@ COMMENT ON COLUMN dib_auditoria.usernameaplicacio IS 'Username d''Aplicacio que 
 
 
 --
--- TOC entry 2219 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dib_auditoria.usernamepersona; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -100,7 +96,6 @@ COMMENT ON COLUMN dib_auditoria.usernamepersona IS 'Username de Persona que real
 
 
 --
--- TOC entry 191 (class 1259 OID 114594)
 -- Name: dib_avis; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -118,7 +113,6 @@ CREATE TABLE dib_avis (
 ALTER TABLE digitalib.dib_avis OWNER TO digitalib;
 
 --
--- TOC entry 188 (class 1259 OID 98510)
 -- Name: dib_configuraciofirma; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -147,7 +141,6 @@ CREATE TABLE dib_configuraciofirma (
 ALTER TABLE digitalib.dib_configuraciofirma OWNER TO digitalib;
 
 --
--- TOC entry 2220 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: COLUMN dib_configuraciofirma.uspoliticadefirma; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -156,7 +149,6 @@ COMMENT ON COLUMN dib_configuraciofirma.uspoliticadefirma IS '0 => no usar polit
 
 
 --
--- TOC entry 2221 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: COLUMN dib_configuraciofirma.tipusoperaciofirma; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -165,7 +157,6 @@ COMMENT ON COLUMN dib_configuraciofirma.tipusoperaciofirma IS '0 firma, 1 contra
 
 
 --
--- TOC entry 179 (class 1259 OID 97984)
 -- Name: dib_configuraciogrup; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -191,7 +182,6 @@ CREATE TABLE dib_configuraciogrup (
 ALTER TABLE digitalib.dib_configuraciogrup OWNER TO digitalib;
 
 --
--- TOC entry 182 (class 1259 OID 98069)
 -- Name: dib_estadistica; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -209,7 +199,6 @@ CREATE TABLE dib_estadistica (
 ALTER TABLE digitalib.dib_estadistica OWNER TO digitalib;
 
 --
--- TOC entry 172 (class 1259 OID 97830)
 -- Name: dib_fitxer; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -225,7 +214,6 @@ CREATE TABLE dib_fitxer (
 ALTER TABLE digitalib.dib_fitxer OWNER TO digitalib;
 
 --
--- TOC entry 173 (class 1259 OID 97838)
 -- Name: dib_idioma; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -240,7 +228,6 @@ CREATE TABLE dib_idioma (
 ALTER TABLE digitalib.dib_idioma OWNER TO digitalib;
 
 --
--- TOC entry 187 (class 1259 OID 98227)
 -- Name: dib_infocustody; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -262,7 +249,6 @@ CREATE TABLE dib_infocustody (
 ALTER TABLE digitalib.dib_infocustody OWNER TO digitalib;
 
 --
--- TOC entry 186 (class 1259 OID 98213)
 -- Name: dib_infosignatura; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -290,7 +276,6 @@ CREATE TABLE dib_infosignatura (
 ALTER TABLE digitalib.dib_infosignatura OWNER TO digitalib;
 
 --
--- TOC entry 190 (class 1259 OID 111896)
 -- Name: dib_metadada; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -305,7 +290,6 @@ CREATE TABLE dib_metadada (
 ALTER TABLE digitalib.dib_metadada OWNER TO digitalib;
 
 --
--- TOC entry 177 (class 1259 OID 97940)
 -- Name: dib_perfil; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -334,7 +318,6 @@ CREATE TABLE dib_perfil (
 ALTER TABLE digitalib.dib_perfil OWNER TO digitalib;
 
 --
--- TOC entry 2222 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN dib_perfil.usperfil; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -343,7 +326,6 @@ COMMENT ON COLUMN dib_perfil.usperfil IS 'Quin us es farà del perfil: plantilla
 
 
 --
--- TOC entry 2223 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN dib_perfil.urlbase; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -352,7 +334,6 @@ COMMENT ON COLUMN dib_perfil.urlbase IS 'Opcional. Serveix per indicar la url qu
 
 
 --
--- TOC entry 178 (class 1259 OID 97968)
 -- Name: dib_perfilusrapp; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -366,7 +347,6 @@ CREATE TABLE dib_perfilusrapp (
 ALTER TABLE digitalib.dib_perfilusrapp OWNER TO digitalib;
 
 --
--- TOC entry 176 (class 1259 OID 97921)
 -- Name: dib_plugin; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -386,7 +366,6 @@ CREATE TABLE dib_plugin (
 ALTER TABLE digitalib.dib_plugin OWNER TO digitalib;
 
 --
--- TOC entry 183 (class 1259 OID 98091)
 -- Name: dib_plugincridada; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -409,7 +388,6 @@ CREATE TABLE dib_plugincridada (
 ALTER TABLE digitalib.dib_plugincridada OWNER TO digitalib;
 
 --
--- TOC entry 180 (class 1259 OID 98044)
 -- Name: dib_traduccio; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -421,7 +399,6 @@ CREATE TABLE dib_traduccio (
 ALTER TABLE digitalib.dib_traduccio OWNER TO digitalib;
 
 --
--- TOC entry 181 (class 1259 OID 98048)
 -- Name: dib_traducciomap; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -435,7 +412,6 @@ CREATE TABLE dib_traducciomap (
 ALTER TABLE digitalib.dib_traducciomap OWNER TO digitalib;
 
 --
--- TOC entry 184 (class 1259 OID 98115)
 -- Name: dib_transaccio; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -480,14 +456,14 @@ CREATE TABLE dib_transaccio (
     arxiuoptparamcustorexpid character varying(255),
     nom character varying(255),
     infoscanpapersize character varying(100),
-    infoscandatacaptura timestamp without time zone
+    infoscandatacaptura timestamp without time zone,
+    transmultipleid bigint
 );
 
 
 ALTER TABLE digitalib.dib_transaccio OWNER TO digitalib;
 
 --
--- TOC entry 2224 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN dib_transaccio.arxiureqparamdocestatelabora; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -496,7 +472,6 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparamdocestatelabora IS 'documentEstatE
 
 
 --
--- TOC entry 2225 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN dib_transaccio.arxiureqparamdocumenttipus; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -505,7 +480,6 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparamdocumenttipus IS 'TDxx';
 
 
 --
--- TOC entry 2226 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN dib_transaccio.arxiureqparaminteressats; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -514,7 +488,6 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparaminteressats IS 'Llistat de Nifs de
 
 
 --
--- TOC entry 2227 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN dib_transaccio.arxiureqparamorigen; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -524,7 +497,6 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparamorigen IS '0 Ciutada
 
 
 --
--- TOC entry 2228 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN dib_transaccio.arxiureqparamorgans; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -533,7 +505,6 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparamorgans IS 'Codi DIR3 dels organs a
 
 
 --
--- TOC entry 2229 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN dib_transaccio.nom; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
@@ -542,7 +513,19 @@ COMMENT ON COLUMN dib_transaccio.nom IS 'Nom descriptiu de la transaccio';
 
 
 --
--- TOC entry 175 (class 1259 OID 97886)
+-- Name: dib_transmultiple; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
+--
+
+CREATE TABLE dib_transmultiple (
+    transmultipleid bigint NOT NULL,
+    descripcio character varying(256) NOT NULL,
+    fitxerescanejatid bigint
+);
+
+
+ALTER TABLE digitalib.dib_transmultiple OWNER TO digitalib;
+
+--
 -- Name: dib_usuariaplicacio; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -562,7 +545,6 @@ CREATE TABLE dib_usuariaplicacio (
 ALTER TABLE digitalib.dib_usuariaplicacio OWNER TO digitalib;
 
 --
--- TOC entry 174 (class 1259 OID 97872)
 -- Name: dib_usuaripersona; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -584,7 +566,6 @@ CREATE TABLE dib_usuaripersona (
 ALTER TABLE digitalib.dib_usuaripersona OWNER TO digitalib;
 
 --
--- TOC entry 2041 (class 2606 OID 98202)
 -- Name: dib_apisimple_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -593,7 +574,6 @@ ALTER TABLE ONLY dib_apisimple
 
 
 --
--- TOC entry 2060 (class 2606 OID 98728)
 -- Name: dib_auditoria_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -602,7 +582,6 @@ ALTER TABLE ONLY dib_auditoria
 
 
 --
--- TOC entry 2069 (class 2606 OID 114599)
 -- Name: dib_avis_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -611,7 +590,6 @@ ALTER TABLE ONLY dib_avis
 
 
 --
--- TOC entry 2010 (class 2606 OID 97994)
 -- Name: dib_cfggrup_uk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -620,7 +598,6 @@ ALTER TABLE ONLY dib_configuraciogrup
 
 
 --
--- TOC entry 2053 (class 2606 OID 98739)
 -- Name: dib_conffirma_nom_uk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -629,7 +606,6 @@ ALTER TABLE ONLY dib_configuraciofirma
 
 
 --
--- TOC entry 2057 (class 2606 OID 98524)
 -- Name: dib_configuraciofirma_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -638,7 +614,6 @@ ALTER TABLE ONLY dib_configuraciofirma
 
 
 --
--- TOC entry 2012 (class 2606 OID 97992)
 -- Name: dib_configuraciogrup_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -647,7 +622,6 @@ ALTER TABLE ONLY dib_configuraciogrup
 
 
 --
--- TOC entry 2022 (class 2606 OID 98078)
 -- Name: dib_estadistica_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -656,7 +630,6 @@ ALTER TABLE ONLY dib_estadistica
 
 
 --
--- TOC entry 1959 (class 2606 OID 97855)
 -- Name: dib_fitxer_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -665,7 +638,6 @@ ALTER TABLE ONLY dib_fitxer
 
 
 --
--- TOC entry 1962 (class 2606 OID 97857)
 -- Name: dib_idioma_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -674,7 +646,6 @@ ALTER TABLE ONLY dib_idioma
 
 
 --
--- TOC entry 2047 (class 2606 OID 98235)
 -- Name: dib_infocustody_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -683,7 +654,6 @@ ALTER TABLE ONLY dib_infocustody
 
 
 --
--- TOC entry 2044 (class 2606 OID 98221)
 -- Name: dib_infosignatura_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -692,7 +662,6 @@ ALTER TABLE ONLY dib_infosignatura
 
 
 --
--- TOC entry 2063 (class 2606 OID 111904)
 -- Name: dib_metadada_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -701,7 +670,6 @@ ALTER TABLE ONLY dib_metadada
 
 
 --
--- TOC entry 1985 (class 2606 OID 97945)
 -- Name: dib_perfil_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -710,7 +678,6 @@ ALTER TABLE ONLY dib_perfil
 
 
 --
--- TOC entry 1993 (class 2606 OID 98299)
 -- Name: dib_perfil_uk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -719,7 +686,6 @@ ALTER TABLE ONLY dib_perfil
 
 
 --
--- TOC entry 1996 (class 2606 OID 97973)
 -- Name: dib_perfilusrapp_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -728,7 +694,6 @@ ALTER TABLE ONLY dib_perfilusrapp
 
 
 --
--- TOC entry 1999 (class 2606 OID 98040)
 -- Name: dib_perfusrapp_per_usrapp_uk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -737,7 +702,6 @@ ALTER TABLE ONLY dib_perfilusrapp
 
 
 --
--- TOC entry 1979 (class 2606 OID 97929)
 -- Name: dib_plugin_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -746,7 +710,6 @@ ALTER TABLE ONLY dib_plugin
 
 
 --
--- TOC entry 2028 (class 2606 OID 98099)
 -- Name: dib_plugincridada_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -755,7 +718,6 @@ ALTER TABLE ONLY dib_plugincridada
 
 
 --
--- TOC entry 2015 (class 2606 OID 98055)
 -- Name: dib_traduccio_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -764,7 +726,6 @@ ALTER TABLE ONLY dib_traduccio
 
 
 --
--- TOC entry 2020 (class 2606 OID 98057)
 -- Name: dib_traducmap_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -773,7 +734,6 @@ ALTER TABLE ONLY dib_traducciomap
 
 
 --
--- TOC entry 2036 (class 2606 OID 98120)
 -- Name: dib_transaccio_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -782,7 +742,6 @@ ALTER TABLE ONLY dib_transaccio
 
 
 --
--- TOC entry 2039 (class 2606 OID 98247)
 -- Name: dib_transaccio_webid_uk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -791,7 +750,14 @@ ALTER TABLE ONLY dib_transaccio
 
 
 --
--- TOC entry 1974 (class 2606 OID 97901)
+-- Name: dib_transmultiple_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
+--
+
+ALTER TABLE ONLY dib_transmultiple
+    ADD CONSTRAINT dib_transmultiple_pk PRIMARY KEY (transmultipleid);
+
+
+--
 -- Name: dib_usrapp_username_uk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -800,7 +766,6 @@ ALTER TABLE ONLY dib_usuariaplicacio
 
 
 --
--- TOC entry 1967 (class 2606 OID 97905)
 -- Name: dib_usrperson_nif_uk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -809,7 +774,6 @@ ALTER TABLE ONLY dib_usuaripersona
 
 
 --
--- TOC entry 1969 (class 2606 OID 97903)
 -- Name: dib_usrperson_username_uk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -818,7 +782,6 @@ ALTER TABLE ONLY dib_usuaripersona
 
 
 --
--- TOC entry 1976 (class 2606 OID 97896)
 -- Name: dib_usuariaplicacio_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -827,7 +790,6 @@ ALTER TABLE ONLY dib_usuariaplicacio
 
 
 --
--- TOC entry 1971 (class 2606 OID 97876)
 -- Name: dib_usuaripersona_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -836,7 +798,6 @@ ALTER TABLE ONLY dib_usuaripersona
 
 
 --
--- TOC entry 2042 (class 1259 OID 98208)
 -- Name: dib_apisimple_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -844,7 +805,6 @@ CREATE INDEX dib_apisimple_pk_i ON dib_apisimple USING btree (apisimpleid);
 
 
 --
--- TOC entry 2061 (class 1259 OID 98729)
 -- Name: dib_auditoria_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -852,7 +812,6 @@ CREATE INDEX dib_auditoria_pk_i ON dib_auditoria USING btree (auditoriaid);
 
 
 --
--- TOC entry 2066 (class 1259 OID 114617)
 -- Name: dib_avis_configgrupid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -860,7 +819,6 @@ CREATE INDEX dib_avis_configgrupid_fk_i ON dib_avis USING btree (configgrupid);
 
 
 --
--- TOC entry 2067 (class 1259 OID 114616)
 -- Name: dib_avis_descripcioid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -868,7 +826,6 @@ CREATE INDEX dib_avis_descripcioid_fk_i ON dib_avis USING btree (descripcioid);
 
 
 --
--- TOC entry 2070 (class 1259 OID 114615)
 -- Name: dib_avis_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -876,7 +833,6 @@ CREATE INDEX dib_avis_pk_i ON dib_avis USING btree (avisid);
 
 
 --
--- TOC entry 2001 (class 1259 OID 98022)
 -- Name: dib_cfggrup_logofooterid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -884,7 +840,6 @@ CREATE INDEX dib_cfggrup_logofooterid_fk_i ON dib_configuraciogrup USING btree (
 
 
 --
--- TOC entry 2002 (class 1259 OID 98021)
 -- Name: dib_cfggrup_logoheaderid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -892,7 +847,6 @@ CREATE INDEX dib_cfggrup_logoheaderid_fk_i ON dib_configuraciogrup USING btree (
 
 
 --
--- TOC entry 2003 (class 1259 OID 98669)
 -- Name: dib_cfggrup_perfilcoau2_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -900,7 +854,6 @@ CREATE INDEX dib_cfggrup_perfilcoau2_fk_i ON dib_configuraciogrup USING btree (p
 
 
 --
--- TOC entry 2004 (class 1259 OID 98328)
 -- Name: dib_cfggrup_perfilcoau_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -908,7 +861,6 @@ CREATE INDEX dib_cfggrup_perfilcoau_fk_i ON dib_configuraciogrup USING btree (pe
 
 
 --
--- TOC entry 2005 (class 1259 OID 98670)
 -- Name: dib_cfggrup_perfilcust2_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -916,7 +868,6 @@ CREATE INDEX dib_cfggrup_perfilcust2_fk_i ON dib_configuraciogrup USING btree (p
 
 
 --
--- TOC entry 2006 (class 1259 OID 98329)
 -- Name: dib_cfggrup_perfilcust_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -924,7 +875,6 @@ CREATE INDEX dib_cfggrup_perfilcust_fk_i ON dib_configuraciogrup USING btree (pe
 
 
 --
--- TOC entry 2007 (class 1259 OID 98671)
 -- Name: dib_cfggrup_perfilscan2_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -932,7 +882,6 @@ CREATE INDEX dib_cfggrup_perfilscan2_fk_i ON dib_configuraciogrup USING btree (p
 
 
 --
--- TOC entry 2008 (class 1259 OID 98327)
 -- Name: dib_cfggrup_perfilscan_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -940,7 +889,6 @@ CREATE INDEX dib_cfggrup_perfilscan_fk_i ON dib_configuraciogrup USING btree (pe
 
 
 --
--- TOC entry 2049 (class 1259 OID 98540)
 -- Name: dib_conffirma_algofirma_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -948,7 +896,6 @@ CREATE INDEX dib_conffirma_algofirma_fk_i ON dib_configuraciofirma USING btree (
 
 
 --
--- TOC entry 2050 (class 1259 OID 98541)
 -- Name: dib_conffirma_firmatper_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -956,7 +903,6 @@ CREATE INDEX dib_conffirma_firmatper_fk_i ON dib_configuraciofirma USING btree (
 
 
 --
--- TOC entry 2051 (class 1259 OID 98542)
 -- Name: dib_conffirma_motiudele_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -964,7 +910,6 @@ CREATE INDEX dib_conffirma_motiudele_fk_i ON dib_configuraciofirma USING btree (
 
 
 --
--- TOC entry 2054 (class 1259 OID 98608)
 -- Name: dib_conffirma_plugfirma_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -972,7 +917,6 @@ CREATE INDEX dib_conffirma_plugfirma_fk_i ON dib_configuraciofirma USING btree (
 
 
 --
--- TOC entry 2055 (class 1259 OID 98543)
 -- Name: dib_conffirma_plugsegell_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -980,7 +924,6 @@ CREATE INDEX dib_conffirma_plugsegell_fk_i ON dib_configuraciofirma USING btree 
 
 
 --
--- TOC entry 2058 (class 1259 OID 98544)
 -- Name: dib_configuraciofirma_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -988,7 +931,6 @@ CREATE INDEX dib_configuraciofirma_pk_i ON dib_configuraciofirma USING btree (co
 
 
 --
--- TOC entry 2013 (class 1259 OID 98020)
 -- Name: dib_configuraciogrup_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -996,7 +938,6 @@ CREATE INDEX dib_configuraciogrup_pk_i ON dib_configuraciogrup USING btree (conf
 
 
 --
--- TOC entry 2023 (class 1259 OID 98166)
 -- Name: dib_estadistica_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1004,7 +945,6 @@ CREATE INDEX dib_estadistica_pk_i ON dib_estadistica USING btree (estadisticaid)
 
 
 --
--- TOC entry 1960 (class 1259 OID 97862)
 -- Name: dib_fitxer_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1012,7 +952,6 @@ CREATE INDEX dib_fitxer_pk_i ON dib_fitxer USING btree (fitxerid);
 
 
 --
--- TOC entry 1963 (class 1259 OID 97863)
 -- Name: dib_idioma_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1020,7 +959,6 @@ CREATE INDEX dib_idioma_pk_i ON dib_idioma USING btree (idiomaid);
 
 
 --
--- TOC entry 2048 (class 1259 OID 98242)
 -- Name: dib_infocustody_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1028,7 +966,6 @@ CREATE INDEX dib_infocustody_pk_i ON dib_infocustody USING btree (infocustodyid)
 
 
 --
--- TOC entry 2045 (class 1259 OID 98243)
 -- Name: dib_infosignatura_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1036,7 +973,6 @@ CREATE INDEX dib_infosignatura_pk_i ON dib_infosignatura USING btree (infosignat
 
 
 --
--- TOC entry 2064 (class 1259 OID 111920)
 -- Name: dib_metadada_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1044,7 +980,6 @@ CREATE INDEX dib_metadada_pk_i ON dib_metadada USING btree (metadadaid);
 
 
 --
--- TOC entry 2065 (class 1259 OID 111921)
 -- Name: dib_metadada_transaccioid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1052,7 +987,6 @@ CREATE INDEX dib_metadada_transaccioid_fk_i ON dib_metadada USING btree (transac
 
 
 --
--- TOC entry 1981 (class 1259 OID 98209)
 -- Name: dib_perfil_apisimpleid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1060,7 +994,6 @@ CREATE INDEX dib_perfil_apisimpleid_fk_i ON dib_perfil USING btree (apisimpleid)
 
 
 --
--- TOC entry 1982 (class 1259 OID 98709)
 -- Name: dib_perfil_descripcioid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1068,7 +1001,6 @@ CREATE INDEX dib_perfil_descripcioid_fk_i ON dib_perfil USING btree (descripcioi
 
 
 --
--- TOC entry 1983 (class 1259 OID 98708)
 -- Name: dib_perfil_nomid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1076,7 +1008,6 @@ CREATE INDEX dib_perfil_nomid_fk_i ON dib_perfil USING btree (nomid);
 
 
 --
--- TOC entry 1986 (class 1259 OID 98023)
 -- Name: dib_perfil_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1084,7 +1015,6 @@ CREATE INDEX dib_perfil_pk_i ON dib_perfil USING btree (perfilid);
 
 
 --
--- TOC entry 1987 (class 1259 OID 98027)
 -- Name: dib_perfil_plugin_pdcid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1092,7 +1022,6 @@ CREATE INDEX dib_perfil_plugin_pdcid_fk_i ON dib_perfil USING btree (plugindoccu
 
 
 --
--- TOC entry 1988 (class 1259 OID 98025)
 -- Name: dib_perfil_plugin_psid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1100,7 +1029,6 @@ CREATE INDEX dib_perfil_plugin_psid_fk_i ON dib_perfil USING btree (configuracio
 
 
 --
--- TOC entry 1989 (class 1259 OID 98026)
 -- Name: dib_perfil_pluginarxiuid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1108,7 +1036,6 @@ CREATE INDEX dib_perfil_pluginarxiuid_fk_i ON dib_perfil USING btree (pluginarxi
 
 
 --
--- TOC entry 1990 (class 1259 OID 98335)
 -- Name: dib_perfil_plugscanweb2_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1116,7 +1043,6 @@ CREATE INDEX dib_perfil_plugscanweb2_fk_i ON dib_perfil USING btree (pluginscanw
 
 
 --
--- TOC entry 1991 (class 1259 OID 98024)
 -- Name: dib_perfil_plugscanwebid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1124,7 +1050,6 @@ CREATE INDEX dib_perfil_plugscanwebid_fk_i ON dib_perfil USING btree (pluginscan
 
 
 --
--- TOC entry 1994 (class 1259 OID 98029)
 -- Name: dib_perfilusrapp_perfilid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1132,7 +1057,6 @@ CREATE INDEX dib_perfilusrapp_perfilid_fk_i ON dib_perfilusrapp USING btree (per
 
 
 --
--- TOC entry 1997 (class 1259 OID 98028)
 -- Name: dib_perfilusrapp_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1140,7 +1064,6 @@ CREATE INDEX dib_perfilusrapp_pk_i ON dib_perfilusrapp USING btree (perfilusrapp
 
 
 --
--- TOC entry 2000 (class 1259 OID 98030)
 -- Name: dib_perfusrapp_usrappid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1148,7 +1071,6 @@ CREATE INDEX dib_perfusrapp_usrappid_fk_i ON dib_perfilusrapp USING btree (usuar
 
 
 --
--- TOC entry 2024 (class 1259 OID 98169)
 -- Name: dib_plugcrid_paramfitxer_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1156,7 +1078,6 @@ CREATE INDEX dib_plugcrid_paramfitxer_fk_i ON dib_plugincridada USING btree (par
 
 
 --
--- TOC entry 2025 (class 1259 OID 98168)
 -- Name: dib_plugcrid_pluginid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1164,7 +1085,6 @@ CREATE INDEX dib_plugcrid_pluginid_fk_i ON dib_plugincridada USING btree (plugin
 
 
 --
--- TOC entry 2026 (class 1259 OID 98170)
 -- Name: dib_plugcrid_retofitxerid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1172,7 +1092,6 @@ CREATE INDEX dib_plugcrid_retofitxerid_fk_i ON dib_plugincridada USING btree (re
 
 
 --
--- TOC entry 1980 (class 1259 OID 98031)
 -- Name: dib_plugin_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1180,7 +1099,6 @@ CREATE INDEX dib_plugin_pk_i ON dib_plugin USING btree (pluginid);
 
 
 --
--- TOC entry 2029 (class 1259 OID 98167)
 -- Name: dib_plugincridada_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1188,7 +1106,6 @@ CREATE INDEX dib_plugincridada_pk_i ON dib_plugincridada USING btree (plugincrid
 
 
 --
--- TOC entry 2016 (class 1259 OID 98058)
 -- Name: dib_traduccio_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1196,7 +1113,6 @@ CREATE INDEX dib_traduccio_pk_i ON dib_traduccio USING btree (traduccioid);
 
 
 --
--- TOC entry 2017 (class 1259 OID 98059)
 -- Name: dib_traducciomap_idiomaid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1204,7 +1120,6 @@ CREATE INDEX dib_traducciomap_idiomaid_fk_i ON dib_traducciomap USING btree (idi
 
 
 --
--- TOC entry 2018 (class 1259 OID 98060)
 -- Name: dib_traducciomap_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1212,7 +1127,6 @@ CREATE INDEX dib_traducciomap_pk_i ON dib_traducciomap USING btree (traducciomap
 
 
 --
--- TOC entry 2030 (class 1259 OID 98310)
 -- Name: dib_transaccio_fileplain_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1220,7 +1134,6 @@ CREATE INDEX dib_transaccio_fileplain_fk_i ON dib_transaccio USING btree (fitxer
 
 
 --
--- TOC entry 2031 (class 1259 OID 98311)
 -- Name: dib_transaccio_filesign_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1228,7 +1141,6 @@ CREATE INDEX dib_transaccio_filesign_fk_i ON dib_transaccio USING btree (fitxers
 
 
 --
--- TOC entry 2032 (class 1259 OID 98245)
 -- Name: dib_transaccio_infocustid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1236,7 +1148,6 @@ CREATE INDEX dib_transaccio_infocustid_fk_i ON dib_transaccio USING btree (infoc
 
 
 --
--- TOC entry 2033 (class 1259 OID 98244)
 -- Name: dib_transaccio_infosignid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1244,7 +1155,6 @@ CREATE INDEX dib_transaccio_infosignid_fk_i ON dib_transaccio USING btree (infos
 
 
 --
--- TOC entry 2034 (class 1259 OID 98270)
 -- Name: dib_transaccio_perfilid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1252,7 +1162,6 @@ CREATE INDEX dib_transaccio_perfilid_fk_i ON dib_transaccio USING btree (perfili
 
 
 --
--- TOC entry 2037 (class 1259 OID 98171)
 -- Name: dib_transaccio_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1260,7 +1169,27 @@ CREATE INDEX dib_transaccio_pk_i ON dib_transaccio USING btree (transaccioid);
 
 
 --
--- TOC entry 1964 (class 1259 OID 98034)
+-- Name: dib_transaccio_transmulid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
+--
+
+CREATE INDEX dib_transaccio_transmulid_fk_i ON dib_transaccio USING btree (transmultipleid);
+
+
+--
+-- Name: dib_transmul_fscaned_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
+--
+
+CREATE INDEX dib_transmul_fscaned_fk_i ON dib_transmultiple USING btree (fitxerescanejatid);
+
+
+--
+-- Name: dib_transmultiple_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
+--
+
+CREATE INDEX dib_transmultiple_pk_i ON dib_transmultiple USING btree (transmultipleid);
+
+
+--
 -- Name: dib_usrperson_confgrupid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1268,7 +1197,6 @@ CREATE INDEX dib_usrperson_confgrupid_fk_i ON dib_usuaripersona USING btree (con
 
 
 --
--- TOC entry 1965 (class 1259 OID 97913)
 -- Name: dib_usrperson_idiomaid_fk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1276,7 +1204,6 @@ CREATE INDEX dib_usrperson_idiomaid_fk_i ON dib_usuaripersona USING btree (idiom
 
 
 --
--- TOC entry 1977 (class 1259 OID 97911)
 -- Name: dib_usuariaplicacio_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1284,7 +1211,6 @@ CREATE INDEX dib_usuariaplicacio_pk_i ON dib_usuariaplicacio USING btree (usuari
 
 
 --
--- TOC entry 1972 (class 1259 OID 97912)
 -- Name: dib_usuaripersona_pk_i; Type: INDEX; Schema: digitalib; Owner: digitalib; Tablespace: 
 --
 
@@ -1292,7 +1218,6 @@ CREATE INDEX dib_usuaripersona_pk_i ON dib_usuaripersona USING btree (usuaripers
 
 
 --
--- TOC entry 2106 (class 2606 OID 114610)
 -- Name: dib_avis_cfggrup_configgrup_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1301,7 +1226,6 @@ ALTER TABLE ONLY dib_avis
 
 
 --
--- TOC entry 2105 (class 2606 OID 114600)
 -- Name: dib_avis_traduccio_desc_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1310,7 +1234,6 @@ ALTER TABLE ONLY dib_avis
 
 
 --
--- TOC entry 2083 (class 2606 OID 97995)
 -- Name: dib_cfggrup_fitxer_cap_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1319,7 +1242,6 @@ ALTER TABLE ONLY dib_configuraciogrup
 
 
 --
--- TOC entry 2084 (class 2606 OID 98000)
 -- Name: dib_cfggrup_fitxer_peu_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1328,7 +1250,6 @@ ALTER TABLE ONLY dib_configuraciogrup
 
 
 --
--- TOC entry 2088 (class 2606 OID 98654)
 -- Name: dib_cfggrup_perfil_coau2_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1337,7 +1258,6 @@ ALTER TABLE ONLY dib_configuraciogrup
 
 
 --
--- TOC entry 2086 (class 2606 OID 98317)
 -- Name: dib_cfggrup_perfil_coau_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1346,7 +1266,6 @@ ALTER TABLE ONLY dib_configuraciogrup
 
 
 --
--- TOC entry 2089 (class 2606 OID 98659)
 -- Name: dib_cfggrup_perfil_cust2_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1355,7 +1274,6 @@ ALTER TABLE ONLY dib_configuraciogrup
 
 
 --
--- TOC entry 2087 (class 2606 OID 98322)
 -- Name: dib_cfggrup_perfil_cust_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1364,7 +1282,6 @@ ALTER TABLE ONLY dib_configuraciogrup
 
 
 --
--- TOC entry 2090 (class 2606 OID 98664)
 -- Name: dib_cfggrup_perfil_scan2_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1373,7 +1290,6 @@ ALTER TABLE ONLY dib_configuraciogrup
 
 
 --
--- TOC entry 2085 (class 2606 OID 98312)
 -- Name: dib_cfggrup_perfil_scan_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1382,7 +1298,6 @@ ALTER TABLE ONLY dib_configuraciogrup
 
 
 --
--- TOC entry 2100 (class 2606 OID 98603)
 -- Name: dib_conffirma_plugin_fir_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1391,7 +1306,6 @@ ALTER TABLE ONLY dib_configuraciofirma
 
 
 --
--- TOC entry 2101 (class 2606 OID 98525)
 -- Name: dib_conffirma_plugin_seg_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1400,7 +1314,6 @@ ALTER TABLE ONLY dib_configuraciofirma
 
 
 --
--- TOC entry 2102 (class 2606 OID 98556)
 -- Name: dib_conffirma_traduccio_ff_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1409,7 +1322,6 @@ ALTER TABLE ONLY dib_configuraciofirma
 
 
 --
--- TOC entry 2103 (class 2606 OID 98561)
 -- Name: dib_conffirma_traduccio_md_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1418,7 +1330,6 @@ ALTER TABLE ONLY dib_configuraciofirma
 
 
 --
--- TOC entry 2104 (class 2606 OID 111915)
 -- Name: dib_meta_transaccio_trans_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1427,7 +1338,6 @@ ALTER TABLE ONLY dib_metadada
 
 
 --
--- TOC entry 2076 (class 2606 OID 98203)
 -- Name: dib_perfil_apisimple_firma_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1436,7 +1346,6 @@ ALTER TABLE ONLY dib_perfil
 
 
 --
--- TOC entry 2080 (class 2606 OID 98741)
 -- Name: dib_perfil_conffirma_cf_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1445,7 +1354,6 @@ ALTER TABLE ONLY dib_perfil
 
 
 --
--- TOC entry 2074 (class 2606 OID 97958)
 -- Name: dib_perfil_plugin_arxiu_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1454,7 +1362,6 @@ ALTER TABLE ONLY dib_perfil
 
 
 --
--- TOC entry 2075 (class 2606 OID 97963)
 -- Name: dib_perfil_plugin_cust_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1463,7 +1370,6 @@ ALTER TABLE ONLY dib_perfil
 
 
 --
--- TOC entry 2077 (class 2606 OID 98330)
 -- Name: dib_perfil_plugin_scan2_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1472,7 +1378,6 @@ ALTER TABLE ONLY dib_perfil
 
 
 --
--- TOC entry 2073 (class 2606 OID 97948)
 -- Name: dib_perfil_plugin_scan_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1481,7 +1386,6 @@ ALTER TABLE ONLY dib_perfil
 
 
 --
--- TOC entry 2079 (class 2606 OID 98703)
 -- Name: dib_perfil_traduccio_descri_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1490,7 +1394,6 @@ ALTER TABLE ONLY dib_perfil
 
 
 --
--- TOC entry 2078 (class 2606 OID 98698)
 -- Name: dib_perfil_traduccio_nomid_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1499,7 +1402,6 @@ ALTER TABLE ONLY dib_perfil
 
 
 --
--- TOC entry 2081 (class 2606 OID 97974)
 -- Name: dib_perfusrapp_perfil_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1508,7 +1410,6 @@ ALTER TABLE ONLY dib_perfilusrapp
 
 
 --
--- TOC entry 2082 (class 2606 OID 98015)
 -- Name: dib_perfusrapp_usrapp_usrap_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1517,7 +1418,6 @@ ALTER TABLE ONLY dib_perfilusrapp
 
 
 --
--- TOC entry 2094 (class 2606 OID 98161)
 -- Name: dib_plugcrid_fitxer_paramet_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1526,7 +1426,6 @@ ALTER TABLE ONLY dib_plugincridada
 
 
 --
--- TOC entry 2092 (class 2606 OID 98151)
 -- Name: dib_plugcrid_fitxer_retornf_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1535,7 +1434,6 @@ ALTER TABLE ONLY dib_plugincridada
 
 
 --
--- TOC entry 2093 (class 2606 OID 98156)
 -- Name: dib_plugcrid_plugin_plugini_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1544,7 +1442,6 @@ ALTER TABLE ONLY dib_plugincridada
 
 
 --
--- TOC entry 2091 (class 2606 OID 98061)
 -- Name: dib_traducmap_traduccio_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1553,7 +1450,6 @@ ALTER TABLE ONLY dib_traducciomap
 
 
 --
--- TOC entry 2098 (class 2606 OID 98300)
 -- Name: dib_transaccio_fitxer_pla_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1562,7 +1458,6 @@ ALTER TABLE ONLY dib_transaccio
 
 
 --
--- TOC entry 2099 (class 2606 OID 98305)
 -- Name: dib_transaccio_fitxer_sign_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1571,7 +1466,6 @@ ALTER TABLE ONLY dib_transaccio
 
 
 --
--- TOC entry 2096 (class 2606 OID 98236)
 -- Name: dib_transaccio_infocust_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1580,7 +1474,6 @@ ALTER TABLE ONLY dib_transaccio
 
 
 --
--- TOC entry 2095 (class 2606 OID 98222)
 -- Name: dib_transaccio_infosign_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1589,7 +1482,6 @@ ALTER TABLE ONLY dib_transaccio
 
 
 --
--- TOC entry 2097 (class 2606 OID 98253)
 -- Name: dib_transaccio_perfil_perfi_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1598,7 +1490,22 @@ ALTER TABLE ONLY dib_transaccio
 
 
 --
--- TOC entry 2072 (class 2606 OID 98010)
+-- Name: dib_transaccio_transmul_tm_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
+--
+
+ALTER TABLE ONLY dib_transaccio
+    ADD CONSTRAINT dib_transaccio_transmul_tm_fk FOREIGN KEY (transmultipleid) REFERENCES dib_transmultiple(transmultipleid);
+
+
+--
+-- Name: dib_transmul_fitxer_fies_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
+--
+
+ALTER TABLE ONLY dib_transmultiple
+    ADD CONSTRAINT dib_transmul_fitxer_fies_fk FOREIGN KEY (fitxerescanejatid) REFERENCES dib_fitxer(fitxerid);
+
+
+--
 -- Name: dib_usrperson_cfggrup_conf_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1607,7 +1514,6 @@ ALTER TABLE ONLY dib_usuaripersona
 
 
 --
--- TOC entry 2071 (class 2606 OID 97906)
 -- Name: dib_usrperson_idioma_idioma_fk; Type: FK CONSTRAINT; Schema: digitalib; Owner: digitalib
 --
 
@@ -1615,7 +1521,7 @@ ALTER TABLE ONLY dib_usuaripersona
     ADD CONSTRAINT dib_usrperson_idioma_idioma_fk FOREIGN KEY (idiomaid) REFERENCES dib_idioma(idiomaid);
 
 
--- Completed on 2020-07-22 12:34:41
+-- Completed on 2020-10-06 12:57:20
 
 --
 -- PostgreSQL database dump complete
