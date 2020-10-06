@@ -54,33 +54,27 @@ public class ApiMassiveScanWebSimpleExampleConsole {
     try {
 
       api = getApiMassiveScanWebSimple();
-      
-      
+
       // Descarregar Separador
       {
         MassiveScanWebSimpleFile separador = api.getSeparatorPage(languageUI);
-        
+
         byte[] data = separador.getData();
-        
+
         FileOutputStream fos = new FileOutputStream("Separador.pdf");
-        
+
         fos.write(data);
-        
-        
+
         fos.close();
-        
-        
+
       }
-      
-      
-      
-      
 
       // Recuperar Perfils disponibles
 
       MassiveScanWebSimpleAvailableProfiles profiles = api.getAvailableProfiles(languageUI);
 
-      List<MassiveScanWebSimpleAvailableProfile> profilesList = profiles.getAvailableProfiles();
+      List<MassiveScanWebSimpleAvailableProfile> profilesList = profiles
+          .getAvailableProfiles();
 
       if (profilesList == null || profilesList.size() == 0) {
         System.err.println("NO HI HA PERFILS PER AQUEST USUARI APLICACIÓ");
@@ -100,12 +94,12 @@ public class ApiMassiveScanWebSimpleExampleConsole {
           profilesByIndex.put(i, profile);
           i++;
         }
-       
+
         System.out.print(" Seleccioni un perfil: ");
         Scanner in = new Scanner(System.in);
 
         int n = in.nextInt();
-        
+
         if (n == 0) {
           return;
         }
@@ -125,8 +119,8 @@ public class ApiMassiveScanWebSimpleExampleConsole {
 
         final String profileCode = scanWebProfileSelected.getCode();
         final int view = MassiveScanWebSimpleGetTransactionIdRequest.VIEW_IFRAME;
-        //ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN;
-        
+        // ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN;
+
         final String transactionName = "Transaccio Exemple " + System.currentTimeMillis();
 
         String funcionariUsername = "u00666";
@@ -137,16 +131,17 @@ public class ApiMassiveScanWebSimpleExampleConsole {
 
           case MassiveScanWebSimpleAvailableProfile.PROFILE_TYPE_ONLY_SCAN:
 
-            transacctionIdRequest = new MassiveScanWebSimpleGetTransactionIdRequest(transactionName, profileCode,
-                view, languageUI, funcionariUsername);
+            transacctionIdRequest = new MassiveScanWebSimpleGetTransactionIdRequest(
+                transactionName, profileCode, view, languageUI, funcionariUsername);
 
           break;
 
           case MassiveScanWebSimpleAvailableProfile.PROFILE_TYPE_SCAN_AND_SIGNATURE: {
             MassiveScanWebSimpleSignatureParameters signatureParameters = getSignatureParameters();
 
-            transacctionIdRequest = new MassiveScanWebSimpleGetTransactionIdRequest(transactionName, profileCode,
-                view, languageUI, funcionariUsername, signatureParameters);
+            transacctionIdRequest = new MassiveScanWebSimpleGetTransactionIdRequest(
+                transactionName, profileCode, view, languageUI, funcionariUsername,
+                signatureParameters);
 
           }
 
@@ -162,16 +157,16 @@ public class ApiMassiveScanWebSimpleExampleConsole {
             // See getArxiuOptionalParameters() sample
             MassiveScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters = null;
 
-            transacctionIdRequest = new MassiveScanWebSimpleGetTransactionIdRequest(transactionName, profileCode,
-                view, languageUI, funcionariUsername, signatureParameters,
-                arxiuRequiredParameters, arxiuOptionalParameters);
+            transacctionIdRequest = new MassiveScanWebSimpleGetTransactionIdRequest(
+                transactionName, profileCode, view, languageUI, funcionariUsername,
+                signatureParameters, arxiuRequiredParameters, arxiuOptionalParameters);
 
           }
           break;
 
           default:
-            throw new Exception("Tipus de perfil desconegut "
-                + scanWebProfileSelected.getProfileType());
+            throw new Exception(
+                "Tipus de perfil desconegut " + scanWebProfileSelected.getProfileType());
 
         }
 
@@ -193,7 +188,8 @@ public class ApiMassiveScanWebSimpleExampleConsole {
       final String returnUrl = "http://" + host + ":" + port + "/returnurl/" + transactionID;
 
       MassiveScanWebSimpleStartTransactionRequest startTransactionInfo;
-      startTransactionInfo = new MassiveScanWebSimpleStartTransactionRequest(transactionID, returnUrl);
+      startTransactionInfo = new MassiveScanWebSimpleStartTransactionRequest(transactionID,
+          returnUrl);
 
       String redirectUrl = api.startTransaction(startTransactionInfo);
 
@@ -206,24 +202,24 @@ public class ApiMassiveScanWebSimpleExampleConsole {
       }
 
       readFromSocket(port);
-      
-      
-      MassiveScanWebSimpleSubTransactionsOfTransaction subs =  api.getSubTransactionsOfTransaction(transactionID);
-      
-      List<String> subtransacions= subs.getSubtransacions();
-      
+
+      MassiveScanWebSimpleSubTransactionsOfTransaction subs = api
+          .getSubTransactionsOfTransaction(transactionID);
+
+      List<String> subtransacions = subs.getSubtransacions();
+
       int count = 1;
-      
+
       for (String subTransactionID : subtransacions) {
-        
-      
+
         // Segons el tipus de perfil ja ho omplirà automàticament
         Boolean returnScannedFile = null;
         Boolean returnSignedFile = null;
         System.out.println();
         System.out.println();
-        
-        System.out.println( "-------------=====  SUBTRANSACCIO(" + count + ") [" +  subTransactionID + "] =====--------------");      
+
+        System.out.println("-------------=====  SUBTRANSACCIO(" + count + ") ["
+            + subTransactionID + "] =====--------------");
         System.out.println();
         count++;
         System.out.println(" Descarregant Informació dels Resultat:");
@@ -231,17 +227,18 @@ public class ApiMassiveScanWebSimpleExampleConsole {
         System.out.println("     * SubransaccioID = " + subTransactionID);
         System.out.println("     * returnScannedFile = " + returnScannedFile);
         System.out.println("     * returnSignedFile = " + returnSignedFile);
-  
+
         MassiveScanWebSimpleSubtransactionResultRequest resultRequest;
         resultRequest = new MassiveScanWebSimpleSubtransactionResultRequest(subTransactionID,
             returnScannedFile, returnSignedFile);
-  
-        MassiveScanWebSimpleSubtransactionResult result = api.getSubTransactionResult(resultRequest);
-  
+
+        MassiveScanWebSimpleSubtransactionResult result = api
+            .getSubTransactionResult(resultRequest);
+
         MassiveScanWebSimpleStatus transactionStatus = result.getStatus();
-  
+
         int status = transactionStatus.getStatus();
-  
+
         System.out.println(MassiveScanWebSimpleSubtransactionResult.toString(result));
         System.out.println();
         System.out.println();
@@ -254,14 +251,14 @@ public class ApiMassiveScanWebSimpleExampleConsole {
                 + " (requestedid). Pot ser el PLugin no està ben desenvolupat."
                 + " Consulti amb el seu administrador.");
             System.err.flush();
-  
+
           case MassiveScanWebSimpleStatus.STATUS_IN_PROGRESS: // = 1;
             System.out.flush();
             System.err.println("S'ha rebut un estat inconsistent del procés"
                 + " (En Progrés). Pot ser el PLugin no està ben desenvolupat."
                 + " Consulti amb el seu administrador.");
             System.err.flush();
-  
+
           case MassiveScanWebSimpleStatus.STATUS_FINAL_ERROR: // = -1;
           {
             System.out.flush();
@@ -272,11 +269,10 @@ public class ApiMassiveScanWebSimpleExampleConsole {
               System.err.println(desc);
             }
             System.err.flush();
-            
-            
+
             continue;
           }
-  
+
           case MassiveScanWebSimpleStatus.STATUS_CANCELLED: // = -2;
           {
             System.out.flush();
@@ -284,53 +280,54 @@ public class ApiMassiveScanWebSimpleExampleConsole {
             System.err.flush();
             continue;
           }
-  
+
           case MassiveScanWebSimpleStatus.STATUS_FINAL_OK: // = 2;
           {
-  
+
             if (result.getScannedFile() != null) {
-              File scanFile = new File( (count -1) + "_scanfile."
-                  + result.getScannedFileInfo().getFormatFile());
-  
+              File scanFile = new File(
+                  (count - 1) + "_scanfile." + result.getScannedFileInfo().getFormatFile());
+
               FileOutputStream fos = new FileOutputStream(scanFile);
               fos.write(result.getScannedFile().getData());
               fos.flush();
               fos.close();
-  
+
               System.out.println();
               System.out.println();
               System.out.println("Fitxer Escanejat guardat a " + scanFile.getAbsolutePath());
             }
-  
+
             MassiveScanWebSimpleFile signedFile = result.getSignedFile();
-  
+
             if (signedFile != null) {
-              File signed = new File((count -1) + "_signed." + signedFile.getNom());
-  
+              File signed = new File((count - 1) + "_signed." + signedFile.getNom());
+
               FileOutputStream fos = new FileOutputStream(signed);
               fos.write(signedFile.getData());
               fos.flush();
               fos.close();
-  
-              System.out.println("Firma del Fitxer Escanejat guardat a "
-                  + signed.getAbsolutePath());
+
+              System.out
+                  .println("Firma del Fitxer Escanejat guardat a " + signed.getAbsolutePath());
             }
-  
+
             MassiveScanWebSimpleFile detachedSignedFile = result.getDetachedSignatureFile();
-  
+
             if (detachedSignedFile != null) {
-              File detached = new File((count -1) + "_detached_sign."
-                  + detachedSignedFile.getNom());
-  
+              File detached = new File(
+                  (count - 1) + "_detached_sign." + detachedSignedFile.getNom());
+
               FileOutputStream fos = new FileOutputStream(detached);
               fos.write(detachedSignedFile.getData());
               fos.flush();
               fos.close();
-  
-              System.out.println("Document Detached de la Firma (Document Escanejat) guardat a "
-                  + detached.getAbsolutePath());
+
+              System.out
+                  .println("Document Detached de la Firma (Document Escanejat) guardat a "
+                      + detached.getAbsolutePath());
             }
-  
+
           } // Final Case Firma OK
         } // Final Switch Firma
       } // final for
@@ -350,8 +347,8 @@ public class ApiMassiveScanWebSimpleExampleConsole {
   }
 
   public static MassiveScanWebSimpleArxiuRequiredParameters getArxiuRequiredParameters() {
-    final List<String> personesInteressades = new ArrayList<String>(Arrays.asList("12345678X",
-        "87654321Z"));
+    final List<String> personesInteressades = new ArrayList<String>(
+        Arrays.asList("12345678X", "87654321Z"));
 
     /**
      * ScanWebSimpleArxiuRequiredParameters.CIUTADA
@@ -399,8 +396,9 @@ public class ApiMassiveScanWebSimpleExampleConsole {
     List<String> organsAfectats = new ArrayList<String>(Arrays.asList("A04013511"));
 
     MassiveScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
-    arxiuRequiredParameters = new MassiveScanWebSimpleArxiuRequiredParameters(ciutadaNif, ciutadaNom,
-        documentEstatElaboracio, documentTipus, origen, personesInteressades, organsAfectats);
+    arxiuRequiredParameters = new MassiveScanWebSimpleArxiuRequiredParameters(ciutadaNif,
+        ciutadaNom, documentEstatElaboracio, documentTipus, origen, personesInteressades,
+        organsAfectats);
     return arxiuRequiredParameters;
   }
 
@@ -436,8 +434,8 @@ public class ApiMassiveScanWebSimpleExampleConsole {
     final String funcionariNif = "12345678X";
 
     MassiveScanWebSimpleSignatureParameters signatureParameters;
-    signatureParameters = new MassiveScanWebSimpleSignatureParameters(languageDoc, funcionariNom,
-        funcionariNif);
+    signatureParameters = new MassiveScanWebSimpleSignatureParameters(languageDoc,
+        funcionariNom, funcionariNif);
     return signatureParameters;
   }
 
@@ -450,10 +448,10 @@ public class ApiMassiveScanWebSimpleExampleConsole {
       System.err
           .println("Nou Client Connectat desde " + clientSocket.getRemoteSocketAddress());
 
-      BufferedReader in = new BufferedReader(new InputStreamReader(
-          clientSocket.getInputStream()));
-      PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
-          clientSocket.getOutputStream())), true);
+      BufferedReader in = new BufferedReader(
+          new InputStreamReader(clientSocket.getInputStream()));
+      PrintWriter out = new PrintWriter(
+          new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())), true);
 
       String s;
       System.err.println(" =========================== ");
@@ -466,7 +464,8 @@ public class ApiMassiveScanWebSimpleExampleConsole {
       out.println("HTTP/1.0 200 OK");
       out.println("Content-Type: text/html");
       out.println("\r\n");
-      out.println("<html><body>OK (Revisi consola per saber l'estat final del proc&eacute;s)</body></html>");
+      out.println(
+          "<html><body>OK (Revisi consola per saber l'estat final del proc&eacute;s)</body></html>");
 
       System.err.println("Connexio amb el client finalitzada.");
       out.flush();

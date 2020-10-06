@@ -1,11 +1,11 @@
-
+﻿
 -- 2020-09-11 Digitalització Múltiple
 
 CREATE TABLE dib_transmultiple
 (
   transmultipleid bigint NOT NULL,
   descripcio character varying(256) NOT NULL,
-  fitxerescanejatid bigint;
+  fitxerescanejatid bigint,
   CONSTRAINT dib_transmultiple_pk PRIMARY KEY (transmultipleid),
   CONSTRAINT dib_transmul_fitxer_fies_fk FOREIGN KEY (fitxerescanejatid) REFERENCES dib_fitxer (fitxerid) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
