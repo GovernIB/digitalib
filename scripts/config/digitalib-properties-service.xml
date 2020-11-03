@@ -43,6 +43,16 @@
       es.caib.digitalib.maxsizeforscanneddocument=
       
       
+      <!-- Configuració de paràmetres de Firma  en Servidor -->
+      <!-- Unic valor de substitució és transaction que conte una instància de tipus es.caib.digitalib.jpa.TransaccioJPA -->
+      <!-- Exemples:  es.caib.digitalib.signreasonEL=${transaction.nom} |  es.caib.digitalib.signeremailEL=digitalib@fbit.org -->
+      es.caib.digitalib.signreasonEL=
+      es.caib.digitalib.signlocationEL=
+      es.caib.digitalib.signeremailEL=
+      
+      
+      
+      
       <!-- ======== PLUGIN USER-INFORMATION - DATABASE ======= -->
       es.caib.digitalib.userinformationplugin=org.fundaciobit.plugins.userinformation.database.DataBaseUserInformationPlugin
       es.caib.digitalib.plugins.userinformation.database.jndi=java:/es.caib.seycon.db.wl

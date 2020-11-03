@@ -1,6 +1,7 @@
 package es.caib.digitalib.logic;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Locale;
@@ -25,6 +26,7 @@ import org.fundaciobit.plugins.signature.api.SignaturesTableHeader;
 import org.fundaciobit.plugins.signature.api.StatusSignature;
 import org.fundaciobit.plugins.signature.api.StatusSignaturesSet;
 import org.fundaciobit.plugins.signatureserver.api.ISignatureServerPlugin;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import com.google.common.hash.Hashing;
@@ -180,11 +182,17 @@ public class PluginFirmaEnServidorLogicaEJB extends
           filtreCertificats, username, administrationID);
 
       String signID = transaccio.getTransactionWebId();
+      
+
 
       String name = fitxer.getNom();
-      String reason = "TEST SIGN"; // XYZ ZZZ
-      String location = "Palma"; // XYZ ZZZ
-      String signerEmail = null; // XYZ ZZZ
+      String reason = templateEngine(Configuracio.getSignReasonEL(), transaccio); 
+      
+      log.info("\n\n  getSignReasonEL => " + reason  + "\n\n");
+      
+      String location = templateEngine(Configuracio.getSignLocationEL(), transaccio); 
+      String signerEmail = templateEngine(Configuracio.getSignerEmailEL(), transaccio); 
+
       final int signNumber = 1;
       String languageSign = transaccio.getSignParamLanguageDoc();
 
@@ -384,6 +392,30 @@ public class PluginFirmaEnServidorLogicaEJB extends
     }
 
   }
+  
+  
+  
+  protected String templateEngine(String valueEL, TransaccioJPA transaccio)  {
+    
+    if (valueEL == null || valueEL.trim().length() == 0) {
+      return "";
+    }
+    
+    Map<String, Object> parameters = new HashMap<String, Object>();
+    parameters.put("transaction", transaccio);
+    
+    try {
+      return TemplateEngine.processExpressionLanguage(valueEL,parameters);
+    } catch (IOException e) {
+      log.error("error substituin valors de la firma en servidor: " + e.getMessage(), e);
+      return null;
+    }
+    
+    
+    
+  }
+  
+  
 
   public static int getPosicioTaulaDeFirmes(int pos) {
 

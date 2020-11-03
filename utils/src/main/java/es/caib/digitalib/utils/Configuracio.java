@@ -66,5 +66,24 @@ public class Configuracio implements Constants {
       return Long.valueOf(strVal);
     }
   }
+  
+  
+  
+  
+  public static String getSignReasonEL() {
+    return System.getProperty(DIGITALIB_PROPERTY_BASE + "signreasonEL");
+  }
+  
+  
+  public static String getSignLocationEL() {
+    return System.getProperty(DIGITALIB_PROPERTY_BASE + "signlocationEL");
+  }
+  
+  public static String getSignerEmailEL() {
+    return System.getProperty(DIGITALIB_PROPERTY_BASE + "signeremailEL");
+  }
+  
+  
+  
 
 }

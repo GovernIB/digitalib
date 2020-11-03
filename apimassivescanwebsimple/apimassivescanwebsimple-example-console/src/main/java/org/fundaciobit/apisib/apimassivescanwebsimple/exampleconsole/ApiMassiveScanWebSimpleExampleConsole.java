@@ -66,7 +66,6 @@ public class ApiMassiveScanWebSimpleExampleConsole {
         fos.write(data);
 
         fos.close();
-
       }
 
       // Recuperar Perfils disponibles
