@@ -3,7 +3,7 @@
 
 ***Versió estable***
 
-> - No hi ha versió estable
+> __digitalib-1.0.4-caib__ (branca [digitalib-1.0](../../tree/digitalib-1.0))
 
 ***Descripció***
 
