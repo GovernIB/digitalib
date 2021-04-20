@@ -139,7 +139,7 @@ public class PluginDocumentCustodyLogicaEJB extends
 
         document = new DocumentCustody(fitxerEscanejat.getNom(), fitxerEscanejat.getMime(),
             plainData);
-        final Boolean attachedDocument = true;
+        final Boolean attachedDocument = false;
         final String signatureType = infoSignatura.getSignType();
 
         byte[] signedData = FileSystemManager.getFileContent(fitxerFirmat.getFitxerID());
@@ -151,7 +151,7 @@ public class PluginDocumentCustodyLogicaEJB extends
         document = null;
         byte[] signedData = FileSystemManager.getFileContent(fitxerFirmat.getFitxerID());
 
-        final Boolean attachedDocument = false;
+        final Boolean attachedDocument = true;
         final String signatureType = infoSignatura.getSignType();
 
         String signatureTypeDC;
