@@ -726,8 +726,9 @@ public abstract class AbstractScanWebProcessController {
       File[] fitxers;
       try {
         fitxers = SplitPdf.detectPagesWithQR(destDir, data,
-            transaccioOriginal.getTransaccioID() + "_"
-                + transaccioOriginal.getTransactionWebId());
+            //transaccioOriginal.getTransaccioID() + "_" + transaccioOriginal.getTransactionWebId()
+            transaccioOriginal.getNom().replace(' ', '_').replace('\\', '_').replace('/', '_')            
+            );
       } catch (Exception e) {
         String msg = "Error desconegut fent Split del document: " + e.getMessage();
         log.error(msg, e);
@@ -756,6 +757,8 @@ public abstract class AbstractScanWebProcessController {
         FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
 
       }
+      
+      String nomTransaccioOriginal = transaccioOriginal.getNom();
 
       for (int i = 0; i < fitxers.length; i++) {
         
@@ -777,9 +780,9 @@ public abstract class AbstractScanWebProcessController {
   
             FileSystemManager.sobreescriureFitxer(file, fileID);
   
-            String nom = transaccioOriginal.getNom();
+            
   
-            transaccioOriginal.setNom(nom + " " + (i + 1) + "/" + fitxers.length);
+            transaccioOriginal.setNom(nomTransaccioOriginal + " " + (i + 1) + "/" + fitxers.length);
   
             transaccioOriginal.setFitxerEscanejatID(fileID);
   
@@ -806,25 +809,9 @@ public abstract class AbstractScanWebProcessController {
         } else {
 
           // clonar transaccioOriginal
-          TransaccioJPA transaccio = TransaccioJPA.toJPA(transaccioOriginal);
-
-          String nom = transaccio.getNom();
-
-          transaccioOriginal.setNom(nom + " " + (i + 1) + "/" + fitxers.length);
+          String nom = nomTransaccioOriginal + " " + (i + 1) + "/" + fitxers.length;
           
-          transaccio.setTransaccioID(0);
-          transaccio.setEstatCodi(MassiveScanWebSimpleStatus.STATUS_IN_PROGRESS);
-          transaccio.setEstatExcepcio(null);
-          transaccio.setEstatMissatge(null);
-          
-          transaccio.setFitxerEscanejatID(null);
-          transaccio.setFitxerEscanejat(null);
-          transaccio.setHashEscaneig(null);
-          
-          transaccio.setTransactionWebId(transaccioLogicaEjb.generateTransactionWebID());
-          
-          // crear transaccio
-          transaccio = (TransaccioJPA) transaccioLogicaEjb.create(transaccio);
+          TransaccioJPA transaccio = transaccioLogicaEjb.cloneTransaccio(transaccioOriginal, nom);
 
           if (maxBytes == null || maxBytes > file.length()) {
             // fer nou fitxer
@@ -870,6 +857,14 @@ public abstract class AbstractScanWebProcessController {
     return allFiles;
 
   }
+
+
+  
+  
+  
+  
+  
+  
 
   protected void exceededTheMaximumLength(TransaccioJPA transaccio,
       Long maxBytes, long fileSize, String place) throws I18NException {

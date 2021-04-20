@@ -372,14 +372,21 @@ public class PluginFirmaEnServidorLogicaEJB extends
       transaccio.setInfoSignatura(infoSign);
 
       return fitxerSignat;
-    } catch (I18NException e) {
+    } catch (Throwable th) {
+      
+      String emsg;
+      if (th instanceof I18NException) {
+        emsg = I18NLogicUtils.getMessage((I18NException)th, locale);
+      } else {
+        emsg = th.getMessage();
+      }
 
-      String msg = "XYZ ZZZ Error creant fitxer firmat, guardant a BBDD el fitxer firmat o guardant informació de la firma: "
-          + I18NLogicUtils.getMessage(e, locale);
+      String msg = "XYZ ZZZ Error realitzant la firma, guardant a BBDD el fitxer firmat o guardant informació de la firma: "
+          + emsg;
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
-      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
+      transaccio.setEstatExcepcio(LogicUtils.exceptionToString(th));
 
       // Cridades de Plugin
       if (monitorIntegracions != null) {

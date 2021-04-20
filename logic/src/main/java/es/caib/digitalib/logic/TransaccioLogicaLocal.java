@@ -115,5 +115,17 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
       MassiveScanWebSimpleGetTransactionIdRequest requestTransaction,
       UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String urlBase,
       String returnURL, String ip) throws I18NException;
+  
+  
+  
+  /**
+   * 
+   * @param transaccioOriginal
+   * @param nom
+   * @return
+   * @throws I18NException
+   */
+  public TransaccioJPA cloneTransaccio(TransaccioJPA transaccioOriginal, String nom)  throws I18NException;
+  
 
 }

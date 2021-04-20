@@ -186,7 +186,11 @@ public class ApiMassiveScanWebSimpleJersey implements ApiMassiveScanWebSimple {
   @Override
   public MassiveScanWebSimpleStatus getSubTransactionStatus(String subtransactionID)
       throws Exception {
-    return null;
+    ClientResponse response = commonCall(subtransactionID, GETSUBTRANSACTIONSTATUS);
+
+    MassiveScanWebSimpleStatus result = response.getEntity(MassiveScanWebSimpleStatus.class);
+
+    return result;
   }
 
 

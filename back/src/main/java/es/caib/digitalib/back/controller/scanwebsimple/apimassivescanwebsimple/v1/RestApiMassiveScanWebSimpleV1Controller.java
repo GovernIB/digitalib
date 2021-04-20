@@ -925,7 +925,7 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
         // Metadades Addicionals
         final List<MassiveScanWebSimpleKeyValue> additionalMetadatas = new ArrayList<MassiveScanWebSimpleKeyValue>();
         List<Metadada> metadades = metadadaEjb
-            .select(MetadadaFields.TRANSACCIOID.equal(transactionID));
+            .select(MetadadaFields.TRANSACCIOID.equal(transactionID), new OrderBy(MetadadaFields.NOM));
         if (metadades != null && !metadades.isEmpty()) {
           for (Metadada metadada : metadades) {
             additionalMetadatas
@@ -1293,8 +1293,13 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
       Long transactionMultipleID = transaccioLogicaEjb.executeQueryOne(
           TransaccioFields.TRANSACCIOMULTIPLEID,
           TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
+      
+      if (transactionMultipleID == null) {
+        // XYZ ZZZ transactionMultipleID is null
+        throw new Exception("No s'ha pogut obtenir l'ID de transactionMultipleID de la transacció amb webID " + transactionWebID);
+      }
 
-      // XYZ ZZZ transactionMultipleID is null
+      
 
       List<String> subtransacions = transaccioLogicaEjb.executeQuery(
           TransaccioFields.TRANSACTIONWEBID,

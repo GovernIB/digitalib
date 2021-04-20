@@ -17,6 +17,7 @@ import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSim
 import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleArxiuRequiredParameters;
 import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleGetTransactionIdRequest;
 import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleSignatureParameters;
+import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleStatus;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuRequiredParameters;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
@@ -30,6 +31,7 @@ import org.jboss.ejb3.annotation.SecurityDomain;
 
 import es.caib.digitalib.ejb.FitxerLocal;
 import es.caib.digitalib.ejb.TransaccioEJB;
+import es.caib.digitalib.jpa.MetadadaJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.jpa.TransaccioMultipleJPA;
@@ -37,6 +39,7 @@ import es.caib.digitalib.jpa.UsuariAplicacioJPA;
 import es.caib.digitalib.jpa.UsuariPersonaJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
+import es.caib.digitalib.model.entity.Metadada;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.entity.TransaccioMultiple;
 import es.caib.digitalib.model.fields.MetadadaFields;
@@ -182,7 +185,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     TransaccioMultiple tm = transaccioMultipleEjb.findByPrimaryKey(transaccioMultipleID);
 
     Long fe = tm.getFitxerEscanejatID();
-    
+
     if (fe != null) {
       fitxers.add(fe);
     }
@@ -620,11 +623,50 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       throws I18NException {
     return transaccioMultipleEjb.findByPrimaryKey(transaccioMultipleID);
   }
-  
+
   @Override
   @PermitAll
-  public TransaccioMultiple updateTransaccioMultiple(TransaccioMultiple tm) throws I18NException {
+  public TransaccioMultiple updateTransaccioMultiple(TransaccioMultiple tm)
+      throws I18NException {
     return transaccioMultipleEjb.update(tm);
+  }
+
+  @Override
+  @PermitAll
+  public TransaccioJPA cloneTransaccio(TransaccioJPA transaccioOriginal, String nom)
+      throws I18NException {
+    TransaccioJPA transaccio = TransaccioJPA.toJPA(transaccioOriginal);
+
+    transaccio.setNom(nom);
+
+    transaccio.setTransaccioID(0);
+    transaccio.setEstatCodi(MassiveScanWebSimpleStatus.STATUS_IN_PROGRESS);
+    transaccio.setEstatExcepcio(null);
+    transaccio.setEstatMissatge(null);
+
+    transaccio.setFitxerEscanejatID(null);
+    transaccio.setFitxerEscanejat(null);
+    transaccio.setHashEscaneig(null);
+
+    transaccio.setTransactionWebId(this.generateTransactionWebID());
+
+    // crear transaccio
+    transaccio = (TransaccioJPA) this.create(transaccio);
+
+    // Clone Metadatas
+    List<Metadada> metas = metadadaLogicaEjb
+        .select(MetadadaFields.TRANSACCIOID.equal(transaccioOriginal.getTransaccioID()));
+
+    for (Metadada metadada : metas) {
+      MetadadaJPA metaJPA = MetadadaJPA.toJPA(metadada);
+      metaJPA.setMetadadaid(0);
+      metaJPA.setTransaccioID(transaccio.getTransaccioID());
+
+      metadadaLogicaEjb.create(metaJPA);
+
+    }
+
+    return transaccio;
   }
 
 }
