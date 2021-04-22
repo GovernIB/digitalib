@@ -413,6 +413,32 @@
 
     
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANLANGUAGEDOC)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="transaccio.infoScanLanguageDoc" var="infoScanLanguageDoc" />
+              <fmt:message key="genapp.form.searchby" var="cercaperinfoScanLanguageDoc" >                
+                 <fmt:param value="${infoScanLanguageDoc}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${infoScanLanguageDoc}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperinfoScanLanguageDoc}" path="infoScanLanguageDoc" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.INFOSCANDOCUMENTTIPUS)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="transaccio.infoScanDocumentTipus" var="infoScanDocumentTipus" />
+              <fmt:message key="genapp.form.searchby" var="cercaperinfoScanDocumentTipus" >                
+                 <fmt:param value="${infoScanDocumentTipus}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${infoScanDocumentTipus}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperinfoScanDocumentTipus}" path="infoScanDocumentTipus" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.VIEW)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
@@ -483,19 +509,6 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.SIGNPARAMLANGUAGEDOC)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.signParamLanguageDoc" var="signParamLanguageDoc" />
-              <fmt:message key="genapp.form.searchby" var="cercapersignParamLanguageDoc" >                
-                 <fmt:param value="${signParamLanguageDoc}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${signParamLanguageDoc}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapersignParamLanguageDoc}" path="signParamLanguageDoc" />
-            </div>
-
-
-        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -505,19 +518,6 @@
               </fmt:message>
               <span class="add-on"><c:out value="${arxiuReqParamDocEstatElabora}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperarxiuReqParamDocEstatElabora}" path="arxiuReqParamDocEstatElabora" />
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="transaccio.arxiuReqParamDocumentTipus" var="arxiuReqParamDocumentTipus" />
-              <fmt:message key="genapp.form.searchby" var="cercaperarxiuReqParamDocumentTipus" >                
-                 <fmt:param value="${arxiuReqParamDocumentTipus}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${arxiuReqParamDocumentTipus}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperarxiuReqParamDocumentTipus}" path="arxiuReqParamDocumentTipus" />
             </div>
 
 

@@ -504,6 +504,64 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANLANGUAGEDOC)}">
+        <tr id="transaccio_infoScanLanguageDoc_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANLANGUAGEDOC])?'transaccio.infoScanLanguageDoc':__theForm.labels[TransaccioFields.INFOSCANLANGUAGEDOC]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.INFOSCANLANGUAGEDOC]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOSCANLANGUAGEDOC]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.infoScanLanguageDoc" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANLANGUAGEDOC)}" >
+          <form:hidden path="transaccio.infoScanLanguageDoc"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.infoScanLanguageDoc,__theForm.listOfValuesForInfoScanLanguageDoc)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANLANGUAGEDOC)}" >
+          <form:select id="transaccio_infoScanLanguageDoc"  onchange="if(typeof onChangeInfoScanLanguageDoc == 'function') {  onChangeInfoScanLanguageDoc(this); };"  cssClass="input-xxlarge" path="transaccio.infoScanLanguageDoc">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForInfoScanLanguageDoc}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANDOCUMENTTIPUS)}">
+        <tr id="transaccio_infoScanDocumentTipus_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANDOCUMENTTIPUS])?'transaccio.infoScanDocumentTipus':__theForm.labels[TransaccioFields.INFOSCANDOCUMENTTIPUS]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.INFOSCANDOCUMENTTIPUS]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOSCANDOCUMENTTIPUS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.infoScanDocumentTipus" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANDOCUMENTTIPUS)}" >
+          <form:hidden path="transaccio.infoScanDocumentTipus"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.infoScanDocumentTipus,__theForm.listOfValuesForInfoScanDocumentTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANDOCUMENTTIPUS)}" >
+          <form:select id="transaccio_infoScanDocumentTipus"  onchange="if(typeof onChangeInfoScanDocumentTipus == 'function') {  onChangeInfoScanDocumentTipus(this); };"  cssClass="input-xxlarge" path="transaccio.infoScanDocumentTipus">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForInfoScanDocumentTipus}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.VIEW)}">
         <tr id="transaccio_view_rowid">
           <td>
@@ -603,35 +661,6 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.SIGNPARAMLANGUAGEDOC)}">
-        <tr id="transaccio_signParamLanguageDoc_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.SIGNPARAMLANGUAGEDOC])?'transaccio.signParamLanguageDoc':__theForm.labels[TransaccioFields.SIGNPARAMLANGUAGEDOC]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.SIGNPARAMLANGUAGEDOC]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.SIGNPARAMLANGUAGEDOC]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="transaccio.signParamLanguageDoc" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMLANGUAGEDOC)}" >
-          <form:hidden path="transaccio.signParamLanguageDoc"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.signParamLanguageDoc,__theForm.listOfValuesForSignParamLanguageDoc)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMLANGUAGEDOC)}" >
-          <form:select id="transaccio_signParamLanguageDoc"  onchange="if(typeof onChangeSignParamLanguageDoc == 'function') {  onChangeSignParamLanguageDoc(this); };"  cssClass="input-xxlarge" path="transaccio.signParamLanguageDoc">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfValuesForSignParamLanguageDoc}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}">
         <tr id="transaccio_arxiuReqParamDocEstatElabora_rowid">
           <td>
@@ -653,35 +682,6 @@
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfValuesForArxiuReqParamDocEstatElabora}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}">
-        <tr id="transaccio_arxiuReqParamDocumentTipus_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS])?'transaccio.arxiuReqParamDocumentTipus':__theForm.labels[TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="transaccio.arxiuReqParamDocumentTipus" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}" >
-          <form:hidden path="transaccio.arxiuReqParamDocumentTipus"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.arxiuReqParamDocumentTipus,__theForm.listOfValuesForArxiuReqParamDocumentTipus)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}" >
-          <form:select id="transaccio_arxiuReqParamDocumentTipus"  onchange="if(typeof onChangeArxiuReqParamDocumentTipus == 'function') {  onChangeArxiuReqParamDocumentTipus(this); };"  cssClass="input-xxlarge" path="transaccio.arxiuReqParamDocumentTipus">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfValuesForArxiuReqParamDocumentTipus}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

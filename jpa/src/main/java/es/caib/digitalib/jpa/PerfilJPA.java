@@ -5,16 +5,16 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import org.hibernate.annotations.Index;
-import org.hibernate.annotations.ForeignKey;
 import java.util.HashSet;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
+import javax.persistence.GenerationType;
 import java.util.Set;
-import javax.persistence.FetchType;
+import org.hibernate.annotations.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import org.hibernate.annotations.ForeignKey;
 import javax.persistence.GeneratedValue;
 
 
@@ -316,19 +316,6 @@ private static final long serialVersionUID = -1815612849L;
     return __result;
   }
 
-// EXP  Field:perfilnomesescaneig2id | Table: dib_configuraciogrup | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilNomesEscaneig2ID")
-	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneig2ids = new HashSet<ConfiguracioGrupJPA>(0);
-	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilnomesescaneig2ids() {
-    return this.configuracioGrup_perfilnomesescaneig2ids;
-  }
-
-	public void setConfiguracioGrup_perfilnomesescaneig2ids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneig2ids) {
-	  this.configuracioGrup_perfilnomesescaneig2ids = configuracioGrup_perfilnomesescaneig2ids;
-	}
-
-
 // EXP  Field:perfilcopiaautentica2id | Table: dib_configuraciogrup | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilCopiaAutentica2ID")
@@ -339,32 +326,6 @@ private static final long serialVersionUID = -1815612849L;
 
 	public void setConfiguracioGrup_perfilcopiaautentica2ids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilcopiaautentica2ids) {
 	  this.configuracioGrup_perfilcopiaautentica2ids = configuracioGrup_perfilcopiaautentica2ids;
-	}
-
-
-// EXP  Field:perfilcustodia2id | Table: dib_configuraciogrup | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilCustodia2ID")
-	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodia2ids = new HashSet<ConfiguracioGrupJPA>(0);
-	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilcustodia2ids() {
-    return this.configuracioGrup_perfilcustodia2ids;
-  }
-
-	public void setConfiguracioGrup_perfilcustodia2ids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodia2ids) {
-	  this.configuracioGrup_perfilcustodia2ids = configuracioGrup_perfilcustodia2ids;
-	}
-
-
-// EXP  Field:perfilnomesescaneigid | Table: dib_configuraciogrup | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilNomesEscaneigID")
-	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneigids = new HashSet<ConfiguracioGrupJPA>(0);
-	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilnomesescaneigids() {
-    return this.configuracioGrup_perfilnomesescaneigids;
-  }
-
-	public void setConfiguracioGrup_perfilnomesescaneigids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneigids) {
-	  this.configuracioGrup_perfilnomesescaneigids = configuracioGrup_perfilnomesescaneigids;
 	}
 
 
@@ -381,6 +342,19 @@ private static final long serialVersionUID = -1815612849L;
 	}
 
 
+// EXP  Field:perfilcustodia2id | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilCustodia2ID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodia2ids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilcustodia2ids() {
+    return this.configuracioGrup_perfilcustodia2ids;
+  }
+
+	public void setConfiguracioGrup_perfilcustodia2ids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodia2ids) {
+	  this.configuracioGrup_perfilcustodia2ids = configuracioGrup_perfilcustodia2ids;
+	}
+
+
 // EXP  Field:perfilcustodiaid | Table: dib_configuraciogrup | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilCustodiaID")
@@ -391,6 +365,32 @@ private static final long serialVersionUID = -1815612849L;
 
 	public void setConfiguracioGrup_perfilcustodiaids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilcustodiaids) {
 	  this.configuracioGrup_perfilcustodiaids = configuracioGrup_perfilcustodiaids;
+	}
+
+
+// EXP  Field:perfilnomesescaneig2id | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilNomesEscaneig2ID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneig2ids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilnomesescaneig2ids() {
+    return this.configuracioGrup_perfilnomesescaneig2ids;
+  }
+
+	public void setConfiguracioGrup_perfilnomesescaneig2ids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneig2ids) {
+	  this.configuracioGrup_perfilnomesescaneig2ids = configuracioGrup_perfilnomesescaneig2ids;
+	}
+
+
+// EXP  Field:perfilnomesescaneigid | Table: dib_configuraciogrup | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "perfilNomesEscaneigID")
+	private Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneigids = new HashSet<ConfiguracioGrupJPA>(0);
+	public  Set<ConfiguracioGrupJPA> getConfiguracioGrup_perfilnomesescaneigids() {
+    return this.configuracioGrup_perfilnomesescaneigids;
+  }
+
+	public void setConfiguracioGrup_perfilnomesescaneigids(Set<ConfiguracioGrupJPA> configuracioGrup_perfilnomesescaneigids) {
+	  this.configuracioGrup_perfilnomesescaneigids = configuracioGrup_perfilnomesescaneigids;
 	}
 
 
@@ -637,12 +637,12 @@ private static final long serialVersionUID = -1815612849L;
       __tmp.setConfiguracioGrup_perfilnomesescaneig2ids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilnomesescaneig2ids(), __alreadyCopied,"PerfilJPA"));
     }
     if(!"ConfiguracioGrupJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilcustodiaids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilcustodiaids())) ) {
-      __tmp.setConfiguracioGrup_perfilcustodiaids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilcustodiaids(), __alreadyCopied,"PerfilJPA"));
-    }
-    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilnomesescaneigids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilnomesescaneigids())) ) {
       __tmp.setConfiguracioGrup_perfilnomesescaneigids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilnomesescaneigids(), __alreadyCopied,"PerfilJPA"));
+    }
+    if(!"ConfiguracioGrupJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.configuracioGrup_perfilcustodiaids) || org.hibernate.Hibernate.isInitialized(__jpa.getConfiguracioGrup_perfilcustodiaids())) ) {
+      __tmp.setConfiguracioGrup_perfilcustodiaids(ConfiguracioGrupJPA.copyJPA(__jpa.getConfiguracioGrup_perfilcustodiaids(), __alreadyCopied,"PerfilJPA"));
     }
     // Copia de beans complexes (IMP)
     if(!"PluginJPA".equals(origenJPA) && 

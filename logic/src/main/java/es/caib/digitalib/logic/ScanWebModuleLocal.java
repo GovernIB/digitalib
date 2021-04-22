@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.plugins.scanweb.api.ScanWebConfig;
 
+import es.caib.digitalib.logic.utils.ScanWebConfig;
 import es.caib.digitalib.model.entity.Plugin;
 
 

@@ -17,11 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.plugins.scanweb.api.IScanWebPlugin;
-import org.fundaciobit.plugins.scanweb.api.ScanWebConfig;
+import org.fundaciobit.pluginsib.scanweb.api.IScanWebPlugin;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.logic.utils.ScanWebConfig;
 import es.caib.digitalib.model.entity.Plugin;
 import es.caib.digitalib.model.fields.PluginFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
@@ -76,7 +76,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
       }
 
       // 2.- Passa el filtre ...
-      if (scanWebPlugin.filter(request, scanWebConfig)) {
+      if (scanWebPlugin.filter(request, scanWebConfig.getRequest())) {
         pluginsFiltered.add(pluginDeScanWeb);
       } else {
         // Exclude Plugin
@@ -123,7 +123,10 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
 
     String urlToPluginWebPage;
     urlToPluginWebPage = scanWebPlugin.startScanWebTransaction(absolutePluginRequestPath,
-        relativePluginRequestPath, request, scanWebConfig);
+        relativePluginRequestPath, request, scanWebConfig.getRequest());
+    
+    
+    scanWebConfig.setResult(scanWebPlugin.getScanWebResult(scanWebConfig.getRequest().getScanWebID()));
 
     return urlToPluginWebPage;
 
@@ -225,10 +228,14 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
     }
     
   }
+  
+  
+ 
+  
 
   
   
-  private static final Map<String, ScanWebConfig> scanWebConfigMap = new HashMap<String, ScanWebConfig>();
+  private static final Map<String, es.caib.digitalib.logic.utils.ScanWebConfig> scanWebConfigMap = new HashMap<String, ScanWebConfig>();
 
   private static long lastCheckScanProcessCaducades = 0;
   
@@ -299,7 +306,7 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
 
   @Override
   public void startScanWebProcess(ScanWebConfig scanWebConfig) {
-    final String scanWebID = scanWebConfig.getScanWebID();
+    final String scanWebID = scanWebConfig.getRequest().getScanWebID();
     synchronized (scanWebConfigMap) {
       scanWebConfigMap.put(scanWebID, scanWebConfig);
     }

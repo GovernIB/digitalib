@@ -257,7 +257,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       documentMetadades.setEstatElaboracio(DocumentEstatElaboracio.toEnum(transaccio
           .getArxiuReqParamDocEstatElabora()));
       documentMetadades.setTipusDocumental(DocumentTipus.toEnum(transaccio
-          .getArxiuReqParamDocumentTipus()));
+          .getInfoScanDocumentTipus()));
       documentMetadades.setFormat(documentFormat);
       documentMetadades.setExtensio(documentExtensio);
 

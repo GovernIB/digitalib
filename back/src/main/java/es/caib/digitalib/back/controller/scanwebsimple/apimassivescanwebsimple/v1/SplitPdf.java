@@ -174,7 +174,7 @@ public class SplitPdf {
       // PdfDocument pdfDest = new PdfDocument(new PdfWriter("RESULT_ONE_PDF.pdf"));
       // pdfDoc.copyPagesTo(1, pdfDoc.getNumberOfPages(), pdfDest);
       // pdfDest.close();
-      String name = baseName + "_ONE.pdf";
+      String name = baseName + "_1_#" + pdfDoc.getNumberOfPages() + ".pdf";
       File pdf = new File(destDir, name); 
       //pdfDoc.save(pdfToSplit);
       org.apache.commons.io.FileUtils.copyInputStreamToFile(originalFileIS, pdf);
@@ -193,7 +193,7 @@ public class SplitPdf {
           final int fromPage = start;
           final int toPage = qrPages.get(index) - 1;
 
-          final String name = baseName + "_" + count + "_" + qrPages.size() + ".pdf";
+          final String name = baseName + "_" + count + "_#" + qrPages.size() + ".pdf";
 
           File f = new File(destDir, name);
 
@@ -209,7 +209,7 @@ public class SplitPdf {
       // La resta de pagines
       if (start <= pdfDoc.getNumberOfPages()) {
         File f = new File(destDir,
-            baseName + "_" + count + "_" + qrPages.size() + ".pdf");
+            baseName + "_" + count + "_#" + qrPages.size() + ".pdf");
 
         int fromPage = start;
         int toPage = pdfDoc.getNumberOfPages();

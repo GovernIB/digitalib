@@ -30,10 +30,10 @@ public class TransaccioForm extends DigitalIBBaseForm {
       this.transaccio = __toClone.transaccio;
     this.listOfValuesForEstatCodi = __toClone.listOfValuesForEstatCodi;
     this.listOfValuesForInfoScanPixelType = __toClone.listOfValuesForInfoScanPixelType;
+    this.listOfValuesForInfoScanLanguageDoc = __toClone.listOfValuesForInfoScanLanguageDoc;
+    this.listOfValuesForInfoScanDocumentTipus = __toClone.listOfValuesForInfoScanDocumentTipus;
     this.listOfValuesForView = __toClone.listOfValuesForView;
-    this.listOfValuesForSignParamLanguageDoc = __toClone.listOfValuesForSignParamLanguageDoc;
     this.listOfValuesForArxiuReqParamDocEstatElabora = __toClone.listOfValuesForArxiuReqParamDocEstatElabora;
-    this.listOfValuesForArxiuReqParamDocumentTipus = __toClone.listOfValuesForArxiuReqParamDocumentTipus;
     this.listOfValuesForArxiuReqParamOrigen = __toClone.listOfValuesForArxiuReqParamOrigen;
     this.listOfPerfilForPerfilID = __toClone.listOfPerfilForPerfilID;
     this.listOfInfoSignaturaForInfoSignaturaID = __toClone.listOfInfoSignaturaForInfoSignaturaID;
@@ -106,6 +106,30 @@ public class TransaccioForm extends DigitalIBBaseForm {
 
 
 
+  private List<StringKeyValue> listOfValuesForInfoScanLanguageDoc;
+
+  public List<StringKeyValue> getListOfValuesForInfoScanLanguageDoc() {
+    return this.listOfValuesForInfoScanLanguageDoc;
+  }
+
+  public void setListOfValuesForInfoScanLanguageDoc(List<StringKeyValue> listOfValuesForInfoScanLanguageDoc) {
+    this.listOfValuesForInfoScanLanguageDoc = listOfValuesForInfoScanLanguageDoc;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForInfoScanDocumentTipus;
+
+  public List<StringKeyValue> getListOfValuesForInfoScanDocumentTipus() {
+    return this.listOfValuesForInfoScanDocumentTipus;
+  }
+
+  public void setListOfValuesForInfoScanDocumentTipus(List<StringKeyValue> listOfValuesForInfoScanDocumentTipus) {
+    this.listOfValuesForInfoScanDocumentTipus = listOfValuesForInfoScanDocumentTipus;
+  }
+
+
+
   private List<StringKeyValue> listOfValuesForView;
 
   public List<StringKeyValue> getListOfValuesForView() {
@@ -118,18 +142,6 @@ public class TransaccioForm extends DigitalIBBaseForm {
 
 
 
-  private List<StringKeyValue> listOfValuesForSignParamLanguageDoc;
-
-  public List<StringKeyValue> getListOfValuesForSignParamLanguageDoc() {
-    return this.listOfValuesForSignParamLanguageDoc;
-  }
-
-  public void setListOfValuesForSignParamLanguageDoc(List<StringKeyValue> listOfValuesForSignParamLanguageDoc) {
-    this.listOfValuesForSignParamLanguageDoc = listOfValuesForSignParamLanguageDoc;
-  }
-
-
-
   private List<StringKeyValue> listOfValuesForArxiuReqParamDocEstatElabora;
 
   public List<StringKeyValue> getListOfValuesForArxiuReqParamDocEstatElabora() {
@@ -138,18 +150,6 @@ public class TransaccioForm extends DigitalIBBaseForm {
 
   public void setListOfValuesForArxiuReqParamDocEstatElabora(List<StringKeyValue> listOfValuesForArxiuReqParamDocEstatElabora) {
     this.listOfValuesForArxiuReqParamDocEstatElabora = listOfValuesForArxiuReqParamDocEstatElabora;
-  }
-
-
-
-  private List<StringKeyValue> listOfValuesForArxiuReqParamDocumentTipus;
-
-  public List<StringKeyValue> getListOfValuesForArxiuReqParamDocumentTipus() {
-    return this.listOfValuesForArxiuReqParamDocumentTipus;
-  }
-
-  public void setListOfValuesForArxiuReqParamDocumentTipus(List<StringKeyValue> listOfValuesForArxiuReqParamDocumentTipus) {
-    this.listOfValuesForArxiuReqParamDocumentTipus = listOfValuesForArxiuReqParamDocumentTipus;
   }
 
 

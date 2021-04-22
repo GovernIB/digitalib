@@ -45,28 +45,6 @@ public class MassiveScanWebSimpleArxiuRequiredParameters {
    */
   public final static String DOCUMENTELABORATIONSTATE_ALTRES = "EE99";
 
-  public static final String DOCUMENTTYPE_RESOLUCIO = "TD01";
-  public static final String DOCUMENTTYPE_ACORD = "TD02";
-  public static final String DOCUMENTTYPE_CONTRACTE = "TD03";
-  public static final String DOCUMENTTYPE_CONVENI = "TD04";
-  public static final String DOCUMENTTYPE_DECLARACIO = "TD05";
-  public static final String DOCUMENTTYPE_COMUNICACIO = "TD06";
-  public static final String DOCUMENTTYPE_NOTIFICACIO = "TD07";
-  public static final String DOCUMENTTYPE_PUBLICACIO = "TD08";
-  public static final String DOCUMENTTYPE_JUSTIFICANT_RECEPCIO = "TD09";
-  public static final String DOCUMENTTYPE_ACTA = "TD10";
-  public static final String DOCUMENTTYPE_CERTIFICAT = "TD11";
-  public static final String DOCUMENTTYPE_DILIGENCIA = "TD12";
-  public static final String DOCUMENTTYPE_INFORME = "TD13";
-  public static final String DOCUMENTTYPE_SOLICITUD = "TD14";
-  public static final String DOCUMENTTYPE_DENUNCIA = "TD15";
-  public static final String DOCUMENTTYPE_ALEGACIO = "TD16";
-  public static final String DOCUMENTTYPE_RECURS = "TD17";
-  public static final String DOCUMENTTYPE_COMUNICACIO_CIUTADA = "TD18";
-  public static final String DOCUMENTTYPE_FACTURA = "TD19";
-  public static final String DOCUMENTTYPE_ALTRES_INCAUTATS = "TD20";
-  public static final String DOCUMENTTYPE_ALTRES = "TD99";
-
   /**
    * NIF del ciutadà
    */
@@ -89,37 +67,6 @@ public class MassiveScanWebSimpleArxiuRequiredParameters {
    */
 
   protected String documentElaborationState;
-
-  /**
-   * /** Document Tipus: TD01 - Resolució,TD02 - Acord,TD03 - Contracte,TD04 - Conveni, TD05 -
-   * Declaració,TD06 - Comunicació,TD07 - Notificació,TD08 - Publicació, TD09 - Justificant
-   * recepció,TD10 - Acta,TD11 - Certificat,TD12 - Diligència, TD13 - Informe,TD14 -
-   * Sol·licitud,TD15 - Denúncia, TD16 - Al·legació,TD17 - Recurs,TD18 - Comunicació
-   * ciutadà,TD19 - Factura, TD20 - Altres incautats,TD99 - Altres,
-   *
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_RESOLUCIO
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_ACORD
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_CONTRACTE
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_CONVENI
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_DECLARACIO
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_COMUNICACIO
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_NOTIFICACIO
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_PUBLICACIO
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_JUSTIFICANT_RECEPCIO
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_ACTA
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_CERTIFICAT
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_DILIGENCIA
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_INFORME
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_SOLICITUD
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_DENUNCIA
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_ALEGACIO
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_RECURS
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_COMUNICACIO_CIUTADA
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_FACTURA
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_ALTRES_INCAUTATS
-   * @see MassiveScanWebSimpleArxiuRequiredParameters.DOCUMENTTYPE_ALTRES
-   */
-  protected String documentType;
 
   /**
    *
@@ -146,13 +93,12 @@ public class MassiveScanWebSimpleArxiuRequiredParameters {
   }
 
   public MassiveScanWebSimpleArxiuRequiredParameters(String citizenAdministrationID,
-      String citizenFullName, String documentElaborationState, String documentType,
-      Integer documentOrigen, List<String> interestedPersons, List<String> affectedOrganisms) {
+      String citizenFullName, String documentElaborationState, Integer documentOrigen,
+      List<String> interestedPersons, List<String> affectedOrganisms) {
     super();
     this.citizenAdministrationID = citizenAdministrationID;
     this.citizenFullName = citizenFullName;
     this.documentElaborationState = documentElaborationState;
-    this.documentType = documentType;
     this.documentOrigen = documentOrigen;
     this.interestedPersons = interestedPersons;
     this.affectedOrganisms = affectedOrganisms;
@@ -180,14 +126,6 @@ public class MassiveScanWebSimpleArxiuRequiredParameters {
 
   public void setDocumentElaborationState(String documentElaborationState) {
     this.documentElaborationState = documentElaborationState;
-  }
-
-  public String getDocumentType() {
-    return documentType;
-  }
-
-  public void setDocumentType(String documentType) {
-    this.documentType = documentType;
   }
 
   public Integer getDocumentOrigen() {

@@ -318,6 +318,28 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.String infoScanLanguageDoc;
+
+  public java.lang.String getInfoScanLanguageDoc() {
+    return this.infoScanLanguageDoc;
+  }
+
+  public void setInfoScanLanguageDoc(java.lang.String infoScanLanguageDoc) {
+    this.infoScanLanguageDoc = infoScanLanguageDoc;
+  }
+
+
+  private java.lang.String infoScanDocumentTipus;
+
+  public java.lang.String getInfoScanDocumentTipus() {
+    return this.infoScanDocumentTipus;
+  }
+
+  public void setInfoScanDocumentTipus(java.lang.String infoScanDocumentTipus) {
+    this.infoScanDocumentTipus = infoScanDocumentTipus;
+  }
+
+
   private java.lang.Integer viewDesde;
 
   public java.lang.Integer getViewDesde() {
@@ -384,17 +406,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
-  private java.lang.String signParamLanguageDoc;
-
-  public java.lang.String getSignParamLanguageDoc() {
-    return this.signParamLanguageDoc;
-  }
-
-  public void setSignParamLanguageDoc(java.lang.String signParamLanguageDoc) {
-    this.signParamLanguageDoc = signParamLanguageDoc;
-  }
-
-
   private java.lang.String arxiuReqParamDocEstatElabora;
 
   public java.lang.String getArxiuReqParamDocEstatElabora() {
@@ -403,17 +414,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setArxiuReqParamDocEstatElabora(java.lang.String arxiuReqParamDocEstatElabora) {
     this.arxiuReqParamDocEstatElabora = arxiuReqParamDocEstatElabora;
-  }
-
-
-  private java.lang.String arxiuReqParamDocumentTipus;
-
-  public java.lang.String getArxiuReqParamDocumentTipus() {
-    return this.arxiuReqParamDocumentTipus;
-  }
-
-  public void setArxiuReqParamDocumentTipus(java.lang.String arxiuReqParamDocumentTipus) {
-    this.arxiuReqParamDocumentTipus = arxiuReqParamDocumentTipus;
   }
 
 
@@ -647,15 +647,15 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.infoScanResolucioPppFins = __toClone.infoScanResolucioPppFins;
     this.infoScanDataCapturaDesde = __toClone.infoScanDataCapturaDesde;
     this.infoScanDataCapturaFins = __toClone.infoScanDataCapturaFins;
+    this.infoScanLanguageDoc = __toClone.infoScanLanguageDoc;
+    this.infoScanDocumentTipus = __toClone.infoScanDocumentTipus;
     this.viewDesde = __toClone.viewDesde;
     this.viewFins = __toClone.viewFins;
     this.languageUI = __toClone.languageUI;
     this.funcionariUsername = __toClone.funcionariUsername;
     this.signParamFuncionariNom = __toClone.signParamFuncionariNom;
     this.signParamFuncionariNif = __toClone.signParamFuncionariNif;
-    this.signParamLanguageDoc = __toClone.signParamLanguageDoc;
     this.arxiuReqParamDocEstatElabora = __toClone.arxiuReqParamDocEstatElabora;
-    this.arxiuReqParamDocumentTipus = __toClone.arxiuReqParamDocumentTipus;
     this.arxiuReqParamOrigenDesde = __toClone.arxiuReqParamOrigenDesde;
     this.arxiuReqParamOrigenFins = __toClone.arxiuReqParamOrigenFins;
     this.arxiuReqParamInteressats = __toClone.arxiuReqParamInteressats;
@@ -676,10 +676,10 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.transaccioMultipleIDFins = __toClone.transaccioMultipleIDFins;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
     this.mapOfValuesForInfoScanPixelType = __toClone.mapOfValuesForInfoScanPixelType;
+    this.mapOfValuesForInfoScanLanguageDoc = __toClone.mapOfValuesForInfoScanLanguageDoc;
+    this.mapOfValuesForInfoScanDocumentTipus = __toClone.mapOfValuesForInfoScanDocumentTipus;
     this.mapOfValuesForView = __toClone.mapOfValuesForView;
-    this.mapOfValuesForSignParamLanguageDoc = __toClone.mapOfValuesForSignParamLanguageDoc;
     this.mapOfValuesForArxiuReqParamDocEstatElabora = __toClone.mapOfValuesForArxiuReqParamDocEstatElabora;
-    this.mapOfValuesForArxiuReqParamDocumentTipus = __toClone.mapOfValuesForArxiuReqParamDocumentTipus;
     this.mapOfValuesForArxiuReqParamOrigen = __toClone.mapOfValuesForArxiuReqParamOrigen;
     this.mapOfPerfilForPerfilID = __toClone.mapOfPerfilForPerfilID;
     this.mapOfInfoSignaturaForInfoSignaturaID = __toClone.mapOfInfoSignaturaForInfoSignaturaID;
@@ -743,6 +743,30 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
 
 
+  private Map<String, String> mapOfValuesForInfoScanLanguageDoc;
+
+  public Map<String, String> getMapOfValuesForInfoScanLanguageDoc() {
+    return this.mapOfValuesForInfoScanLanguageDoc;
+  }
+
+  public void setMapOfValuesForInfoScanLanguageDoc(Map<String, String> mapOfValuesForInfoScanLanguageDoc) {
+    this.mapOfValuesForInfoScanLanguageDoc = mapOfValuesForInfoScanLanguageDoc;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForInfoScanDocumentTipus;
+
+  public Map<String, String> getMapOfValuesForInfoScanDocumentTipus() {
+    return this.mapOfValuesForInfoScanDocumentTipus;
+  }
+
+  public void setMapOfValuesForInfoScanDocumentTipus(Map<String, String> mapOfValuesForInfoScanDocumentTipus) {
+    this.mapOfValuesForInfoScanDocumentTipus = mapOfValuesForInfoScanDocumentTipus;
+  }
+
+
+
   private Map<String, String> mapOfValuesForView;
 
   public Map<String, String> getMapOfValuesForView() {
@@ -755,18 +779,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
 
 
-  private Map<String, String> mapOfValuesForSignParamLanguageDoc;
-
-  public Map<String, String> getMapOfValuesForSignParamLanguageDoc() {
-    return this.mapOfValuesForSignParamLanguageDoc;
-  }
-
-  public void setMapOfValuesForSignParamLanguageDoc(Map<String, String> mapOfValuesForSignParamLanguageDoc) {
-    this.mapOfValuesForSignParamLanguageDoc = mapOfValuesForSignParamLanguageDoc;
-  }
-
-
-
   private Map<String, String> mapOfValuesForArxiuReqParamDocEstatElabora;
 
   public Map<String, String> getMapOfValuesForArxiuReqParamDocEstatElabora() {
@@ -775,18 +787,6 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
 
   public void setMapOfValuesForArxiuReqParamDocEstatElabora(Map<String, String> mapOfValuesForArxiuReqParamDocEstatElabora) {
     this.mapOfValuesForArxiuReqParamDocEstatElabora = mapOfValuesForArxiuReqParamDocEstatElabora;
-  }
-
-
-
-  private Map<String, String> mapOfValuesForArxiuReqParamDocumentTipus;
-
-  public Map<String, String> getMapOfValuesForArxiuReqParamDocumentTipus() {
-    return this.mapOfValuesForArxiuReqParamDocumentTipus;
-  }
-
-  public void setMapOfValuesForArxiuReqParamDocumentTipus(Map<String, String> mapOfValuesForArxiuReqParamDocumentTipus) {
-    this.mapOfValuesForArxiuReqParamDocumentTipus = mapOfValuesForArxiuReqParamDocumentTipus;
   }
 
 

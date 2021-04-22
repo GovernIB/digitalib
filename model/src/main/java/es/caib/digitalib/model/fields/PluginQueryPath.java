@@ -61,10 +61,10 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public ConfiguracioFirmaQueryPath CONFIGURACIOFIRMA_PLUGINSEGELLATIDS() {
+  public ConfiguracioFirmaQueryPath CONFIGURACIOFIRMA_PLUGINFIRMASERVIDORIDS() {
     return new ConfiguracioFirmaQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "configuracioFirma_pluginsegellatids" + ".";
+          return PluginQueryPath.this.getQueryPath() + "configuracioFirma_pluginfirmaservidorids" + ".";
       }
     });
   }
@@ -75,10 +75,10 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public ConfiguracioFirmaQueryPath CONFIGURACIOFIRMA_PLUGINFIRMASERVIDORIDS() {
+  public ConfiguracioFirmaQueryPath CONFIGURACIOFIRMA_PLUGINSEGELLATIDS() {
     return new ConfiguracioFirmaQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "configuracioFirma_pluginfirmaservidorids" + ".";
+          return PluginQueryPath.this.getQueryPath() + "configuracioFirma_pluginsegellatids" + ".";
       }
     });
   }
@@ -117,10 +117,10 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public PerfilQueryPath PERFIL_PLUGINSCANWEBIDS() {
+  public PerfilQueryPath PERFIL_PLUGINSCANWEB2IDS() {
     return new PerfilQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "perfil_pluginscanwebids" + ".";
+          return PluginQueryPath.this.getQueryPath() + "perfil_pluginscanweb2ids" + ".";
       }
     });
   }
@@ -131,10 +131,10 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public PerfilQueryPath PERFIL_PLUGINSCANWEB2IDS() {
+  public PerfilQueryPath PERFIL_PLUGINSCANWEBIDS() {
     return new PerfilQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "perfil_pluginscanweb2ids" + ".";
+          return PluginQueryPath.this.getQueryPath() + "perfil_pluginscanwebids" + ".";
       }
     });
   }

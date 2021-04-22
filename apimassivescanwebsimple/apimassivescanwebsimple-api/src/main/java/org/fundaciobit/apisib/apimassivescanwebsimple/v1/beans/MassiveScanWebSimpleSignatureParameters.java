@@ -13,46 +13,46 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MassiveScanWebSimpleSignatureParameters {
 
-  protected String documentLanguage;
+    protected String functionaryFullName = null;
 
-  protected String functionaryFullName = null;
+    protected String functionaryAdministrationID = null;
 
-  protected String functionaryAdministrationID = null;
+    protected String functionayDIR3Unit = null;
 
-  public MassiveScanWebSimpleSignatureParameters() {
-    super();
-  }
+    public MassiveScanWebSimpleSignatureParameters() {
+        super();
+    }
 
-  public MassiveScanWebSimpleSignatureParameters(String documentLanguage, String functionaryFullName,
-      String functionaryAdministrationID) {
-    super();
-    this.documentLanguage = documentLanguage;
-    this.functionaryFullName = functionaryFullName;
-    this.functionaryAdministrationID = functionaryAdministrationID;
-  }
+    public MassiveScanWebSimpleSignatureParameters(String functionaryFullName,
+            String functionaryAdministrationID, String functionayDIR3Unit) {
+        super();
+        this.functionaryFullName = functionaryFullName;
+        this.functionaryAdministrationID = functionaryAdministrationID;
+        this.functionayDIR3Unit = functionayDIR3Unit;
+    }
 
-  public String getDocumentLanguage() {
-    return documentLanguage;
-  }
+    public String getFunctionaryFullName() {
+        return functionaryFullName;
+    }
 
-  public void setDocumentLanguage(String documentLanguage) {
-    this.documentLanguage = documentLanguage;
-  }
+    public void setFunctionaryFullName(String functionaryFullName) {
+        this.functionaryFullName = functionaryFullName;
+    }
 
-  public String getFunctionaryFullName() {
-    return functionaryFullName;
-  }
+    public String getFunctionaryAdministrationID() {
+        return functionaryAdministrationID;
+    }
 
-  public void setFunctionaryFullName(String functionaryFullName) {
-    this.functionaryFullName = functionaryFullName;
-  }
+    public void setFunctionaryAdministrationID(String functionaryAdministrationID) {
+        this.functionaryAdministrationID = functionaryAdministrationID;
+    }
 
-  public String getFunctionaryAdministrationID() {
-    return functionaryAdministrationID;
-  }
+    public String getFunctionayDIR3Unit() {
+        return functionayDIR3Unit;
+    }
 
-  public void setFunctionaryAdministrationID(String functionaryAdministrationID) {
-    this.functionaryAdministrationID = functionaryAdministrationID;
-  }
+    public void setFunctionayDIR3Unit(String functionayDIR3Unit) {
+        this.functionayDIR3Unit = functionayDIR3Unit;
+    }
 
 }

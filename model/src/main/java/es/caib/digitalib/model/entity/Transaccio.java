@@ -65,6 +65,12 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.sql.Timestamp getInfoScanDataCaptura();
 	public void setInfoScanDataCaptura(java.sql.Timestamp _infoScanDataCaptura_);
 
+	public java.lang.String getInfoScanLanguageDoc();
+	public void setInfoScanLanguageDoc(java.lang.String _infoScanLanguageDoc_);
+
+	public java.lang.String getInfoScanDocumentTipus();
+	public void setInfoScanDocumentTipus(java.lang.String _infoScanDocumentTipus_);
+
 	public java.lang.Integer getView();
 	public void setView(java.lang.Integer _view_);
 
@@ -80,14 +86,8 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.String getSignParamFuncionariNif();
 	public void setSignParamFuncionariNif(java.lang.String _signParamFuncionariNif_);
 
-	public java.lang.String getSignParamLanguageDoc();
-	public void setSignParamLanguageDoc(java.lang.String _signParamLanguageDoc_);
-
 	public java.lang.String getArxiuReqParamDocEstatElabora();
 	public void setArxiuReqParamDocEstatElabora(java.lang.String _arxiuReqParamDocEstatElabora_);
-
-	public java.lang.String getArxiuReqParamDocumentTipus();
-	public void setArxiuReqParamDocumentTipus(java.lang.String _arxiuReqParamDocumentTipus_);
 
 	public java.lang.Integer getArxiuReqParamOrigen();
 	public void setArxiuReqParamOrigen(java.lang.Integer _arxiuReqParamOrigen_);

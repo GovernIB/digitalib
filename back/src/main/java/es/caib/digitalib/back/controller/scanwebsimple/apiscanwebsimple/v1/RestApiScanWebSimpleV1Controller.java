@@ -744,7 +744,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils
         {
           final String functionaryFullName = transaccio.getSignParamFuncionariNom();
           final String functionaryAdministrationID = transaccio.getSignParamFuncionariNif();
-          final String documentLanguage = transaccio.getSignParamLanguageDoc();
+          final String documentLanguage = transaccio.getInfoScanLanguageDoc();
           signatureParameters = new ScanWebSimpleSignatureParameters(documentLanguage,
               functionaryFullName, functionaryAdministrationID);
         }
@@ -758,7 +758,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils
           final String citizenFullName = transaccio.getArxiuReqParamCiutadaNom();
 
           final String documentElaborationState = transaccio.getArxiuReqParamDocEstatElabora();
-          final String documentType = transaccio.getArxiuReqParamDocumentTipus();
+          final String documentType = transaccio.getInfoScanDocumentTipus();
           final Integer documentOrigen = transaccio.getArxiuReqParamOrigen();
           final List<String> interestedPersons;
           {

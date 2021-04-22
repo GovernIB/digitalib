@@ -14,7 +14,7 @@ import javax.ejb.Stateless;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.plugins.scanweb.api.IScanWebPlugin;
+import org.fundaciobit.pluginsib.scanweb.api.ScanWebDocument;
 import org.fundaciobit.plugins.signature.api.CommonInfoSignature;
 import org.fundaciobit.plugins.signature.api.FileInfoSignature;
 import org.fundaciobit.plugins.signature.api.ITimeStampGenerator;
@@ -119,7 +119,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
         return null;
       }
 
-      if (!IScanWebPlugin.SCANTYPE_PDF.equalsIgnoreCase(scanType)) {
+      if (!ScanWebDocument.SCANTYPE_MIME_PDF.equalsIgnoreCase(scanType)) {
         transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
         transaccio
             .setEstatMissatge("El perfil de firma PADES només pot signar documents PADES "
@@ -194,7 +194,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
       String signerEmail = templateEngine(Configuracio.getSignerEmailEL(), transaccio); 
 
       final int signNumber = 1;
-      String languageSign = transaccio.getSignParamLanguageDoc();
+      String languageDoc = transaccio.getInfoScanLanguageDoc();
 
       final String signAlgorithm = getAlgorisme(confFirma.getAlgorismeDeFirmaID()); // FileInfoSignature.SIGN_ALGORITHM_SHA1;
 
@@ -249,7 +249,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
       // XYZ ZZZ PDF MIME
       FileInfoSignature fileInfo = new FileInfoSignature(signID, source,
           previusSignatureDetachedFile, FileInfoSignature.PDF_MIME_TYPE, name, reason,
-          location, signerEmail, signNumber, languageSign, signOperation, signType,
+          location, signerEmail, signNumber, languageDoc, signOperation, signType,
           signAlgorithm, signMode, signaturesTableLocation, signaturesTableHeader,
           pdfInfoSignature, csvStampInfo, userRequiresTimeStamp, timeStampGenerator,
           policyInfoSignature,

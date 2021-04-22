@@ -4,13 +4,12 @@
 
   <groupId>es.caib.digitalib</groupId>
   <artifactId>digitalib-ear</artifactId>  
-  <version>1.1.6</version>
   <packaging>ear</packaging>
 
   <parent>
     <groupId>es.caib.digitalib</groupId>
     <artifactId>digitalib</artifactId>
-    <version>1.1.6</version>
+    <version>1.0.6</version>
   </parent>
 
   <name>DigitalIB Ear</name>
@@ -86,19 +85,19 @@
     <dependency>
       <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
       <artifactId>pluginsib-scanweb-iecisascanweb-plugin</artifactId>
-      <version>3.0.2</version>
+      <version>4.0.0</version>
     </dependency>
 
     <dependency>
       <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
       <artifactId>pluginsib-scanweb-dynamicwebtwain</artifactId>
-      <version>3.0.2</version>
+      <version>4.0.0</version>
     </dependency>
 
     <dependency>
       <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
       <artifactId>pluginsib-scanweb-file</artifactId>
-      <version>3.0.1</version>
+      <version>4.0.0</version>
     </dependency>
 
     <!-- ====================================== -->

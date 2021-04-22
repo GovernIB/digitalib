@@ -152,19 +152,6 @@ private static final long serialVersionUID = -252813913L;
 	}
 
 
-// EXP  Field:retornfitxerid | Table: dib_plugincridada | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "retornFitxerID")
-	private Set<PluginCridadaJPA> pluginCridada_retornfitxerids = new HashSet<PluginCridadaJPA>(0);
-	public  Set<PluginCridadaJPA> getPluginCridada_retornfitxerids() {
-    return this.pluginCridada_retornfitxerids;
-  }
-
-	public void setPluginCridada_retornfitxerids(Set<PluginCridadaJPA> pluginCridada_retornfitxerids) {
-	  this.pluginCridada_retornfitxerids = pluginCridada_retornfitxerids;
-	}
-
-
 // EXP  Field:parametresfitxerid | Table: dib_plugincridada | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parametresFitxerID")
@@ -175,6 +162,19 @@ private static final long serialVersionUID = -252813913L;
 
 	public void setPluginCridada_parametresfitxerids(Set<PluginCridadaJPA> pluginCridada_parametresfitxerids) {
 	  this.pluginCridada_parametresfitxerids = pluginCridada_parametresfitxerids;
+	}
+
+
+// EXP  Field:retornfitxerid | Table: dib_plugincridada | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "retornFitxerID")
+	private Set<PluginCridadaJPA> pluginCridada_retornfitxerids = new HashSet<PluginCridadaJPA>(0);
+	public  Set<PluginCridadaJPA> getPluginCridada_retornfitxerids() {
+    return this.pluginCridada_retornfitxerids;
+  }
+
+	public void setPluginCridada_retornfitxerids(Set<PluginCridadaJPA> pluginCridada_retornfitxerids) {
+	  this.pluginCridada_retornfitxerids = pluginCridada_retornfitxerids;
 	}
 
 

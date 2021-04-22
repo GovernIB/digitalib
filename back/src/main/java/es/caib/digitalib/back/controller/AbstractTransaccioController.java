@@ -402,7 +402,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
   }
 
   @Override
-  public List<StringKeyValue> getReferenceListForArxiuReqParamDocumentTipus(
+  public List<StringKeyValue> getReferenceListForInfoScanDocumentTipus(
       HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
 
@@ -440,13 +440,20 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     return __tmp;
   }
 
-  public List<StringKeyValue> getReferenceListForSignParamLanguageDoc(
+  @Override
+  public List<StringKeyValue> getReferenceListForInfoScanLanguageDoc(
       HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
     __tmp.add(new StringKeyValue("ca", I18NUtils.tradueix("idiomadoc.catala")));
     __tmp.add(new StringKeyValue("es", I18NUtils.tradueix("idiomadoc.castella")));
     __tmp.add(new StringKeyValue("en", I18NUtils.tradueix("idiomadoc.angles")));
     __tmp.add(new StringKeyValue("de", I18NUtils.tradueix("idiomadoc.alemany")));
+    __tmp.add(new StringKeyValue("gl", "Galego"));
+    __tmp.add(new StringKeyValue("eu", "Euskara"));
+    __tmp.add(new StringKeyValue("fr", "Français"));
+    __tmp.add(new StringKeyValue("it", "Italiano"));
+    
+    
     return __tmp;
   }
   

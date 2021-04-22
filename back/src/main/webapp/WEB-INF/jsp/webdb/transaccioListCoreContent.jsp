@@ -135,6 +135,22 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANDATACAPTURA)}">
           <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${transaccio.infoScanDataCaptura}" /></td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANLANGUAGEDOC)}">
+          <td>
+          <c:set var="tmp">${transaccio.infoScanLanguageDoc}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForInfoScanLanguageDoc[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANDOCUMENTTIPUS)}">
+          <td>
+          <c:set var="tmp">${transaccio.infoScanDocumentTipus}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForInfoScanDocumentTipus[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.VIEW)}">
           <td>
           <c:set var="tmp">${transaccio.view}</c:set>
@@ -163,27 +179,11 @@
           ${transaccio.signParamFuncionariNif}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMLANGUAGEDOC)}">
-          <td>
-          <c:set var="tmp">${transaccio.signParamLanguageDoc}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForSignParamLanguageDoc[tmp]}
-          </c:if>
-          </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}">
           <td>
           <c:set var="tmp">${transaccio.arxiuReqParamDocEstatElabora}</c:set>
           <c:if test="${not empty tmp}">
           ${__theFilterForm.mapOfValuesForArxiuReqParamDocEstatElabora[tmp]}
-          </c:if>
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}">
-          <td>
-          <c:set var="tmp">${transaccio.arxiuReqParamDocumentTipus}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForArxiuReqParamDocumentTipus[tmp]}
           </c:if>
           </td>
         </c:if>

@@ -75,6 +75,12 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANDATACAPTURA)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANDATACAPTURA)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANLANGUAGEDOC)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANLANGUAGEDOC)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANDOCUMENTTIPUS)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANDOCUMENTTIPUS)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.VIEW)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.VIEW)}</th>
         </c:if>
@@ -90,14 +96,8 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARINIF)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.SIGNPARAMFUNCIONARINIF)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMLANGUAGEDOC)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.SIGNPARAMLANGUAGEDOC)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMORIGEN)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMORIGEN)}</th>

@@ -4,7 +4,7 @@ package es.caib.digitalib.logic;
 
 import javax.ejb.Stateless;
 
-import org.fundaciobit.plugins.scanweb.api.IScanWebPlugin;
+import org.fundaciobit.pluginsib.scanweb.api.IScanWebPlugin;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import es.caib.digitalib.utils.Constants;

@@ -2,11 +2,9 @@ package es.caib.digitalib.back.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.nio.charset.Charset;
+import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -24,11 +22,10 @@ import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.fundaciobit.plugins.scanweb.api.ScanWebConfig;
-import org.fundaciobit.plugins.scanweb.api.ScanWebStatus;
-import org.fundaciobit.plugins.scanweb.api.ScannedDocument;
-import org.fundaciobit.plugins.scanweb.api.ScannedPlainFile;
-import org.fundaciobit.pluginsib.core.utils.ISO8601;
+import org.fundaciobit.pluginsib.scanweb.api.ScanWebStatus;
+import org.fundaciobit.pluginsib.scanweb.api.ScanWebDocument;
+import org.fundaciobit.pluginsib.scanweb.api.ScanWebPlainFile;
+import org.fundaciobit.pluginsib.scanweb.api.ScanWebRequest;
 import org.fundaciobit.pluginsib.core.utils.Metadata;
 import org.fundaciobit.pluginsib.core.utils.MetadataConstants;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -39,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.common.hash.Hashing;
+import com.google.common.io.Files;
 
 import es.caib.digitalib.back.controller.all.FirmaArxiuParametersPublicController;
 import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
@@ -58,6 +56,7 @@ import es.caib.digitalib.logic.PluginFirmaEnServidorLogicaLocal;
 import es.caib.digitalib.logic.PluginScanWebLogicaLocal;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
+import es.caib.digitalib.logic.utils.ScanWebConfig;
 import es.caib.digitalib.logic.utils.ScanWebUtils;
 import es.caib.digitalib.model.bean.FitxerBean;
 import es.caib.digitalib.model.entity.Fitxer;
@@ -98,7 +97,7 @@ public abstract class AbstractScanWebProcessController {
   protected ScanWebModuleLocal scanWebModuleEjb;
 
   @EJB(mappedName = FitxerLogicaLocal.JNDI_NAME)
-  protected FitxerLogicaLocal fitxerEjb;
+  protected FitxerLogicaLocal fitxerLogicaEjb;
 
   @EJB(mappedName = PluginScanWebLogicaLocal.JNDI_NAME)
   protected PluginScanWebLogicaLocal pluginScanWebLogicaEjb;
@@ -146,10 +145,10 @@ public abstract class AbstractScanWebProcessController {
     mav.addObject("finalURL", finalURL);
 
     if (transMultipleID == null) {
-      // Peticio Senzilla
+      // Petició Senzilla
       mav.addObject("missatgeespera", "esperarfirmacustodia");
     } else {
-      // Peticio Multiple
+      // Petició Multiple
       mav.addObject("missatgeespera", "esperarcercaseparadors");
     }
     return mav;
@@ -165,7 +164,7 @@ public abstract class AbstractScanWebProcessController {
 
   }
 
-  @SuppressWarnings("deprecation")
+
   protected ModelAndView finalProcesDeScanWeb(HttpServletRequest request,
       String transactionWebID) throws I18NException, Exception {
     final boolean debug = log.isDebugEnabled();
@@ -198,7 +197,7 @@ public abstract class AbstractScanWebProcessController {
     swc = scanWebModuleEjb.getScanWebConfig(request, transactionWebID);
     // ScanWebStatus scanWebStatus = swc.getStatus();
 
-    int status = swc.getStatus().getStatus();
+    int status = swc.getResult().getStatus().getStatus();
 
     // Auditoria
     final boolean isApp = isPublic();
@@ -216,7 +215,7 @@ public abstract class AbstractScanWebProcessController {
       case ScanWebStatus.STATUS_IN_PROGRESS: {
         // Comprovam que s'hagin escanejat coses
 
-        List<ScannedDocument> listDocs = swc.getScannedFiles();
+        List<ScanWebDocument> listDocs = swc.getResult().getScannedDocuments();
 
         if (listDocs.size() == 1) {
 
@@ -274,14 +273,14 @@ public abstract class AbstractScanWebProcessController {
 
       case ScanWebStatus.STATUS_FINAL_ERROR: {
         transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-        transaccio.setEstatMissatge(swc.getStatus().getErrorMsg());
+        transaccio.setEstatMissatge(swc.getResult().getStatus().getErrorMsg());
         // transaccio.setEstatExcepcio(swc.getStatus().getErrorException());
       }
       break;
 
       case ScanWebStatus.STATUS_CANCELLED: {
         transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_CANCELLED);
-        transaccio.setEstatMissatge(swc.getStatus().getErrorMsg());
+        transaccio.setEstatMissatge(swc.getResult().getStatus().getErrorMsg());
         if (transaccio.getEstatMissatge() == null) {
           transaccio.setEstatMissatge(I18NUtils.tradueix("plugindescan.cancelat"));
         }
@@ -335,7 +334,7 @@ public abstract class AbstractScanWebProcessController {
           TransaccioJPA trans = info.transaccio;
 
           if (Utils.isEmpty(trans.getArxiuReqParamDocEstatElabora())
-              || Utils.isEmpty(trans.getArxiuReqParamDocumentTipus())
+              || Utils.isEmpty(trans.getInfoScanDocumentTipus())
               || Utils.isEmpty(trans.getArxiuReqParamOrigen())) {
             return false;
           }
@@ -348,7 +347,7 @@ public abstract class AbstractScanWebProcessController {
           if (Utils.isEmpty(trans.getFuncionariUsername())
               || Utils.isEmpty(trans.getSignParamFuncionariNif())
               || Utils.isEmpty(trans.getSignParamFuncionariNom())
-              || Utils.isEmpty(trans.getSignParamLanguageDoc())) {
+              || Utils.isEmpty(trans.getInfoScanLanguageDoc())) {
             return false;
           }
         }
@@ -371,11 +370,57 @@ public abstract class AbstractScanWebProcessController {
 
   protected Map<Long, FitxerEscanejatInfo> processScannedFile(HttpServletRequest request,
       String transactionWebID, TransaccioJPA transaccio, ScanWebConfig swc,
-      List<ScannedDocument> listDocs) throws I18NException {
+      List<ScanWebDocument> listDocs) throws I18NException {
+    
+    
+    ScanWebDocument scannedDoc = swc.getResult().getScannedDocuments().get(0);
+    
+    transaccio.setInfoScanOcr(scannedDoc.getOcr());
+    transaccio.setInfoScanLanguageDoc(scannedDoc.getDocumentLanguage());
+    
+    // XYZ ZZZ FALTA TODO
+    //transaccio.setInfoScanDuplex(scannedDoc.getDuplex());
+    
+    
+    transaccio.setInfoScanDocumentTipus(scannedDoc.getDocumentType());
+    
+    
+    transaccio.setInfoScanResolucioPpp(scannedDoc.getPppResolution());
+    
+    if (scannedDoc.getPixelType() != null) {
+      switch(scannedDoc.getPixelType()) {
+          case ScanWebDocument.PIXEL_TYPE_GRAY:
+             transaccio.setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.GRAY);
+          break;
+          
+          case ScanWebDocument.PIXEL_TYPE_BLACK_WHITE:
+             transaccio.setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.BW);
+          break;
+      
+          case ScanWebDocument.PIXEL_TYPE_COLOR:
+             transaccio.setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.COLOR);
+          break;
+          
+          default:
+              log.error("\n\n   NO PUC DECODIFICAR PIXEL TYPE [" + scannedDoc.getPixelType() + "]\n\n");
+      }
+    }
+    
+    transaccio.setInfoScanDataCaptura(scannedDoc.getScanDate() == null? null: new Timestamp(scannedDoc.getScanDate().getTime()));
+    
+    // XYZ ZZZ TODO  ????
+    // transaccio.setInfoScanDuplex(scannedDoc.getDuplex());
+
+    transaccio.setInfoScanLanguageDoc( scannedDoc.getDocumentLanguage());
+    
+    transaccio.setInfoScanDocumentTipus( scannedDoc.getDocumentType());
+    
+    transaccio.setInfoScanPaperSize(scannedDoc.getPaperSize());
+    
     {
 
       // Recollir Metadades del PLugin
-      List<Metadata> metadades = swc.getScannedFiles().get(0).getMetadatas();
+      List<Metadata> metadades = scannedDoc.getAdditionalMetadatas();
       if (metadades != null) {
         log.info("XYZ ZZZ   Metadades transacció " + transaccio.getTransaccioID());
 
@@ -386,16 +431,29 @@ public abstract class AbstractScanWebProcessController {
           log.info("XYZ ZZZ   Metadada[" + name + "] => " + value);
 
           if (MetadataConstants.PAPER_SIZE.equals(name)) {
-            transaccio.setInfoScanPaperSize(value);
-          } else if (MetadataConstants.OCR.equals(name)) {
+              if (transaccio.getInfoScanPaperSize() == null) {
+                transaccio.setInfoScanPaperSize(value);
+              }
+          }  else if (MetadataConstants.ENI_TIPO_DOCUMENTAL.equals(name)) {
+
+            if (transaccio.getInfoScanDocumentTipus() == null) {
+              transaccio.setInfoScanDocumentTipus(value);
+            }
+          } else {
+            // afegir a taula de metadades
+            metadadaLogicaEjb.create(transaccio.getTransaccioID(), name, value);
+          }
+          
+          
+          /*else if (MetadataConstants.OCR.equals(name)) {
             if ("true".equalsIgnoreCase(value)) {
               transaccio.setInfoScanOcr(true);
             } else if ("false".equalsIgnoreCase(value)) {
               transaccio.setInfoScanOcr(false);
             } else {
               transaccio.setInfoScanOcr(null);
-            }
-          } else if (MetadataConstants.FUNCTIONARY_FULLNAME.equals(name)) {
+            } 
+          }  else if (MetadataConstants.FUNCTIONARY_FULLNAME.equals(name)) { **
             if (Utils.isEmpty(transaccio.getSignParamFuncionariNom())) {
               transaccio.setSignParamFuncionariNom(value);
             }
@@ -407,7 +465,7 @@ public abstract class AbstractScanWebProcessController {
             if (Utils.isEmpty(transaccio.getSignParamFuncionariNif())) {
               transaccio.setSignParamFuncionariNif(value);
             }
-          } else if (MetadataConstants.EEMGDE_RESOLUCION.equals(name)) {
+          }  else if (MetadataConstants.EEMGDE_RESOLUCION.equals(name)) {
             try {
               transaccio.setInfoScanResolucioPpp(Integer.valueOf(value));
             } catch (NumberFormatException nfe) {
@@ -416,24 +474,9 @@ public abstract class AbstractScanWebProcessController {
 
           } else if (MetadataConstants.EEMGDE_PROFUNDIDAD_COLOR.equals(name)) {
             try {
-              int bits = Integer.valueOf(value);
-              if (bits == 8) {
-                transaccio
-                    .setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.GRAY);
-              } else if (bits < 8) {
-                transaccio
-                    .setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.BW);
-              } else {
-                transaccio
-                    .setInfoScanPixelType(MetadataConstants.ProfundidadColorConstants.COLOR);
-              }
+              
             } catch (NumberFormatException nfe) {
               log.error("Error processant PixelType: " + name + " => ]" + value + "[", nfe);
-            }
-          } else if (MetadataConstants.ENI_TIPO_DOCUMENTAL.equals(name)) {
-
-            if (transaccio.getArxiuReqParamDocumentTipus() == null) {
-              transaccio.setArxiuReqParamDocumentTipus(value);
             }
           } else if (MetadataConstants.ENI_IDIOMA.equals(name)
               || MetadataConstants.EEMGDE_IDIOMA.equals(name)) {
@@ -441,7 +484,7 @@ public abstract class AbstractScanWebProcessController {
             if (transaccio.getSignParamLanguageDoc() == null) {
               transaccio.setSignParamLanguageDoc(value);
             }
-          } else if (MetadataConstants.ENI_FECHA_INICIO.equals(name)) {
+          }  else if (MetadataConstants.ENI_FECHA_INICIO.equals(name)) {
             // DATA CAPTURA
             try {
               Date data = ISO8601.ISO8601ToDate(value);
@@ -451,11 +494,8 @@ public abstract class AbstractScanWebProcessController {
                   "Error processant DataCaptura(FechaInicio): " + name + " => ]" + value + "[",
                   e);
             }
-
-          } else {
-            // afegir a taula de metadades
-            metadadaLogicaEjb.create(transaccio.getTransaccioID(), name, value);
-          }
+*/
+          
         }
       }
 
@@ -599,7 +639,7 @@ public abstract class AbstractScanWebProcessController {
 
       case ScanWebStatus.STATUS_FINAL_ERROR:
         additionalInfo = I18NUtils.tradueix("scanwebprocess.scan.estat.error") + "\nError: "
-            + swc.getStatus().getErrorMsg();
+            + swc.getResult().getStatus().getErrorMsg();
       // XYZ ZZZ Afegir Excepció si no val null. Controlar que no superi màxim
 
       break;
@@ -669,13 +709,13 @@ public abstract class AbstractScanWebProcessController {
    * @return
    */
   public Map<Long, FitxerEscanejatInfo> recuperarDocumentEscanejat(
-      TransaccioJPA transaccioOriginal, List<ScannedDocument> listDocs) throws I18NException {
+      TransaccioJPA transaccioOriginal, List<ScanWebDocument> listDocs) throws I18NException {
 
     Map<Long, FitxerEscanejatInfo> allFiles = new TreeMap<Long, AbstractScanWebProcessController.FitxerEscanejatInfo>();
 
-    ScannedDocument sd = listDocs.get(0);
+    ScanWebDocument sd = listDocs.get(0);
 
-    ScannedPlainFile scannedFile = sd.getScannedPlainFile();
+    ScanWebPlainFile scannedFile = sd.getScannedPlainFile();
 
     byte[] data = scannedFile.getData();
 
@@ -693,7 +733,7 @@ public abstract class AbstractScanWebProcessController {
 
         fitxer = new FitxerJPA("", scannedFile.getMime(), scannedFile.getName(), data.length);
 
-        fitxer = (FitxerJPA) fitxerEjb.create(fitxer);
+        fitxer = (FitxerJPA) fitxerLogicaEjb.create(fitxer);
 
         final long fileID = fitxer.getFitxerID();
 
@@ -747,7 +787,7 @@ public abstract class AbstractScanWebProcessController {
         Fitxer fitxer = new FitxerBean("", scannedFile.getMime(), scannedFile.getName(),
             data.length);
 
-        fitxer = fitxerEjb.create(fitxer);
+        fitxer = fitxerLogicaEjb.create(fitxer);
 
         tm.setFitxerEscanejatID(fitxer.getFitxerID());
         tm.setDescripcio(transaccioOriginal.getNom());
@@ -772,9 +812,9 @@ public abstract class AbstractScanWebProcessController {
           if (maxBytes == null || maxBytes > file.length()) {
 
             FitxerJPA fitxer = new FitxerJPA("", "application/pdf", 
-                 transaccioOriginal.getTransactionWebId() + "_" +  fitxers[i].getName(),
+                 /*transaccioOriginal.getTransactionWebId() + "_"  + */ fitxers[i].getName(),
                 fitxers[i].length());
-            fitxer = (FitxerJPA) fitxerEjb.create(fitxer);
+            fitxer = (FitxerJPA) fitxerLogicaEjb.create(fitxer);
   
             final long fileID = fitxer.getFitxerID();
   
@@ -815,10 +855,10 @@ public abstract class AbstractScanWebProcessController {
 
           if (maxBytes == null || maxBytes > file.length()) {
             // fer nou fitxer
-            FitxerJPA fitxer = new FitxerJPA("", "application/pdf", transaccio.getTransactionWebId() + "_" + file.getName(),
+            FitxerJPA fitxer = new FitxerJPA("", "application/pdf", /* transaccio.getTransactionWebId() + "_" + */ file.getName(),
                file.length());
 
-            fitxer = (FitxerJPA) fitxerEjb.create(fitxer);
+            fitxer = (FitxerJPA) fitxerLogicaEjb.create(fitxer);
   
             final long fileID = fitxer.getFitxerID();
   
@@ -826,10 +866,18 @@ public abstract class AbstractScanWebProcessController {
 
             transaccio.setFitxerEscanejatID(fileID);
   
-            String hashEscaneig = Hashing.sha256()
-                .hashString(String.valueOf(fileID), Charset.forName("UTF-8")).toString();
+            // XYZ ZZZ El has de l'escaneig s'ha de poder validar a la part del client !!!
+            
+            
+            
+            //String hashEscaneig = Hashing.sha256()
+            //    .hashString(String.valueOf(fileID), Charset.forName("UTF-8")).toString();
   
-            transaccio.setHashEscaneig(hashEscaneig);
+            try {
+              transaccio.setHashEscaneig(Files.hash(file, Hashing.sha256()).toString());
+            } catch (IOException e) {
+              log.error(" Error desconegut creant HASH del fitxer " + fileID + ":" + e.getMessage(), e);
+            }
   
             transaccioLogicaEjb.update(transaccio);
 
@@ -1041,7 +1089,9 @@ public abstract class AbstractScanWebProcessController {
         : "plugindescan_contenidor";
     final String scanWebID = transaction.getTransactionWebId();
 
-    ScanWebConfig scanWebConfig = ScanWebUtils.generateScanWebConfig(transaction, urlFinal);
+    ScanWebRequest scanWebRequest = ScanWebUtils.generateScanWebRequest(transaction, urlFinal);
+    
+    ScanWebConfig scanWebConfig = new ScanWebConfig(scanWebRequest);
 
     scanWebModuleEjb.startScanWebProcess(scanWebConfig);
 

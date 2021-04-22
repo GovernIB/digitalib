@@ -2,7 +2,7 @@ package es.caib.digitalib.logic;
 
 import javax.ejb.Local;
 
-import org.fundaciobit.plugins.scanweb.api.IScanWebPlugin;
+import org.fundaciobit.pluginsib.scanweb.api.IScanWebPlugin;
 
 /**
  * 

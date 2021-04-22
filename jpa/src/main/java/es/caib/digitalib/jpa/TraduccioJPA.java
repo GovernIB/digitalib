@@ -19,8 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 import org.hibernate.annotations.CollectionOfElements;
 import java.util.Set;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 
 
@@ -116,19 +116,6 @@ private static final long serialVersionUID = -326205279L;
 	}
 
 
-// EXP  Field:nomid | Table: dib_perfil | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
-	private Set<PerfilJPA> perfil_nomids = new HashSet<PerfilJPA>(0);
-	public  Set<PerfilJPA> getPerfil_nomids() {
-    return this.perfil_nomids;
-  }
-
-	public void setPerfil_nomids(Set<PerfilJPA> perfil_nomids) {
-	  this.perfil_nomids = perfil_nomids;
-	}
-
-
 // EXP  Field:descripcioid | Table: dib_perfil | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
@@ -139,6 +126,19 @@ private static final long serialVersionUID = -326205279L;
 
 	public void setPerfil_descripcioids(Set<PerfilJPA> perfil_descripcioids) {
 	  this.perfil_descripcioids = perfil_descripcioids;
+	}
+
+
+// EXP  Field:nomid | Table: dib_perfil | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
+	private Set<PerfilJPA> perfil_nomids = new HashSet<PerfilJPA>(0);
+	public  Set<PerfilJPA> getPerfil_nomids() {
+    return this.perfil_nomids;
+  }
+
+	public void setPerfil_nomids(Set<PerfilJPA> perfil_nomids) {
+	  this.perfil_nomids = perfil_nomids;
 	}
 
 

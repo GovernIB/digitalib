@@ -141,6 +141,44 @@ public class TransaccioValidator<T> implements TransaccioFields {
       }
     }
     
+    if (__vr.getFieldErrorCount(INFOSCANLANGUAGEDOC) == 0) {
+      java.lang.String __infoscanlanguagedoc = (java.lang.String)__vr.getFieldValue(__target__,INFOSCANLANGUAGEDOC);
+      if (__infoscanlanguagedoc!= null && __infoscanlanguagedoc.length() > 10) {
+        __vr.rejectValue(INFOSCANLANGUAGEDOC, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(INFOSCANLANGUAGEDOC)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(10)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(INFOSCANLANGUAGEDOC) == 0) {
+      String val = String.valueOf(__vr.getFieldValue(__target__,INFOSCANLANGUAGEDOC));
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(ca|es|gl|eu|en|fr|it|de)");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(INFOSCANLANGUAGEDOC, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(INFOSCANLANGUAGEDOC)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(INFOSCANDOCUMENTTIPUS) == 0) {
+      java.lang.String __infoscandocumenttipus = (java.lang.String)__vr.getFieldValue(__target__,INFOSCANDOCUMENTTIPUS);
+      if (__infoscandocumenttipus!= null && __infoscandocumenttipus.length() > 4) {
+        __vr.rejectValue(INFOSCANDOCUMENTTIPUS, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(INFOSCANDOCUMENTTIPUS)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(4)));
+      }
+    }
+    
+    if (__vr.getFieldErrorCount(INFOSCANDOCUMENTTIPUS) == 0) {
+      String val = String.valueOf(__vr.getFieldValue(__target__,INFOSCANDOCUMENTTIPUS));
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(TD01|TD02|TD03|TD04|TD05|TD06|TD07|TD08|TD09|TD10|TD11|TD12|TD13|TD14|TD15|TD16|TD17|TD18|TD19|TD20|TD51|TD52|TD53|TD54|TD55|TD56|TD57|TD58|TD59|TD60|TD61|TD62|TD63|TD64|TD65|TD66|TD67|TD68|TD69|TD99)");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(INFOSCANDOCUMENTTIPUS, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(INFOSCANDOCUMENTTIPUS)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(LANGUAGEUI) == 0) {
       java.lang.String __languageui = (java.lang.String)__vr.getFieldValue(__target__,LANGUAGEUI);
       if (__languageui!= null && __languageui.length() > 10) {
@@ -173,25 +211,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
       }
     }
     
-    if (__vr.getFieldErrorCount(SIGNPARAMLANGUAGEDOC) == 0) {
-      java.lang.String __signparamlanguagedoc = (java.lang.String)__vr.getFieldValue(__target__,SIGNPARAMLANGUAGEDOC);
-      if (__signparamlanguagedoc!= null && __signparamlanguagedoc.length() > 10) {
-        __vr.rejectValue(SIGNPARAMLANGUAGEDOC, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SIGNPARAMLANGUAGEDOC)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(10)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(SIGNPARAMLANGUAGEDOC) == 0) {
-      String val = String.valueOf(__vr.getFieldValue(__target__,SIGNPARAMLANGUAGEDOC));
-      if (val != null && val.trim().length() != 0) {
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(ca|es|en|de)");
-        if (!p.matcher(val).matches()) {
-          __vr.rejectValue(SIGNPARAMLANGUAGEDOC, "genapp.validation.malformed",
-             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SIGNPARAMLANGUAGEDOC)));
-        }
-      }
-    }
-
     if (__vr.getFieldErrorCount(ARXIUREQPARAMDOCESTATELABORA) == 0) {
       java.lang.String __arxiureqparamdocestatelabora = (java.lang.String)__vr.getFieldValue(__target__,ARXIUREQPARAMDOCESTATELABORA);
       if (__arxiureqparamdocestatelabora!= null && __arxiureqparamdocestatelabora.length() > 4) {
@@ -207,25 +226,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
         if (!p.matcher(val).matches()) {
           __vr.rejectValue(ARXIUREQPARAMDOCESTATELABORA, "genapp.validation.malformed",
              new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMDOCESTATELABORA)));
-        }
-      }
-    }
-
-    if (__vr.getFieldErrorCount(ARXIUREQPARAMDOCUMENTTIPUS) == 0) {
-      java.lang.String __arxiureqparamdocumenttipus = (java.lang.String)__vr.getFieldValue(__target__,ARXIUREQPARAMDOCUMENTTIPUS);
-      if (__arxiureqparamdocumenttipus!= null && __arxiureqparamdocumenttipus.length() > 4) {
-        __vr.rejectValue(ARXIUREQPARAMDOCUMENTTIPUS, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMDOCUMENTTIPUS)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(4)));
-      }
-    }
-    
-    if (__vr.getFieldErrorCount(ARXIUREQPARAMDOCUMENTTIPUS) == 0) {
-      String val = String.valueOf(__vr.getFieldValue(__target__,ARXIUREQPARAMDOCUMENTTIPUS));
-      if (val != null && val.trim().length() != 0) {
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(TD01|TD02|TD03|TD04|TD05|TD06|TD07|TD08|TD09|TD10|TD11|TD12|TD13|TD14|TD15|TD16|TD17|TD18|TD19|TD20|TD99)");
-        if (!p.matcher(val).matches()) {
-          __vr.rejectValue(ARXIUREQPARAMDOCUMENTTIPUS, "genapp.validation.malformed",
-             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMDOCUMENTTIPUS)));
         }
       }
     }

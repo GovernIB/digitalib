@@ -15,8 +15,7 @@ import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.fundaciobit.plugins.scanweb.api.ScanWebConfig;
-import org.fundaciobit.plugins.scanweb.api.ScanWebStatus;
+import org.fundaciobit.pluginsib.scanweb.api.ScanWebStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +28,7 @@ import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.AuditoriaLogicaLocal;
 import es.caib.digitalib.logic.ScanWebModuleLocal;
 import es.caib.digitalib.logic.TransaccioPublicLogicaLocal;
+import es.caib.digitalib.logic.utils.ScanWebConfig;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.utils.Configuracio;
@@ -107,7 +107,7 @@ public abstract class AbstractFirmaArxiuParametersController
         transaccioForm.addReadOnlyField(TransaccioFields.SIGNPARAMFUNCIONARINOM);
       }
 
-      hiddenFields.remove(TransaccioFields.SIGNPARAMLANGUAGEDOC);
+      hiddenFields.remove(TransaccioFields.INFOSCANLANGUAGEDOC);
     }
 
     // Digitalitzacio
@@ -130,7 +130,7 @@ public abstract class AbstractFirmaArxiuParametersController
       // hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANIF);
       // hiddenFields.remove(TransaccioFields.ARXIUREQPARAMCIUTADANOM);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMDOCESTATELABORA);
-      hiddenFields.remove(TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS);
+      hiddenFields.remove(TransaccioFields.INFOSCANDOCUMENTTIPUS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMINTERESSATS);
       hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORIGEN);
       // hiddenFields.remove(TransaccioFields.ARXIUREQPARAMORGANS);
@@ -149,7 +149,7 @@ public abstract class AbstractFirmaArxiuParametersController
     transaccioForm.setDeleteButtonVisible(false);
 
     // XYZ ZZZ Obtenir idioma per defecte
-    transaccioForm.getTransaccio().setSignParamLanguageDoc("ca");
+    //transaccioForm.getTransaccio().setSignParamLanguageDoc("ca");
 
     return transaccioForm;
   }
@@ -167,8 +167,9 @@ public abstract class AbstractFirmaArxiuParametersController
     if (tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA
         || tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
 
+        // XYZ ZZZ Aqui falta el camp de DIR3Unit !!!
       Field<?>[] signFields = { TransaccioFields.SIGNPARAMFUNCIONARINIF,
-          TransaccioFields.SIGNPARAMFUNCIONARINOM, TransaccioFields.SIGNPARAMLANGUAGEDOC };
+          TransaccioFields.SIGNPARAMFUNCIONARINOM,  };
 
       for (Field<?> field : signFields) {
         ValidationUtils.rejectIfEmptyOrWhitespace(result, field.fullName,
@@ -180,7 +181,7 @@ public abstract class AbstractFirmaArxiuParametersController
     if (tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
 
       Field<?>[] reqFields = { TransaccioFields.ARXIUREQPARAMDOCESTATELABORA,
-          TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS, TransaccioFields.ARXIUREQPARAMORIGEN
+          TransaccioFields.INFOSCANDOCUMENTTIPUS, TransaccioFields.ARXIUREQPARAMORIGEN
           // TransaccioFields.ARXIUREQPARAMCIUTADANIF, No és obligatori
           // TransaccioFields.ARXIUREQPARAMCIUTADANOM, No és obligatori
           // TransaccioFields.ARXIUREQPARAMINTERESSATS, No és obligatori
@@ -325,7 +326,7 @@ public abstract class AbstractFirmaArxiuParametersController
       ScanWebConfig swc;
       swc = scanWebModuleEjb.getScanWebConfig(request, transaccioWebId);
 
-      swc.getStatus().setStatus(ScanWebStatus.STATUS_CANCELLED);
+      swc.getResult().getStatus().setStatus(ScanWebStatus.STATUS_CANCELLED);
 
       // AUDITA
       final String msg = I18NUtils.tradueix("transaccio.firma.insercio.dades.cancelat");

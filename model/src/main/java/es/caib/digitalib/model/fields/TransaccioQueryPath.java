@@ -95,6 +95,14 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new TimestampField(getQueryPath(), TransaccioFields.INFOSCANDATACAPTURA);
   }
 
+  public StringField INFOSCANLANGUAGEDOC() {
+    return new StringField(getQueryPath(), TransaccioFields.INFOSCANLANGUAGEDOC);
+  }
+
+  public StringField INFOSCANDOCUMENTTIPUS() {
+    return new StringField(getQueryPath(), TransaccioFields.INFOSCANDOCUMENTTIPUS);
+  }
+
   public IntegerField VIEW() {
     return new IntegerField(getQueryPath(), TransaccioFields.VIEW);
   }
@@ -115,16 +123,8 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new StringField(getQueryPath(), TransaccioFields.SIGNPARAMFUNCIONARINIF);
   }
 
-  public StringField SIGNPARAMLANGUAGEDOC() {
-    return new StringField(getQueryPath(), TransaccioFields.SIGNPARAMLANGUAGEDOC);
-  }
-
   public StringField ARXIUREQPARAMDOCESTATELABORA() {
     return new StringField(getQueryPath(), TransaccioFields.ARXIUREQPARAMDOCESTATELABORA);
-  }
-
-  public StringField ARXIUREQPARAMDOCUMENTTIPUS() {
-    return new StringField(getQueryPath(), TransaccioFields.ARXIUREQPARAMDOCUMENTTIPUS);
   }
 
   public IntegerField ARXIUREQPARAMORIGEN() {

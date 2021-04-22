@@ -322,14 +322,16 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
       ScanWebSimpleSignatureParameters sp = mrt.getSignatureParameters();
 
-      final String documentLanguage = sp.getDocumentLanguage();
+      //final String documentLanguage = sp.getDocumentLanguage();
 
       final String functionaryFullName = sp.getFunctionaryFullName();
 
       final String functionaryAdministrationID = sp.getFunctionaryAdministrationID();
+      
+      final String functionaryDir3Unit = null;
 
-      signatureParameters = new MassiveScanWebSimpleSignatureParameters(documentLanguage,
-          functionaryFullName, functionaryAdministrationID);
+      signatureParameters = new MassiveScanWebSimpleSignatureParameters(
+          functionaryFullName, functionaryAdministrationID, functionaryDir3Unit);
     }
 
     final MassiveScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
@@ -344,7 +346,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
       final String documentElaborationState = arp.getDocumentElaborationState();
 
-      final String documentType = arp.getDocumentType();
+      //final String documentType = arp.getDocumentType();
 
       final Integer documentOrigen = arp.getDocumentOrigen();
 
@@ -353,7 +355,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       final List<String> affectedOrganisms = arp.getAffectedOrganisms();
 
       arxiuRequiredParameters = new MassiveScanWebSimpleArxiuRequiredParameters(
-          citizenAdministrationID, citizenFullName, documentElaborationState, documentType,
+          citizenAdministrationID, citizenFullName, documentElaborationState, 
           documentOrigen, interestedPersons, affectedOrganisms);
     }
 
@@ -483,6 +485,16 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     t.setView(requestTransaction.getView());
     t.setLanguageUI(requestTransaction.getLanguageUI());
     t.setFuncionariUsername(requestTransaction.getFuncionariUsername());
+    
+    //t.setArxiuReqParamDocumentTipus(arxiuReqParams.getDocumentType());
+   
+    
+    MassiveScanWebSimpleSignatureParameters sp = requestTransaction.getSignatureParameters();
+    if (sp != null) {
+        t.setSignParamFuncionariNom(sp.getFunctionaryFullName());
+        t.setSignParamFuncionariNif(sp.getFunctionaryAdministrationID());
+        
+    }
 
     int tipusPerfil = perfil.getUsPerfil();
 
@@ -495,18 +507,12 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       // TOT AIXÒ s'OBTINDRA D'UNA PAGINA POSTERIOR A NO SER QUE JA ESTIGUI DEFINIT
       if (signParams != null) {
         // XYZ ZZZ Check not null
-
-        log.info("\n\n XYZ ZZZ ZZZ CREAR TRANSACCIO POSAM LANGDOC A "
-            + signParams.getDocumentLanguage() + "\n\n");
-
-        t.setSignParamLanguageDoc(signParams.getDocumentLanguage());
         t.setSignParamFuncionariNom(signParams.getFunctionaryFullName());
         t.setSignParamFuncionariNif(signParams.getFunctionaryAdministrationID());
       }
     }
 
-    if (tipusPerfil == Constants.PERFIL_US_CUSTODIA
-        || tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
+    if (tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
 
       // ==== OBLIGATORIS =======
 
@@ -527,7 +533,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         // arxiuReqParams.getOrigen() => Valor Valid
 
         t.setArxiuReqParamDocEstatElabora(arxiuReqParams.getDocumentElaborationState());
-        t.setArxiuReqParamDocumentTipus(arxiuReqParams.getDocumentType());
+        
         t.setArxiuReqParamOrigen(arxiuReqParams.getDocumentOrigen());
         t.setArxiuReqParamInteressats(
             LogicUtils.listToString(arxiuReqParams.getInterestedPersons()));

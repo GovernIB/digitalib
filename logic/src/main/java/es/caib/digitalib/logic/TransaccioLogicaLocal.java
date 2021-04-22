@@ -127,5 +127,8 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
    */
   public TransaccioJPA cloneTransaccio(TransaccioJPA transaccioOriginal, String nom)  throws I18NException;
   
+  
+  @Override
+  public Transaccio update(Transaccio __bean) throws I18NException;
 
 }
