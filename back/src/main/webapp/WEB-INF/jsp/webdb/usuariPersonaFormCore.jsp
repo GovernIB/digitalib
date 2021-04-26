@@ -148,6 +148,24 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariPersonaFields.UNITATDIR3)}">
+        <tr id="usuariPersona_unitatDir3_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[UsuariPersonaFields.UNITATDIR3])?'usuariPersona.unitatDir3':__theForm.labels[UsuariPersonaFields.UNITATDIR3]}" />
+              <c:if test="${not empty __theForm.help[UsuariPersonaFields.UNITATDIR3]}">
+              <i class="icon-info-sign" title="${__theForm.help[UsuariPersonaFields.UNITATDIR3]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="usuariPersona.unitatDir3" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.UNITATDIR3)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,UsuariPersonaFields.UNITATDIR3)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="usuariPersona.unitatDir3"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariPersonaFields.ROLESCAN)}">
         <tr id="usuariPersona_roleScan_rowid">
           <td>

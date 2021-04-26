@@ -139,6 +139,14 @@ public class UsuariPersonaValidator<T> implements UsuariPersonaFields {
       }
     }
     
+    if (__vr.getFieldErrorCount(UNITATDIR3) == 0) {
+      java.lang.String __unitatdir3 = (java.lang.String)__vr.getFieldValue(__target__,UNITATDIR3);
+      if (__unitatdir3!= null && __unitatdir3.length() > 100) {
+        __vr.rejectValue(UNITATDIR3, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(UNITATDIR3)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+    
     if (__isNou__) { // Creació
       // ================ CREATION
       // Fitxers 

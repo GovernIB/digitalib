@@ -20,6 +20,7 @@ public interface UsuariPersonaFields extends java.io.Serializable {
 	 public static final StringField NIF = new StringField(_TABLE_MODEL, "nif", "nif");
 	 public static final StringField IDIOMAID = new StringField(_TABLE_MODEL, "idiomaID", "idiomaid");
 	 public static final LongField CONFIGURACIOGRUPID = new LongField(_TABLE_MODEL, "configuracioGrupID", "configuraciogrupid");
+	 public static final StringField UNITATDIR3 = new StringField(_TABLE_MODEL, "unitatDir3", "unitatdir3");
 	 public static final BooleanField ROLESCAN = new BooleanField(_TABLE_MODEL, "roleScan", "rolescan");
 	 public static final BooleanField ROLECOAU = new BooleanField(_TABLE_MODEL, "roleCoAu", "rolecoau");
 	 public static final BooleanField ROLECUST = new BooleanField(_TABLE_MODEL, "roleCust", "rolecust");
@@ -34,6 +35,7 @@ public interface UsuariPersonaFields extends java.io.Serializable {
     NIF,
     IDIOMAID,
     CONFIGURACIOGRUPID,
+    UNITATDIR3,
     ROLESCAN,
     ROLECOAU,
     ROLECUST

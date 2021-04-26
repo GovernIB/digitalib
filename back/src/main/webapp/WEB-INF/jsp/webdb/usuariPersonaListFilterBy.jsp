@@ -164,6 +164,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuariPersonaFields.UNITATDIR3)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="usuariPersona.unitatDir3" var="unitatDir3" />
+              <fmt:message key="genapp.form.searchby" var="cercaperunitatDir3" >                
+                 <fmt:param value="${unitatDir3}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${unitatDir3}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperunitatDir3}" path="unitatDir3" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuariPersonaFields.ROLESCAN)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">

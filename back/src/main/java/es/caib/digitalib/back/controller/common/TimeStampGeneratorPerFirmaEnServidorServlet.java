@@ -56,7 +56,6 @@ public class TimeStampGeneratorPerFirmaEnServidorServlet extends HttpServlet {
     
     
     // XYZ ZZZ
-
     final boolean debug =log.isDebugEnabled();
 
     if (debug) {

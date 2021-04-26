@@ -91,6 +91,10 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new BooleanField(getQueryPath(), TransaccioFields.INFOSCANOCR);
   }
 
+  public BooleanField INFOSCANDUPLEX() {
+    return new BooleanField(getQueryPath(), TransaccioFields.INFOSCANDUPLEX);
+  }
+
   public TimestampField INFOSCANDATACAPTURA() {
     return new TimestampField(getQueryPath(), TransaccioFields.INFOSCANDATACAPTURA);
   }
@@ -121,6 +125,10 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
 
   public StringField SIGNPARAMFUNCIONARINIF() {
     return new StringField(getQueryPath(), TransaccioFields.SIGNPARAMFUNCIONARINIF);
+  }
+
+  public StringField SIGNPARAMFUNCIONARIDIR3() {
+    return new StringField(getQueryPath(), TransaccioFields.SIGNPARAMFUNCIONARIDIR3);
   }
 
   public StringField ARXIUREQPARAMDOCESTATELABORA() {

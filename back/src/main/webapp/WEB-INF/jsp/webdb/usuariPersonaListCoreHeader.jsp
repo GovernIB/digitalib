@@ -36,6 +36,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.CONFIGURACIOGRUPID)}">
         <th>${dib:getSortIcons(__theFilterForm,UsuariPersonaFields.CONFIGURACIOGRUPID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.UNITATDIR3)}">
+        <th>${dib:getSortIcons(__theFilterForm,UsuariPersonaFields.UNITATDIR3)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.ROLESCAN)}">
         <th>${dib:getSortIcons(__theFilterForm,UsuariPersonaFields.ROLESCAN)}</th>
         </c:if>

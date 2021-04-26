@@ -131,6 +131,17 @@ public class UsuariPersonaFilterForm extends DigitalIBBaseFilterForm implements 
   }
 
 
+  private java.lang.String unitatDir3;
+
+  public java.lang.String getUnitatDir3() {
+    return this.unitatDir3;
+  }
+
+  public void setUnitatDir3(java.lang.String unitatDir3) {
+    this.unitatDir3 = unitatDir3;
+  }
+
+
   public UsuariPersonaFilterForm() {
   }
   
@@ -146,6 +157,7 @@ public class UsuariPersonaFilterForm extends DigitalIBBaseFilterForm implements 
     this.idiomaID = __toClone.idiomaID;
     this.configuracioGrupIDDesde = __toClone.configuracioGrupIDDesde;
     this.configuracioGrupIDFins = __toClone.configuracioGrupIDFins;
+    this.unitatDir3 = __toClone.unitatDir3;
     this.mapOfIdiomaForIdiomaID = __toClone.mapOfIdiomaForIdiomaID;
     this.mapOfConfiguracioGrupForConfiguracioGrupID = __toClone.mapOfConfiguracioGrupForConfiguracioGrupID;
   }
@@ -159,7 +171,7 @@ public class UsuariPersonaFilterForm extends DigitalIBBaseFilterForm implements 
 
   @Override
   public List<Field<?>> getDefaultGroupByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { UNITATDIR3 }));
   }
 
 

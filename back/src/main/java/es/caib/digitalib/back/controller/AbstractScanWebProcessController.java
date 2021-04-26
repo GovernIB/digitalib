@@ -335,7 +335,8 @@ public abstract class AbstractScanWebProcessController {
 
           if (Utils.isEmpty(trans.getArxiuReqParamDocEstatElabora())
               || Utils.isEmpty(trans.getInfoScanDocumentTipus())
-              || Utils.isEmpty(trans.getArxiuReqParamOrigen())) {
+              || Utils.isEmpty(trans.getArxiuReqParamOrigen())
+              ) {
             return false;
           }
         }
@@ -345,6 +346,7 @@ public abstract class AbstractScanWebProcessController {
         for (FitxerEscanejatInfo info : infos.values()) {
           TransaccioJPA trans = info.transaccio;
           if (Utils.isEmpty(trans.getFuncionariUsername())
+              || Utils.isEmpty(trans.getSignParamFuncionariDir3())
               || Utils.isEmpty(trans.getSignParamFuncionariNif())
               || Utils.isEmpty(trans.getSignParamFuncionariNom())
               || Utils.isEmpty(trans.getInfoScanLanguageDoc())) {
@@ -377,9 +379,8 @@ public abstract class AbstractScanWebProcessController {
     
     transaccio.setInfoScanOcr(scannedDoc.getOcr());
     transaccio.setInfoScanLanguageDoc(scannedDoc.getDocumentLanguage());
-    
-    // XYZ ZZZ FALTA TODO
-    //transaccio.setInfoScanDuplex(scannedDoc.getDuplex());
+
+    transaccio.setInfoScanDuplex(scannedDoc.getDuplex());
     
     
     transaccio.setInfoScanDocumentTipus(scannedDoc.getDocumentType());

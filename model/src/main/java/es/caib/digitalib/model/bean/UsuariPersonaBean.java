@@ -18,6 +18,7 @@ private static final long serialVersionUID = 1803901243L;
 	java.lang.String nif;
 	java.lang.String idiomaID;
 	java.lang.Long configuracioGrupID;
+	java.lang.String unitatDir3;
 	boolean roleScan;
 	boolean roleCoAu;
 	boolean roleCust;
@@ -28,7 +29,7 @@ private static final long serialVersionUID = 1803901243L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariPersonaBean(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , java.lang.Long configuracioGrupID , boolean roleScan , boolean roleCoAu , boolean roleCust) {
+  public UsuariPersonaBean(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , java.lang.Long configuracioGrupID , java.lang.String unitatDir3 , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.usuariPersonaID=usuariPersonaID;
     this.username=username;
     this.nom=nom;
@@ -37,12 +38,13 @@ private static final long serialVersionUID = 1803901243L;
     this.nif=nif;
     this.idiomaID=idiomaID;
     this.configuracioGrupID=configuracioGrupID;
+    this.unitatDir3=unitatDir3;
     this.roleScan=roleScan;
     this.roleCoAu=roleCoAu;
     this.roleCust=roleCust;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariPersonaBean(java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , java.lang.Long configuracioGrupID , boolean roleScan , boolean roleCoAu , boolean roleCust) {
+  public UsuariPersonaBean(java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , java.lang.Long configuracioGrupID , java.lang.String unitatDir3 , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.username=username;
     this.nom=nom;
     this.llinatges=llinatges;
@@ -50,6 +52,20 @@ private static final long serialVersionUID = 1803901243L;
     this.nif=nif;
     this.idiomaID=idiomaID;
     this.configuracioGrupID=configuracioGrupID;
+    this.unitatDir3=unitatDir3;
+    this.roleScan=roleScan;
+    this.roleCoAu=roleCoAu;
+    this.roleCust=roleCust;
+}
+  /** Constructor dels valors Not Null */
+  public UsuariPersonaBean(long usuariPersonaID , java.lang.String username , java.lang.String nom , java.lang.String llinatges , java.lang.String email , java.lang.String nif , java.lang.String idiomaID , boolean roleScan , boolean roleCoAu , boolean roleCust) {
+    this.usuariPersonaID=usuariPersonaID;
+    this.username=username;
+    this.nom=nom;
+    this.llinatges=llinatges;
+    this.email=email;
+    this.nif=nif;
+    this.idiomaID=idiomaID;
     this.roleScan=roleScan;
     this.roleCoAu=roleCoAu;
     this.roleCust=roleCust;
@@ -63,6 +79,7 @@ private static final long serialVersionUID = 1803901243L;
     this.setNif(__bean.getNif());
     this.setIdiomaID(__bean.getIdiomaID());
     this.setConfiguracioGrupID(__bean.getConfiguracioGrupID());
+    this.setUnitatDir3(__bean.getUnitatDir3());
     this.setRoleScan(__bean.isRoleScan());
     this.setRoleCoAu(__bean.isRoleCoAu());
     this.setRoleCust(__bean.isRoleCust());
@@ -124,6 +141,13 @@ private static final long serialVersionUID = 1803901243L;
 		this.configuracioGrupID = _configuracioGrupID_;
 	};
 
+	public java.lang.String getUnitatDir3() {
+		return(unitatDir3);
+	};
+	public void setUnitatDir3(java.lang.String _unitatDir3_) {
+		this.unitatDir3 = _unitatDir3_;
+	};
+
 	public boolean isRoleScan() {
 		return(roleScan);
 	};
@@ -160,6 +184,7 @@ private static final long serialVersionUID = 1803901243L;
     __tmp.setNif(__bean.getNif());
     __tmp.setIdiomaID(__bean.getIdiomaID());
     __tmp.setConfiguracioGrupID(__bean.getConfiguracioGrupID());
+    __tmp.setUnitatDir3(__bean.getUnitatDir3());
     __tmp.setRoleScan(__bean.isRoleScan());
     __tmp.setRoleCoAu(__bean.isRoleCoAu());
     __tmp.setRoleCust(__bean.isRoleCust());

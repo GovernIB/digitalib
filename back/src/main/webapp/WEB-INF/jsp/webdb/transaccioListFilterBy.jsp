@@ -509,6 +509,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.SIGNPARAMFUNCIONARIDIR3)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="transaccio.signParamFuncionariDir3" var="signParamFuncionariDir3" />
+              <fmt:message key="genapp.form.searchby" var="cercapersignParamFuncionariDir3" >                
+                 <fmt:param value="${signParamFuncionariDir3}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${signParamFuncionariDir3}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapersignParamFuncionariDir3}" path="signParamFuncionariDir3" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">

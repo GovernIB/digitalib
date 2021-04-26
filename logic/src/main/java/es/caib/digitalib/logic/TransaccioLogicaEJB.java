@@ -328,7 +328,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
       final String functionaryAdministrationID = sp.getFunctionaryAdministrationID();
       
-      final String functionaryDir3Unit = null;
+      final String functionaryDir3Unit = usuariPersona.getUnitatDir3();
 
       signatureParameters = new MassiveScanWebSimpleSignatureParameters(
           functionaryFullName, functionaryAdministrationID, functionaryDir3Unit);
@@ -486,15 +486,14 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     t.setLanguageUI(requestTransaction.getLanguageUI());
     t.setFuncionariUsername(requestTransaction.getFuncionariUsername());
     
-    //t.setArxiuReqParamDocumentTipus(arxiuReqParams.getDocumentType());
-   
-    
-    MassiveScanWebSimpleSignatureParameters sp = requestTransaction.getSignatureParameters();
-    if (sp != null) {
-        t.setSignParamFuncionariNom(sp.getFunctionaryFullName());
-        t.setSignParamFuncionariNif(sp.getFunctionaryAdministrationID());
-        
-    }
+  
+    // Esborrar !!! Això ja es fa a 
+//    MassiveScanWebSimpleSignatureParameters sp = requestTransaction.getSignatureParameters();
+//    if (sp != null) {
+//        t.setSignParamFuncionariNom(sp.getFunctionaryFullName());
+//        t.setSignParamFuncionariNif(sp.getFunctionaryAdministrationID());
+//        t.setSignParamFuncionariDir3(sp.getFunctionayDIR3Unit());
+//    }
 
     int tipusPerfil = perfil.getUsPerfil();
 
@@ -509,6 +508,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         // XYZ ZZZ Check not null
         t.setSignParamFuncionariNom(signParams.getFunctionaryFullName());
         t.setSignParamFuncionariNif(signParams.getFunctionaryAdministrationID());
+        t.setSignParamFuncionariDir3(signParams.getFunctionayDIR3Unit());
       }
     }
 

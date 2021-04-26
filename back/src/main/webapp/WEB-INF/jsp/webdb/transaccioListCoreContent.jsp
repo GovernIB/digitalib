@@ -132,6 +132,13 @@
             </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANDUPLEX)}">
+          <td>
+            &nbsp;<c:if test="${not empty transaccio.infoScanDuplex}">
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${transaccio.infoScanDuplex?'success':'error'}.png"/>">
+            </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANDATACAPTURA)}">
           <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${transaccio.infoScanDataCaptura}" /></td>
         </c:if>
@@ -177,6 +184,11 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARINIF)}">
           <td>
           ${transaccio.signParamFuncionariNif}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARIDIR3)}">
+          <td>
+          ${transaccio.signParamFuncionariDir3}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}">

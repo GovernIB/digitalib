@@ -72,6 +72,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANOCR)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANOCR)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANDUPLEX)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANDUPLEX)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANDATACAPTURA)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOSCANDATACAPTURA)}</th>
         </c:if>
@@ -95,6 +98,9 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARINIF)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.SIGNPARAMFUNCIONARINIF)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARIDIR3)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.SIGNPARAMFUNCIONARIDIR3)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}</th>

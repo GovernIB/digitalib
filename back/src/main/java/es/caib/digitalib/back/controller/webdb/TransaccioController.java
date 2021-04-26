@@ -221,6 +221,9 @@ public class TransaccioController
 
       fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, INFOSCANOCR);
 
+
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, INFOSCANDUPLEX);
+
     // Field infoScanLanguageDoc
     {
       _listSKV = getReferenceListForInfoScanLanguageDoc(request, mav, filterForm, list, groupByItemsMap, null);

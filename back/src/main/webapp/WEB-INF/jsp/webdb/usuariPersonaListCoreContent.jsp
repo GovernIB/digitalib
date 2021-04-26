@@ -70,6 +70,11 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.UNITATDIR3)}">
+          <td>
+          ${usuariPersona.unitatDir3}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.ROLESCAN)}">
           <td>
             <img height="18" width="18" src="<c:url value="/img/icn_alert_${usuariPersona.roleScan?'success':'error'}.png"/>">

@@ -91,19 +91,9 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
 
     final boolean isPublic = true;
 
-    // /WEB-INF/views/plugindescan_contenidor.jsp
-
-    // final boolean fullView = (transaccio.getView() ==
-    // ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN);
-
     ModelAndView mav = startScanWebProcess(request, response, transaccio, isPublic, urlFinal, urlBase);
 
-    // , fullView, Math.abs(transaccio.getPerfil().getUsPerfil()), isPublic);
 
-    // XYZ ZZZ
-    // En passarela de firma requerim dins d'un frame
-    // mav.addObject("fullView",
-    // transaccio.getView() == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN);
 
     return mav;
 

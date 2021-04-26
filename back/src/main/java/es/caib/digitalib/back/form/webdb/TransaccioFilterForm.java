@@ -406,6 +406,17 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
+  private java.lang.String signParamFuncionariDir3;
+
+  public java.lang.String getSignParamFuncionariDir3() {
+    return this.signParamFuncionariDir3;
+  }
+
+  public void setSignParamFuncionariDir3(java.lang.String signParamFuncionariDir3) {
+    this.signParamFuncionariDir3 = signParamFuncionariDir3;
+  }
+
+
   private java.lang.String arxiuReqParamDocEstatElabora;
 
   public java.lang.String getArxiuReqParamDocEstatElabora() {
@@ -655,6 +666,7 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.funcionariUsername = __toClone.funcionariUsername;
     this.signParamFuncionariNom = __toClone.signParamFuncionariNom;
     this.signParamFuncionariNif = __toClone.signParamFuncionariNif;
+    this.signParamFuncionariDir3 = __toClone.signParamFuncionariDir3;
     this.arxiuReqParamDocEstatElabora = __toClone.arxiuReqParamDocEstatElabora;
     this.arxiuReqParamOrigenDesde = __toClone.arxiuReqParamOrigenDesde;
     this.arxiuReqParamOrigenFins = __toClone.arxiuReqParamOrigenFins;

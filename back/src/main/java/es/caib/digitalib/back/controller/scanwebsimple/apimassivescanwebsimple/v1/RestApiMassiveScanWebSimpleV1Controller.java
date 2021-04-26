@@ -996,6 +996,8 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
                     .formatFileToScanWebApi(transaccio.getPerfil().getScanFormatFitxer());
 
             Boolean ocr = transaccio.getInfoScanOcr();
+            
+            Boolean duplex = transaccio.getInfoScanDuplex();
 
             final String documentLanguage = transaccio.getInfoScanLanguageDoc();
 
@@ -1004,8 +1006,7 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
 
             Date scanDate = transaccio.getDataInici();
             
-            // XYZ ZZZ FALTA BBDD
-            Boolean duplex = null;
+            
             
             String documentType = transaccio.getInfoScanDocumentTipus();
 

@@ -26,6 +26,9 @@ public interface UsuariPersona extends org.fundaciobit.genapp.common.IGenAppEnti
 	public java.lang.Long getConfiguracioGrupID();
 	public void setConfiguracioGrupID(java.lang.Long _configuracioGrupID_);
 
+	public java.lang.String getUnitatDir3();
+	public void setUnitatDir3(java.lang.String _unitatDir3_);
+
 	public boolean isRoleScan();
 	public void setRoleScan(boolean _roleScan_);
 

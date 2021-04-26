@@ -43,6 +43,10 @@ public class UsuariPersonaQueryPath extends org.fundaciobit.genapp.common.query.
     return new LongField(getQueryPath(), UsuariPersonaFields.CONFIGURACIOGRUPID);
   }
 
+  public StringField UNITATDIR3() {
+    return new StringField(getQueryPath(), UsuariPersonaFields.UNITATDIR3);
+  }
+
   public BooleanField ROLESCAN() {
     return new BooleanField(getQueryPath(), UsuariPersonaFields.ROLESCAN);
   }

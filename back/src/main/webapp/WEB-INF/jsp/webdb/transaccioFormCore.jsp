@@ -468,6 +468,31 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANDUPLEX)}">
+        <tr id="transaccio_infoScanDuplex_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.INFOSCANDUPLEX])?'transaccio.infoScanDuplex':__theForm.labels[TransaccioFields.INFOSCANDUPLEX]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.INFOSCANDUPLEX]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.INFOSCANDUPLEX]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANDUPLEX)}" >
+              <form:select cssClass="input-medium" onchange="if(typeof onChangeInfoScanDuplex == 'function') {  onChangeInfoScanDuplex(this); };"  path="transaccio.infoScanDuplex">
+                <form:option value=""><fmt:message key="genapp.checkbox." /></form:option>
+                <form:option value="true" ><fmt:message key="genapp.checkbox.true" /></form:option>
+                <form:option value="false" ><fmt:message key="genapp.checkbox.false" /></form:option>
+              </form:select>
+          </c:if>
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.INFOSCANDUPLEX)}" >
+                <fmt:message key="genapp.checkbox.${__theForm.transaccio.infoScanDuplex}" />
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.INFOSCANDATACAPTURA)}">
         <tr id="transaccio_infoScanDataCaptura_rowid">
           <td>
@@ -656,6 +681,24 @@
             <td>
             <form:errors path="transaccio.signParamFuncionariNif" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMFUNCIONARINIF)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMFUNCIONARINIF)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="255" path="transaccio.signParamFuncionariNif"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARIDIR3)}">
+        <tr id="transaccio_signParamFuncionariDir3_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.SIGNPARAMFUNCIONARIDIR3])?'transaccio.signParamFuncionariDir3':__theForm.labels[TransaccioFields.SIGNPARAMFUNCIONARIDIR3]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.SIGNPARAMFUNCIONARIDIR3]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.SIGNPARAMFUNCIONARIDIR3]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="transaccio.signParamFuncionariDir3" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMFUNCIONARIDIR3)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.SIGNPARAMFUNCIONARIDIR3)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="transaccio.signParamFuncionariDir3"   />
 
            </td>
         </tr>

@@ -32,6 +32,7 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final IntegerField INFOSCANPIXELTYPE = new IntegerField(_TABLE_MODEL, "infoScanPixelType", "infoscanpixeltype");
 	 public static final IntegerField INFOSCANRESOLUCIOPPP = new IntegerField(_TABLE_MODEL, "infoScanResolucioPpp", "infoscanresolucioppp");
 	 public static final BooleanField INFOSCANOCR = new BooleanField(_TABLE_MODEL, "infoScanOcr", "infoscanocr");
+	 public static final BooleanField INFOSCANDUPLEX = new BooleanField(_TABLE_MODEL, "infoScanDuplex", "infoscanduplex");
 	 public static final TimestampField INFOSCANDATACAPTURA = new TimestampField(_TABLE_MODEL, "infoScanDataCaptura", "infoscandatacaptura");
 	 public static final StringField INFOSCANLANGUAGEDOC = new StringField(_TABLE_MODEL, "infoScanLanguageDoc", "signparamlanguagedoc");
 	 public static final StringField INFOSCANDOCUMENTTIPUS = new StringField(_TABLE_MODEL, "infoScanDocumentTipus", "arxiureqparamdocumenttipus");
@@ -40,6 +41,7 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final StringField FUNCIONARIUSERNAME = new StringField(_TABLE_MODEL, "funcionariUsername", "funcionariusername");
 	 public static final StringField SIGNPARAMFUNCIONARINOM = new StringField(_TABLE_MODEL, "signParamFuncionariNom", "signparamfuncionarinom");
 	 public static final StringField SIGNPARAMFUNCIONARINIF = new StringField(_TABLE_MODEL, "signParamFuncionariNif", "signparamfuncionarinif");
+	 public static final StringField SIGNPARAMFUNCIONARIDIR3 = new StringField(_TABLE_MODEL, "signParamFuncionariDir3", "signparamfuncionaridir3");
 	 public static final StringField ARXIUREQPARAMDOCESTATELABORA = new StringField(_TABLE_MODEL, "arxiuReqParamDocEstatElabora", "arxiureqparamdocestatelabora");
 	 public static final IntegerField ARXIUREQPARAMORIGEN = new IntegerField(_TABLE_MODEL, "arxiuReqParamOrigen", "arxiureqparamorigen");
 	 public static final StringField ARXIUREQPARAMINTERESSATS = new StringField(_TABLE_MODEL, "arxiuReqParamInteressats", "arxiureqparaminteressats");
@@ -77,6 +79,7 @@ public interface TransaccioFields extends java.io.Serializable {
     INFOSCANPIXELTYPE,
     INFOSCANRESOLUCIOPPP,
     INFOSCANOCR,
+    INFOSCANDUPLEX,
     INFOSCANDATACAPTURA,
     INFOSCANLANGUAGEDOC,
     INFOSCANDOCUMENTTIPUS,
@@ -85,6 +88,7 @@ public interface TransaccioFields extends java.io.Serializable {
     FUNCIONARIUSERNAME,
     SIGNPARAMFUNCIONARINOM,
     SIGNPARAMFUNCIONARINIF,
+    SIGNPARAMFUNCIONARIDIR3,
     ARXIUREQPARAMDOCESTATELABORA,
     ARXIUREQPARAMORIGEN,
     ARXIUREQPARAMINTERESSATS,
