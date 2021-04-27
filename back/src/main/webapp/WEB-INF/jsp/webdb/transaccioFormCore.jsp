@@ -121,9 +121,20 @@
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.usuariAplicacioId" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIAPLICACIOID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIAPLICACIOID)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.usuariAplicacioId"   />
-
+          <form:errors path="transaccio.usuariAplicacioId" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIAPLICACIOID)}" >
+          <form:hidden path="transaccio.usuariAplicacioId"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.usuariAplicacioId,__theForm.listOfValuesForUsuariAplicacioId)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIAPLICACIOID)}" >
+          <form:select id="transaccio_usuariAplicacioId"  onchange="if(typeof onChangeUsuariAplicacioId == 'function') {  onChangeUsuariAplicacioId(this); };"  cssClass="input-xxlarge" path="transaccio.usuariAplicacioId">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForUsuariAplicacioId}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>
@@ -139,9 +150,20 @@
              </label>
             </td>
             <td>
-            <form:errors path="transaccio.usuariPersonaId" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIPERSONAID)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIPERSONAID)? 'input-mini uneditable-input' : 'input-mini'}"   path="transaccio.usuariPersonaId"   />
-
+          <form:errors path="transaccio.usuariPersonaId" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIPERSONAID)}" >
+          <form:hidden path="transaccio.usuariPersonaId"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.usuariPersonaId,__theForm.listOfValuesForUsuariPersonaId)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.USUARIPERSONAID)}" >
+          <form:select id="transaccio_usuariPersonaId"  onchange="if(typeof onChangeUsuariPersonaId == 'function') {  onChangeUsuariPersonaId(this); };"  cssClass="input-xxlarge" path="transaccio.usuariPersonaId">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForUsuariPersonaId}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>

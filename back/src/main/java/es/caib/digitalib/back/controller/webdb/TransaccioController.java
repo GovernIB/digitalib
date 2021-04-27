@@ -198,6 +198,26 @@ public class TransaccioController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
+    // Field usuariAplicacioId
+    {
+      _listSKV = getReferenceListForUsuariAplicacioId(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForUsuariAplicacioId(_tmp);
+      if (filterForm.getGroupByFields().contains(USUARIAPLICACIOID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, USUARIAPLICACIOID, false);
+      };
+    }
+
+    // Field usuariPersonaId
+    {
+      _listSKV = getReferenceListForUsuariPersonaId(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForUsuariPersonaId(_tmp);
+      if (filterForm.getGroupByFields().contains(USUARIPERSONAID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, USUARIPERSONAID, false);
+      };
+    }
+
     // Field estatCodi
     {
       _listSKV = getReferenceListForEstatCodi(request, mav, filterForm, list, groupByItemsMap, null);
@@ -329,6 +349,8 @@ public class TransaccioController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
+    __mapping.put(USUARIAPLICACIOID, filterForm.getMapOfValuesForUsuariAplicacioId());
+    __mapping.put(USUARIPERSONAID, filterForm.getMapOfValuesForUsuariPersonaId());
     __mapping.put(ESTATCODI, filterForm.getMapOfValuesForEstatCodi());
     __mapping.put(INFOSCANPIXELTYPE, filterForm.getMapOfValuesForInfoScanPixelType());
     __mapping.put(INFOSCANLANGUAGEDOC, filterForm.getMapOfValuesForInfoScanLanguageDoc());
@@ -387,6 +409,24 @@ public class TransaccioController
 
   public void fillReferencesForForm(TransaccioForm transaccioForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
+    // Comprovam si ja esta definida la llista
+    if (transaccioForm.getListOfValuesForUsuariAplicacioId() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForUsuariAplicacioId(request, mav, transaccioForm, null);
+
+ if (!_listSKV.isEmpty())    {
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
+      transaccioForm.setListOfValuesForUsuariAplicacioId(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (transaccioForm.getListOfValuesForUsuariPersonaId() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForUsuariPersonaId(request, mav, transaccioForm, null);
+
+ if (!_listSKV.isEmpty())    {
+      java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+    }
+      transaccioForm.setListOfValuesForUsuariPersonaId(_listSKV);
+    }
     // Comprovam si ja esta definida la llista
     if (transaccioForm.getListOfValuesForEstatCodi() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForEstatCodi(request, mav, transaccioForm, null);
@@ -831,6 +871,72 @@ public java.lang.Long stringToPK(String value) {
 
   public boolean isActiveFormView() {
     return isActiveFormEdit();
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsuariAplicacioId(HttpServletRequest request,
+       ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
+    if (transaccioForm.isHiddenField(USUARIAPLICACIOID)) {
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
+    }
+    return getReferenceListForUsuariAplicacioId(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsuariAplicacioId(HttpServletRequest request,
+       ModelAndView mav, TransaccioFilterForm transaccioFilterForm,
+       List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (transaccioFilterForm.isHiddenField(USUARIAPLICACIOID)
+      && !transaccioFilterForm.isGroupByField(USUARIAPLICACIOID)) {
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
+    }
+    Where _w = null;
+    return getReferenceListForUsuariAplicacioId(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsuariAplicacioId(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsuariPersonaId(HttpServletRequest request,
+       ModelAndView mav, TransaccioForm transaccioForm, Where where)  throws I18NException {
+    if (transaccioForm.isHiddenField(USUARIPERSONAID)) {
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
+    }
+    return getReferenceListForUsuariPersonaId(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsuariPersonaId(HttpServletRequest request,
+       ModelAndView mav, TransaccioFilterForm transaccioFilterForm,
+       List<Transaccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (transaccioFilterForm.isHiddenField(USUARIPERSONAID)
+      && !transaccioFilterForm.isGroupByField(USUARIPERSONAID)) {
+      return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
+    }
+    Where _w = null;
+    return getReferenceListForUsuariPersonaId(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForUsuariPersonaId(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    return __tmp;
   }
 
 

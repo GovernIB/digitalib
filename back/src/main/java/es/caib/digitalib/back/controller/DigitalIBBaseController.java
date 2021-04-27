@@ -10,5 +10,11 @@ import org.fundaciobit.genapp.common.web.controller.CommonBaseController;
  */
 public abstract class DigitalIBBaseController<I extends IGenAppEntity, PK extends Object> 
   extends CommonBaseController<I, PK> {
+    
+    
+    
+    public boolean isVisibleExportData() {
+        return false;
+    }
 
 }

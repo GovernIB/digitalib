@@ -47,12 +47,18 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USUARIAPLICACIOID)}">
           <td>
-          ${transaccio.usuariAplicacioId}
+          <c:set var="tmp">${transaccio.usuariAplicacioId}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForUsuariAplicacioId[tmp]}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.USUARIPERSONAID)}">
           <td>
-          ${transaccio.usuariPersonaId}
+          <c:set var="tmp">${transaccio.usuariPersonaId}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForUsuariPersonaId[tmp]}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.IP)}">

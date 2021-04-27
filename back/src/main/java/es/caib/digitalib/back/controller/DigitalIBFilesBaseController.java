@@ -15,48 +15,52 @@ import javax.ejb.EJB;
 
 /**
  * POT SOBRESCRIURE AQUESTA CLASSE
+ * 
  * @author anadal
  * 
  */
 @Controller
 public abstract class DigitalIBFilesBaseController<I extends IGenAppEntity, PK extends Object, F extends BaseForm>
-  extends CommonFilesBaseController<I, PK, F, Fitxer> {
+        extends CommonFilesBaseController<I, PK, F, Fitxer> {
 
-  @EJB(mappedName = "digitalib/FitxerEJB/local")
-  protected FitxerLocal fitxerEjb;
+    @EJB(mappedName = "digitalib/FitxerEJB/local")
+    protected FitxerLocal fitxerEjb;
 
-  protected final Logger log = Logger.getLogger(getClass());
+    protected final Logger log = Logger.getLogger(getClass());
 
-  /**
-   * 
-   * @return
-   */
-  protected FilesFormManager<Fitxer> getFilesFormManager() {
-    return new DigitalIBFilesFormManager(fitxerEjb);
-  }
-
-  /**
-   * 
-   * @param arxiu
-   * @return
-   */
-  public boolean deleteFile(Long fileID) {
-    if (fileID != null) {
-      Fitxer file = null;
-      try {
-        file = fitxerEjb.findByPrimaryKey(fileID);
-        if (file != null) {
-          fitxerEjb.delete(file);
-        }
-      } catch (Exception e) {
-        log.error("Error borrant arxiu fisic amb id=" + fileID +
-            ((file == null)? "" : ("("+ file.getNom() + ")")));
-      }
-
-      return FileSystemManager.eliminarArxiu(fileID);
+    /**
+     * 
+     * @return
+     */
+    protected FilesFormManager<Fitxer> getFilesFormManager() {
+        return new DigitalIBFilesFormManager(fitxerEjb);
     }
-    return true;
-  }
 
+    /**
+     * 
+     * @param arxiu
+     * @return
+     */
+    public boolean deleteFile(Long fileID) {
+        if (fileID != null) {
+            Fitxer file = null;
+            try {
+                file = fitxerEjb.findByPrimaryKey(fileID);
+                if (file != null) {
+                    fitxerEjb.delete(file);
+                }
+            } catch (Exception e) {
+                log.error("Error borrant arxiu fisic amb id=" + fileID
+                        + ((file == null) ? "" : ("(" + file.getNom() + ")")));
+            }
+
+            return FileSystemManager.eliminarArxiu(fileID);
+        }
+        return true;
+    }
+
+    public boolean isVisibleExportData() {
+        return false;
+    }
 
 }

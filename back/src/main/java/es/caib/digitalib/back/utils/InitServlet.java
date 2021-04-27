@@ -1,6 +1,9 @@
 package es.caib.digitalib.back.utils;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.security.RunAs;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,7 +14,10 @@ import org.fundaciobit.genapp.common.crypt.AlgorithmEncrypter;
 import org.fundaciobit.genapp.common.crypt.FileIDEncrypter;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.filesystem.ThreeFolderFileSystemManager;
+import org.fundaciobit.genapp.common.web.exportdata.DataExporterManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.fundaciobit.pluginsib.core.utils.PluginsManager;
+import org.fundaciobit.pluginsib.exportdata.IExportDataPlugin;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 import es.caib.digitalib.hibernate.HibernateFileUtil;
@@ -77,11 +83,11 @@ public class InitServlet extends HttpServlet {
     }
 
     // Inicialitzar els DataExporters
-    /*
+    
     try {
       Set<Class<? extends IExportDataPlugin>> plugins;
       
-      if (Configuracio.isDesenvolupament()) {
+      {
         String [] classes = new String[] {
            "org.fundaciobit.plugins.exportdata.cvs.CSVPlugin",
            "org.fundaciobit.plugins.exportdata.ods.ODSPlugin",
@@ -93,13 +99,12 @@ public class InitServlet extends HttpServlet {
           try {
             Class<?> cls = Class.forName(str);
             plugins.add((Class<? extends IExportDataPlugin>)cls);
-          } catch (Throwable e) {            
+          } catch (Throwable e) {
+              log.error("No es troba Classe per la cadena '" + str + "'");
           }
         }
         
         
-      } else {
-        plugins = PluginsManager.getPluginsByInterface(IExportDataPlugin.class);  
       }
       
       
@@ -109,7 +114,13 @@ public class InitServlet extends HttpServlet {
       } else {
       
         for (Class<? extends IExportDataPlugin> class1 : plugins) {
-          IExportDataPlugin edp = (IExportDataPlugin)PluginsManager.instancePluginByClass(class1);
+          IExportDataPlugin edp;
+          try {
+            edp = (IExportDataPlugin)PluginsManager.instancePluginByClass(class1);
+          } catch(Throwable e) {
+            log.error("Error instanciant el DataExporter ]" + class1.getName() + "[ " + e.getMessage(), e);
+            continue;
+          }
           if (edp == null) {
             log.warn("No s'ha pogut instanciar Plugin associat a la classe " + class1.getName());
           } else {
@@ -122,7 +133,7 @@ public class InitServlet extends HttpServlet {
     } catch(Throwable e) {
       log.error("Error inicialitzant els DataExporters: " + e.getMessage(), e);
     }
-    */
+    
 
     // Mostrar Versió
     String ver = LogicUtils.getVersio();

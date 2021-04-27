@@ -686,6 +686,8 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
     this.infoCustodyIDFins = __toClone.infoCustodyIDFins;
     this.transaccioMultipleIDDesde = __toClone.transaccioMultipleIDDesde;
     this.transaccioMultipleIDFins = __toClone.transaccioMultipleIDFins;
+    this.mapOfValuesForUsuariAplicacioId = __toClone.mapOfValuesForUsuariAplicacioId;
+    this.mapOfValuesForUsuariPersonaId = __toClone.mapOfValuesForUsuariPersonaId;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
     this.mapOfValuesForInfoScanPixelType = __toClone.mapOfValuesForInfoScanPixelType;
     this.mapOfValuesForInfoScanLanguageDoc = __toClone.mapOfValuesForInfoScanLanguageDoc;
@@ -731,6 +733,30 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
    // -----------------------
    // Maps de referencies.
    // -----------------------
+  private Map<String, String> mapOfValuesForUsuariAplicacioId;
+
+  public Map<String, String> getMapOfValuesForUsuariAplicacioId() {
+    return this.mapOfValuesForUsuariAplicacioId;
+  }
+
+  public void setMapOfValuesForUsuariAplicacioId(Map<String, String> mapOfValuesForUsuariAplicacioId) {
+    this.mapOfValuesForUsuariAplicacioId = mapOfValuesForUsuariAplicacioId;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForUsuariPersonaId;
+
+  public Map<String, String> getMapOfValuesForUsuariPersonaId() {
+    return this.mapOfValuesForUsuariPersonaId;
+  }
+
+  public void setMapOfValuesForUsuariPersonaId(Map<String, String> mapOfValuesForUsuariPersonaId) {
+    this.mapOfValuesForUsuariPersonaId = mapOfValuesForUsuariPersonaId;
+  }
+
+
+
   private Map<String, String> mapOfValuesForEstatCodi;
 
   public Map<String, String> getMapOfValuesForEstatCodi() {

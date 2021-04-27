@@ -27,7 +27,6 @@ function reassignAction() {
 
   <div style="float:left;" id="${formName}_pagination_left">
   <c:if test="${__theFilterForm.visibleExportList}">
-      
       <%
          for(IDataExporter dataExporter : DataExporterManager.getAllDataExporters()) {
       %>

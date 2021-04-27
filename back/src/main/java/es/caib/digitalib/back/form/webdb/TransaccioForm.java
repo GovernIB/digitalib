@@ -28,6 +28,8 @@ public class TransaccioForm extends DigitalIBBaseForm {
   public TransaccioForm(TransaccioForm __toClone) {
     super(__toClone);
       this.transaccio = __toClone.transaccio;
+    this.listOfValuesForUsuariAplicacioId = __toClone.listOfValuesForUsuariAplicacioId;
+    this.listOfValuesForUsuariPersonaId = __toClone.listOfValuesForUsuariPersonaId;
     this.listOfValuesForEstatCodi = __toClone.listOfValuesForEstatCodi;
     this.listOfValuesForInfoScanPixelType = __toClone.listOfValuesForInfoScanPixelType;
     this.listOfValuesForInfoScanLanguageDoc = __toClone.listOfValuesForInfoScanLanguageDoc;
@@ -82,6 +84,30 @@ public class TransaccioForm extends DigitalIBBaseForm {
   public void setFitxerSignaturaIDDelete(boolean fitxerSignaturaIDDelete) {
     this.fitxerSignaturaIDDelete = fitxerSignaturaIDDelete;
    }
+  private List<StringKeyValue> listOfValuesForUsuariAplicacioId;
+
+  public List<StringKeyValue> getListOfValuesForUsuariAplicacioId() {
+    return this.listOfValuesForUsuariAplicacioId;
+  }
+
+  public void setListOfValuesForUsuariAplicacioId(List<StringKeyValue> listOfValuesForUsuariAplicacioId) {
+    this.listOfValuesForUsuariAplicacioId = listOfValuesForUsuariAplicacioId;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForUsuariPersonaId;
+
+  public List<StringKeyValue> getListOfValuesForUsuariPersonaId() {
+    return this.listOfValuesForUsuariPersonaId;
+  }
+
+  public void setListOfValuesForUsuariPersonaId(List<StringKeyValue> listOfValuesForUsuariPersonaId) {
+    this.listOfValuesForUsuariPersonaId = listOfValuesForUsuariPersonaId;
+  }
+
+
+
   private List<StringKeyValue> listOfValuesForEstatCodi;
 
   public List<StringKeyValue> getListOfValuesForEstatCodi() {
