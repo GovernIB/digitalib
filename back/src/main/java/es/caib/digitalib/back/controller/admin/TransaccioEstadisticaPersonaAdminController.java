@@ -12,16 +12,16 @@ import es.caib.digitalib.back.form.webdb.TransaccioForm;
  * @author anadal(u80067)
  */
 @Controller
-@RequestMapping(value = TransaccioEstadisticaAplicacioAdminController.CONTEXTWEB)
+@RequestMapping(value = TransaccioEstadisticaPersonaAdminController.CONTEXTWEB)
 @SessionAttributes(types = { TransaccioForm.class, TransaccioFilterForm.class })
-public class TransaccioEstadisticaAplicacioAdminController
+public class TransaccioEstadisticaPersonaAdminController
         extends AbstractTransaccioEstadisticaAdminController {
 
-    public static final String CONTEXTWEB = "/admin/transaccioestadisticaaplicacio";
-
+    public static final String CONTEXTWEB = "/admin/transaccioestadisticapersona";
     
     @Override
     public boolean isUtilitzatPerAplicacio() {
-        return true;
+        return false;
     }
+
 }

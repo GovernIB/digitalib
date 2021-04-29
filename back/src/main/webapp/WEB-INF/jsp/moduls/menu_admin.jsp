@@ -139,6 +139,13 @@
           style="${(fn:contains(url, '/admin/auditoria/persona/'))? "font-weight:bold;" : ""}"><fmt:message
               key="auditoria.auditoria" /></span>
       </a></li>
+      
+      <li style="list-style-type: disc; list-style-position: inside;"><a
+        href="<c:url value="/admin/transaccioestadisticapersona/list"/>"> <span
+          style="${(fn:contains(url, '/transaccioestadisticapersona/'))? "font-weight:bold;" : ""}"><fmt:message
+              key="transaccio.estadistica.plural" /></span>
+
+      </a></li>
 
      <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
@@ -204,8 +211,7 @@
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/transaccioestadisticaaplicacio/list"/>"> <span
           style="${(fn:contains(url, '/transaccioestadisticaaplicacio/'))? "font-weight:bold;" : ""}"><fmt:message
-              key="transaccio.estadistica.aplicacio.plural" /></span>
-
+              key="transaccio.estadistica.plural" /></span>
       </a></li>
 
       <hr style="margin-top: 6px; margin-bottom: 6px;" />
