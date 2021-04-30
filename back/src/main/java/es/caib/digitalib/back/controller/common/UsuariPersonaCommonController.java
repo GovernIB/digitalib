@@ -84,6 +84,10 @@ public class UsuariPersonaCommonController extends UsuariPersonaController {
       usuariPersonaForm.addReadOnlyField(ROLECUST);
       usuariPersonaForm.addReadOnlyField(CONFIGURACIOGRUPID);
     }
+
+    if (Configuracio.useDir3OfGroupConfiguration()) {
+        usuariPersonaForm.addHiddenField(UNITATDIR3);
+    }
         
     usuariPersonaForm.setDeleteButtonVisible(false);
     usuariPersonaForm.setCancelButtonVisible(false);

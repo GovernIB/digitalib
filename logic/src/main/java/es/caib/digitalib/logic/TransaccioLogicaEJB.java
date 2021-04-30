@@ -42,11 +42,13 @@ import es.caib.digitalib.logic.utils.LogicUtils;
 import es.caib.digitalib.model.entity.Metadada;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.entity.TransaccioMultiple;
+import es.caib.digitalib.model.fields.ConfiguracioGrupFields;
 import es.caib.digitalib.model.fields.MetadadaFields;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioQueryPath;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -82,6 +84,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
   @EJB(mappedName = es.caib.digitalib.ejb.TransaccioMultipleLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.TransaccioMultipleLocal transaccioMultipleEjb;
+  
+  @EJB(mappedName = es.caib.digitalib.ejb.ConfiguracioGrupLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.ConfiguracioGrupLocal configuracioGrupEjb;
 
   @Override
   public Set<Long> deleteFull(Transaccio transaccio, boolean esborrarFitxers,
@@ -328,7 +333,26 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
       final String functionaryAdministrationID = sp.getFunctionaryAdministrationID();
       
-      final String functionaryDir3Unit = usuariPersona.getUnitatDir3();
+      
+      final String functionaryDir3Unit;
+      if (usuariPersona == null) {
+          functionaryDir3Unit = null;
+      } else {
+
+        if (Configuracio.useDir3OfGroupConfiguration()) {
+            
+            if (usuariPersona.getConfiguracioGrupID() == null) {
+                // XYZ ZZZ
+                throw new I18NException("genapp.comodi",
+                        "L'usuari  " + usuariPersona.getUsername() + " no te definida la Configuració de Grup");
+            }
+            functionaryDir3Unit = configuracioGrupEjb.executeQueryOne(ConfiguracioGrupFields.CODIDIR3PERDEFECTE, 
+                    ConfiguracioGrupFields.CONFIGURACIOGRUPID.equal(usuariPersona.getConfiguracioGrupID()));
+        } else {            
+            functionaryDir3Unit = usuariPersona.getUnitatDir3();
+        }
+      }
+      
 
       signatureParameters = new MassiveScanWebSimpleSignatureParameters(
           functionaryFullName, functionaryAdministrationID, functionaryDir3Unit);

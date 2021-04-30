@@ -11,7 +11,6 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
@@ -22,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.digitalib.back.controller.AbstractScanWebProcessController.UrlSelectScanModule;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
-import es.caib.digitalib.back.security.LoginInfo;
 import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.AuditoriaLogicaLocal;
@@ -213,7 +211,7 @@ public abstract class AbstractFirmaArxiuParametersController
         }
 
     }
-
+/*
     @Override
     public TransaccioJPA update(HttpServletRequest request, TransaccioJPA transaccio)
             throws Exception, I18NException, I18NValidationException {
@@ -230,7 +228,7 @@ public abstract class AbstractFirmaArxiuParametersController
 
         return super.update(request, transaccio);
     }
-
+*/
     public static long lastCheck = 0;
 
     @Override

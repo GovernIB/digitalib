@@ -35,8 +35,8 @@
       es.caib.digitalib.ocultarmenuinici=false
 
       <!-- Parametres: "userinfo" = org.fundaciobit.pluginsib.userinformation.UserInfo   -->
-      #es.caib.digitalib.configuraciogruppereefecteEL=<![CDATA[<#if userinfo?? && userinfo.username??><#if userinfo.username = "test">1078</#if><#if userinfo.username = "admin">1233</#if></#if>]]>
-      es.caib.digitalib.configuraciogruppereefecteEL=
+      #es.caib.digitalib.configuraciogrupperdefecteEL=<![CDATA[<#if userinfo?? && userinfo.username??><#if userinfo.username = "test">1078</#if><#if userinfo.username = "admin">1233</#if></#if>]]>
+      es.caib.digitalib.configuraciogrupperdefecteEL=
       
       <!-- Opcional. Indica el tamany màxim en bytes que ha de tenir un fitxer escanejat.
         En el cas de l'escaneig múltiple aquest valor s'aplica a cada un dels subdocuments. -->
@@ -49,6 +49,14 @@
       es.caib.digitalib.signreasonEL=
       es.caib.digitalib.signlocationEL=
       es.caib.digitalib.signeremailEL=
+	  
+	  
+	  <!-- Si aquest valor és true, llavors: -->
+	  <!-- (1) No es permetrà l'edició del camp Dir3Codi de l'objecte Usuari-Persona -->
+	  <!-- (2) Durant l'inici d'una transacció via entorn web, s'utilitzaria el codi dir3 de la Configuració de Grup de la persona -->
+	  es.caib.digitalib.usedir3ofgroupconfiguration=true
+	  
+	  
       
       
       
