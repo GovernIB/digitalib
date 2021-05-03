@@ -15,14 +15,12 @@ import es.caib.digitalib.model.entity.Fitxer;
  *
  */
 @Local
-public interface PluginFirmaEnServidorLogicaLocal extends
-    AbstractPluginLogicaLocal<ISignatureServerPlugin> {
+public interface PluginFirmaEnServidorLogicaLocal
+        extends AbstractPluginLogicaLocal<ISignatureServerPlugin> {
 
-  public static final String JNDI_NAME = "digitalib/PluginFirmaEnServidorLogicaEJB/local";
-  
-  
-  public Fitxer firmarFitxerAmbApiFirmaEnServidor(TransaccioJPA transaccio, Fitxer fitxer,
-      Locale locale, String userApp, String userPerson);
+    public static final String JNDI_NAME = "digitalib/PluginFirmaEnServidorLogicaEJB/local";
 
+    public Fitxer firmarFitxerAmbApiFirmaEnServidor(TransaccioJPA transaccio, Fitxer fitxer,
+            Locale locale, String userApp, String userPerson);
 
 }

@@ -31,7 +31,7 @@
   <dependencies>
 
     <!-- Internas -->
-    
+
     <dependency>
         <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
         <artifactId>pluginsib-exportdata-api</artifactId>
@@ -90,17 +90,7 @@
 
     <!-- Externas -->
 
-    <dependency>
-      <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-mapper-asl</artifactId>
-      <version>1.9.9</version>
-    </dependency>
 
-    <dependency>
-      <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-core-asl</artifactId>
-      <version>1.9.9</version>
-    </dependency>
 
 
     <dependency>
@@ -173,6 +163,7 @@
       <scope>provided</scope>
     </dependency>
 
+<!-- 
     <dependency>
       <artifactId>apiscanwebsimple-jersey</artifactId>
       <groupId>org.fundaciobit.apisib.apiscanwebsimple</groupId>
@@ -186,12 +177,28 @@
       <version>1.0.0</version>
       <scope>provided</scope>
     </dependency>
+    
 
     <dependency>
       <groupId>org.fundaciobit.pluginsib.utils</groupId>
       <artifactId>pluginsib-utils-templateengine</artifactId>
       <version>2.0.0</version>
     </dependency>
+    
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.9</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-core-asl</artifactId>
+      <version>1.9.9</version>
+    </dependency>
+    
+    
+    -->
 
     <dependency>
       <groupId>org.apache.tiles</groupId>

@@ -17,8 +17,26 @@
 
   <name>DigitalIB Logic</name>
 
-
   <dependencies>
+  
+    <dependency>
+      <artifactId>apifirmasimple-jersey</artifactId>
+      <groupId>org.fundaciobit.apisib.apifirmasimple</groupId>
+      <version>1.0.2</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-json</artifactId>
+      <version>1.19</version>
+    </dependency>
+    
+    <!-- 
+    [INFO] |        +- org.codehaus.jackson:jackson-core-asl:jar:1.7.1:compile
+[INFO] |        +- org.codehaus.jackson:jackson-mapper-asl:jar:1.7.1:compile
+[INFO] |        +- org.codehaus.jackson:jackson-jaxrs:jar:1.7.1:compile
+[INFO] |        \- org.codehaus.jackson:jackson-xc:jar:1.7.1:compile
+     -->
 
     <dependency>
       <groupId>org.fundaciobit.pluginsib.userinformation</groupId>

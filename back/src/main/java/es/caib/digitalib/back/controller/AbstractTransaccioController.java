@@ -912,8 +912,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
             if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
                 // Afegir boto de Descarrega de document escanejat o de versio imprimible
-                // segons si es
-                // escaneig o copia autentica
+                // segons si es escaneig o copia autentica
 
                 Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
 
@@ -997,6 +996,9 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     protected void postListNomPersonaAplicacio(HttpServletRequest request,
             TransaccioFilterForm filterForm, List<Transaccio> list, final boolean isAdmin)
             throws I18NException {
+        
+        
+        
         if (isAdmin) {
             /*
              * // XYZ ZZZ Ocultar columnes de datafi, missatgeerror, fitxersignat // si tots
