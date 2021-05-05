@@ -14,5 +14,6 @@ Digitalitzador de documents en paper, a documents electrònics vàlids i conform
 Nom | Descripció | Enllaç
 ------------ | ------------- | -------------
 Digitalib_Manual_instalacio.odt | Manual d'instal·lació de l'aplicació | [Document](./doc/Digitalib_Manual_instalacio.odt)
-Manual_Integracio_v1_0.odt | Manual d'integració | [Document](./doc/Manual_Integracio_v1_0.odt)
+Manual_Integracio_API_SCANWEB_v1_0.odt | Manual d'integració | [Document](./doc/Manual_Integracio_API_SCANWEB_v1_0.odt)
+Manual_Integracio_API_SCANWEB_MASSIVA_v1_0.odt | Manual d'integració | [Document](./doc/Manual_Integracio_API_SCANWEB_MASSIVA_v1_0.odt)
 Manual_usuari_DigitalIB.odt | Manual d'usuari | [Document](./doc/Manual_usuari_DigitalIB.odt)
