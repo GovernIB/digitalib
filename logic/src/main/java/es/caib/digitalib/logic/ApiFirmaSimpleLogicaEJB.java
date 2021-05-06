@@ -3,11 +3,14 @@ package es.caib.digitalib.logic;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -31,7 +34,6 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.plugins.signature.api.FileInfoSignature;
 import org.fundaciobit.pluginsib.core.utils.FileUtils;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
-import org.hibernate.exception.ExceptionUtils;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import com.google.common.hash.Hashing;
@@ -50,6 +52,7 @@ import es.caib.digitalib.utils.Configuracio;
  */
 @Stateless(name = "ApiFirmaSimpleLogicaEJB")
 @SecurityDomain("seycon")
+@RunAs("DIB_ADMIN")
 public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
 
     
@@ -140,7 +143,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
             transaccio.setEstatMissatge(
                     "ApiFirmaSimple::Error durant la cridada a signar document: "
                             + e.getMessage());
-            transaccio.setEstatExcepcio(ExceptionUtils.getStackTrace(e));
+            transaccio.setEstatExcepcio(getStackTrace(e));
             log.error(transaccio.getEstatMissatge(), e);
             return null;
         }
@@ -290,7 +293,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
                     transaccio.setEstatMissatge(
                             "ApiFirmaSimple::Error durant el processament dels resultats de la signatura en servidor: "
                                     + msg);
-                    transaccio.setEstatExcepcio(ExceptionUtils.getStackTrace(e));
+                    transaccio.setEstatExcepcio(getStackTrace(e));
                     log.error(transaccio.getEstatMissatge(), e);
                     return null;
                 }
@@ -311,6 +314,16 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
 
         return fitxerSignat;
     }
+    
+    
+    protected String getStackTrace(Throwable e) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        return sw.toString();
+    }
+    
+    
 
     
     protected String templateEngine(String valueEL, TransaccioJPA transaccio)  {

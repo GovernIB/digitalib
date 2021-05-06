@@ -18,25 +18,45 @@
   <name>DigitalIB Logic</name>
 
   <dependencies>
-  
+
     <dependency>
       <artifactId>apifirmasimple-jersey</artifactId>
       <groupId>org.fundaciobit.apisib.apifirmasimple</groupId>
       <version>1.0.2</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>jaxb-impl</artifactId>
+          <groupId>com.sun.xml.bind</groupId>
+        </exclusion>
+
+        <exclusion>
+          <artifactId>jaxb-api</artifactId>
+          <groupId>com.sun.xml.bind</groupId>
+        </exclusion>
+
+      </exclusions>
     </dependency>
-    
+
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-json</artifactId>
       <version>1.19</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>jaxb-impl</artifactId>
+          <groupId>com.sun.xml.bind</groupId>
+        </exclusion>
+
+        <exclusion>
+          <artifactId>jaxb-api</artifactId>
+          <groupId>com.sun.xml.bind</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
-    
-    <!-- 
-    [INFO] |        +- org.codehaus.jackson:jackson-core-asl:jar:1.7.1:compile
-[INFO] |        +- org.codehaus.jackson:jackson-mapper-asl:jar:1.7.1:compile
-[INFO] |        +- org.codehaus.jackson:jackson-jaxrs:jar:1.7.1:compile
-[INFO] |        \- org.codehaus.jackson:jackson-xc:jar:1.7.1:compile
-     -->
+
+    <!-- [INFO] | +- org.codehaus.jackson:jackson-core-asl:jar:1.7.1:compile [INFO] | 
+      +- org.codehaus.jackson:jackson-mapper-asl:jar:1.7.1:compile [INFO] | +- org.codehaus.jackson:jackson-jaxrs:jar:1.7.1:compile 
+      [INFO] | \- org.codehaus.jackson:jackson-xc:jar:1.7.1:compile -->
 
     <dependency>
       <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
@@ -154,7 +174,7 @@
     <dependency>
       <groupId>com.google.zxing</groupId>
       <artifactId>javase</artifactId>
-      <version>2.2</version> <!--  2.2  3.3.0 -->
+      <version>2.2</version> <!-- 2.2 3.3.0 -->
     </dependency>
 
     <!-- ===== PLUGINS IB -->
@@ -194,13 +214,13 @@
       <artifactId>pluginsib-timestamp-api</artifactId>
       <version>2.0.0</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.fundaciobit.pluginsib.utils</groupId>
       <artifactId>pluginsib-utils-templateengine</artifactId>
       <version>2.0.1</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.freemarker</groupId>
       <artifactId>freemarker</artifactId>
