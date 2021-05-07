@@ -31,212 +31,208 @@ import com.google.zxing.common.HybridBinarizer;
  *
  */
 public class SplitPdf {
-  
-  protected static final Logger log = Logger.getLogger(SplitPdf.class);
 
-  protected static final String SEPARADOR_TEXT = "GOIB DIGITALIB SEPARADOR";
+    protected static final Logger log = Logger.getLogger(SplitPdf.class);
 
-  
+    protected static final String SEPARADOR_TEXT = "GOIB DIGITALIB SEPARADOR";
 
-  public static final File[] detectPagesWithQR(File destDir, final File pdfToSplit, String baseName)
-      throws Exception {
-    
-    final PDDocument document = PDDocument.load(pdfToSplit);
-    final InputStream originalFileIS = new FileInputStream(pdfToSplit);
-    try {
-       return detectPagesWithQR(destDir, document, baseName, originalFileIS);
-    } finally {
+    public static final File[] detectPagesWithQR(File destDir, final File pdfToSplit,
+            String baseName, Integer resolucio) throws Exception {
+
+        final PDDocument document = PDDocument.load(pdfToSplit);
+        final InputStream originalFileIS = new FileInputStream(pdfToSplit);
         try {
-          originalFileIS.close();
-        } catch (Exception e) {
-          log.error("Tancant IS", e);
+            return detectPagesWithQR(destDir, document, baseName, originalFileIS, resolucio);
+        } finally {
+            try {
+                originalFileIS.close();
+            } catch (Exception e) {
+                log.error("Tancant IS", e);
+            }
+            document.close();
+
         }
-        document.close();
-    
     }
-  }
-  
-  
-  public static final File[] detectPagesWithQR(File destDir, final byte[] pdfToSplit, String baseName)
-      throws Exception {
-    final PDDocument document = PDDocument.load(pdfToSplit);
-    final InputStream originalFileIS = new ByteArrayInputStream(pdfToSplit);
-    try {
-      return detectPagesWithQR(destDir, document, baseName,  originalFileIS);
-    } finally {
-      document.close();
+
+    public static final File[] detectPagesWithQR(File destDir, final byte[] pdfToSplit,
+            String baseName, Integer resolucio) throws Exception {
+        final PDDocument document = PDDocument.load(pdfToSplit);
+        final InputStream originalFileIS = new ByteArrayInputStream(pdfToSplit);
+        try {
+            return detectPagesWithQR(destDir, document, baseName, originalFileIS, resolucio);
+        } finally {
+            document.close();
+        }
     }
-  }
-  
-  
-  protected static final File[] detectPagesWithQR(File destDir, final PDDocument document, String baseName, InputStream originalFileIS)
-      throws Exception {
 
-    final List<Integer> qrPages = new ArrayList<Integer>();
+    protected static final File[] detectPagesWithQR(File destDir, final PDDocument document,
+            String baseName, InputStream originalFileIS, Integer resolucio) throws Exception {
 
-    
-    ArrayList<PDRectangle> crops = new ArrayList<PDRectangle>();
-    
-    {
-      log.info("XYZ ZZZ ZZZZZ\n\n detectPagesWithQR:: ENTRAM => ");
+        final List<Integer> qrPages = new ArrayList<Integer>();
 
-   // XYZ ZZZ ZZZ
-      PDRectangle rectangle = new PDRectangle();
+        ArrayList<PDRectangle> crops = new ArrayList<PDRectangle>();
 
-      final int x = 140;
-      final int y = 365;
-      final int side = 310;
-    
-      
-      rectangle.setLowerLeftX(x);
-      rectangle.setLowerLeftY(y);
-      rectangle.setUpperRightX(x + side);
-      rectangle.setUpperRightY(y + side);
-      
-      
+        log.info("XYZ ZZZ ZZZZZ\n\n detectPagesWithQR:: ENTRAM => resolucio: " + resolucio);
 
-      for (int page = 1; page <= document.getNumberOfPages(); page++) {
+        PDRectangle rectangle = new PDRectangle();
+        // XYZ ZZZ ZZZ
+        final int margin = 0;
+        final int x = 140 - margin;
+        final int y = 365 + margin;
+        final int side = 310 + 2 * margin;
 
-        PDPage page2 = document.getPage(page - 1);
-        
-        crops.add(page2.getCropBox());
-
-        page2.setCropBox(rectangle);
-      }
-
-      PDFRenderer pdfRenderer = new PDFRenderer(document);
-
-      {
-
+        rectangle.setLowerLeftX(x);
+        rectangle.setLowerLeftY(y);
+        rectangle.setUpperRightX(x + side);
+        rectangle.setUpperRightY(y + side);
 
         for (int page = 1; page <= document.getNumberOfPages(); page++) {
 
-          BufferedImage bim = pdfRenderer.renderImage(page - 1, 0.2f, ImageType.BINARY);
+            PDPage page2 = document.getPage(page - 1);
 
-          try {
-            // ZXING - > Read Data from QR Code
-            LuminanceSource source = new BufferedImageLuminanceSource(bim);
-            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-            log.info("XYZ ZZZ ZZZZZ detectPagesWithQR:: PROCESSANT PAGINA => " + page);
-            Result result = new MultiFormatReader().decode(bitmap);
+            crops.add(page2.getCropBox());
 
-            
-            if (result.getBarcodeFormat().equals(BarcodeFormat.QR_CODE)) {
-              String text = result.getText();
-              if (text != null && text.startsWith(SEPARADOR_TEXT)) {
-                log.info("   XYZ ZZZ ZZZZZ detectPagesWithQR:: TROBAT SEPARADOR => " + page);
-                qrPages.add(page);
+            page2.setCropBox(rectangle);
+        }
 
-              }
+        float scale;
+        if (resolucio == null || resolucio <= 100) {
+            scale = 0.5f;
+        } else if (resolucio <= 200) {
+            scale = 0.3f;
+        } else {
+            scale = 0.2f;
+        }
+
+        PDFRenderer pdfRenderer = new PDFRenderer(document);
+
+        for (int page = 1; page <= document.getNumberOfPages(); page++) {
+
+            BufferedImage bim = pdfRenderer.renderImage(page - 1, scale, ImageType.BINARY);
+
+            try {
+                // ZXING - > Read Data from QR Code
+                LuminanceSource source = new BufferedImageLuminanceSource(bim);
+                BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                log.info("XYZ ZZZ ZZZZZ detectPagesWithQR:: PROCESSANT PAGINA => " + page);
+                Result result = new MultiFormatReader().decode(bitmap);
+
+                if (result.getBarcodeFormat().equals(BarcodeFormat.QR_CODE)) {
+                    String text = result.getText();
+                    if (text != null && text.startsWith(SEPARADOR_TEXT)) {
+                        log.info("   XYZ ZZZ ZZZZZ detectPagesWithQR:: TROBAT SEPARADOR => "
+                                + page);
+                        qrPages.add(page);
+
+                    }
+                }
+            } catch (com.google.zxing.NotFoundException nfe) {
+                log.info("   XYZ ZZZ ZZZZZ detectPagesWithQR:: NO TROBAT");
             }
-          } catch (com.google.zxing.NotFoundException nfe) {
-            log.info("   XYZ ZZZ ZZZZZ detectPagesWithQR:: NO TROBAT");
-          }
 
         }
-      }
-     
-    }
-    
-    
-    for (int page = 1; page <= document.getNumberOfPages(); page++) {
-      PDPage page2 = document.getPage(page - 1);
-      page2.setCropBox(crops.get(page - 1));
-    }
-    
 
-    List<File> listFiles = extractPagesFromPDF(destDir, document, qrPages, baseName, originalFileIS);
-    
-    document.close();
-
-    return listFiles.toArray(new File[listFiles.size()]);
-  }
-
-  /**
-   * PDF BOX
-   * 
-   * @param destDir
-   * @param pdfToSplit
-   * @param qrPages
-   * @return
-   */
-  protected static List<File> extractPagesFromPDF(File destDir, PDDocument pdfDoc,
-      final List<Integer> qrPages, String baseName, InputStream originalFileIS) throws Exception {
-
-    //PDDocument pdfDoc = PDDocument.load(pdfToSplit);
-
-    List<File> listFiles = new ArrayList<File>();
-
-    if (qrPages.size() == 0) {
-      
-      log.info("   XYZ ZZZ ZZZZZ extractPagesFromPDF => qrPages.size() == 0");
-      
-      // PdfDocument pdfDest = new PdfDocument(new PdfWriter("RESULT_ONE_PDF.pdf"));
-      // pdfDoc.copyPagesTo(1, pdfDoc.getNumberOfPages(), pdfDest);
-      // pdfDest.close();
-      String name = baseName + "_1_#" + pdfDoc.getNumberOfPages() + ".pdf";
-      File pdf = new File(destDir, name); 
-      //pdfDoc.save(pdfToSplit);
-      org.apache.commons.io.FileUtils.copyInputStreamToFile(originalFileIS, pdf);
-      listFiles.add(pdf);
-    } else {
-      log.info("   XYZ ZZZ ZZZZZ extractPagesFromPDF => TROBATS SEPARADORS: " + qrPages.size());
-      // 2) Un ou plusieurs QR code = au moins deux documents
-      //log.info("Llista items: " + qrPages.size());
-      int start = 1;
-      int count = 1;
-      for (int index = 0; index < qrPages.size(); index++) {
-        //log.info("trobat QR  en pagina " + qrPages.get(index));
-
-        if (qrPages.get(index) != 1) {
-
-          final int fromPage = start;
-          final int toPage = qrPages.get(index) - 1;
-
-          final String name = baseName + "_" + count + "_#" + qrPages.size() + ".pdf";
-
-          File f = new File(destDir, name);
-
-          splitPdfpages(pdfDoc, f, fromPage, toPage);
-
-          listFiles.add(f);
-
-          count++;
+        for (int page = 1; page <= document.getNumberOfPages(); page++) {
+            PDPage page2 = document.getPage(page - 1);
+            page2.setCropBox(crops.get(page - 1));
         }
-        start = qrPages.get(index) + 1;
-      }
 
-      // La resta de pagines
-      if (start <= pdfDoc.getNumberOfPages()) {
-        File f = new File(destDir,
-            baseName + "_" + count + "_#" + qrPages.size() + ".pdf");
+        List<File> listFiles = extractPagesFromPDF(destDir, document, qrPages, baseName,
+                originalFileIS);
 
-        int fromPage = start;
-        int toPage = pdfDoc.getNumberOfPages();
-        splitPdfpages(pdfDoc, f, fromPage, toPage);
+        document.close();
 
-        listFiles.add(f);
-      }
-
+        return listFiles.toArray(new File[listFiles.size()]);
     }
 
-    pdfDoc.close();
-    return listFiles;
-  }
+    /**
+     * PDF BOX
+     * 
+     * @param destDir
+     * @param pdfToSplit
+     * @param qrPages
+     * @return
+     */
+    protected static List<File> extractPagesFromPDF(File destDir, PDDocument pdfDoc,
+            final List<Integer> qrPages, String baseName, InputStream originalFileIS)
+            throws Exception {
 
-  protected static void splitPdfpages(PDDocument pdfDoc, File destFile, final int fromPage,
-      final int toPage) throws IOException {
-    Splitter splitter = new Splitter();
+        // PDDocument pdfDoc = PDDocument.load(pdfToSplit);
 
-    splitter.setStartPage(fromPage);
-    splitter.setEndPage(toPage);
-    splitter.setSplitAtPage(toPage - fromPage + 1);
+        List<File> listFiles = new ArrayList<File>();
 
-    List<PDDocument> lst = splitter.split(pdfDoc);
+        if (qrPages.size() == 0) {
 
-    PDDocument pdfDocPartial = lst.get(0);
+            log.info("   XYZ ZZZ ZZZZZ extractPagesFromPDF => qrPages.size() == 0");
 
-    pdfDocPartial.save(destFile);
-  }
+            // PdfDocument pdfDest = new PdfDocument(new PdfWriter("RESULT_ONE_PDF.pdf"));
+            // pdfDoc.copyPagesTo(1, pdfDoc.getNumberOfPages(), pdfDest);
+            // pdfDest.close();
+            String name = baseName + "_1_#" + pdfDoc.getNumberOfPages() + ".pdf";
+            File pdf = new File(destDir, name);
+            // pdfDoc.save(pdfToSplit);
+            org.apache.commons.io.FileUtils.copyInputStreamToFile(originalFileIS, pdf);
+            listFiles.add(pdf);
+        } else {
+            log.info("   XYZ ZZZ ZZZZZ extractPagesFromPDF => TROBATS SEPARADORS: "
+                    + qrPages.size());
+            // 2) Un ou plusieurs QR code = au moins deux documents
+            // log.info("Llista items: " + qrPages.size());
+            int start = 1;
+            int count = 1;
+            for (int index = 0; index < qrPages.size(); index++) {
+                // log.info("trobat QR en pagina " + qrPages.get(index));
+
+                if (qrPages.get(index) != 1) {
+
+                    final int fromPage = start;
+                    final int toPage = qrPages.get(index) - 1;
+
+                    final String name = baseName + "_" + count + "_#" + qrPages.size()
+                            + ".pdf";
+
+                    File f = new File(destDir, name);
+
+                    splitPdfpages(pdfDoc, f, fromPage, toPage);
+
+                    listFiles.add(f);
+
+                    count++;
+                }
+                start = qrPages.get(index) + 1;
+            }
+
+            // La resta de pagines
+            if (start <= pdfDoc.getNumberOfPages()) {
+                File f = new File(destDir,
+                        baseName + "_" + count + "_#" + qrPages.size() + ".pdf");
+
+                int fromPage = start;
+                int toPage = pdfDoc.getNumberOfPages();
+                splitPdfpages(pdfDoc, f, fromPage, toPage);
+
+                listFiles.add(f);
+            }
+
+        }
+
+        pdfDoc.close();
+        return listFiles;
+    }
+
+    protected static void splitPdfpages(PDDocument pdfDoc, File destFile, final int fromPage,
+            final int toPage) throws IOException {
+        Splitter splitter = new Splitter();
+
+        splitter.setStartPage(fromPage);
+        splitter.setEndPage(toPage);
+        splitter.setSplitAtPage(toPage - fromPage + 1);
+
+        List<PDDocument> lst = splitter.split(pdfDoc);
+
+        PDDocument pdfDocPartial = lst.get(0);
+
+        pdfDocPartial.save(destFile);
+    }
 
 }

@@ -20,10 +20,12 @@ public class SplitPdfTest extends TestCase {
 
     final String resName;
     final int[] expectedPagesByDoc;
+    final Integer resolucio;
 
-    public TestItem(String resName, int[] expectedPagesByDoc) {
+    public TestItem(String resName, Integer resolucio, int[] expectedPagesByDoc) {
       super();
       this.resName = resName;
+      this.resolucio = resolucio;
       this.expectedPagesByDoc = expectedPagesByDoc;
     }
 
@@ -48,13 +50,20 @@ public class SplitPdfTest extends TestCase {
     destDir.mkdirs();
 
     final TestItem[] tests = {
-        // new TestItem("Separador_test_4.pdf", new int[] { 3, 2, 1 }), // OK
+        new TestItem("Separador_test_4.pdf", 300, new int[] { 3, 2, 1 }), // OK
 
-        new TestItem("Test_Color_300dpi_No-Separator-in-1.PDF", new int[] { 3, 2, 1 }), // OK
+        new TestItem("Test_Color_300dpi_No-Separator-in-1.PDF", 300,  new int[] { 3, 2, 1 }), // OK
 
-        new TestItem("Test_Color_300dpi_Separator-in-1.PDF", new int[] { 3, 2, 1 }),
+        new TestItem("Test_Color_300dpi_Separator-in-1.PDF", 300, new int[] { 3, 2, 1 }),
 
-        new TestItem("Test_Gray_75dpi_No-Separator-in-1.PDF", new int[] { 3, 2, 1 }) };
+        new TestItem("Test_Gray_75dpi_No-Separator-in-1.PDF", 75, new int[] { 3, 2, 1 }), 
+    
+        new TestItem("Separador_test_NO_FUNCIONA_marilen.pdf", 200, new int[] { 1, 1 })
+            
+        //    new TestItem("NO_FUNCIONA_Test_Gray_75dpi_Separator-in-1.PDF", 75, new int[] { 1, 1 })
+    };
+            
+            
 
     long mitjaPerPagina = 0;
 
@@ -72,7 +81,7 @@ public class SplitPdfTest extends TestCase {
 
       long start = System.currentTimeMillis();
 
-      File[] filesSplitted = SplitPdf.detectPagesWithQR(destDir, data, baseName);
+      File[] filesSplitted = SplitPdf.detectPagesWithQR(destDir, data, baseName, testItem.resolucio);
 
       long end = System.currentTimeMillis();
 
@@ -120,7 +129,7 @@ public class SplitPdfTest extends TestCase {
       // Parsejar PDF
       String baseName = "Prova";
 
-      SplitPdf.detectPagesWithQR(destDir, new File("Separador_test_2.pdf"), baseName); // "Separador_test.pdf"
+      SplitPdf.detectPagesWithQR(destDir, new File("Separador_test_2.pdf"), baseName, 200); // "Separador_test.pdf"
 
       // Generar QR
       // generateQR(new File(destDir, "generaredQR.jpg"));

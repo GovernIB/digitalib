@@ -788,7 +788,7 @@ public abstract class AbstractScanWebProcessController {
                         // transaccioOriginal.getTransaccioID() + "_" +
                         // transaccioOriginal.getTransactionWebId()
                         transaccioOriginal.getNom().replace(' ', '_').replace('\\', '_')
-                                .replace('/', '_'));
+                                .replace('/', '_'), transaccioOriginal.getInfoScanResolucioPpp());
             } catch (Exception e) {
                 String msg = "Error desconegut fent Split del document: " + e.getMessage();
                 log.error(msg, e);
