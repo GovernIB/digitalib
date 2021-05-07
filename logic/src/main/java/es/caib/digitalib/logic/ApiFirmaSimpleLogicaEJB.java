@@ -89,7 +89,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
         int signNumber = 1;
         String languageSign = transaccio.getInfoScanLanguageDoc();
         if (languageSign == null || languageSign.trim().length() == 0) {
-            languageSign = "ca";
+            languageSign = Configuracio.getDefaultLanguage();
         }
 
         long tipusDocumentalID;
