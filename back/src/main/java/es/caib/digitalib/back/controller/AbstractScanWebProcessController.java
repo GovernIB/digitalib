@@ -49,6 +49,7 @@ import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.ApiFirmaSimpleLogicaLocal;
+import es.caib.digitalib.logic.ApiSimpleLogicaLocal;
 import es.caib.digitalib.logic.AuditoriaLogicaLocal;
 import es.caib.digitalib.logic.FitxerLogicaLocal;
 import es.caib.digitalib.logic.MetadadaLogicaLocal;
@@ -125,8 +126,8 @@ public abstract class AbstractScanWebProcessController {
     @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
     protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
 
-    @EJB(mappedName = es.caib.digitalib.ejb.ApiSimpleLocal.JNDI_NAME)
-    protected es.caib.digitalib.ejb.ApiSimpleLocal apiSimpleEjb;
+    @EJB(mappedName = ApiSimpleLogicaLocal.JNDI_NAME)
+    protected ApiSimpleLogicaLocal apiSimpleLogicaEjb;
 
     @EJB(mappedName = es.caib.digitalib.ejb.InfoSignaturaLocal.JNDI_NAME)
     protected es.caib.digitalib.ejb.InfoSignaturaLocal infoSignaturaEjb;
@@ -1046,7 +1047,7 @@ public abstract class AbstractScanWebProcessController {
 
             Long apiSimpleID = perfil.getApiSimpleID();
 
-            ApiSimpleJPA apisimple = apiSimpleEjb.findByPrimaryKey(apiSimpleID);
+            ApiSimpleJPA apisimple = apiSimpleLogicaEjb.findByPrimaryKey(apiSimpleID);
 
             fitxerSignat = apiFirmaSimpleLogicaEjb.signUsingApiFirmaSimple(transaccio, apisimple, fitxer);
 

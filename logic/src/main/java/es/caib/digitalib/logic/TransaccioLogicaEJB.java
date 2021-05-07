@@ -565,6 +565,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             LogicUtils.listToString(arxiuReqParams.getAffectedOrganisms()));
         t.setArxiuReqParamCiutadaNif(arxiuReqParams.getCitizenAdministrationID());
         t.setArxiuReqParamCiutadaNom(arxiuReqParams.getCitizenFullName());
+        
       }
 
       // ==== OPCIONALS =======

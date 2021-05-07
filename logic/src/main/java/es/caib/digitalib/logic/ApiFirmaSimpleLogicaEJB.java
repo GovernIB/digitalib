@@ -80,13 +80,17 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
         
         String reason = templateEngine(Configuracio.getSignReasonEL(), transaccio); 
         
-        log.info("\n\n  getSignReasonEL => " + reason  + "\n\n");
+        log.info("\n\n  getSignReasonEL => ]" + reason  + "[\n\n");
+        
         
         String location = templateEngine(Configuracio.getSignLocationEL(), transaccio); 
         String signerEmail = templateEngine(Configuracio.getSignerEmailEL(), transaccio); 
 
         int signNumber = 1;
         String languageSign = transaccio.getInfoScanLanguageDoc();
+        if (languageSign == null || languageSign.trim().length() == 0) {
+            languageSign = "ca";
+        }
 
         long tipusDocumentalID;
         {

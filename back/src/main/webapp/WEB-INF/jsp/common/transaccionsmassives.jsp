@@ -20,9 +20,9 @@
 
   <%@include file="../webdb/transaccioFormButtons.jsp" %>
 
-  <c:if test="${transaccioForm.attachedAdditionalJspCode}">
-     <%@include file="../webdbmodificable/transaccioFormModificable.jsp" %>
-  </c:if>
+<!-- HOLA XYZ ZZZ XXX -->
+  
+  <%@include file="../webdbmodificable/transaccioFormModificable.jsp" %>
 
 </form:form>
 </td>

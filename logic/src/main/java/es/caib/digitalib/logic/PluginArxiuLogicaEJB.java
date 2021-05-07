@@ -199,6 +199,21 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
         }
       }
       
+     
+          
+      if (transaccio.getSignParamFuncionariDir3() != null) {
+          if (organs == null) {
+            organs = new ArrayList<String>();
+          }
+          organs.add(transaccio.getSignParamFuncionariDir3());
+      }
+          
+      if (organs == null || organs.size() == 0) {
+          log.error("\n\n ================ ORGANS VAL NULL ====================\n\n");
+      }
+      
+      
+      
       String serieDocumental = transaccio.getArxiuOptParamSerieDocumental(); // "S0001";
       if (serieDocumental == null) {
         serieDocumental = prop.getProperty(TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL.javaName);

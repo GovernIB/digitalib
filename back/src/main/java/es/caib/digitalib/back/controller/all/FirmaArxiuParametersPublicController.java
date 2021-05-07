@@ -104,6 +104,9 @@ public class FirmaArxiuParametersPublicController
 
         mav.addObject("thumbnailPDF", getContextWeb() + "/" + THUMBNAIL_PDF_MASSIVE + "/"
             + transaccioForm.getTransaccio().getTransactionWebId());
+        
+        transaccioForm.setAttachedAdditionalJspCode(true);
+        
 
         mav.setViewName("transaccionsmassives_public");
 
