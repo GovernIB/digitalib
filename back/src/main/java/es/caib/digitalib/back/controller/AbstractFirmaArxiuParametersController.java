@@ -201,7 +201,7 @@ public abstract class AbstractFirmaArxiuParametersController
             }
 
             if (isPublic()) {
-                // Si la petició arriba des d'APP llavors, requerim que ens afegeixin in organ
+                // Si la petició arriba des d'APP llavors, requerim que ens afegeixin quin organ
                 ValidationUtils.rejectIfEmptyOrWhitespace(result,
                         TransaccioFields.ARXIUREQPARAMORGANS.fullName,
                         "genapp.validation.required", new Object[] { I18NUtils

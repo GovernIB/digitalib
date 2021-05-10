@@ -95,10 +95,15 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
         long tipusDocumentalID;
         {
             String tipusStr = transaccio.getInfoScanDocumentTipus();
-            if (tipusStr == null) {
+            if (tipusStr == null || tipusStr.trim().length() == 0) {
                 tipusDocumentalID = 99; // =TD99
             } else {
-                tipusDocumentalID = Long.parseLong(tipusStr.replace("TD", ""));
+                try {
+                    tipusDocumentalID = Long.parseLong(tipusStr.replace("TD", ""));
+                } catch(NumberFormatException nfe) {
+                    log.error("Error parsejant tipus documental ]" + tipusStr + "[:" + nfe.getMessage(), nfe);
+                    tipusDocumentalID = 99;
+                }
             }
         }
 

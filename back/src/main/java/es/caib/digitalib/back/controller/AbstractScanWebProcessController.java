@@ -399,11 +399,11 @@ public abstract class AbstractScanWebProcessController {
         ScanWebDocument scannedDoc = swc.getResult().getScannedDocuments().get(0);
 
         transaccio.setInfoScanOcr(scannedDoc.getOcr());
-        transaccio.setInfoScanLanguageDoc(scannedDoc.getDocumentLanguage());
+        
 
         transaccio.setInfoScanDuplex(scannedDoc.getDuplex());
 
-        transaccio.setInfoScanDocumentTipus(scannedDoc.getDocumentType());
+        
 
         transaccio.setInfoScanResolucioPpp(scannedDoc.getPppResolution());
 
@@ -429,18 +429,27 @@ public abstract class AbstractScanWebProcessController {
                             + scannedDoc.getPixelType() + "]\n\n");
             }
         }
+        
+        transaccio.setInfoScanPaperSize(scannedDoc.getPaperSize());
 
         transaccio.setInfoScanDataCaptura(scannedDoc.getScanDate() == null ? null
                 : new Timestamp(scannedDoc.getScanDate().getTime()));
 
         // XYZ ZZZ TODO ????
         // transaccio.setInfoScanDuplex(scannedDoc.getDuplex());
+        {
+          String ld = scannedDoc.getDocumentLanguage();
+          if (ld != null && ld.trim().length() != 0) {
+              transaccio.setInfoScanLanguageDoc(ld);      
+          }
+        }
 
-        transaccio.setInfoScanLanguageDoc(scannedDoc.getDocumentLanguage());
-
-        transaccio.setInfoScanDocumentTipus(scannedDoc.getDocumentType());
-
-        transaccio.setInfoScanPaperSize(scannedDoc.getPaperSize());
+        {
+          String dt = scannedDoc.getDocumentType();
+          if (dt != null && dt.trim().length() != 0) {
+            transaccio.setInfoScanDocumentTipus(dt);
+          }
+        }
 
         {
 
