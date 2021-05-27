@@ -144,6 +144,12 @@ public abstract class AbstractFirmaArxiuParametersController
             }
 
         }
+        
+        
+        if (transaccioForm.getTransaccio().getInfoScanLanguageDoc() == null) {
+            transaccioForm.getTransaccio().setInfoScanLanguageDoc(Configuracio.getDefaultLanguage());
+        }
+        
 
         transaccioForm.setTitleCode("dadesrequerides");
 
