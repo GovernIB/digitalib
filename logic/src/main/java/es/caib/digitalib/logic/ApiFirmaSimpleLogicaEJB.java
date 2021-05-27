@@ -236,6 +236,18 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
                     java.lang.String eniTipoFirma = sfi.getEniTipoFirma();
                     java.lang.String eniPerfilFirma = sfi.getEniPerfilFirma(); // "EPES" :
                                                                                // "BES";
+                    
+                    
+                    log.info("\n\n\n eniTipoFirma = " + sfi.getEniTipoFirma()
+                            + "\neniPerfilFirma = " + sfi.getEniPerfilFirma() +  "\n\n\n");
+                    
+                    if (eniPerfilFirma == null) {
+                        log.warn("eniPerfilFirma es NULL !!!!!");
+                        eniPerfilFirma = "BES";
+                    }
+                    
+                    
+                    
                     java.lang.String eniRolFirma = null;
 
                     String eniSignerName = null;
