@@ -344,7 +344,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
       // XYZ ZZZ FALTA INFO
       java.lang.String eniTipoFirma = "TF06";
-      java.lang.String eniPerfilFirma = epes ? "EPES" : "BES";
+      java.lang.String eniPerfilFirma = epes ? PluginArxiuLogicaLocal.SIGNPROFILE_EPES : PluginArxiuLogicaLocal.SIGNPROFILE_BES;
       java.lang.String eniRolFirma = null;
 
       java.lang.String eniSignerName = null;

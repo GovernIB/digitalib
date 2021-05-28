@@ -60,6 +60,7 @@ import es.caib.plugins.arxiu.api.IArxiuPlugin;
 @RunAs("DIB_ADMIN")
 public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> implements
     PluginArxiuLogicaLocal {
+    
 
   @EJB(mappedName = es.caib.digitalib.ejb.InfoCustodyLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.InfoCustodyLocal infoCustodyEjb;
@@ -378,7 +379,9 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       // firma.setCsvRegulacio(csvRegulacio);
       firma.setFitxerNom(fitxerFirmat.getNom());
       nomDocument = fitxerFirmat.getNom();
-      FirmaPerfil firmaPerfil = FirmaPerfil.toEnum(infoSignatura.getEniPerfilFirma());
+      
+      
+      FirmaPerfil firmaPerfil = firmaPerfilToEnum(infoSignatura.getEniPerfilFirma());
       if (firmaPerfil == null) {
         log.error("FirmaPerfil val null (infoSignatura.getEniPerfilFirma() == "
             + infoSignatura.getEniPerfilFirma() + " )");
@@ -465,9 +468,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
         msg = "XYZ ZZZ Error custodiant fitxer firmat(" + e.getClass()+ "): " + e.getMessage();
       }
 
-      
-      // XYZ ZZZ
-      e.printStackTrace();
+      log.error("Error intenant enviar a API d'Arxiu: " +msg, e);
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
@@ -481,6 +482,73 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
 
     return null;
 
+  }
+  
+  
+  public FirmaPerfil firmaPerfilToEnum(String perfil) throws I18NException {
+  
+      if (perfil == null || perfil.trim().length() == 0) {
+          log.warn("Perfil de Firma val null. Retornam BES.");
+          return FirmaPerfil.BES;
+      }
+      
+      perfil = perfil.trim();
+  
+      /*  QUEDEN PENDENTS AQUESTS 
+          FirmaPerfil.BASELINE_B_LEVEL;
+          FirmaPerfil.BASELINE_T_LEVEL;
+          FirmaPerfil.BASELINE_LT_LEVEL;
+          FirmaPerfil.BASELINE_LTA_LEVEL;
+          FirmaPerfil.BASELINE_T;
+          FirmaPerfil.LTA;
+       
+       */
+      
+      if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_BES)) {
+          return FirmaPerfil.BES;
+      } if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_EPES)) {
+          return FirmaPerfil.EPES;
+      } if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_T)) {
+          return FirmaPerfil.T;
+      } if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_C)) {
+          return FirmaPerfil.C;
+      } if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_X)) {
+          return FirmaPerfil.X;
+      } if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_X1)) {
+          return FirmaPerfil.X;
+      } if (perfil.equals( PluginArxiuLogicaLocal.SIGNPROFILE_X2)) {
+          return FirmaPerfil.X;
+      } if (perfil.equals( PluginArxiuLogicaLocal.SIGNPROFILE_XL)) {
+          return FirmaPerfil.XL;
+      } if (perfil.equals( PluginArxiuLogicaLocal.SIGNPROFILE_XL1)) {
+          return FirmaPerfil.XL;
+      } if (perfil.equals( PluginArxiuLogicaLocal.SIGNPROFILE_XL2)) {
+          return FirmaPerfil.XL;
+      } if (perfil.equals( PluginArxiuLogicaLocal.SIGNPROFILE_A)) {
+          return FirmaPerfil.A;
+      } if (perfil.equals( PluginArxiuLogicaLocal.SIGNPROFILE_PADES_LTV)) {
+          return FirmaPerfil.LTV;
+      } if (perfil.equals( PluginArxiuLogicaLocal.SIGNPROFILE_PADES_BASIC)) {
+          return FirmaPerfil.BASIC; // o FirmaPerfil.Basic; 
+      } else {
+          // Cercar traducció
+          throw new I18NException("genapp.comodi", "S'ha rebut un perfil de firma de l'acció de firma ]" 
+            + perfil + "[ però no s'ha trobat l'equivalent en FirmaPerfil de l'API d'arxiu");
+      }
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
   }
 
 }
