@@ -57,6 +57,11 @@
           ${apiSimple.perfil}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.CONFIGDEFIRMA)}">
+          <td>
+          ${apiSimple.configDeFirma}
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

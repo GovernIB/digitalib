@@ -131,8 +131,8 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
                 tipusDocumentalID);
 
         String languageUI = transaccio.getLanguageUI();
-        // Es la configuració del Servidor (deixam el valor per defecte)
-        String username = null; //
+        // Es la configuració del Servidor
+        String username = apisimple.getConfigDeFirma();
         String administrationID = null;
 
         FirmaSimpleCommonInfo commonInfo;

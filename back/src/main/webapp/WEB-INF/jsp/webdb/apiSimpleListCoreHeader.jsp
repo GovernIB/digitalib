@@ -30,6 +30,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.PERFIL)}">
         <th>${dib:getSortIcons(__theFilterForm,ApiSimpleFields.PERFIL)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.CONFIGDEFIRMA)}">
+        <th>${dib:getSortIcons(__theFilterForm,ApiSimpleFields.CONFIGDEFIRMA)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

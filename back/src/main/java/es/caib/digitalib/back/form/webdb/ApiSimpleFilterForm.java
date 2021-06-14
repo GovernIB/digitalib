@@ -97,6 +97,17 @@ public class ApiSimpleFilterForm extends DigitalIBBaseFilterForm implements ApiS
   }
 
 
+  private java.lang.String configDeFirma;
+
+  public java.lang.String getConfigDeFirma() {
+    return this.configDeFirma;
+  }
+
+  public void setConfigDeFirma(java.lang.String configDeFirma) {
+    this.configDeFirma = configDeFirma;
+  }
+
+
   public ApiSimpleFilterForm() {
   }
   
@@ -109,6 +120,7 @@ public class ApiSimpleFilterForm extends DigitalIBBaseFilterForm implements ApiS
     this.username = __toClone.username;
     this.contrasenya = __toClone.contrasenya;
     this.perfil = __toClone.perfil;
+    this.configDeFirma = __toClone.configDeFirma;
   }
   
   /* ========= UTILS ========== */

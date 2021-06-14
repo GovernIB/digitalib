@@ -35,6 +35,10 @@ public class ApiSimpleQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), ApiSimpleFields.PERFIL);
   }
 
+  public StringField CONFIGDEFIRMA() {
+    return new StringField(getQueryPath(), ApiSimpleFields.CONFIGDEFIRMA);
+  }
+
 
 
   @Override

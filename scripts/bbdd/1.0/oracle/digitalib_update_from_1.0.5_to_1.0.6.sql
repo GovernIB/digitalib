@@ -13,3 +13,9 @@ ALTER TABLE dib_transaccio ADD COLUMN signparamfuncionaridir3 VARCHAR2(100);
 COMMENT ON COLUMN dib_transaccio.signparamfuncionaridir3 IS 'Codi DIR3 de l''unitat de la qual depen l''oficina en la que es troba el funcionari.';
 
 ALTER TABLE dib_usuaripersona  ADD COLUMN unitatdir3 VARCHAR2(100);
+
+
+
+-- 2021-06-14 Dins APISimple poder definir el username(configuracio de firma en servidor) #144
+
+ALTER TABLE dib_apisimple ADD COLUMN configdefirma VARCHAR2(100);

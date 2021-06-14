@@ -89,6 +89,14 @@ public class ApiSimpleValidator<T> implements ApiSimpleFields {
       }
     }
     
+    if (__vr.getFieldErrorCount(CONFIGDEFIRMA) == 0) {
+      java.lang.String __configdefirma = (java.lang.String)__vr.getFieldValue(__target__,CONFIGDEFIRMA);
+      if (__configdefirma!= null && __configdefirma.length() > 100) {
+        __vr.rejectValue(CONFIGDEFIRMA, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONFIGDEFIRMA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+    
     if (__isNou__) { // Creació
       // ================ CREATION
       // Fitxers 

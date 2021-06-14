@@ -133,6 +133,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ApiSimpleFields.CONFIGDEFIRMA)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="apiSimple.configDeFirma" var="configDeFirma" />
+              <fmt:message key="genapp.form.searchby" var="cercaperconfigDeFirma" >                
+                 <fmt:param value="${configDeFirma}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${configDeFirma}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperconfigDeFirma}" path="configDeFirma" />
+            </div>
+
+
+        </c:if>
 
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
       <c:if test="${ __entry.key >= 0 && not empty __entry.value.searchBy }">

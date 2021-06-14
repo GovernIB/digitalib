@@ -20,6 +20,9 @@ public interface ApiSimple extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getPerfil();
 	public void setPerfil(java.lang.String _perfil_);
 
+	public java.lang.String getConfigDeFirma();
+	public void setConfigDeFirma(java.lang.String _configDeFirma_);
+
 
 
   // ======================================

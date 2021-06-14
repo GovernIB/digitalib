@@ -3,6 +3,7 @@ package es.caib.digitalib.back.controller.admin;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -43,6 +44,13 @@ public class ApiSimpleAdminController extends ApiSimpleController {
 			HttpServletRequest request) throws I18NException {
 
 		ApiSimpleFilterForm apiSimpleFilterForm = super.getApiSimpleFilterForm(pagina, mav, request);
+		
+		if (apiSimpleFilterForm.isNou()) {
+		    apiSimpleFilterForm.addHiddenField(CONTRASENYA);
+		    apiSimpleFilterForm.addHiddenField(APISIMPLEID);
+		    apiSimpleFilterForm.addHiddenField(CONFIGDEFIRMA);
+		}
+		
 
 		return apiSimpleFilterForm;
 	}
@@ -52,6 +60,9 @@ public class ApiSimpleAdminController extends ApiSimpleController {
 			boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
 
 		ApiSimpleForm apiSimpleForm = super.getApiSimpleForm(_jpa, __isView, request, mav);
+		
+		apiSimpleForm.addHelpToField(CONFIGDEFIRMA, I18NUtils.tradueix("apisimple.configdefirma.help"));
+		
 
 		return apiSimpleForm;
 	}

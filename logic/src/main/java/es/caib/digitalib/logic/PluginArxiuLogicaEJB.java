@@ -429,15 +429,11 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       
       log.info("\n FINAL \n");
 
-      
-
       java.lang.String originalFileUrl = plugin.getOriginalFileUrl(uuidDoc);
       String printableFileUrl = plugin.getPrintableFileUrl(uuidDoc);
       String eniFileUrl = plugin.getEniFileUrl(uuidDoc);
       java.lang.String csv = plugin.getCsv(uuidDoc);
-      
-      
-      
+
       java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(uuidDoc);
       
       java.lang.String validationFileUrl = plugin.getValidationFileUrl(uuidDoc);
@@ -473,8 +469,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin> 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(msg);
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
-      
-      
+
       // Cridades de Plugin
       pluginCridada.postCridadaError(monitorIntegracions, msg + "\n\n" + transaccio.getEstatExcepcio());
     }

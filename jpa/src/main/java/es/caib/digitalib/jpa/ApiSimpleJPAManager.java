@@ -66,8 +66,8 @@ public class ApiSimpleJPAManager
 		return list.toArray(new ApiSimple[list.size()]);
 	};
 
-	public synchronized ApiSimple create( java.lang.String _nom_, java.lang.String _url_, java.lang.String _username_, java.lang.String _contrasenya_, java.lang.String _perfil_) throws I18NException {
-		ApiSimpleJPA __bean =  new ApiSimpleJPA(_nom_,_url_,_username_,_contrasenya_,_perfil_);
+	public synchronized ApiSimple create( java.lang.String _nom_, java.lang.String _url_, java.lang.String _username_, java.lang.String _contrasenya_, java.lang.String _perfil_, java.lang.String _configDeFirma_) throws I18NException {
+		ApiSimpleJPA __bean =  new ApiSimpleJPA(_nom_,_url_,_username_,_contrasenya_,_perfil_,_configDeFirma_);
 		return create(__bean);
 	}
 

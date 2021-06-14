@@ -104,3 +104,21 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ApiSimpleFields.CONFIGDEFIRMA)}">
+        <tr id="apiSimple_configDeFirma_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ApiSimpleFields.CONFIGDEFIRMA])?'apiSimple.configDeFirma':__theForm.labels[ApiSimpleFields.CONFIGDEFIRMA]}" />
+              <c:if test="${not empty __theForm.help[ApiSimpleFields.CONFIGDEFIRMA]}">
+              <i class="icon-info-sign" title="${__theForm.help[ApiSimpleFields.CONFIGDEFIRMA]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="apiSimple.configDeFirma" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,ApiSimpleFields.CONFIGDEFIRMA)? 'true' : 'false'}" cssClass="${gen:contains(__theForm.readOnlyFields ,ApiSimpleFields.CONFIGDEFIRMA)? 'input-xxlarge uneditable-input' : 'input-xxlarge'}"  maxlength="100" path="apiSimple.configDeFirma"   />
+
+           </td>
+        </tr>
+        </c:if>
+        

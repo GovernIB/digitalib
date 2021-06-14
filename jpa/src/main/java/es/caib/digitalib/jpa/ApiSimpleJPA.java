@@ -46,6 +46,9 @@ private static final long serialVersionUID = 1125838831L;
 	@Column(name="perfil",nullable = false,length = 255)
 	java.lang.String perfil;
 
+	@Column(name="configdefirma",length = 100)
+	java.lang.String configDeFirma;
+
 
 
   /** Constructor Buit */
@@ -53,21 +56,23 @@ private static final long serialVersionUID = 1125838831L;
   }
 
   /** Constructor amb tots els camps  */
-  public ApiSimpleJPA(long apiSimpleID , java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil) {
+  public ApiSimpleJPA(long apiSimpleID , java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil , java.lang.String configDeFirma) {
     this.apiSimpleID=apiSimpleID;
     this.nom=nom;
     this.url=url;
     this.username=username;
     this.contrasenya=contrasenya;
     this.perfil=perfil;
+    this.configDeFirma=configDeFirma;
 }
   /** Constructor sense valors autoincrementals */
-  public ApiSimpleJPA(java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil) {
+  public ApiSimpleJPA(java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil , java.lang.String configDeFirma) {
     this.nom=nom;
     this.url=url;
     this.username=username;
     this.contrasenya=contrasenya;
     this.perfil=perfil;
+    this.configDeFirma=configDeFirma;
 }
   public ApiSimpleJPA(ApiSimple __bean) {
     this.setApiSimpleID(__bean.getApiSimpleID());
@@ -76,6 +81,7 @@ private static final long serialVersionUID = 1125838831L;
     this.setUsername(__bean.getUsername());
     this.setContrasenya(__bean.getContrasenya());
     this.setPerfil(__bean.getPerfil());
+    this.setConfigDeFirma(__bean.getConfigDeFirma());
 	}
 
 	public long getApiSimpleID() {
@@ -120,6 +126,13 @@ private static final long serialVersionUID = 1125838831L;
 		this.perfil = _perfil_;
 	};
 
+	public java.lang.String getConfigDeFirma() {
+		return(configDeFirma);
+	};
+	public void setConfigDeFirma(java.lang.String _configDeFirma_) {
+		this.configDeFirma = _configDeFirma_;
+	};
+
 
 
   @Override
@@ -159,6 +172,7 @@ private static final long serialVersionUID = 1125838831L;
     __tmp.setUsername(__bean.getUsername());
     __tmp.setContrasenya(__bean.getContrasenya());
     __tmp.setPerfil(__bean.getPerfil());
+    __tmp.setConfigDeFirma(__bean.getConfigDeFirma());
 		return __tmp;
 	}
 
