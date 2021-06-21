@@ -241,12 +241,10 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
                             + "\neniPerfilFirma = " + sfi.getEniPerfilFirma() +  "\n\n\n");
                     
                     if (eniPerfilFirma == null) {
-                        eniPerfilFirma = PluginArxiuLogicaLocal.SIGNPROFILE_BES; 
+                        eniPerfilFirma = FirmaSimpleSignedFileInfo.SIGNPROFILE_BES; 
                         log.warn("eniPerfilFirma es NULL. Posam per defecte " + eniPerfilFirma + "!!!!!");
                     }
-                    
-                    
-                    
+
                     java.lang.String eniRolFirma = null;
 
                     String eniSignerName = null;

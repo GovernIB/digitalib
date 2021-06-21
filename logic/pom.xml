@@ -22,7 +22,7 @@
     <dependency>
       <artifactId>apifirmasimple-jersey</artifactId>
       <groupId>org.fundaciobit.apisib.apifirmasimple</groupId>
-      <version>1.0.2</version>
+      <version>1.0.3</version>
       <exclusions>
         <exclusion>
           <artifactId>jaxb-impl</artifactId>

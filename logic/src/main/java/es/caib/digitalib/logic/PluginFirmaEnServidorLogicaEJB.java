@@ -11,6 +11,7 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleSignedFileInfo;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -344,7 +345,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
       // XYZ ZZZ FALTA INFO
       java.lang.String eniTipoFirma = "TF06";
-      java.lang.String eniPerfilFirma = epes ? PluginArxiuLogicaLocal.SIGNPROFILE_EPES : PluginArxiuLogicaLocal.SIGNPROFILE_BES;
+      java.lang.String eniPerfilFirma = epes ? FirmaSimpleSignedFileInfo.SIGNPROFILE_EPES : FirmaSimpleSignedFileInfo.SIGNPROFILE_BES;
       java.lang.String eniRolFirma = null;
 
       java.lang.String eniSignerName = null;

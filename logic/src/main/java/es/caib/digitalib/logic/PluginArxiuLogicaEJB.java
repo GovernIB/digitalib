@@ -13,6 +13,7 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleSignedFileInfo;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuRequiredParameters;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
@@ -480,50 +481,44 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
 
         perfil = perfil.trim();
 
-        /*
-         * QUEDEN PENDENTS AQUESTS FirmaPerfil.BASELINE_B_LEVEL; FirmaPerfil.BASELINE_T_LEVEL;
-         * FirmaPerfil.BASELINE_LT_LEVEL; FirmaPerfil.BASELINE_LTA_LEVEL;
-         * FirmaPerfil.BASELINE_T; FirmaPerfil.LTA;
-         * 
-         */
 
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_BES)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_BES)) {
             return FirmaPerfil.BES;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_EPES)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_EPES)) {
             return FirmaPerfil.EPES;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_T)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_T)) {
             return FirmaPerfil.T;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_C)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_C)) {
             return FirmaPerfil.C;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_X)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_X)) {
             return FirmaPerfil.X;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_X1)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_X1)) {
             return FirmaPerfil.X;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_X2)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_X2)) {
             return FirmaPerfil.X;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_XL)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_XL)) {
             return FirmaPerfil.XL;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_XL1)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_XL1)) {
             return FirmaPerfil.XL;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_XL2)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_XL2)) {
             return FirmaPerfil.XL;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_A)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_A)) {
             return FirmaPerfil.A;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_PADES_LTV)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_PADES_LTV)) {
             return FirmaPerfil.LTV;
         }
-        if (perfil.equals(PluginArxiuLogicaLocal.SIGNPROFILE_PADES_BASIC)) {
+        if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_PADES_BASIC)) {
             return FirmaPerfil.BASIC; // o FirmaPerfil.Basic;
         } else {
             // Cercar traducció
