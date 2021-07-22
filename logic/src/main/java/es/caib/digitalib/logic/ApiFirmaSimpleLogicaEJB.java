@@ -53,38 +53,37 @@ import es.caib.digitalib.utils.Configuracio;
 @Stateless(name = "ApiFirmaSimpleLogicaEJB")
 @SecurityDomain("seycon")
 @RunAs("DIB_ADMIN")
-public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
+public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal {
 
-    
     protected final Logger log = Logger.getLogger(this.getClass());
-    
-    
+
     @EJB(mappedName = FitxerLogicaLocal.JNDI_NAME)
     protected FitxerLogicaLocal fitxerLogicaEjb;
 
-    
     @EJB(mappedName = es.caib.digitalib.ejb.InfoSignaturaLocal.JNDI_NAME)
     protected es.caib.digitalib.ejb.InfoSignaturaLocal infoSignaturaEjb;
-    
+
+    @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
+    protected TransaccioLogicaLocal transaccioLogicaEjb;
+
     /**
      * 
      */
-    public Fitxer signUsingApiFirmaSimple(TransaccioJPA transaccio,
-            ApiSimpleJPA apisimple, Fitxer fitxer) {
+    public Fitxer signUsingApiFirmaSimple(TransaccioJPA transaccio, ApiSimpleJPA apisimple,
+            Fitxer fitxer) {
 
         ApiFirmaEnServidorSimple api = new ApiFirmaEnServidorSimpleJersey(apisimple.getUrl(),
                 apisimple.getUsername(), apisimple.getContrasenya());
 
         String signID = "1";
         String name = transaccio.getNom();
-        
-        String reason = templateEngine(Configuracio.getSignReasonEL(), transaccio); 
-        
-        log.info("\n\n  getSignReasonEL => ]" + reason  + "[\n\n");
-        
-        
-        String location = templateEngine(Configuracio.getSignLocationEL(), transaccio); 
-        String signerEmail = templateEngine(Configuracio.getSignerEmailEL(), transaccio); 
+
+        String reason = templateEngine(Configuracio.getSignReasonEL(), transaccio);
+
+        log.info("\n\n  getSignReasonEL => ]" + reason + "[\n\n");
+
+        String location = templateEngine(Configuracio.getSignLocationEL(), transaccio);
+        String signerEmail = templateEngine(Configuracio.getSignerEmailEL(), transaccio);
 
         int signNumber = 1;
         String languageSign = transaccio.getInfoScanLanguageDoc();
@@ -100,8 +99,9 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
             } else {
                 try {
                     tipusDocumentalID = Long.parseLong(tipusStr.replace("TD", ""));
-                } catch(NumberFormatException nfe) {
-                    log.error("Error parsejant tipus documental ]" + tipusStr + "[:" + nfe.getMessage(), nfe);
+                } catch (NumberFormatException nfe) {
+                    log.error("Error parsejant tipus documental ]" + tipusStr + "[:"
+                            + nfe.getMessage(), nfe);
                     tipusDocumentalID = 99;
                 }
             }
@@ -118,7 +118,8 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
             transaccio.setEstatMissatge(
                     "ApiFirmaSimple::Error durant la lectura del document a signar ("
                             + source.getAbsolutePath() + "): " + e.getMessage());
-            transaccio.setEstatExcepcio(org.hibernate.exception.ExceptionUtils.getStackTrace(e));
+            transaccio
+                    .setEstatExcepcio(org.hibernate.exception.ExceptionUtils.getStackTrace(e));
             log.error(transaccio.getEstatMissatge(), e);
             return null;
         }
@@ -234,15 +235,15 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
 
                     // XYZ ZZZ FALTA INFO
                     java.lang.String eniTipoFirma = sfi.getEniTipoFirma();
-                    java.lang.String eniPerfilFirma = sfi.getEniPerfilFirma(); 
-                    
-                    
+                    java.lang.String eniPerfilFirma = sfi.getEniPerfilFirma();
+
                     log.info("\n\n\n eniTipoFirma = " + sfi.getEniTipoFirma()
-                            + "\neniPerfilFirma = " + sfi.getEniPerfilFirma() +  "\n\n\n");
-                    
+                            + "\neniPerfilFirma = " + sfi.getEniPerfilFirma() + "\n\n\n");
+
                     if (eniPerfilFirma == null) {
-                        eniPerfilFirma = FirmaSimpleSignedFileInfo.SIGNPROFILE_BES; 
-                        log.warn("eniPerfilFirma es NULL. Posam per defecte " + eniPerfilFirma + "!!!!!");
+                        eniPerfilFirma = FirmaSimpleSignedFileInfo.SIGNPROFILE_BES;
+                        log.warn("eniPerfilFirma es NULL. Posam per defecte " + eniPerfilFirma
+                                + "!!!!!");
                     }
 
                     java.lang.String eniRolFirma = null;
@@ -300,7 +301,8 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
 
                     String msg;
                     if (e instanceof I18NException) {
-                        msg = I18NCommonUtils.getMessage((I18NException) e, new Locale(transaccio.getLanguageUI()));
+                        msg = I18NCommonUtils.getMessage((I18NException) e,
+                                new Locale(transaccio.getLanguageUI()));
                     } else {
                         msg = e.getMessage();
                     }
@@ -330,36 +332,30 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal  {
 
         return fitxerSignat;
     }
-    
-    
+
     protected String getStackTrace(Throwable e) {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         e.printStackTrace(pw);
         return sw.toString();
     }
-    
-    
 
-    
-    protected String templateEngine(String valueEL, TransaccioJPA transaccio)  {
-        
+    protected String templateEngine(String valueEL, TransaccioJPA transaccio) {
+
         if (valueEL == null || valueEL.trim().length() == 0) {
-          return "";
+            return "";
         }
-        
+
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("transaction", transaccio);
-        
+
         try {
-          return TemplateEngine.processExpressionLanguage(valueEL,parameters);
+            return TemplateEngine.processExpressionLanguage(valueEL, parameters);
         } catch (IOException e) {
-          log.error("error substituin valors de la firma en servidor: " + e.getMessage(), e);
-          return null;
+            log.error("error substituin valors de la firma en servidor: " + e.getMessage(), e);
+            return null;
         }
-        
-        
-        
-      }
+
+    }
 
 }

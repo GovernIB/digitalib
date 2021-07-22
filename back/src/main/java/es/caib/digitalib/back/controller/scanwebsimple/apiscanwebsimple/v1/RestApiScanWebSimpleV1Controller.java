@@ -621,49 +621,6 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils
 
   }
 
-  /*
-   * @RequestMapping(value = "/" + ApiScanWebSimple.SCANWEBRESULT, method = RequestMethod.POST)
-   * 
-   * @ResponseBody
-   * 
-   * @Produces(MediaType.APPLICATION_JSON)
-   * 
-   * @Consumes(MediaType.APPLICATION_JSON) public ResponseEntity<?>
-   * getScanWebResult(@RequestBody String transactionWebID, HttpServletRequest request) {
-   * 
-   * log.info(" XYZ ZZZ getSignaturesResult => ENTRA");
-   * 
-   * String error = autenticate(request, "ca", usuariAplicacioEjb); if (error != null) { return
-   * generateServerError(error, HttpStatus.UNAUTHORIZED); } try { ScanWebSimpleScanResult fssr
-   * = getScanWebResult(transactionWebID);
-   * 
-   * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> re = new
-   * ResponseEntity<ScanWebSimpleScanResult>(fssr, headers, HttpStatus.OK);
-   * log.info(" XYZ ZZZ getScanWebResult => FINAL OK"); return re;
-   * 
-   * } catch (Throwable th) {
-   * 
-   * final String msg = I18NUtils.tradueix("error.desconegut.transaccio.numero.escaneig",
-   * transactionWebID) + ": " + th.getMessage();
-   * 
-   * log.error(msg, th);
-   * 
-   * return generateServerError(msg, th); }
-   * 
-   * }
-   * 
-   * @Override public ScanWebSimpleScanResult getScanWebResult(String transactionID) throws
-   * Exception {
-   * 
-   * boolean returnScannedFile = true; boolean returnSignedFile = true;
-   * 
-   * ScanWebSimpleResultRequest resultRequest = new ScanWebSimpleResultRequest(transactionID,
-   * returnScannedFile, returnSignedFile);
-   * 
-   * return getScanWebResultSelectFiles(resultRequest);
-   * 
-   * }
-   */
 
   @RequestMapping(value = "/" + ApiScanWebSimple.SCANWEBRESULT, method = RequestMethod.POST)
   @ResponseBody

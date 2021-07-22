@@ -618,22 +618,10 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
             transaccio.setReturnUrl(startTransactionRequest.getReturnUrl());
 
             // CRIDAR A START TRANSACION
-
-            // XYZ ZZZ ZZZ Validar
-            // SignaturesSetBeanValidator ssbv = new SignaturesSetBeanValidator(validator,
-            // this,
-            // entitatID);
-            // final boolean isNou = true;
-            // ssbv.throwValidationExceptionIfErrors(signaturesSet, isNou);
-
             // Cercar plugin d'escaneig
 
             Perfil p = transaccio.getPerfil();
 
-            // List<Long> filterPluginsByIDs = new ArrayList<Long>();
-            //
-            //
-            // filterPluginsByIDs.add(p.getPluginScanWebID());
 
             String urlBase = p.getUrlBase();
             if (urlBase == null) {
@@ -732,25 +720,6 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
         };
 
         return restCaller.cridada();
-
-        /*
-         * 
-         * String error = autenticate(request, "ca", usuariAplicacioEjb); if (error != null) {
-         * return generateServerError(error, HttpStatus.UNAUTHORIZED); }
-         * 
-         * try { MassiveScanWebSimpleStatus status = getSubTransactionStatus(transactionID);
-         * 
-         * HttpHeaders headers = addAccessControllAllowOrigin(); ResponseEntity<?> re = new
-         * ResponseEntity<MassiveScanWebSimpleStatus>(status, headers, HttpStatus.OK);
-         * log.info(" XYZ ZZZ surt de  getSUBTransactionStatus => FINAL OK");
-         * 
-         * return re;
-         * 
-         * } catch (Throwable th) { final String msg =
-         * I18NUtils.tradueix("error.desconegut.transaccio.estat.informacio", transactionID) +
-         * ": " + th.getMessage(); log.error(msg, th); return generateServerError(msg, th); }
-         */
-
     }
 
     @Override

@@ -136,10 +136,10 @@ public class FirmaArxiuParametersPublicController
           + transaccioMultipleID;
 
       log.info(
-          " XYZ ZZZ FirmaArxiuParametersPublicController ::getRedirectWhenModified  STATUS => "
+          "FirmaArxiuParametersPublicController ::getRedirectWhenModified  STATUS => "
               + transaccioForm.getTransaccio().getEstatCodi());
       log.info(
-          " XYZ ZZZ   FirmaArxiuParametersPublicController ::   PASSAM A SEGÜENT ENTRADA: "
+          "FirmaArxiuParametersPublicController ::   PASSAM A SEGÜENT ENTRADA: "
               + r);
 
       // Venim de MASSIVE

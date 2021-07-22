@@ -38,7 +38,7 @@ private static final long serialVersionUID = -360699331L;
 	java.lang.String contrasenya;
 
 	@Column(name="emailadmin",nullable = false,length = 100)
-	java.lang.String emailadmin;
+	java.lang.String emailAdmin;
 
 	@Column(name="descripcio",length = 255)
 	java.lang.String descripcio;
@@ -62,11 +62,11 @@ private static final long serialVersionUID = -360699331L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariAplicacioJPA(long usuariAplicacioID , java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
+  public UsuariAplicacioJPA(long usuariAplicacioID , java.lang.String username , java.lang.String contrasenya , java.lang.String emailAdmin , java.lang.String descripcio , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.usuariAplicacioID=usuariAplicacioID;
     this.username=username;
     this.contrasenya=contrasenya;
-    this.emailadmin=emailadmin;
+    this.emailAdmin=emailAdmin;
     this.descripcio=descripcio;
     this.actiu=actiu;
     this.roleScan=roleScan;
@@ -74,10 +74,10 @@ private static final long serialVersionUID = -360699331L;
     this.roleCust=roleCust;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariAplicacioJPA(java.lang.String username , java.lang.String contrasenya , java.lang.String emailadmin , java.lang.String descripcio , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
+  public UsuariAplicacioJPA(java.lang.String username , java.lang.String contrasenya , java.lang.String emailAdmin , java.lang.String descripcio , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.username=username;
     this.contrasenya=contrasenya;
-    this.emailadmin=emailadmin;
+    this.emailAdmin=emailAdmin;
     this.descripcio=descripcio;
     this.actiu=actiu;
     this.roleScan=roleScan;
@@ -85,10 +85,10 @@ private static final long serialVersionUID = -360699331L;
     this.roleCust=roleCust;
 }
   /** Constructor dels valors Not Null */
-  public UsuariAplicacioJPA(long usuariAplicacioID , java.lang.String username , java.lang.String emailadmin , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
+  public UsuariAplicacioJPA(long usuariAplicacioID , java.lang.String username , java.lang.String emailAdmin , boolean actiu , boolean roleScan , boolean roleCoAu , boolean roleCust) {
     this.usuariAplicacioID=usuariAplicacioID;
     this.username=username;
-    this.emailadmin=emailadmin;
+    this.emailAdmin=emailAdmin;
     this.actiu=actiu;
     this.roleScan=roleScan;
     this.roleCoAu=roleCoAu;
@@ -98,7 +98,7 @@ private static final long serialVersionUID = -360699331L;
     this.setUsuariAplicacioID(__bean.getUsuariAplicacioID());
     this.setUsername(__bean.getUsername());
     this.setContrasenya(__bean.getContrasenya());
-    this.setEmailadmin(__bean.getEmailadmin());
+    this.setEmailAdmin(__bean.getEmailAdmin());
     this.setDescripcio(__bean.getDescripcio());
     this.setActiu(__bean.isActiu());
     this.setRoleScan(__bean.isRoleScan());
@@ -127,11 +127,11 @@ private static final long serialVersionUID = -360699331L;
 		this.contrasenya = _contrasenya_;
 	};
 
-	public java.lang.String getEmailadmin() {
-		return(emailadmin);
+	public java.lang.String getEmailAdmin() {
+		return(emailAdmin);
 	};
-	public void setEmailadmin(java.lang.String _emailadmin_) {
-		this.emailadmin = _emailadmin_;
+	public void setEmailAdmin(java.lang.String _emailAdmin_) {
+		this.emailAdmin = _emailAdmin_;
 	};
 
 	public java.lang.String getDescripcio() {
@@ -205,7 +205,7 @@ private static final long serialVersionUID = -360699331L;
     __tmp.setUsuariAplicacioID(__bean.getUsuariAplicacioID());
     __tmp.setUsername(__bean.getUsername());
     __tmp.setContrasenya(__bean.getContrasenya());
-    __tmp.setEmailadmin(__bean.getEmailadmin());
+    __tmp.setEmailAdmin(__bean.getEmailAdmin());
     __tmp.setDescripcio(__bean.getDescripcio());
     __tmp.setActiu(__bean.isActiu());
     __tmp.setRoleScan(__bean.isRoleScan());

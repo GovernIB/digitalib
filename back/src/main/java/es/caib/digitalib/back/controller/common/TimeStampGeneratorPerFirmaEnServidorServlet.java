@@ -55,7 +55,7 @@ public class TimeStampGeneratorPerFirmaEnServidorServlet extends HttpServlet {
       boolean isPost) throws ServletException, IOException {
     
     
-    // XYZ ZZZ
+
     final boolean debug =log.isDebugEnabled();
 
     if (debug) {

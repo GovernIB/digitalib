@@ -41,7 +41,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.EMAILADMIN)}">
           <td>
-          ${usuariAplicacio.emailadmin}
+          ${usuariAplicacio.emailAdmin}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.DESCRIPCIO)}">

@@ -105,85 +105,13 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     public abstract int getTipusPerfil();
 
-    /*
-     * // XYZ ZZZ
-     * 
-     * @RequestMapping(value = "/{transaccioID}/edit", method = RequestMethod.GET) public
-     * ModelAndView editarTransaccioGet(@PathVariable("transaccioID") java.lang.Long
-     * transaccioID, HttpServletRequest request, HttpServletResponse response) throws
-     * I18NException {
-     * 
-     * 
-     * ModelAndView mav = super.editAndViewTransaccioGet(transaccioID, request, response,
-     * false);
-     * 
-     * Map<String, Object> map = mav.getModel();
-     * 
-     * log.info("\n\n\n ==============================  GET ::  INICI ===================\n");
-     * for (Map.Entry<String, Object> e : map.entrySet()) { log.info(e.getKey() + " => " +
-     * e.getValue()); }
-     * 
-     * log.info(" ============================== GET :: FINAL ===================\n");
-     * 
-     * 
-     * return mav; }
-     * 
-     * 
-     * // XYZ ZZZ
-     * 
-     * @Override
-     * 
-     * @RequestMapping(value = "/{transaccioID}/edit", method = RequestMethod.POST) public
-     * String editarTransaccioPost(@ModelAttribute @Valid TransaccioForm transaccioForm,
-     * BindingResult result, SessionStatus status, HttpServletRequest request,
-     * HttpServletResponse response) throws I18NException {
-     * 
-     * log.info("\n ==============================  POST OK :: BEGIN ===================\n"
-     * +" TF => " + transaccioForm + "\n");
-     * 
-     * 
-     * String r = super.editarTransaccioPost(transaccioForm, result, status, request,
-     * response);
-     * 
-     * 
-     * log.info("\n ==============================  POST OK :: FINAL " + r +
-     * " ===================\n");
-     * 
-     * return r;
-     * 
-     * }
-     * 
-     * 
-     * 
-     * 
-     * 
-     * // XYZ ZZZ
-     * 
-     * @RequestMapping(value = "/{transaccioID}/null") // , method = RequestMethod.POST public
-     * String editarTransaccioPostNull(@ModelAttribute @Valid TransaccioForm transaccioForm,
-     * //BindingResult result, SessionStatus status,
-     * 
-     * @PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
-     * HttpServletResponse response) throws I18NException {
-     * 
-     * log.error("\n  PASSA PER  editarTransaccioPostNULL  \n");
-     * 
-     * //return this.editarTransaccioPost(transaccioForm, result, status, request, response);
-     * 
-     * return "redirect:" + getContextWeb() + "/" + transaccioID + "/edit" ;
-     * 
-     * }
-     */
+   
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
-        // TransaccioQueryPath tqp = new TransaccioQueryPath();
-        // Where w =
-        // Where.OR(tqp.PERFIL().UTILITZATPERAPLICACIO().equal(isUtilitzatPerAplicacio()));
+
         Where w;
-        /*
-         * if (isUtilitzatPerAplicacio2() == null) { w = null; } else
-         */
+
         {
             if (isUtilitzatPerAplicacio() == true) {
                 w = USUARIAPLICACIOID.isNotNull();
@@ -615,29 +543,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     return getRedirectWhenCancel(request, transaccioID);
                 }
 
-                /*
-                 * if (info.getCustodyId() == null) { // XYZ ZZZ TRA
-                 * stb.append("<li><b>Arxiu::ExpedientID:</b> ").append(info.
-                 * getArxiuExpedientId()) .append("</li>"); // XYZ ZZZ TRA
-                 * stb.append("<li><b>Arxiu::DocumentID:</b> ").append(info.getArxiuDocumentId(
-                 * )) .append("</li>"); } else { // XYZ ZZZ TRA
-                 * stb.append("<li><b>CustodyID:</b> ").append(info.getCustodyId()).append(
-                 * "</li>"); } // XYZ ZZZ TRA
-                 * stb.append("<li><b>CSV:</b> ").append(info.getCsv()).append("</li>"); // XYZ
-                 * ZZZ TRA stb.append("<li><b>CSV Validation Web:</b> ").append(info.
-                 * getCsvValidationWeb()) .append("</li>"); // XYZ ZZZ TRA
-                 * stb.append("<li><b>CSV Generation Definition:</b> ")
-                 * .append(info.getCsvGenerationDefinition()).append("</li>"); // XYZ ZZZ TRA
-                 * stb.append("<li><b>Original File URL:</b> ").append(info.getOriginalFileUrl(
-                 * )) .append("</li>"); // XYZ ZZZ TRA
-                 * stb.append("<li><b>Printable File URL:</b> ").append(info.
-                 * getPrintableFileUrl()) .append("</li>"); // XYZ ZZZ TRA
-                 * stb.append("<li><b>ENI File URL:</b> ").append(info.getEniFileUrl()).append(
-                 * "</li>"); // XYZ ZZZ TRA
-                 * stb.append("<li><b>Validation File URL:</b> ").append(info.
-                 * getValidationFileUrl()) .append("</li>");
-                 */
-
+  
             } else {
                 // XYZ ZZZ Configurable per part de Grup
                 // {0} li envia el document adjunt.
@@ -778,25 +684,12 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             break;
 
             case Constants.TIPUS_CUSTODIA_DOCUMENTCUSTODY:
-                // IDocumentCustodyPlugin custodyPlugin = pluginDocumentCustodyLogicaEjb
-                // .getInstanceByPluginID(perfil.getPluginDocCustodyID());
 
                 String urlStr = null;
 
-                // Map<String, Object> parameters = new HashMap<String, Object>();
-                // parameters.put("transaccio", transaccio);
-
-                // } catch (CustodyException e) {
-                // XYZ ZZZ TRA
-                // throw new I18NException("genapp.comodi",
-                // "Error desconegut llegint document de DocumetnCustody: " + e.getMessage());
-                // }
 
                 switch (tipusFile) {
                     case ORIGINAL:
-                        // urlStr =
-                        // custodyPlugin.getOriginalFileUrl(infoCustody.getCustodyId(),
-                        // parameters);
                         urlStr = transaccio.getInfoCustody().getOriginalFileUrl();
                     break;
 

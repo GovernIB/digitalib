@@ -64,14 +64,14 @@ public class UsuariAplicacioFilterForm extends DigitalIBBaseFilterForm implement
   }
 
 
-  private java.lang.String emailadmin;
+  private java.lang.String emailAdmin;
 
-  public java.lang.String getEmailadmin() {
-    return this.emailadmin;
+  public java.lang.String getEmailAdmin() {
+    return this.emailAdmin;
   }
 
-  public void setEmailadmin(java.lang.String emailadmin) {
-    this.emailadmin = emailadmin;
+  public void setEmailAdmin(java.lang.String emailAdmin) {
+    this.emailAdmin = emailAdmin;
   }
 
 
@@ -95,7 +95,7 @@ public class UsuariAplicacioFilterForm extends DigitalIBBaseFilterForm implement
     this.usuariAplicacioIDFins = __toClone.usuariAplicacioIDFins;
     this.username = __toClone.username;
     this.contrasenya = __toClone.contrasenya;
-    this.emailadmin = __toClone.emailadmin;
+    this.emailAdmin = __toClone.emailAdmin;
     this.descripcio = __toClone.descripcio;
   }
   
