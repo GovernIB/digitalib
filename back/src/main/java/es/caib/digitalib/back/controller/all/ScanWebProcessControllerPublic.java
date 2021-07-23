@@ -1,15 +1,20 @@
 package es.caib.digitalib.back.controller.all;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.util.WebUtils;
 
 import es.caib.digitalib.back.controller.AbstractScanWebProcessController;
 import es.caib.digitalib.jpa.TransaccioJPA;
@@ -33,7 +38,7 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
       I18NException {
 
     @SuppressWarnings("unused")
-    String languageUI = "ca";
+    String languageUI;
     TransaccioJPA transaccio = null;
     {
 
@@ -51,7 +56,11 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
       }
     }
 
-    languageUI = transaccio.getLanguageUI();
+    // Establint idioma de la UI
+    Locale loc = new Locale(languageUI);
+    LocaleContextHolder.setLocale(loc);
+    WebUtils.setSessionAttribute(request, SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, loc);
+    
 
     String urlBase = transaccio.getPerfil().getUrlBase();
 
