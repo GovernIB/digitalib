@@ -70,7 +70,7 @@ public class RestUtils {
       }
 
       String credentials = new String(Base64.decode(st.nextToken()));
-      log.info("XYZ ZZZ autenticate::Credentials: " + credentials);
+      //log.info("XYZ ZZZ autenticate::Credentials: " + credentials);
       int p = credentials.indexOf(":");
       if (p == -1) {
         final String msg = I18NUtils.tradueix("autenticacio.credencials.format.incorrecte", credentials);

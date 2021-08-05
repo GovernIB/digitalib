@@ -57,10 +57,12 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
     }
 
     // Establint idioma de la UI
+    log.info("\n\n" + "ScanWebProcessControllerPublic::scanWebStart() => "
+            + languageUI + "\n\n");
     Locale loc = new Locale(languageUI);
+    response.setLocale(loc);
     LocaleContextHolder.setLocale(loc);
     WebUtils.setSessionAttribute(request, SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, loc);
-    
 
     String urlBase = transaccio.getPerfil().getUrlBase();
 
