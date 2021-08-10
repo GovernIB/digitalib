@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.util.WebUtils;
 
+import es.caib.digitalib.back.controller.AbstractScanWebModuleController;
 import es.caib.digitalib.back.controller.AbstractScanWebProcessController;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.utils.Configuracio;
@@ -57,12 +58,10 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
     }
 
     // Establint idioma de la UI
-    log.info("\n\n" + "ScanWebProcessControllerPublic::scanWebStart() => "
-            + languageUI + "\n\n");
-    Locale loc = new Locale(languageUI);
-    response.setLocale(loc);
-    LocaleContextHolder.setLocale(loc);
-    WebUtils.setSessionAttribute(request, SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, loc);
+    {        
+        String where = "ScanWebProcessControllerPublic::scanWebStart()";        
+        AbstractScanWebModuleController.setLanguageUI(request, response, languageUI, where);
+    }
 
     String urlBase = transaccio.getPerfil().getUrlBase();
 

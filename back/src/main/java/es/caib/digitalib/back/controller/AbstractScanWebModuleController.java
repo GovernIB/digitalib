@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -15,11 +16,14 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.util.WebUtils;
 
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.PerfilLogicaLocal;
@@ -83,6 +87,16 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
       String msg = "No existeix cap mòdul de scan que passi els filtres";
       return generateErrorMAV(request, transactionWebID, msg, null);
     }
+    
+    
+    // En aquesta pàgina web hi ha algun tipus de BUG i no captura correctament l'idioma
+    {
+        String languageUI = transaccio.getLanguageUI();
+        String where = "AbstractScanWebModuleController::selectScanWebModule()";
+        setLanguageUI(request, response, languageUI, where);
+    }
+    
+    
 
     // Si només hi ha un mòdul de scan llavors anar a scan directament
     if (pluginsFiltered.size() == 1) {
@@ -104,6 +118,25 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     return mav;
 
   }
+
+  /**
+   * 
+   * @param request
+   * @param response
+   * @param languageUI
+   * @param where
+   */
+    public static void setLanguageUI(HttpServletRequest request, HttpServletResponse response,
+            String languageUI, String where) {
+        // Establint idioma de la UI
+        log.info("\n\n" + where + " => " + languageUI + "\n\n");
+        Locale loc = new Locale(languageUI);
+        if (response != null) {
+          response.setLocale(loc);
+        }
+        LocaleContextHolder.setLocale(loc);
+        WebUtils.setSessionAttribute(request, SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, loc);
+    }
 
   @RequestMapping(value = "/error")
   public ModelAndView errorProcesDeScan(HttpServletRequest request,

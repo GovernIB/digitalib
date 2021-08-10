@@ -13,8 +13,7 @@
   <br/>
   
 <div class="lead" style="margin-bottom:10px; text-align:center;">
-  
-
+  <b><%= request.getLocale() %></b>
   <fmt:message key="plugindescan.seleccio.title2"/>
   <br/>
   <h5 style="line-height: 10px; margin-top: 0px; margin-bottom: 0px;">

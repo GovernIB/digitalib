@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.digitalib.back.controller.AbstractFirmaArxiuParametersController;
+import es.caib.digitalib.back.controller.AbstractScanWebModuleController;
 import es.caib.digitalib.back.controller.AbstractScanWebProcessController;
 import es.caib.digitalib.back.controller.user.ScanWebProcessControllerUser;
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
@@ -76,7 +77,7 @@ public class FirmaArxiuParametersPublicController
 
   @Override
   public TransaccioForm getTransaccioForm(TransaccioJPA _jpa, boolean __isView,
-      HttpServletRequest request, ModelAndView mav) throws I18NException {
+      HttpServletRequest request,  ModelAndView mav) throws I18NException {
 
     TransaccioForm transaccioForm = super.getTransaccioForm(_jpa, __isView, request, mav);
 
@@ -106,6 +107,14 @@ public class FirmaArxiuParametersPublicController
             + transaccioForm.getTransaccio().getTransactionWebId());
         
         transaccioForm.setAttachedAdditionalJspCode(true);
+        
+        // En aquesta pàgina web hi ha algun tipus de BUG i no captura correctament l'idioma
+        {
+            String languageUI = transaccioForm.getTransaccio().getLanguageUI();
+            String where = "AbstractScanWebModuleController::selectScanWebModule()";
+            HttpServletResponse response = null;
+            AbstractScanWebModuleController.setLanguageUI(request, response, languageUI, where);
+        }
         
 
         mav.setViewName("transaccionsmassives_public");

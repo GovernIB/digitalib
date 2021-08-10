@@ -158,6 +158,17 @@ public abstract class AbstractScanWebProcessController {
 
         mav = new ModelAndView(isPublic() ? "public_wait" : "wait");
         mav.addObject("finalURL", finalURL);
+        
+        // En aquesta pàgina web hi ha algun tipus de BUG i no captura correctament l'idioma
+        {
+            String languageUI = transaccioLogicaEjb.executeQueryOne(
+                    TransaccioFields.LANGUAGEUI,
+                    TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
+            String where = "AbstractScanWebProcessController::esperaProcesDeScanWebController()";            
+            AbstractScanWebModuleController.setLanguageUI(request, response, languageUI, where);
+        }
+        
+        
 
         if (transMultipleID == null) {
             // Petició Senzilla
@@ -1268,6 +1279,16 @@ public abstract class AbstractScanWebProcessController {
 
         String finalMassiveURL = getContextWeb() + SCANWEB_CONTEXTPATH_RETURNTOORIGEN_MASSIVE
                 + "/" + transaccioWebID;
+        
+        // En aquesta pàgina web hi ha algun tipus de BUG i no captura correctament l'idioma
+        {
+            String languageUI = transaccioLogicaEjb.executeQueryOne(
+                    TransaccioFields.LANGUAGEUI,
+                    TransaccioFields.TRANSACTIONWEBID.equal(transaccioWebID));
+            String where = "AbstractScanWebProcessController::finalPeticioMassiva()";            
+            AbstractScanWebModuleController.setLanguageUI(request, response, languageUI, where);
+        }
+        
 
         ModelAndView mav;
         mav = new ModelAndView(isPublic() ? "public_wait" : "wait");
