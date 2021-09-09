@@ -2,19 +2,19 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.3.5
--- Dumped by pg_dump version 9.3.5
--- Started on 2020-10-06 12:57:19
+-- Dumped from database version 9.3.25
+-- Dumped by pg_dump version 9.3.25
+-- Started on 2021-09-09 08:41:49
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- TOC entry 7 (class 2615 OID 97827)
 -- Name: digitalib; Type: SCHEMA; Schema: -; Owner: digitalib
 --
 
@@ -23,10 +23,7 @@ CREATE SCHEMA digitalib;
 
 ALTER SCHEMA digitalib OWNER TO digitalib;
 
-SET search_path = digitalib, pg_catalog;
-
 --
-
 -- Name: dib_digitalib_seq; Type: SEQUENCE; Schema: digitalib; Owner: digitalib
 --
 
@@ -38,7 +35,7 @@ CREATE SEQUENCE dib_digitalib_seq
     CACHE 1;
 
 
-ALTER TABLE digitalib.dib_digitalib_seq OWNER TO digitalib;
+ALTER TABLE dib_digitalib_seq OWNER TO digitalib;
 
 SET default_tablespace = '';
 
@@ -54,11 +51,12 @@ CREATE TABLE dib_apisimple (
     url character varying(255) NOT NULL,
     username character varying(255) NOT NULL,
     contrasenya character varying(255) NOT NULL,
-    perfil character varying(255) DEFAULT ' '::character varying NOT NULL
+    perfil character varying(255) DEFAULT ' '::character varying NOT NULL,
+    configdefirma character varying(100)
 );
 
 
-ALTER TABLE digitalib.dib_apisimple OWNER TO digitalib;
+ALTER TABLE dib_apisimple OWNER TO digitalib;
 
 --
 -- Name: dib_auditoria; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -77,10 +75,9 @@ CREATE TABLE dib_auditoria (
 );
 
 
-ALTER TABLE digitalib.dib_auditoria OWNER TO digitalib;
+ALTER TABLE dib_auditoria OWNER TO digitalib;
 
 --
--- Dependencies: 189
 -- Name: COLUMN dib_auditoria.usernameaplicacio; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -88,7 +85,6 @@ COMMENT ON COLUMN dib_auditoria.usernameaplicacio IS 'Username d''Aplicacio que 
 
 
 --
--- Dependencies: 189
 -- Name: COLUMN dib_auditoria.usernamepersona; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -110,7 +106,7 @@ CREATE TABLE dib_avis (
 );
 
 
-ALTER TABLE digitalib.dib_avis OWNER TO digitalib;
+ALTER TABLE dib_avis OWNER TO digitalib;
 
 --
 -- Name: dib_configuraciofirma; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -138,10 +134,9 @@ CREATE TABLE dib_configuraciofirma (
 );
 
 
-ALTER TABLE digitalib.dib_configuraciofirma OWNER TO digitalib;
+ALTER TABLE dib_configuraciofirma OWNER TO digitalib;
 
 --
--- Dependencies: 188
 -- Name: COLUMN dib_configuraciofirma.uspoliticadefirma; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -149,7 +144,6 @@ COMMENT ON COLUMN dib_configuraciofirma.uspoliticadefirma IS '0 => no usar polit
 
 
 --
--- Dependencies: 188
 -- Name: COLUMN dib_configuraciofirma.tipusoperaciofirma; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -179,7 +173,7 @@ CREATE TABLE dib_configuraciogrup (
 );
 
 
-ALTER TABLE digitalib.dib_configuraciogrup OWNER TO digitalib;
+ALTER TABLE dib_configuraciogrup OWNER TO digitalib;
 
 --
 -- Name: dib_estadistica; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -196,7 +190,7 @@ CREATE TABLE dib_estadistica (
 );
 
 
-ALTER TABLE digitalib.dib_estadistica OWNER TO digitalib;
+ALTER TABLE dib_estadistica OWNER TO digitalib;
 
 --
 -- Name: dib_fitxer; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -211,7 +205,7 @@ CREATE TABLE dib_fitxer (
 );
 
 
-ALTER TABLE digitalib.dib_fitxer OWNER TO digitalib;
+ALTER TABLE dib_fitxer OWNER TO digitalib;
 
 --
 -- Name: dib_idioma; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -225,7 +219,7 @@ CREATE TABLE dib_idioma (
 );
 
 
-ALTER TABLE digitalib.dib_idioma OWNER TO digitalib;
+ALTER TABLE dib_idioma OWNER TO digitalib;
 
 --
 -- Name: dib_infocustody; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -246,7 +240,7 @@ CREATE TABLE dib_infocustody (
 );
 
 
-ALTER TABLE digitalib.dib_infocustody OWNER TO digitalib;
+ALTER TABLE dib_infocustody OWNER TO digitalib;
 
 --
 -- Name: dib_infosignatura; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -273,7 +267,7 @@ CREATE TABLE dib_infosignatura (
 );
 
 
-ALTER TABLE digitalib.dib_infosignatura OWNER TO digitalib;
+ALTER TABLE dib_infosignatura OWNER TO digitalib;
 
 --
 -- Name: dib_metadada; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -287,7 +281,7 @@ CREATE TABLE dib_metadada (
 );
 
 
-ALTER TABLE digitalib.dib_metadada OWNER TO digitalib;
+ALTER TABLE dib_metadada OWNER TO digitalib;
 
 --
 -- Name: dib_perfil; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -315,10 +309,9 @@ CREATE TABLE dib_perfil (
 );
 
 
-ALTER TABLE digitalib.dib_perfil OWNER TO digitalib;
+ALTER TABLE dib_perfil OWNER TO digitalib;
 
 --
--- Dependencies: 177
 -- Name: COLUMN dib_perfil.usperfil; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -326,7 +319,6 @@ COMMENT ON COLUMN dib_perfil.usperfil IS 'Quin us es farà del perfil: plantilla
 
 
 --
--- Dependencies: 177
 -- Name: COLUMN dib_perfil.urlbase; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -344,7 +336,7 @@ CREATE TABLE dib_perfilusrapp (
 );
 
 
-ALTER TABLE digitalib.dib_perfilusrapp OWNER TO digitalib;
+ALTER TABLE dib_perfilusrapp OWNER TO digitalib;
 
 --
 -- Name: dib_plugin; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -363,7 +355,7 @@ CREATE TABLE dib_plugin (
 );
 
 
-ALTER TABLE digitalib.dib_plugin OWNER TO digitalib;
+ALTER TABLE dib_plugin OWNER TO digitalib;
 
 --
 -- Name: dib_plugincridada; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -385,7 +377,7 @@ CREATE TABLE dib_plugincridada (
 );
 
 
-ALTER TABLE digitalib.dib_plugincridada OWNER TO digitalib;
+ALTER TABLE dib_plugincridada OWNER TO digitalib;
 
 --
 -- Name: dib_traduccio; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -396,7 +388,7 @@ CREATE TABLE dib_traduccio (
 );
 
 
-ALTER TABLE digitalib.dib_traduccio OWNER TO digitalib;
+ALTER TABLE dib_traduccio OWNER TO digitalib;
 
 --
 -- Name: dib_traducciomap; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -409,7 +401,7 @@ CREATE TABLE dib_traducciomap (
 );
 
 
-ALTER TABLE digitalib.dib_traducciomap OWNER TO digitalib;
+ALTER TABLE dib_traducciomap OWNER TO digitalib;
 
 --
 -- Name: dib_transaccio; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -457,14 +449,15 @@ CREATE TABLE dib_transaccio (
     nom character varying(255),
     infoscanpapersize character varying(100),
     infoscandatacaptura timestamp without time zone,
-    transmultipleid bigint
+    transmultipleid bigint,
+    infoscanduplex boolean,
+    signparamfuncionaridir3 character varying(100)
 );
 
 
-ALTER TABLE digitalib.dib_transaccio OWNER TO digitalib;
+ALTER TABLE dib_transaccio OWNER TO digitalib;
 
 --
--- Dependencies: 184
 -- Name: COLUMN dib_transaccio.arxiureqparamdocestatelabora; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -472,7 +465,6 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparamdocestatelabora IS 'documentEstatE
 
 
 --
--- Dependencies: 184
 -- Name: COLUMN dib_transaccio.arxiureqparamdocumenttipus; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -480,7 +472,6 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparamdocumenttipus IS 'TDxx';
 
 
 --
--- Dependencies: 184
 -- Name: COLUMN dib_transaccio.arxiureqparaminteressats; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -488,7 +479,6 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparaminteressats IS 'Llistat de Nifs de
 
 
 --
--- Dependencies: 184
 -- Name: COLUMN dib_transaccio.arxiureqparamorigen; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -497,7 +487,6 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparamorigen IS '0 Ciutada
 
 
 --
--- Dependencies: 184
 -- Name: COLUMN dib_transaccio.arxiureqparamorgans; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
@@ -505,11 +494,17 @@ COMMENT ON COLUMN dib_transaccio.arxiureqparamorgans IS 'Codi DIR3 dels organs a
 
 
 --
--- Dependencies: 184
 -- Name: COLUMN dib_transaccio.nom; Type: COMMENT; Schema: digitalib; Owner: digitalib
 --
 
 COMMENT ON COLUMN dib_transaccio.nom IS 'Nom descriptiu de la transaccio';
+
+
+--
+-- Name: COLUMN dib_transaccio.signparamfuncionaridir3; Type: COMMENT; Schema: digitalib; Owner: digitalib
+--
+
+COMMENT ON COLUMN dib_transaccio.signparamfuncionaridir3 IS 'Codi DIR3 de l''unitat de la qual depen l''oficina en la que es troba el funcionari.';
 
 
 --
@@ -523,7 +518,7 @@ CREATE TABLE dib_transmultiple (
 );
 
 
-ALTER TABLE digitalib.dib_transmultiple OWNER TO digitalib;
+ALTER TABLE dib_transmultiple OWNER TO digitalib;
 
 --
 -- Name: dib_usuariaplicacio; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -542,7 +537,7 @@ CREATE TABLE dib_usuariaplicacio (
 );
 
 
-ALTER TABLE digitalib.dib_usuariaplicacio OWNER TO digitalib;
+ALTER TABLE dib_usuariaplicacio OWNER TO digitalib;
 
 --
 -- Name: dib_usuaripersona; Type: TABLE; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -559,11 +554,12 @@ CREATE TABLE dib_usuaripersona (
     configuraciogrupid bigint,
     rolescan boolean DEFAULT false NOT NULL,
     rolecoau boolean DEFAULT false NOT NULL,
-    rolecust boolean DEFAULT false NOT NULL
+    rolecust boolean DEFAULT false NOT NULL,
+    unitatdir3 character varying(100)
 );
 
 
-ALTER TABLE digitalib.dib_usuaripersona OWNER TO digitalib;
+ALTER TABLE dib_usuaripersona OWNER TO digitalib;
 
 --
 -- Name: dib_apisimple_pk; Type: CONSTRAINT; Schema: digitalib; Owner: digitalib; Tablespace: 
@@ -1521,7 +1517,7 @@ ALTER TABLE ONLY dib_usuaripersona
     ADD CONSTRAINT dib_usrperson_idioma_idioma_fk FOREIGN KEY (idiomaid) REFERENCES dib_idioma(idiomaid);
 
 
--- Completed on 2020-10-06 12:57:20
+-- Completed on 2021-09-09 08:41:49
 
 --
 -- PostgreSQL database dump complete

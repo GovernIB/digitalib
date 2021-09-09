@@ -1,6 +1,7 @@
 
     create table dib_apisimple (
         apisimpleid number(19,0) not null,
+        configdefirma varchar2(100 char),
         contrasenya varchar2(255 char) not null,
         nom varchar2(255 char) not null,
         perfil varchar2(255 char) not null,
@@ -208,7 +209,6 @@
         arxiureqparamciutadanif varchar2(15 char),
         arxiureqparamciutadanom varchar2(255 char),
         arxiureqparamdocestatelabora varchar2(4 char),
-        arxiureqparamdocumenttipus varchar2(4 char),
         arxiureqparaminteressats varchar2(255 char),
         arxiureqparamorgans varchar2(255 char),
         arxiureqparamorigen number(10,0),
@@ -224,6 +224,9 @@
         hashfirma varchar2(255 char),
         infocustodyid number(19,0),
         infoscandatacaptura timestamp,
+        arxiureqparamdocumenttipus varchar2(4 char),
+        infoscanduplex number(1,0),
+        signparamlanguagedoc varchar2(10 char),
         infoscanocr number(1,0),
         infoscanpapersize varchar2(100 char),
         infoscanpixeltype number(10,0),
@@ -234,9 +237,9 @@
         nom varchar2(255 char),
         perfilid number(19,0) not null,
         returnurl varchar2(255 char),
+        signparamfuncionaridir3 varchar2(100 char),
         signparamfuncionarinif varchar2(255 char),
         signparamfuncionarinom varchar2(255 char),
-        signparamlanguagedoc varchar2(10 char),
         transmultipleid number(19,0),
         webid varchar2(100 char) not null,
         usuariaplicacioid number(19,0),
@@ -273,6 +276,7 @@
         rolecoau number(1,0) not null,
         rolecust number(1,0) not null,
         rolescan number(1,0) not null,
+        unitatdir3 varchar2(100 char),
         username varchar2(50 char) not null
     );
 

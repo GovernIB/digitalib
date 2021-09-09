@@ -30,20 +30,20 @@ es.caib.digitalib.plugins.signatureserver.miniappletinserver.base_dir=D:/dades/d
 # Si signaturesSet.getCommonInfoSignature().getUsername() es null, llavors
 # s''utilitza aquest valor com a sistema de selecció del certificat amb el que firmar
 es.caib.digitalib.plugins.signatureserver.miniappletinserver.defaultAliasCertificate=anadaljks', true, 1, 'SIGN_MINIAPPLET_IN_SERVER', NULL, 'Plugin de Firma de Servidor emprant MiniApplet', 'Plugin de Firma de Servidor emprant MiniApplet');
-INSERT INTO dib_plugin(pluginid, classe, properties, actiu, tipus, codi, ordre, nom, descripcio) VALUES (1001, 'es.limit.plugins.scanweb.dynamicwebtwain.DynamicWebTwainScanWebPlugin', 'es.caib.digitalib.plugins.scanweb.dynamicwebtwain.debug=true
-es.caib.digitalib.plugins.scanweb.dynamicwebtwain.trial=true
-es.caib.digitalib.plugins.scanweb.dynamicwebtwain.productkey=8839E20083E3197244ABA95D2871EA91FCF8675A8CBEA0D5D4B15A95DDD13615CD16425F8AB3FD646331371F3822A86FCD16425F8AB3FD64B150B8F277D15433FCF8675A8CBEA0D520C40B56D470FD8AFCF8675A8CBEA0D51499049EE2B2572AFCF8675A8CBEA0D51263DA85E51DDDE8FCF8675A8CBEA0D5524CE1CDACCA983FFCF8675A8CBEA0D5B7C9CB69F517FE87FCF8675A8CBEA0D5D658A6C0180FDE3BFCF8675A8CBEA0D5B7561C4D3BBF2FAFFCF8675A8CBEA0D521D6B46E0049BE91FCF8675A8CBEA0D58B8E455BAA2491BBFCF8675A8CBEA0D568C5DE7F9604E6A2FCF8675A8CBEA0D5C918038969B9B1F6FCF8675A8CBEA0D587D9F73F5F748E2EFCF8675A8CBEA0D58E441C2602E0E103FCF8675A8CBEA0D5B87CFFA8FF8DE513FCF8675A8CBEA0D5DB33CD75F490C0CAFCF8675A8CBEA0D500D9FF319BD1767130010000
+INSERT INTO dib_plugin(pluginid, classe, properties, actiu, tipus, codi, ordre, nom, descripcio) VALUES (1001, 'es.limit.pluginsib.scanweb.dynamicwebtwain.DynamicWebTwainScanWebPlugin', 'es.caib.digitalib.pluginsib.scanweb.dynamicwebtwain.debug=true
+es.caib.digitalib.pluginsib.scanweb.dynamicwebtwain.trial=true
+es.caib.digitalib.pluginsib.scanweb.dynamicwebtwain.productkey=8839E20083E3197244ABA95D2871EA91FCF8675A8CBEA0D5D4B15A95DDD13615CD16425F8AB3FD646331371F3822A86FCD16425F8AB3FD64B150B8F277D15433FCF8675A8CBEA0D520C40B56D470FD8AFCF8675A8CBEA0D51499049EE2B2572AFCF8675A8CBEA0D51263DA85E51DDDE8FCF8675A8CBEA0D5524CE1CDACCA983FFCF8675A8CBEA0D5B7C9CB69F517FE87FCF8675A8CBEA0D5D658A6C0180FDE3BFCF8675A8CBEA0D5B7561C4D3BBF2FAFFCF8675A8CBEA0D521D6B46E0049BE91FCF8675A8CBEA0D58B8E455BAA2491BBFCF8675A8CBEA0D568C5DE7F9604E6A2FCF8675A8CBEA0D5C918038969B9B1F6FCF8675A8CBEA0D587D9F73F5F748E2EFCF8675A8CBEA0D58E441C2602E0E103FCF8675A8CBEA0D5B87CFFA8FF8DE513FCF8675A8CBEA0D5DB33CD75F490C0CAFCF8675A8CBEA0D500D9FF319BD1767130010000
 
 
 # Podeu trobar el contingut d''aquest directori a https://github.com/GovernIB/pluginsib/tree/pluginsib-1.0/plugins-scanweb/iecisa2-scanweb-plugin/scanner_resources
-es.caib.digitalib.plugins.scanweb.dynamicwebtwain.resourcespath=D:/dades/dades/CarpetesPersonals/Programacio/pluginsib-1.0/plugins-scanweb/dynamicwebtwain2/scanner_resources
+es.caib.digitalib.pluginsib.scanweb.dynamicwebtwain.resourcespath=D:/dades/dades/CarpetesPersonals/Programacio/pluginsib-1.0/plugins-scanweb/dynamicwebtwain2/scanner_resources
 
 # Optional
 # Versió: Per defecte 12.2. Possibles valors 13.2, 12.2 o 10.2
-es.caib.digitalib.plugins.scanweb.dynamicwebtwain.version=12.2', true, 0, 'SCAN_DWT', 0, 'DynamicWebTwain', 'DynamicWebTwain');
-INSERT INTO dib_plugin(pluginid, classe, properties, actiu, tipus, codi, ordre, nom, descripcio) VALUES (1000, 'org.fundaciobit.plugins.scanweb.iecisa.IECISAScanWebPlugin', 'es.caib.digitalib.plugins.scanweb.iecisa.debug=false
-es.caib.digitalib.plugins.scanweb.iecisa.forcejnlp=false
-es.caib.digitalib.plugins.scanweb.iecisa.closewindowwhenfinish=true', true, 0, 'SCAN_JNLP', 1, 'Escaneig JNLP', 'Escaneig JNLP');
+es.caib.digitalib.pluginsib.scanweb.dynamicwebtwain.version=12.2', true, 0, 'SCAN_DWT', 0, 'DynamicWebTwain', 'DynamicWebTwain');
+INSERT INTO dib_plugin(pluginid, classe, properties, actiu, tipus, codi, ordre, nom, descripcio) VALUES (1000, 'org.fundaciobit.pluginsib.scanweb.iecisa.IECISAScanWebPlugin', 'es.caib.digitalib.pluginsib.scanweb.iecisa.debug=false
+es.caib.digitalib.pluginsib.scanweb.iecisa.forcejnlp=false
+es.caib.digitalib.pluginsib.scanweb.iecisa.closewindowwhenfinish=true', true, 0, 'SCAN_JNLP', 1, 'Escaneig JNLP', 'Escaneig JNLP');
 INSERT INTO dib_plugin(pluginid, classe, properties, actiu, tipus, codi, ordre, nom, descripcio) VALUES (1004, 'org.fundaciobit.plugin.signatureserver.afirmalibs.AfirmaLibsSignatureServerPlugin', '# Estructura ha de ser com del tipus [base_dir]\AFIRMALIBS_CERTS\[USERNAME]\ i dins aquest directori hi ha
 # d''haver un fitxer cert.properties que ha de definir l''accés a un p12 o un jks:
 #       * JKS:  - jksfilename=anadal.jks
