@@ -5,13 +5,13 @@
 
   <groupId>es.caib.digitalib</groupId>
   <artifactId>digitalib-logic</artifactId>
-  <version>1.0.6</version>
+  <version>1.0.7</version>
   <packaging>ejb</packaging>
 
   <parent>
     <groupId>es.caib.digitalib</groupId>
     <artifactId>digitalib</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
   </parent>
 
 
