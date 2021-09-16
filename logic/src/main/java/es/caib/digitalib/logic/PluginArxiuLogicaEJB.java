@@ -276,6 +276,8 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
             documentMetadades.setFormat(documentFormat);
             documentMetadades.setExtensio(documentExtensio);
 
+            
+
             // ================== METADADES ==================
 
             // Si posam alguna cosa llavors peta [HTTP_500, COD_021] nodeId is not valid

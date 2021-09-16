@@ -261,17 +261,17 @@ public class PluginDocumentCustodyLogicaEJB extends
 
   public static  List<Metadata> generaMetadades(TransaccioJPA transaccio,String csvGenerationDefinition, Logger log) {
     List<Metadata> metadadesAddicionals = new ArrayList<Metadata>();
-    /*
+    
     // Resolució
     Integer resolucio = transaccio.getInfoScanResolucioPpp();
     if (resolucio != null) {
-      log.info("\n\n  RESOLUCIO: " + resolucio );
+      //log.info("\n\n  RESOLUCIO: " + resolucio );
       metadadesAddicionals.add(new Metadata("eni:resolucion", resolucio));
     }
     // Idioma del Document
     String languageDoc = transaccio.getInfoScanLanguageDoc();
     if (languageDoc != null) {
-      log.info("\n\n  LANGUAGEDOC: " + languageDoc );
+      //log.info("\n\n  LANGUAGEDOC: " + languageDoc );
       metadadesAddicionals.add(new Metadata("eni:idioma", languageDoc));
     }
     // Profunditat de Color
@@ -279,7 +279,7 @@ public class PluginDocumentCustodyLogicaEJB extends
     if (profundidad_color != null) {
       metadadesAddicionals.add(new Metadata("eni:profundidad_color", profundidad_color));
     }
-    */
+    
 
     // Identificador único del procedimiento administrativo con el que se relaciona el expediente.
     {
