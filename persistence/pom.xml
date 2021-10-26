@@ -3,13 +3,13 @@
 
   <groupId>es.caib.digitalib</groupId>
   <artifactId>digitalib-persistence</artifactId>  
-  <version>1.0.7</version>
+  <version>1.0.8</version>
   <packaging>pom</packaging>
 
   <parent>
     <groupId>es.caib.digitalib</groupId>
     <artifactId>digitalib</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
   </parent>
 
   <name>DigitalIB Persistence</name>
