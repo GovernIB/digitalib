@@ -189,6 +189,18 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                                 "btn-info"));
             }
         }
+        
+        
+        // Ha d'escriure els DNIs, CIFs o NIFs de les persones interessades separats per coma.
+        String msgIn = I18NUtils.tradueix("transaccio.interessats.ajuda");
+                
+        form.addHelpToField(ARXIUREQPARAMINTERESSATS, msgIn);
+
+        // Ha d'escriure la unitat DIR3 del funcionari. Pot esbrinar aquest codi accedint a la pàgina web
+        // https://intranet.caib.es/dir3caib i introduint les dades requerides.";
+        String msgFD3 = I18NUtils.tradueix("transaccio.fundacionaridir3.ajuda");
+        
+        form.addHelpToField(SIGNPARAMFUNCIONARIDIR3, msgFD3);
 
         return form;
 

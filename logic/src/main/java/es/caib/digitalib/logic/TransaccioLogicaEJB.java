@@ -352,10 +352,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       
       if (functionaryDir3Unit == null) {
           functionaryDir3Unit = Configuracio.getDefaultFuncionariDir3();
-          
-          log.info(" XYZ ZZZ \n\n\n FUNCIONARI DIR3 = " + functionaryDir3Unit + "\n\n\n");
-          
-          
+          //log.info("\n\n\n FUNCIONARI DIR3 = " + functionaryDir3Unit + "\n\n\n");
       }
 
       signatureParameters = new MassiveScanWebSimpleSignatureParameters(
