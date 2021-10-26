@@ -334,11 +334,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       final String functionaryAdministrationID = sp.getFunctionaryAdministrationID();
       
       
-      final String functionaryDir3Unit;
-      if (usuariPersona == null) {
-          functionaryDir3Unit = null;
-      } else {
-
+      String functionaryDir3Unit = null;
+      if (usuariPersona != null) {
         if (Configuracio.useDir3OfGroupConfiguration()) {
             
             if (usuariPersona.getConfiguracioGrupID() == null) {
@@ -353,6 +350,13 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         }
       }
       
+      if (functionaryDir3Unit == null) {
+          functionaryDir3Unit = Configuracio.getDefaultFuncionariDir3();
+          
+          log.info(" XYZ ZZZ \n\n\n FUNCIONARI DIR3 = " + functionaryDir3Unit + "\n\n\n");
+          
+          
+      }
 
       signatureParameters = new MassiveScanWebSimpleSignatureParameters(
           functionaryFullName, functionaryAdministrationID, functionaryDir3Unit);

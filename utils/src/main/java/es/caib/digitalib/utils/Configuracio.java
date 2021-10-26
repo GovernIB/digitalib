@@ -90,5 +90,15 @@ public class Configuracio implements Constants {
     public static boolean useDir3OfGroupConfiguration() {
         return Boolean.getBoolean(DIGITALIB_PROPERTY_BASE + "usedir3ofgroupconfiguration");
     }
+    
+    
+    /**
+     * Retorna el DIR3 per defecte a utilitzar quan es fan cridades des de l'API normal de DigitalIB,
+     * ja que aquesta API no inclou el Funcionari DIR3.
+     * @return
+     */
+    public static String getDefaultFuncionariDir3() {
+        return System.getProperty(DIGITALIB_PROPERTY_BASE + "defaultfuncionaridir3");
+    }
 
 }

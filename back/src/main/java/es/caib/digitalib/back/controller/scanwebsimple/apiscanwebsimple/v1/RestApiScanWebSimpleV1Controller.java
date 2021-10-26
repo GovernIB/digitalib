@@ -318,7 +318,7 @@ public class RestApiScanWebSimpleV1Controller extends RestApiScanWebUtils
   @Override
   public String getTransactionID(ScanWebSimpleGetTransactionIdRequest requestTransaction)
       throws Exception {
-
+     
     String language = "ca";
 
     // Fer neteja de transaccions Obsoletes !!!!

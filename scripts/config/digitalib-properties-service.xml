@@ -57,6 +57,9 @@
 	  es.caib.digitalib.usedir3ofgroupconfiguration=true
 	  
 	  
+	  <!-- S’utilitza per definir el DIR3 per defecte del funcionari quan la cridada es fa des de l’API antiga de DigitalIB -->
+	  es.caib.digitalib.defaultfuncionaridir3=A04003003
+	  
       
       
       
