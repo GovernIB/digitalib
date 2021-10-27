@@ -60,6 +60,11 @@
 	  <!-- S’utilitza per definir el DIR3 per defecte del funcionari quan la cridada es fa des de l’API antiga de DigitalIB -->
 	  es.caib.digitalib.defaultfuncionaridir3=A04003003
 	  
+	  <!-- Temps de vida de les transaccions. Aquest límit es per si alguna transacció es queda 'zombi' -->
+	  <!-- o el client iniciador (web o app) es desconecta abans d'acabar la transacció. -->
+	  <!-- Les unitats són en milisegons. Per defecte 900000ms = 15min -->
+	  es.caib.digitalib.transactionexpirationtimeinms=900000
+	  
       
       
       

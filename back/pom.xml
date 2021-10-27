@@ -70,7 +70,6 @@
     <dependency>
       <artifactId>pluginsib-core</artifactId>
       <groupId>org.fundaciobit.pluginsib.core</groupId>
-      <version>2.0.0</version>
       <scope>provided</scope>
     </dependency>
 

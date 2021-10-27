@@ -82,23 +82,44 @@ public class Configuracio implements Constants {
     }
 
     /**
-     * @return Si aquest valor és true, llavors: 
-     * (1) No es permetrà l'edició del camp Dir3Codi de l'objecte Usuari-Persona 
-     * (2) Durant l'inici d'una transacció via entorn web, s'utilitzaria el codi dir3 de la Configuració de Grup de la persona
+     * @return Si aquest valor és true, llavors: (1) No es permetrà l'edició del camp Dir3Codi
+     *         de l'objecte Usuari-Persona (2) Durant l'inici d'una transacció via entorn web,
+     *         s'utilitzaria el codi dir3 de la Configuració de Grup de la persona
      * 
      */
     public static boolean useDir3OfGroupConfiguration() {
         return Boolean.getBoolean(DIGITALIB_PROPERTY_BASE + "usedir3ofgroupconfiguration");
     }
-    
-    
+
     /**
-     * Retorna el DIR3 per defecte a utilitzar quan es fan cridades des de l'API normal de DigitalIB,
-     * ja que aquesta API no inclou el Funcionari DIR3.
+     * Retorna el DIR3 per defecte a utilitzar quan es fan cridades des de l'API normal de
+     * DigitalIB, ja que aquesta API no inclou el Funcionari DIR3.
+     * 
      * @return
      */
     public static String getDefaultFuncionariDir3() {
         return System.getProperty(DIGITALIB_PROPERTY_BASE + "defaultfuncionaridir3");
+    }
+
+    // 15 minuts
+    private static final long DEFAULT_EXPIRATION_TIME_MS = 900000L;
+
+    public static long getTransactionExpirationTimeInMs() {
+        String strVal = System
+                .getProperty(DIGITALIB_PROPERTY_BASE + "transactionexpirationtimeinms");
+        if (strVal == null || strVal.trim().length() == 0) {
+            return DEFAULT_EXPIRATION_TIME_MS;
+        } else {
+            try {
+                return Long.valueOf(strVal);
+            } catch (NumberFormatException nfe) {
+                System.err.println(
+                        "Valor per la propietat 'transactionexpirationtimeinms' no correspon a un número: "
+                                + strVal);
+                nfe.printStackTrace(System.err);
+                return DEFAULT_EXPIRATION_TIME_MS;
+            }
+        }
     }
 
 }

@@ -48,7 +48,6 @@ import es.caib.digitalib.jpa.FitxerJPA;
 import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.PerfilJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
-import es.caib.digitalib.jpa.TransaccioMultipleJPA;
 import es.caib.digitalib.logic.ApiFirmaSimpleLogicaLocal;
 import es.caib.digitalib.logic.ApiSimpleLogicaLocal;
 import es.caib.digitalib.logic.AuditoriaLogicaLocal;

@@ -26,7 +26,7 @@ import es.caib.digitalib.logic.utils.ScanWebConfig;
 import es.caib.digitalib.model.entity.Plugin;
 import es.caib.digitalib.model.fields.PluginFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
-import es.caib.digitalib.utils.Constants;
+import es.caib.digitalib.utils.Configuracio;
 
 /**
  *
@@ -215,11 +215,10 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
                         + ": " + e.getMessage(), e);
             }
         }
-        
+
         synchronized (scanWebConfigMap) {
-            scanWebConfigMap.remove(transactionWebID);     
+            scanWebConfigMap.remove(transactionWebID);
         }
-       
 
         if (log.isDebugEnabled()) {
             log.debug(" ESBORRAT TRANSACCIO " + transactionWebID + ".");
@@ -253,7 +252,8 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
             // Es fa un new HashSet per evitar un java.util.ConcurrentModificationException
             Set<Entry<String, ScanWebConfig>> configs;
             synchronized (scanWebConfigMap) {
-              configs = new HashSet<Entry<String, ScanWebConfig>>(scanWebConfigMap.entrySet());
+                configs = new HashSet<Entry<String, ScanWebConfig>>(
+                        scanWebConfigMap.entrySet());
             }
             for (Entry<String, ScanWebConfig> entry : configs) {
                 final String id = entry.getKey();
@@ -269,12 +269,12 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
                     continue;
                 }
 
-                long expiryTransaction = ts.getTime() + Constants.EXPIRATION_TIME_MS;
+                long expiryTransaction = ts.getTime() + Configuracio.getTransactionExpirationTimeInMs();
 
                 if (now > expiryTransaction) {
                     keysToDelete.put(id, ss);
                     SimpleDateFormat sdf = new SimpleDateFormat();
-                    log.info("Tancant ScanWebConfig amb ID = " + id
+                    log.warn("Tancant ScanWebConfig amb ID = " + id
                             + " a causa de que està caducat " + "( ARA: "
                             + sdf.format(new Date(now)) + " | CADUCITAT: "
                             + sdf.format(new Date(expiryTransaction)) + ")");
@@ -282,21 +282,19 @@ public class ScanWebModuleEjb implements ScanWebModuleLocal {
             }
 
             if (keysToDelete.size() != 0) {
-                
-
-                    for (Entry<String, ScanWebConfig> pss : keysToDelete.entrySet()) {
-                        try {
-                            closeScanWebProcess(request, pss.getKey());
-                        } catch (I18NException e) {
-                            log.warn("Error tancant un ScanWebProcess: " + e.getMessage(), e);
-                        }
+                for (Entry<String, ScanWebConfig> pss : keysToDelete.entrySet()) {
+                    try {
+                        closeScanWebProcess(request, pss.getKey());
+                    } catch (I18NException e) {
+                        log.warn("Error tancant un ScanWebProcess: " + e.getMessage(), e);
                     }
-                
+                }
+
             }
         }
 
         synchronized (scanWebConfigMap) {
-          return scanWebConfigMap.get(scanWebID);
+            return scanWebConfigMap.get(scanWebID);
         }
     }
 

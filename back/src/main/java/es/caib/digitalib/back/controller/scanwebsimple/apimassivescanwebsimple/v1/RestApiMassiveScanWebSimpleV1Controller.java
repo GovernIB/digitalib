@@ -1186,7 +1186,7 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
             return; // Esperam un poc entre
         }
 
-        Timestamp expired = new Timestamp(now - Constants.EXPIRATION_TIME_MS);
+        Timestamp expired = new Timestamp(now - Configuracio.getTransactionExpirationTimeInMs());
 
         Where where = Where.AND(TransaccioFields.DATAFI.isNull(),
                 TransaccioFields.DATAINICI.lessThan(expired));

@@ -94,9 +94,6 @@ public interface Constants {
 
   public static final int FORMAT_FILE_GIF = 4; // "gif";
 
-  // 15 minuts
-  public static final long EXPIRATION_TIME_MS = 900000L;
-
   // public static final int PERFIL_US_PLANTILLA = 0;
   //
   // public static final int PERFIL_US_TRANSACCIO_INFO = 1;

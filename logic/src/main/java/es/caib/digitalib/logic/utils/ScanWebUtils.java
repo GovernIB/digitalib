@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.pluginsib.scanweb.api.IScanWebPlugin;
 import org.fundaciobit.pluginsib.scanweb.api.ScanWebDocument;
 import org.fundaciobit.pluginsib.scanweb.api.ScanWebMode;
 import org.fundaciobit.pluginsib.scanweb.api.ScanWebRequest;
