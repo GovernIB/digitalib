@@ -121,5 +121,23 @@ public class Configuracio implements Constants {
             }
         }
     }
+    
+    
+    /** 
+     Si aquest valor val true serveix per mostrar un boto durant el processament de subdocuments
+     en un escaneig massiu. Aquest boto només es farà visible si pàgina de després d'un Separador 
+     està en blanc, cosa que fa suposar que no és una pàgina del document sinó la part posterior 
+     d'un separador que només han imprès a una cara i s'ha fet un escaneig a doble cara. 
+     Per defecte val false
+    */
+    public static boolean showButtonToDeleteFirstPage() {
+        String strVal = System
+                .getProperty(DIGITALIB_PROPERTY_BASE + "showbuttontodeletefirstpage");
+        if ("true".equals(strVal)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

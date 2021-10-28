@@ -65,9 +65,12 @@
 	  <!-- Les unitats són en milisegons. Per defecte 900000ms = 15min -->
 	  es.caib.digitalib.transactionexpirationtimeinms=900000
 	  
-      
-      
-      
+      <!-- Si aquest valor val true serveix per mostrar un boto durant el processament de subdocuments -->
+	  <!-- en un escaneig massiu. Aquest boto només es farà visible si pàgina de després d'un Separador -->
+      <!-- està en blanc, cosa que fa suposar que no és una pàgina del document sinó la part posterior -->
+      <!-- d'un separador que només han imprès a una cara i s'ha fet un escaneig a doble cara. -->
+	  <!-- Per defecte val false -->
+	  es.caib.digitalib.showbuttontodeletefirstpage=false
       
       <!-- ======== PLUGIN USER-INFORMATION - DATABASE ======= -->
       es.caib.digitalib.userinformationplugin=org.fundaciobit.plugins.userinformation.database.DataBaseUserInformationPlugin

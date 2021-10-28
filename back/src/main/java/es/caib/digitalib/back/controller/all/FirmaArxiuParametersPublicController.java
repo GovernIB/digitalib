@@ -44,6 +44,7 @@ import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.logic.TransaccioPublicLogicaLocal;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.utils.Configuracio;
 
 /**
  * 
@@ -128,30 +129,31 @@ public class FirmaArxiuParametersPublicController
                     AbstractScanWebModuleController.setLanguageUI(request, response,
                             languageUI, where);
                 }
-
-                Map<Long, FitxerEscanejatInfo> infos = (Map<Long, FitxerEscanejatInfo>) request
-                        .getSession().getAttribute(
-                                AbstractScanWebProcessController.SESSION_MASSIVE_INFO_BY_ID);
-                if (infos == null) {
-                    log.error("\n\n\n ERROR infos val null. \n\n\n");
-                } else {
-                    long id = transaccioForm.getTransaccio().getTransaccioID();
-                    FitxerEscanejatInfo fei = infos.get(id);
-
-                    if (fei == null) {
-                        log.error("\n\n\n infos[" + id + "] => " + fei + "  \n\n\n");
-                        log.error("\n\n\n IDs de Transaccions:");
-                        for (Long ids : infos.keySet()) {
-                            log.info("     => " + ids);
-                        }
+                
+                
+                if(Configuracio.showButtonToDeleteFirstPage()) {
+                    Map<Long, FitxerEscanejatInfo> infos = (Map<Long, FitxerEscanejatInfo>) request
+                            .getSession().getAttribute(
+                                    AbstractScanWebProcessController.SESSION_MASSIVE_INFO_BY_ID);
+                    if (infos == null) {
+                        log.error("\n\n\n ERROR infos val null. \n\n\n");
                     } else {
-                        if (fei.firstPageEmpty) {
-                            transaccioForm.addAdditionalButton(new AdditionalButton(
-                                    "icon-trash icon-white", "esborrarprimerapagina",
-                                    "javascript:eliminarPrimeraPagina();", "btn-warning"));
+                        long id = transaccioForm.getTransaccio().getTransaccioID();
+                        FitxerEscanejatInfo fei = infos.get(id);
+                        if (fei == null) {
+                            log.error("\n\n\n infos[" + id + "] => " + fei + "  \n\n\n");
+                            log.error("\n\n\n IDs de Transaccions:");
+                            for (Long ids : infos.keySet()) {
+                                log.info("     => " + ids);
+                            }
+                        } else {
+                            if (fei.firstPageEmpty) {
+                                transaccioForm.addAdditionalButton(new AdditionalButton(
+                                        "icon-trash icon-white", "esborrarprimerapagina",
+                                        "javascript:eliminarPrimeraPagina();", "btn-warning"));
+                            }
                         }
                     }
-
                 }
 
                 rewriteTileForm = "transaccionsmassives_public";
