@@ -107,7 +107,7 @@ public abstract class AbstractAuditoriaAdminController extends AuditoriaControll
      }
 
      auditoriaForm.addAdditionalButton(new AdditionalButton(
-         " icon-info-sign icon-white", "auditoria.veuretransaccio",
+         "icon-info-sign icon-white", "auditoria.veuretransaccio",
          baseUrl +auditoria.getTransaccioId() , "btn-info"));
    }
 

@@ -40,6 +40,7 @@ import com.google.common.io.Files;
 
 import es.caib.digitalib.back.controller.all.FirmaArxiuParametersPublicController;
 import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
+import es.caib.digitalib.back.controller.scanwebsimple.apimassivescanwebsimple.v1.SplitInfo;
 import es.caib.digitalib.back.controller.scanwebsimple.apimassivescanwebsimple.v1.SplitPdf;
 import es.caib.digitalib.back.controller.user.ScanWebProcessControllerUser;
 import es.caib.digitalib.back.utils.Utils;
@@ -90,6 +91,10 @@ public abstract class AbstractScanWebProcessController {
     public static final String SESSION_URL_TO_SELECT_SCANWEB_MODULE = "SESSION_URL_TO_SELECT_SCANWEB_MODULE";
 
     public static final String SESSION_MASIVE_POINTER_POST_SCAN = "SESSION_MASIVE_POINTER_POST_SCAN";
+    
+    public static final String SESSION_MASSIVE_INFO_BY_ID = "SESSION_MASSIVE_INFO_BY_ID";
+    
+    
 
     protected final Logger log = Logger.getLogger(this.getClass());
 
@@ -296,6 +301,8 @@ public abstract class AbstractScanWebProcessController {
                             for (FitxerEscanejatInfo info : infos.values()) {
                                 transaccioLogicaEjb.update(info.transaccio);
                             }
+                            
+                            request.getSession().setAttribute(SESSION_MASSIVE_INFO_BY_ID, infos);
 
                             final String massiveInfo;
                             if (isComplete) {
@@ -691,20 +698,23 @@ public abstract class AbstractScanWebProcessController {
      */
     public static class FitxerEscanejatInfo {
 
-        protected final TransaccioJPA transaccio;
+        final TransaccioJPA transaccio;
 
-        protected final Fitxer fitxer;
+        final Fitxer fitxer;
 
-        protected final File dataFile;
+        final File dataFile;
 
-        protected final byte[] dataByteArray;
+        final byte[] dataByteArray;
+        
+        public final boolean firstPageEmpty;
 
-        public FitxerEscanejatInfo(TransaccioJPA transaccio, Fitxer fitxer, File dataFile) {
+        public FitxerEscanejatInfo(TransaccioJPA transaccio, Fitxer fitxer, File dataFile, boolean firstPageEmpty) {
             super();
             this.transaccio = transaccio;
             this.fitxer = fitxer;
             this.dataFile = dataFile;
             this.dataByteArray = null;
+            this.firstPageEmpty = firstPageEmpty;
         }
 
         public FitxerEscanejatInfo(TransaccioJPA transaccio, Fitxer fitxer,
@@ -714,6 +724,7 @@ public abstract class AbstractScanWebProcessController {
             this.fitxer = fitxer;
             this.dataFile = null;
             this.dataByteArray = dataByteArray;
+            this.firstPageEmpty = false;
         }
 
     }
@@ -787,7 +798,7 @@ public abstract class AbstractScanWebProcessController {
             // Split del document !!!!!
             File destDir = new File(FileSystemManager.getFilesPath(), "MASSIVE_TRANSACCTIONS");
             destDir.mkdirs();
-            File[] fitxers;
+            SplitInfo[] fitxers;
             try {
                 fitxers = SplitPdf.detectPagesWithQR(destDir, data,
                         // transaccioOriginal.getTransaccioID() + "_" +
@@ -813,9 +824,9 @@ public abstract class AbstractScanWebProcessController {
                 List<Integer> subDocsQueSuperenTamanyMaxim = new ArrayList<Integer>();
                 long lastLength = 0;
                 for (int i = 0; i < fitxers.length; i++) {
-                    if (fitxers[i].length() > maxBytes) {
+                    if (fitxers[i].file.length() > maxBytes) {
                         subDocsQueSuperenTamanyMaxim.add(i + 1);
-                        lastLength = fitxers[i].length();
+                        lastLength = fitxers[i].file.length();
                     }
                 }
 
@@ -857,7 +868,7 @@ public abstract class AbstractScanWebProcessController {
 
             for (int i = 0; i < fitxers.length; i++) {
 
-                File file = fitxers[i];
+                File file = fitxers[i].file;
 
                 log.info("\n\n =======  FITXER [" + i + "] => exists = " + file.exists()
                         + " ============== \n");
@@ -869,9 +880,9 @@ public abstract class AbstractScanWebProcessController {
                     {
 
                         FitxerJPA fitxer = new FitxerJPA("", "application/pdf",
-                                /* transaccioOriginal.getTransactionWebId() + "_" + */ fitxers[i]
+                                /* transaccioOriginal.getTransactionWebId() + "_" + */ fitxers[i].file
                                         .getName(),
-                                fitxers[i].length());
+                                fitxers[i].file.length());
                         fitxer = (FitxerJPA) fitxerLogicaEjb.create(fitxer);
 
                         final long fileID = fitxer.getFitxerID();
@@ -891,7 +902,7 @@ public abstract class AbstractScanWebProcessController {
                         transaccioOriginal.setFitxerEscanejat(fitxer);
 
                         FitxerEscanejatInfo fei = new FitxerEscanejatInfo(transaccioOriginal,
-                                fitxer, FileSystemManager.getFile(fitxer.getFitxerID()));
+                                fitxer, FileSystemManager.getFile(fitxer.getFitxerID()), fitxers[i].firstPageEmpty);
 
                         allFiles.put(transaccioOriginal.getTransaccioID(), fei);
 
@@ -940,15 +951,14 @@ public abstract class AbstractScanWebProcessController {
                         transaccio.setPerfil(transaccioOriginal.getPerfil());
 
                         FitxerEscanejatInfo fei = new FitxerEscanejatInfo(transaccio, fitxer,
-                                FileSystemManager.getFile(fileID));
+                                FileSystemManager.getFile(fileID), fitxers[i].firstPageEmpty);
 
                         allFiles.put(transaccio.getTransaccioID(), fei);
                     }
 
                 }
 
-            }
-            ; // Final for
+            } // Final for
 
         }
 
@@ -1231,6 +1241,8 @@ public abstract class AbstractScanWebProcessController {
             if (next >= transaccions.size()) {
 
                 log.info(" XYZ ZZZ  demanarInformacioPeticioMassivaGet:: DARRERA ENTRADA ");
+                
+                request.getSession().removeAttribute(SESSION_MASSIVE_INFO_BY_ID);
 
                 // ANAR A WAIT DE MASSIVE
                 String waitUrl = getContextWeb() + SCANWEB_CONTEXTPATH_WAIT_MASSIVE + "/"
@@ -1238,6 +1250,9 @@ public abstract class AbstractScanWebProcessController {
                 ModelAndView mav = new ModelAndView(new RedirectView(waitUrl, true));
                 return mav;
             }
+            
+            
+            
             pos = next;
         }
 
@@ -1251,10 +1266,6 @@ public abstract class AbstractScanWebProcessController {
             log.info(" XYZ ZZZ   Redireccionam a " + redirect);
 
             ModelAndView mav = new ModelAndView(new RedirectView(redirect, true));
-
-            // TODO XYZ ZZZ Això necessita un altre vista si suportessim AUTENTICAT
-            // mav = new ModelAndView("transaccionsmassives_public");
-            // mav.addObject("transaccions", transaccions);
 
             return mav;
 

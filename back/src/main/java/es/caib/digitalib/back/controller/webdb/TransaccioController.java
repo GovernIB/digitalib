@@ -637,6 +637,9 @@ public class TransaccioController
   public String editarTransaccioPost(@ModelAttribute @Valid TransaccioForm transaccioForm,
       BindingResult result, SessionStatus status, HttpServletRequest request,
       HttpServletResponse response) throws I18NException {
+      
+      // XYZ ZZZ ZZZ
+      log.info(" XYZ ZZZ editarTransaccioPost WEBDB !!!!");
 
     if(!isActiveFormEdit()) {
       response.setStatus(HttpServletResponse.SC_NOT_FOUND);
