@@ -117,6 +117,9 @@ public class FirmaArxiuParametersPublicController
                 transaccioForm.setTitleParam(String.valueOf(pos + 1));
 
                 transaccioForm.setCancelButtonVisible(false);
+                
+                mav.addObject("thumbnailPDF", getContextWeb() + THUMBNAIL_PDF_MASSIVE + "/"
+                                    + transaccioForm.getTransaccio().getTransactionWebId());
 
                 transaccioForm.setAttachedAdditionalJspCode(true);
 

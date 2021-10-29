@@ -32,13 +32,20 @@
           <%-- XYZ ZZZ  Traduir 
           <font size="2" color="red"> Please wait for the image to load
             completely... </font>--%>
-            
             <img  src="<c:url value="/img/spinner_40.gif"/>" />
             
         </div>
         <%--  <c:url value="${thumbnailPDF}"/> XYZ ZZZ --%>
-        <img style="height: 300px;border: 1px solid #000; padding: 2px;" src="<%=request.getContextPath()%>${contexte}<%=FirmaArxiuParametersPublicController.THUMBNAIL_PDF_MASSIVE%>/${transaccioForm.transaccio.transactionWebId}"
+        <c:if test="${empty thumbnailPDF}" >
+          <img style="height: 300px;border: 1px solid #000; padding: 2px;" src="<%=request.getContextPath()%>${contexte}<%=FirmaArxiuParametersPublicController.THUMBNAIL_PDF_MASSIVE%>/${transaccioForm.transaccio.transactionWebId}"
           alt="Thumbnail PDF" onload="imageLoaded();" />
+        </c:if>
+        
+        <c:if test="${not empty thumbnailPDF}" >
+          <img style="height: 300px;border: 1px solid #000; padding: 2px;" src="<c:url value="${thumbnailPDF}"/>" alt="Thumbnail PDF" onload="imageLoaded();" />
+        </c:if>
+        
+          
         <script type="text/javascript">
             function imageLoaded() {
               var element = document.getElementById('waitMessage');
