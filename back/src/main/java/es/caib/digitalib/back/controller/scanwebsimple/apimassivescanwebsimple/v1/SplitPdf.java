@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
 import org.apache.pdfbox.multipdf.Splitter;
@@ -28,6 +29,8 @@ import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 
 /**
@@ -45,9 +48,10 @@ public class SplitPdf {
             String baseName, Integer resolucio) throws Exception {
 
         final PDDocument document = PDDocument.load(pdfToSplit);
+        
         final InputStream originalFileIS = new FileInputStream(pdfToSplit);
         try {
-            return detectPagesWithQR(destDir, document, baseName, originalFileIS, resolucio);
+            return detectPagesWithQR(destDir, document, baseName, originalFileIS, resolucio, null);
         } finally {
             try {
                 originalFileIS.close();
@@ -61,45 +65,107 @@ public class SplitPdf {
 
     public static final SplitInfo[] detectPagesWithQR(File destDir, final byte[] pdfToSplit,
             String baseName, Integer resolucio) throws Exception {
+
+        return detectPagesWithQR(destDir, pdfToSplit, baseName, resolucio, null);
+    }
+
+    public static final SplitInfo[] detectPagesWithQR(File destDir, final byte[] pdfToSplit,
+            String baseName, Integer resolucio, File debugDir) throws Exception {
         final PDDocument document = PDDocument.load(pdfToSplit);
         final InputStream originalFileIS = new ByteArrayInputStream(pdfToSplit);
         try {
-            return detectPagesWithQR(destDir, document, baseName, originalFileIS, resolucio);
+            return detectPagesWithQR(destDir, document, baseName, originalFileIS, resolucio,
+                    debugDir);
         } finally {
             document.close();
         }
     }
 
-    protected static final SplitInfo[] detectPagesWithQR(File destDir, final PDDocument document,
-            String baseName, InputStream originalFileIS, Integer resolucio) throws Exception {
+    protected static final SplitInfo[] detectPagesWithQR(File destDir,
+            final PDDocument document, String baseName, InputStream originalFileIS,
+            Integer resolucio, File debugDir) throws Exception {
 
         final List<Integer> qrPages = new ArrayList<Integer>();
         final List<Integer> possibleEmptyPage = new ArrayList<Integer>();
- 
+
         ArrayList<PDRectangle> crops = new ArrayList<PDRectangle>();
 
         log.info("XYZ ZZZ ZZZZZ\n\n detectPagesWithQR:: ENTRAM => resolucio: " + resolucio);
 
-        PDRectangle rectangle = new PDRectangle();
+        
         // XYZ ZZZ ZZZ
         // Incrementar si la zona del QR no s'ajusta exactament a l aposició impresa del QR.
-        final int margin = 25;
-        final int x = 140 - margin;
-        final int y = 365 - margin;
-        final int side = 310 + 2 * margin;
+        final int margin = 26;
+        final int lado = 364;
+        final int Xqr = 108;
+        final int Yqr = 146;
 
-        rectangle.setLowerLeftX(x);
-        rectangle.setLowerLeftY(y);
-        rectangle.setUpperRightX(x + side);
-        rectangle.setUpperRightY(y + side);
+        /*
+        PDRectangle rectangleCropA4 = new PDRectangle();
+        {
+            final int x = Xqr - margin;
+            final int y = pageHeight Yqr - margin;
+            final int side = 310 + 2 * margin;
+            rectangleCropA4.setLowerLeftX(x);
+            rectangleCropA4.setLowerLeftY(y);
+            rectangleCropA4.setUpperRightX(x + side);
+            rectangleCropA4.setUpperRightY(y + side);
+        }
+       
+        
+        /*
+        PDRectangle rectangleCropLetter= new PDRectangle();
+        {
+            final int x = 145 - margin;
+            final int y = lado + 180 - margin;
+            final int side = 310 + 2 * margin;
+            rectangleCropLetter.setLowerLeftX(x);
+            rectangleCropLetter.setLowerLeftY(y);
+            rectangleCropLetter.setUpperRightX(x + side);
+            rectangleCropLetter.setUpperRightY(y + side);
+
+        }
+        */
+        
+        log.info(" XYZ ZZZ   SIZE A4 => " + PDRectangle.A4);
+        log.info(" XYZ ZZZ   SIZE LEGAL => " + PDRectangle.LEGAL);
+        log.info(" XYZ ZZZ   SIZE LETTER => " + PDRectangle.LETTER);
+        
+        
+        //Map<Integer,PDRectangle> dimByPage = new HashMap<Integer, PDRectangle>();
 
         for (int page = 1; page <= document.getNumberOfPages(); page++) {
 
             PDPage page2 = document.getPage(page - 1);
-
+            
             crops.add(page2.getCropBox());
+            
+            PDRectangle dim = page2.getMediaBox();
+            
+            PDRectangle rectangleCropA4 = new PDRectangle();
+            {
+                final int x = Xqr - margin;
+                final int y = (int)(dim.getHeight() -  Yqr - lado - margin);
+                final int side = lado + 2 * margin;
+                rectangleCropA4.setLowerLeftX(x);
+                rectangleCropA4.setLowerLeftY(y);
+                rectangleCropA4.setUpperRightX(x + side);
+                rectangleCropA4.setUpperRightY(y + side);
+            }
+            
+            page2.setCropBox(rectangleCropA4);
 
-            page2.setCropBox(rectangle);
+            /*
+            if (dim.equals(PDRectangle.A4)) {
+                log.warn(" XYZ ZZZ  A4");
+              page2.setCropBox(rectangleCropA4);
+            } else if (dim.equals(PDRectangle.LETTER)) {
+                log.warn(" XYZ ZZZ  LETTER");
+                page2.setCropBox(rectangleCropLetter);
+            } else {
+                log.warn("Els separadors estan optimitzats per escaneig de pàgines A4 i Letter. S'ha escanejat amb tamany " + dim.toString());
+            }
+            */
         }
 
         float scale;
@@ -112,28 +178,36 @@ public class SplitPdf {
         }
 
         PDFRenderer pdfRenderer = new PDFRenderer(document);
-        
+
         boolean lastPageWasSeparator = false;
 
         for (int page = 1; page <= document.getNumberOfPages(); page++) {
 
             BufferedImage bim = pdfRenderer.renderImage(page - 1, scale, ImageType.BINARY);
-            
-            
+
             if (lastPageWasSeparator) {
                 boolean isEmpty = isBlank(bim);
                 if (isEmpty) {
-                  possibleEmptyPage.add(page);
+                    possibleEmptyPage.add(page);
                 }
             }
-            
 
             boolean isSeparador = false;
-            
+
             try {
                 // ZXING - > Read Data from QR Code
                 LuminanceSource source = new BufferedImageLuminanceSource(bim);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+
+                if (debugDir != null) {
+                    BitMatrix blackMatrix = bitmap.getBlackMatrix();
+                    BufferedImage image = MatrixToImageWriter.toBufferedImage(blackMatrix);
+
+                    File outputfile = new File(debugDir, baseName + "_" + page + ".jpg");
+
+                    ImageIO.write(image, "jpg", outputfile);
+                }
+
                 log.info("XYZ ZZZ ZZZZZ detectPagesWithQR:: PROCESSANT PAGINA => " + page);
                 Result result = new MultiFormatReader().decode(bitmap);
 
@@ -149,7 +223,7 @@ public class SplitPdf {
             } catch (com.google.zxing.NotFoundException nfe) {
                 log.info("   XYZ ZZZ ZZZZZ detectPagesWithQR:: NO TROBAT");
             }
-            
+
             if (isSeparador) {
                 lastPageWasSeparator = true;
             } else {
@@ -181,8 +255,7 @@ public class SplitPdf {
      */
     protected static List<SplitInfo> extractPagesFromPDF(File destDir, PDDocument pdfDoc,
             final List<Integer> qrPages, String baseName, InputStream originalFileIS,
-            final List<Integer> possibleEmptyPage)
-            throws Exception {
+            final List<Integer> possibleEmptyPage) throws Exception {
 
         // PDDocument pdfDoc = PDDocument.load(pdfToSplit);
 
@@ -214,13 +287,13 @@ public class SplitPdf {
 
                     final int fromPage = start;
                     final int toPage = qrPages.get(index) - 1;
-                    
+
                     // Ignorar dos separadors seguits
                     if (toPage >= fromPage) {
 
                         final String name = baseName + "_" + count + "_#" + qrPages.size()
                                 + ".pdf";
-    
+
                         File f = new File(destDir, name);
                         splitPdfpages(pdfDoc, f, fromPage, toPage);
                         listFiles.add(new SplitInfo(f, possibleEmptyPage.contains(fromPage)));
@@ -261,14 +334,13 @@ public class SplitPdf {
         PDDocument pdfDocPartial = lst.get(0);
 
         pdfDocPartial.save(destFile);
-        
+
         pdfDocPartial.close();
     }
-    
-    
+
     public static boolean isBlank(Image img) throws Exception {
         long start = System.currentTimeMillis();
-        //Image img = ImageIO.read(imageFile);
+        // Image img = ImageIO.read(imageFile);
         int w = img.getWidth(null);
         int h = img.getHeight(null);
         int[] pixels = new int[w * h];
@@ -284,50 +356,42 @@ public class SplitPdf {
         for (int pixel : pixels) {
             Color color = new Color(pixel);
             // color.getAlpha() == 0 ||
-            
+
             boolean isWhite;
-            
-            //isWhite = (color.getRGB() == Color.WHITE.getRGB());
-            {   
-                int gray = (int)(color.getRed() * 0.299f +  color.getGreen() * 0.587f + color.getBlue() * 0.114f);
-                
+
+            // isWhite = (color.getRGB() == Color.WHITE.getRGB());
+            {
+                int gray = (int) (color.getRed() * 0.299f + color.getGreen() * 0.587f
+                        + color.getBlue() * 0.114f);
+
                 final int UMBRAL = 240;
-                
-                isWhite = ( gray > UMBRAL);
+
+                isWhite = (gray > UMBRAL);
             }
-            
-            
-            
-            
+
             if (isWhite) {
                 countWhite++;
             } else {
                 countNoWhite++;
             }
-            
-            
-            
+
         }
 
-   
         // XYZ ZZZ
 
         System.out.println(" - Time Blank => " + (System.currentTimeMillis() - start) + "ms");
 
         System.out.println(" - Count White: " + countWhite);
         System.out.println(" - Count No White: " + countNoWhite);
-        final  DecimalFormat df = new DecimalFormat("###.##");
-        
+        final DecimalFormat df = new DecimalFormat("###.##");
+
         double percent = countWhite * 100.0 / countTotal;
-        
-        System.out.println(
-                " - Percent White: " + df.format(percent) + "%");
+
+        System.out.println(" - Percent White: " + df.format(percent) + "%");
 
         return percent > 99.0;
     }
 
-    
-    
     public static void removeFirstPage(File fileOrig, File fileDest) throws Exception {
         PDDocument document = PDDocument.load(fileOrig);
 

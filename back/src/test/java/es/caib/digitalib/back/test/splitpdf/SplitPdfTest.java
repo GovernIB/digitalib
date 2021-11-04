@@ -22,13 +22,24 @@ public class SplitPdfTest extends TestCase {
         final String resName;
         final int[] expectedPagesByDoc;
         final Integer resolucio;
+        final int numberOfDocs;
 
         public TestItem(String resName, Integer resolucio, int[] expectedPagesByDoc) {
             super();
             this.resName = resName;
             this.resolucio = resolucio;
             this.expectedPagesByDoc = expectedPagesByDoc;
+            this.numberOfDocs = expectedPagesByDoc.length;
         }
+        
+        public TestItem(String resName, Integer resolucio, int[] expectedPagesByDoc, int numberOfDocs) {
+            super();
+            this.resName = resName;
+            this.resolucio = resolucio;
+            this.expectedPagesByDoc = expectedPagesByDoc;
+            this.numberOfDocs = numberOfDocs;
+        }
+
 
     }
 
@@ -64,10 +75,13 @@ public class SplitPdfTest extends TestCase {
 
         final TestItem[] tests = {
 
+                
                 new TestItem("Separador_test_4.pdf", 300, new int[] { 3, 2, 1 }), // OK
+
 
                 new TestItem("Test_Color_300dpi_No-Separator-in-1.PDF", 300,
                         new int[] { 3, 2, 1 }), // OK
+                        
 
                 new TestItem("Test_Color_300dpi_Separator-in-1.PDF", 300,
                         new int[] { 3, 2, 1 }),
@@ -80,13 +94,22 @@ public class SplitPdfTest extends TestCase {
 
 
                 new TestItem("300ppp_BN_Separador_Doble_Cara_i_Una_Cara.pdf", 200,
-                        new int[] { 5, 6, 9 }),
+                        new int[] { 5, 6, 9}),
 
                 new TestItem("300ppp_BN_Separador_Doble_Cara_Darrera_pagina.pdf", 200,
-                        new int[] { 5 })
+                        new int[] { 5 }),
+               
+                /*
+                new TestItem("TEST_LEGAL_SIZE_1.pdf", 200, new int[] { 3,4,7,8 }, 3),
                 
+                new TestItem("TEST_LEGAL_SIZE_2.pdf", 200, new int[] { 3,4,7,8 }, 3),
                 
-                // new TestItem("NO_FUNCIONA_Test_Gray_75dpi_Separator-in-1.PDF", 75, new int[] { 5, 8 }),
+                new TestItem("TEST_LEGAL_SIZE_3.pdf", 200, new int[] { 3,4,7,8 }, 3),
+                */
+                
+                //new TestItem("escala_grisos_nofunciona_separador.pdf", 200, new int[] { 4 }, 2),
+                
+               // new TestItem("NO_FUNCIONA_Test_Gray_75dpi_Separator-in-1.PDF", 75, new int[] { 5, 8 })
 
         };
 
@@ -106,9 +129,14 @@ public class SplitPdfTest extends TestCase {
             byte[] data = FileUtils.toByteArray(is);
 
             long start = System.currentTimeMillis();
+            
+            File debugDir = null;
+            debugDir = new File(destDir, "bitmaps");
+            debugDir.mkdirs();
+            
 
             SplitInfo[] filesSplitted = SplitPdf.detectPagesWithQR(destDir, data, baseName,
-                    testItem.resolucio);
+                    testItem.resolucio, debugDir);
             
            
 
@@ -118,13 +146,13 @@ public class SplitPdfTest extends TestCase {
 
             System.out.println("    - Temps: " + totalMs + " ms");
 
-            if (testItem.expectedPagesByDoc.length != filesSplitted.length) {
+            if (testItem.numberOfDocs != filesSplitted.length) {
                 System.err.println("    - Test ERROR [" + i + "] => Expected ("
-                        + testItem.expectedPagesByDoc.length + ")  || Splitted ("
+                        + testItem.numberOfDocs + ")  || Splitted ("
                         + filesSplitted.length + ")");
             } else {
                 System.out.println("    - Test OK [" + i + "] => Expected ("
-                        + testItem.expectedPagesByDoc.length + ")  || Splitted ("
+                        + testItem.numberOfDocs + ")  || Splitted ("
                         + filesSplitted.length + ")");
 
                 int totalPages = 0;
@@ -149,7 +177,7 @@ public class SplitPdfTest extends TestCase {
 
             }
 
-            assertEquals(testItem.expectedPagesByDoc.length, filesSplitted.length);
+            assertEquals(testItem.numberOfDocs, filesSplitted.length);
 
         }
         return mitjaPerPagina;
