@@ -3,8 +3,8 @@
  
  ***Versions***
 
-> - Versió Estable: __digitalib-1.0.4-caib__ (branca [digitalib-1.0](../../tree/digitalib-1.0))
-> - Versió en Desenvolupament: __digitalib-1.0.5-caib__ (branca [digitalib-1.0](../../tree/digitalib-1.0))
+> - Versió Estable: __digitalib-1.0.7-caib__ (branca [digitalib-1.0](../../tree/digitalib-1.0))
+> - Versió en Desenvolupament: __digitalib-1.0.8-caib__ (branca [digitalib-1.0](../../tree/digitalib-1.0))
 
 
 ***Descripció***
