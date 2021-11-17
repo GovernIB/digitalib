@@ -317,6 +317,10 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/infoSignaturaForm.jsp" />
     </definition>
     
+    <definition name="infoCustodyListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/infoCustodyList.jsp" />
+    </definition>
+    
     
     <definition name="auditoriaFormAdmin" extends="admin">
         <put-attribute name="titol" value="auditoria.auditoria" />

@@ -1,4 +1,6 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java"%><%@ include
+﻿<%@page
+  import="es.caib.digitalib.back.controller.admin.InfoCustodyExpedientNoTancatAdminController"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%><%@ include
   file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <c:set var="url" value="${urlActual}" />
 
@@ -36,7 +38,7 @@
             key="firmaenservidorplugin.menu" /></span>
 
     </a></li>
-    
+
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/pluginsegelltemps/list"/>"> <span
         style="${(fn:contains(url, 'pluginsegelltemps/'))? "font-weight:bold;" : ""}"><fmt:message
@@ -49,7 +51,7 @@
         style="${(fn:contains(url, '/admin/conffirma/'))? "font-weight:bold;" : ""}"><fmt:message
             key="configuracioFirma.configuracioFirma" /></span>
     </a></li>
-    
+
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 
@@ -70,6 +72,22 @@
 
     </a></li>
 
+
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/admin/infoCustodyNoTancat/list"/>"> <span
+        style="${(fn:contains(url, 'infoCustodyNoTancat/'))? "font-weight:bold;" : ""}"><fmt:message
+            key="expedientsnotancats" />
+            <%
+           Long countNoTancats = (Long) request.getAttribute("adminwarning");
+           if (countNoTancats != null && countNoTancats != 0) {   %>
+           &nbsp; <span class="label label-important"><%=countNoTancats%></span> 
+        <%  } %>
+            
+            </span>
+    </a></li>
+
+    <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/plugindoccustody/list"/>"> <span
         style="${(fn:contains(url, 'plugindoccustody/'))? "font-weight:bold;" : ""}"><fmt:message
@@ -79,7 +97,7 @@
 
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
-      <li style="list-style-type: disc; list-style-position: inside;"><a
+    <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/plugincridada/list"/>"> <span
         style="${(fn:contains(url, '/admin/plugincridada'))? "font-weight:bold;" : ""}"><fmt:message
             key="monitor.integracions" /></span>
@@ -98,7 +116,6 @@
             key="avis.avis.plural" /></span>
 
     </a></li>
-
 </div>
 </div>
 <div class="thumbnail" style="margin-top: 20px;">
@@ -132,14 +149,14 @@
               key="transaccio.gestio.persona" /></span>
 
       </a></li>
-      
-      
-       <li style="list-style-type: disc; list-style-position: inside;"><a
+
+
+      <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/auditoria/persona/list"/>"> <span
           style="${(fn:contains(url, '/admin/auditoria/persona/'))? "font-weight:bold;" : ""}"><fmt:message
               key="auditoria.auditoria" /></span>
       </a></li>
-      
+
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/transaccioestadisticapersona/list"/>"> <span
           style="${(fn:contains(url, '/transaccioestadisticapersona/'))? "font-weight:bold;" : ""}"><fmt:message
@@ -147,7 +164,7 @@
 
       </a></li>
 
-     <hr style="margin-top: 6px; margin-bottom: 6px;" />
+      <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/perfilnomesescaneig/perpersona/list"/>"> <span
@@ -191,7 +208,7 @@
       </a></li>
 
       <hr style="margin-top: 6px; margin-bottom: 6px;" />
-      
+
 
 
       <li style="list-style-type: disc; list-style-position: inside;"><a
@@ -200,14 +217,14 @@
               key="transaccio.gestio.aplicacio" /></span>
 
       </a></li>
-      
+
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/auditoria/aplicacio/list"/>"> <span
           style="${(fn:contains(url, '/admin/auditoria/aplicacio/'))? "font-weight:bold;" : ""}"><fmt:message
               key="auditoria.auditoria" /></span>
       </a></li>
-      
-      
+
+
       <li style="list-style-type: disc; list-style-position: inside;"><a
         href="<c:url value="/admin/transaccioestadisticaaplicacio/list"/>"> <span
           style="${(fn:contains(url, '/transaccioestadisticaaplicacio/'))? "font-weight:bold;" : ""}"><fmt:message

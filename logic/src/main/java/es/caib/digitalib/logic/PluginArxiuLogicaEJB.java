@@ -1,5 +1,6 @@
 package es.caib.digitalib.logic;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -20,6 +21,7 @@ import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.plugins.signature.api.FileInfoSignature;
 import org.fundaciobit.pluginsib.core.utils.Metadata;
+import org.hibernate.Hibernate;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import es.caib.digitalib.jpa.FitxerJPA;
@@ -32,6 +34,7 @@ import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
 import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.model.entity.Plugin;
+import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.utils.Constants;
 import es.caib.plugins.arxiu.api.ArxiuException;
@@ -68,6 +71,9 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
     @EJB(mappedName = CridadaPluginLogicaLocal.JNDI_NAME)
     protected CridadaPluginLogicaLocal pluginCridada;
 
+    @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
+    protected TransaccioLogicaLocal transaccioLogicaEjb;
+
     @Override
     public int getTipusDePlugin() {
         return Constants.TIPUS_PLUGIN_ARXIU;
@@ -78,6 +84,45 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
         return "Arxiu";
     }
 
+    @Override
+    public void tancarExpedient(Long infoCustodyID, String expedientID, Locale locale)
+            throws I18NException {
+
+        List<Transaccio> transaccions;
+        try {
+            transaccions = transaccioLogicaEjb
+                    .select(TransaccioFields.INFOCUSTODYID.equal(infoCustodyID));
+
+        } catch (Throwable e) {
+            String msg = "Error cercant la transacció associada a la InfoCustody amb ID "
+                    + infoCustodyID + ": " + e.getMessage();
+            log.error(msg, e);
+            // XYZ ZZZ TRA
+            throw new I18NException("genapp.comodi", msg);
+        }
+
+        if (transaccions == null || transaccions.size() == 0) {
+            // XYZ ZZZ TRA
+            throw new I18NException("genapp.comodi",
+                    "InfoCustody amb ID " + infoCustodyID + " no es troba en cap transacció.");
+        }
+
+        TransaccioJPA transaccio = (TransaccioJPA) transaccions.get(0);
+
+        Hibernate.initialize(transaccio.getPerfil());
+
+        PerfilJPA perfil = transaccio.getPerfil();
+
+        log.info(" XYZ ZZZ tancarExpedient:: PERFIL = "
+                + ((perfil == null) ? " null!!!!" : "OK"));
+        log.info(" XYZ ZZZ tancarExpedient:: PERFIL.getPluginArxiuID = "
+                + perfil.getPluginArxiuID());
+
+        IArxiuPlugin plugin = getInstanceByPluginID(perfil.getPluginArxiuID());
+
+        plugin.expedientTancar(expedientID);
+
+    }
 
     @Override
     public InfoCustodyJPA custodiaAmbApiArxiu(TransaccioJPA transaccio, Fitxer fitxerFirmat,
@@ -276,8 +321,6 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
             documentMetadades.setFormat(documentFormat);
             documentMetadades.setExtensio(documentExtensio);
 
-            
-
             // ================== METADADES ==================
 
             // Si posam alguna cosa llavors peta [HTTP_500, COD_021] nodeId is not valid
@@ -412,8 +455,27 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
             log.info("XYZ ZZZ  Creat document ... ");
 
             log.info("XYZ ZZZ  Tancar Expedient ... ");
-            plugin.expedientTancar(expedientId);
-            log.info("XYZ ZZZ  Expedient Tancat... ");
+
+            // Només per DocumentCustody, s'utilitza també per gestionar quan l'expedient no
+            // s'ha pogut tancar.
+            java.lang.String custodyID;
+
+            try {
+                // if (true) {
+                // throw new Exception("Error desconegut tancant Expedient !!!!!");
+                // }
+
+                plugin.expedientTancar(expedientId);
+                log.info("XYZ ZZZ  Expedient Tancat... ");
+                custodyID = null;
+            } catch (Throwable th) {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+                        "yyyy-MM-dd HH:mm:ss");
+                log.error("Error tancant Expedient " + expedientId + ": " + th.getMessage(),
+                        th);
+                custodyID = KEY_ERROR + simpleDateFormat.format(new Date()) + " "
+                        + th.getMessage();
+            }
 
             String uuidDoc = documentCreat.getIdentificador();
 
@@ -426,14 +488,13 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
             java.lang.String originalFileUrl = plugin.getOriginalFileUrl(uuidDoc);
             String printableFileUrl = plugin.getPrintableFileUrl(uuidDoc);
             String eniFileUrl = plugin.getEniFileUrl(uuidDoc);
-            java.lang.String csv = plugin.getCsv(uuidDoc);
+
+            // java.lang.String csv = plugin.getCsv(uuidDoc);
+            java.lang.String csv = documentCreat.getDocumentMetadades().getCsv();
 
             java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(uuidDoc);
 
             java.lang.String validationFileUrl = plugin.getValidationFileUrl(uuidDoc);
-
-            // Només per DocumentCustody
-            java.lang.String custodyID = null;
 
             InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyID, expedientId, uuidDoc, csv,
                     originalFileUrl, csvValidationWeb, csvGenerationDefinition,
@@ -482,7 +543,6 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
         }
 
         perfil = perfil.trim();
-
 
         if (perfil.equals(FirmaSimpleSignedFileInfo.SIGNPROFILE_BES)) {
             return FirmaPerfil.BES;

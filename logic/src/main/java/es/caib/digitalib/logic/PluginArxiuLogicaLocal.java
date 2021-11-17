@@ -4,6 +4,8 @@ import java.util.Locale;
 
 import javax.ejb.Local;
 
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
 import es.caib.digitalib.jpa.InfoCustodyJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
 import es.caib.digitalib.model.entity.Fitxer;
@@ -18,6 +20,8 @@ import es.caib.plugins.arxiu.api.IArxiuPlugin;
 public interface PluginArxiuLogicaLocal extends AbstractPluginLogicaLocal<IArxiuPlugin> {
 
 
+    public static final String KEY_ERROR = "* ERROR: ";
+    
     public static final String JNDI_NAME = "digitalib/PluginArxiuLogicaEJB/local";
 
     /**
@@ -29,5 +33,15 @@ public interface PluginArxiuLogicaLocal extends AbstractPluginLogicaLocal<IArxiu
      */
     public InfoCustodyJPA custodiaAmbApiArxiu(TransaccioJPA transaccio, Fitxer fitxer,
             Locale locale);
+    
+    
+    /**
+     * 
+     * @param transaccio
+     * @param expedientID
+     * @param locale
+     * @throws I18NException
+     */
+    public void tancarExpedient(Long infoCustodyID, String expedientID, Locale locale) throws I18NException;
 
 }

@@ -60,7 +60,13 @@
     
     <sec:authorize access="hasRole('ROLE_ADMIN')">
     <li ${(pipella eq 'admin')?'class="active"' : '' }>
-       <a href="<c:url value="/canviarPipella/admin"/>"><fmt:message key="administrador.rol" /></a>
+       <a href="<c:url value="/canviarPipella/admin"/>"><fmt:message key="administrador.rol" />
+        <%
+           Long countNoTancats = (Long) request.getAttribute("adminwarning");
+           if (countNoTancats != null && countNoTancats != 0) {   %>
+            &nbsp;<span class="label label-important"><%=countNoTancats%></span> 
+        <%  } %> 
+       </a>
     </li>
     </sec:authorize>
 

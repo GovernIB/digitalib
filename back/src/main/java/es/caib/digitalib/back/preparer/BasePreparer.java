@@ -20,6 +20,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
 import es.caib.digitalib.back.security.LoginInfo;
+import es.caib.digitalib.model.fields.InfoCustodyFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.model.fields.TransaccioQueryPath;
 import es.caib.digitalib.utils.Configuracio;
@@ -33,13 +34,16 @@ import es.caib.digitalib.utils.Constants;
  */
 @RunAs("DIB_USER")
 @Component
-public class BasePreparer extends ViewPreparerSupport implements Constants {
+public class BasePreparer extends ViewPreparerSupport implements Constants, InfoCustodyFields {
   
 
   protected final Logger log = Logger.getLogger(getClass());
   
   @EJB(mappedName = es.caib.digitalib.ejb.TransaccioLocal.JNDI_NAME)
   protected es.caib.digitalib.ejb.TransaccioLocal transaccioEjb;
+  
+  @EJB(mappedName = es.caib.digitalib.ejb.InfoCustodyLocal.JNDI_NAME)
+  protected es.caib.digitalib.ejb.InfoCustodyLocal infoCustodyEjb;
 
   
 	@Override
@@ -134,6 +138,21 @@ public class BasePreparer extends ViewPreparerSupport implements Constants {
       
     }
     
+    // Mostrar Transaccions amb Expedient No Tancats
+    if (LoginInfo.hasRole(ROLE_ADMIN)) {
+        
+        try {
+            Long count = infoCustodyEjb.count(Where.AND(ARXIUDOCUMENTID.isNotNull(), ARXIUEXPEDIENTID.isNotNull(),
+                    CUSTODYID.isNotNull()));
+            if (count != null && count != 0) {
+              request.put("adminwarning", count);
+            }
+            
+        } catch (I18NException e) {
+            log.error("Error calculant Transaccions amb Expedient No Tancats" + I18NUtils.getMessage(e), e);
+        }
+        
+    }
     
 
     
