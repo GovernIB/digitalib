@@ -140,7 +140,7 @@
     <dependency>
       <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
       <artifactId>pluginsib-scanweb-dynamicwebtwain</artifactId>
-      <version>4.0.3</version>
+      <version>4.0.4</version>
     </dependency>
 
     <dependency>
