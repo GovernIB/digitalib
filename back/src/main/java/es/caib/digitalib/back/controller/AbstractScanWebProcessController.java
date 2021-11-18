@@ -618,7 +618,6 @@ public abstract class AbstractScanWebProcessController {
                 } else {
                     msg = th.getMessage();
                 }
-                
 
                 log.error(msg, th);
 
@@ -760,7 +759,7 @@ public abstract class AbstractScanWebProcessController {
 
             FitxerJPA fitxer;
 
-            // Comprobar limit de tamany
+            // Comprobar limit de mida
             if (maxBytes == null || maxBytes > data.length) {
 
                 fitxer = new FitxerJPA("", scannedFile.getMime(), scannedFile.getName(),
@@ -873,7 +872,7 @@ public abstract class AbstractScanWebProcessController {
                 log.info("\n\n =======  FITXER [" + i + "] => exists = " + file.exists()
                         + " ============== \n");
 
-                // Comprobar limit de tamany
+                // Comprobar limit de mida
                 if (i == 0) {
                     // El primer fitxer el posam dins la transaccio original
 
@@ -1051,9 +1050,9 @@ public abstract class AbstractScanWebProcessController {
 
         {
             final String additionalInfo;
-            String msg = I18NUtils.tradueix("scanwebprocess.scan.final") + tipusStr + ": ";
+            String msg = I18NUtils.tradueix("scanwebprocess.scan.final") + " " + tipusStr + ": ";
             if (infoCust == null) {
-                msg = msg + "ERROR";
+                msg = msg + "ERROR " + transaccio.getEstatMissatge();
                 additionalInfo = null;
             } else {
                 msg = msg + "OK";
@@ -1115,8 +1114,12 @@ public abstract class AbstractScanWebProcessController {
         }
 
         {
-            final String msg = "Final Procés de Firma: "
-                    + (fitxerSignat == null ? "ERROR" : "OK");
+            final String msg;
+            if (fitxerSignat == null) {
+                msg = "Final Procés de Firma: ERROR " + transaccio.getEstatMissatge(); 
+            } else {
+                msg = "Final Procés de Firma: OK";
+            }
             auditoriaLogicaEjb.audita(transaccio, isApp, msg, additionalInfo, auditType,
                     users[0], users[1]);
         }

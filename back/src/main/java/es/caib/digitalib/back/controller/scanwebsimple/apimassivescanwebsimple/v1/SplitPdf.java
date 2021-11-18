@@ -155,17 +155,6 @@ public class SplitPdf {
             
             page2.setCropBox(rectangleCropA4);
 
-            /*
-            if (dim.equals(PDRectangle.A4)) {
-                log.warn(" XYZ ZZZ  A4");
-              page2.setCropBox(rectangleCropA4);
-            } else if (dim.equals(PDRectangle.LETTER)) {
-                log.warn(" XYZ ZZZ  LETTER");
-                page2.setCropBox(rectangleCropLetter);
-            } else {
-                log.warn("Els separadors estan optimitzats per escaneig de pàgines A4 i Letter. S'ha escanejat amb tamany " + dim.toString());
-            }
-            */
         }
 
         float scale;

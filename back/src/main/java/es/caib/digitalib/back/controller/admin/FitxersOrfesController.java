@@ -113,26 +113,10 @@ public class FitxersOrfesController extends FitxerController {
 
         Map<Long, File> fitxersFisics = FileSystemManager.getAllFiles();
 
-        // File path = FileSystemManager.getFilesPath();
-        // List<String> fitxersFisics = new ArrayList<String>(Arrays.asList(path.list(new
-        // FilenameFilter() {
-        // /**
-        // * No volem directoris
-        // */
-        // @Override
-        // public boolean accept(File dir, String name) {
-        // return new File(dir, name).isFile();
-        // }
-        // })));
-
-        // fitxersFisics.remove(AutoFirmaController.AUTOFIRMA);
-
         List<Long> fitxersBBDD = fitxerEjb.executeQuery(FITXERID, null, new OrderBy(FITXERID));
 
         // Fitxers que existeixen en BBDD però no fisicament
         for (Long fID : fitxersBBDD) {
-            // File f = FileSystemManager.getFile(fID);
-            // fitxersFisics.contains(String.valueOf(fID))
             if (!fitxersFisics.containsKey(fID)) {
                 HtmlUtils.saveMessageError(request,
                         I18NUtils.tradueix("fitxersorfes.noexistex", String.valueOf(fID)));
@@ -140,7 +124,6 @@ public class FitxersOrfesController extends FitxerController {
         }
 
         // Fitxers que existeixen fisicament però no en BBDD
-
         for (Long fBDID : fitxersBBDD) {
 
             if (fitxersFisics.containsKey(fBDID)) {

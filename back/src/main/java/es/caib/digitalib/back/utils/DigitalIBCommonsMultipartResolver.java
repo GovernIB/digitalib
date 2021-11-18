@@ -44,14 +44,7 @@ public class DigitalIBCommonsMultipartResolver extends
     // d'aquí
     Long maxUploadSize;
     String msgCode;
-	/*
-    if (AutoFirmaController.CONTEXTWEB.equals(request.getServletPath())) {
-      // PUJADA DES D'AUTOFIRMA
-      // El màxim es tria per fitxer adaptat
-      maxUploadSize = getMaxFitxerAdaptatSize();
-      msgCode = "tamanyfitxeradaptatsuperat";
-    } else 
-	*/
+
 	{
       // Pujada d'un fitxer
       // Es fa una mescla entre el màxim global i màxim per entitat
@@ -83,52 +76,16 @@ public class DigitalIBCommonsMultipartResolver extends
     Long maxUploadSizeGlobal = Configuracio.getMaxUploadSizeInBytes();
     if (log.isDebugEnabled()) {
       if (maxUploadSizeGlobal == null) {
-        log.debug("No s'ha definit limit de tamany global en la pujada de Fitxers");
+        log.debug("No s'ha definit limit de grandaria global en la pujada de Fitxers");
       } else {
-        log.info("S'ha definit un tamany màxim de pujada global de Fitxers a "
+        log.info("S'ha definit una grandaria màxima de pujada global de Fitxers a "
             + maxUploadSizeGlobal + " bytes");
       }
     }
-/*
-    Long maxUploadSizeEntitat;
-    try {
-      maxUploadSizeEntitat = LoginInfo.getInstance().getEntitat().getMaxUploadSize();
-    } catch (Throwable th) {
-      maxUploadSizeEntitat = null;
-    }
 
-    Long maxUploadSize = PdfUtils.selectMin(maxUploadSizeGlobal, maxUploadSizeEntitat);
-*/
     Long maxUploadSize = maxUploadSizeGlobal;
     return maxUploadSize;
   }
 
   
-  /*
-  private Long getMaxFitxerAdaptatSize() {
-    Long maxFitxerAdaptatSizeGlobal = Configuracio.getMaxFitxerAdaptatSizeInBytes();
-    if (log.isDebugEnabled()) {
-      if (maxFitxerAdaptatSizeGlobal == null) {
-        log.info("No s'ha definit limit de tamany global en el fitxer adaptat");
-      } else {
-        log.info("S'ha definit un tamany màxim de Fitxer Adaptat a "
-            + maxFitxerAdaptatSizeGlobal + " bytes");
-      }
-    }
-
-    Long maxFitxerAdaptatSizeEntitat;
-    try {
-      maxFitxerAdaptatSizeEntitat = LoginInfo.getInstance().getEntitat()
-          .getMaxSizeFitxerAdaptat();
-    } catch (Throwable th) {
-      maxFitxerAdaptatSizeEntitat = null;
-    }
-
-    Long maxFitxerAdaptatSize = PdfUtils.selectMin(maxFitxerAdaptatSizeGlobal,
-        maxFitxerAdaptatSizeEntitat);
-
-    Long maxFitxerAdaptatSize = maxFitxerAdaptatSizeGlobal;
-    return maxFitxerAdaptatSize;
-  }
-*/
 }
