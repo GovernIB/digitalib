@@ -18,6 +18,7 @@ import org.apache.commons.lang.StringUtils;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.KeyValue;
 import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.GroupByItem;
@@ -607,8 +608,10 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         // XYZ ZZZ Verificar que es pot esborrar
         // (1) No te fitxer
         // (2) Esta en error i té més d'un dia
-        transaccioLogicaEjb.deleteFull(transaccio, true, null,
+        Set<Long> filesToDelete = transaccioLogicaEjb.deleteFull(transaccio, null,
                 LoginInfo.getInstance().getUsername());
+        
+        FileSystemManager.eliminarArxius(filesToDelete);
 
     }
 

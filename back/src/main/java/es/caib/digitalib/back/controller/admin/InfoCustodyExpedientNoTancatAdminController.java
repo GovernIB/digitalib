@@ -1,8 +1,6 @@
 package es.caib.digitalib.back.controller.admin;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 
 import javax.servlet.http.HttpServletRequest;

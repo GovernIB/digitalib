@@ -89,7 +89,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
   protected es.caib.digitalib.ejb.ConfiguracioGrupLocal configuracioGrupEjb;
 
   @Override
-  public Set<Long> deleteFull(Transaccio transaccio, boolean esborrarFitxers,
+  public Set<Long> deleteFull(Transaccio transaccio, 
       String usernameApp, String usernamePerson) throws I18NException {
 
     Set<Long> fitxers = new HashSet<Long>();
@@ -134,6 +134,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         infoSignaturaEjb.delete(is);
       }
     }
+    
 
     Long fe = transaccio.getFitxerEscanejatID();
     if (fe != null) {
@@ -145,18 +146,17 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     }
 
     // log.info("XYZ ZZZ FFF PRE esborrar fitxers ... " + esborrarFitxers);
-
-    if (count <= 1 && transMultiple != null) {
-      fitxers.addAll(deleteTransaccioMultipleFull(transMultiple, esborrarFitxers));
-    }
-
-    if (esborrarFitxers) {
+    {
       // log.info("XYZ ZZZ FFF Entra a esborrar fitxers " +
       // Arrays.toString(fitxers.toArray()));
       for (Long fid : fitxers) {
         fitxerEjb.delete(fid);
       }
-      fitxers.clear();
+      
+    }
+    
+    if (count <= 1 && transMultiple != null) {
+        fitxers.addAll(deleteTransaccioMultipleFull(transMultiple));
     }
 
     {
@@ -179,8 +179,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
    * @return
    * @throws I18NException
    */
-  public Set<Long> deleteTransaccioMultipleFull(Long transaccioMultipleID,
-      boolean esborrarFitxers) throws I18NException {
+  public Set<Long> deleteTransaccioMultipleFull(Long transaccioMultipleID) throws I18NException {
 
     Set<Long> fitxers = new HashSet<Long>();
     if (transaccioMultipleID == null) {
@@ -196,11 +195,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     }
 
     transaccioMultipleEjb.delete(tm);
-    if (esborrarFitxers) {
+    {
       for (Long fid : fitxers) {
         fitxerEjb.delete(fid);
-      }
-      fitxers.clear();
+      }      
     }
 
     return fitxers;

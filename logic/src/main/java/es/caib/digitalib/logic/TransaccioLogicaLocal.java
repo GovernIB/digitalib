@@ -28,10 +28,12 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
   /**
    * 
    * @param transaccio
+   * @param usernameApp
+   * @param usernamePerson
    * @return
    * @throws I18NException
    */
-  public Set<Long> deleteFull(Transaccio transaccio, boolean esborrarFitxers,
+  public Set<Long> deleteFull(Transaccio transaccio, 
       String usernameApp, String usernamePerson) throws I18NException;
 
   /**
