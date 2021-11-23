@@ -1,10 +1,10 @@
-<%@page import="es.caib.digitalib.utils.Constants"%>
-<%@ page language="java"%><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
+<%@page import="es.caib.digitalib.utils.Configuracio"
+%><%@page import="es.caib.digitalib.utils.Constants"
+%><%@ page language="java"%><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <br />
 <br />
 
 <div class="lead" style="margin-bottom: 10px; text-align: center;">
-
 
   <fmt:message key="plugindescan.seleccio.title2" />
   <br />
@@ -16,6 +16,7 @@
   <c:if test="${not empty configuracioGrup }">
   <div class="well" style="max-width: 400px; margin: 0 auto 10px;">
 
+ 
       <sec:authorize access="hasAnyRole('ROLE_SCAN')">
       <c:if test="${not empty configuracioGrup.perfilNomesEscaneigID }">
         <button type="button" class="btn btn-large btn-block btn-success"
@@ -109,9 +110,16 @@
 
 
   </div>
-  </c:if>
-
   <br />
+  <%   if(Configuracio.isAllowedMassiveScanInWeb())  { %>
+    <center>
+        <a href="<c:url value="/user/scan/separator"/>" target="_blank" class="btn btn-large btn-info" >
+           <b>Descarregar separador</b><br>
+           <small style="color:white;"><i>Necessari per separar diferents documents quan es fa un escaneig múltiple</i></small>
+        </a>
+    </center>
+  <%   } %>
+  </c:if>
 
 </div>
 

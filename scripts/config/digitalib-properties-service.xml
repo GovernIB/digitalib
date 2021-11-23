@@ -71,6 +71,14 @@
       <!-- d'un separador que només han imprès a una cara i s'ha fet un escaneig a doble cara. -->
 	  <!-- Per defecte val false -->
 	  es.caib.digitalib.showbuttontodeletefirstpage=false
+
+	  <!-- Si val true llavors permeten escanejos massius emprant Separadors des de web i -->
+      <!-- mostra un boto per descarregar el separador. En cas contrari, es permeten      -->
+      <!-- escanejos simples i s'ignoren els Separadors. -->
+      es.caib.digitalib.allowedmassivescaninweb=true
+	  
+	  
+	  
       
       <!-- ======== PLUGIN USER-INFORMATION - DATABASE ======= -->
       es.caib.digitalib.userinformationplugin=org.fundaciobit.plugins.userinformation.database.DataBaseUserInformationPlugin

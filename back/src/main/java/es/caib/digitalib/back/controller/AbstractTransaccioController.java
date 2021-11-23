@@ -28,7 +28,6 @@ import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -907,7 +906,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         
         
         
-        if (isAdmin) {
+        //if (isAdmin) 
+        {
             /*
              * // XYZ ZZZ Ocultar columnes de datafi, missatgeerror, fitxersignat // si tots
              * els valors de les columnes són NULL Map<Long, String> map; map = (Map<Long,
@@ -968,9 +968,11 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     @RequestMapping(value = AGRUPA_PER_TRANSACCIO_MULTIPLE
             + "/{transaccioMultipleID}", method = RequestMethod.GET)
     public ModelAndView agrupaPerTransaccioMultiple(HttpServletRequest request,
-            HttpServletResponse response, @ModelAttribute TransaccioFilterForm filterForm,
+            HttpServletResponse response,
             @PathVariable("transaccioMultipleID") java.lang.Long transaccioMultipleID)
-            throws IOException {
+            throws IOException, I18NException {
+        
+        TransaccioFilterForm filterForm = getTransaccioFilterForm(null, null, request);
 
         ArrayList<Field<?>> filterByFields = new ArrayList<Field<?>>();
         filterByFields.add(TRANSACCIOMULTIPLEID);

@@ -3,6 +3,7 @@ package es.caib.digitalib.back.controller.all;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import es.caib.digitalib.back.controller.AbstractScanWebModuleController;
 import es.caib.digitalib.back.controller.AbstractScanWebProcessController;
@@ -98,8 +100,6 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
 
     ModelAndView mav = startScanWebProcess(request, response, transaccio, isPublic, urlFinal, urlBase);
 
-
-
     return mav;
 
   }
@@ -108,5 +108,30 @@ public class ScanWebProcessControllerPublic extends AbstractScanWebProcessContro
   public boolean isPublic() {
     return true;
   }
+  
+  
+  @Override
+  protected ModelAndView returnToOrigen(HttpServletRequest request, TransaccioJPA transaccio) throws I18NException {
+      String urlRetorn = transaccio.getReturnUrl();
+      ModelAndView mav;
+      if (transaccio.getView() == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN) {
+          // Simple REDIRECCIO
+
+          log.info("SIMPLE REDIRECCIO = " + urlRetorn);
+
+          mav = new ModelAndView(new RedirectView(urlRetorn, false));
+
+      } else {
+          // Sortir de IFRAME
+
+          log.info("Sortir de IFRAME = " + urlRetorn);
+          mav = new ModelAndView("public_finalsortiriframe");
+                  //isPublic() ? "public_finalsortiriframe" : "finalsortiriframe");
+          mav.addObject("urlRetorn", urlRetorn);
+      }
+
+      return mav;
+  }
+
 
 }

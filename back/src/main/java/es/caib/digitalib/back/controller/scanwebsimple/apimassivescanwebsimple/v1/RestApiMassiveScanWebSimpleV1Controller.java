@@ -1,5 +1,6 @@
 package es.caib.digitalib.back.controller.scanwebsimple.apimassivescanwebsimple.v1;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -150,25 +151,33 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
     @Override
     public MassiveScanWebSimpleFile getSeparatorPage(String locale) throws Exception {
 
-        final String nom = "separador_escanig_massiu.pdf";
+        byte[] data = getSeparador();
 
-        // XYZ ZZZ Tenir aquest fitxer en memòria cache ??????
-
-        InputStream is = RestApiMassiveScanWebSimpleV1Controller.class.getClassLoader()
-                .getResourceAsStream(nom);
-
-        if (is == null) {
-            // XYZ ZZZ TRA
-            throw new Exception("No puc carregar el fitxer " + nom + " dels recursos.");
-        }
-        byte[] data = FileUtils.toByteArray(is);
-        is.close();
-
-        MassiveScanWebSimpleFile msf = new MassiveScanWebSimpleFile(nom, "application/pdf",
-                data);
+        MassiveScanWebSimpleFile msf = new MassiveScanWebSimpleFile(
+                SEPARADOR_ESCANEIG_MASSIU_NOM, Constants.MIME_PDF, data);
 
         return msf;
     }
+
+    public static final String SEPARADOR_ESCANEIG_MASSIU_NOM = "separador_escanig_massiu.pdf";
+
+    public static byte[] getSeparador() throws Exception, IOException {
+        // XYZ ZZZ Tenir aquest fitxer en memòria cache ??????
+
+        InputStream is = RestApiMassiveScanWebSimpleV1Controller.class.getClassLoader()
+                .getResourceAsStream(SEPARADOR_ESCANEIG_MASSIU_NOM);
+
+        if (is == null) {
+            // XYZ ZZZ TRA
+            throw new Exception("No puc carregar el fitxer " + SEPARADOR_ESCANEIG_MASSIU_NOM
+                    + " dels recursos.");
+        }
+        byte[] data = FileUtils.toByteArray(is);
+        is.close();
+        return data;
+    }
+
+    
 
     @RequestMapping(value = "/"
             + ApiMassiveScanWebSimple.GETAVAILABLEPROFILES, method = RequestMethod.POST)

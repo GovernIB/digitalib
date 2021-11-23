@@ -97,13 +97,16 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       return fitxers;
     }
 
-    long count;
+    
     Long transMultiple = transaccio.getTransaccioMultipleID();
+    
+    long count;
     if (transMultiple == null) {
       count = -1;
     } else {
       Long count2 = this.count(TRANSACCIOMULTIPLEID.equal(transMultiple));
       if (count2 == null) {
+          // XYZ ZZZ TRA
         throw new I18NException("comodi",
             "No puc averiguar quantes transaccions hi ha associades a la transacció multiple amb ID "
                 + transMultiple);
@@ -111,19 +114,25 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       count = count2;
     }
 
-    if (count <= 1) {
+
+    // Cada transacció té les seves metadades
+    {        
       metadadaLogicaEjb
           .delete(MetadadaFields.TRANSACCIOID.equal(transaccio.getTransaccioID()));
     }
 
     delete(transaccio.getTransaccioID());
 
+    // El perfil és compartit per les diverses transaccions que formen part d'una transacció multiple 
     if (count <= 1) {
       Long pid = transaccio.getPerfilID();
       if (pid != null) {
         perfilEjb.delete(pid);
       }
+    }
 
+    // Cada transacció té la seva informació de custòdia i signatura
+    {
       Long ic = transaccio.getInfoCustodyID();
       if (ic != null) {
         infoCustodyEjb.delete(ic);
@@ -254,12 +263,23 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
   }
 
+  
+  @Override
+  public Long countTransaccionsByTransaccioMultipleID(
+          long transaccioMultipleID) throws I18NException {
+        return this.count(
+            TransaccioFields.TRANSACCIOMULTIPLEID.equal(transaccioMultipleID));
+  }
+  
+  
+  
   /**
    * 
    * @param transaccioMultipleID
    * @return
    * @throws I18NException
    */
+  @Override
   public List<TransaccioJPA> searchMassiveTransaccioByTransaccioMultipleID(
       long transaccioMultipleID) throws I18NException {
 
@@ -407,7 +427,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         "", scanWebProfile, view, languageUI, funcionariUsername, signatureParameters,
         arxiuRequiredParameters, arxiuOptionalParameters);
 
-    boolean isMassive = false;
+    // Original Value final boolean isMassive = false;
+    
+    final boolean isMassive = Configuracio.isAllowedMassiveScanInWeb();
 
     return internalCrearTransaccio(requestTransaction, usuariAplicacio, usuariPersona, urlBase,
         returnURL, ip, isMassive);
@@ -421,7 +443,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
       UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String urlBase,
       String returnURL, String ip) throws I18NException {
 
-    boolean isMassive = true;
+    final boolean isMassive = true;
 
     return internalCrearTransaccio(requestTransaction, usuariAplicacio, usuariPersona, urlBase,
         returnURL, ip, isMassive);

@@ -292,6 +292,9 @@ public abstract class AbstractScanWebProcessController {
                                     PerfilFields.PERFILID.equal(transaccio.getPerfilID()));
                             boolean isComplete = comprovarSiTotesTransaccionsSonCompletes(
                                     infos, usPerfil);
+                            
+                            log.info("\n Escaneig MASSIU: isComplete " + isComplete 
+                                    + "(true -> No mostra cada document | false -> mostra cada document)\n");
 
                             final String cp = isPublic()
                                     ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
@@ -312,6 +315,8 @@ public abstract class AbstractScanWebProcessController {
                                 massiveInfo = cp + SCANWEB_CONTEXTPATH_UPDATE_MASSIVE + "/"
                                         + transaccio.getTransaccioMultipleID();
                             }
+                            
+                            log.info("redireccionant a " + massiveInfo);
                             return new ModelAndView(new RedirectView(massiveInfo, true));
                         }
                     }
@@ -378,8 +383,10 @@ public abstract class AbstractScanWebProcessController {
 
         transaccio.setDataFi(new Timestamp(System.currentTimeMillis()));
         transaccioLogicaEjb.update(transaccio);
+        
+        log.info(" XYZ ZZZ Sortim de finalProcesDeScanWeb (ABSTRACT). ID = " + transaccio.getTransaccioID());
 
-        return returnToOrigen(transaccio);
+        return returnToOrigen(request,transaccio);
     }
 
     protected boolean comprovarSiTotesTransaccionsSonCompletes(
@@ -629,28 +636,7 @@ public abstract class AbstractScanWebProcessController {
         } // Final For
     }
 
-    protected ModelAndView returnToOrigen(TransaccioJPA transaccio) throws I18NException {
-        String urlRetorn = transaccio.getReturnUrl();
-        ModelAndView mav;
-        if (transaccio.getView() == ScanWebSimpleGetTransactionIdRequest.VIEW_FULLSCREEN) {
-            // Simple REDIRECCIO
-
-            log.info("SIMPLE REDIRECCIO = " + urlRetorn);
-
-            mav = new ModelAndView(new RedirectView(urlRetorn, false));
-
-        } else {
-            // Sortir de IFRAME
-
-            log.info("Sortir de IFRAME = " + urlRetorn);
-            mav = new ModelAndView(
-                    isPublic() ? "public_finalsortiriframe" : "finalsortiriframe");
-            mav.addObject("urlRetorn", urlRetorn);
-        }
-
-        return mav;
-    }
-
+    
     /**
      * 
      * @param status
@@ -911,13 +897,16 @@ public abstract class AbstractScanWebProcessController {
 
                     // clonar transaccioOriginal
                     String nom = nomTransaccioOriginal + " " + (i + 1) + "/" + fitxers.length;
+                    
+                    log.info("XYZ ZZZ  FITXER [" + i + "] : Per transaccio "
+                            + transaccioOriginal.getTransaccioID());
 
                     TransaccioJPA transaccio = transaccioLogicaEjb
                             .cloneTransaccio(transaccioOriginal, nom);
 
                     {
                         // fer nou fitxer
-                        FitxerJPA fitxer = new FitxerJPA("", "application/pdf",
+                        FitxerJPA fitxer = new FitxerJPA("", Constants.MIME_PDF,
                                 /* transaccio.getTransactionWebId() + "_" + */ file.getName(),
                                 file.length());
 
@@ -938,7 +927,7 @@ public abstract class AbstractScanWebProcessController {
 
                         try {
                             transaccio.setHashEscaneig(
-                                    Files.hash(file, Hashing.sha256()).toString());
+                                    Files.hash(FileSystemManager.getFile(fileID), Hashing.sha256()).toString());
                         } catch (IOException e) {
                             log.error(" Error desconegut creant HASH del fitxer " + fileID
                                     + ":" + e.getMessage(), e);
@@ -1289,6 +1278,8 @@ public abstract class AbstractScanWebProcessController {
             HttpServletResponse response,
             @PathVariable("transaccioWebID") String transaccioWebID)
             throws Exception, I18NException {
+        
+        log.info(" XYZ ZZZ Entra a finalPeticioMassiva ...");
 
         String finalMassiveURL = getContextWeb() + SCANWEB_CONTEXTPATH_RETURNTOORIGEN_MASSIVE
                 + "/" + transaccioWebID;
@@ -1338,8 +1329,11 @@ public abstract class AbstractScanWebProcessController {
             transaccioLogicaEjb.update(transaccio);
         }
 
-        return returnToOrigen(transaccions.get(0));
+        return returnToOrigen(request, transaccions.get(0));
 
     }
+    
+    
+    protected abstract ModelAndView returnToOrigen(HttpServletRequest request, TransaccioJPA transaccio) throws I18NException;
 
 }

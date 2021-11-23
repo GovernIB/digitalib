@@ -75,7 +75,7 @@ public class SplitPdfTest extends TestCase {
 
         final TestItem[] tests = {
 
-                
+                /*
                 new TestItem("Separador_test_4.pdf", 300, new int[] { 3, 2, 1 }), // OK
 
 
@@ -98,7 +98,17 @@ public class SplitPdfTest extends TestCase {
 
                 new TestItem("300ppp_BN_Separador_Doble_Cara_Darrera_pagina.pdf", 200,
                         new int[] { 5 }),
+                */
 
+                //new TestItem("2021_11_22_Separador_No_funciona_1.pdf", 200, new int[] { 2,4,6}, 3),
+                
+                //new TestItem("2021_11_22_Separador_No_funciona_2.pdf", 200, new int[] { 3,4,7,8}, 3),
+                
+                new TestItem("2021_11_22_Separador_No_funciona_3.pdf", 200, new int[] { 1,3,5}, 3),
+                
+                
+                
+                
                 /*
                 new TestItem("TEST_LEGAL_SIZE_1.pdf", 200, new int[] { 3,4,7,8 }, 3),
                 

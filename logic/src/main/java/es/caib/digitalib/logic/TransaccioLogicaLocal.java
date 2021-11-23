@@ -64,6 +64,15 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
       long transaccioMultipleID) throws I18NException;
 
   /**
+   * Compte les transaccions associades a una Transacció Massiva
+   * @param transaccioMultipleID
+   * @return
+   * @throws I18NException
+   */
+  public Long countTransaccionsByTransaccioMultipleID(
+          long transaccioMultipleID) throws I18NException;
+  
+  /**
    * 
    * @param _ID_
    * @return

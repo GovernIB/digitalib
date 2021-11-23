@@ -139,5 +139,23 @@ public class Configuracio implements Constants {
             return false;
         }
     }
+    
+    
+    
+    /**
+     * 
+     * @return Si val true llavors permeten escanejos massius emprant Separadors des de web.
+     * Si es true, mostrar un boto per descarregar el separador. En cas contrari, es permeten 
+     * escanejos simples i s'ignoren els Separadors.
+     */
+    public static boolean isAllowedMassiveScanInWeb() {
+        String strVal = System
+                .getProperty(DIGITALIB_PROPERTY_BASE + "allowedmassivescaninweb");
+        if ("true".equals(strVal)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
