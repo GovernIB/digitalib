@@ -423,8 +423,11 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
     }
 
-    MassiveScanWebSimpleGetTransactionIdRequest requestTransaction = new MassiveScanWebSimpleGetTransactionIdRequest(
-        "", scanWebProfile, view, languageUI, funcionariUsername, signatureParameters,
+    final String transactionName = " "; // No posam buit per no fer petar en Oracle
+    MassiveScanWebSimpleGetTransactionIdRequest requestTransaction;
+    
+    requestTransaction = new MassiveScanWebSimpleGetTransactionIdRequest(
+        transactionName, scanWebProfile, view, languageUI, funcionariUsername, signatureParameters,
         arxiuRequiredParameters, arxiuOptionalParameters);
 
     // Original Value final boolean isMassive = false;
@@ -622,6 +625,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
       // A massiva posam el ID de la primera transacció
       long transmultipleid = t.getTransaccioID();
+      
+      log.error("\n\n  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX NOM => |" + t.getNom() + "|");
+      
       TransaccioMultipleJPA traMul = new TransaccioMultipleJPA(transmultipleid, t.getNom());
       transaccioMultipleEjb.create(traMul);
 
