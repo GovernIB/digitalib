@@ -218,6 +218,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
 
             ocults.remove(TransaccioFields.TRANSACCIOID);
+            ocults.remove(TransaccioFields.TRANSACCIOMULTIPLEID);
             ocults.remove(TransaccioFields.NOM);
             ocults.remove(TransaccioFields.DATAINICI);
             ocults.remove(TransaccioFields.DATAFI);
@@ -637,9 +638,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     protected enum TipusFile {
-
         ORIGINAL, ENI_DOC, VERSIO_IMPRIMIBLE
-
     }
 
     @RequestMapping(value = "/descarregaroriginal/{transaccioID}", method = RequestMethod.GET)
@@ -906,48 +905,10 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         
         
         
-        //if (isAdmin) 
+        /*
         {
-            /*
-             * // XYZ ZZZ Ocultar columnes de datafi, missatgeerror, fitxersignat // si tots
-             * els valors de les columnes són NULL Map<Long, String> map; map = (Map<Long,
-             * String>) filterForm.getAdditionalField(USUARICOLUMN) .getValueMap();
-             * map.clear();
-             */
-
             for (Transaccio ua : list) {
-                /*
-                 * String web; StringKeyValue usuari; { SelectMultipleStringKeyValue smskv;
-                 * 
-                 * if (isUtilitzatPerAplicacio()) {
-                 * 
-                 * smskv = new SelectMultipleStringKeyValue(
-                 * UsuariAplicacioFields.USUARIAPLICACIOID.select,
-                 * UsuariAplicacioFields.USERNAME.select);
-                 * 
-                 * usuari = usuariAplicacioEjb.executeQueryOne(smskv,
-                 * UsuariAplicacioFields.USUARIAPLICACIOID .equal(ua.getUsuariAplicacioId()));
-                 * 
-                 * web = request.getContextPath() + "/admin/usuariAplicacio/" +
-                 * ua.getUsuariAplicacioId() + "/edit";
-                 * 
-                 * } else {
-                 * 
-                 * smskv = new SelectMultipleStringKeyValue(
-                 * UsuariPersonaFields.USUARIPERSONAID.select, UsuariPersonaFields.NOM.select,
-                 * UsuariPersonaFields.LLINATGES.select);
-                 * 
-                 * usuari = usuariPersonaEjb.executeQueryOne(smskv,
-                 * UsuariPersonaFields.USUARIPERSONAID .equal(ua.getUsuariPersonaId()));
-                 * 
-                 * web = request.getContextPath() + "/admin/usuariPersona/" +
-                 * ua.getUsuariPersonaId() + "/edit";
-                 * 
-                 * } }
-                 * 
-                 * if (usuari != null) { map.put(ua.getTransaccioID(), "<a href=\"" + web +
-                 * "\">" + usuari.getValue() + "</a>"); }
-                 */
+                
                 // Transaccions Massives
                 if (ua.getTransaccioMultipleID() != null) {
                     AdditionalButton additionalButton = new AdditionalButton(
@@ -961,6 +922,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                 }
             }
         }
+        */
     }
 
     public static final String AGRUPA_PER_TRANSACCIO_MULTIPLE = "/transaccionsMultiples";

@@ -2,6 +2,35 @@
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <un:useConstants var="TransaccioFields" className="es.caib.digitalib.model.fields.TransaccioFields"/>
   
+        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.TRANSACCIOMULTIPLEID)}">
+        <tr id="transaccio_transaccioMultipleID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[TransaccioFields.TRANSACCIOMULTIPLEID])?'transaccio.transaccioMultipleID':__theForm.labels[TransaccioFields.TRANSACCIOMULTIPLEID]}" />
+              <c:if test="${not empty __theForm.help[TransaccioFields.TRANSACCIOMULTIPLEID]}">
+              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.TRANSACCIOMULTIPLEID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="transaccio.transaccioMultipleID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.TRANSACCIOMULTIPLEID)}" >
+          <form:hidden path="transaccio.transaccioMultipleID"/>
+          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.transaccioMultipleID,__theForm.listOfTransaccioMultipleForTransaccioMultipleID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.TRANSACCIOMULTIPLEID)}" >
+          <form:select id="transaccio_transaccioMultipleID"  onchange="if(typeof onChangeTransaccioMultipleID == 'function') {  onChangeTransaccioMultipleID(this); };"  cssClass="input-xxlarge" path="transaccio.transaccioMultipleID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfTransaccioMultipleForTransaccioMultipleID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.NOM)}">
         <tr id="transaccio_nom_rowid">
           <td>
@@ -1005,35 +1034,6 @@
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfInfoCustodyForInfoCustodyID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,TransaccioFields.TRANSACCIOMULTIPLEID)}">
-        <tr id="transaccio_transaccioMultipleID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[TransaccioFields.TRANSACCIOMULTIPLEID])?'transaccio.transaccioMultipleID':__theForm.labels[TransaccioFields.TRANSACCIOMULTIPLEID]}" />
-              <c:if test="${not empty __theForm.help[TransaccioFields.TRANSACCIOMULTIPLEID]}">
-              <i class="icon-info-sign" title="${__theForm.help[TransaccioFields.TRANSACCIOMULTIPLEID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="transaccio.transaccioMultipleID" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,TransaccioFields.TRANSACCIOMULTIPLEID)}" >
-          <form:hidden path="transaccio.transaccioMultipleID"/>
-          <input type="text" readonly="true" class="input-xxlarge uneditable-input" value="${gen:findValue(__theForm.transaccio.transaccioMultipleID,__theForm.listOfTransaccioMultipleForTransaccioMultipleID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,TransaccioFields.TRANSACCIOMULTIPLEID)}" >
-          <form:select id="transaccio_transaccioMultipleID"  onchange="if(typeof onChangeTransaccioMultipleID == 'function') {  onChangeTransaccioMultipleID(this); };"  cssClass="input-xxlarge" path="transaccio.transaccioMultipleID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfTransaccioMultipleForTransaccioMultipleID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

@@ -341,6 +341,20 @@ public class TransaccioValidator<T> implements TransaccioFields {
     }
 
     // Fields with References to Other tables 
+    if (__vr.getFieldErrorCount(TRANSACCIOMULTIPLEID) == 0) {
+      java.lang.Long __transacciomultipleid = (java.lang.Long)__vr.getFieldValue(__target__,TRANSACCIOMULTIPLEID);
+      if (__transacciomultipleid != null ) {
+        Long __count_ = null;
+        try { __count_ = __transaccioMultipleManager.count(TransaccioMultipleFields.TRANSMULTIPLEID.equal(__transacciomultipleid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(TRANSACCIOMULTIPLEID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("transaccioMultiple.transaccioMultiple"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("transaccioMultiple.transmultipleid"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__transacciomultipleid)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(PERFILID) == 0) {
       java.lang.Long __perfilid = (java.lang.Long)__vr.getFieldValue(__target__,PERFILID);
       Long __count_ = null;
@@ -377,20 +391,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("infoCustody.infoCustody"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("infoCustody.infoCustodyID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__infocustodyid)));
-        }
-      }
-    }
-
-    if (__vr.getFieldErrorCount(TRANSACCIOMULTIPLEID) == 0) {
-      java.lang.Long __transacciomultipleid = (java.lang.Long)__vr.getFieldValue(__target__,TRANSACCIOMULTIPLEID);
-      if (__transacciomultipleid != null ) {
-        Long __count_ = null;
-        try { __count_ = __transaccioMultipleManager.count(TransaccioMultipleFields.TRANSMULTIPLEID.equal(__transacciomultipleid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-        if (__count_ == null || __count_ == 0) {        
-          __vr.rejectValue(TRANSACCIOMULTIPLEID, "error.notfound",
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("transaccioMultiple.transaccioMultiple"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("transaccioMultiple.transmultipleid"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__transacciomultipleid)));
         }
       }
     }

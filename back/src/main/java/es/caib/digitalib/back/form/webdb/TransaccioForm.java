@@ -28,6 +28,7 @@ public class TransaccioForm extends DigitalIBBaseForm {
   public TransaccioForm(TransaccioForm __toClone) {
     super(__toClone);
       this.transaccio = __toClone.transaccio;
+    this.listOfTransaccioMultipleForTransaccioMultipleID = __toClone.listOfTransaccioMultipleForTransaccioMultipleID;
     this.listOfValuesForUsuariAplicacioId = __toClone.listOfValuesForUsuariAplicacioId;
     this.listOfValuesForUsuariPersonaId = __toClone.listOfValuesForUsuariPersonaId;
     this.listOfValuesForEstatCodi = __toClone.listOfValuesForEstatCodi;
@@ -40,7 +41,6 @@ public class TransaccioForm extends DigitalIBBaseForm {
     this.listOfPerfilForPerfilID = __toClone.listOfPerfilForPerfilID;
     this.listOfInfoSignaturaForInfoSignaturaID = __toClone.listOfInfoSignaturaForInfoSignaturaID;
     this.listOfInfoCustodyForInfoCustodyID = __toClone.listOfInfoCustodyForInfoCustodyID;
-    this.listOfTransaccioMultipleForTransaccioMultipleID = __toClone.listOfTransaccioMultipleForTransaccioMultipleID;
   }
   
   public TransaccioForm(TransaccioJPA transaccio, boolean nou) {
@@ -84,6 +84,18 @@ public class TransaccioForm extends DigitalIBBaseForm {
   public void setFitxerSignaturaIDDelete(boolean fitxerSignaturaIDDelete) {
     this.fitxerSignaturaIDDelete = fitxerSignaturaIDDelete;
    }
+  private List<StringKeyValue> listOfTransaccioMultipleForTransaccioMultipleID;
+
+  public List<StringKeyValue> getListOfTransaccioMultipleForTransaccioMultipleID() {
+    return this.listOfTransaccioMultipleForTransaccioMultipleID;
+  }
+
+  public void setListOfTransaccioMultipleForTransaccioMultipleID(List<StringKeyValue> listOfTransaccioMultipleForTransaccioMultipleID) {
+    this.listOfTransaccioMultipleForTransaccioMultipleID = listOfTransaccioMultipleForTransaccioMultipleID;
+  }
+
+
+
   private List<StringKeyValue> listOfValuesForUsuariAplicacioId;
 
   public List<StringKeyValue> getListOfValuesForUsuariAplicacioId() {
@@ -224,18 +236,6 @@ public class TransaccioForm extends DigitalIBBaseForm {
 
   public void setListOfInfoCustodyForInfoCustodyID(List<StringKeyValue> listOfInfoCustodyForInfoCustodyID) {
     this.listOfInfoCustodyForInfoCustodyID = listOfInfoCustodyForInfoCustodyID;
-  }
-
-
-
-  private List<StringKeyValue> listOfTransaccioMultipleForTransaccioMultipleID;
-
-  public List<StringKeyValue> getListOfTransaccioMultipleForTransaccioMultipleID() {
-    return this.listOfTransaccioMultipleForTransaccioMultipleID;
-  }
-
-  public void setListOfTransaccioMultipleForTransaccioMultipleID(List<StringKeyValue> listOfTransaccioMultipleForTransaccioMultipleID) {
-    this.listOfTransaccioMultipleForTransaccioMultipleID = listOfTransaccioMultipleForTransaccioMultipleID;
   }
 
 

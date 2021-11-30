@@ -11,6 +11,7 @@ public class TransaccioBean implements Transaccio {
 private static final long serialVersionUID = 2099592239L;
 
 	long transaccioID;// PK
+	java.lang.Long transaccioMultipleID;
 	java.lang.String nom;
 	java.lang.String transactionWebId;
 	java.sql.Timestamp dataInici;
@@ -53,7 +54,6 @@ private static final long serialVersionUID = 2099592239L;
 	long perfilID;
 	java.lang.Long infoSignaturaID;
 	java.lang.Long infoCustodyID;
-	java.lang.Long transaccioMultipleID;
 
 
   /** Constructor Buit */
@@ -61,8 +61,9 @@ private static final long serialVersionUID = 2099592239L;
   }
 
   /** Constructor amb tots els camps  */
-  public TransaccioBean(long transaccioID , java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.String infoScanPaperSize , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , java.lang.Boolean infoScanOcr , java.lang.Boolean infoScanDuplex , java.sql.Timestamp infoScanDataCaptura , java.lang.String infoScanLanguageDoc , java.lang.String infoScanDocumentTipus , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamFuncionariDir3 , java.lang.String arxiuReqParamDocEstatElabora , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuReqParamOrgans , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID , java.lang.Long transaccioMultipleID) {
+  public TransaccioBean(long transaccioID , java.lang.Long transaccioMultipleID , java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.String infoScanPaperSize , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , java.lang.Boolean infoScanOcr , java.lang.Boolean infoScanDuplex , java.sql.Timestamp infoScanDataCaptura , java.lang.String infoScanLanguageDoc , java.lang.String infoScanDocumentTipus , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamFuncionariDir3 , java.lang.String arxiuReqParamDocEstatElabora , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuReqParamOrgans , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID) {
     this.transaccioID=transaccioID;
+    this.transaccioMultipleID=transaccioMultipleID;
     this.nom=nom;
     this.transactionWebId=transactionWebId;
     this.dataInici=dataInici;
@@ -105,10 +106,10 @@ private static final long serialVersionUID = 2099592239L;
     this.perfilID=perfilID;
     this.infoSignaturaID=infoSignaturaID;
     this.infoCustodyID=infoCustodyID;
-    this.transaccioMultipleID=transaccioMultipleID;
 }
   /** Constructor sense valors autoincrementals */
-  public TransaccioBean(java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.String infoScanPaperSize , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , java.lang.Boolean infoScanOcr , java.lang.Boolean infoScanDuplex , java.sql.Timestamp infoScanDataCaptura , java.lang.String infoScanLanguageDoc , java.lang.String infoScanDocumentTipus , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamFuncionariDir3 , java.lang.String arxiuReqParamDocEstatElabora , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuReqParamOrgans , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID , java.lang.Long transaccioMultipleID) {
+  public TransaccioBean(java.lang.Long transaccioMultipleID , java.lang.String nom , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.Long usuariAplicacioId , java.lang.Long usuariPersonaId , java.lang.String ip , java.lang.String returnUrl , int estatCodi , java.lang.String estatMissatge , java.lang.String estatExcepcio , java.lang.Long fitxerEscanejatID , java.lang.String hashEscaneig , java.lang.Long fitxerSignaturaID , java.lang.String hashFirma , java.lang.String infoScanPaperSize , java.lang.Integer infoScanPixelType , java.lang.Integer infoScanResolucioPpp , java.lang.Boolean infoScanOcr , java.lang.Boolean infoScanDuplex , java.sql.Timestamp infoScanDataCaptura , java.lang.String infoScanLanguageDoc , java.lang.String infoScanDocumentTipus , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , java.lang.String signParamFuncionariNom , java.lang.String signParamFuncionariNif , java.lang.String signParamFuncionariDir3 , java.lang.String arxiuReqParamDocEstatElabora , java.lang.Integer arxiuReqParamOrigen , java.lang.String arxiuReqParamInteressats , java.lang.String arxiuReqParamCiutadaNif , java.lang.String arxiuReqParamCiutadaNom , java.lang.String arxiuReqParamOrgans , java.lang.String arxiuOptParamProcedimentCodi , java.lang.String arxiuOptParamProcedimentNom , java.lang.String arxiuOptParamSerieDocumental , java.lang.String arxiuOptParamCustodyOrExpedientId , long perfilID , java.lang.Long infoSignaturaID , java.lang.Long infoCustodyID) {
+    this.transaccioMultipleID=transaccioMultipleID;
     this.nom=nom;
     this.transactionWebId=transactionWebId;
     this.dataInici=dataInici;
@@ -151,7 +152,6 @@ private static final long serialVersionUID = 2099592239L;
     this.perfilID=perfilID;
     this.infoSignaturaID=infoSignaturaID;
     this.infoCustodyID=infoCustodyID;
-    this.transaccioMultipleID=transaccioMultipleID;
 }
   /** Constructor dels valors Not Null */
   public TransaccioBean(long transaccioID , java.lang.String transactionWebId , java.sql.Timestamp dataInici , java.lang.String ip , int estatCodi , java.lang.Integer view , java.lang.String languageUI , java.lang.String funcionariUsername , long perfilID) {
@@ -167,6 +167,7 @@ private static final long serialVersionUID = 2099592239L;
 }
   public TransaccioBean(Transaccio __bean) {
     this.setTransaccioID(__bean.getTransaccioID());
+    this.setTransaccioMultipleID(__bean.getTransaccioMultipleID());
     this.setNom(__bean.getNom());
     this.setTransactionWebId(__bean.getTransactionWebId());
     this.setDataInici(__bean.getDataInici());
@@ -209,7 +210,6 @@ private static final long serialVersionUID = 2099592239L;
     this.setPerfilID(__bean.getPerfilID());
     this.setInfoSignaturaID(__bean.getInfoSignaturaID());
     this.setInfoCustodyID(__bean.getInfoCustodyID());
-    this.setTransaccioMultipleID(__bean.getTransaccioMultipleID());
     // Fitxer
     this.setFitxerEscanejat(FitxerBean.toBean(__bean.getFitxerEscanejat()));
     // Fitxer
@@ -221,6 +221,13 @@ private static final long serialVersionUID = 2099592239L;
 	};
 	public void setTransaccioID(long _transaccioID_) {
 		this.transaccioID = _transaccioID_;
+	};
+
+	public java.lang.Long getTransaccioMultipleID() {
+		return(transaccioMultipleID);
+	};
+	public void setTransaccioMultipleID(java.lang.Long _transaccioMultipleID_) {
+		this.transaccioMultipleID = _transaccioMultipleID_;
 	};
 
 	public java.lang.String getNom() {
@@ -517,13 +524,6 @@ private static final long serialVersionUID = 2099592239L;
 		this.infoCustodyID = _infoCustodyID_;
 	};
 
-	public java.lang.Long getTransaccioMultipleID() {
-		return(transaccioMultipleID);
-	};
-	public void setTransaccioMultipleID(java.lang.Long _transaccioMultipleID_) {
-		this.transaccioMultipleID = _transaccioMultipleID_;
-	};
-
 
 
   // ======================================
@@ -532,6 +532,7 @@ private static final long serialVersionUID = 2099592239L;
     if (__bean == null) { return null;}
     TransaccioBean __tmp = new TransaccioBean();
     __tmp.setTransaccioID(__bean.getTransaccioID());
+    __tmp.setTransaccioMultipleID(__bean.getTransaccioMultipleID());
     __tmp.setNom(__bean.getNom());
     __tmp.setTransactionWebId(__bean.getTransactionWebId());
     __tmp.setDataInici(__bean.getDataInici());
@@ -574,7 +575,6 @@ private static final long serialVersionUID = 2099592239L;
     __tmp.setPerfilID(__bean.getPerfilID());
     __tmp.setInfoSignaturaID(__bean.getInfoSignaturaID());
     __tmp.setInfoCustodyID(__bean.getInfoCustodyID());
-    __tmp.setTransaccioMultipleID(__bean.getTransaccioMultipleID());
     // Fitxer
     __tmp.setFitxerEscanejat(FitxerBean.toBean(__bean.getFitxerEscanejat()));
     // Fitxer

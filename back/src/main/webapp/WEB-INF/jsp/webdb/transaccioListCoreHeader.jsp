@@ -15,6 +15,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.TRANSACCIOID)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.TRANSACCIOID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.TRANSACCIOMULTIPLEID)}">
+        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.TRANSACCIOMULTIPLEID)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.NOM)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.NOM)}</th>
         </c:if>
@@ -140,9 +143,6 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOCUSTODYID)}">
         <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.INFOCUSTODYID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.TRANSACCIOMULTIPLEID)}">
-        <th>${dib:getSortIcons(__theFilterForm,TransaccioFields.TRANSACCIOMULTIPLEID)}</th>
         </c:if>
 
 

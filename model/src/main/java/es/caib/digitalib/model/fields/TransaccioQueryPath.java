@@ -15,6 +15,10 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new LongField(getQueryPath(), TransaccioFields.TRANSACCIOID);
   }
 
+  public LongField TRANSACCIOMULTIPLEID() {
+    return new LongField(getQueryPath(), TransaccioFields.TRANSACCIOMULTIPLEID);
+  }
+
   public StringField NOM() {
     return new StringField(getQueryPath(), TransaccioFields.NOM);
   }
@@ -183,10 +187,6 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new LongField(getQueryPath(), TransaccioFields.INFOCUSTODYID);
   }
 
-  public LongField TRANSACCIOMULTIPLEID() {
-    return new LongField(getQueryPath(), TransaccioFields.TRANSACCIOMULTIPLEID);
-  }
-
 
 
   @Override
@@ -209,6 +209,14 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     });
   }
 */
+
+  public TransaccioMultipleQueryPath TRANSACCIOMULTIPLE() {
+    return new TransaccioMultipleQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return TransaccioQueryPath.this.getQueryPath() + "transaccioMultiple" + ".";
+      }
+    });
+  }
 
   public FitxerQueryPath FITXERESCANEJAT() {
     return new FitxerQueryPath(new QueryPath() {
@@ -246,14 +254,6 @@ public class TransaccioQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new InfoCustodyQueryPath(new QueryPath() {
       public String getQueryPath() {
           return TransaccioQueryPath.this.getQueryPath() + "infoCustody" + ".";
-      }
-    });
-  }
-
-  public TransaccioMultipleQueryPath TRANSACCIOMULTIPLE() {
-    return new TransaccioMultipleQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return TransaccioQueryPath.this.getQueryPath() + "transaccioMultiple" + ".";
       }
     });
   }

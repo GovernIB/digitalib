@@ -11,13 +11,9 @@
 
 <br/>
 <br/>
+<center><fmt:message key="plugindescan.seleccio.title2"/></center>
 
 <div class="lead" style="margin-bottom:10px; text-align:center;">  
-  <fmt:message key="plugindescan.seleccio.title2"/>
-  <br/>
-  <h5 style="line-height: 10px; margin-top: 0px; margin-bottom: 0px;">
-  <fmt:message key="plugindescan.seleccio.subtitle2"/>
-  </h5>
   <br/>
   <%-- XYZ ZZZ
   <c:if test="fn:length(companies) eq 1" >

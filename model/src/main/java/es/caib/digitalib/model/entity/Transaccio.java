@@ -5,6 +5,9 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public long getTransaccioID();
 	public void setTransaccioID(long _transaccioID_);
 
+	public java.lang.Long getTransaccioMultipleID();
+	public void setTransaccioMultipleID(java.lang.Long _transaccioMultipleID_);
+
 	public java.lang.String getNom();
 	public void setNom(java.lang.String _nom_);
 
@@ -130,9 +133,6 @@ public interface Transaccio extends org.fundaciobit.genapp.common.IGenAppEntity 
 
 	public java.lang.Long getInfoCustodyID();
 	public void setInfoCustodyID(java.lang.Long _infoCustodyID_);
-
-	public java.lang.Long getTransaccioMultipleID();
-	public void setTransaccioMultipleID(java.lang.Long _transaccioMultipleID_);
 
   // Fitxer
   public <F extends Fitxer> F getFitxerEscanejat();

@@ -3,14 +3,25 @@
 %><%@ page language="java"%><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <br />
 <br />
+<center>
+<h2><fmt:message key="plugindescan.seleccio.title2" /></h2>
+</center>
 
+<%  if(Configuracio.isAllowedMassiveScanInWeb())  { %>
+<br/>
+ <h5 style="margin-top: 0px; margin-bottom: 0px;">
+  <fmt:message  key="plugindescan.seleccio.subtitle2"/>
+  <img src="<c:url value="/img/ajudaescaneigmassiu.png"/>" alt="ajuda" />
+  </h5>
+<% } %>
 <div class="lead" style="margin-bottom: 10px; text-align: center;">
 
-  <fmt:message key="plugindescan.seleccio.title2" />
+  <%--  
   <br />
   <h5 style="line-height: 10px; margin-top: 0px; margin-bottom: 0px;">
     <fmt:message key="plugindescan.seleccio.subtitle2" />
   </h5>
+  --%>
   <br />
 
   <c:if test="${not empty configuracioGrup }">

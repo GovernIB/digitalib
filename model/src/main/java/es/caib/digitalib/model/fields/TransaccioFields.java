@@ -13,6 +13,7 @@ public interface TransaccioFields extends java.io.Serializable {
 
 
 	 public static final LongField TRANSACCIOID = new LongField(_TABLE_MODEL, "transaccioID", "transaccioid");  // PK
+	 public static final LongField TRANSACCIOMULTIPLEID = new LongField(_TABLE_MODEL, "transaccioMultipleID", "transmultipleid");
 	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");
 	 public static final StringField TRANSACTIONWEBID = new StringField(_TABLE_MODEL, "transactionWebId", "webid");
 	 public static final TimestampField DATAINICI = new TimestampField(_TABLE_MODEL, "dataInici", "datainici");
@@ -55,11 +56,11 @@ public interface TransaccioFields extends java.io.Serializable {
 	 public static final LongField PERFILID = new LongField(_TABLE_MODEL, "perfilID", "perfilid");
 	 public static final LongField INFOSIGNATURAID = new LongField(_TABLE_MODEL, "infoSignaturaID", "infosignaturaid");
 	 public static final LongField INFOCUSTODYID = new LongField(_TABLE_MODEL, "infoCustodyID", "infocustodyid");
-	 public static final LongField TRANSACCIOMULTIPLEID = new LongField(_TABLE_MODEL, "transaccioMultipleID", "transmultipleid");
 
 
   public static final Field<?>[] ALL_TRANSACCIO_FIELDS = {
     TRANSACCIOID,
+    TRANSACCIOMULTIPLEID,
     NOM,
     TRANSACTIONWEBID,
     DATAINICI,
@@ -101,8 +102,7 @@ public interface TransaccioFields extends java.io.Serializable {
     ARXIUOPTPARAMCUSTODYOREXPEDIENTID,
     PERFILID,
     INFOSIGNATURAID,
-    INFOCUSTODYID,
-    TRANSACCIOMULTIPLEID
+    INFOCUSTODYID
   };
 
 
