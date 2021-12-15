@@ -64,12 +64,14 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
       long transaccioMultipleID) throws I18NException;
 
   /**
-   * Compte les transaccions associades a una Transacció Massiva
+   * retorna un array de sencers de dues posicions:
+   *     - Posició 0: Compte les transaccions associades a una Transacció Massiva
+   *     - Posició 1: Numero de transaccions acabades amb OK
    * @param transaccioMultipleID
    * @return
    * @throws I18NException
    */
-  public Long countTransaccionsByTransaccioMultipleID(
+  public Long[] countTransaccionsByTransaccioMultipleID(
           long transaccioMultipleID) throws I18NException;
   
   /**

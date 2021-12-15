@@ -265,12 +265,31 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
   
   @Override
-  public Long countTransaccionsByTransaccioMultipleID(
-          long transaccioMultipleID) throws I18NException {
-        return this.count(
-            TransaccioFields.TRANSACCIOMULTIPLEID.equal(transaccioMultipleID));
+  public Long[] countTransaccionsByTransaccioMultipleID(long transaccioMultipleID)
+          throws I18NException {
+
+      List<Integer> estats = this.executeQuery(TransaccioFields.ESTATCODI,
+              TransaccioFields.TRANSACCIOMULTIPLEID.equal(transaccioMultipleID));
+
+      /*
+       * Long totals = this
+       * .count(TransaccioFields.TRANSACCIOMULTIPLEID.equal(transaccioMultipleID));
+       * 
+       * Long oks = this.count(
+       * Where.AND(TransaccioFields.TRANSACCIOMULTIPLEID.equal(transaccioMultipleID),
+       * TransaccioFields.ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_OK)));
+       */
+
+      long oks = 0;
+
+      for (Integer estat : estats) {
+          if (estat == Constants.TRANSACCIO_ESTAT_CODI_OK) {
+              oks++;
+          }
+      }
+      return new Long[] { (long) estats.size(), oks };
+
   }
-  
   
   
   /**

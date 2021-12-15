@@ -477,23 +477,35 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     protected ModelAndView returnToOrigen(HttpServletRequest request, TransaccioJPA transaccio)
             throws I18NException {
 
-        long countTransactions;
+        final long countTransactions;
+        final long countTransactionsOK;        
         Long transMultipleID = transaccio.getTransaccioMultipleID();
 
         if (transMultipleID == null) {
             countTransactions = 1;
+            countTransactionsOK = 1;
         } else {
-            Long c = transaccioLogicaEjb
+            Long[] resum = transaccioLogicaEjb
                     .countTransaccionsByTransaccioMultipleID(transMultipleID);
-            if (c == null) {
+            if (resum == null) {
                 countTransactions = 1;
+                countTransactionsOK = 1;
             } else {
-                countTransactions = c;
+                countTransactions = resum[0];
+                countTransactionsOK = resum[1];
             }
         }
+        
+        if (countTransactions == countTransactionsOK) {
+            HtmlUtils.saveMessageSuccess(request,
+                    I18NUtils.tradueix("scanwebget.operacio.ok"));
+        } else {
+            HtmlUtils.saveMessageWarning(request,
+                    I18NUtils.tradueix("scanwebget.operacio.errorsubtransaccio"));
+        }
+        
 
         String r;
-
         switch (transaccio.getPerfil().getUsPerfil()) {
             case Constants.PERFIL_US_NOMES_ESCANEIG_INFO: {
                 String base = request.getContextPath() + "/user/transaccio/nomesescaneig";
