@@ -34,7 +34,7 @@
   %>
   	<hr style="margin-top: 6px; margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;"><a
-      href="<c:url value="/user/transaccio/nomesescaneig/list"/>"> <span
+      href="<c:url value="/user/transaccio/nomesescaneig/listreset"/>"> <span
         style="${(fn:contains(url, '/user/transaccio/nomesescaneig/'))? "font-weight:bold;" : ""}">
           <fmt:message key="usuari.escanejos" /> (<%=type%>)
       </span>
@@ -50,7 +50,7 @@
   %>
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;"><a
-      href="<c:url value="/user/transaccio/copiaautentica/list"/>"> <span
+      href="<c:url value="/user/transaccio/copiaautentica/listreset"/>"> <span
         style="${(fn:contains(url, '/user/transaccio/copiaautentica/'))? "font-weight:bold;" : ""}">
 
           <fmt:message key="usuari.copies" /> (<%=type%>)
@@ -67,7 +67,7 @@
   %>
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;"><a
-      href="<c:url value="/user/transaccio/custodia/list"/>"> <span
+      href="<c:url value="/user/transaccio/custodia/listreset"/>"> <span
         style="${(fn:contains(url, '/user/transaccio/custodia/'))? "font-weight:bold;" : ""}">
 
           <fmt:message key="usuari.copiesarxiu" /> (<%=type%>)

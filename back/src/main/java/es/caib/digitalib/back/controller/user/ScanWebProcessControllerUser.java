@@ -497,6 +497,9 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
         switch (transaccio.getPerfil().getUsPerfil()) {
             case Constants.PERFIL_US_NOMES_ESCANEIG_INFO: {
                 String base = request.getContextPath() + "/user/transaccio/nomesescaneig";
+                
+                log.info(" PERFIL NOMES ESCANEIG: { countTransactions : " + countTransactions + "}");
+                
                 if (countTransactions == 1) {
                     r = base + "/view/" + transaccio.getTransaccioID();
                 } else {

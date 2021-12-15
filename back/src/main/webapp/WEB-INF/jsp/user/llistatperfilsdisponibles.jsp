@@ -51,10 +51,6 @@ if (Configuracio.isAllowedMassiveScanInWeb()) {
     <li>
     <fmt:message key="plugindescan.seleccio.subtitle2B3" />
     </li>
-    
-    
-    
-    
 
 </ol>
 <b><fmt:message key="plugindescan.seleccio.subtitle2B4" /></b>

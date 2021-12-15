@@ -105,8 +105,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     public abstract int getTipusPerfil();
 
-   
-
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
 
@@ -189,17 +187,17 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                                 "btn-info"));
             }
         }
-        
-        
+
         // Ha d'escriure els DNIs, CIFs o NIFs de les persones interessades separats per coma.
         String msgIn = I18NUtils.tradueix("transaccio.interessats.ajuda");
-                
+
         form.addHelpToField(ARXIUREQPARAMINTERESSATS, msgIn);
 
-        // Ha d'escriure la unitat DIR3 del funcionari. Pot esbrinar aquest codi accedint a la pàgina web
+        // Ha d'escriure la unitat DIR3 del funcionari. Pot esbrinar aquest codi accedint a la
+        // pàgina web
         // https://intranet.caib.es/dir3caib i introduint les dades requerides.";
         String msgFD3 = I18NUtils.tradueix("transaccio.fundacionaridir3.ajuda");
-        
+
         form.addHelpToField(SIGNPARAMFUNCIONARIDIR3, msgFD3);
 
         return form;
@@ -556,7 +554,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     return getRedirectWhenCancel(request, transaccioID);
                 }
 
-  
             } else {
                 // XYZ ZZZ Configurable per part de Grup
                 // {0} li envia el document adjunt.
@@ -610,7 +607,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         // (2) Esta en error i té més d'un dia
         Set<Long> filesToDelete = transaccioLogicaEjb.deleteFull(transaccio, null,
                 LoginInfo.getInstance().getUsername());
-        
+
         FileSystemManager.eliminarArxius(filesToDelete);
 
     }
@@ -699,7 +696,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             case Constants.TIPUS_CUSTODIA_DOCUMENTCUSTODY:
 
                 String urlStr = null;
-
 
                 switch (tipusFile) {
                     case ORIGINAL:
@@ -902,27 +898,18 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     protected void postListNomPersonaAplicacio(HttpServletRequest request,
             TransaccioFilterForm filterForm, List<Transaccio> list, final boolean isAdmin)
             throws I18NException {
-        
-        
-        
-        /*
-        {
-            for (Transaccio ua : list) {
-                
-                // Transaccions Massives
-                if (ua.getTransaccioMultipleID() != null) {
-                    AdditionalButton additionalButton = new AdditionalButton(
-                            "icon-list-alt icon-white",
-                            "transaccioMultiple.transaccioMultiple",
-                            getContextWeb() + AGRUPA_PER_TRANSACCIO_MULTIPLE + "/"
-                                    + ua.getTransaccioMultipleID(),
-                            "btn-danger");
 
-                    filterForm.addAdditionalButtonByPK(ua.getTransaccioID(), additionalButton);
-                }
-            }
-        }
-        */
+        /*
+         * { for (Transaccio ua : list) {
+         * 
+         * // Transaccions Massives if (ua.getTransaccioMultipleID() != null) {
+         * AdditionalButton additionalButton = new AdditionalButton(
+         * "icon-list-alt icon-white", "transaccioMultiple.transaccioMultiple", getContextWeb()
+         * + AGRUPA_PER_TRANSACCIO_MULTIPLE + "/" + ua.getTransaccioMultipleID(),
+         * "btn-danger");
+         * 
+         * filterForm.addAdditionalButtonByPK(ua.getTransaccioID(), additionalButton); } } }
+         */
     }
 
     public static final String AGRUPA_PER_TRANSACCIO_MULTIPLE = "/transaccionsMultiples";
@@ -933,7 +920,10 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             HttpServletResponse response,
             @PathVariable("transaccioMultipleID") java.lang.Long transaccioMultipleID)
             throws IOException, I18NException {
-        
+
+        log.info(" XYZ ZZZ ENTRA A AGRUPA_PER_TRANSACCIO_MULTIPLE ... [" + transaccioMultipleID
+                + "] ");
+
         TransaccioFilterForm filterForm = getTransaccioFilterForm(null, null, request);
 
         ArrayList<Field<?>> filterByFields = new ArrayList<Field<?>>();
@@ -943,6 +933,26 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
         filterForm.setTransaccioMultipleIDDesde(transaccioMultipleID);
         filterForm.setTransaccioMultipleIDFins(transaccioMultipleID);
+
+        request.getSession().setAttribute(getSessionAttributeFilterForm(), filterForm);
+
+        return new ModelAndView(new RedirectView(getContextWeb() + "/list", true));
+
+    }
+
+    @RequestMapping(value = "/listreset", method = RequestMethod.GET)
+    public ModelAndView llistatInicialSenseAgrupaPerTransaccioMultiple(
+            HttpServletRequest request, HttpServletResponse response)
+            throws IOException, I18NException {
+
+        TransaccioFilterForm filterForm = getTransaccioFilterForm(null, null, request);
+
+        List<Field<?>> list = filterForm.getFilterByFields();
+        if (list != null && list.contains(TRANSACCIOMULTIPLEID)) {
+            list.remove(TRANSACCIOMULTIPLEID);
+        }
+        filterForm.setTransaccioMultipleIDDesde(null);
+        filterForm.setTransaccioMultipleIDFins(null);
 
         return new ModelAndView(new RedirectView(getContextWeb() + "/list", true));
 

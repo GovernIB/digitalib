@@ -145,6 +145,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal {
 
         FirmaSimpleSignatureResult fullResults;
         try {
+            log.info(" Cridant a signDocument() ... ");
             fullResults = api.signDocument(signature);
         } catch (AbstractApisIBException e) {
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
