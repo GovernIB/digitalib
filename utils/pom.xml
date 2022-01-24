@@ -4,14 +4,14 @@
 
   <groupId>es.caib.digitalib</groupId>
   <artifactId>digitalib-utils</artifactId>  
-  <version>1.0.8</version>
+  <version>1.0.9</version>
 
   <packaging>jar</packaging>
 
   <parent>
     <groupId>es.caib.digitalib</groupId>
     <artifactId>digitalib</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
   </parent>
 
   <name>DigitalIB Utils</name>

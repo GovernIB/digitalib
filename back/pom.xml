@@ -8,13 +8,13 @@
 
   <groupId>es.caib.digitalib</groupId>
   <artifactId>digitalib-back</artifactId>
-  <version>1.0.8</version>
+  <version>1.0.9</version>
   <packaging>war</packaging>
 
   <parent>
     <groupId>es.caib.digitalib</groupId>
     <artifactId>digitalib</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
   </parent>
 
   <name>DigitalIB Back</name>
