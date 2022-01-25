@@ -402,7 +402,7 @@ public class TransaccioMultipleController
       return null;
     }
     try {
-      TransaccioMultiple transaccioMultiple = transaccioMultipleEjb.findByPrimaryKey(transmultipleid);
+      TransaccioMultiple transaccioMultiple = findByPrimaryKey(request, transmultipleid);
       if (transaccioMultiple == null) {
         String __msg =createMessageError(request, "error.notfound", transmultipleid);
         return getRedirectWhenDelete(request, transmultipleid, new Exception(__msg));
@@ -496,7 +496,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-
+    initDisallowedFields(binder);
   }
 
   public TransaccioMultipleWebValidator getWebValidator() {

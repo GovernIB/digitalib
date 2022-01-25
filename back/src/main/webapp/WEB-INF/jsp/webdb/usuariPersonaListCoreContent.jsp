@@ -26,32 +26,32 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.USUARIPERSONAID)}">
           <td>
-          ${usuariPersona.usuariPersonaID}
+          <c:out value="${usuariPersona.usuariPersonaID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.USERNAME)}">
           <td>
-          ${usuariPersona.username}
+          <c:out value="${usuariPersona.username}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.NOM)}">
           <td>
-          ${usuariPersona.nom}
+          <c:out value="${usuariPersona.nom}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.LLINATGES)}">
           <td>
-          ${usuariPersona.llinatges}
+          <c:out value="${usuariPersona.llinatges}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.EMAIL)}">
           <td>
-          ${usuariPersona.email}
+          <c:out value="${usuariPersona.email}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.NIF)}">
           <td>
-          ${usuariPersona.nif}
+          <c:out value="${usuariPersona.nif}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.IDIOMAID)}">
@@ -72,7 +72,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.UNITATDIR3)}">
           <td>
-          ${usuariPersona.unitatDir3}
+          <c:out value="${usuariPersona.unitatDir3}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariPersonaFields.ROLESCAN)}">

@@ -26,7 +26,7 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.AUDITORIAID)}">
           <td>
-          ${auditoria.auditoriaID}
+          <c:out value="${auditoria.auditoriaID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.DATA)}">
@@ -34,7 +34,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.TRANSACCIOID)}">
           <td>
-          ${auditoria.transaccioId}
+          <c:out value="${auditoria.transaccioId}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.TIPUS)}">
@@ -47,12 +47,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.MISSATGE)}">
           <td>
-          ${auditoria.missatge}
+          <c:out value="${auditoria.missatge}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.ADDITIONALINFO)}">
           <td>
-          ${auditoria.additionalInfo}
+          <c:out value="${auditoria.additionalInfo}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.ISAPP)}">
@@ -61,12 +61,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USERNAMEAPLICACIO)}">
           <td>
-          ${auditoria.usernameAplicacio}
+          <c:out value="${auditoria.usernameAplicacio}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USERNAMEPERSONA)}">
           <td>
-          ${auditoria.usernamePersona}
+          <c:out value="${auditoria.usernamePersona}" />
           </td>
         </c:if>
 

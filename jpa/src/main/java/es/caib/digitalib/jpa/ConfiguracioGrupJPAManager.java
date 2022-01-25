@@ -66,7 +66,7 @@ public class ConfiguracioGrupJPAManager
 		return list.toArray(new ConfiguracioGrup[list.size()]);
 	};
 
-	public synchronized ConfiguracioGrup create( java.lang.String _nom_, java.lang.String _suportWeb_, java.lang.String _suportEmail_, java.lang.String _suportTelefon_, long _logoHeaderID_, long _logoFooterID_, java.lang.String _adreza_, java.lang.String _codiDir3PerDefecte_, java.lang.Long _perfilNomesEscaneigID_, java.lang.Long _perfilNomesEscaneig2ID_, java.lang.Long _perfilCopiaAutenticaID_, java.lang.Long _perfilCopiaAutentica2ID_, java.lang.Long _perfilCustodiaID_, java.lang.Long _perfilCustodia2ID_) throws I18NException {
+	public ConfiguracioGrup create( java.lang.String _nom_, java.lang.String _suportWeb_, java.lang.String _suportEmail_, java.lang.String _suportTelefon_, long _logoHeaderID_, long _logoFooterID_, java.lang.String _adreza_, java.lang.String _codiDir3PerDefecte_, java.lang.Long _perfilNomesEscaneigID_, java.lang.Long _perfilNomesEscaneig2ID_, java.lang.Long _perfilCopiaAutenticaID_, java.lang.Long _perfilCopiaAutentica2ID_, java.lang.Long _perfilCustodiaID_, java.lang.Long _perfilCustodia2ID_) throws I18NException {
 		ConfiguracioGrupJPA __bean =  new ConfiguracioGrupJPA(_nom_,_suportWeb_,_suportEmail_,_suportTelefon_,_logoHeaderID_,_logoFooterID_,_adreza_,_codiDir3PerDefecte_,_perfilNomesEscaneigID_,_perfilNomesEscaneig2ID_,_perfilCopiaAutenticaID_,_perfilCopiaAutentica2ID_,_perfilCustodiaID_,_perfilCustodia2ID_);
 		return create(__bean);
 	}

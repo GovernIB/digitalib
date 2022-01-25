@@ -26,12 +26,12 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.PERFILID)}">
           <td>
-          ${perfil.perfilID}
+          <c:out value="${perfil.perfilID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.CODI)}">
           <td>
-          ${perfil.codi}
+          <c:out value="${perfil.codi}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilFields.NOMID)}">

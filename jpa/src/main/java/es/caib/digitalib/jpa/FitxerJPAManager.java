@@ -66,7 +66,7 @@ public class FitxerJPAManager
 		return list.toArray(new Fitxer[list.size()]);
 	};
 
-	public synchronized Fitxer create( java.lang.String _descripcio_, java.lang.String _mime_, java.lang.String _nom_, long _tamany_) throws I18NException {
+	public Fitxer create( java.lang.String _descripcio_, java.lang.String _mime_, java.lang.String _nom_, long _tamany_) throws I18NException {
 		FitxerJPA __bean =  new FitxerJPA(_descripcio_,_mime_,_nom_,_tamany_);
 		return create(__bean);
 	}

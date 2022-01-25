@@ -69,6 +69,7 @@ public class PerfilValidator<T> implements PerfilFields {
       }
     }
     
+    //class java.lang.Class
     if (__vr.getFieldErrorCount(CODI) == 0) {
       String val = String.valueOf(__vr.getFieldValue(__target__,CODI));
       if (val != null && val.trim().length() != 0) {

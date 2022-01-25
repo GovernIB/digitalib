@@ -450,7 +450,7 @@ public class UsuariPersonaController
       return null;
     }
     try {
-      UsuariPersona usuariPersona = usuariPersonaEjb.findByPrimaryKey(usuariPersonaID);
+      UsuariPersona usuariPersona = findByPrimaryKey(request, usuariPersonaID);
       if (usuariPersona == null) {
         String __msg =createMessageError(request, "error.notfound", usuariPersonaID);
         return getRedirectWhenDelete(request, usuariPersonaID, new Exception(__msg));
@@ -544,8 +544,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("usuariPersonaID");
-
+    initDisallowedFields(binder, "usuariPersona.usuariPersonaID");
   }
 
   public UsuariPersonaWebValidator getWebValidator() {

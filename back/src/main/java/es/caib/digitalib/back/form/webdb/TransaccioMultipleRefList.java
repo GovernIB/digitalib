@@ -33,7 +33,7 @@ public class TransaccioMultipleRefList extends RefListBase
     this.transaccioMultipleEjb = __clone.transaccioMultipleEjb;
   }
   public TransaccioMultipleRefList() {
-    setSelects(new Select<?>[] { DESCRIPCIO.select });
+    setSelects(new Select<?>[] { TRANSMULTIPLEID.select });
   }
   public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
     Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());

@@ -58,7 +58,7 @@
     <dependency>
       <groupId>org.fundaciobit.genapp</groupId>
       <artifactId>genapp-core</artifactId>
-      <version>1.0</version>
+      <version>1.0.3</version>
     </dependency>
 
     <!--  WEB -->
@@ -84,7 +84,7 @@
     <dependency>
       <groupId>org.fundaciobit.genapp</groupId>
       <artifactId>genapp-web</artifactId>
-      <version>1.0</version>
+      <version>1.0.3</version>
     </dependency>
 
     <!-- GEN -->
@@ -130,7 +130,7 @@
     <dependency>
       <groupId>org.fundaciobit.genapp</groupId>
       <artifactId>genapp-gen</artifactId>
-      <version>1.0</version>
+      <version>1.0.3</version>
     </dependency>
 
   </dependencies>

@@ -468,7 +468,7 @@ public class InfoSignaturaController
       return null;
     }
     try {
-      InfoSignatura infoSignatura = infoSignaturaEjb.findByPrimaryKey(infoSignaturaID);
+      InfoSignatura infoSignatura = findByPrimaryKey(request, infoSignaturaID);
       if (infoSignatura == null) {
         String __msg =createMessageError(request, "error.notfound", infoSignaturaID);
         return getRedirectWhenDelete(request, infoSignaturaID, new Exception(__msg));
@@ -562,8 +562,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("infoSignaturaID");
-
+    initDisallowedFields(binder, "infoSignatura.infoSignaturaID");
   }
 
   public InfoSignaturaWebValidator getWebValidator() {

@@ -26,7 +26,7 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.TRANSACCIOID)}">
           <td>
-          ${transaccio.transaccioID}
+          <c:out value="${transaccio.transaccioID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.TRANSACCIOMULTIPLEID)}">
@@ -39,12 +39,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.NOM)}">
           <td>
-          ${transaccio.nom}
+          <c:out value="${transaccio.nom}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.TRANSACTIONWEBID)}">
           <td>
-          ${transaccio.transactionWebId}
+          <c:out value="${transaccio.transactionWebId}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.DATAINICI)}">
@@ -71,12 +71,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.IP)}">
           <td>
-          ${transaccio.ip}
+          <c:out value="${transaccio.ip}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.RETURNURL)}">
           <td>
-          ${transaccio.returnUrl}
+          <c:out value="${transaccio.returnUrl}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATCODI)}">
@@ -89,12 +89,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATMISSATGE)}">
           <td>
-          ${transaccio.estatMissatge}
+          <c:out value="${transaccio.estatMissatge}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ESTATEXCEPCIO)}">
           <td>
-          ${transaccio.estatExcepcio}
+          <c:out value="${transaccio.estatExcepcio}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FITXERESCANEJATID)}">
@@ -106,7 +106,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHESCANEIG)}">
           <td>
-          ${transaccio.hashEscaneig}
+          <c:out value="${transaccio.hashEscaneig}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FITXERSIGNATURAID)}">
@@ -118,12 +118,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.HASHFIRMA)}">
           <td>
-          ${transaccio.hashFirma}
+          <c:out value="${transaccio.hashFirma}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANPAPERSIZE)}">
           <td>
-          ${transaccio.infoScanPaperSize}
+          <c:out value="${transaccio.infoScanPaperSize}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANPIXELTYPE)}">
@@ -136,7 +136,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANRESOLUCIOPPP)}">
           <td>
-          ${transaccio.infoScanResolucioPpp}
+          <c:out value="${transaccio.infoScanResolucioPpp}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.INFOSCANOCR)}">
@@ -182,27 +182,27 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.LANGUAGEUI)}">
           <td>
-          ${transaccio.languageUI}
+          <c:out value="${transaccio.languageUI}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.FUNCIONARIUSERNAME)}">
           <td>
-          ${transaccio.funcionariUsername}
+          <c:out value="${transaccio.funcionariUsername}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARINOM)}">
           <td>
-          ${transaccio.signParamFuncionariNom}
+          <c:out value="${transaccio.signParamFuncionariNom}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARINIF)}">
           <td>
-          ${transaccio.signParamFuncionariNif}
+          <c:out value="${transaccio.signParamFuncionariNif}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.SIGNPARAMFUNCIONARIDIR3)}">
           <td>
-          ${transaccio.signParamFuncionariDir3}
+          <c:out value="${transaccio.signParamFuncionariDir3}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMDOCESTATELABORA)}">
@@ -223,42 +223,42 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMINTERESSATS)}">
           <td>
-          ${transaccio.arxiuReqParamInteressats}
+          <c:out value="${transaccio.arxiuReqParamInteressats}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMCIUTADANIF)}">
           <td>
-          ${transaccio.arxiuReqParamCiutadaNif}
+          <c:out value="${transaccio.arxiuReqParamCiutadaNif}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMCIUTADANOM)}">
           <td>
-          ${transaccio.arxiuReqParamCiutadaNom}
+          <c:out value="${transaccio.arxiuReqParamCiutadaNom}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUREQPARAMORGANS)}">
           <td>
-          ${transaccio.arxiuReqParamOrgans}
+          <c:out value="${transaccio.arxiuReqParamOrgans}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTCODI)}">
           <td>
-          ${transaccio.arxiuOptParamProcedimentCodi}
+          <c:out value="${transaccio.arxiuOptParamProcedimentCodi}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMPROCEDIMENTNOM)}">
           <td>
-          ${transaccio.arxiuOptParamProcedimentNom}
+          <c:out value="${transaccio.arxiuOptParamProcedimentNom}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMSERIEDOCUMENTAL)}">
           <td>
-          ${transaccio.arxiuOptParamSerieDocumental}
+          <c:out value="${transaccio.arxiuOptParamSerieDocumental}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.ARXIUOPTPARAMCUSTODYOREXPEDIENTID)}">
           <td>
-          ${transaccio.arxiuOptParamCustodyOrExpedientId}
+          <c:out value="${transaccio.arxiuOptParamCustodyOrExpedientId}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioFields.PERFILID)}">

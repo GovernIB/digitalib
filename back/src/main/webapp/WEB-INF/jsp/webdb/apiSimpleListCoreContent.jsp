@@ -26,12 +26,12 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.APISIMPLEID)}">
           <td>
-          ${apiSimple.apiSimpleID}
+          <c:out value="${apiSimple.apiSimpleID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.NOM)}">
           <td>
-          ${apiSimple.nom}
+          <c:out value="${apiSimple.nom}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.URL)}">
@@ -44,22 +44,22 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.USERNAME)}">
           <td>
-          ${apiSimple.username}
+          <c:out value="${apiSimple.username}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.CONTRASENYA)}">
           <td>
-          ${apiSimple.contrasenya}
+          <c:out value="${apiSimple.contrasenya}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.PERFIL)}">
           <td>
-          ${apiSimple.perfil}
+          <c:out value="${apiSimple.perfil}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.CONFIGDEFIRMA)}">
           <td>
-          ${apiSimple.configDeFirma}
+          <c:out value="${apiSimple.configDeFirma}" />
           </td>
         </c:if>
 

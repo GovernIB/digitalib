@@ -149,16 +149,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
       }
     }
     
-    if (__vr.getFieldErrorCount(INFOSCANLANGUAGEDOC) == 0) {
-      String val = String.valueOf(__vr.getFieldValue(__target__,INFOSCANLANGUAGEDOC));
-      if (val != null && val.trim().length() != 0) {
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(ca|es|gl|eu|en|fr|it|de)");
-        if (!p.matcher(val).matches()) {
-          __vr.rejectValue(INFOSCANLANGUAGEDOC, "genapp.validation.malformed",
-             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(INFOSCANLANGUAGEDOC)));
-        }
-      }
-    }
 
     if (__vr.getFieldErrorCount(INFOSCANDOCUMENTTIPUS) == 0) {
       java.lang.String __infoscandocumenttipus = (java.lang.String)__vr.getFieldValue(__target__,INFOSCANDOCUMENTTIPUS);
@@ -168,16 +158,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
       }
     }
     
-    if (__vr.getFieldErrorCount(INFOSCANDOCUMENTTIPUS) == 0) {
-      String val = String.valueOf(__vr.getFieldValue(__target__,INFOSCANDOCUMENTTIPUS));
-      if (val != null && val.trim().length() != 0) {
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(TD01|TD02|TD03|TD04|TD05|TD06|TD07|TD08|TD09|TD10|TD11|TD12|TD13|TD14|TD15|TD16|TD17|TD18|TD19|TD20|TD51|TD52|TD53|TD54|TD55|TD56|TD57|TD58|TD59|TD60|TD61|TD62|TD63|TD64|TD65|TD66|TD67|TD68|TD69|TD99)");
-        if (!p.matcher(val).matches()) {
-          __vr.rejectValue(INFOSCANDOCUMENTTIPUS, "genapp.validation.malformed",
-             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(INFOSCANDOCUMENTTIPUS)));
-        }
-      }
-    }
 
     if (__vr.getFieldErrorCount(LANGUAGEUI) == 0) {
       java.lang.String __languageui = (java.lang.String)__vr.getFieldValue(__target__,LANGUAGEUI);
@@ -227,16 +207,6 @@ public class TransaccioValidator<T> implements TransaccioFields {
       }
     }
     
-    if (__vr.getFieldErrorCount(ARXIUREQPARAMDOCESTATELABORA) == 0) {
-      String val = String.valueOf(__vr.getFieldValue(__target__,ARXIUREQPARAMDOCESTATELABORA));
-      if (val != null && val.trim().length() != 0) {
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(EE01|EE02|EE03|EE04|EE99)");
-        if (!p.matcher(val).matches()) {
-          __vr.rejectValue(ARXIUREQPARAMDOCESTATELABORA, "genapp.validation.malformed",
-             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMDOCESTATELABORA)));
-        }
-      }
-    }
 
     if (__vr.getFieldErrorCount(ARXIUREQPARAMINTERESSATS) == 0) {
       java.lang.String __arxiureqparaminteressats = (java.lang.String)__vr.getFieldValue(__target__,ARXIUREQPARAMINTERESSATS);

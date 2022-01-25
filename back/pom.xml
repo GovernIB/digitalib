@@ -87,7 +87,7 @@
     <dependency>
       <groupId>org.fundaciobit.genapp</groupId>
       <artifactId>genapp-web</artifactId>
-      <version>1.0</version>
+      <version>1.0.3</version>
       <scope>compile</scope>
     </dependency>
 

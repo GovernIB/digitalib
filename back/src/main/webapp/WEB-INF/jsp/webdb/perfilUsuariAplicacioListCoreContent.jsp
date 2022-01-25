@@ -26,7 +26,7 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilUsuariAplicacioFields.PERFILUSRAPPID)}">
           <td>
-          ${perfilUsuariAplicacio.perfilUsrAppID}
+          <c:out value="${perfilUsuariAplicacio.perfilUsrAppID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PerfilUsuariAplicacioFields.PERFILID)}">

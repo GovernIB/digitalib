@@ -66,7 +66,7 @@ public class PluginJPAManager
 		return list.toArray(new Plugin[list.size()]);
 	};
 
-	public synchronized Plugin create( java.lang.String _codi_, java.lang.String _nom_, java.lang.String _descripcio_, java.lang.String _classe_, java.lang.String _properties_, boolean _actiu_, int _tipus_, java.lang.Integer _ordre_) throws I18NException {
+	public Plugin create( java.lang.String _codi_, java.lang.String _nom_, java.lang.String _descripcio_, java.lang.String _classe_, java.lang.String _properties_, boolean _actiu_, int _tipus_, java.lang.Integer _ordre_) throws I18NException {
 		PluginJPA __bean =  new PluginJPA(_codi_,_nom_,_descripcio_,_classe_,_properties_,_actiu_,_tipus_,_ordre_);
 		return create(__bean);
 	}

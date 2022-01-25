@@ -689,7 +689,7 @@ public class TransaccioController
       return null;
     }
     try {
-      Transaccio transaccio = transaccioEjb.findByPrimaryKey(transaccioID);
+      Transaccio transaccio = findByPrimaryKey(request, transaccioID);
       if (transaccio == null) {
         String __msg =createMessageError(request, "error.notfound", transaccioID);
         return getRedirectWhenDelete(request, transaccioID, new Exception(__msg));
@@ -783,8 +783,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("transaccioID");
-
+    initDisallowedFields(binder, "transaccio.transaccioID");
   }
 
   public TransaccioWebValidator getWebValidator() {

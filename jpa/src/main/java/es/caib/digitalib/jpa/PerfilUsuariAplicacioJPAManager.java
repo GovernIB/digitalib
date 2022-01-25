@@ -66,7 +66,7 @@ public class PerfilUsuariAplicacioJPAManager
 		return list.toArray(new PerfilUsuariAplicacio[list.size()]);
 	};
 
-	public synchronized PerfilUsuariAplicacio create( long _perfilID_, long _usuariAplicacioID_) throws I18NException {
+	public PerfilUsuariAplicacio create( long _perfilID_, long _usuariAplicacioID_) throws I18NException {
 		PerfilUsuariAplicacioJPA __bean =  new PerfilUsuariAplicacioJPA(_perfilID_,_usuariAplicacioID_);
 		return create(__bean);
 	}

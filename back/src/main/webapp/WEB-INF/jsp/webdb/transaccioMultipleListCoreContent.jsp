@@ -26,12 +26,12 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioMultipleFields.TRANSMULTIPLEID)}">
           <td>
-          ${transaccioMultiple.transmultipleid}
+          <c:out value="${transaccioMultiple.transmultipleid}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioMultipleFields.DESCRIPCIO)}">
           <td>
-          ${transaccioMultiple.descripcio}
+          <c:out value="${transaccioMultiple.descripcio}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,TransaccioMultipleFields.FITXERESCANEJATID)}">

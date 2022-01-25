@@ -66,7 +66,7 @@ public class TransaccioMultipleJPAManager
 		return list.toArray(new TransaccioMultiple[list.size()]);
 	};
 
-	public synchronized TransaccioMultiple create( long _transmultipleid_, java.lang.String _descripcio_, java.lang.Long _fitxerEscanejatID_) throws I18NException {
+	public TransaccioMultiple create( long _transmultipleid_, java.lang.String _descripcio_, java.lang.Long _fitxerEscanejatID_) throws I18NException {
 		TransaccioMultipleJPA __bean =  new TransaccioMultipleJPA(_transmultipleid_,_descripcio_,_fitxerEscanejatID_);
 		return create(__bean);
 	}

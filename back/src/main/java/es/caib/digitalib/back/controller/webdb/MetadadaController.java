@@ -417,7 +417,7 @@ public class MetadadaController
       return null;
     }
     try {
-      Metadada metadada = metadadaEjb.findByPrimaryKey(metadadaid);
+      Metadada metadada = findByPrimaryKey(request, metadadaid);
       if (metadada == null) {
         String __msg =createMessageError(request, "error.notfound", metadadaid);
         return getRedirectWhenDelete(request, metadadaid, new Exception(__msg));
@@ -511,8 +511,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("metadadaid");
-
+    initDisallowedFields(binder, "metadada.metadadaid");
   }
 
   public MetadadaWebValidator getWebValidator() {

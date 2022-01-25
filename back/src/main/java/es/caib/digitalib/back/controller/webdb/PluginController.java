@@ -416,7 +416,7 @@ public class PluginController
       return null;
     }
     try {
-      Plugin plugin = pluginEjb.findByPrimaryKey(pluginID);
+      Plugin plugin = findByPrimaryKey(request, pluginID);
       if (plugin == null) {
         String __msg =createMessageError(request, "error.notfound", pluginID);
         return getRedirectWhenDelete(request, pluginID, new Exception(__msg));
@@ -510,8 +510,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("pluginID");
-
+    initDisallowedFields(binder, "plugin.pluginID");
   }
 
   public PluginWebValidator getWebValidator() {

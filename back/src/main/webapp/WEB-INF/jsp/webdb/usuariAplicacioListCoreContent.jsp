@@ -26,27 +26,27 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.USUARIAPLICACIOID)}">
           <td>
-          ${usuariAplicacio.usuariAplicacioID}
+          <c:out value="${usuariAplicacio.usuariAplicacioID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.USERNAME)}">
           <td>
-          ${usuariAplicacio.username}
+          <c:out value="${usuariAplicacio.username}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.CONTRASENYA)}">
           <td>
-          ${usuariAplicacio.contrasenya}
+          <c:out value="${usuariAplicacio.contrasenya}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.EMAILADMIN)}">
           <td>
-          ${usuariAplicacio.emailAdmin}
+          <c:out value="${usuariAplicacio.emailAdmin}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.DESCRIPCIO)}">
           <td>
-          ${usuariAplicacio.descripcio}
+          <c:out value="${usuariAplicacio.descripcio}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariAplicacioFields.ACTIU)}">

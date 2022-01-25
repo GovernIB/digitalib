@@ -451,7 +451,7 @@ public class PluginCridadaController
       return null;
     }
     try {
-      PluginCridada pluginCridada = pluginCridadaEjb.findByPrimaryKey(pluginCridadaID);
+      PluginCridada pluginCridada = findByPrimaryKey(request, pluginCridadaID);
       if (pluginCridada == null) {
         String __msg =createMessageError(request, "error.notfound", pluginCridadaID);
         return getRedirectWhenDelete(request, pluginCridadaID, new Exception(__msg));
@@ -545,8 +545,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("pluginCridadaID");
-
+    initDisallowedFields(binder, "pluginCridada.pluginCridadaID");
   }
 
   public PluginCridadaWebValidator getWebValidator() {

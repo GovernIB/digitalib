@@ -802,6 +802,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     public void postList(HttpServletRequest request, ModelAndView mav,
             TransaccioFilterForm filterForm, List<Transaccio> list) throws I18NException {
 
+
+        
         // Afegir boto d'esborrar per transaccions buides
         filterForm.getAdditionalButtonsByPK().clear();
         boolean delete;
@@ -875,7 +877,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
                 filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(),
                         additionalButton);
-            }
+            } 
 
             if (!isAdmin && transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
 
@@ -888,10 +890,15 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                         additionalButton);
 
             }
+            
+            
 
         }
-
+        
         postListNomPersonaAplicacio(request, filterForm, list, isAdmin);
+        
+        
+       
 
     }
 

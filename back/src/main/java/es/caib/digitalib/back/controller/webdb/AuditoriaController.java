@@ -416,7 +416,7 @@ public class AuditoriaController
       return null;
     }
     try {
-      Auditoria auditoria = auditoriaEjb.findByPrimaryKey(auditoriaID);
+      Auditoria auditoria = findByPrimaryKey(request, auditoriaID);
       if (auditoria == null) {
         String __msg =createMessageError(request, "error.notfound", auditoriaID);
         return getRedirectWhenDelete(request, auditoriaID, new Exception(__msg));
@@ -510,8 +510,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("auditoriaID");
-
+    initDisallowedFields(binder, "auditoria.auditoriaID");
   }
 
   public AuditoriaWebValidator getWebValidator() {

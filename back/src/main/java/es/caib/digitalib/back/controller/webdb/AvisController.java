@@ -475,7 +475,7 @@ public class AvisController
       return null;
     }
     try {
-      Avis avis = avisEjb.findByPrimaryKey(avisID);
+      Avis avis = findByPrimaryKey(request, avisID);
       if (avis == null) {
         String __msg =createMessageError(request, "error.notfound", avisID);
         return getRedirectWhenDelete(request, avisID, new Exception(__msg));
@@ -569,8 +569,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("avisID");
-
+    initDisallowedFields(binder, "avis.avisID");
   }
 
   public AvisWebValidator getWebValidator() {

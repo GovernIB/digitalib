@@ -531,7 +531,7 @@ public class ConfiguracioGrupController
       return null;
     }
     try {
-      ConfiguracioGrup configuracioGrup = configuracioGrupEjb.findByPrimaryKey(configuracioGrupID);
+      ConfiguracioGrup configuracioGrup = findByPrimaryKey(request, configuracioGrupID);
       if (configuracioGrup == null) {
         String __msg =createMessageError(request, "error.notfound", configuracioGrupID);
         return getRedirectWhenDelete(request, configuracioGrupID, new Exception(__msg));
@@ -625,8 +625,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("configuracioGrupID");
-
+    initDisallowedFields(binder, "configuracioGrup.configuracioGrupID");
   }
 
   public ConfiguracioGrupWebValidator getWebValidator() {

@@ -26,12 +26,12 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.CONFIGURACIOFIRMAID)}">
           <td>
-          ${configuracioFirma.configuracioFirmaID}
+          <c:out value="${configuracioFirma.configuracioFirmaID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.NOM)}">
           <td>
-          ${configuracioFirma.nom}
+          <c:out value="${configuracioFirma.nom}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PLUGINFIRMASERVIDORID)}">
@@ -93,22 +93,22 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIER)}">
           <td>
-          ${configuracioFirma.policyIdentifier}
+          <c:out value="${configuracioFirma.policyIdentifier}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIERHASH)}">
           <td>
-          ${configuracioFirma.policyIdentifierHash}
+          <c:out value="${configuracioFirma.policyIdentifierHash}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYIDENTIFIERHASHALGORITHM)}">
           <td>
-          ${configuracioFirma.policyIdentifierHashAlgorithm}
+          <c:out value="${configuracioFirma.policyIdentifierHashAlgorithm}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POLICYURLDOCUMENT)}">
           <td>
-          ${configuracioFirma.policyUrlDocument}
+          <c:out value="${configuracioFirma.policyUrlDocument}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.POSICIOTAULAFIRMESID)}">
@@ -137,7 +137,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioFirmaFields.PROPIETATSTAULAFIRMES)}">
           <td>
-          ${configuracioFirma.propietatsTaulaFirmes}
+          <c:out value="${configuracioFirma.propietatsTaulaFirmes}" />
           </td>
         </c:if>
 

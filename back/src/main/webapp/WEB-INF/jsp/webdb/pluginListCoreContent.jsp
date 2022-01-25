@@ -26,32 +26,32 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.PLUGINID)}">
           <td>
-          ${plugin.pluginID}
+          <c:out value="${plugin.pluginID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.CODI)}">
           <td>
-          ${plugin.codi}
+          <c:out value="${plugin.codi}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.NOM)}">
           <td>
-          ${plugin.nom}
+          <c:out value="${plugin.nom}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.DESCRIPCIO)}">
           <td>
-          ${plugin.descripcio}
+          <c:out value="${plugin.descripcio}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.CLASSE)}">
           <td>
-          ${plugin.classe}
+          <c:out value="${plugin.classe}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.PROPERTIES)}">
           <td>
-          ${plugin.properties}
+          <c:out value="${plugin.properties}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.ACTIU)}">
@@ -69,7 +69,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.ORDRE)}">
           <td>
-          ${plugin.ordre}
+          <c:out value="${plugin.ordre}" />
           </td>
         </c:if>
 

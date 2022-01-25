@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.KeyValue;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -35,12 +36,13 @@ import es.caib.digitalib.model.fields.UsuariPersonaQueryPath;
  */
 public abstract class AbstractTransaccioEstadisticaAdminController
         extends AbstractTransaccioAdminController {
+    
 
     public static final int CONF_GRUP_COLUMN = 3;
 
     public static final int FITXER_NOM_COLUMN = 4;
 
-    public static final int FITXER_SIZE_COLUMN = 6;
+    public static final int FITXER_SIZE_COLUMN = 5;
 
     public String getTipus() {
         return isUtilitzatPerAplicacio() ? "aplicacio" : "persona";
@@ -78,7 +80,9 @@ public abstract class AbstractTransaccioEstadisticaAdminController
 
             hiddens.addAll(Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
 
+            hiddens.remove(ESTATCODI);
             hiddens.remove(TRANSACCIOID);
+            hiddens.remove(SIGNPARAMFUNCIONARIDIR3);
             hiddens.remove(FUNCIONARIUSERNAME);
 
             if (isUtilitzatPerAplicacio()) {
@@ -102,13 +106,12 @@ public abstract class AbstractTransaccioEstadisticaAdminController
 
             // filterForm.setDefaultOrderBy(null);
 
-            filterForm.getGroupByFields().remove(DATAINICI);
+            //filterForm.getGroupByFields().remove(DATAINICI);
             filterForm.getGroupByFields().remove(DATAFI);
             filterForm.getGroupByFields().remove(PERFILID);
             
 
             filterForm.getGroupByFields().remove(INFOSCANPAPERSIZE);
-
             filterForm.getGroupByFields().remove(INFOSCANPIXELTYPE);
             filterForm.getGroupByFields().remove(INFOSCANRESOLUCIOPPP);
 
@@ -116,6 +119,10 @@ public abstract class AbstractTransaccioEstadisticaAdminController
             filterByFields.add(DATAINICI);
             filterByFields.add(ESTATCODI);
             filterByFields.add(FUNCIONARIUSERNAME);
+            filterByFields.add(ESTATMISSATGE);
+            
+
+            
             /*
              * if (isUtilitzatPerAplicacio()) { filterByFields.add(USUARIAPLICACIOID); } else {
              * filterByFields.add(USUARIPERSONAID); }
@@ -124,27 +131,34 @@ public abstract class AbstractTransaccioEstadisticaAdminController
             filterForm.setFilterByFields(filterByFields);
 
 
+            
+            
+
+            
 
             if (!isUtilitzatPerAplicacio()) {
-                AdditionalField<Long, String> adfield3 = new AdditionalField<Long, String>();
-                adfield3.setPosition(CONF_GRUP_COLUMN);
-                adfield3.setEscapeXml(false);
-                adfield3.setCodeName(ConfiguracioGrupFields._TABLE_MODEL + "."
+                AdditionalField<Long, String> adfield4 = new AdditionalField<Long, String>();
+                adfield4.setPosition(CONF_GRUP_COLUMN);
+                adfield4.setEscapeXml(false);
+                adfield4.setCodeName(ConfiguracioGrupFields._TABLE_MODEL + "."
                         + ConfiguracioGrupFields._TABLE_MODEL);
                 // Els valors s'ompliran al mètode postList()
-                adfield3.setValueMap(new HashMap<Long, String>());
+                adfield4.setValueMap(new HashMap<Long, String>());
 
-                filterForm.addAdditionalField(adfield3);
+                filterForm.addAdditionalField(adfield4);
             }
 
-            AdditionalField<Long, String> adfield4 = new AdditionalField<Long, String>();
-            adfield4.setPosition(FITXER_NOM_COLUMN);
-            adfield4.setValueField(new TransaccioQueryPath().FITXERSIGNATURA().NOM());
-            adfield4.setEscapeXml(false);
-            adfield4.setCodeName(FITXERSIGNATURAID.fullName);
-            adfield4.setOrderBy(new TransaccioQueryPath().FITXERSIGNATURA().NOM());
+            AdditionalField<Long, String> adfield5 = new AdditionalField<Long, String>();
+            adfield5.setPosition(FITXER_NOM_COLUMN);
+            adfield5.setValueField(new TransaccioQueryPath().FITXERSIGNATURA().NOM());
+            adfield5.setEscapeXml(false);
+            adfield5.setCodeName(FITXERSIGNATURAID.fullName);
+            adfield5.setOrderBy(new TransaccioQueryPath().FITXERSIGNATURA().NOM());
 
-            filterForm.addAdditionalField(adfield4);
+            filterForm.addAdditionalField(adfield5);
+            
+          
+            
 
             AdditionalField<Long, Long> adfield6 = new AdditionalField<Long, Long>();
             adfield6.setPosition(FITXER_SIZE_COLUMN);
@@ -230,6 +244,25 @@ public abstract class AbstractTransaccioEstadisticaAdminController
             }
 
         }
+        
+        boolean showErrorColumn = false;
+        for (Transaccio t : list) {
+
+            if (t.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_ERROR) {
+                // Afegir Columna Error
+                showErrorColumn = true;
+                break;
+            }
+        }
+        
+        
+        if (showErrorColumn) {
+            filterForm.getHiddenFields().remove(ESTATMISSATGE);
+        } else {
+            filterForm.getHiddenFields().add(ESTATMISSATGE);
+        }
+        
+        
 
     }
 

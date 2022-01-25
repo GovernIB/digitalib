@@ -441,7 +441,7 @@ public class PerfilUsuariAplicacioController
       return null;
     }
     try {
-      PerfilUsuariAplicacio perfilUsuariAplicacio = perfilUsuariAplicacioEjb.findByPrimaryKey(perfilUsrAppID);
+      PerfilUsuariAplicacio perfilUsuariAplicacio = findByPrimaryKey(request, perfilUsrAppID);
       if (perfilUsuariAplicacio == null) {
         String __msg =createMessageError(request, "error.notfound", perfilUsrAppID);
         return getRedirectWhenDelete(request, perfilUsrAppID, new Exception(__msg));
@@ -535,8 +535,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("perfilUsrAppID");
-
+    initDisallowedFields(binder, "perfilUsuariAplicacio.perfilUsrAppID");
   }
 
   public PerfilUsuariAplicacioWebValidator getWebValidator() {

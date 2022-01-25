@@ -26,12 +26,12 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.CONFIGURACIOGRUPID)}">
           <td>
-          ${configuracioGrup.configuracioGrupID}
+          <c:out value="${configuracioGrup.configuracioGrupID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.NOM)}">
           <td>
-          ${configuracioGrup.nom}
+          <c:out value="${configuracioGrup.nom}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.SUPORTWEB)}">
@@ -44,12 +44,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.SUPORTEMAIL)}">
           <td>
-          ${configuracioGrup.suportEmail}
+          <c:out value="${configuracioGrup.suportEmail}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.SUPORTTELEFON)}">
           <td>
-          ${configuracioGrup.suportTelefon}
+          <c:out value="${configuracioGrup.suportTelefon}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.LOGOHEADERID)}">
@@ -68,12 +68,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.ADREZA)}">
           <td>
-          ${configuracioGrup.adreza}
+          <c:out value="${configuracioGrup.adreza}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.CODIDIR3PERDEFECTE)}">
           <td>
-          ${configuracioGrup.codiDir3PerDefecte}
+          <c:out value="${configuracioGrup.codiDir3PerDefecte}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ConfiguracioGrupFields.PERFILNOMESESCANEIGID)}">

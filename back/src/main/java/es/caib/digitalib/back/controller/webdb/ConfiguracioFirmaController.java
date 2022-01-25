@@ -598,7 +598,7 @@ public class ConfiguracioFirmaController
       return null;
     }
     try {
-      ConfiguracioFirma configuracioFirma = configuracioFirmaEjb.findByPrimaryKey(configuracioFirmaID);
+      ConfiguracioFirma configuracioFirma = findByPrimaryKey(request, configuracioFirmaID);
       if (configuracioFirma == null) {
         String __msg =createMessageError(request, "error.notfound", configuracioFirmaID);
         return getRedirectWhenDelete(request, configuracioFirmaID, new Exception(__msg));
@@ -692,8 +692,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("configuracioFirmaID");
-
+    initDisallowedFields(binder, "configuracioFirma.configuracioFirmaID");
   }
 
   public ConfiguracioFirmaWebValidator getWebValidator() {

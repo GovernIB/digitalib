@@ -388,7 +388,7 @@ public class ApiSimpleController
       return null;
     }
     try {
-      ApiSimple apiSimple = apiSimpleEjb.findByPrimaryKey(apiSimpleID);
+      ApiSimple apiSimple = findByPrimaryKey(request, apiSimpleID);
       if (apiSimple == null) {
         String __msg =createMessageError(request, "error.notfound", apiSimpleID);
         return getRedirectWhenDelete(request, apiSimpleID, new Exception(__msg));
@@ -482,8 +482,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("apiSimpleID");
-
+    initDisallowedFields(binder, "apiSimple.apiSimpleID");
   }
 
   public ApiSimpleWebValidator getWebValidator() {

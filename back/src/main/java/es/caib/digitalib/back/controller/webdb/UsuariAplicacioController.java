@@ -400,7 +400,7 @@ public class UsuariAplicacioController
       return null;
     }
     try {
-      UsuariAplicacio usuariAplicacio = usuariAplicacioEjb.findByPrimaryKey(usuariAplicacioID);
+      UsuariAplicacio usuariAplicacio = findByPrimaryKey(request, usuariAplicacioID);
       if (usuariAplicacio == null) {
         String __msg =createMessageError(request, "error.notfound", usuariAplicacioID);
         return getRedirectWhenDelete(request, usuariAplicacioID, new Exception(__msg));
@@ -494,8 +494,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("usuariAplicacioID");
-
+    initDisallowedFields(binder, "usuariAplicacio.usuariAplicacioID");
   }
 
   public UsuariAplicacioWebValidator getWebValidator() {

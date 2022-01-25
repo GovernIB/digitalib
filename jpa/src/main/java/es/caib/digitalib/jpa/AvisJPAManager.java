@@ -66,7 +66,7 @@ public class AvisJPAManager
 		return list.toArray(new Avis[list.size()]);
 	};
 
-	public synchronized Avis create( long _descripcioID_, int _tipus_, java.sql.Timestamp _dataInici_, java.sql.Timestamp _dataFi_, java.lang.Long _configGrupID_, boolean _bloquejar_) throws I18NException {
+	public Avis create( long _descripcioID_, int _tipus_, java.sql.Timestamp _dataInici_, java.sql.Timestamp _dataFi_, java.lang.Long _configGrupID_, boolean _bloquejar_) throws I18NException {
 		AvisJPA __bean =  new AvisJPA(_descripcioID_,_tipus_,_dataInici_,_dataFi_,_configGrupID_,_bloquejar_);
 		return create(__bean);
 	}

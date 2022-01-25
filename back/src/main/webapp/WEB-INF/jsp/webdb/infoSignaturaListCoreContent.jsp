@@ -26,7 +26,7 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.INFOSIGNATURAID)}">
           <td>
-          ${infoSignatura.infoSignaturaID}
+          <c:out value="${infoSignatura.infoSignaturaID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.SIGNOPERATION)}">
@@ -39,12 +39,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.SIGNTYPE)}">
           <td>
-          ${infoSignatura.signType}
+          <c:out value="${infoSignatura.signType}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.SIGNALGORITHM)}">
           <td>
-          ${infoSignatura.signAlgorithm}
+          <c:out value="${infoSignatura.signAlgorithm}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.SIGNMODE)}">
@@ -79,32 +79,32 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENITIPOFIRMA)}">
           <td>
-          ${infoSignatura.eniTipoFirma}
+          <c:out value="${infoSignatura.eniTipoFirma}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENIPERFILFIRMA)}">
           <td>
-          ${infoSignatura.eniPerfilFirma}
+          <c:out value="${infoSignatura.eniPerfilFirma}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENIROLFIRMA)}">
           <td>
-          ${infoSignatura.eniRolFirma}
+          <c:out value="${infoSignatura.eniRolFirma}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENISIGNERNAME)}">
           <td>
-          ${infoSignatura.eniSignerName}
+          <c:out value="${infoSignatura.eniSignerName}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENISIGNERADMINISTRATIONID)}">
           <td>
-          ${infoSignatura.eniSignerAdministrationId}
+          <c:out value="${infoSignatura.eniSignerAdministrationId}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.ENISIGNLEVEL)}">
           <td>
-          ${infoSignatura.eniSignLevel}
+          <c:out value="${infoSignatura.eniSignLevel}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoSignaturaFields.CHECKADMINISTRATIONIDOFSIGNER)}">

@@ -703,7 +703,7 @@ public class PerfilController
       return null;
     }
     try {
-      Perfil perfil = perfilEjb.findByPrimaryKey(perfilID);
+      Perfil perfil = findByPrimaryKey(request, perfilID);
       if (perfil == null) {
         String __msg =createMessageError(request, "error.notfound", perfilID);
         return getRedirectWhenDelete(request, perfilID, new Exception(__msg));
@@ -797,8 +797,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("perfilID");
-
+    initDisallowedFields(binder, "perfil.perfilID");
   }
 
   public PerfilWebValidator getWebValidator() {

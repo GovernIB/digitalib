@@ -26,7 +26,7 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,MetadadaFields.METADADAID)}">
           <td>
-          ${metadada.metadadaid}
+          <c:out value="${metadada.metadadaid}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,MetadadaFields.TRANSACCIOID)}">
@@ -39,12 +39,12 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,MetadadaFields.NOM)}">
           <td>
-          ${metadada.nom}
+          <c:out value="${metadada.nom}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,MetadadaFields.VALOR)}">
           <td>
-          ${metadada.valor}
+          <c:out value="${metadada.valor}" />
           </td>
         </c:if>
 

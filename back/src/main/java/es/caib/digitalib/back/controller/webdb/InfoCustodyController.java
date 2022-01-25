@@ -388,7 +388,7 @@ public class InfoCustodyController
       return null;
     }
     try {
-      InfoCustody infoCustody = infoCustodyEjb.findByPrimaryKey(infoCustodyID);
+      InfoCustody infoCustody = findByPrimaryKey(request, infoCustodyID);
       if (infoCustody == null) {
         String __msg =createMessageError(request, "error.notfound", infoCustodyID);
         return getRedirectWhenDelete(request, infoCustodyID, new Exception(__msg));
@@ -482,8 +482,7 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("infoCustodyID");
-
+    initDisallowedFields(binder, "infoCustody.infoCustodyID");
   }
 
   public InfoCustodyWebValidator getWebValidator() {

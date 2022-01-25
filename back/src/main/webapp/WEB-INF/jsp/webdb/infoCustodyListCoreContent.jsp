@@ -26,27 +26,27 @@
 
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.INFOCUSTODYID)}">
           <td>
-          ${infoCustody.infoCustodyID}
+          <c:out value="${infoCustody.infoCustodyID}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CUSTODYID)}">
           <td>
-          ${infoCustody.custodyId}
+          <c:out value="${infoCustody.custodyId}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ARXIUEXPEDIENTID)}">
           <td>
-          ${infoCustody.arxiuExpedientId}
+          <c:out value="${infoCustody.arxiuExpedientId}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ARXIUDOCUMENTID)}">
           <td>
-          ${infoCustody.arxiuDocumentId}
+          <c:out value="${infoCustody.arxiuDocumentId}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.CSV)}">
           <td>
-          ${infoCustody.csv}
+          <c:out value="${infoCustody.csv}" />
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InfoCustodyFields.ORIGINALFILEURL)}">

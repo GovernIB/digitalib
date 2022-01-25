@@ -66,7 +66,7 @@ public class MetadadaJPAManager
 		return list.toArray(new Metadada[list.size()]);
 	};
 
-	public synchronized Metadada create( long _transaccioID_, java.lang.String _nom_, java.lang.String _valor_) throws I18NException {
+	public Metadada create( long _transaccioID_, java.lang.String _nom_, java.lang.String _valor_) throws I18NException {
 		MetadadaJPA __bean =  new MetadadaJPA(_transaccioID_,_nom_,_valor_);
 		return create(__bean);
 	}
