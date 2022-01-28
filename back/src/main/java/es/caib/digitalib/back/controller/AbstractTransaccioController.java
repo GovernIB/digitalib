@@ -18,7 +18,6 @@ import org.apache.commons.lang.StringUtils;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.KeyValue;
 import org.fundaciobit.genapp.common.StringKeyValue;
-import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.GroupByItem;
@@ -281,11 +280,15 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             }
 
             filterForm.setGroupByFields(campsFiltre);
+            
+
         }
+        
         filterForm.setVisibleMultipleSelection(false);
         filterForm.setAddButtonVisible(false);
         filterForm.setDeleteButtonVisible(false);
         filterForm.setEditButtonVisible(false);
+
 
         return filterForm;
     }
@@ -601,15 +604,10 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     @Override
     public void delete(HttpServletRequest request, Transaccio transaccio)
             throws Exception, I18NException {
-
         // XYZ ZZZ Verificar que es pot esborrar
         // (1) No te fitxer
         // (2) Esta en error i té més d'un dia
-        Set<Long> filesToDelete = transaccioLogicaEjb.deleteFull(transaccio, null,
-                LoginInfo.getInstance().getUsername());
-
-        FileSystemManager.eliminarArxius(filesToDelete);
-
+        transaccioLogicaEjb.deleteFull(transaccio, null, LoginInfo.getInstance().getUsername());
     }
 
     @RequestMapping(value = "/descarregar/{transaccioID}", method = RequestMethod.GET)
@@ -656,7 +654,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             return;
         }
 
-        TransaccioJPA transaccio = transaccioLogicaEjb.findByPrimaryKey(transaccioID);
+        TransaccioJPA transaccio = transaccioLogicaEjb.findByPrimaryKeyFull(transaccioID);
 
         InfoCustodyJPA infoCustody = infoCustodyEjb
                 .findByPrimaryKey(transaccio.getInfoCustodyID());

@@ -12,7 +12,7 @@ public abstract class DigitalIBBaseController<I extends IGenAppEntity, PK extend
   extends CommonBaseController<I, PK> {
     
     
-    
+
     public boolean isVisibleExportData() {
         return false;
     }

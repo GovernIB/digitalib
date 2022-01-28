@@ -77,6 +77,18 @@
       <!-- escanejos simples i s'ignoren els Separadors. -->
       es.caib.digitalib.allowedmassivescaninweb=true
 	  
+	  <!-- Neteja els fitxers de les transaccions realitzades via WEB en les 
+	       que hagin passat més de N dies des de la seva creacio. La neteja es
+		   realitzarà a les 5:00 durant 4 minuts. N es el valor d'aquesta propietat.
+		   Si aquesta propietat esta buida llavors no es fa neteja alguna. -->
+	  es.caib.digitalib.transactioncleanfilespersonindays=
+
+	  <!-- Neteja els fitxers de les transaccions realitzades via REST en les 
+	       que hagin passat més de N dies des de la seva creacio. La neteja es
+		   realitzarà a les 4:00 durant 4 minuts. N es el valor d'aquesta propietat. 
+		   Si aquesta propietat esta buida llavors no es fa neteja alguna. -->	  
+	  es.caib.digitalib.transactioncleanfilesappindays=
+	  
 	  
 	  
       

@@ -2,12 +2,16 @@ package es.caib.digitalib.utils;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
+
 /**
  * 
  * @author anadal
  * 
  */
 public class Configuracio implements Constants {
+    
+    public static final Logger log = Logger.getLogger(Configuracio.class);
 
     public static boolean isCAIB() {
         return Boolean.getBoolean(DIGITALIB_PROPERTY_BASE + "iscaib");
@@ -113,10 +117,9 @@ public class Configuracio implements Constants {
             try {
                 return Long.valueOf(strVal);
             } catch (NumberFormatException nfe) {
-                System.err.println(
-                        "Valor per la propietat 'transactionexpirationtimeinms' no correspon a un número: "
-                                + strVal);
-                nfe.printStackTrace(System.err);
+                String msg = "Valor per la propietat 'transactionexpirationtimeinms' no correspon a un número: "
+                                + strVal;
+                log.error(msg, nfe);
                 return DEFAULT_EXPIRATION_TIME_MS;
             }
         }
@@ -139,8 +142,7 @@ public class Configuracio implements Constants {
             return false;
         }
     }
-    
-    
+
     
     /**
      * 
@@ -158,4 +160,38 @@ public class Configuracio implements Constants {
         }
     }
 
+    public static final String PROPERTY_DIESPERNETEJADEFITXERSAPLICACIO = "transactioncleanfilesappindays";
+    public static final String PROPERTY_DIESPERNETEJADEFITXERSPERSONA = "transactioncleanfilespersonindays";
+    
+    
+    public static Integer getDiesPerNetejaDeFitxersAplicacio() {
+        return getDiesPerNetejaDeFitxers(PROPERTY_DIESPERNETEJADEFITXERSAPLICACIO);
+    }
+    
+    public static Integer getDiesPerNetejaDeFitxersPersona() {
+        return getDiesPerNetejaDeFitxers(PROPERTY_DIESPERNETEJADEFITXERSPERSONA);
+    }
+    
+
+    protected static Integer getDiesPerNetejaDeFitxers(String propName) {
+        String strVal = System
+                .getProperty(DIGITALIB_PROPERTY_BASE + propName);
+        if (strVal == null || strVal.trim().length() == 0) {
+            return null;
+        } else {
+            try {
+                return Integer.valueOf(strVal);
+            } catch (NumberFormatException nfe) {
+  
+                
+                String msg = "Valor per la propietat " + propName + " no correspon a un número: "
+                        + strVal;
+        log.error(msg, nfe);
+                
+                return null;
+            }
+        }
+    }
+    
+    
 }
