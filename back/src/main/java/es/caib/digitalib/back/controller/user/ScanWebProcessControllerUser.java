@@ -500,8 +500,14 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
             HtmlUtils.saveMessageSuccess(request,
                     I18NUtils.tradueix("scanwebget.operacio.ok"));
         } else {
+            String code;
+            if (countTransactions == 1) {
+               code = "scanwebget.operacio.errorsubtransaccio"; 
+            } else {
+               code = "scanwebget.operacio.erroralgunasubtransaccio";
+            }
             HtmlUtils.saveMessageWarning(request,
-                    I18NUtils.tradueix("scanwebget.operacio.errorsubtransaccio"));
+                    I18NUtils.tradueix(code));
         }
         
 

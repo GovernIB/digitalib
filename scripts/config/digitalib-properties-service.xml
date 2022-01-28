@@ -88,9 +88,25 @@
 		   realitzarà a les 4:00 durant 4 minuts. N es el valor d'aquesta propietat. 
 		   Si aquesta propietat esta buida llavors no es fa neteja alguna. -->	  
 	  es.caib.digitalib.transactioncleanfilesappindays=
+
+
+	  <!--  ========  CONTRASENYES DE PLUGINS i API FIRMA SIMPLE ============ -->
+
+	  <!-- Exemple del plugin de @firmaServer -->
+	  <!-- Propietats en Plugin de BD =>  es.caib.digitalib.plugins.signatureserver.afirmaserver.authorization.password=[=SP["es.caib.digitalib.plugins.signatureserver.afirmaserver.authorization.password"]]   -->
+	  <!-- 
+	     es.caib.digitalib.plugins.signatureserver.afirmaserver.authorization.password=ThePassword 
+	  -->
 	  
-	  
-	  
+	  <!-- Exemple de API de Firma Simple -->
+	  <!-- En els canps dels formularis s'ha de posar:
+	          Camp 'Username': [=SP["es.caib.digitalib.apifirmasimple.username"]]
+	  -->
+	  <!--
+	     es.caib.digitalib.apifirmasimple.url=http://apifirmasimple.exempleserver.com/portafib/common/rest/apifirmaenservidorsimple/v1/
+	     es.caib.digitalib.apifirmasimple.username=myusername
+	     es.caib.digitalib.apifirmasimple.password=mypassword
+	  -->
       
       <!-- ======== PLUGIN USER-INFORMATION - DATABASE ======= -->
       es.caib.digitalib.userinformationplugin=org.fundaciobit.plugins.userinformation.database.DataBaseUserInformationPlugin
