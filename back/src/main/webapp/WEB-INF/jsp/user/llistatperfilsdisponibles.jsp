@@ -3,18 +3,18 @@
   file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <br />
 
-<center>
+<%-- <center>
   <h2>
     <fmt:message key="plugindescan.seleccio.title2" />
   </h2>
-</center>
+</center> --%>
 <br />
 
 <%
 if (Configuracio.isAllowedMassiveScanInWeb()) {
 %>
 
-<div class="span6">
+<div class="span5">
 
 
     <fmt:message key="plugindescan.seleccio.subtitle2A" />
@@ -28,7 +28,7 @@ if (Configuracio.isAllowedMassiveScanInWeb()) {
     <fmt:message key="plugindescan.seleccio.subtitle2B1" />
     <%-- BOTO DESCARREGAR SEPARADOR --%>
     <center>
-      <a href="<c:url value="/user/scan/separator"/>" target="_blank"  class="btn btn-info">
+      <a href="<c:url value="/user/scan/separator"/>" target="_blank"  class="btn btn-info" style="margin-right: 10%; margin-top: 3%; margin-bottom: 2%; color: white;">
         
         <fmt:message key="descarregar.separador" />
         <%-- <small style="color:white;"><i>Necessari per separar diferents documents quan es fa un escaneig múltiple</i></small> --%>
@@ -43,7 +43,7 @@ if (Configuracio.isAllowedMassiveScanInWeb()) {
     <%-- IMATGE --%>
     <br />
     <center>
-    <img src="<c:url value="/img/ajudaescaneigmassiu.png"/>" alt="ajuda" />
+    <img src="<c:url value="/img/ajudaescaneigmassiu.png"/>" alt="ajuda" style="margin: 4% 0%;"/>
     </center>
     </li>
     <br/>
@@ -51,18 +51,32 @@ if (Configuracio.isAllowedMassiveScanInWeb()) {
     <li>
     <fmt:message key="plugindescan.seleccio.subtitle2B3" />
     </li>
+    
+    
+    
+    
 
 </ol>
-<b><fmt:message key="plugindescan.seleccio.subtitle2B4" /></b>
-    </div>
 
+    </div>
+<p style="margin: 4% 0%"><b><fmt:message key="plugindescan.seleccio.subtitle2B4" /></b></p>
 </div>
 
 <%
 }
 %>
-<div class="span5" style="margin-bottom: 10px; text-align: center;">
 
+<%
+if (Configuracio.isAllowedMassiveScanInWeb()) {
+%>
+<div class="span6" style="margin-bottom: 10px; text-align: center;">
+<%
+} else {
+%>
+<div class="span11" style="margin-bottom: 10px; text-align: center;">
+<%
+}
+%>
   <%--  
   <br />
   <h5 style="line-height: 10px; margin-top: 0px; margin-bottom: 0px;">
@@ -70,7 +84,9 @@ if (Configuracio.isAllowedMassiveScanInWeb()) {
   </h5>
   --%>
 
-
+<h3 style="margin-bottom: 3%;">
+    <fmt:message key="plugindescan.seleccio.title2" />
+  </h3>
   <c:if test="${not empty configuracioGrup }">
     <div class="well" style="max-width: 400px; margin: 0 auto 10px;">
 
