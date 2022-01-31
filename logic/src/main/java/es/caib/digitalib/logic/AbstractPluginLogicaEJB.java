@@ -2,16 +2,22 @@ package es.caib.digitalib.logic;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
+import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.pluginsib.core.IPlugin;
 import org.fundaciobit.pluginsib.core.utils.PluginsManager;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import es.caib.digitalib.jpa.PluginJPA;
 import es.caib.digitalib.model.entity.Plugin;
+import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -59,15 +65,46 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
 
       Properties prop = new Properties();
 
+      // CODI ORIGINAL 
+//      if (plugin.getProperties() != null && plugin.getProperties().trim().length() != 0) {
+//        try {
+//
+//          prop.load(new StringReader(plugin.getProperties()));
+//
+//        } catch (Exception e) {
+//          // TODO Crec que no es cridarà mai
+//        }
+//      }
+      
+      
       if (plugin.getProperties() != null && plugin.getProperties().trim().length() != 0) {
-        try {
-
-          prop.load(new StringReader(plugin.getProperties()));
-
-        } catch (Exception e) {
-          // TODO Crec que no es cridarà mai
-        }
+          try {
+              
+              
+              // Exemple:
+              //       [=SP["es.caib.digitalib.plugins.signatureserver.afirmaserver.authorization.password"]]
+              
+              
+              Map<String, Object> map = new HashMap<String, Object>();
+              map.put("SP", System.getProperties());
+              
+              String plantilla = plugin.getProperties();
+              String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map, new Locale("ca"));
+              
+              //log.error("PROPIETATS DESPRES DE generat:\n" + generat + "\n");
+              
+              
+              prop.load(new StringReader(generat));
+                                  
+          } catch (Exception e) {
+             throw new I18NException(e, "genapp.comodi", 
+                new I18NArgumentString("Error desconegut processant propietats del plugin "
+                  + pluginID + ": " + e.getMessage()));
+          }
       }
+
+      
+      
 
       pluginInstance = (IPlugin) PluginsManager.instancePluginByClassName(plugin.getClasse(),
           Constants.DIGITALIB_PROPERTY_BASE, prop);

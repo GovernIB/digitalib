@@ -116,6 +116,9 @@
             key="avis.avis.plural" /></span>
 
     </a></li>
+    
+   
+    
 </div>
 </div>
 <div class="thumbnail" style="margin-top: 20px;">
@@ -161,8 +164,14 @@
         href="<c:url value="/admin/transaccioestadisticapersona/list"/>"> <span
           style="${(fn:contains(url, '/transaccioestadisticapersona/'))? "font-weight:bold;" : ""}"><fmt:message
               key="transaccio.estadistica.plural" /></span>
-
       </a></li>
+      
+      <li style="list-style-type: disc; list-style-position: inside;">
+        <a href="<c:url value="/admin/netejafitxerspersona/list"/>"> <span
+        style="${(fn:contains(url, '//admin/netejafitxerspersona'))? "font-weight:bold;" : ""}"><fmt:message
+            key="netejafitxerstransaccions" /></span>
+        </a>
+      </li>
 
       <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
@@ -230,6 +239,13 @@
           style="${(fn:contains(url, '/transaccioestadisticaaplicacio/'))? "font-weight:bold;" : ""}"><fmt:message
               key="transaccio.estadistica.plural" /></span>
       </a></li>
+      
+      <li style="list-style-type: disc; list-style-position: inside;">
+        <a href="<c:url value="/admin/netejafitxersaplicacio/list"/>"> <span
+        style="${(fn:contains(url, '//admin/netejafitxersaplicacio'))? "font-weight:bold;" : ""}"><fmt:message
+            key="netejafitxerstransaccions" /></span>
+        </a>
+      </li>
 
       <hr style="margin-top: 6px; margin-bottom: 6px;" />
 

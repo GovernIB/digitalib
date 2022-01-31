@@ -38,6 +38,13 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
 
   /**
    * 
+   * @param transaccioID
+   * @throws I18NException
+   */
+  public void netejaFitxers(Long transaccioID) throws I18NException;
+  
+  /**
+   * 
    * @param transactionWebID
    * @return
    * @throws I18NException
@@ -144,4 +151,15 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
   @Override
   public Transaccio update(Transaccio __bean) throws I18NException;
 
+  /**
+   * 
+   * @throws I18NException
+   */
+  public void netejaDeFitxersNocturnAplicacio() throws I18NException;
+  
+  /**
+   * 
+   * @throws I18NException
+   */
+  public void netejaDeFitxersNocturnPersona() throws I18NException;
 }

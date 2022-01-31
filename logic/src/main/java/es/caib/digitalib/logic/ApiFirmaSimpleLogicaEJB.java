@@ -41,7 +41,9 @@ import com.google.common.hash.Hashing;
 import es.caib.digitalib.jpa.ApiSimpleJPA;
 import es.caib.digitalib.jpa.InfoSignaturaJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
+import es.caib.digitalib.model.bean.ApiSimpleBean;
 import es.caib.digitalib.model.bean.FitxerBean;
+import es.caib.digitalib.model.entity.ApiSimple;
 import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.utils.Configuracio;
 
@@ -69,11 +71,42 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaLocal {
     /**
      * 
      */
+    @Override
     public Fitxer signUsingApiFirmaSimple(TransaccioJPA transaccio, ApiSimpleJPA apisimple,
-            Fitxer fitxer) {
+            Fitxer fitxer)  {
 
-        ApiFirmaEnServidorSimple api = new ApiFirmaEnServidorSimpleJersey(apisimple.getUrl(),
-                apisimple.getUsername(), apisimple.getContrasenya());
+        ApiFirmaEnServidorSimple api; 
+        try {
+        
+          final Map<String, Object> map = new HashMap<String, Object>();
+          map.put("SP", System.getProperties());
+        
+          final Locale loc = new Locale("ca");
+          
+          log.info(" =============================================");
+          log.info("URL PRE => " + apisimple.getUrl()); 
+          String url = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getUrl(), map, loc);
+          log.info("URL POST => |" + url  + "|");
+          log.info("USERNAME PRE => " + apisimple.getUsername());
+          String username = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getUsername(), map, loc);
+          log.info("USERNAME POST => |" + username  + "|");
+          log.info("PASSWORD PRE => " + apisimple.getContrasenya());
+          String password = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getContrasenya(), map, loc);
+          log.info("PASSWORD POST => |" + password + "|");
+        
+          log.info(" =============================================");
+        
+          api = new ApiFirmaEnServidorSimpleJersey(url, username, password);
+        } catch (Exception e) {
+
+            transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+            transaccio.setEstatMissatge(
+                    "ApiFirmaSimple::Error durant instanciació de l'API de Firma Simple: " + e.getMessage());
+            transaccio
+                    .setEstatExcepcio(org.hibernate.exception.ExceptionUtils.getStackTrace(e));
+            log.error(transaccio.getEstatMissatge(), e);
+            return null;
+        }
 
         String signID = "1";
         String name = transaccio.getNom();

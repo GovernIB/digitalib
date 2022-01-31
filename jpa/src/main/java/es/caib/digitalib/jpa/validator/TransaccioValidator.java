@@ -216,6 +216,18 @@ public class TransaccioValidator<T> implements TransaccioFields {
       }
     }
     
+    //class java.lang.Class
+    if (__vr.getFieldErrorCount(ARXIUREQPARAMINTERESSATS) == 0) {
+      String val = String.valueOf(__vr.getFieldValue(__target__,ARXIUREQPARAMINTERESSATS));
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("([0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]|[KLMXYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]|[TRWAGMYFPDXBNJZSQVHLCKE]{1}[0-9]{8})(,([0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]|[KLMXYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]|[TRWAGMYFPDXBNJZSQVHLCKE]{1}[0-9]{8}))*");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(ARXIUREQPARAMINTERESSATS, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ARXIUREQPARAMINTERESSATS)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(ARXIUREQPARAMCIUTADANIF) == 0) {
       java.lang.String __arxiureqparamciutadanif = (java.lang.String)__vr.getFieldValue(__target__,ARXIUREQPARAMCIUTADANIF);
       if (__arxiureqparamciutadanif!= null && __arxiureqparamciutadanif.length() > 15) {

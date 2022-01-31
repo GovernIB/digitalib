@@ -92,8 +92,6 @@
         <put-attribute name="menu" value="/WEB-INF/jsp/moduls/menu_inici.jsp" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/principal.jsp" />
     </definition>
-    
-    
 
     <definition name="principal" extends="common">
         <put-attribute name="contingut" value="/WEB-INF/jsp/principal.jsp" />
@@ -103,11 +101,7 @@
         <put-attribute name="titol" value="usuariPersona.usuariPersona" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariPersonaForm.jsp" />
     </definition>
-    
-    
-    
 
-    
 
     <!--  ===========  USER  ================== -->
         
