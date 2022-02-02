@@ -38,6 +38,7 @@ import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.utils.Constants;
 import es.caib.plugins.arxiu.api.ArxiuException;
+import es.caib.plugins.arxiu.api.ArxiuNotFoundException;
 import es.caib.plugins.arxiu.api.ContingutArxiu;
 import es.caib.plugins.arxiu.api.ContingutOrigen;
 import es.caib.plugins.arxiu.api.Document;
@@ -484,21 +485,34 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
                     "expedientID=" + expedientId + "\nDocumentID=" + uuidDoc);
 
             log.info("\n FINAL \n");
-
-            java.lang.String originalFileUrl = plugin.getOriginalFileUrl(uuidDoc);
-            String printableFileUrl = plugin.getPrintableFileUrl(uuidDoc);
-            String eniFileUrl = plugin.getEniFileUrl(uuidDoc);
-
-            // java.lang.String csv = plugin.getCsv(uuidDoc);
-            java.lang.String csv = documentCreat.getDocumentMetadades().getCsv();
-
-            java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(uuidDoc);
-
-            java.lang.String validationFileUrl = plugin.getValidationFileUrl(uuidDoc);
-
-            InfoCustodyJPA infoCust = new InfoCustodyJPA(custodyID, expedientId, uuidDoc, csv,
-                    originalFileUrl, csvValidationWeb, csvGenerationDefinition,
-                    printableFileUrl, eniFileUrl, validationFileUrl);
+            
+            InfoCustodyJPA infoCust = null;
+            // Hi ha un error "Contingut no trobat" que és "fals", per això hem de reintentar
+            int i=0;
+            do {
+              try {
+                    java.lang.String originalFileUrl = plugin.getOriginalFileUrl(uuidDoc);
+                    String printableFileUrl = plugin.getPrintableFileUrl(uuidDoc);
+                    String eniFileUrl = plugin.getEniFileUrl(uuidDoc);
+        
+                    // java.lang.String csv = plugin.getCsv(uuidDoc);
+                    java.lang.String csv = documentCreat.getDocumentMetadades().getCsv();
+        
+                    java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(uuidDoc);
+        
+                    java.lang.String validationFileUrl = plugin.getValidationFileUrl(uuidDoc);
+        
+                    infoCust = new InfoCustodyJPA(custodyID, expedientId, uuidDoc, csv,
+                            originalFileUrl, csvValidationWeb, csvGenerationDefinition,
+                            printableFileUrl, eniFileUrl, validationFileUrl);
+                    break;
+                } catch(ArxiuNotFoundException anfe) {
+                    if (i > 2) {
+                        throw anfe;
+                    }
+                }
+                i++;
+            } while(i < 4);
 
             infoCust = (InfoCustodyJPA) infoCustodyEjb.create(infoCust);
 
