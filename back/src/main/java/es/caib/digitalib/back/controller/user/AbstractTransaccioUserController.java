@@ -107,7 +107,9 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
     form.setEntityNameCode("transaccio.tipus." + Math.abs(tipusPerfil));
     form.setEntityNameCodePlural("transaccio.tipus." + Math.abs(tipusPerfil) + ".plural");
     
-    form.setAttachedAdditionalJspCode(true);
+    if (__isView) {
+      form.setAttachedAdditionalJspCode(true);
+    }
 
     return form;
 
