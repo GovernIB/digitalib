@@ -15,6 +15,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.transaction.Status;
 import javax.transaction.TransactionSynchronizationRegistry;
 
 import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleArxiuOptionalParameters;
@@ -240,10 +241,11 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         public void afterCompletion(int status) {
             
             log.error("Passa per CleanFilesSynchronization::afterCompletion()");
-            
-            if (!FileSystemManager.eliminarArxius(filesToDelete)) {
-                log.error("No s'ha pogut esborrar alguns dels següents fitxers: "
-                        + Arrays.toString(filesToDelete.toArray()));
+            if (status == Status.STATUS_COMMITTED) {
+                if (!FileSystemManager.eliminarArxius(filesToDelete)) {
+                    log.error("No s'ha pogut esborrar alguns dels següents fitxers: "
+                            + Arrays.toString(filesToDelete.toArray()));
+                }
             }
         }
     }
