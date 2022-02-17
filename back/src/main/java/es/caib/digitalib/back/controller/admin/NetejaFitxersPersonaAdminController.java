@@ -24,5 +24,10 @@ public class NetejaFitxersPersonaAdminController
     public boolean isUtilitzatPerAplicacio() {
         return false;
     }
+    
+    @Override
+    public String getSessionAttributeFilterForm() {
+      return "TransaccioAdmin_FilterForm_NetejaFitxersPersona";
+    }
 
 }
