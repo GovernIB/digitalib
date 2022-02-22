@@ -41,9 +41,7 @@ import com.google.common.hash.Hashing;
 import es.caib.digitalib.jpa.ApiSimpleJPA;
 import es.caib.digitalib.jpa.InfoSignaturaJPA;
 import es.caib.digitalib.jpa.TransaccioJPA;
-import es.caib.digitalib.model.bean.ApiSimpleBean;
 import es.caib.digitalib.model.bean.FitxerBean;
-import es.caib.digitalib.model.entity.ApiSimple;
 import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.utils.Configuracio;
 

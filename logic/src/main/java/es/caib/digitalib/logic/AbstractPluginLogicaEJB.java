@@ -17,7 +17,6 @@ import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import es.caib.digitalib.jpa.PluginJPA;
 import es.caib.digitalib.model.entity.Plugin;
-import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
 
 /**

@@ -143,6 +143,9 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         }
 
         if (__isView) {
+
+            form.setAttachedAdditionalJspCode(true);
+
             // Ocultar tots els camps null
             Utils.hideNullFields(_jpa, form, ALL_TRANSACCIO_FIELDS);
 

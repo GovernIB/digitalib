@@ -39,6 +39,11 @@ public class NetejaFitxersAplicacioAdminController extends AbstractTransaccioAdm
     public static final String CONTEXTWEB = "/admin/netejafitxersaplicacio";
 
     @Override
+    public String getSessionAttributeFilterForm() {
+      return "TransaccioAdmin_FilterForm_NetejaFitxersAplicacio";
+    }
+
+    @Override
     public boolean isUtilitzatPerAplicacio() {
         return true;
     }

@@ -491,16 +491,16 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
             int i=0;
             do {
               try {
-                    java.lang.String originalFileUrl = plugin.getOriginalFileUrl(uuidDoc);
-                    String printableFileUrl = plugin.getPrintableFileUrl(uuidDoc);
-                    String eniFileUrl = plugin.getEniFileUrl(uuidDoc);
+                    final String originalFileUrl = plugin.getOriginalFileUrl(documentCreat);
+                    final String printableFileUrl = plugin.getPrintableFileUrl(documentCreat);
+                    final String eniFileUrl = plugin.getEniFileUrl(documentCreat);
         
-                    // java.lang.String csv = plugin.getCsv(uuidDoc);
-                    java.lang.String csv = documentCreat.getDocumentMetadades().getCsv();
+                    // String csv = plugin.getCsv(uuidDoc);
+                    final String csv = documentCreat.getDocumentMetadades().getCsv();
         
-                    java.lang.String csvValidationWeb = plugin.getCsvValidationWeb(uuidDoc);
+                    final String csvValidationWeb = plugin.getCsvValidationWeb(documentCreat);
         
-                    java.lang.String validationFileUrl = plugin.getValidationFileUrl(uuidDoc);
+                    final String validationFileUrl = plugin.getValidationFileUrl(documentCreat);
         
                     infoCust = new InfoCustodyJPA(custodyID, expedientId, uuidDoc, csv,
                             originalFileUrl, csvValidationWeb, csvGenerationDefinition,
@@ -509,6 +509,10 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
                 } catch(ArxiuNotFoundException anfe) {
                     if (i > 2) {
                         throw anfe;
+                    }
+                } catch(ArxiuException ae) {
+                    if (i > 2) {
+                        throw ae;
                     }
                 }
                 i++;
