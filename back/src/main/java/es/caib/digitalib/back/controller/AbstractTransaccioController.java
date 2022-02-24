@@ -966,13 +966,30 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     }
 
+
+    /**
+     * 
+     * @param isAdmin
+     * @param transaccio
+     * @return
+     */
     protected boolean canBeDeleted(final boolean isAdmin, Transaccio transaccio) {
 
-        if (transaccio.getFitxerEscanejatID() == null) {
+        final int codi = transaccio.getEstatCodi(); 
+        if (codi == ScanWebSimpleStatus.STATUS_CANCELLED
+           || codi == ScanWebSimpleStatus.STATUS_EXPIRED
+           || codi == ScanWebSimpleStatus.STATUS_FINAL_ERROR) {
             return true;
         }
-        if (transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_ERROR) {
-            return true;
+        
+        if (codi == ScanWebSimpleStatus.STATUS_IN_PROGRESS
+           || codi == ScanWebSimpleStatus.STATUS_REQUESTED_ID) {
+            
+            final long ONE_DAY_IN_MS = 86_400_000;
+            
+            if (System.currentTimeMillis() - transaccio.getDataInici().getTime() > ONE_DAY_IN_MS) {
+                return true;
+            }
         }
 
         if (isAdmin) {
