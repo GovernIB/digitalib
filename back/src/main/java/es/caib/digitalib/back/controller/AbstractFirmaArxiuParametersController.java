@@ -220,8 +220,8 @@ public abstract class AbstractFirmaArxiuParametersController
                                 .tradueix(TransaccioFields.ARXIUREQPARAMORGANS.fullName) });
             }
             
-            log.info("\n XXX result.hasFieldErrors(get(ARXIUREQPARAMINTERESSATS)) => " + result.hasFieldErrors(get(ARXIUREQPARAMINTERESSATS)));
-            if (!result.hasFieldErrors(get(ARXIUREQPARAMINTERESSATS))) {
+            
+            if (!result.hasFieldErrors(get(ARXIUREQPARAMINTERESSATS)) && !transaccioForm.getReadOnlyFields().contains(ARXIUREQPARAMINTERESSATS)) {
 
                 final String interessats = transaccioForm.getTransaccio()
                         .getArxiuReqParamInteressats();
