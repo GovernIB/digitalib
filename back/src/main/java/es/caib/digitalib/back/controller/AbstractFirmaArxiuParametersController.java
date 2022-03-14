@@ -31,6 +31,8 @@ import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
+import es.caib.digitalib.utils.NifUtils;
+import es.caib.digitalib.utils.NifUtils.CheckNifResult;
 
 /**
  * 
@@ -168,6 +170,8 @@ public abstract class AbstractFirmaArxiuParametersController
     @Override
     public void postValidate(HttpServletRequest request, TransaccioForm transaccioForm,
             BindingResult result) throws I18NException {
+        
+        super.postValidate(request, transaccioForm, result);
 
         ValidationUtils.rejectIfEmptyOrWhitespace(result, NOM.fullName,
                 "genapp.validation.required",
@@ -214,6 +218,23 @@ public abstract class AbstractFirmaArxiuParametersController
                         TransaccioFields.ARXIUREQPARAMORGANS.fullName,
                         "genapp.validation.required", new Object[] { I18NUtils
                                 .tradueix(TransaccioFields.ARXIUREQPARAMORGANS.fullName) });
+            }
+            
+            log.info("\n XXX result.hasFieldErrors(get(ARXIUREQPARAMINTERESSATS)) => " + result.hasFieldErrors(get(ARXIUREQPARAMINTERESSATS)));
+            if (!result.hasFieldErrors(get(ARXIUREQPARAMINTERESSATS))) {
+
+                final String interessats = transaccioForm.getTransaccio()
+                        .getArxiuReqParamInteressats();
+
+                log.info("\n XXX Validar NIFs interessats ... " + interessats);
+
+                CheckNifResult cnr = NifUtils.validateNifsSeparatedByCommas(interessats);
+
+                if (!cnr.isValid()) {
+                    result.rejectValue(get(ARXIUREQPARAMINTERESSATS), "error.interessats",
+                            new String[] { (cnr.getNifs() == null)? interessats : cnr.getNifs().toString() }, null);
+
+                }
             }
 
         }

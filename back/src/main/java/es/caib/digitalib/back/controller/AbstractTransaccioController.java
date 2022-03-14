@@ -27,6 +27,7 @@ import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,6 +60,8 @@ import es.caib.digitalib.model.fields.UsuariAplicacioFields;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
+import es.caib.digitalib.utils.NifUtils;
+import es.caib.digitalib.utils.NifUtils.CheckNifResult;
 import es.caib.plugins.arxiu.api.Document;
 import es.caib.plugins.arxiu.api.DocumentContingut;
 import es.caib.plugins.arxiu.api.IArxiuPlugin;
@@ -1132,6 +1135,17 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         }
 
         return __tmp;
+    }
+    
+    
+    
+    @Override
+    public void postValidate(HttpServletRequest request, TransaccioForm transaccioForm,
+            BindingResult result) throws I18NException {
+        
+        super.postValidate(request, transaccioForm, result);
+
+
     }
 
 }
