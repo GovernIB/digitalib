@@ -24,6 +24,8 @@
      
     <sec:intercept-url pattern="/common/rest/apiscanwebsimple/v1/**" access="permitAll"/>
     <sec:intercept-url pattern="/common/rest/apimassivescanwebsimple/v1/**" access="permitAll"/>
+    
+    <sec:intercept-url pattern="/public/rest/estadistiques/v1/**" access="permitAll"/>
     <sec:intercept-url pattern="/public/**" access="permitAll"/>
 	
     <sec:intercept-url pattern="/common/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>

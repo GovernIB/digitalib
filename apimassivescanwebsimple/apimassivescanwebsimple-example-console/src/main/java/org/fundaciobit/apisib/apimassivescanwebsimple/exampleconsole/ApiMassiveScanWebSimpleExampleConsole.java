@@ -97,13 +97,17 @@ public class ApiMassiveScanWebSimpleExampleConsole {
                 System.out.print(" Seleccioni un perfil: ");
                 Scanner in = new Scanner(System.in);
 
-                int n = in.nextInt();
-
-                if (n == 0) {
-                    return;
+                try {
+                    int n = in.nextInt();
+    
+                    if (n == 0) {
+                        return;
+                    }
+    
+                    scanWebProfileSelected = profilesByIndex.get(n);
+                } finally {
+                  in.close();
                 }
-
-                scanWebProfileSelected = profilesByIndex.get(n);
 
             } while (scanWebProfileSelected == null);
 

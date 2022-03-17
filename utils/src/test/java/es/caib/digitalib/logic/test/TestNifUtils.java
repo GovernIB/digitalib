@@ -1,7 +1,5 @@
 package es.caib.digitalib.logic.test;
 
-import java.util.Iterator;
-
 import es.caib.digitalib.utils.NifUtils;
 import es.caib.digitalib.utils.NifUtils.CheckNifResult;
 import es.caib.digitalib.utils.NifUtils.NifInfo;

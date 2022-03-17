@@ -2,6 +2,9 @@ package es.caib.digitalib.back.controller.scanwebsimple;
 
 import java.io.InputStream;
 
+import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleError;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleFile;
@@ -9,6 +12,7 @@ import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.NoAvailablePluginEx
 import org.fundaciobit.apisib.apiscanwebsimple.v1.exceptions.ServerException;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +28,14 @@ import es.caib.digitalib.model.bean.FitxerBean;
  *
  */
 public abstract class RestApiScanWebUtils extends RestUtils {
+    
+
+    @Autowired
+    protected HttpServletRequest request;
+    
+    
+    @EJB(mappedName = es.caib.digitalib.ejb.UsuariAplicacioLocal.JNDI_NAME)
+    protected es.caib.digitalib.ejb.UsuariAplicacioLocal usuariAplicacioEjb;
 
   public ResponseEntity<ScanWebSimpleError> generateServerError(String msg) {
     return generateServerError(msg, null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -135,4 +147,47 @@ public abstract class RestApiScanWebUtils extends RestUtils {
 
   }
 
+  
+  public abstract class RestCaller<R> {
+
+      public final String locale;
+      
+      public final boolean autenticate;
+
+      public RestCaller(String locale) {
+          this.locale = locale;
+          this.autenticate = true;
+      }
+      
+      public RestCaller() {
+          this.locale = "ca";
+          this.autenticate = false;
+      }
+
+      public final ResponseEntity<?> cridada() {
+          try {
+
+              if (autenticate) {
+                  String error = autenticate(request, locale, usuariAplicacioEjb);
+                  if (error != null) {
+                      return generateServerError(error, HttpStatus.UNAUTHORIZED);
+                  }
+              }
+
+              R fsap = cridadaReal();
+
+              HttpHeaders headers = addAccessControllAllowOrigin();
+              return new ResponseEntity<R>(fsap, headers, HttpStatus.OK);
+
+          } catch (Throwable th) {
+              String msg = th.getMessage();
+              log.error(msg, th);
+              return generateServerError(msg, th);
+          }
+      }
+
+      public abstract R cridadaReal() throws Exception;
+
+  }
+  
 }

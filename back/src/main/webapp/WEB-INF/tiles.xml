@@ -83,6 +83,12 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/transaccionsmassives.jsp" />
     </definition>
     
+    
+    <definition name="ajudaestadistiques_public" extends="user.emptylayout">
+        <put-attribute name="titol" value="transaccio.transaccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/public/ajudaestadistiques.jsp" />
+    </definition>
+    
 
     
 

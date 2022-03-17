@@ -45,8 +45,6 @@ import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.plugins.signature.api.FileInfoSignature;
 import org.fundaciobit.pluginsib.core.utils.FileUtils;
 import org.fundaciobit.pluginsib.core.utils.MetadataConstants;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -92,8 +90,6 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
 
     public static final String CONTEXT = "/common/rest/apimassivescanwebsimple/v1";
 
-    @EJB(mappedName = es.caib.digitalib.ejb.UsuariAplicacioLocal.JNDI_NAME)
-    protected es.caib.digitalib.ejb.UsuariAplicacioLocal usuariAplicacioEjb;
 
     @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
     protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
@@ -110,8 +106,6 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
     @EJB(mappedName = es.caib.digitalib.ejb.MetadadaLocal.JNDI_NAME)
     protected es.caib.digitalib.ejb.MetadadaLocal metadadaEjb;
 
-    @Autowired
-    private HttpServletRequest request;
 
     @RequestMapping(value = "/"
             + ApiMassiveScanWebSimple.GETSEPARATORPAGE, method = RequestMethod.POST)
@@ -1312,36 +1306,6 @@ public class RestApiMassiveScanWebSimpleV1Controller extends RestApiScanWebUtils
         }
     }
 
-    public abstract class RestCaller<R> {
 
-        public final String locale;
-
-        public RestCaller(String locale) {
-            this.locale = locale;
-        }
-
-        public final ResponseEntity<?> cridada() {
-            try {
-
-                String error = autenticate(request, locale, usuariAplicacioEjb);
-                if (error != null) {
-                    return generateServerError(error, HttpStatus.UNAUTHORIZED);
-                }
-
-                R fsap = cridadaReal();
-
-                HttpHeaders headers = addAccessControllAllowOrigin();
-                return new ResponseEntity<R>(fsap, headers, HttpStatus.OK);
-
-            } catch (Throwable th) {
-                String msg = th.getMessage();
-                log.error(msg, th);
-                return generateServerError(msg, th);
-            }
-        }
-
-        public abstract R cridadaReal() throws Exception;
-
-    }
 
 }

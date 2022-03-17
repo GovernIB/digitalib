@@ -60,8 +60,6 @@ import es.caib.digitalib.model.fields.UsuariAplicacioFields;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.utils.Configuracio;
 import es.caib.digitalib.utils.Constants;
-import es.caib.digitalib.utils.NifUtils;
-import es.caib.digitalib.utils.NifUtils.CheckNifResult;
 import es.caib.plugins.arxiu.api.Document;
 import es.caib.plugins.arxiu.api.DocumentContingut;
 import es.caib.plugins.arxiu.api.IArxiuPlugin;
