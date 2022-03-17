@@ -67,12 +67,12 @@ public class RestApiEstadistiques extends RestApiScanWebUtils
 
     
     
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = {"", "/" }, method = RequestMethod.GET)
     public ModelAndView help0() {
-        return new ModelAndView(new RedirectView(CONTEXT + "/", true));
+        return new ModelAndView(new RedirectView(CONTEXT + "/help", true));
     }
     
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/help", method = RequestMethod.GET)
     public ModelAndView help() {
         return new ModelAndView("ajudaestadistiques_public");
     }

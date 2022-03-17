@@ -1,3 +1,5 @@
+compil.sh
+config.sh
 /back/src/main/resources/digitalib_genapp_ca.properties
 /back/src/main/resources/digitalib_genapp_es.properties
 /back/src/main/resources/genapp_ca.properties
