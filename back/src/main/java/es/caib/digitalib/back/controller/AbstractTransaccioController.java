@@ -401,8 +401,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     public List<StringKeyValue> getReferenceListForArxiuReqParamOrigen(
             HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-        __tmp.add(new StringKeyValue("0", I18NUtils.tradueix("origen.ciutada")));
-        __tmp.add(new StringKeyValue("1", I18NUtils.tradueix("origen.administracio")));
+        __tmp.add(new StringKeyValue(String.valueOf(Constants.ORIGEN_CIUTADA), I18NUtils.tradueix("origen.ciutada")));
+        __tmp.add(new StringKeyValue(String.valueOf(Constants.ORIGEN_ADMINISTRACIO), I18NUtils.tradueix("origen.administracio")));
         return __tmp;
     }
 

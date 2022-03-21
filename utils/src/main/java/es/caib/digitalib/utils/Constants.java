@@ -164,5 +164,9 @@ public interface Constants {
   public static final int TRANSACCIO_ESTAT_CODI_ID = 0;
   public static final int TRANSACCIO_ESTAT_CODI_ENPROGRES = 1;
   public static final int TRANSACCIO_ESTAT_CODI_OK = 2;
-  
+
+
+  public static final int ORIGEN_CIUTADA = 0; 
+  public static final int ORIGEN_ADMINISTRACIO = 1;
+
 }

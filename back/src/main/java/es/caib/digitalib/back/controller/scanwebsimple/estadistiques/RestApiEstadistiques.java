@@ -18,6 +18,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
@@ -42,6 +43,7 @@ import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.model.fields.UsuariAplicacioFields;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
+import es.caib.digitalib.model.fields.UsuariPersonaQueryPath;
 import es.caib.digitalib.utils.Constants;
 
 /**
@@ -62,7 +64,8 @@ public class RestApiEstadistiques extends RestApiScanWebUtils
 
     @EJB(mappedName = UsuariPersonaLocal.JNDI_NAME)
     protected es.caib.digitalib.ejb.UsuariPersonaLocal usuariPersonaEjb;
-
+    
+    
     private static final SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
 
     
@@ -244,7 +247,7 @@ public class RestApiEstadistiques extends RestApiScanWebUtils
                 transaccions = transaccioLogicaEjb.select(where, orderBy);
             }
 
-            List<TransaccioRest> resultat = new ArrayList<RestApiEstadistiques.TransaccioRest>();
+            List<TransaccioRest> resultat = new ArrayList<TransaccioRest>();
 
             if (transaccions != null && transaccions.size() != 0) {
 
@@ -281,6 +284,8 @@ public class RestApiEstadistiques extends RestApiScanWebUtils
                     u = usrName;
                     a = appName;
                 }
+                
+                final Map<Long, String> configuracioGrupMapByUsrName = new HashedMap();
 
                 for (Transaccio transaccio : transaccions) {
 
@@ -359,10 +364,47 @@ public class RestApiEstadistiques extends RestApiScanWebUtils
                             e = null;
 
                     }
+                    
 
-                    resultat.add(new TransaccioRest(transaccioID, funcionariUsername, a, u,
-                            fitxerNom, fitxerMidaBytes, color, resolucio, midaPaper,
-                            dataCapturaISO, e));
+                    final Long transaccioMultipleID = transaccio.getTransaccioMultipleID();
+                    final String codiDir3 = transaccio.getSignParamFuncionariDir3();
+
+                    final String configuracioGrupNom;
+                    if (u == null) {
+                        configuracioGrupNom = null;
+                    } else {
+                       String cgn = configuracioGrupMapByUsrName.get(u);
+                       if (cgn == null) {
+                           UsuariPersonaQueryPath upqp = new UsuariPersonaQueryPath();
+                           cgn = usuariPersonaEjb.executeQueryOne(upqp.CONFIGURACIOGRUP().NOM(), UsuariPersonaFields.USERNAME.equal(u));
+                       }
+                       configuracioGrupNom = cgn;
+                    }
+                    
+                    final String idiomaDocument = transaccio.getInfoScanLanguageDoc();
+                    final Boolean duplex = transaccio.getInfoScanDuplex();
+                    final String missatgeError = transaccio.getEstatMissatge();
+                    
+                    final Integer origenInt = transaccio.getArxiuReqParamOrigen();
+                    
+                    final String origen;
+                    if (origenInt == null) {
+                        origen = null;
+                    } else if (origenInt == Constants.ORIGEN_CIUTADA) {
+                        origen = "Ciutadà";
+                    } else if (origenInt == Constants.ORIGEN_ADMINISTRACIO) {
+                        origen = "Administració";
+                    } else {
+                        log.error("Origen Desconegut " + origenInt + " per transaccióamb ID  " + transaccioID);
+                        origen = null;
+                    }
+                     
+                    final String tipusDocumental = transaccio.getInfoScanDocumentTipus();
+
+                    resultat.add(new TransaccioRest(transaccioID, transaccioMultipleID, funcionariUsername, a, u,
+                            fitxerMidaBytes, color, resolucio, midaPaper,
+                            dataCapturaISO, e,  codiDir3, configuracioGrupNom, idiomaDocument,
+                    duplex, missatgeError, origen, tipusDocumental));
 
                 }
             }
@@ -375,157 +417,8 @@ public class RestApiEstadistiques extends RestApiScanWebUtils
 
     }
 
-    public class EstadistiquesRest {
+    
 
-        public EstadistiquesRest(List<TransaccioRest> resultat) {
-            super();
-            this.resultat = resultat;
-        }
-
-        public EstadistiquesRest() {
-            super();
-            // TODO Auto-generated constructor stub
-        }
-
-        protected List<TransaccioRest> resultat;
-
-        public List<TransaccioRest> getResultat() {
-            return resultat;
-        }
-
-        public void setResultat(List<TransaccioRest> resultat) {
-            this.resultat = resultat;
-        }
-
-    }
-
-    /**
-     * 
-     * @author anadal (u80067)
-     *
-     */
-    public class TransaccioRest {
-        protected long transaccioID;
-        protected String funcionariUsername;
-        protected String appname;
-        protected String usrname;
-        protected String fitxerNom;
-        protected long fitxerMidaBytes;
-        protected String color; // 1,'B/N',8,'Gris',32,'Color'
-        protected Integer resolucio; // infoscanresolucioppp
-        protected String midaPaper;
-        protected String dataCapturaISO8601;
-        protected String estat;
-
-        public TransaccioRest() {
-            super();
-        }
-
-        public TransaccioRest(long transaccioID, String funcionariUsername, String appname,
-                String usrname, String fitxerNom, long fitxerMidaBytes, String color,
-                Integer resolucio, String midaPaper, String dataCapturaISO8601, String estat) {
-            super();
-            this.transaccioID = transaccioID;
-            this.funcionariUsername = funcionariUsername;
-            this.appname = appname;
-            this.usrname = usrname;
-            this.fitxerNom = fitxerNom;
-            this.fitxerMidaBytes = fitxerMidaBytes;
-            this.color = color;
-            this.resolucio = resolucio;
-            this.midaPaper = midaPaper;
-            this.dataCapturaISO8601 = dataCapturaISO8601;
-            this.estat = estat;
-        }
-
-        public long getTransaccioID() {
-            return transaccioID;
-        }
-
-        public void setTransaccioID(long transaccioID) {
-            this.transaccioID = transaccioID;
-        }
-
-        public String getFuncionariUsername() {
-            return funcionariUsername;
-        }
-
-        public void setFuncionariUsername(String funcionariUsername) {
-            this.funcionariUsername = funcionariUsername;
-        }
-
-        public String getFitxerNom() {
-            return fitxerNom;
-        }
-
-        public void setFitxerNom(String fitxerNom) {
-            this.fitxerNom = fitxerNom;
-        }
-
-        public String getUsrname() {
-            return usrname;
-        }
-
-        public void setUsrname(String usrname) {
-            this.usrname = usrname;
-        }
-
-        public String getEstat() {
-            return estat;
-        }
-
-        public void setEstat(String estat) {
-            this.estat = estat;
-        }
-
-        public String getAppname() {
-            return appname;
-        }
-
-        public void setAppname(String appname) {
-            this.appname = appname;
-        }
-
-        public long getFitxerMidaBytes() {
-            return fitxerMidaBytes;
-        }
-
-        public void setFitxerMidaBytes(long fitxerMidaBytes) {
-            this.fitxerMidaBytes = fitxerMidaBytes;
-        }
-
-        public String getColor() {
-            return color;
-        }
-
-        public void setColor(String color) {
-            this.color = color;
-        }
-
-        public Integer getResolucio() {
-            return resolucio;
-        }
-
-        public void setResolucio(Integer resolucio) {
-            this.resolucio = resolucio;
-        }
-
-        public String getMidaPaper() {
-            return midaPaper;
-        }
-
-        public void setMidaPaper(String midaPaper) {
-            this.midaPaper = midaPaper;
-        }
-
-        public String getDataCapturaISO8601() {
-            return dataCapturaISO8601;
-        }
-
-        public void setDataCapturaISO8601(String dataCapturaISO8601) {
-            this.dataCapturaISO8601 = dataCapturaISO8601;
-        }
-
-    }
+   
 
 }
