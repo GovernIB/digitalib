@@ -1,4 +1,4 @@
-# ![Logo](https://github.com/GovernIB/maven/blob/binaris/digitalib/logo.png)DigitalIB (digitalib)
+# ![Logo](https://github.com/GovernIB/maven/blob/binaris/digitalib/logo.png)  DigitalIB (digitalib)
  *Digitalitzador de documents*
  
  ***Versions***
