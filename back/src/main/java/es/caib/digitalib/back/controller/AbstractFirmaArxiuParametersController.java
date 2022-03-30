@@ -223,41 +223,28 @@ public abstract class AbstractFirmaArxiuParametersController
             
             if (!result.hasFieldErrors(get(ARXIUREQPARAMINTERESSATS)) && !transaccioForm.getReadOnlyFields().contains(ARXIUREQPARAMINTERESSATS)) {
 
-                final String interessats = transaccioForm.getTransaccio()
+                String interessats = transaccioForm.getTransaccio()
                         .getArxiuReqParamInteressats();
 
                 log.info("\n XXX Validar NIFs interessats ... " + interessats);
+                
+                if (interessats != null) {
 
-                CheckNifResult cnr = NifUtils.validateNifsSeparatedByCommas(interessats);
-
-                if (!cnr.isValid()) {
-                    result.rejectValue(get(ARXIUREQPARAMINTERESSATS), "error.interessats",
-                            new String[] { (cnr.getNifs() == null)? interessats : cnr.getNifs().toString() }, null);
-
+                    CheckNifResult cnr = NifUtils.validateNifsSeparatedByCommas(interessats);
+                   
+                    transaccioForm.getTransaccio().setArxiuReqParamInteressats(cnr.getNifListFormatted());
+    
+                    if (!cnr.isValid()) {
+                        result.rejectValue(get(ARXIUREQPARAMINTERESSATS), "error.interessats",
+                                new String[] { (cnr.getNifs() == null)? interessats : cnr.getNifs().toString() }, null);
+                    }
                 }
             }
 
         }
 
     }
-/*
-    @Override
-    public TransaccioJPA update(HttpServletRequest request, TransaccioJPA transaccio)
-            throws Exception, I18NException, I18NValidationException {
 
-        final String dir3 = transaccio.getArxiuReqParamOrgans();
-
-        log.info("\n\n  XYZ ZZZZZ  PRE UPDATE: dir3 -> ]" + dir3 + "[");
-
-        if (!isPublic() && (dir3 == null || dir3.isEmpty())) {
-            // Obtenim el codidir3 per defecte de la ConfiguracioGrup
-            transaccio.setArxiuReqParamOrgans(LoginInfo.getInstance().getUsuariPersona()
-                    .getConfiguracioGrup().getCodiDir3PerDefecte());
-        }
-
-        return super.update(request, transaccio);
-    }
-*/
     public static long lastCheck = 0;
 
     @Override

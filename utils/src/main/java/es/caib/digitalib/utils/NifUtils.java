@@ -39,8 +39,11 @@ public class NifUtils {
     public static CheckNifResult validateNifsSeparatedByCommas(String niflist) {
 
         if (niflist == null || niflist.trim().length() == 0) {
-            return new CheckNifResult(false, null);
+            return new CheckNifResult(false, null, null);
         }
+        
+        niflist = cleanNif(niflist);
+        
 
         String[] nifsSplit = niflist.split(",");
 
@@ -60,9 +63,9 @@ public class NifUtils {
         }
 
         if (nifsErrors.isEmpty()) {
-            return new CheckNifResult(true, nifsOK);
+            return new CheckNifResult(true, niflist, nifsOK);
         } else {
-            return new CheckNifResult(false, nifsErrors);
+            return new CheckNifResult(false, niflist, nifsErrors);
         }
 
     }
@@ -76,8 +79,7 @@ public class NifUtils {
     public static NifInfo validateNif(String nif) {
 
         // Neteja ' ', -, . / \n \r uppercase
-        String n = nif.replace(" ", "").replace("-", "").replace(".", "").replace("/", "")
-                .replace("\n", "").replace("\r", "");
+        String n = cleanNif(nif);
 
         n = n.toUpperCase();
 
@@ -150,6 +152,17 @@ public class NifUtils {
 
         return ni;
 
+    }
+
+    public static String cleanNif(String nif) {
+
+        if (nif == null) {
+            return null;
+        }
+
+        String n = nif.toUpperCase().replace(" ", "").replace("-", "").replace(".", "")
+                .replace("/", "").replace("\n", "").replace("\r", "");
+        return n;
     }
 
     private static boolean validaNifPersonaFisica(String dni) {
@@ -242,7 +255,13 @@ public class NifUtils {
                  * A la variable sumaImpares le sumamos lo que tenga la variable en ese
                  * momento, más el número convertido en dato numérico multiplicado por dos
                  */
-                longitudCifraImpar = 2 * Integer.parseInt(dc.substring(pos, pos + 1));
+                
+                String number = dc.substring(pos, pos + 1);
+                if (!Character.isDigit(number.charAt(0))) {
+                  continue;
+                }
+                longitudCifraImpar = 2 * Integer.parseInt(number);
+                
 
                 /*
                  * Si al multiplicar por dos un numero de unaposicion impar el restultado tiene
@@ -340,12 +359,15 @@ public class NifUtils {
     public static class CheckNifResult {
 
         private final boolean valid;
+        
+        private final String nifListFormatted;
 
         private final List<NifInfo> nifs;
 
-        public CheckNifResult(boolean valid, List<NifInfo> nifs) {
+        public CheckNifResult(boolean valid, String nifListFormatted, List<NifInfo> nifs) {
             super();
             this.valid = valid;
+            this.nifListFormatted = nifListFormatted;
             this.nifs = nifs == null ? new ArrayList<NifInfo>() : nifs;
         }
 
@@ -355,6 +377,10 @@ public class NifUtils {
 
         public List<NifInfo> getNifs() {
             return nifs;
+        }
+
+        public String getNifListFormatted() {
+            return nifListFormatted;
         }
 
     }

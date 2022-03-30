@@ -69,7 +69,6 @@ public class RestApiEstadistiques extends RestApiScanWebUtils
     private static final SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
 
     
-    
     @RequestMapping(value = {"", "/" }, method = RequestMethod.GET)
     public ModelAndView help0() {
         return new ModelAndView(new RedirectView(CONTEXT + "/help", true));
