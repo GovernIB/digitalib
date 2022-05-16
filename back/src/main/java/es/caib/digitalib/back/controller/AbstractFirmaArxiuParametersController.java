@@ -240,9 +240,7 @@ public abstract class AbstractFirmaArxiuParametersController
                     }
                 }
             }
-
         }
-
     }
 
     public static long lastCheck = 0;
