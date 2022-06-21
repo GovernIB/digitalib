@@ -826,7 +826,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     case Constants.PERFIL_US_CUSTODIA_INFO:
                         AdditionalButton addOriginalButton = new AdditionalButton(
                                 "icon-download-alt icon-white",
-                                "transaccio.descarregar.original",
+                                "transaccio.descarregar.firmat",
                                 getContextWeb() + "/descarregaroriginal/{0}",
                                 "btn-success\" target=\"_blank");
                         AdditionalButton addImprimibleButton = new AdditionalButton(
@@ -839,7 +839,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                         filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(),
                                 addImprimibleButton);
 
-                        if (isAdmin) {
+//                        if (isAdmin) {
                             AdditionalButton addEniButton = new AdditionalButton(
                                     "icon-file icon-white", "transaccio.descarregar.enidoc",
                                     getContextWeb() + "/descarregarenidoc/{0}",
@@ -847,7 +847,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
                             filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(),
                                     addEniButton);
-                        }
+//                        }
                     break;
                     case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
                         AdditionalButton addFirmatButton = new AdditionalButton(
