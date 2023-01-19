@@ -24,7 +24,7 @@ public interface AuditoriaLogicaLocal extends AuditoriaLocal {
   public String[] audita(Transaccio transaccio, final String msg,
       final String additionalInfo, final int auditType, final boolean isApp);
   
-  public void audita(Transaccio transaccio, final boolean isApp, final String msg,
+  public Long audita(Transaccio transaccio, final boolean isApp, final String msg,
       final String additionalInfo, final int auditType, String usernameApp,
       String usernamePerson);
 
