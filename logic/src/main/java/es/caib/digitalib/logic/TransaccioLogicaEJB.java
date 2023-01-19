@@ -165,14 +165,15 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             auditoriaLogicaEjb.audita(transaccio, isApp, msg, additionalInfo, auditType,
                     usernameApp, usernamePerson);
         }
-        
+
         transactionSynchronizationRegistry.registerInterposedSynchronization(
                 new CleanFilesSynchronization(filesToDelete));
 
         return filesToDelete;
     }
 
-    protected void cleanFilesOfTransaction(Transaccio transaccio, Set<Long> fitxers, boolean updateTransaction) throws I18NException {
+    protected void cleanFilesOfTransaction(Transaccio transaccio, Set<Long> fitxers,
+            boolean updateTransaction) throws I18NException {
         Long fe = transaccio.getFitxerEscanejatID();
         if (fe != null) {
             fitxers.add(fe);
@@ -184,7 +185,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             fitxers.add(fs);
             transaccio.setFitxerSignaturaID(null);
         }
-        
+
         if (updateTransaction && (fe != null || fs != null)) {
             this.update(transaccio);
         }
@@ -205,8 +206,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
     @Override
     public void netejaFitxers(Long transaccioID) throws I18NException {
-        
-        //log.error("Passa per cleanFiles => INICI");
+
+        // log.error("Passa per cleanFiles => INICI");
 
         Transaccio t = this.findByPrimaryKey(transaccioID);
 
@@ -221,7 +222,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
         transactionSynchronizationRegistry.registerInterposedSynchronization(
                 new CleanFilesSynchronization(filesToDelete));
-        //log.error("Passa per netejaFitxers => FINAL");
+        // log.error("Passa per netejaFitxers => FINAL");
     }
 
     public class CleanFilesSynchronization implements javax.transaction.Synchronization {
@@ -239,13 +240,13 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
         @Override
         public void afterCompletion(int status) {
-            
-            log.error("Passa per CleanFilesSynchronization::afterCompletion()");
             if (status == Status.STATUS_COMMITTED) {
                 if (!FileSystemManager.eliminarArxius(filesToDelete)) {
                     log.error("No s'ha pogut esborrar alguns dels següents fitxers: "
                             + Arrays.toString(filesToDelete.toArray()));
                 }
+            } else {
+                log.error("Passa per CleanFilesSynchronization::afterCompletion(" + status + "): Estat final no commit");   
             }
         }
     }
@@ -822,31 +823,28 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
         return transaccio;
     }
-    
-    
-  
-    // Timeout de transacion la definim a 5 minuts  
-    @TransactionTimeout( value = 5*60 ) // Units segons
+
+    // Timeout de transacion la definim a 5 minuts
+    @TransactionTimeout(value = 5 * 60) // Units segons
     @Override
     public void netejaDeFitxersNocturnAplicacio() throws I18NException {
-        
+
         netejaDeFitxersNocturn(true);
-        
-        
+
     }
-    
-    @TransactionTimeout( value = 5*60) // Units segons
+
+    @TransactionTimeout(value = 5 * 60) // Units segons
     @Override
     public void netejaDeFitxersNocturnPersona() throws I18NException {
-        
+
         netejaDeFitxersNocturn(false);
-        
-        
+
     }
-    
-    
+
     protected void netejaDeFitxersNocturn(boolean isUtilitzatPerAplicacio)
             throws I18NException {
+        
+        final long start = System.currentTimeMillis();
 
         Integer days = isUtilitzatPerAplicacio
                 ? Configuracio.getDiesPerNetejaDeFitxersAplicacio()
@@ -856,10 +854,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             log.info("Neteja de fitxers no es realitzarà: propietat val null.");
 
         } else {
-            
-            log.info("Neteja de fitxers de transaccions de tipus " 
-              + (isUtilitzatPerAplicacio?"Aplicacio":"Persona") 
-              +  " es realitzarà: propietat val " + days + " dies");
+
+            log.info("Neteja de fitxers de transaccions de tipus "
+                    + (isUtilitzatPerAplicacio ? "Aplicacio" : "Persona")
+                    + " es realitzarà: propietat val " + days + " dies");
 
             Where w1;
 
@@ -883,26 +881,27 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             Where w = Where.AND(w1, w2);
             OrderBy order = new OrderBy(DATAINICI, OrderType.ASC);
-            List<Transaccio> list = this.select(w, order);
-            
-            final long start = System.currentTimeMillis();
-            final long FOURMINUTS = (long)(4.5 * 60 * 1000);
-            
+            List<Long> list = this.executeQuery(TransaccioFields.TRANSACCIOID, w, order);
 
-            for (Transaccio t : list) {
+            final long FOURMINUTS = 4L * 60L * 1000L;
 
+            for (Long transaccioID : list) {
+
+                Transaccio t = this.findByPrimaryKey(transaccioID);
                 Timestamp ts = t.getDataInici();
                 long diff = start - ts.getTime();
 
-                long diffDays = diff/(1000 * 60 * 60 * 24);
-                log.info("Netejant fitxers de Transacció amb ID " + t.getTransaccioID() + " (" + diffDays + " dies)");
-                
+                long diffDays = diff / (1000 * 60 * 60 * 24);
+                log.info("Netejant fitxers de Transacció amb ID " + t.getTransaccioID() + " ("
+                        + diffDays + " dies)");
+
                 netejaFitxers(t);
 
                 long now = System.currentTimeMillis();
 
                 if (now > start + FOURMINUTS) {
-                    log.warn("Hem tardat massa temps en esborrar fitxers. Sortim i demà acabarem amb els pendents.");
+                    log.warn(
+                            "Hem tardat massa temps en esborrar fitxers. Sortim i demà acabarem amb els pendents.");
                     break;
                 } else {
                     try {
@@ -910,8 +909,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                     } catch (InterruptedException e) {
                     }
                 }
-                
+
             }
+            
+            log.info("Finalitzada Neteja de fitxers ...");
 
         }
 
