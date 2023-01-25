@@ -24,6 +24,9 @@ import es.caib.digitalib.model.entity.TransaccioMultiple;
 public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioLocal {
 
   public static final String JNDI_NAME = "digitalib/TransaccioLogicaEJB/local";
+  
+  
+  public static final int FIVE_MINUTS_IN_SECONDS = 5* 60;
 
   /**
    * 

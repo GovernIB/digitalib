@@ -68,6 +68,9 @@ import es.caib.digitalib.utils.Constants;
 @SecurityDomain("seycon")
 @RunAs(Constants.DIB_ADMIN)
 public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogicaLocal {
+    
+    
+    
 
     @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
     protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
@@ -825,15 +828,17 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     }
 
     // Timeout de transacion la definim a 5 minuts
-    @TransactionTimeout(value = 5 * 60) // Units segons
+    @TransactionTimeout(value = TransaccioLogicaLocal.FIVE_MINUTS_IN_SECONDS) // Units segons
     @Override
     public void netejaDeFitxersNocturnAplicacio() throws I18NException {
 
         netejaDeFitxersNocturn(true);
 
     }
+    
+    
 
-    @TransactionTimeout(value = 5 * 60) // Units segons
+    @TransactionTimeout(value = TransaccioLogicaLocal.FIVE_MINUTS_IN_SECONDS) // Units segons
     @Override
     public void netejaDeFitxersNocturnPersona() throws I18NException {
 
