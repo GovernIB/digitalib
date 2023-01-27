@@ -5,7 +5,6 @@ import es.caib.digitalib.logic.utils.I18NLogicUtils;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.jboss.ejb3.annotation.TransactionTimeout;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +29,7 @@ public class NetejaFitxersSheduler {
     @EJB(mappedName = TransaccioLogicaLocal.JNDI_NAME)
     protected TransaccioLogicaLocal transaccioLogicaEjb;
 
-    @Scheduled(cron = "0 0 4 ? * ?") // Cada dia a las 04:00h
-    @TransactionTimeout(value = TransaccioLogicaLocal.FIVE_MINUTS_IN_SECONDS) // Units segons
+    @Scheduled(cron = "0 */10 4 * * *") // Cada dia cada 10 minuts entre les 04:00h i les 4:59h 
     //@Scheduled(cron = "0 * * ? * *") // Cada minut
     public void netejarFitxersAplicacio() {
 
@@ -47,9 +45,8 @@ public class NetejaFitxersSheduler {
     }
     
     
-    @Scheduled(cron = "0 0 5 ? * ?") // Cada dia a las 05:00h
+    @Scheduled(cron = "0 */10 5 * * *") // Cada dia cada 10 minuts entre les 05:00h i les 5:59h 
     //@Scheduled(cron = "0 * * ? * *") // Cada minut
-    @TransactionTimeout(value = TransaccioLogicaLocal.FIVE_MINUTS_IN_SECONDS) // Units segons
     public void netejarFitxersPersona() {
 
         try {

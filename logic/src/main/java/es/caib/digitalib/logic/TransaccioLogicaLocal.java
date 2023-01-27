@@ -26,7 +26,7 @@ public interface TransaccioLogicaLocal extends es.caib.digitalib.ejb.TransaccioL
   public static final String JNDI_NAME = "digitalib/TransaccioLogicaEJB/local";
   
   
-  public static final int FIVE_MINUTS_IN_SECONDS = 5* 60;
+  public static final int THREE_MINUTS_IN_SECONDS = 3 * 60;
 
   /**
    * 

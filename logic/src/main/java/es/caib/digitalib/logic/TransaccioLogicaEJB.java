@@ -1,5 +1,6 @@
 package es.caib.digitalib.logic;
 
+import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.transaction.Status;
 import javax.transaction.TransactionSynchronizationRegistry;
@@ -68,9 +70,6 @@ import es.caib.digitalib.utils.Constants;
 @SecurityDomain("seycon")
 @RunAs(Constants.DIB_ADMIN)
 public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogicaLocal {
-    
-    
-    
 
     @EJB(mappedName = es.caib.digitalib.ejb.PerfilLocal.JNDI_NAME)
     protected es.caib.digitalib.ejb.PerfilLocal perfilEjb;
@@ -249,7 +248,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                             + Arrays.toString(filesToDelete.toArray()));
                 }
             } else {
-                log.error("Passa per CleanFilesSynchronization::afterCompletion(" + status + "): Estat final no commit");   
+                log.error("Passa per CleanFilesSynchronization::afterCompletion(" + status
+                        + "): Estat final no commit");
             }
         }
     }
@@ -827,18 +827,16 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         return transaccio;
     }
 
-    // Timeout de transacion la definim a 5 minuts
-    @TransactionTimeout(value = TransaccioLogicaLocal.FIVE_MINUTS_IN_SECONDS) // Units segons
+    // Timeout de transacion
+    @TransactionTimeout(value = TransaccioLogicaLocal.THREE_MINUTS_IN_SECONDS) // Units segons
     @Override
     public void netejaDeFitxersNocturnAplicacio() throws I18NException {
 
         netejaDeFitxersNocturn(true);
 
     }
-    
-    
 
-    @TransactionTimeout(value = TransaccioLogicaLocal.FIVE_MINUTS_IN_SECONDS) // Units segons
+    @TransactionTimeout(value = TransaccioLogicaLocal.THREE_MINUTS_IN_SECONDS) // Units segons
     @Override
     public void netejaDeFitxersNocturnPersona() throws I18NException {
 
@@ -848,7 +846,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
     protected void netejaDeFitxersNocturn(boolean isUtilitzatPerAplicacio)
             throws I18NException {
-        
+
         final long start = System.currentTimeMillis();
 
         Integer days = isUtilitzatPerAplicacio
@@ -888,7 +886,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             OrderBy order = new OrderBy(DATAINICI, OrderType.ASC);
             List<Long> list = this.executeQuery(TransaccioFields.TRANSACCIOID, w, order);
 
-            final long FOURMINUTS = 4L * 60L * 1000L;
+            final long TIMEOUT_MS =  (TransaccioLogicaLocal.THREE_MINUTS_IN_SECONDS - 1L * 60L) * 1000L;
 
             for (Long transaccioID : list) {
 
@@ -904,7 +902,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
                 long now = System.currentTimeMillis();
 
-                if (now > start + FOURMINUTS) {
+                if (now > start + TIMEOUT_MS) {
                     log.warn(
                             "Hem tardat massa temps en esborrar fitxers. Sortim i demà acabarem amb els pendents.");
                     break;
@@ -916,7 +914,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 }
 
             }
-            
+
             log.info("Finalitzada Neteja de fitxers ...");
 
         }
