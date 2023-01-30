@@ -830,6 +830,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     // Timeout de transacion
     @TransactionTimeout(value = TransaccioLogicaLocal.THREE_MINUTS_IN_SECONDS) // Units segons
     @Override
+    @PermitAll
     public void netejaDeFitxersNocturnAplicacio() throws I18NException {
 
         netejaDeFitxersNocturn(true);
@@ -838,6 +839,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
     @TransactionTimeout(value = TransaccioLogicaLocal.THREE_MINUTS_IN_SECONDS) // Units segons
     @Override
+    @PermitAll
     public void netejaDeFitxersNocturnPersona() throws I18NException {
 
         netejaDeFitxersNocturn(false);

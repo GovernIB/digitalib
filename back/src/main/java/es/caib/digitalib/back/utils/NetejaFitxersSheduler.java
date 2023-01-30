@@ -2,6 +2,7 @@ package es.caib.digitalib.back.utils;
 
 import es.caib.digitalib.logic.TransaccioLogicaLocal;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
+import es.caib.digitalib.utils.Constants;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 
+import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 
 /**
@@ -22,6 +24,7 @@ import javax.ejb.EJB;
  *
  */
 @Service
+@RunAs(Constants.DIB_ADMIN)
 public class NetejaFitxersSheduler {
 
     protected final Logger log = Logger.getLogger(getClass());
