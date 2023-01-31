@@ -57,6 +57,8 @@ public class NetejaFitxersSheduler {
         } catch (I18NException e) {
             String msg = I18NLogicUtils.getMessage(e, new Locale("ca"));
             log.error("Error cridant a netejarFitxers Persona: " + msg, e);
+        }  catch(Throwable th) {
+            log.error("Error cridant a netejarFitxers Persona: " + th.getMessage(), th);
         }
 
     }

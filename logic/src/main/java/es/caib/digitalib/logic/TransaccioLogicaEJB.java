@@ -1,6 +1,5 @@
 package es.caib.digitalib.logic;
 
-import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +14,6 @@ import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
-import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.transaction.Status;
 import javax.transaction.TransactionSynchronizationRegistry;
@@ -197,7 +195,18 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             // log.info("XYZ ZZZ FFF Entra a esborrar fitxers " +
             // Arrays.toString(fitxers.toArray()));
             for (Long fid : fitxers) {
-                fitxerEjb.delete(fid);
+                try {
+                   fitxerEjb.delete(fid);
+                } catch(Throwable th) {
+                    String msg;
+                    if (th instanceof I18NException) {
+                        msg = I18NLogicUtils.getMessage((I18NException)th, new Locale("ca"));
+                    } else {
+                        msg = th.getMessage();
+                    }
+                    
+                    log.error("Error desconegut esborrant fitxer amb ID " + fid + " de la transacció " + transaccio.getTransaccioID() + ": " + msg, th);                    
+                }
             }
 
         }
@@ -900,7 +909,14 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 log.info("Netejant fitxers de Transacció amb ID " + t.getTransaccioID() + " ("
                         + diffDays + " dies)");
 
-                netejaFitxers(t);
+                try {
+                  netejaFitxers(t);
+                } catch (I18NException e) {
+                    String msg = I18NLogicUtils.getMessage(e, new Locale("ca"));
+                    log.error("Error cridant a netejarFitxers de la transaccio " + transaccioID + " : " + msg, e);
+                } catch(Throwable th) {
+                    log.error("Error cridant a netejarFitxers de la transaccio " + transaccioID + " : "+ th.getMessage(), th);
+                }
 
                 long now = System.currentTimeMillis();
 
