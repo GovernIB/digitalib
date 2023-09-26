@@ -122,12 +122,13 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         }
 
         // Cada transacció té les seves metadades
+        final Long transaccioID = transaccio.getTransaccioID();
         {
             metadadaLogicaEjb
-                    .delete(MetadadaFields.TRANSACCIOID.equal(transaccio.getTransaccioID()));
+                    .delete(MetadadaFields.TRANSACCIOID.equal(transaccioID));
         }
 
-        delete(transaccio.getTransaccioID());
+        delete(transaccioID);
 
         // El perfil és compartit per les diverses transaccions que formen part d'una
         // transacció multiple
@@ -159,7 +160,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
         {
             final boolean isApp = (transaccio.getUsuariAplicacioId() != null);
-            final String msg = "Esborrada transaccio " + transaccio.getTransaccioID();
+            final String msg = "Esborrada transaccio " + transaccioID;
             final String additionalInfo = null;
             final int auditType = Constants.AUDIT_TYPE_DELETE_TRANSACTION;
             auditoriaLogicaEjb.audita(transaccio, isApp, msg, additionalInfo, auditType,
@@ -167,7 +168,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         }
 
         transactionSynchronizationRegistry.registerInterposedSynchronization(
-                new CleanFilesSynchronization(filesToDelete));
+                new CleanFilesSynchronization(transaccioID, filesToDelete));
 
         return filesToDelete;
     }
@@ -232,16 +233,19 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         cleanFilesOfTransaction(t, filesToDelete, true);
 
         transactionSynchronizationRegistry.registerInterposedSynchronization(
-                new CleanFilesSynchronization(filesToDelete));
+                new CleanFilesSynchronization(t.getTransaccioID(), filesToDelete));
         // log.error("Passa per netejaFitxers => FINAL");
     }
 
     public class CleanFilesSynchronization implements javax.transaction.Synchronization {
 
         protected final Set<Long> filesToDelete;
+        
+        protected final Long transactionID;
 
-        public CleanFilesSynchronization(Set<Long> filesToDelete) {
+        public CleanFilesSynchronization(Long transactionID, Set<Long> filesToDelete) {            
             super();
+            this.transactionID = transactionID;
             this.filesToDelete = filesToDelete;
         }
 
@@ -258,7 +262,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 }
             } else {
                 log.error("Passa per CleanFilesSynchronization::afterCompletion(" + status
-                        + "): Estat final no commit");
+                        + "): Estat final no commit de la transaccio " + this.transactionID);
             }
         }
     }
@@ -898,6 +902,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             List<Long> list = this.executeQuery(TransaccioFields.TRANSACCIOID, w, order);
 
             final long TIMEOUT_MS =  (TransaccioLogicaLocal.THREE_MINUTS_IN_SECONDS - 1L * 60L) * 1000L;
+            
+            int processats = 0;
+            
+            int error = 0;
 
             for (Long transaccioID : list) {
 
@@ -906,16 +914,20 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 long diff = start - ts.getTime();
 
                 long diffDays = diff / (1000 * 60 * 60 * 24);
-                log.info("Netejant fitxers de Transacció amb ID " + t.getTransaccioID() + " ("
+                log.info("Iniciant neteja dels fitxers de Transacció amb ID " + t.getTransaccioID() + " ("
                         + diffDays + " dies)");
 
                 try {
                   netejaFitxers(t);
+                  log.info("Neteja dels fitxers de la Transacció amb ID " + t.getTransaccioID() + " realitzada correctment.");
+                  processats++;
                 } catch (I18NException e) {
                     String msg = I18NLogicUtils.getMessage(e, new Locale("ca"));
                     log.error("Error cridant a netejarFitxers de la transaccio " + transaccioID + " : " + msg, e);
+                    error++;
                 } catch(Throwable th) {
                     log.error("Error cridant a netejarFitxers de la transaccio " + transaccioID + " : "+ th.getMessage(), th);
+                    error++;
                 }
 
                 long now = System.currentTimeMillis();
@@ -930,10 +942,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                     } catch (InterruptedException e) {
                     }
                 }
-
             }
 
-            log.info("Finalitzada Neteja de fitxers ...");
+            log.info("Finalitzada Neteja de fitxers => Processats: " + processats + " | Error: " + error);
 
         }
 
