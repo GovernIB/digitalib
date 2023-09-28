@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- FITXER AUTOGENERAT -->
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+    <persistence-unit name="digitalibPU" transaction-type="JTA">
+        <provider>es.caib.digitalib.hibernate.CustomHibernatePersistenceProvider</provider>
+        <jta-data-source>java:jboss/datasources/digitalibDS</jta-data-source>
+        
+		<class>es.caib.digitalib.persistence.ApiSimpleJPA</class>
+		<class>es.caib.digitalib.persistence.AuditoriaJPA</class>
+		<class>es.caib.digitalib.persistence.AvisJPA</class>
+		<class>es.caib.digitalib.persistence.ConfiguracioFirmaJPA</class>
+		<class>es.caib.digitalib.persistence.ConfiguracioGrupJPA</class>
+		<class>es.caib.digitalib.persistence.EstadisticaJPA</class>
+		<class>es.caib.digitalib.persistence.FitxerJPA</class>
+		<class>es.caib.digitalib.persistence.IdiomaJPA</class>
+		<class>es.caib.digitalib.persistence.InfoCustodyJPA</class>
+		<class>es.caib.digitalib.persistence.InfoSignaturaJPA</class>
+		<class>es.caib.digitalib.persistence.MetadadaJPA</class>
+		<class>es.caib.digitalib.persistence.PerfilJPA</class>
+		<class>es.caib.digitalib.persistence.PerfilUsuariAplicacioJPA</class>
+		<class>es.caib.digitalib.persistence.PluginJPA</class>
+		<class>es.caib.digitalib.persistence.PluginCridadaJPA</class>
+		<class>es.caib.digitalib.persistence.TraduccioJPA</class>
+		<class>es.caib.digitalib.persistence.TraduccioMapJPA</class>
+		<class>es.caib.digitalib.persistence.TransaccioJPA</class>
+		<class>es.caib.digitalib.persistence.TransaccioMultipleJPA</class>
+		<class>es.caib.digitalib.persistence.UsuariAplicacioJPA</class>
+		<class>es.caib.digitalib.persistence.UsuariPersonaJPA</class>
+
+        <!-- Activar cache només per aquelles entitats on volguem expressament -->
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+        <!-- Sempre activar la validació de les propietats -->
+        <validation-mode>CALLBACK</validation-mode>
+
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,242 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>digitalib-ejb</artifactId>
+    <packaging>ejb</packaging>
+
+    <parent>
+        <groupId>es.caib.digitalib</groupId>
+        <artifactId>digitalib</artifactId>
+        <version>2.0.0</version>
+    </parent>
+
+    <name>DigitalIB - EJB</name>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.dom4j</groupId>
+                    <artifactId>dom4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+
+        <!-- Split PDF -->
+
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.21</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox-tools</artifactId>
+            <version>2.0.21</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <!-- ===== PLUGINS IB -->
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.core</groupId>
+            <artifactId>pluginsib-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
+            <artifactId>pluginsib-scanweb-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>pluginsib-signatureserver-api</artifactId>
+            <groupId>org.fundaciobit.pluginsib.signatureserver</groupId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.documentcustody</groupId>
+            <artifactId>pluginsib-documentcustody-api</artifactId>
+            <version>4.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.freemarker</groupId>
+                    <artifactId>freemarker</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.arxiu</groupId>
+            <artifactId>pluginsib-arxiu-api</artifactId>
+            <version>${pluginsib.arxiu.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.freemarker</groupId>
+                    <artifactId>freemarker</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
+            <artifactId>pluginsib-timestamp-api</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.utils</groupId>
+            <artifactId>pluginsib-utils-templateengine</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.28</version>
+        </dependency>
+
+
+        <dependency>
+            <artifactId>apifirmasimple-jersey</artifactId>
+            <groupId>org.fundaciobit.apisib.apifirmasimple</groupId>
+            <version>1.0.3</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jaxb-impl</artifactId>
+                    <groupId>com.sun.xml.bind</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jaxb-api</artifactId>
+                    <groupId>com.sun.xml.bind</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.19.4</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jaxb-impl</artifactId>
+                    <groupId>com.sun.xml.bind</groupId>
+                </exclusion>
+
+                <exclusion>
+                    <artifactId>jaxb-api</artifactId>
+                    <groupId>com.sun.xml.bind</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <dependency>
+            <artifactId>apiscanwebsimple-api</artifactId>
+            <groupId>org.fundaciobit.apisib.apiscanwebsimple</groupId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>apimassivescanwebsimple-api</artifactId>
+            <groupId>org.fundaciobit.apisib.apimassivescanwebsimple</groupId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>es.caib.digitalib</groupId>
+            <artifactId>digitalib-persistence</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>es.caib.digitalib</groupId>
+            <artifactId>digitalib-commons</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <artifactId>pluginsib-userinformation-api</artifactId>
+            <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+            <version>${pluginsib.userinformation.api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.ejb3</groupId>
+            <artifactId>jboss-ejb3-ext-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <finalName>${project.artifactId}-${project.version}</finalName>
+
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <configuration>
+                    <ejbVersion>3.2</ejbVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

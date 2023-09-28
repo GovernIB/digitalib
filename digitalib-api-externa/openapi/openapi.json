@@ -1,0 +1,87 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API REST EXTERNA de DigitalIB",
+    "description" : "Conjunt de Serveis REST de DigitalIB per ser accedits des de l'exterior",
+    "contact" : {
+      "name" : "Departament de Govern Digital a la Fundació Bit",
+      "url" : "http://otae.fundaciobit.org",
+      "email" : "otae@fundaciobit.org"
+    },
+    "license" : {
+      "name" : "License Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "version" : "1.0.0"
+  },
+  "externalDocs" : {
+    "description" : "Java Client (GovernIB Github)",
+    "url" : "https://github.com/GovernIB/digitalib/tree/digitalib-1.0/digitalib-api-externa-client"
+  },
+  "servers" : [ {
+    "url" : "/digitalibapi/externa"
+  }, {
+    "url" : "http://localhost:8080/digitalibapi/externa"
+  }, {
+    "url" : "https://dev.caib.es/digitalibapi/externa"
+  }, {
+    "url" : "https://proves.caib.es/digitalibapi/externa"
+  }, {
+    "url" : "https://se.caib.es/digitalibapi/externa"
+  }, {
+    "url" : "https://www.caib.es/digitalibapi/externa"
+  } ],
+  "tags" : [ {
+    "name" : "Versio",
+    "description" : "Exemple de Servei JSON d'accés Públic"
+  } ],
+  "paths" : {
+    "/public/exemplepublic/versio" : {
+      "get" : {
+        "tags" : [ "Versio" ],
+        "summary" : "Versio de l'Aplicació",
+        "operationId" : "versio",
+        "parameters" : [ {
+          "name" : "idioma",
+          "in" : "query",
+          "description" : "Codi de l'idioma",
+          "schema" : {
+            "pattern" : "^ca|es$",
+            "type" : "string"
+          },
+          "example" : "ca"
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "200" : {
+            "description" : "Versió i idioma",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ExamplePojo"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "ExamplePojo" : {
+        "type" : "object",
+        "properties" : {
+          "versio" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
