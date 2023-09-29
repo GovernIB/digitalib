@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.security.RunAs;
-import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 

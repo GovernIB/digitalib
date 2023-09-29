@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -366,7 +367,7 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
       urlFinal = getRelativeURLBase(request);
     } else {
 
-      trans.setEstatMissatge(msg);
+      trans.setEstatMissatge(StringUtils.truncate(msg, 254));
 
       trans.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       if (th == null) {

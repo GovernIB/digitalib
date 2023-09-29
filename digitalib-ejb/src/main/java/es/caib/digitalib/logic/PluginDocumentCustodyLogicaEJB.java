@@ -11,6 +11,7 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
@@ -94,7 +95,7 @@ public class PluginDocumentCustodyLogicaEJB extends
           + I18NLogicUtils.getMessage(e1, locale);
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
+      transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e1));
 
       return null;
@@ -243,11 +244,10 @@ public class PluginDocumentCustodyLogicaEJB extends
         msg = "XYZ ZZZ Error custodiant fitxer firmat(Throwable): " + e.getMessage();
       }
 
-      // XYZ ZZZ
-      e.printStackTrace();
+      log.error(msg, e);
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
+      transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
 
       // Cridades de Plugin

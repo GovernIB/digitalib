@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -18,7 +19,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
@@ -284,7 +284,7 @@ public class RestApiEstadistiques extends RestApiScanWebUtils
                     a = appName;
                 }
                 
-                final Map<Long, String> configuracioGrupMapByUsrName = new HashedMap();
+                final Map<String, String> configuracioGrupMapByUsrName = new HashMap<String, String>();
 
                 for (Transaccio transaccio : transaccions) {
 
@@ -372,10 +372,14 @@ public class RestApiEstadistiques extends RestApiScanWebUtils
                     if (u == null) {
                         configuracioGrupNom = null;
                     } else {
+                        // 
                        String cgn = configuracioGrupMapByUsrName.get(u);
                        if (cgn == null) {
                            UsuariPersonaQueryPath upqp = new UsuariPersonaQueryPath();
                            cgn = usuariPersonaEjb.executeQueryOne(upqp.CONFIGURACIOGRUP().NOM(), UsuariPersonaFields.USERNAME.equal(u));
+                           
+                           configuracioGrupMapByUsrName.put(u,cgn);
+                           
                        }
                        configuracioGrupNom = cgn;
                     }

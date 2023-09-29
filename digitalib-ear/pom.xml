@@ -1,202 +1,242 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>es.caib.digitalib</groupId>
-	<artifactId>digitalib-ear</artifactId>
-	<version>2.0.0</version>
-	<packaging>ear</packaging>
+    <artifactId>digitalib-ear</artifactId>
+    <packaging>ear</packaging>
 
-	<parent>
-		<groupId>es.caib.digitalib</groupId>
-		<artifactId>digitalib</artifactId>
-		<version>2.0.0</version>
-	</parent>
+    <parent>
+        <groupId>es.caib.digitalib</groupId>
+        <artifactId>digitalib</artifactId>
+        <version>2.0.0</version>
+    </parent>
 
-	<name>DigitalIB - Ear</name>
+    <name>DigitalIB - Ear</name>
 
-	<properties>
-		<!-- Format del timestamp -->
-		<maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
-	</properties>
+    <properties>
+        <!-- Format del timestamp -->
+        <maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
+    </properties>
 
-	<dependencies>
+    <dependencies>
 
-		<!-- Internes -->
+        <!-- Internes -->
 
-		<dependency>
-			<groupId>es.caib.digitalib</groupId>
-			<artifactId>digitalib-persistence</artifactId>
-			<version>${project.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>es.caib.digitalib</groupId>
+            <artifactId>digitalib-persistence</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>es.caib.digitalib</groupId>
-			<artifactId>digitalib-ejb</artifactId>
-			<version>${project.version}</version>
-			<type>ejb</type>
-		</dependency>
+        <dependency>
+            <groupId>es.caib.digitalib</groupId>
+            <artifactId>digitalib-ejb</artifactId>
+            <version>${project.version}</version>
+            <type>ejb</type>
+        </dependency>
 
 
-		<dependency>
-			<groupId>es.caib.digitalib</groupId>
-			<artifactId>digitalib-back</artifactId>
-			<version>${project.version}</version>
-			<type>war</type>
-		</dependency>
+        <dependency>
+            <groupId>es.caib.digitalib</groupId>
+            <artifactId>digitalib-back</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
 
 
-		<!-- Tenir en compte a l'hora de incloure dependències només si és imprescindible 
+        <!-- Tenir en compte a l'hora de incloure dependències només si és imprescindible 
 			i no està ja dins un mòdul sobre el que es pugui establir una dependència 
 			als descriptors. https://docs.jboss.org/author/display/AS72/Implicit+module+dependencies+for+deployments -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
 
 
-		<!-- Externes -->
-		
-		<!-- ====================================== -->
-		<!-- ===== PLUGINS DE USERINFORMATION ===== -->
-		<!-- ====================================== -->
-		<dependency>
+        <!-- Externes -->
+
+        <!-- ====================================== -->
+        <!-- =========  PLUGINS ESCANEIG  ========= -->
+        <!-- ====================================== -->
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
+            <artifactId>pluginsib-scanweb-iecisascanweb-plugin</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
+            <artifactId>pluginsib-scanweb-dynamicwebtwain</artifactId>
+            <version>4.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
+            <artifactId>pluginsib-scanweb-file</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+
+        <!-- ====================================== -->
+        <!-- ===  PLUGINS DE SEGELLAT DE TEMPS  === -->
+        <!-- ====================================== -->
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
+            <artifactId>pluginsib-timestamp-api</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
+            <artifactId>pluginsib-timestamp-catcertrfc</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
+            <artifactId>pluginsib-timestamp-afirmarfc-cliente_tsa_rfc</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <!-- ====================================== -->
+        <!-- ===== PLUGINS DE USERINFORMATION ===== -->
+        <!-- ====================================== -->
+        <dependency>
             <artifactId>pluginsib-userinformation-api</artifactId>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
             <version>${pluginsib.userinformation.api.version}</version>
         </dependency>
-		
-		<dependency>
-			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-			<artifactId>pluginsib-userinformation-keycloak</artifactId>
-			<version>${pluginsib.userinformation.impl.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.fundaciobit.pluginsib.core</groupId>
-					<artifactId>pluginsib-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jboss.resteasy</groupId>
-					<artifactId>resteasy-client</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jboss.resteasy</groupId>
-					<artifactId>resteasy-multipart-provider</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jboss.resteasy</groupId>
-					<artifactId>resteasy-jaxrs</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jboss.resteasy</groupId>
-					<artifactId>resteasy-jaxb-provider</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jboss.resteasy</groupId>
-					<artifactId>resteasy-jackson2-provider</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-			<artifactId>pluginsib-userinformation-database</artifactId>
-			<version>${pluginsib.userinformation.impl.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.fundaciobit.pluginsib.core</groupId>
-					<artifactId>pluginsib-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-			<artifactId>pluginsib-userinformation-ldap</artifactId>
-			<version>${pluginsib.userinformation.impl.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.fundaciobit.pluginsib.core</groupId>
-					<artifactId>pluginsib-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 
-      <!-- ============================================ -->
-      <!-- ========== PLUGINS DE DATAEXPORT =========== -->
-      <!-- ============================================ -->
-      
-      <!-- API -->
-      <dependency>
-        <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
-        <artifactId>pluginsib-exportdata-api</artifactId>
-        <version>2.0.0</version>
-		<exclusions>
-				<exclusion>
-					<groupId>org.fundaciobit.pluginsib.core</groupId>
-					<artifactId>pluginsib-core</artifactId>
-				</exclusion>
-		</exclusions>
-      </dependency>
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+            <artifactId>pluginsib-userinformation-keycloak</artifactId>
+            <version>${pluginsib.userinformation.impl.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.fundaciobit.pluginsib.core</groupId>
+                    <artifactId>pluginsib-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-multipart-provider</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jaxrs</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jaxb-provider</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jackson2-provider</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+            <artifactId>pluginsib-userinformation-database</artifactId>
+            <version>${pluginsib.userinformation.impl.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.fundaciobit.pluginsib.core</groupId>
+                    <artifactId>pluginsib-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+            <artifactId>pluginsib-userinformation-ldap</artifactId>
+            <version>${pluginsib.userinformation.impl.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.fundaciobit.pluginsib.core</groupId>
+                    <artifactId>pluginsib-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- ============================================ -->
+        <!-- ========== PLUGINS DE DATAEXPORT =========== -->
+        <!-- ============================================ -->
+
+        <!-- API -->
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
+            <artifactId>pluginsib-exportdata-api</artifactId>
+            <version>2.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.fundaciobit.pluginsib.core</groupId>
+                    <artifactId>pluginsib-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
 
+        <!-- Excel Plugin -->
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
+            <artifactId>pluginsib-exportdata-excel</artifactId>
+            <version>2.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.fundaciobit.pluginsib.core</groupId>
+                    <artifactId>pluginsib-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
-      <!-- Excel Plugin -->
-      <dependency>
-        <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
-        <artifactId>pluginsib-exportdata-excel</artifactId>
-        <version>2.0.0</version>
-		<exclusions>
-				<exclusion>
-					<groupId>org.fundaciobit.pluginsib.core</groupId>
-					<artifactId>pluginsib-core</artifactId>
-				</exclusion>
-		</exclusions>
-      </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
+        </dependency>
 
-      <dependency>
-        <groupId>org.apache.poi</groupId>
-        <artifactId>poi</artifactId>
-        <version>3.9</version>
-      </dependency>
+        <!-- ODS Plugin -->
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
+            <artifactId>pluginsib-exportdata-ods</artifactId>
+            <version>2.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.fundaciobit.pluginsib.core</groupId>
+                    <artifactId>pluginsib-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
-      <!-- ODS Plugin -->
-      <dependency>
-        <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
-        <artifactId>pluginsib-exportdata-ods</artifactId>
-        <version>2.0.0</version>
-		<exclusions>
-				<exclusion>
-					<groupId>org.fundaciobit.pluginsib.core</groupId>
-					<artifactId>pluginsib-core</artifactId>
-				</exclusion>
-		</exclusions>
-      </dependency>
+        <dependency>
+            <groupId>org.jopendocument</groupId>
+            <artifactId>jOpenDocument</artifactId>
+            <version>1.3b1</version>
+        </dependency>
 
-      <dependency>
-        <groupId>org.jopendocument</groupId>
-        <artifactId>jOpenDocument</artifactId>
-        <version>1.3b1</version>
-      </dependency>
+        <!-- CSV Plugin -->
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
+            <artifactId>pluginsib-exportdata-csv</artifactId>
+            <version>2.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.fundaciobit.pluginsib.core</groupId>
+                    <artifactId>pluginsib-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
-      <!-- CSV Plugin -->
-      <dependency>
-        <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
-        <artifactId>pluginsib-exportdata-csv</artifactId>
-        <version>2.0.0</version>
-		<exclusions>
-				<exclusion>
-					<groupId>org.fundaciobit.pluginsib.core</groupId>
-					<artifactId>pluginsib-core</artifactId>
-				</exclusion>
-		</exclusions>
-      </dependency>
-
-		<!-- Commons Dependencies -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
+        <!-- Commons Dependencies -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -204,112 +244,231 @@
         </dependency>
 
 
+        <!-- ============================================ -->
+        <!-- ==========  PLUGINS FIRMA EN SERVIDOR =========== -->
+        <!-- ============================================ -->
 
-		<!-- API REST de DigitalIB -->
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.signatureserver</groupId>
+            <artifactId>pluginsib-signatureserver-afirmalibs</artifactId>
+            <version>${pluginsib.signatureserver.version}</version>
+        </dependency>
 
-		<!-- API EXTERNA START -->
-		<!-- http://localhost:8080/digitalibapi/externa/index.html -->
-		<dependency>
-			<groupId>es.caib.digitalib</groupId>
-			<artifactId>digitalib-api-externa</artifactId>
-			<version>2.0.0</version>
-			<type>war</type>
-		</dependency>
-		<!-- API EXTERNA END -->
-	</dependencies>
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.signatureserver</groupId>
+            <artifactId>pluginsib-signatureserver-afirmaserver</artifactId>
+            <version>${pluginsib.signatureserver.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>com.sun.xml.bind</groupId>
+                    <artifactId>jaxb-impl</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>xalan</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>log4j-over-slf4j</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.apache.ws.security</groupId>
+                    <artifactId>wss4j</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.apache.santuario</groupId>
+                    <artifactId>xmlsec</artifactId>
+                </exclusion>
+
+                <!--  XYZ ZZZ -->
+                <exclusion>
+                    <groupId>org.freemarker</groupId>
+                    <artifactId>freemarker</artifactId>
+                </exclusion>
+                
+                <!--  XYZ ZZZ Esta a pluginsib-signatureserver-afirmaserver:3.1.0-SNAPSHOT -->
+                 <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+
+            </exclusions>
+        </dependency>
+
+        <!-- ============================================ -->
+        <!-- =======  PLUGINS DE DOCUMENT CUSTODY ======= -->
+        <!-- ============================================ -->
 
 
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.documentcustody</groupId>
+            <artifactId>pluginsib-documentcustody-filesystem</artifactId>
+            <version>4.0.0</version>
+        </dependency>
 
-	<build>
-		<finalName>digitalib</finalName>
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.documentcustody</groupId>
+            <artifactId>pluginsib-documentcustody-arxiudigitalcaib</artifactId>
+            <version>4.0.0</version>
+            
+             <!-- Exclussions -->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-client</artifactId>
+                </exclusion>
+            </exclusions>
+            
+        </dependency>
 
-		<filters>
-			<filter>../config.properties</filter>
-		</filters>
-
-		<plugins>
-
-			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<!-- Aquest bloc força a netejar sempre -->
-				<executions>
-					<execution>
-						<id>auto-clean</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+        <!-- Plugin d'Alfresco veure Profiles -->
 
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ear-plugin</artifactId>
+        <!-- ============================================ -->
+        <!-- ==========   PLUGINS DE ARXIU =========== -->
+        <!-- ============================================ -->
 
-				<!-- configuring the ear plugin -->
-				<configuration>
 
-					<displayName>DigitalIB</displayName>
-					<description>DigitalIB</description>
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.arxiu</groupId>
+            <artifactId>pluginsib-arxiu-caib</artifactId>
+            <version>${pluginsib.arxiu.version}</version>
 
-					<generateApplicationXml>true</generateApplicationXml>
-					<defaultLibBundleDir>lib</defaultLibBundleDir>
+            <!-- Exclussions XYZ ZZZ esta inclòs a DocumentCustody-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jersey</groupId>
+                    <artifactId>jersey-client</artifactId>
+                </exclusion>
+                
+                <exclusion>
+                    <groupId>es.caib.arxiudigital</groupId>
+                    <artifactId>arxiudigital-apirest</artifactId>
+                </exclusion>              
+            </exclusions>
+
+        </dependency>
+
+        <!-- Plugin de FileSystem de Arxiu veure Profiles -->
+
+
+        <!-- API REST de DigitalIB -->
+
+        <!-- API EXTERNA START -->
+        <!-- http://localhost:8080/digitalibapi/externa/index.html -->
+        <dependency>
+            <groupId>es.caib.digitalib</groupId>
+            <artifactId>digitalib-api-externa</artifactId>
+            <version>2.0.0</version>
+            <type>war</type>
+        </dependency>
+        <!-- API EXTERNA END -->
+    </dependencies>
+
+
+    <build>
+        <finalName>digitalib</finalName>
+
+        <filters>
+            <filter>../config.properties</filter>
+        </filters>
+
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <!-- Aquest bloc força a netejar sempre -->
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+
+                <!-- configuring the ear plugin -->
+                <configuration>
+
+                    <displayName>DigitalIB</displayName>
+                    <description>DigitalIB</description>
+
+                    <generateApplicationXml>true</generateApplicationXml>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <skinnyWars>true</skinnyWars>
-					<includeLibInApplicationXml>false</includeLibInApplicationXml>
-					<!--suppress UnresolvedMavenProperty -->
-					<!-- Nom mòduls d'acord amb punt 4.2 de l'Estàndard CAIB -->
-					<outputFileNameMapping>@{artifactId}@-@{version}@.@{extension}@</outputFileNameMapping>
-					<version>8</version>
+                    <includeLibInApplicationXml>false</includeLibInApplicationXml>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <!-- Nom mòduls d'acord amb punt 4.2 de l'Estàndard CAIB -->
+                    <outputFileNameMapping>@{artifactId}@-@{version}@.@{extension}@</outputFileNameMapping>
+                    <version>8</version>
 
-					<archive>
-						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-						</manifest>
-						<manifestEntries>
-							<project-version>${project.version}</project-version>
-							<project-buildtime>${maven.build.timestamp}</project-buildtime>
-							<scm-revision>${buildNumber}</scm-revision>
-						</manifestEntries>
-					</archive>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <project-version>${project.version}</project-version>
+                            <project-buildtime>${maven.build.timestamp}</project-buildtime>
+                            <scm-revision>${buildNumber}</scm-revision>
+                        </manifestEntries>
+                    </archive>
 
-					<defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
 
-					<modules>
+                    <modules>
 
-						<webModule>
-							<groupId>es.caib.digitalib</groupId>
-							<artifactId>digitalib-back</artifactId>
-							<contextRoot>digitalibback</contextRoot>
+                        <webModule>
+                            <groupId>es.caib.digitalib</groupId>
+                            <artifactId>digitalib-back</artifactId>
+                            <contextRoot>digitalibback</contextRoot>
                             <bundleFileName>digitalib-back.war</bundleFileName>
-						</webModule>
-                        
-                        
+                        </webModule>
 
-						<ejbModule>
-							<groupId>es.caib.digitalib</groupId>
-							<artifactId>digitalib-ejb</artifactId>
-							<bundleFileName>digitalib-ejb.jar</bundleFileName>
-						</ejbModule>
 
-						<!-- API EXTERNA START -->
-						<webModule>
-							<groupId>es.caib.digitalib</groupId>
-							<artifactId>digitalib-api-externa</artifactId>
-							<contextRoot>/digitalibapi/externa</contextRoot>
-							<bundleFileName>digitalib-api-externa.war</bundleFileName>
-						</webModule>
-						<!-- API EXTERNA END -->
-					</modules>
+                        <ejbModule>
+                            <groupId>es.caib.digitalib</groupId>
+                            <artifactId>digitalib-ejb</artifactId>
+                            <bundleFileName>digitalib-ejb.jar</bundleFileName>
+                        </ejbModule>
 
-				</configuration>
-			</plugin>
+                        <!-- API EXTERNA START -->
+                        <webModule>
+                            <groupId>es.caib.digitalib</groupId>
+                            <artifactId>digitalib-api-externa</artifactId>
+                            <contextRoot>/digitalibapi/externa</contextRoot>
+                            <bundleFileName>digitalib-api-externa.war</bundleFileName>
+                        </webModule>
+                        <!-- API EXTERNA END -->
+                    </modules>
 
-		</plugins>
-	</build>
-	
-	
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
     <profiles>
         <!-- Garantir que es fixa la variable d'entorn JBOSS_HOME -->
         <profile>
@@ -323,18 +482,66 @@
                 <env.JBOSS_HOME>HA DE FIXAR LA VARIABLE D'ENTORN JBOSS_HOME</env.JBOSS_HOME>
             </properties>
         </profile>
+
         <profile>
-          <id>revisionnumber</id>
-          <build>
-            <plugins>
-                <!-- Defineix la propietat ${buildNumber} que s'empra al filtrat -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>buildnumber-maven-plugin</artifactId>
-                </plugin>
-            </plugins>
-          </build>
+            <id>revisionnumber</id>
+            <build>
+                <plugins>
+                    <!-- Defineix la propietat ${buildNumber} que s'empra al filtrat -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>buildnumber-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
+
+
+        <profile>
+            <id>desenvolupament</id>
+            <dependencies></dependencies>
+        </profile>
+
+        <!-- Profile per Incloure Plugin de Document Custody de Alfresco -->
+        <profile>
+            <id>alfresco</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.fundaciobit.pluginsib.documentcustody</groupId>
+                    <artifactId>pluginsib-documentcustody-alfresco</artifactId>
+                    <version>4.0.0</version>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-api</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>javax.xml.stream</groupId>
+                            <artifactId>stax-api</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>xpp3</groupId>
+                            <artifactId>xpp3</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <activation>
+                <jdk>[1.7,)</jdk>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.fundaciobit.pluginsib.arxiu</groupId>
+                    <artifactId>pluginsib-arxiu-filesystem</artifactId>
+                    <version>${pluginsib.arxiu.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+
     </profiles>
 
 </project>

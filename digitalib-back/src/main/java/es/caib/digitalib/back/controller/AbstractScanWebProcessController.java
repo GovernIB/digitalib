@@ -15,6 +15,7 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleStatus;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
@@ -313,14 +314,14 @@ public abstract class AbstractScanWebProcessController {
 
             case ScanWebStatus.STATUS_FINAL_ERROR: {
                 transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-                transaccio.setEstatMissatge(swc.getResult().getStatus().getErrorMsg());
+                transaccio.setEstatMissatge(StringUtils.truncate(swc.getResult().getStatus().getErrorMsg(), 254));
                 // transaccio.setEstatExcepcio(swc.getStatus().getErrorException());
             }
             break;
 
             case ScanWebStatus.STATUS_CANCELLED: {
                 transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_CANCELLED);
-                transaccio.setEstatMissatge(swc.getResult().getStatus().getErrorMsg());
+                transaccio.setEstatMissatge(StringUtils.truncate(swc.getResult().getStatus().getErrorMsg(), 254));
                 if (transaccio.getEstatMissatge() == null) {
                     transaccio.setEstatMissatge(I18NUtils.tradueix("plugindescan.cancelat"));
                 }
@@ -941,7 +942,7 @@ public abstract class AbstractScanWebProcessController {
     protected void setError(TransaccioJPA transaccio, String msg) throws I18NException {
         log.error(msg);
 
-        transaccio.setEstatMissatge(msg);
+        transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
         transaccio.setEstatCodi(MassiveScanWebSimpleStatus.STATUS_FINAL_ERROR);
 
         transaccioLogicaEjb.update(transaccio);

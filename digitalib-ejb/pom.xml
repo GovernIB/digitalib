@@ -70,7 +70,7 @@
         <dependency>
             <artifactId>pluginsib-signatureserver-api</artifactId>
             <groupId>org.fundaciobit.pluginsib.signatureserver</groupId>
-            <version>3.0.0</version>
+            <version>${pluginsib.signatureserver.version}</version>
         </dependency>
 
         <dependency>

@@ -14,6 +14,7 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.apache.commons.lang3.StringUtils;
 import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleSignedFileInfo;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuRequiredParameters;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
@@ -152,7 +153,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
                     + I18NLogicUtils.getMessage(e1, locale);
 
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-            transaccio.setEstatMissatge(msg);
+            transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
             transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e1));
 
             return null;
@@ -541,7 +542,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
             log.error("Error intenant enviar a API d'Arxiu: " + msg, e);
 
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-            transaccio.setEstatMissatge(msg);
+            transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
             transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
 
             // Cridades de Plugin

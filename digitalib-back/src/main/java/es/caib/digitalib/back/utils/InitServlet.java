@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.crypt.AlgorithmEncrypter;
 import org.fundaciobit.genapp.common.crypt.FileIDEncrypter;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
+import org.fundaciobit.genapp.common.filesystem.IFileSystemManager;
 import org.fundaciobit.genapp.common.web.exportdata.DataExporterManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.core.utils.PluginsManager;
@@ -46,6 +47,16 @@ public class InitServlet extends HttpServlet {
 
         // Sistema de Fitxers
         try {
+            
+            String fileManagerClass = Configuracio.getFileSystemManager();
+            if (fileManagerClass != null) {
+                Class<?> clazz = Class.forName(fileManagerClass);
+                IFileSystemManager fsm = (IFileSystemManager)clazz.getDeclaredConstructor().newInstance();
+                FileSystemManager.setFileSystemManager(fsm);
+                log.info("FileSystemManager class = " + fsm.getClass().getName());
+            }
+            
+            
             File fd = Configuracio.getFilesDirectory();
             if (fd == null) {
                 throw new Exception("No s'ha definit la propietat de la ubicació dels fitxers ("
@@ -61,6 +72,8 @@ public class InitServlet extends HttpServlet {
             }
             FileSystemManager.setFilesPath(fd);
             log.info("FileSystemManager path = " + FileSystemManager.getFilesPath().getAbsolutePath());
+            
+            
 
         } catch (Throwable th) {
             final String msg = "Error inicialitzant el sistema de sistema de fitxers: " + th.getMessage();

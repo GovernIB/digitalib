@@ -17,6 +17,7 @@ import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import es.caib.digitalib.persistence.PluginJPA;
 import es.caib.digitalib.model.entity.Plugin;
+import es.caib.digitalib.commons.utils.Configuracio;
 import es.caib.digitalib.commons.utils.Constants;
 
 /**
@@ -25,133 +26,125 @@ import es.caib.digitalib.commons.utils.Constants;
  *
  */
 public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginLogicaEJB
-    implements AbstractPluginLogicaLocal<I> {
+        implements AbstractPluginLogicaLocal<I> {
 
-  protected abstract int getTipusDePlugin();
+    protected abstract int getTipusDePlugin();
 
-  protected abstract String getName();
+    protected abstract String getName();
 
-  @Override
-  public List<Plugin> getAllPlugins() throws I18NException {
+    @Override
+    public List<Plugin> getAllPlugins() throws I18NException {
 
-    Where where = getWhere();
+        Where where = getWhere();
 
-    return select(where);
+        return select(where);
 
-  }
+    }
 
-  @Override
-  public Where getWhere() {
-    return Where.AND(TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true)
+    @Override
+    public Where getWhere() {
+        return Where.AND(TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true)
 
-    // TODO Elegim plugin entre les genèriques o entre els específics per l'entitat
-    // Where.OR(ENTITATID.isNull(), ENTITATID.equal(entitatID))
+        // TODO Elegim plugin entre les genèriques o entre els específics per l'entitat
+        // Where.OR(ENTITATID.isNull(), ENTITATID.equal(entitatID))
         );
-  }
-
-  @Override
-  public I getInstanceByPluginID(long pluginID) throws I18NException {
-
-    IPlugin pluginInstance = getPluginFromCache(pluginID);
-
-    if (pluginInstance == null) {
-
-      PluginJPA plugin = (PluginJPA) findByPrimaryKey(pluginID);
-
-      if (plugin == null) {
-        return null;
-      }
-
-      Properties prop = new Properties();
-
-      // CODI ORIGINAL 
-//      if (plugin.getProperties() != null && plugin.getProperties().trim().length() != 0) {
-//        try {
-//
-//          prop.load(new StringReader(plugin.getProperties()));
-//
-//        } catch (Exception e) {
-//          // TODO Crec que no es cridarà mai
-//        }
-//      }
-      
-      
-      if (plugin.getProperties() != null && plugin.getProperties().trim().length() != 0) {
-          try {
-              
-              
-              // Exemple:
-              //       [=SP["es.caib.digitalib.plugins.signatureserver.afirmaserver.authorization.password"]]
-              
-              
-              Map<String, Object> map = new HashMap<String, Object>();
-              map.put("SP", System.getProperties());
-              
-              String plantilla = plugin.getProperties();
-              String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map, new Locale("ca"));
-              
-              //log.error("PROPIETATS DESPRES DE generat:\n" + generat + "\n");
-              
-              
-              prop.load(new StringReader(generat));
-                                  
-          } catch (Exception e) {
-             throw new I18NException(e, "genapp.comodi", 
-                new I18NArgumentString("Error desconegut processant propietats del plugin "
-                  + pluginID + ": " + e.getMessage()));
-          }
-      }
-
-      
-      
-
-      pluginInstance = (IPlugin) PluginsManager.instancePluginByClassName(plugin.getClasse(),
-          Constants.DIGITALIB_PROPERTY_BASE, prop);
-
-      if (pluginInstance == null) {
-        throw new I18NException("plugin.donotinstantiate", getName() + " ("
-            + plugin.getClasse() + ")");
-      }
-
-      addPluginToCache(pluginID, pluginInstance);
-
-    }
-    return (I) pluginInstance;
-
-  }
-
-  @Override
-  public List<I> getPluginInstancesByEntitatID() throws I18NException {
-
-    return getPluginInstancesBy(null, null);
-
-  }
-
-  @Override
-  public List<I> getPluginInstancesBy(List<Long> filterByPluginID,
-      List<String> filterByPluginCode) throws I18NException {
-
-    List<I> plugins = new ArrayList<I>();
-
-    Where where = Where.AND(TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true));
-
-    if (filterByPluginID != null && filterByPluginID.size() != 0) {
-      where = Where.AND(where, PLUGINID.in(filterByPluginID));
     }
 
-    // TODO XYZ pendent afegir camp codi dins plugin
-    // if (filterByPluginCode != null && filterByPluginCode.size() != 0) {
-    // where = Where.AND(where, CODI.in(filterByPluginID));
-    // }
+    @Override
+    public I getInstanceByPluginID(long pluginID) throws I18NException {
 
-    List<Plugin> modulsdefirma = select(where);
+        IPlugin pluginInstance = getPluginFromCache(pluginID);
 
-    for (Plugin mf : modulsdefirma) {
-      plugins.add(getInstanceByPluginID(mf.getPluginID()));
+        if (pluginInstance == null) {
+
+            PluginJPA plugin = (PluginJPA) findByPrimaryKey(pluginID);
+
+            if (plugin == null) {
+                return null;
+            }
+
+            Properties prop = new Properties();
+
+            // CODI ORIGINAL 
+            //      if (plugin.getProperties() != null && plugin.getProperties().trim().length() != 0) {
+            //        try {
+            //
+            //          prop.load(new StringReader(plugin.getProperties()));
+            //
+            //        } catch (Exception e) {
+            //          // TODO Crec que no es cridarà mai
+            //        }
+            //      }
+
+            if (plugin.getProperties() != null && plugin.getProperties().trim().length() != 0) {
+                try {
+
+                    // Exemple:
+                    //       [=SP["es.caib.digitalib.plugins.signatureserver.afirmaserver.authorization.password"]]
+
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("SP", Configuracio.getSystemAndFileProperties());
+
+                    String plantilla = plugin.getProperties();
+                    String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map,
+                            new Locale("ca"));
+
+                    //log.error("PROPIETATS DESPRES DE generat:\n" + generat + "\n");
+
+                    prop.load(new StringReader(generat));
+
+                } catch (Exception e) {
+                    throw new I18NException(e, "genapp.comodi", new I18NArgumentString(
+                            "Error desconegut processant propietats del plugin " + pluginID + ": " + e.getMessage()));
+                }
+            }
+
+            pluginInstance = (IPlugin) PluginsManager.instancePluginByClassName(plugin.getClasse(),
+                    Constants.DIGITALIB_PROPERTY_BASE, prop);
+
+            if (pluginInstance == null) {
+                throw new I18NException("plugin.donotinstantiate", getName() + " (" + plugin.getClasse() + ")");
+            }
+
+            addPluginToCache(pluginID, pluginInstance);
+
+        }
+        return (I) pluginInstance;
+
     }
 
-    return plugins;
+    @Override
+    public List<I> getPluginInstancesByEntitatID() throws I18NException {
 
-  }
+        return getPluginInstancesBy(null, null);
+
+    }
+
+    @Override
+    public List<I> getPluginInstancesBy(List<Long> filterByPluginID, List<String> filterByPluginCode)
+            throws I18NException {
+
+        List<I> plugins = new ArrayList<I>();
+
+        Where where = Where.AND(TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true));
+
+        if (filterByPluginID != null && filterByPluginID.size() != 0) {
+            where = Where.AND(where, PLUGINID.in(filterByPluginID));
+        }
+
+        // TODO XYZ pendent afegir camp codi dins plugin
+        // if (filterByPluginCode != null && filterByPluginCode.size() != 0) {
+        // where = Where.AND(where, CODI.in(filterByPluginID));
+        // }
+
+        List<Plugin> modulsdefirma = select(where);
+
+        for (Plugin mf : modulsdefirma) {
+            plugins.add(getInstanceByPluginID(mf.getPluginID()));
+        }
+
+        return plugins;
+
+    }
 
 }

@@ -107,7 +107,9 @@
         <version_txt_template_file>./scripts/templates/versio.txt.template</version_txt_template_file>
         <pluginsib.userinformation.api.version>3.1.0</pluginsib.userinformation.api.version>
         <pluginsib.userinformation.impl.version>3.1.0-SNAPSHOT</pluginsib.userinformation.impl.version>
-        <pluginsib.arxiu.version>2.0.17</pluginsib.arxiu.version>
+        <pluginsib.arxiu.version>2.0.27</pluginsib.arxiu.version>
+        <pluginsib.signatureserver.version>3.1.0-SNAPSHOT</pluginsib.signatureserver.version>
+      
     </properties>
     <dependencyManagement>
         <dependencies>

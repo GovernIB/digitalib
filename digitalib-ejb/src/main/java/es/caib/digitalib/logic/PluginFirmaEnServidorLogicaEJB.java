@@ -11,6 +11,7 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.apache.commons.lang3.StringUtils;
 import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleSignedFileInfo;
 import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
@@ -140,7 +141,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
           + I18NLogicUtils.getMessage(e1, locale);
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
+      transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e1));
 
       return null;
@@ -267,8 +268,8 @@ public class PluginFirmaEnServidorLogicaEJB extends
       if (error != null) {
 
         transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-        transaccio.setEstatMissatge("XYZ ZZZ Plugin " + plugin.getName(locale)
-            + " No passa el filtre. Raó:  " + error);
+        transaccio.setEstatMissatge(StringUtils.truncate("XYZ ZZZ Plugin " + plugin.getName(locale)
+            + " No passa el filtre. Raó:  " + error, 254));
 
         return null;
       }
@@ -281,7 +282,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
         String msg = "XYZ ZZZ Error General MSG = " + sss.getErrorMsg();
 
         transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-        transaccio.setEstatMissatge(msg);
+        transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
         transaccio.setEstatExcepcio(LogicUtils.exceptionToString(sss.getErrorException()));
 
         // Cridades de Plugin
@@ -386,7 +387,7 @@ public class PluginFirmaEnServidorLogicaEJB extends
           + emsg;
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-      transaccio.setEstatMissatge(msg);
+      transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
       transaccio.setEstatExcepcio(LogicUtils.exceptionToString(th));
 
       // Cridades de Plugin
