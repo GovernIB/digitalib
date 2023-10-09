@@ -136,10 +136,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "Operació realitzada correctament",
-            "content" : {
-              "application/json" : { }
-            }
+            "description" : "Operació realitzada correctament"
           },
           "400" : {
             "description" : "Paràmetres incorrectes",

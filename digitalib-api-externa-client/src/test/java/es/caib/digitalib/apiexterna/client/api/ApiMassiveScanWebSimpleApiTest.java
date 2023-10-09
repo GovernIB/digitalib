@@ -258,6 +258,7 @@ public class ApiMassiveScanWebSimpleApiTest extends MassiveScanWebSimpleConstant
 
             readFromSocket(port);
 
+            System.out.println(" Cridant a getSubTransactionsOfTransaction(" + transactionID + ") ...");
             MassiveScanWebSimpleSubTransactionsOfTransaction subs = api.getSubTransactionsOfTransaction(transactionID);
 
             List<String> subtransacions = subs.getSubtransacions();

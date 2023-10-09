@@ -10,6 +10,7 @@ import java.util.Locale;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,6 +19,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 
 import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleArxiuInfo;
@@ -62,6 +64,7 @@ import es.caib.digitalib.model.entity.Auditoria;
 import es.caib.digitalib.model.entity.Metadada;
 import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.PerfilUsuariAplicacio;
+import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.entity.UsuariAplicacio;
 import es.caib.digitalib.model.fields.MetadadaFields;
 import es.caib.digitalib.model.fields.PerfilFields;
@@ -332,7 +335,11 @@ public class ApiMassiveScanWebSimpleV1Service {
                             content = { @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
                                     schema = @Schema(implementation = RestExceptionInfo.class)) }) })
-    public MassiveScanWebSimpleAvailableProfiles getAvailableProfiles(@RequestBody String language,
+    public MassiveScanWebSimpleAvailableProfiles getAvailableProfiles(@RequestBody(
+            description = "Idioma. Valors permesos 'es' o 'ca'",
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON,
+                    schema = @Schema(name = "language", required = true, implementation = String.class))) String language,
 
             @Parameter(hidden = true) @Context HttpServletRequest request) throws RestException {
 
@@ -807,8 +814,12 @@ public class ApiMassiveScanWebSimpleV1Service {
             @Parameter(hidden = true) @Context HttpServletRequest request) throws RestException {
 
         final String methodName = "getMassiveTransactionStatus";
+        
+        if (transactionWebID!= null) {
+            transactionWebID = transactionWebID.replace("\"",  "");
+        }
 
-        log.info(" Entra a  " + methodName + "...");
+        log.info(" Entra a  " + methodName + "(" + transactionWebID + ")...");
 
         String language = "ca";
 
@@ -1243,10 +1254,9 @@ public class ApiMassiveScanWebSimpleV1Service {
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "Operació realitzada correctament",
-                            content = @Content(
-                                    mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = Void.class))),
+                            description = "Operació realitzada correctament"
+                            // NO content field for void return. 
+                            ),
                     @ApiResponse(
                             responseCode = "400",
                             description = "Paràmetres incorrectes",
@@ -1272,13 +1282,14 @@ public class ApiMassiveScanWebSimpleV1Service {
                                     mediaType = MediaType.APPLICATION_JSON,
                                     schema = @Schema(implementation = RestExceptionInfo.class)) }) })
     public void closeTransaction(@RequestBody String transactionWebID,
-            @Parameter(hidden = true) @Context HttpServletRequest request) throws RestException {
+            @Parameter(hidden = true) @Context HttpServletRequest request,
+            @Parameter(hidden = true) @Context HttpServletResponse response) throws RestException {
 
         final String methodName = "closeTransaction";
 
-        log.info(" Entra a  " + methodName + "...");
+        log.info(" Entra a  " + methodName + "(" + transactionWebID + ")...");
 
-        String language = "ca";
+        final String language = "ca";
         try {
             // Checks usuari aplicacio
             commonChecks(request, language);
@@ -1288,6 +1299,8 @@ public class ApiMassiveScanWebSimpleV1Service {
             } catch (Throwable th) {
                 // TODO XYZ
             }
+            
+            response.sendError(HttpStatus.SC_OK);
 
         } catch (Throwable th) {
 
@@ -1305,8 +1318,15 @@ public class ApiMassiveScanWebSimpleV1Service {
     @Operation(
             operationId = "getSubTransactionsOfTransaction",
             summary = "Retorna el PDF que s'ha de ficar entre els diferents documents a escanejar",
-            tags = { TAG }
-    //requestBody = 
+            tags = { TAG },
+            requestBody = @RequestBody(
+                    description = "transactionWebID",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(
+                                    name = "transactionWebID",
+                                    required = true,
+                                    implementation = String.class)))
     )
     @ApiResponses(
             value = {
@@ -1360,8 +1380,11 @@ public class ApiMassiveScanWebSimpleV1Service {
             @Parameter(hidden = true) @Context HttpServletRequest request) throws RestException {
 
         final String methodName = "getSubTransactionsOfTransaction";
+        if (transactionWebID!= null) {
+            transactionWebID = transactionWebID.replace("\"",  "");
+        }
 
-        log.debug(" Entra a  " + methodName + "...");
+        log.info("\n\n Entra a  " + methodName + "(" + transactionWebID  + ")...\n\n");
 
         String language = "ca";
 
@@ -1373,6 +1396,30 @@ public class ApiMassiveScanWebSimpleV1Service {
             // Extreim la transaccio massiva de la transactionWebID
             Long transactionMultipleID = transaccioLogicaEjb.executeQueryOne(TransaccioFields.TRANSACCIOMULTIPLEID,
                     TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
+            
+            log.info("\n\n transactionMultipleID = " + transactionMultipleID  + "...\n\n");
+            
+            
+            if (transactionMultipleID == null) {
+                
+                
+                List<Transaccio> transaccions = transaccioLogicaEjb.select(TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
+                
+                log.info("\n\n transaccions = " + transaccions  + "...\n\n");
+                
+                if (transaccions != null) {
+                    log.info("\n\n #transaccions = " + transaccions.size()  + "...\n\n");
+                    
+                    if (transaccions.size() != 0) {
+                        
+                        transactionMultipleID = transaccions.get(0).getTransaccioMultipleID();
+                        log.info("\n\n transactionMultipleID2 = " + transactionMultipleID  + "...\n\n");
+                    }
+                }
+                
+                
+            }
+            
 
             if (transactionMultipleID == null) {
                 // XYZ ZZZ transactionMultipleID is null

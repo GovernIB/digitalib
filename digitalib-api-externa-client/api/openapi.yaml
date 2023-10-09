@@ -118,8 +118,6 @@ paths:
         description: transactionWebID
       responses:
         "200":
-          content:
-            application/json: {}
           description: Operació realitzada correctament
         "400":
           content:
