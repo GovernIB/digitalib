@@ -408,4 +408,18 @@ public abstract class AbstractFirmaArxiuParametersController
         return false;
     }
 
+    
+    
+    public static void main(String[] args) {
+        String str =  "87654321X,12345678Z"; //,
+        
+        CheckNifResult result = NifUtils.validateNifsSeparatedByCommas(str);
+        
+        System.out.println(result.isValid());
+        
+        
+        
+        
+        
+    }
 }

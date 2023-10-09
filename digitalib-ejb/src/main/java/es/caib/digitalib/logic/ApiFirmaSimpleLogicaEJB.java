@@ -28,7 +28,7 @@ import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleSignerInfo;
 import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleStatus;
 import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleValidationInfo;
 import org.fundaciobit.apisib.apifirmasimple.v1.jersey.ApiFirmaEnServidorSimpleJersey;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.apisib.core.exceptions.AbstractApisIBException;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;

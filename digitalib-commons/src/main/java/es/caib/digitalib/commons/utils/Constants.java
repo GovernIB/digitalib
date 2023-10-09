@@ -171,4 +171,12 @@ public interface Constants {
 
     public static final int ORIGEN_CIUTADA = 0; 
     public static final int ORIGEN_ADMINISTRACIO = 1;
+    
+    
+    
+    // CONTEXTES WEB 
+    
+    public static final String SCANWEB_PROCESS_CONTROLLER_PUBLIC_CONTEXTPATH = "/public/scanweb";
+    
+    
 }

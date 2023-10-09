@@ -13,10 +13,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
-import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.digitalib.commons.utils.Version;
-
+import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -79,7 +78,7 @@ public class ExemplePublicService {
             String msg;
             if (th instanceof I18NException) {
                 I18NException ie = (I18NException) th;
-                msg = I18NCommonUtils.getMessage(ie, new Locale(idioma));
+                msg = I18NLogicUtils.getMessage(ie, new Locale(idioma));
             } else {
                 msg = th.getMessage();
             }

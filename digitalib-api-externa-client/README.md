@@ -83,21 +83,25 @@ Please follow the [installation](#installation) instruction and execute the foll
 import es.caib.digitalib.apiexterna.client.services.*;
 import es.caib.digitalib.apiexterna.client.services.auth.*;
 import es.caib.digitalib.apiexterna.client.model.*;
-import es.caib.digitalib.apiexterna.client.api.VersioApi;
+import es.caib.digitalib.apiexterna.client.api.ApiMassiveScanWebSimpleApi;
 
-public class VersioApiExample {
+public class ApiMassiveScanWebSimpleApiExample {
 
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
         defaultClient.setBasePath("/digitalibapi/externa");
         
-        VersioApi apiInstance = new VersioApi(defaultClient);
-        String idioma = "ca"; // String | Codi de l'idioma
+        // Configure HTTP basic authorization: BasicAuth
+        HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
+        BasicAuth.setUsername("YOUR USERNAME");
+        BasicAuth.setPassword("YOUR PASSWORD");
+
+        ApiMassiveScanWebSimpleApi apiInstance = new ApiMassiveScanWebSimpleApi(defaultClient);
+        String body = "body_example"; // String | transactionWebID
         try {
-            ExamplePojo result = apiInstance.versio(idioma);
-            System.out.println(result);
+            apiInstance.closeTransaction(body);
         } catch (ApiException e) {
-            System.err.println("Exception when calling VersioApi#versio");
+            System.err.println("Exception when calling ApiMassiveScanWebSimpleApi#closeTransaction");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());
@@ -114,18 +118,52 @@ All URIs are relative to */digitalibapi/externa*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*VersioApi* | [**versio**](docs/VersioApi.md#versio) | **GET** /public/exemplepublic/versio | Versio de l&#39;Aplicació
+*ApiMassiveScanWebSimpleApi* | [**closeTransaction**](docs/ApiMassiveScanWebSimpleApi.md#closeTransaction) | **POST** /secure/apimassivescanwebsimple/v1/closeTransaction | Tanca una transacció a partir del seu transaccionWebID
+*ApiMassiveScanWebSimpleApi* | [**getAvailableProfiles**](docs/ApiMassiveScanWebSimpleApi.md#getAvailableProfiles) | **POST** /secure/apimassivescanwebsimple/v1/getAvailableProfiles | Retorna els Perfils Disponibles per aquest usuari aplicacio
+*ApiMassiveScanWebSimpleApi* | [**getMassiveTransactionStatus**](docs/ApiMassiveScanWebSimpleApi.md#getMassiveTransactionStatus) | **POST** /secure/apimassivescanwebsimple/v1/getMassiveTransactionStatus | Retorna l&#39;estat d&#39;una transacció massiva
+*ApiMassiveScanWebSimpleApi* | [**getProfile**](docs/ApiMassiveScanWebSimpleApi.md#getProfile) | **POST** /secure/apimassivescanwebsimple/v1/getProfile | Retorna el PDF que s&#39;ha de ficar entre els diferents documents a escanejar
+*ApiMassiveScanWebSimpleApi* | [**getSeparatorPage**](docs/ApiMassiveScanWebSimpleApi.md#getSeparatorPage) | **POST** /secure/apimassivescanwebsimple/v1/getSeparatorPage | Retorna el PDF que s&#39;ha de ficar entre els diferents documents a escanejar
+*ApiMassiveScanWebSimpleApi* | [**getSubTransactionResult**](docs/ApiMassiveScanWebSimpleApi.md#getSubTransactionResult) | **POST** /secure/apimassivescanwebsimple/v1/getSubTransactionResult | Retorna els resultats d&#39;una subtransacció.
+*ApiMassiveScanWebSimpleApi* | [**getSubTransactionsOfTransaction**](docs/ApiMassiveScanWebSimpleApi.md#getSubTransactionsOfTransaction) | **POST** /secure/apimassivescanwebsimple/v1/getSubTransactionsOfTransaction | Retorna el PDF que s&#39;ha de ficar entre els diferents documents a escanejar
+*ApiMassiveScanWebSimpleApi* | [**getTransactionID**](docs/ApiMassiveScanWebSimpleApi.md#getTransactionID) | **POST** /secure/apimassivescanwebsimple/v1/getTransactionID | Retorna una transacció a partir de l&#39;identificador
+*ApiMassiveScanWebSimpleApi* | [**startTransaction**](docs/ApiMassiveScanWebSimpleApi.md#startTransaction) | **POST** /secure/apimassivescanwebsimple/v1/startTransaction | Posa en marxa una transacció
 
 
 ## Documentation for Models
 
- - [ExamplePojo](docs/ExamplePojo.md)
+ - [MassiveScanWebSimpleArxiuInfo](docs/MassiveScanWebSimpleArxiuInfo.md)
+ - [MassiveScanWebSimpleArxiuOptionalParameters](docs/MassiveScanWebSimpleArxiuOptionalParameters.md)
+ - [MassiveScanWebSimpleArxiuRequiredParameters](docs/MassiveScanWebSimpleArxiuRequiredParameters.md)
+ - [MassiveScanWebSimpleAvailableProfile](docs/MassiveScanWebSimpleAvailableProfile.md)
+ - [MassiveScanWebSimpleAvailableProfiles](docs/MassiveScanWebSimpleAvailableProfiles.md)
+ - [MassiveScanWebSimpleConstants](docs/MassiveScanWebSimpleConstants.md)
+ - [MassiveScanWebSimpleCustodyInfo](docs/MassiveScanWebSimpleCustodyInfo.md)
+ - [MassiveScanWebSimpleFile](docs/MassiveScanWebSimpleFile.md)
+ - [MassiveScanWebSimpleGetTransactionIdRequest](docs/MassiveScanWebSimpleGetTransactionIdRequest.md)
+ - [MassiveScanWebSimpleKeyValue](docs/MassiveScanWebSimpleKeyValue.md)
+ - [MassiveScanWebSimpleProfileRequest](docs/MassiveScanWebSimpleProfileRequest.md)
+ - [MassiveScanWebSimpleScannedFileInfo](docs/MassiveScanWebSimpleScannedFileInfo.md)
+ - [MassiveScanWebSimpleSignatureParameters](docs/MassiveScanWebSimpleSignatureParameters.md)
+ - [MassiveScanWebSimpleSignedFileInfo](docs/MassiveScanWebSimpleSignedFileInfo.md)
+ - [MassiveScanWebSimpleStartTransactionRequest](docs/MassiveScanWebSimpleStartTransactionRequest.md)
+ - [MassiveScanWebSimpleStatus](docs/MassiveScanWebSimpleStatus.md)
+ - [MassiveScanWebSimpleSubTransactionsOfTransaction](docs/MassiveScanWebSimpleSubTransactionsOfTransaction.md)
+ - [MassiveScanWebSimpleSubtransactionResult](docs/MassiveScanWebSimpleSubtransactionResult.md)
+ - [MassiveScanWebSimpleSubtransactionResultRequest](docs/MassiveScanWebSimpleSubtransactionResultRequest.md)
+ - [MassiveScanWebSimpleValidationInfo](docs/MassiveScanWebSimpleValidationInfo.md)
+ - [RestExceptionInfo](docs/RestExceptionInfo.md)
 
 
 <a id="documentation-for-authorization"></a>
 ## Documentation for Authorization
 
-Endpoints do not require authorization.
+
+Authentication schemes defined for the API:
+<a id="BasicAuth"></a>
+### BasicAuth
+
+
+- **Type**: HTTP basic authentication
 
 
 ## Recommendation

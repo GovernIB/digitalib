@@ -1,5 +1,5 @@
 <%@page import="es.caib.digitalib.model.fields.PerfilFields"%>
-<%@page import="es.caib.digitalib.utils.Constants"%>
+<%@page import="es.caib.digitalib.commons.utils.Constants"%>
 <%@page import="org.fundaciobit.genapp.common.web.i18n.I18NUtils"%>
 <%@page import="org.fundaciobit.genapp.common.query.Field"%>
 <script>

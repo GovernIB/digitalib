@@ -5,7 +5,7 @@
 <table border=0>
 
   <tr>
-    <td><form:form modelAttribute="transaccioForm" method="${method}"
+    <td><form:form modelAttribute="transaccioForm" method="POST"
         enctype="multipart/form-data">
 
         <c:set var="contexte" value="${transaccioForm.contexte}" />

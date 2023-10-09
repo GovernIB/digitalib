@@ -9,7 +9,6 @@
     <artifactId>digitalib-api-externa</artifactId>
     <packaging>war</packaging>
     <name>DigitalIB - API Rest - Externa</name>
-    <version>2.0.0</version>
     <properties>
         <auth.method>BASIC</auth.method>
         <client.default.package>es.caib.digitalib.apiexterna.client</client.default.package>
@@ -102,8 +101,12 @@
                             <outputFormat>JSON</outputFormat>
                             <resourcePackages>
                                 <package>es.caib.digitalib.api.externa.config</package>
+                                <!--
                                 <package>es.caib.digitalib.api.externa.all</package>
                                 <package>es.caib.digitalib.api.externa.secure</package>
+                                -->
+                                <package>es.caib.digitalib.api.externa.secure.apimassivescanwebsimple</package>
+                                <package>es.caib.digitalib.api.externa.all.dadesobertes.estadistiques</package>
                             </resourcePackages>
                             <prettyPrint>TRUE</prettyPrint>
                         </configuration>
@@ -129,9 +132,8 @@
                             <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
                             <generatorName>java</generatorName>
                             <skipValidateSpec>true</skipValidateSpec>
-                            <configHelp>java</configHelp>
                             <library>resteasy</library>
-                            <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
+                            <!-- ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA*** --> 
                             <!-- <configHelp>true</configHelp> -->
                             <addCompileSourceRoot>false</addCompileSourceRoot>
                             <output>${project.basedir}/../digitalib-api-externa-client</output>
@@ -139,6 +141,14 @@
                             <modelPackage>${client.default.package}.model</modelPackage>
                             <invokerPackage>${client.default.package}.services</invokerPackage>
                             <generateModelTests>false</generateModelTests>
+                            
+                            <languageSpecificPrimitives>boolean,int</languageSpecificPrimitives>
+                            
+                            <apisToGenerate>ApiMassiveScanWebSimple</apisToGenerate>
+
+                            <modelsToGenerate>MassiveScanWebSimpleArxiuInfo,MassiveScanWebSimpleArxiuOptionalParameters,MassiveScanWebSimpleArxiuRequiredParameters,MassiveScanWebSimpleAvailableProfile,MassiveScanWebSimpleAvailableProfiles,MassiveScanWebSimpleConstants,MassiveScanWebSimpleCustodyInfo,MassiveScanWebSimpleFile,MassiveScanWebSimpleGetTransactionIdRequest,MassiveScanWebSimpleKeyValue,MassiveScanWebSimpleProfileRequest,MassiveScanWebSimpleScannedFileInfo,MassiveScanWebSimpleSignatureParameters,MassiveScanWebSimpleSignedFileInfo,MassiveScanWebSimpleStartTransactionRequest,MassiveScanWebSimpleStatus,MassiveScanWebSimpleSubtransactionResult,MassiveScanWebSimpleSubtransactionResultRequest,MassiveScanWebSimpleSubTransactionsOfTransaction,MassiveScanWebSimpleValidationInfo,RestExceptionInfo</modelsToGenerate>
+
+                            
                             <configOptions>
                                 <groupId>es.caib.digitalib</groupId>
                                 <artifactId>digitalib-api-externa-client</artifactId>
@@ -148,6 +158,8 @@
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
                                 <java11>true</java11>
+                                <booleanGetterPrefix>is</booleanGetterPrefix>
+                               
                             </configOptions>
                         </configuration>
                     </execution>

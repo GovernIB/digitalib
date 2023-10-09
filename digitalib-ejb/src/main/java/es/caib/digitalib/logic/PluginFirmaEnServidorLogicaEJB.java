@@ -13,7 +13,7 @@ import javax.ejb.Stateless;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleSignedFileInfo;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.pluginsib.scanweb.api.ScanWebDocument;

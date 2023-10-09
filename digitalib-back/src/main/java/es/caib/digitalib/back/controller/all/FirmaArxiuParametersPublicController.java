@@ -36,8 +36,8 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.AbstractFirmaArxiuParametersController;
 import es.caib.digitalib.back.controller.AbstractScanWebModuleController;
 import es.caib.digitalib.back.controller.AbstractScanWebProcessController;
+import es.caib.digitalib.back.controller.SplitPdf;
 import es.caib.digitalib.back.controller.AbstractScanWebProcessController.FitxerEscanejatInfo;
-import es.caib.digitalib.back.controller.scanwebsimple.apimassivescanwebsimple.v1.SplitPdf;
 import es.caib.digitalib.back.controller.user.ScanWebProcessControllerUser;
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
@@ -45,6 +45,7 @@ import es.caib.digitalib.persistence.TransaccioJPA;
 import es.caib.digitalib.logic.TransaccioPublicLogicaService;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.commons.utils.Configuracio;
+import es.caib.digitalib.commons.utils.Constants;
 
 /**
  * 
@@ -167,6 +168,32 @@ public class FirmaArxiuParametersPublicController extends AbstractFirmaArxiuPara
 
         return transaccioForm;
     }
+    
+    
+    
+    /**
+     * 
+     * Parxe per evitar error de Invalid HTTP method: ]]]
+     */
+    
+/*
+    @RequestMapping(value = "/{transaccioID}/editget", method = { RequestMethod.DELETE,
+            RequestMethod.GET,RequestMethod.HEAD, RequestMethod.OPTIONS, RequestMethod.PATCH,
+            RequestMethod.POST, RequestMethod.PUT, RequestMethod.TRACE} )
+    //@Override
+    public ModelAndView editarTransaccioGet2(@PathVariable("transaccioID") java.lang.Long transaccioID,
+        HttpServletRequest request,
+        HttpServletResponse response) throws I18NException {
+
+        log.info("\n\n\n ===>   METHOD " + request.getMethod() + "\n\n\n");
+        
+        return editAndViewTransaccioGet(transaccioID,
+          request, response, false);
+    }
+    */
+    
+    
+    
 
     @Override
     @RequestMapping(value = "/{transaccioID}/edit", method = RequestMethod.POST)
@@ -243,7 +270,7 @@ public class FirmaArxiuParametersPublicController extends AbstractFirmaArxiuPara
 
             Long transaccioMultipleID = transaccioForm.getTransaccio().getTransaccioMultipleID();
 
-            String r = (isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
+            String r = (isPublic() ? Constants.SCANWEB_PROCESS_CONTROLLER_PUBLIC_CONTEXTPATH
                     : ScanWebProcessControllerUser.CONTEXTWEB)
                     + AbstractScanWebProcessController.SCANWEB_CONTEXTPATH_UPDATE_MASSIVE + "/" + transaccioMultipleID;
 

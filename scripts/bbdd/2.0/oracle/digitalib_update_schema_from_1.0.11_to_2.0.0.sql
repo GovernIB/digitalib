@@ -58,4 +58,6 @@ ALTER TABLE dib_usuariaplicacio ALTER COLUMN usuariaplicacioid SET DEFAULT dib_u
 CREATE SEQUENCE dib_usuaripersona_seq INCREMENT 1 START __XXXXX__;
 ALTER TABLE dib_usuaripersona ALTER COLUMN usuaripersonaid SET DEFAULT dib_usuaripersona_seq.nextval);
 
+-- ====== NOU CONTEXT DE BACK és digitalibback
 
+UPDATE dib_perfil SET  urlbase=REPLACE(urlbase,'digitalib','digitalibback') where usperfil > 0;

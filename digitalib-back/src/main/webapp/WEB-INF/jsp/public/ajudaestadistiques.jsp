@@ -13,7 +13,7 @@ Manual d'&uacute;s del m&ograve;dul d&rsquo;estadístiques de DigitalIB
 <br/>
 La ruta a la consula de transaccions es troba en aquesta ruta:<br/><br/>
 
-   <b>http://HOST:PORT/digitalib/public/rest/estadistiques/v1/consulta</b>
+   <b>http://HOST:PORT/digitalibapi/estadistiques/v1/consulta</b>
 
 <br/>
 <br/>

@@ -24,7 +24,8 @@
     </repositories>
 
     <dependencies>
-
+    
+    
         <!-- Internas -->
         <dependency>
             <groupId>es.caib.digitalib</groupId>

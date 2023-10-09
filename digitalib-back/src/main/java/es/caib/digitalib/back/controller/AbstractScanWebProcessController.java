@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleStatus;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
+import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleStatus;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
@@ -40,9 +40,6 @@ import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
 
 import es.caib.digitalib.back.controller.all.FirmaArxiuParametersPublicController;
-import es.caib.digitalib.back.controller.all.ScanWebProcessControllerPublic;
-import es.caib.digitalib.back.controller.scanwebsimple.apimassivescanwebsimple.v1.SplitInfo;
-import es.caib.digitalib.back.controller.scanwebsimple.apimassivescanwebsimple.v1.SplitPdf;
 import es.caib.digitalib.back.controller.user.ScanWebProcessControllerUser;
 import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.persistence.ApiSimpleJPA;
@@ -137,7 +134,7 @@ public abstract class AbstractScanWebProcessController {
     protected es.caib.digitalib.ejb.InfoSignaturaService infoSignaturaEjb;
 
     public static String getFinalURL(String baseURL, String transactionWebID, boolean isPublic) {
-        String cp = isPublic ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
+        String cp = isPublic ? Constants.SCANWEB_PROCESS_CONTROLLER_PUBLIC_CONTEXTPATH
                 : ScanWebProcessControllerUser.CONTEXTWEB;
         return baseURL + cp + SCANWEB_CONTEXTPATH_ESPERA + "/" + transactionWebID;
     }
@@ -146,7 +143,7 @@ public abstract class AbstractScanWebProcessController {
     public ModelAndView esperaProcesDeScanWebController(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("transactionWebID") String transactionWebID) throws Exception, I18NException {
 
-        String cp = isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
+        String cp = isPublic() ? Constants.SCANWEB_PROCESS_CONTROLLER_PUBLIC_CONTEXTPATH
                 : ScanWebProcessControllerUser.CONTEXTWEB;
         String finalURL = cp + SCANWEB_CONTEXTPATH_FINAL + "/" + transactionWebID;
 
@@ -276,7 +273,7 @@ public abstract class AbstractScanWebProcessController {
                             log.info("\n Escaneig MASSIU: isComplete " + isComplete
                                     + "(true -> No mostra cada document | false -> mostra cada document)\n");
 
-                            final String cp = isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
+                            final String cp = isPublic() ? Constants.SCANWEB_PROCESS_CONTROLLER_PUBLIC_CONTEXTPATH
                                     : ScanWebProcessControllerUser.CONTEXTWEB;
 
                             // Actualitzam per no perdre dades
@@ -1124,10 +1121,11 @@ public abstract class AbstractScanWebProcessController {
                 && transaction.getNom().trim().length() != 0) {
             urlToRequestFirmaArxiuParameters = urlToSelectPluginPage;
         } else {
+            log.info("\n\n\n ===>   PASSA PER startScanWebProcess "  + "\n\n\n");
             urlToRequestFirmaArxiuParameters = urlBase
                     + (isPublic ? AbstractFirmaArxiuParametersController.CONTEXTWEB_PUBLIC
                             : AbstractFirmaArxiuParametersController.CONTEXTWEB_USER)
-                    + "/" + transaction.getTransaccioID() + "/edit";
+                    + "/" + transaction.getTransaccioID() + "/edit"; 
         }
 
         mav.addObject("urlToSelectPluginPage", urlToRequestFirmaArxiuParameters);
@@ -1176,13 +1174,15 @@ public abstract class AbstractScanWebProcessController {
         request.getSession().setAttribute(SESSION_MASIVE_POINTER_POST_SCAN, pos);
 
         {
+            log.info("\n\n\n ===>   PASSA PER demanarInformacioPeticioMassivaGet "  + "\n\n\n");
+            
             String cp = isPublic() ? FirmaArxiuParametersPublicController.CONTEXTWEB_PUBLIC
                     : FirmaArxiuParametersPublicController.CONTEXTWEB_USER;
-            String redirect = cp + "/" + transaccions.get(pos).getTransaccioID() + "/edit";
+            String redirect = cp + "/" + transaccions.get(pos).getTransaccioID() + "/edit"; 
 
             log.info(" XYZ ZZZ   Redireccionam a " + redirect);
 
-            ModelAndView mav = new ModelAndView(new RedirectView(redirect, true));
+            ModelAndView mav = new ModelAndView(new RedirectView(redirect, true, true));
 
             return mav;
 
@@ -1192,7 +1192,7 @@ public abstract class AbstractScanWebProcessController {
 
     protected String getContextWeb() {
 
-        return isPublic() ? ScanWebProcessControllerPublic.SCANWEB_CONTEXTPATH
+        return isPublic() ? Constants.SCANWEB_PROCESS_CONTROLLER_PUBLIC_CONTEXTPATH
                 : ScanWebProcessControllerUser.CONTEXTWEB;
 
     }

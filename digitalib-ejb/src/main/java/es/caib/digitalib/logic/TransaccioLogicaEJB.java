@@ -1,5 +1,6 @@
 package es.caib.digitalib.logic;
 
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,21 +17,23 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.transaction.Status;
 
-import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleArxiuOptionalParameters;
-import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleArxiuRequiredParameters;
-import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleGetTransactionIdRequest;
-import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleSignatureParameters;
-import org.fundaciobit.apisib.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleStatus;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuRequiredParameters;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleSignatureParameters;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
+import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleArxiuOptionalParameters;
+import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleArxiuRequiredParameters;
+import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleFile;
+import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleGetTransactionIdRequest;
+import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleSignatureParameters;
+import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleStatus;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuRequiredParameters;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleSignatureParameters;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.pluginsib.core.utils.FileUtils;
 import org.hibernate.Hibernate;
 import org.jboss.ejb3.annotation.TransactionTimeout;
 
@@ -212,6 +215,29 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         }
     }
 
+    
+    @Override
+    public MassiveScanWebSimpleFile getSeparator() throws Exception {
+
+        byte[] data;
+        InputStream is = TransaccioLogicaEJB.class.getClassLoader()
+                .getResourceAsStream(SEPARADOR_ESCANEIG_MASSIU_NOM);
+
+        if (is == null) {
+            // XYZ ZZZ TRA
+            throw new Exception("No puc carregar el fitxer " + SEPARADOR_ESCANEIG_MASSIU_NOM + " dels recursos.");
+        }
+        data = FileUtils.toByteArray(is);
+        is.close();
+
+        MassiveScanWebSimpleFile msf = new MassiveScanWebSimpleFile(SEPARADOR_ESCANEIG_MASSIU_NOM,
+                Constants.MIME_PDF, data);
+        
+        return msf;
+    }
+    
+    
+    
     //@Resource(mappedName="java:jboss/TransactionSynchronizationRegistry")
     //protected TransactionSynchronizationRegistry transactionSynchronizationRegistry;
 

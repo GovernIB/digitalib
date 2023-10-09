@@ -11,10 +11,10 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleSignatureParameters;
-import org.fundaciobit.apisib.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuOptionalParameters;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleSignatureParameters;
+import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
@@ -33,7 +33,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import es.caib.digitalib.back.controller.AbstractScanWebProcessController;
 import es.caib.digitalib.back.controller.AbstractTransaccioController;
-import es.caib.digitalib.back.controller.scanwebsimple.apimassivescanwebsimple.v1.RestApiMassiveScanWebSimpleV1Controller;
 import es.caib.digitalib.back.form.ScanWebConfigForm;
 import es.caib.digitalib.back.form.ScanWebConfigValidator;
 import es.caib.digitalib.back.security.LoginInfo;
@@ -43,6 +42,7 @@ import es.caib.digitalib.persistence.TransaccioJPA;
 import es.caib.digitalib.persistence.UsuariPersonaJPA;
 import es.caib.digitalib.logic.ConfiguracioGrupLogicaService;
 import es.caib.digitalib.logic.ScanWebModuleService;
+import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleFile;
 import es.caib.digitalib.logic.utils.LogicUtils;
 import es.caib.digitalib.model.entity.Plugin;
 import es.caib.digitalib.model.entity.UsuariPersona;
@@ -99,12 +99,13 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
     public void downloadSeparator(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        byte[] data = RestApiMassiveScanWebSimpleV1Controller.getSeparador();
+        MassiveScanWebSimpleFile separador=  transaccioLogicaEjb.getSeparator();
 
         try {
+            byte[] data = separador.getData();
             response.setContentType(Constants.MIME_PDF);
             response.setHeader("Content-Disposition", "attachment; filename=\""
-                    + RestApiMassiveScanWebSimpleV1Controller.SEPARADOR_ESCANEIG_MASSIU_NOM
+                    + separador.getNom()
                     + "\"");
             response.setContentLength(data.length);
 
@@ -316,8 +317,6 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
             String baseUrl = url.getProtocol() + "://" + url.getHost() + port
                     + request.getContextPath();
             log.info("XYZ ZZZ  baseUrl OK = " + baseUrl);
-
-            // http://10.215.216.175:8080/digitalib/user/llistatperfilsdisponibles
 
             String urlRetorn = baseUrl + "/user/llistatperfilsdisponibles";
 
