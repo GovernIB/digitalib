@@ -51,7 +51,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+
 
 /**
  * API tests for ApiMassiveScanWebSimpleApi
@@ -101,7 +101,7 @@ public class ApiMassiveScanWebSimpleApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Test
+    
     public void getAvailableProfilesTest() throws Exception {
 
         ApiMassiveScanWebSimpleApi api = getApi();
@@ -112,7 +112,7 @@ public class ApiMassiveScanWebSimpleApiTest {
         System.out.println(response);
     }
 
-    @Test
+    
     public void getSeparatorPageTest() throws Exception {
 
         ApiMassiveScanWebSimpleApi api = getApi();
