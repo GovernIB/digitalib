@@ -1,10 +1,6 @@
-# ![Logo](https://github.com/GovernIB/maven/blob/binaris/digitalib/logo.png)  DigitalIB (digitalib)
+# ![Logo](https://github.com/GovernIB/maven/blob/binaris/digitalib/logo.png)  DigitalIB 2.0 (digitalib)
  *Digitalitzador de documents*
  
- ***Versions***
-
-> - Versió Estable: __digitalib-1.0.12-caib__ (branca [digitalib-1.0](../../tree/digitalib-1.0))
-> - Versió en Desenvolupament: __digitalib-1.0.12-caib__ (branca [digitalib-1.0](../../tree/digitalib-1.0))
 
 
 ***Descripció***
