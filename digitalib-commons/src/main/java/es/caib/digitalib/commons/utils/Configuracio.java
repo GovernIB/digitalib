@@ -14,7 +14,7 @@ import java.util.Properties;
  * 
  */
 public class Configuracio implements Constants {
-    
+
     public static final Logger log = Logger.getLogger(Configuracio.class);
 
     private static final Properties fileProperties = new Properties();
@@ -28,19 +28,19 @@ public class Configuracio implements Constants {
      */
     public static Properties getFilesProperties() {
 
-		if (fileProperties.isEmpty()) {
-			// matches the property name as defined in the system-properties element in
-			// WildFly
-			String property = Constants.DIGITALIB_PROPERTY_BASE + "properties";
-			loadPropertyFile(property);
+        if (fileProperties.isEmpty()) {
+            // matches the property name as defined in the system-properties element in
+            // WildFly
+            String property = Constants.DIGITALIB_PROPERTY_BASE + "properties";
+            loadPropertyFile(property);
 
-			String propertySystem = Constants.DIGITALIB_PROPERTY_BASE + "system.properties";
-			loadPropertyFile(propertySystem);
-		}
+            String propertySystem = Constants.DIGITALIB_PROPERTY_BASE + "system.properties";
+            loadPropertyFile(propertySystem);
+        }
 
-		return fileProperties;
+        return fileProperties;
 
-	}
+    }
 
     public static void loadPropertyFile(String property) {
 
@@ -109,11 +109,11 @@ public class Configuracio implements Constants {
     public static String getAppName() {
         return getProperty(DIGITALIB_PROPERTY_BASE + "name", "DigitalIB");
     }
-    
+
     public static String getFrontUrl() {
         return getProperty(DIGITALIB_PROPERTY_BASE + "url.front");
     }
-    
+
     public static String getBackUrl() {
         return getProperty(DIGITALIB_PROPERTY_BASE + "url.back");
     }
@@ -140,20 +140,20 @@ public class Configuracio implements Constants {
             throw new RuntimeException("No existeix la propietat '" + DIGITALIB_PROPERTY_BASE + "filesdirectory'"
                     + " al fitxer " + System.getProperty(DIGITALIB_PROPERTY_BASE + "system.properties")
                     + ". S'hauria d'anar al fitxer " + System.getProperty(DIGITALIB_PROPERTY_BASE + "system.properties")
-                    + " i incloure la propietat '" + DIGITALIB_PROPERTY_BASE
-                    + "filesdirectory'" + " amb una ruta al directori on l'aplició gestionara els fitxers.");
+                    + " i incloure la propietat '" + DIGITALIB_PROPERTY_BASE + "filesdirectory'"
+                    + " amb una ruta al directori on l'aplició gestionara els fitxers.");
         }
 
         if (path.isEmpty()) {
             throw new RuntimeException("No s'ha definit la propietat '" + DIGITALIB_PROPERTY_BASE + "filesdirectory'"
                     + " al fitxer " + System.getProperty(DIGITALIB_PROPERTY_BASE + "system.properties")
                     + ". S'hauria d'anar al fitxer " + System.getProperty(DIGITALIB_PROPERTY_BASE + "system.properties")
-                    + " i donar valor a la propietat '" + DIGITALIB_PROPERTY_BASE +"filesdirectory'"
+                    + " i donar valor a la propietat '" + DIGITALIB_PROPERTY_BASE + "filesdirectory'"
                     + " amb una ruta al directori on l'aplició gestionara els fitxers.");
         }
-        
+
         File filesFolder = new File(path);
-        
+
         if (!filesFolder.exists()) {
             throw new RuntimeException("El directori indicat a la propietat '" + DIGITALIB_PROPERTY_BASE
                     + ".filesdirectory'" + " del fitxer "
@@ -182,16 +182,13 @@ public class Configuracio implements Constants {
     public static String getFileSystemManager() {
         return getProperty(DIGITALIB_PROPERTY_BASE + "filesystemmanagerclass");
     }
-    
-    
 
     public static String getPublicCsvUrl() {
-        return System.getProperty(DIGITALIB_PROPERTY_BASE + "publiccsvurl");
+        return getProperty(DIGITALIB_PROPERTY_BASE + "publiccsvurl");
     }
 
     public static Long getMaxSizeForScannedDocument() {
-        String strVal = System
-                .getProperty(DIGITALIB_PROPERTY_BASE + "maxsizeforscanneddocument");
+        String strVal = getProperty(DIGITALIB_PROPERTY_BASE + "maxsizeforscanneddocument");
         if (strVal == null || strVal.trim().length() == 0) {
             return null;
         } else {
@@ -200,15 +197,15 @@ public class Configuracio implements Constants {
     }
 
     public static String getSignReasonEL() {
-        return System.getProperty(DIGITALIB_PROPERTY_BASE + "signreasonEL");
+        return getProperty(DIGITALIB_PROPERTY_BASE + "signreasonEL");
     }
 
     public static String getSignLocationEL() {
-        return System.getProperty(DIGITALIB_PROPERTY_BASE + "signlocationEL");
+        return getProperty(DIGITALIB_PROPERTY_BASE + "signlocationEL");
     }
 
     public static String getSignerEmailEL() {
-        return System.getProperty(DIGITALIB_PROPERTY_BASE + "signeremailEL");
+        return getProperty(DIGITALIB_PROPERTY_BASE + "signeremailEL");
     }
 
     /**
@@ -218,7 +215,7 @@ public class Configuracio implements Constants {
      * 
      */
     public static boolean useDir3OfGroupConfiguration() {
-        return Boolean.getBoolean(DIGITALIB_PROPERTY_BASE + "usedir3ofgroupconfiguration");
+        return "true".equals(getProperty(DIGITALIB_PROPERTY_BASE + "usedir3ofgroupconfiguration"));
     }
 
     /**
@@ -228,15 +225,14 @@ public class Configuracio implements Constants {
      * @return
      */
     public static String getDefaultFuncionariDir3() {
-        return System.getProperty(DIGITALIB_PROPERTY_BASE + "defaultfuncionaridir3");
+        return getProperty(DIGITALIB_PROPERTY_BASE + "defaultfuncionaridir3");
     }
 
     // 15 minuts
     private static final long DEFAULT_EXPIRATION_TIME_MS = 900000L;
 
     public static long getTransactionExpirationTimeInMs() {
-        String strVal = System
-                .getProperty(DIGITALIB_PROPERTY_BASE + "transactionexpirationtimeinms");
+        String strVal = getProperty(DIGITALIB_PROPERTY_BASE + "transactionexpirationtimeinms");
         if (strVal == null || strVal.trim().length() == 0) {
             return DEFAULT_EXPIRATION_TIME_MS;
         } else {
@@ -244,14 +240,13 @@ public class Configuracio implements Constants {
                 return Long.valueOf(strVal);
             } catch (NumberFormatException nfe) {
                 String msg = "Valor per la propietat 'transactionexpirationtimeinms' no correspon a un número: "
-                                + strVal;
+                        + strVal;
                 log.error(msg, nfe);
                 return DEFAULT_EXPIRATION_TIME_MS;
             }
         }
     }
-    
-    
+
     /** 
      Si aquest valor val true serveix per mostrar un boto durant el processament de subdocuments
      en un escaneig massiu. Aquest boto només es farà visible si pàgina de després d'un Separador 
@@ -260,8 +255,7 @@ public class Configuracio implements Constants {
      Per defecte val false
     */
     public static boolean showButtonToDeleteFirstPage() {
-        String strVal = System
-                .getProperty(DIGITALIB_PROPERTY_BASE + "showbuttontodeletefirstpage");
+        String strVal = getProperty(DIGITALIB_PROPERTY_BASE + "showbuttontodeletefirstpage");
         if ("true".equals(strVal)) {
             return true;
         } else {
@@ -269,7 +263,6 @@ public class Configuracio implements Constants {
         }
     }
 
-    
     /**
      * 
      * @return Si val true llavors permeten escanejos massius emprant Separadors des de web.
@@ -277,8 +270,7 @@ public class Configuracio implements Constants {
      * escanejos simples i s'ignoren els Separadors.
      */
     public static boolean isAllowedMassiveScanInWeb() {
-        String strVal = System
-                .getProperty(DIGITALIB_PROPERTY_BASE + "allowedmassivescaninweb");
+        String strVal = getProperty(DIGITALIB_PROPERTY_BASE + "allowedmassivescaninweb");
         if ("true".equals(strVal)) {
             return true;
         } else {
@@ -288,43 +280,38 @@ public class Configuracio implements Constants {
 
     public static final String PROPERTY_DIESPERNETEJADEFITXERSAPLICACIO = "transactioncleanfilesappindays";
     public static final String PROPERTY_DIESPERNETEJADEFITXERSPERSONA = "transactioncleanfilespersonindays";
-    
-    
+
     public static Integer getDiesPerNetejaDeFitxersAplicacio() {
         return getDiesPerNetejaDeFitxers(PROPERTY_DIESPERNETEJADEFITXERSAPLICACIO);
     }
-    
+
     public static Integer getDiesPerNetejaDeFitxersPersona() {
         return getDiesPerNetejaDeFitxers(PROPERTY_DIESPERNETEJADEFITXERSPERSONA);
     }
-    
 
     protected static Integer getDiesPerNetejaDeFitxers(String propName) {
-        String strVal = System
-                .getProperty(DIGITALIB_PROPERTY_BASE + propName);
+        String strVal = getProperty(DIGITALIB_PROPERTY_BASE + propName);
         if (strVal == null || strVal.trim().length() == 0) {
             return null;
         } else {
             try {
                 return Integer.valueOf(strVal);
             } catch (NumberFormatException nfe) {
-  
-                
-                String msg = "Valor per la propietat " + propName + " no correspon a un número: "
-                        + strVal;
-        log.error(msg, nfe);
-                
+
+                String msg = "Valor per la propietat " + propName + " no correspon a un número: " + strVal;
+                log.error(msg, nfe);
+
                 return null;
             }
         }
     }
-    
+
     public static boolean isOcultarMenuInici() {
-        return Boolean.getBoolean(DIGITALIB_PROPERTY_BASE + "ocultarmenuinici");
+        return "true".equals(getProperty(DIGITALIB_PROPERTY_BASE + "ocultarmenuinici"));
     }
 
     public static String getConfiguracioGrupPerDefecteEL() {
-        return System.getProperty(DIGITALIB_PROPERTY_BASE + "configuraciogruppereefecteEL");
+        return getProperty(DIGITALIB_PROPERTY_BASE + "configuraciogruppereefecteEL");
     }
 
 }
