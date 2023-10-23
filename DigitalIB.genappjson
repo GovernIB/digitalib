@@ -4705,7 +4705,7 @@
           "showInReferenceList": true,
           "transientField": false,
           "descripcio": "",
-          "defaultValue": "nextval(\u0027dib_digitalib_seq\u0027::regclass)",
+          "defaultValue": "nextval(\u0027dib_traduccio_seq\u0027::regclass)",
           "filter": false,
           "orderBy": 0,
           "groupBy": false,

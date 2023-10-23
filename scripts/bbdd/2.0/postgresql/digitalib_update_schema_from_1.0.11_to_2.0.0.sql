@@ -35,6 +35,7 @@ ALTER TABLE dib_infosignatura ALTER COLUMN infosignaturaid SET DEFAULT nextval('
 
 CREATE SEQUENCE dib_metadada_seq INCREMENT 1 START __XXXXX__;
 ALTER TABLE dib_metadada ALTER COLUMN metadadaid SET DEFAULT nextval('dib_metadada_seq');
+
 CREATE SEQUENCE dib_perfil_seq INCREMENT 1 START __XXXXX__;
 ALTER TABLE dib_perfil ALTER COLUMN perfilid SET DEFAULT nextval('dib_perfil_seq');
 
@@ -56,7 +57,8 @@ ALTER TABLE dib_usuariaplicacio ALTER COLUMN usuariaplicacioid SET DEFAULT nextv
 CREATE SEQUENCE dib_usuaripersona_seq INCREMENT 1 START __XXXXX__;
 ALTER TABLE dib_usuaripersona ALTER COLUMN usuaripersonaid SET DEFAULT nextval('dib_usuaripersona_seq');
 
-
+CREATE SEQUENCE dib_traduccio_seq INCREMENT 1 START __XXXXX__;
+ALTER TABLE dib_traduccio ALTER COLUMN traduccioid SET DEFAULT nextval('dib_traduccio_seq');
 
 
 -- ====== NOU CONTEXT DE BACK és digitalibback
