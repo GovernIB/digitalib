@@ -273,6 +273,49 @@ public class ApiMassiveScanWebSimpleApi {
     return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
       }
   /**
+   * Retorna l&#39;estat d&#39;una subtransacció.
+   * 
+   * @param body subTransactionID (required)
+   * @return a {@code MassiveScanWebSimpleStatus}
+   * @throws ApiException if fails to make API call
+   */
+  public MassiveScanWebSimpleStatus getSubTransactionStatus(String body) throws ApiException {
+    Object localVarPostBody = body;
+    
+    // verify the required parameter 'body' is set
+    if (body == null) {
+      throw new ApiException(400, "Missing the required parameter 'body' when calling getSubTransactionStatus");
+    }
+    
+    // create path and map variables
+    String localVarPath = "/secure/apimassivescanwebsimple/v1/getSubTransactionStatus".replaceAll("\\{format\\}","json");
+
+    // query params
+    List<Pair> localVarQueryParams = new ArrayList<Pair>();
+    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+    Map<String, String> localVarCookieParams = new HashMap<String, String>();
+    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+
+    
+    
+    
+    final String[] localVarAccepts = {
+      "application/json"
+    };
+    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+    final String[] localVarContentTypes = {
+      "application/json"
+    };
+    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+    String[] localVarAuthNames = new String[] { "BasicAuth" };
+
+    GenericType<MassiveScanWebSimpleStatus> localVarReturnType = new GenericType<MassiveScanWebSimpleStatus>() {};
+    return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+      }
+  /**
    * Retorna el PDF que s&#39;ha de ficar entre els diferents documents a escanejar
    * 
    * @param body transactionWebID (required)

@@ -47,6 +47,7 @@ import es.caib.digitalib.model.entity.ConfiguracioFirma;
 import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.commons.utils.Configuracio;
 import es.caib.digitalib.commons.utils.Constants;
+import es.caib.digitalib.ejb.PerfilService;
 
 /**
  * 
@@ -74,6 +75,9 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
   @EJB(mappedName = PluginSegellDeTempsLogicaService.JNDI_NAME)
   protected PluginSegellDeTempsLogicaService pluginSegellDeTempsEjb;
+  
+  @EJB(mappedName = PerfilService.JNDI_NAME)
+  protected PerfilService perfilEjb;
 
   @Override
   public int getTipusDePlugin() {
@@ -90,8 +94,17 @@ public class PluginFirmaEnServidorLogicaEJB extends
       Locale locale, String userApp, String userPerson) {
 
     PerfilJPA perfil = transaccio.getPerfil();
-
-    long confFirmaID = perfil.getConfiguracioFirmaID();
+    
+    log.info("firmarFitxerAmbApiFirmaEnServidor => PerfilID=" + transaccio.getPerfilID());
+    log.info("firmarFitxerAmbApiFirmaEnServidor => Perfil=" + perfil);
+    
+    if (perfil == null) {
+        perfil = (PerfilJPA)perfilEjb.findByPrimaryKey(transaccio.getPerfilID());
+    }
+    
+    
+    Long confFirmaID = perfil.getConfiguracioFirmaID();
+    log.info("firmarFitxerAmbApiFirmaEnServidor => confFirmaID=" + confFirmaID);
 
     ConfiguracioFirma confFirma = configuracioFirmaEjb.findByPrimaryKey(confFirmaID);
 

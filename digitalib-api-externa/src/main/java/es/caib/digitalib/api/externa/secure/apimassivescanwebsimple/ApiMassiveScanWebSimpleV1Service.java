@@ -858,6 +858,102 @@ public class ApiMassiveScanWebSimpleV1Service {
         }
 
     }
+    
+    
+    
+    @Path("/getSubTransactionStatus")
+    @RolesAllowed({ Constants.DIB_WS })
+    @SecurityRequirement(name = SEC)
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "getSubTransactionStatus",
+            summary = "Retorna l'estat d'una subtransacció.",
+            tags = { TAG },
+            requestBody = @RequestBody(
+                    description = "subTransactionID",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(
+                                    name = "subTransactionID",
+                                    required = true,
+                                    implementation = String.class))))
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Operació realitzada correctament",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = MassiveScanWebSimpleStatus.class))),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Paràmetres incorrectes",
+                            content = { @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class)) }),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "No Autenticat",
+                            content = { @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = String.class)) }),
+                    @ApiResponse(
+                            responseCode = "403",
+                            description = "No Autoritzat",
+                            content = { @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = String.class)) }),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Error no controlat",
+                            content = { @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = RestExceptionInfo.class)) }) })
+    public MassiveScanWebSimpleStatus getSubTransactionStatus(@RequestBody(
+            description = "subTransactionID",
+            required = true,
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON,
+                    schema = @Schema(
+                            name = "subTransactionID",
+                            required = true,
+                            implementation = String.class))) String subTransactionID) throws Exception {
+
+        final String methodName = "getSubTransactionStatus";
+        
+        if (subTransactionID!= null) {
+            subTransactionID = subTransactionID.replace("\"",  "");
+        }
+        
+        log.info(" Cridant a mètode " +  methodName + "(" + subTransactionID + ") ...");
+
+        String languageUI = "ca";
+        try {
+            TransaccioJPA transaccio;
+            transaccio = transaccioLogicaEjb.searchTransaccioByTransactionWebID(subTransactionID);
+            if (transaccio == null) {  
+              throw new I18NException("transaccio.noexisteix", subTransactionID);
+            }
+            
+
+            languageUI = transaccio.getLanguageUI();
+            
+
+            MassiveScanWebSimpleStatus status = new MassiveScanWebSimpleStatus();
+            status.setStatus(transaccio.getEstatCodi());
+            status.setErrorMessage(transaccio.getEstatMissatge());
+            status.setErrorStackTrace(transaccio.getEstatExcepcio());
+
+            return status;
+
+        } catch (Throwable th) {
+
+            return processException(methodName, languageUI, th);
+        }
+
+    }
 
     @Path("/getSubTransactionResult")
     @RolesAllowed({ Constants.DIB_WS })

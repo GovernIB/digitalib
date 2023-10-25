@@ -10,6 +10,7 @@ All URIs are relative to */digitalibapi/externa*
 | [**getProfile**](ApiMassiveScanWebSimpleApi.md#getProfile) | **POST** /secure/apimassivescanwebsimple/v1/getProfile | Retorna el PDF que s&#39;ha de ficar entre els diferents documents a escanejar |
 | [**getSeparatorPage**](ApiMassiveScanWebSimpleApi.md#getSeparatorPage) | **POST** /secure/apimassivescanwebsimple/v1/getSeparatorPage | Retorna el PDF que s&#39;ha de ficar entre els diferents documents a escanejar |
 | [**getSubTransactionResult**](ApiMassiveScanWebSimpleApi.md#getSubTransactionResult) | **POST** /secure/apimassivescanwebsimple/v1/getSubTransactionResult | Retorna els resultats d&#39;una subtransacció. |
+| [**getSubTransactionStatus**](ApiMassiveScanWebSimpleApi.md#getSubTransactionStatus) | **POST** /secure/apimassivescanwebsimple/v1/getSubTransactionStatus | Retorna l&#39;estat d&#39;una subtransacció. |
 | [**getSubTransactionsOfTransaction**](ApiMassiveScanWebSimpleApi.md#getSubTransactionsOfTransaction) | **POST** /secure/apimassivescanwebsimple/v1/getSubTransactionsOfTransaction | Retorna el PDF que s&#39;ha de ficar entre els diferents documents a escanejar |
 | [**getTransactionID**](ApiMassiveScanWebSimpleApi.md#getTransactionID) | **POST** /secure/apimassivescanwebsimple/v1/getTransactionID | Retorna una transacció a partir de l&#39;identificador |
 | [**startTransaction**](ApiMassiveScanWebSimpleApi.md#startTransaction) | **POST** /secure/apimassivescanwebsimple/v1/startTransaction | Posa en marxa una transacció |
@@ -439,6 +440,80 @@ public class Example {
 ### Return type
 
 [**MassiveScanWebSimpleSubtransactionResult**](MassiveScanWebSimpleSubtransactionResult.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Operació realitzada correctament |  -  |
+| **400** | Paràmetres incorrectes |  -  |
+| **401** | No Autenticat |  -  |
+| **403** | No Autoritzat |  -  |
+| **500** | Error no controlat |  -  |
+
+
+## getSubTransactionStatus
+
+> MassiveScanWebSimpleStatus getSubTransactionStatus(body)
+
+Retorna l&#39;estat d&#39;una subtransacció.
+
+### Example
+
+```java
+// Import classes:
+import es.caib.digitalib.apiexterna.client.services.ApiClient;
+import es.caib.digitalib.apiexterna.client.services.ApiException;
+import es.caib.digitalib.apiexterna.client.services.Configuration;
+import es.caib.digitalib.apiexterna.client.services.auth.*;
+import es.caib.digitalib.apiexterna.client.services.models.*;
+import es.caib.digitalib.apiexterna.client.api.ApiMassiveScanWebSimpleApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("/digitalibapi/externa");
+        
+        // Configure HTTP basic authorization: BasicAuth
+        HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
+        BasicAuth.setUsername("YOUR USERNAME");
+        BasicAuth.setPassword("YOUR PASSWORD");
+
+        ApiMassiveScanWebSimpleApi apiInstance = new ApiMassiveScanWebSimpleApi(defaultClient);
+        String body = "body_example"; // String | subTransactionID
+        try {
+            MassiveScanWebSimpleStatus result = apiInstance.getSubTransactionStatus(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ApiMassiveScanWebSimpleApi#getSubTransactionStatus");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **body** | **String**| subTransactionID | |
+
+### Return type
+
+[**MassiveScanWebSimpleStatus**](MassiveScanWebSimpleStatus.md)
 
 ### Authorization
 

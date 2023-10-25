@@ -344,7 +344,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             throws I18NException {
 
         List<Transaccio> list = select(
-                TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
+                TRANSACTIONWEBID.equal(transactionWebID));
 
         if (list == null || list.size() == 0) {
             return null;

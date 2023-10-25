@@ -391,6 +391,54 @@ paths:
       - ApiMassiveScanWebSimple
       x-content-type: application/json
       x-accepts: application/json
+  /secure/apimassivescanwebsimple/v1/getSubTransactionStatus:
+    post:
+      operationId: getSubTransactionStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: subTransactionID
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveScanWebSimpleStatus'
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna l'estat d'una subtransacció.
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
   /secure/apimassivescanwebsimple/v1/getSubTransactionsOfTransaction:
     post:
       operationId: getSubTransactionsOfTransaction
