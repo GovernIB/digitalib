@@ -4,7 +4,7 @@
 
 -- IMPORTANT !!!!!!
 
--- S'ha de reemplaçar __XXXX__ pel valor de la consulta "select nextval('dib_digitalib_seq');"
+-- S'ha de reemplaçar __XXXX__ pel valor de la consulta "select nextval('dib_digitalib_seq')+1000;"
 
 CREATE SEQUENCE dib_apisimple_seq INCREMENT 1 START __XXXXX__;
 ALTER TABLE dib_apisimple ALTER COLUMN apisimpleid SET DEFAULT nextval('dib_apisimple_seq');

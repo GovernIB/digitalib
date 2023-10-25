@@ -4,7 +4,7 @@
 
 -- IMPORTANT !!!!!!
 
--- S'ha de reemplaçar __XXXX__ pel valor de la consulta "select dib_digitalib_seq.nextval from dual;"
+-- S'ha de reemplaçar __XXXX__ pel valor de la consulta "select dib_digitalib_seq.nextval+1000 from dual;"
 
 
 CREATE SEQUENCE dib_apisimple_seq INCREMENT 1 START __XXXXX__;
