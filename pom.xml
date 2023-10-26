@@ -10,7 +10,8 @@
         <module>digitalib-persistence</module>
         <module>digitalib-ejb</module>
         <module>digitalib-commons</module>
-        <module>digitalib-api-externa</module>
+        <module>digitalib-api-interna</module>
+        <module>digitalib-api-interna-client</module>
         <module>digitalib-back</module>
         <module>digitalib-ear</module>
         <module>scripts</module>
@@ -467,7 +468,7 @@
                     </replacements>
                 </configuration>
             </plugin>
-<!--
+
             <plugin>
 
                 <groupId>com.github.github</groupId>
@@ -497,10 +498,10 @@
                     </execution>
                 </executions>
             </plugin>
--->
+
         </plugins>
     </build>
-<!--
+
     <distributionManagement>
         <repository>
             <id>github_governib_maven</id>
@@ -508,7 +509,7 @@
             <url>file://${project.build.directory}/mvn-repo</url>
         </repository>
     </distributionManagement>
--->
+
     <profiles>
         <profile>
             <id>revisionnumber</id>
@@ -531,17 +532,6 @@
                     </plugins>
                 </pluginManagement>
             </build>
-        </profile>
-        <profile>
-            <id>api-externa-client</id>
-            <activation>
-                <file>
-                    <exists>digitalib-api-externa-client</exists>
-                </file>
-            </activation>
-            <modules>
-                <module>digitalib-api-externa-client</module>
-            </modules>
         </profile>
     </profiles>
 </project>

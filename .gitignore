@@ -1,6 +1,6 @@
 
-/digitalib-api-externa/target
-/digitalib-api-externa-client/target
+/digitalib-api-interna/target
+/digitalib-api-interna-client/target
 /digitalib-back/target
 /digitalib-commons/target
 /digitalib-ear/target
@@ -9,8 +9,8 @@
 /digitalib-persistence/target
 
 
-/digitalib-api-externa/.classpath
-/digitalib-api-externa-client/.classpath
+/digitalib-api-interna/.classpath
+/digitalib-api-interna-client/.classpath
 /digitalib-back/.classpath
 /digitalib-commons/.classpath
 /digitalib-ear/.classpath
@@ -19,8 +19,8 @@
 /digitalib-persistence/.classpath
 
 
-/digitalib-api-externa/.project
-/digitalib-api-externa-client/.project
+/digitalib-api-interna/.project
+/digitalib-api-interna-client/.project
 /digitalib-back/.project
 /digitalib-commons/.project
 /digitalib-ear/.project
@@ -29,33 +29,33 @@
 /digitalib-persistence/.project
 
 
-/digitalib-api-externa/.settings
-/digitalib-api-externa-client/.settings
+/digitalib-api-interna/.settings
+/digitalib-api-interna-client/.settings
 /digitalib-back/.settings
 /digitalib-commons/.settings
 /digitalib-ear/.settings
 /digitalib-ejb/.settings
 /digitalib-model/.settings
 /digitalib-persistence/.settings
-/digitalib-api-externa-client/settings.gradle
-/digitalib-api-externa-client/.github
-/digitalib-api-externa-client/.openapi-generator
-/digitalib-api-externa-client/gradle
-/digitalib-api-externa-client/.openapi-generator-ignore
-/digitalib-api-externa-client/.project
-/digitalib-api-externa-client/.travis.yml
-/digitalib-api-externa-client/build.gradle
-/digitalib-api-externa-client/build.sbt
-/digitalib-api-externa-client/gradle.properties
-/digitalib-api-externa-client/gradlew
-/digitalib-api-externa-client/gradlew.bat
+/digitalib-api-interna-client/settings.gradle
+/digitalib-api-interna-client/.github
+/digitalib-api-interna-client/.openapi-generator
+/digitalib-api-interna-client/gradle
+/digitalib-api-interna-client/.openapi-generator-ignore
+/digitalib-api-interna-client/.project
+/digitalib-api-interna-client/.travis.yml
+/digitalib-api-interna-client/build.gradle
+/digitalib-api-interna-client/build.sbt
+/digitalib-api-interna-client/gradle.properties
+/digitalib-api-interna-client/gradlew
+/digitalib-api-interna-client/gradlew.bat
 /rungenapp/lastconfig.properties
 /rungenapp/genapp.log
-/digitalib-api-externa-client/git_push.sh
+/digitalib-api-interna-client/git_push.sh
 /2023-09-29 Primer Escaneig DigitalIB 2.0.0 amb DWT.pdf
 /2023-09-29 Primer Escaneig DigitalIB 2.0.0.pdf
-/digitalib-api-externa-client/1_scanfile.application.pdf
-/digitalib-api-externa-client/1_signed.Transaccio_Exemple_1696496545855_1_#2-signed.pdf
-/digitalib-api-externa-client/SEPARADOR.pdf
+/digitalib-api-interna-client/1_scanfile.application.pdf
+/digitalib-api-interna-client/1_signed.Transaccio_Exemple_1696496545855_1_#2-signed.pdf
+/digitalib-api-interna-client/SEPARADOR.pdf
 /digitalib-back/test.properties
-/digitalib-api-externa-client/test.properties
+/digitalib-api-interna-client/test.properties

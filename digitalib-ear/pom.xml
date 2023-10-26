@@ -368,15 +368,15 @@
 
         <!-- API REST de DigitalIB -->
 
-        <!-- API EXTERNA START -->
-        <!-- http://localhost:8080/digitalibapi/externa/index.html -->
+        <!-- API INTERNA START -->
+        <!-- http://localhost:8080/digitalibapi/interna/index.html -->
         <dependency>
             <groupId>es.caib.digitalib</groupId>
-            <artifactId>digitalib-api-externa</artifactId>
+            <artifactId>digitalib-api-interna</artifactId>
             <version>2.0.0</version>
             <type>war</type>
         </dependency>
-        <!-- API EXTERNA END -->
+        <!-- API INTERNA END -->
     </dependencies>
 
 
@@ -452,14 +452,14 @@
                             <bundleFileName>digitalib-ejb.jar</bundleFileName>
                         </ejbModule>
 
-                        <!-- API EXTERNA START -->
+                        <!-- API INTERNA START -->
                         <webModule>
                             <groupId>es.caib.digitalib</groupId>
-                            <artifactId>digitalib-api-externa</artifactId>
-                            <contextRoot>/digitalibapi/externa</contextRoot>
-                            <bundleFileName>digitalib-api-externa.war</bundleFileName>
+                            <artifactId>digitalib-api-interna</artifactId>
+                            <contextRoot>/digitalibapi/interna</contextRoot>
+                            <bundleFileName>digitalib-api-interna.war</bundleFileName>
                         </webModule>
-                        <!-- API EXTERNA END -->
+                        <!-- API INTERNA END -->
                     </modules>
 
                 </configuration>
