@@ -145,10 +145,7 @@
                             <languageSpecificPrimitives>boolean,int</languageSpecificPrimitives>
                             
                             <apisToGenerate>ApiMassiveScanWebSimple</apisToGenerate>
-
-                            <modelsToGenerate>MassiveScanWebSimpleArxiuInfo,MassiveScanWebSimpleArxiuOptionalParameters,MassiveScanWebSimpleArxiuRequiredParameters,MassiveScanWebSimpleAvailableProfile,MassiveScanWebSimpleAvailableProfiles,MassiveScanWebSimpleConstants,MassiveScanWebSimpleCustodyInfo,MassiveScanWebSimpleFile,MassiveScanWebSimpleGetTransactionIdRequest,MassiveScanWebSimpleKeyValue,MassiveScanWebSimpleProfileRequest,MassiveScanWebSimpleScannedFileInfo,MassiveScanWebSimpleSignatureParameters,MassiveScanWebSimpleSignedFileInfo,MassiveScanWebSimpleStartTransactionRequest,MassiveScanWebSimpleStatus,MassiveScanWebSimpleSubtransactionResult,MassiveScanWebSimpleSubtransactionResultRequest,MassiveScanWebSimpleSubTransactionsOfTransaction,MassiveScanWebSimpleValidationInfo,RestExceptionInfo</modelsToGenerate>
-
-                            
+                   
                             <configOptions>
                                 <groupId>es.caib.digitalib</groupId>
                                 <artifactId>digitalib-api-interna-client</artifactId>
