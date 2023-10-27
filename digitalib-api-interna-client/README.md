@@ -132,6 +132,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [Estadistiques](docs/Estadistiques.md)
+ - [EstadistiquesTransaccio](docs/EstadistiquesTransaccio.md)
  - [MassiveScanWebSimpleArxiuInfo](docs/MassiveScanWebSimpleArxiuInfo.md)
  - [MassiveScanWebSimpleArxiuOptionalParameters](docs/MassiveScanWebSimpleArxiuOptionalParameters.md)
  - [MassiveScanWebSimpleArxiuRequiredParameters](docs/MassiveScanWebSimpleArxiuRequiredParameters.md)
