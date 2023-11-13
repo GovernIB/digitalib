@@ -3,7 +3,7 @@
     file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <br />
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
 
         <% if (Configuracio.isAllowedMassiveScanInWeb()) {  %>
@@ -16,7 +16,7 @@
                         <center>
                             <a href="<c:url value="/user/scan/separator"/>" target="_blank" class="btn btn-info"
                                 style="margin-right: 10%; margin-top: 3%; margin-bottom: 2%; color: white;"> <fmt:message
-                                    key="descarregar.separador" /> <%-- <small style="color:white;"><i>Necessari per separar diferents documents quan es fa un escaneig múltiple</i></small> --%>
+                                    key="descarregar.separador" /> <%-- <small style="color:white;"><i>Necessari per separar diferents documents quan es fa un escaneig mï¿½ltiple</i></small> --%>
                             </a>
                         </center></li>
                     <br />
@@ -46,13 +46,13 @@
         %>
 
 
-        <div class="class=" col-sm" style="margin-left: 20px;margin-right: 20px;text-align: center;">
+        <div class="col-sm" style="margin-left: 20px;margin-right: 20px;text-align: center; margin-top: 3em;">
 
             <h3>
                 <fmt:message key="plugindescan.seleccio.title2" />
             </h3>
             <c:if test="${not empty configuracioGrup }">
-                <div class="well" style="max-width: 400px; margin: 0 auto 10px;">
+                <div class="well" style="max-width: 400px; margin: 0 auto 10px; margin-top: 2em;">
 
 
                     <sec:authorize access="hasAnyRole('ROLE_SCAN')">

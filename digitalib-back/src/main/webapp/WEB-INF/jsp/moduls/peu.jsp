@@ -10,7 +10,11 @@
         <!-- Esquerra -->
         <div class="col-4 pt-2 elementPeuResponsive">
             <strong class="font-weight-bold h6"> ${versio.projectName} v${versio.version}<%=Configuracio.isCAIB() ? "-caib" : ""%>
-            </strong> <br /> <small> Build: ${versio.buildTime} <br /> JDK: ${version.jdkVersion} <br /> <fmt:message
+            </strong> <br />
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <small> Build: ${versio.buildTime} <br /> JDK: ${version.jdkVersion} <br />
+            </sec:authorize>
+                <fmt:message
                     key="revisio" />: <c:if test="${empty versio.scmRevision}">
                     <fmt:message key="scmversion.msg" />
                 </c:if> <c:if test="${not empty versio.scmRevision}">${versio.scmRevision}</c:if> <br /> <span

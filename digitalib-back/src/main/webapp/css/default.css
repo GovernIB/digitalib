@@ -3,6 +3,7 @@
 .tdformlabel tbody td:nth-child(1) {
 	text-align: right;
 	font-weight: bold;
+	width: 43%;
 }
 
 .tdformlabel tbody td:nth-child(1) label {

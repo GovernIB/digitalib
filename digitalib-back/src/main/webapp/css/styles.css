@@ -276,7 +276,7 @@ a:hover{
 }
 .subtitolMay{
 	font-size: 0.85em !important;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 }
 .menuGovern span, strong{
 	font-size: 1em;

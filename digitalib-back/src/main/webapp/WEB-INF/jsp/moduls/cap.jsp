@@ -16,13 +16,16 @@
         <!-- Logo i nom aplicació -->
         <div class="navbar-brand menuGovern">
             <div class="logoGovern">
-                <a href="http://www.fundaciobit.org"> <img src="<c:url value="/img/fundaciobit-logo-cap.png"/>"
-                    alt="FundacioBit-Govern Digital" />
-                </a>
+                <c:if test="${not empty loginInfo.usuariPersona.configuracioGrup}">
+                    <a href="<c:out value="${loginInfo.usuariPersona.configuracioGrup.suportWeb}" />" target="_blank">
+                        <img style="height: 50px; margin: 0% 10%; padding: 2%;" src="<c:url value="${dib:fileUrl(loginInfo.usuariPersona.configuracioGrup.logoHeader)}"/>"
+                        alt="${loginInfo.usuariPersona.configuracioGrup.nom }" />
+                    </a>
+                </c:if>
             </div>
 
             <div class="logoGovern">
-                <img src="<c:url value="/img/app-logo.png"/>" alt="DigitalIB" title="DigitalIB" />
+                <img style="height: 50px;" src="<c:url value="/img/app-logo.png"/>" alt="DigitalIB" title="DigitalIB" />
             </div>
 
             <div>
@@ -72,7 +75,7 @@
                         <i class="fas fa-language fa-lg"></i>
                         <fmt:message key="idiomes" />
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="top: 90%;">
                         <c:forEach var="idioma" items="${idiomes}" varStatus="status">
                             <c:set var="idiomaID" value="${idioma.idiomaID}" />
                             <a class="dropdown-item" href="?lang=${idiomaID}"> <img
@@ -93,7 +96,7 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v"></i>
                     </button>
-                    <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownMenu3">
+                    <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownMenu3" style="top: 90%;">
 
                         <c:if test="${ empty loginInfo  }">
                             <a class="dropdown-item" href="<c:url value="/common/principal.html"></c:url>"> <i
