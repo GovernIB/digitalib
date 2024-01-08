@@ -45,7 +45,7 @@ public class ExempleSeguritzatService {
 
     @Path("/echo")
     @GET
-    @RolesAllowed({ Constants.DIB_ADMIN, Constants.DIB_USER })
+    @RolesAllowed({ Constants.DIB_WS })
 	@SecurityRequirement(name = SEC)  
 	@Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
