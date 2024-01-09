@@ -32,17 +32,17 @@
     "url" : "https://www.caib.es/digitalibapi/interna"
   } ],
   "tags" : [ {
-    "name" : "Estadistiques",
-    "description" : "Servei d'Estadistiques JSON d'accés Públic"
+    "name" : "Transaccions",
+    "description" : "Servei de informació d'estadístiques de Transaccions d'Accés Públic"
   }, {
     "name" : "ApiMassiveScanWebSimple",
     "description" : "ApiMassiveScanWebSimple"
   } ],
   "paths" : {
-    "/public/dadesobertes/estadistiques/consulta" : {
+    "/public/dadesobertes/transaccions/consulta" : {
       "get" : {
-        "tags" : [ "Estadistiques" ],
-        "summary" : "Retorna estadístiques de les peticions a DigitalIB",
+        "tags" : [ "Transaccions" ],
+        "summary" : "Retorna estadístiques de les transaccions a DigitalIB",
         "operationId" : "consulta",
         "parameters" : [ {
           "name" : "startdate",
@@ -91,7 +91,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Estadistiques"
+                  "$ref" : "#/components/schemas/Transaccions"
                 }
               }
             }
@@ -857,18 +857,7 @@
   },
   "components" : {
     "schemas" : {
-      "Estadistiques" : {
-        "type" : "object",
-        "properties" : {
-          "resultat" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/EstadistiquesTransaccio"
-            }
-          }
-        }
-      },
-      "EstadistiquesTransaccio" : {
+      "TransaccioInfo" : {
         "type" : "object",
         "properties" : {
           "transaccioID" : {
@@ -928,6 +917,17 @@
           },
           "tipusDocumental" : {
             "type" : "string"
+          }
+        }
+      },
+      "Transaccions" : {
+        "type" : "object",
+        "properties" : {
+          "resultat" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/TransaccioInfo"
+            }
           }
         }
       },

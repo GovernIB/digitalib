@@ -21,12 +21,12 @@ servers:
 - url: https://se.caib.es/digitalibapi/interna
 - url: https://www.caib.es/digitalibapi/interna
 tags:
-- description: Servei d'Estadistiques JSON d'accés Públic
-  name: Estadistiques
+- description: Servei de informació d'estadístiques de Transaccions d'Accés Públic
+  name: Transaccions
 - description: ApiMassiveScanWebSimple
   name: ApiMassiveScanWebSimple
 paths:
-  /public/dadesobertes/estadistiques/consulta:
+  /public/dadesobertes/transaccions/consulta:
     get:
       operationId: consulta
       parameters:
@@ -89,7 +89,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Estadistiques'
+                $ref: '#/components/schemas/Transaccions'
           description: Operació realitzada correctament
         "404":
           content:
@@ -103,9 +103,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestExceptionInfo'
           description: Error no controlat
-      summary: Retorna estadístiques de les peticions a DigitalIB
+      summary: Retorna estadístiques de les transaccions a DigitalIB
       tags:
-      - Estadistiques
+      - Transaccions
       x-accepts: application/json
   /secure/apimassivescanwebsimple/v1/closeTransaction:
     post:
@@ -589,52 +589,7 @@ paths:
       x-accepts: application/json
 components:
   schemas:
-    Estadistiques:
-      example:
-        resultat:
-        - codiDir3: codiDir3
-          color: color
-          fitxerMidaBytes: 1
-          idiomaDocument: idiomaDocument
-          duplex: true
-          origen: origen
-          usrname: usrname
-          missatgeError: missatgeError
-          funcionariUsername: funcionariUsername
-          transaccioID: 0
-          appname: appname
-          dataCapturaISO8601: dataCapturaISO8601
-          transaccioMultipleID: 6
-          midaPaper: midaPaper
-          estat: estat
-          configuracioGrupNom: configuracioGrupNom
-          tipusDocumental: tipusDocumental
-          resolucio: 5
-        - codiDir3: codiDir3
-          color: color
-          fitxerMidaBytes: 1
-          idiomaDocument: idiomaDocument
-          duplex: true
-          origen: origen
-          usrname: usrname
-          missatgeError: missatgeError
-          funcionariUsername: funcionariUsername
-          transaccioID: 0
-          appname: appname
-          dataCapturaISO8601: dataCapturaISO8601
-          transaccioMultipleID: 6
-          midaPaper: midaPaper
-          estat: estat
-          configuracioGrupNom: configuracioGrupNom
-          tipusDocumental: tipusDocumental
-          resolucio: 5
-      properties:
-        resultat:
-          items:
-            $ref: '#/components/schemas/EstadistiquesTransaccio'
-          type: array
-      type: object
-    EstadistiquesTransaccio:
+    TransaccioInfo:
       example:
         codiDir3: codiDir3
         color: color
@@ -695,6 +650,51 @@ components:
           type: string
         tipusDocumental:
           type: string
+      type: object
+    Transaccions:
+      example:
+        resultat:
+        - codiDir3: codiDir3
+          color: color
+          fitxerMidaBytes: 1
+          idiomaDocument: idiomaDocument
+          duplex: true
+          origen: origen
+          usrname: usrname
+          missatgeError: missatgeError
+          funcionariUsername: funcionariUsername
+          transaccioID: 0
+          appname: appname
+          dataCapturaISO8601: dataCapturaISO8601
+          transaccioMultipleID: 6
+          midaPaper: midaPaper
+          estat: estat
+          configuracioGrupNom: configuracioGrupNom
+          tipusDocumental: tipusDocumental
+          resolucio: 5
+        - codiDir3: codiDir3
+          color: color
+          fitxerMidaBytes: 1
+          idiomaDocument: idiomaDocument
+          duplex: true
+          origen: origen
+          usrname: usrname
+          missatgeError: missatgeError
+          funcionariUsername: funcionariUsername
+          transaccioID: 0
+          appname: appname
+          dataCapturaISO8601: dataCapturaISO8601
+          transaccioMultipleID: 6
+          midaPaper: midaPaper
+          estat: estat
+          configuracioGrupNom: configuracioGrupNom
+          tipusDocumental: tipusDocumental
+          resolucio: 5
+      properties:
+        resultat:
+          items:
+            $ref: '#/components/schemas/TransaccioInfo'
+          type: array
       type: object
     RestExceptionInfo:
       description: Estructura de dades utilitzada per passar informació d'un error

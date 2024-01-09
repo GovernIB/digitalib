@@ -1,11 +1,11 @@
-package es.caib.digitalib.api.interna.all.dadesobertes.estadistiques;
+package es.caib.digitalib.api.interna.all.dadesobertes.transaccions;
 
 /**
  * 
  * @author anadal (u80067)
  *
  */
-public class EstadistiquesTransaccio {
+public class TransaccioInfo {
     protected long transaccioID;
     protected Long transaccioMultipleID;
     protected String funcionariUsername;
@@ -26,11 +26,11 @@ public class EstadistiquesTransaccio {
     protected String origen;
     protected String tipusDocumental;
 
-    public EstadistiquesTransaccio() {
+    public TransaccioInfo() {
         super();
     }
 
-    public EstadistiquesTransaccio(long transaccioID, Long transaccioMultipleID,
+    public TransaccioInfo(long transaccioID, Long transaccioMultipleID,
             String funcionariUsername, String appname, String usrname, long fitxerMidaBytes,
             String color, Integer resolucio, String midaPaper, String dataCapturaISO8601,
             String estat, String codiDir3, String configuracioGrupNom, String idiomaDocument,

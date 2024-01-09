@@ -1,4 +1,4 @@
-package es.caib.digitalib.api.interna.all.dadesobertes.estadistiques;
+package es.caib.digitalib.api.interna.all.dadesobertes.transaccions;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -54,16 +54,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Content;
 
 /**
- *  Servei d'Estadistiques JSON d'accés Públic
+ *  Servei d'Estadistiquesde Transaccions JSON d'accés Públic
  */
-@Path("/public/dadesobertes/estadistiques")
+@Path("/public/dadesobertes/transaccions")
 @OpenAPIDefinition(
-        tags = @Tag(name = EstadistiquesService.TAG_NAME, description = "Servei d'Estadistiques JSON d'accés Públic"))
-public class EstadistiquesService extends RestUtils {
+        tags = @Tag(
+                name = TransaccionsService.TAG_NAME,
+                description = "Servei de informació d'estadístiques de Transaccions d'Accés Públic"))
+public class TransaccionsService extends RestUtils {
 
-    protected static Logger log = Logger.getLogger(EstadistiquesService.class);
+    protected static Logger log = Logger.getLogger(TransaccionsService.class);
 
-    public static final String TAG_NAME = "Estadistiques";
+    public static final String TAG_NAME = "Transaccions";
 
     public static final String DATE_PATTERN_DD_MM_YYYY = "^(?:(?:31(-)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(-)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(-)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(-)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
 
@@ -84,7 +86,7 @@ public class EstadistiquesService extends RestUtils {
     @Operation(
             tags = TAG_NAME,
             operationId = "consulta",
-            summary = "Retorna estadístiques de les peticions a DigitalIB")
+            summary = "Retorna estadístiques de les transaccions a DigitalIB")
     @ApiResponses(
             value = {
                     @ApiResponse(
@@ -92,7 +94,7 @@ public class EstadistiquesService extends RestUtils {
                             description = "Operació realitzada correctament",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = Estadistiques.class))),
+                                    schema = @Schema(implementation = Transaccions.class))),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Paràmetres incorrectes",
@@ -105,7 +107,7 @@ public class EstadistiquesService extends RestUtils {
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
                                     schema = @Schema(implementation = RestExceptionInfo.class))) })
-    public Estadistiques consulta(
+    public Transaccions consultaTransaccions(
             @Parameter(
                     name = "startdate",
                     description = "Data d'inici de la consulta. Opcional. Format dd-mm-yyyy",
@@ -228,8 +230,7 @@ public class EstadistiquesService extends RestUtils {
 
     }
 
-    // @Override
-    public Estadistiques consulta(Date startDate, Date endDate, String appName, String usrName, Integer estat)
+    protected Transaccions consulta(Date startDate, Date endDate, String appName, String usrName, Integer estat)
             throws I18NException {
 
         List<Transaccio> transaccions;
@@ -283,7 +284,7 @@ public class EstadistiquesService extends RestUtils {
 
             Where where = Where.AND(sd, ed, app, usr, status);
 
-            log.info("Where: " + where.toSQL());
+            log.info("Where: " + ((where==null)? "--NULL--": where.toSQL()));
 
             final OrderBy orderBy = new OrderBy(TransaccioFields.DATAINICI, OrderType.DESC);
 
@@ -303,7 +304,7 @@ public class EstadistiquesService extends RestUtils {
             transaccions = transaccioLogicaEjb.select(where, orderBy);
         }
 
-        List<EstadistiquesTransaccio> resultat = new ArrayList<EstadistiquesTransaccio>();
+        List<TransaccioInfo> resultat = new ArrayList<TransaccioInfo>();
 
         if (transaccions != null && transaccions.size() != 0) {
 
@@ -457,14 +458,14 @@ public class EstadistiquesService extends RestUtils {
 
                 final String tipusDocumental = transaccio.getInfoScanDocumentTipus();
 
-                resultat.add(new EstadistiquesTransaccio(transaccioID, transaccioMultipleID, funcionariUsername, a, u,
+                resultat.add(new TransaccioInfo(transaccioID, transaccioMultipleID, funcionariUsername, a, u,
                         fitxerMidaBytes, color, resolucio, midaPaper, dataCapturaISO, e, codiDir3, configuracioGrupNom,
                         idiomaDocument, duplex, missatgeError, origen, tipusDocumental));
 
             }
         }
 
-        return new Estadistiques(resultat);
+        return new Transaccions(resultat);
 
     }
 }

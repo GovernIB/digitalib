@@ -109,7 +109,7 @@
                                 <package>es.caib.digitalib.api.interna.secure</package>
                                 -->
                                 <package>es.caib.digitalib.api.interna.secure.apimassivescanwebsimple</package>
-                                <package>es.caib.digitalib.api.interna.all.dadesobertes.estadistiques</package>
+                                <package>es.caib.digitalib.api.interna.all.dadesobertes.transaccions</package>
                             </resourcePackages>
                             <prettyPrint>TRUE</prettyPrint>
                         </configuration>
