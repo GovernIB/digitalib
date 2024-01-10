@@ -2,31 +2,22 @@ package es.caib.digitalib.api.interna.all.dadesobertes.transaccions;
 
 import java.util.List;
 
+import org.fundaciobit.pluginsib.utils.rest.OpenDataPagination;
 
 /**
  * 
  * @author anadal (u80067)
  *
  */
-public class Transaccions {
-
-    public Transaccions(List<TransaccioInfo> resultat) {
-        super();
-        this.resultat = resultat;
-    }
+public class Transaccions extends OpenDataPagination<TransaccioInfo> {
 
     public Transaccions() {
         super();
     }
 
-    protected List<TransaccioInfo> resultat;
-
-    public List<TransaccioInfo> getResultat() {
-        return resultat;
-    }
-
-    public void setResultat(List<TransaccioInfo> resultat) {
-        this.resultat = resultat;
+    public Transaccions(List<TransaccioInfo> data, int page, int pagesize, int totalpages, int totalcount,
+            String nextUrl, String dateDownload) {
+        super(data, page, pagesize, totalpages, totalcount, nextUrl, dateDownload);
     }
 
 }

@@ -84,6 +84,22 @@
             "pattern" : "^(EXPIRAT|CANCELAT|ERROR|ID|ENPROGRES|OK)$",
             "type" : "string"
           }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Numero de pàgina quan el llistat és paginat. Per defecte 1.",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page-size",
+          "in" : "query",
+          "description" : "Número d'elements a retornar per pàgina. Per defecte 50",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -918,16 +934,52 @@
           "tipusDocumental" : {
             "type" : "string"
           }
-        }
+        },
+        "description" : "Elements retornats"
       },
       "Transaccions" : {
+        "required" : [ "date-download", "items-returned", "page", "page-size", "resultat", "total-count", "total-pages" ],
         "type" : "object",
         "properties" : {
           "resultat" : {
             "type" : "array",
+            "description" : "Elements retornats",
             "items" : {
               "$ref" : "#/components/schemas/TransaccioInfo"
             }
+          },
+          "page" : {
+            "type" : "integer",
+            "description" : "Número pàgina. Comença per 1.",
+            "format" : "int32"
+          },
+          "page-size" : {
+            "type" : "integer",
+            "description" : "Mida de pàgina",
+            "format" : "int32"
+          },
+          "total-pages" : {
+            "type" : "integer",
+            "description" : "Número total de pàgines",
+            "format" : "int32"
+          },
+          "total-count" : {
+            "type" : "integer",
+            "description" : "Numero total d'elements",
+            "format" : "int32"
+          },
+          "items-returned" : {
+            "type" : "integer",
+            "description" : "Numero d'elements retornats",
+            "format" : "int32"
+          },
+          "next" : {
+            "type" : "string",
+            "description" : "Si hi ha més elements, llavors retorna la URL a la següent pàgina de dades."
+          },
+          "date-download" : {
+            "type" : "string",
+            "description" : "Data en que s'han retornat les dades"
           }
         }
       },

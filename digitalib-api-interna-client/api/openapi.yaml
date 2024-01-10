@@ -84,6 +84,24 @@ paths:
           pattern: ^(EXPIRAT|CANCELAT|ERROR|ID|ENPROGRES|OK)$
           type: string
         style: form
+      - description: Numero de pàgina quan el llistat és paginat. Per defecte 1.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Número d'elements a retornar per pàgina. Per defecte 50
+        explode: true
+        in: query
+        name: page-size
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
       responses:
         "200":
           content:
@@ -590,6 +608,7 @@ paths:
 components:
   schemas:
     TransaccioInfo:
+      description: Elements retornats
       example:
         codiDir3: codiDir3
         color: color
@@ -653,6 +672,12 @@ components:
       type: object
     Transaccions:
       example:
+        next: next
+        page-size: 2
+        total-count: 9
+        items-returned: 3
+        page: 5
+        total-pages: 7
         resultat:
         - codiDir3: codiDir3
           color: color
@@ -690,11 +715,48 @@ components:
           configuracioGrupNom: configuracioGrupNom
           tipusDocumental: tipusDocumental
           resolucio: 5
+        date-download: date-download
       properties:
         resultat:
+          description: Elements retornats
           items:
             $ref: '#/components/schemas/TransaccioInfo'
           type: array
+        page:
+          description: Número pàgina. Comença per 1.
+          format: int32
+          type: integer
+        page-size:
+          description: Mida de pàgina
+          format: int32
+          type: integer
+        total-pages:
+          description: Número total de pàgines
+          format: int32
+          type: integer
+        total-count:
+          description: Numero total d'elements
+          format: int32
+          type: integer
+        items-returned:
+          description: Numero d'elements retornats
+          format: int32
+          type: integer
+        next:
+          description: "Si hi ha més elements, llavors retorna la URL a la següent\
+            \ pàgina de dades."
+          type: string
+        date-download:
+          description: Data en que s'han retornat les dades
+          type: string
+      required:
+      - date-download
+      - items-returned
+      - page
+      - page-size
+      - resultat
+      - total-count
+      - total-pages
       type: object
     RestExceptionInfo:
       description: Estructura de dades utilitzada per passar informació d'un error

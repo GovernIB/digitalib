@@ -4,13 +4,11 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -30,10 +28,12 @@ import org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.utils.Utils;
 import org.fundaciobit.pluginsib.core.utils.ISO8601;
+import org.fundaciobit.pluginsib.utils.rest.GenAppPaginationUtils;
 import org.fundaciobit.pluginsib.utils.rest.RestException;
 import org.fundaciobit.pluginsib.utils.rest.RestExceptionInfo;
 import org.fundaciobit.pluginsib.utils.rest.RestUtils;
 
+import es.caib.digitalib.commons.utils.Configuracio;
 import es.caib.digitalib.commons.utils.Constants;
 import es.caib.digitalib.ejb.UsuariPersonaService;
 import es.caib.digitalib.logic.TransaccioLogicaService;
@@ -54,9 +54,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Content;
 
 /**
- *  Servei d'Estadistiquesde Transaccions JSON d'accés Públic
+ * Servei d'Estadistiquesde Transaccions JSON d'accés Públic
+ *
+ * @author anadal
+ *
  */
-@Path("/public/dadesobertes/transaccions")
+@Path(TransaccionsService.PATH)
 @OpenAPIDefinition(
         tags = @Tag(
                 name = TransaccionsService.TAG_NAME,
@@ -65,6 +68,10 @@ public class TransaccionsService extends RestUtils {
 
     protected static Logger log = Logger.getLogger(TransaccionsService.class);
 
+    public static final int DEFAULT_ITEMS_PER_PAGE = 50;
+
+    public static final String PATH = "/public/dadesobertes/transaccions";
+    
     public static final String TAG_NAME = "Transaccions";
 
     public static final String DATE_PATTERN_DD_MM_YYYY = "^(?:(?:31(-)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(-)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(-)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(-)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
@@ -151,28 +158,54 @@ public class TransaccionsService extends RestUtils {
                             implementation = String.class,
                             pattern = "^(EXPIRAT|CANCELAT|ERROR|ID|ENPROGRES|OK)$")) @QueryParam("estat") String estat,
 
+            @Parameter(
+                    name = "page",
+                    description = "Numero de pàgina quan el llistat és paginat. Per defecte 1.",
+                    required = false,
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(implementation = Integer.class)) @QueryParam("page") Integer page,
+
+            @Parameter(
+                    name = "page-size",
+                    description = "Número d'elements a retornar per pàgina. Per defecte " + DEFAULT_ITEMS_PER_PAGE,
+                    required = false,
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(implementation = Integer.class)) @QueryParam("page-size") Integer pageSize,
+
             @Parameter(hidden = true) @Context HttpServletRequest request) throws RestException {
 
         final String language = "ca";
 
         try {
-            // String startDateStr = request.getParameter("startdate");
-            // String endDateStr = request.getParameter("enddate");
-            // final String appname = request.getParameter("appname");
-            // final String estatStr = request.getParameter("estat");
 
+            if (page == null) {
+                page = 1;
+            }
+
+            if (pageSize == null) {
+                pageSize = DEFAULT_ITEMS_PER_PAGE;
+            }
+
+            log.info("page => " + page);
+            log.info("page-size => " + pageSize);
+
+            /*
+            
             log.info("startDate => " + startdate);
             log.info("endDate => " + enddate);
             log.info("appname => " + appname);
             log.info("estat => " + estat);
-
+            
+            
+            
             Map<String, String[]> params = request.getParameterMap();
             log.info("============== " + params.size() + " ================ ");
-
+            
             for (Entry<String, String[]> entry : params.entrySet()) {
                 log.info(entry.getKey() + " => " + Arrays.toString(entry.getValue()));
             }
             log.info("============================== ");
+            */
 
             final Date startDate = convertToDate(startdate);
             log.info("startDate DATE => " + startDate);
@@ -200,7 +233,7 @@ public class TransaccionsService extends RestUtils {
                 }
             }
 
-            return consulta(startDate, endDate, appname, usrname, status);
+            return consulta(startDate, endDate, appname, usrname, status, page, pageSize, request);
 
         } catch (RestException re) {
             throw re;
@@ -221,17 +254,17 @@ public class TransaccionsService extends RestUtils {
     }
 
     protected Date convertToDate(String dateStr) throws ParseException {
-
         if (dateStr == null || dateStr.trim().length() == 0) {
             return null;
         }
-
         return SDF.parse(dateStr);
-
     }
 
-    protected Transaccions consulta(Date startDate, Date endDate, String appName, String usrName, Integer estat)
-            throws I18NException {
+    protected Transaccions consulta(Date startDate, Date endDate, String appName, String usrName, Integer estat,
+            int page, int pageSize, HttpServletRequest request) throws I18NException {
+        
+        
+        StringBuilder nextQuery = new StringBuilder("page=" + (page + 1) + "&page-size=" + pageSize);
 
         List<Transaccio> transaccions;
 
@@ -247,6 +280,7 @@ public class TransaccionsService extends RestUtils {
             }
 
             usr = UsuariPersonaFields.USUARIPERSONAID.equal(usrID);
+            nextQuery.append("&usrname=" + usrName);
         }
 
         Where app;
@@ -261,30 +295,35 @@ public class TransaccionsService extends RestUtils {
             }
 
             app = UsuariAplicacioFields.USUARIAPLICACIOID.equal(appID);
+            nextQuery.append("&appname=" + appName);
         }
 
         if (app != null && usr != null) {
             throw new RestException("No pot elegir appname i usrname a la vegada.", 404);
         }
 
+        TransaccioPaginacio paginacio;
         {
             Where sd = null;
             if (startDate != null) {
                 sd = TransaccioFields.DATAINICI.greaterThanOrEqual(new Timestamp(startDate.getTime()));
+                nextQuery.append("&startdate=" + SDF.format(startDate));
             }
             Where ed = null;
             if (endDate != null) {
                 ed = TransaccioFields.DATAINICI.lessThanOrEqual(new Timestamp(endDate.getTime()));
+                nextQuery.append("&enddate=" + SDF.format(endDate));
             }
 
             Where status = null;
             if (estat != null) {
                 status = TransaccioFields.ESTATCODI.equal(estat);
+                nextQuery.append("&estat=" + estat);
             }
 
             Where where = Where.AND(sd, ed, app, usr, status);
 
-            log.info("Where: " + ((where==null)? "--NULL--": where.toSQL()));
+            log.info("Where: " + ((where == null) ? "--NULL--" : where.toSQL()));
 
             final OrderBy orderBy = new OrderBy(TransaccioFields.DATAINICI, OrderType.DESC);
 
@@ -301,7 +340,12 @@ public class TransaccionsService extends RestUtils {
              * 
              */
 
-            transaccions = transaccioLogicaEjb.select(where, orderBy);
+            //transaccions = transaccioLogicaEjb.select(where, orderBy);
+
+            paginacio = GenAppPaginationUtils.createRestPagination(TransaccioPaginacio.class, this.transaccioLogicaEjb, (int) page,
+                    (int) pageSize, where, orderBy);
+
+            transaccions = paginacio.getData();
         }
 
         List<TransaccioInfo> resultat = new ArrayList<TransaccioInfo>();
@@ -347,10 +391,10 @@ public class TransaccionsService extends RestUtils {
                 long transaccioID = transaccio.getTransaccioID();
                 String funcionariUsername = transaccio.getFuncionariUsername();
 
-                String fitxerNom = null;
+                //String fitxerNom = null;
                 long fitxerMidaBytes = -1;
                 if (transaccio.getFitxerEscanejat() != null) {
-                    fitxerNom = transaccio.getFitxerEscanejat().getNom();
+                    //fitxerNom = transaccio.getFitxerEscanejat().getNom();
                     fitxerMidaBytes = transaccio.getFitxerEscanejat().getTamany();
                 }
 
@@ -465,7 +509,60 @@ public class TransaccionsService extends RestUtils {
             }
         }
 
-        return new Transaccions(resultat);
+        String nextUrl = null;
+        if (paginacio.getTotalpages() != page) {
+            nextUrl = (Configuracio.getBackUrl().replace(Constants.DIGITALIB_APP_NAME + "back",
+                    "") + request.getContextPath() + PATH + "/consulta?" + nextQuery.toString()).replace("//", "/");
+        }
+        final String dateDownload = SDF.format(new Date());
+
+        return new Transaccions(resultat, paginacio.getPage(), paginacio.getPagesize(), paginacio.getTotalpages(),
+                paginacio.getTotalcount(), nextUrl, dateDownload);
 
     }
+
+    /**
+     * 
+     * @param <D>
+     * @param <P>
+     * @param classe
+     * @param ejb
+     * @param page
+     * @param pagesize
+     * @param w
+     * @param orderBy
+     * @return
+     * @throws I18NException 
+     */
+    /*
+    protected static <D extends IGenAppEntity, P extends AbstractPagination<D>> P createRestPagination(Class<P> classe,
+            ITableManager<D, Long> ejb, int page, int pagesize, Where w, OrderBy orderBy) throws I18NException {
+
+        final int firstResult = (page - 1) * pagesize;
+        final int maxResults = pagesize;
+        final List<D> llistat = ejb.select(w, null, firstResult, maxResults, orderBy);
+
+        long countTotal = ejb.count(w);
+
+        // PAGINACIO
+        final int pageSizeOutput = pagesize;
+        final int pageOutput = page;
+        final int totalPages = (int) (countTotal / pagesize) + ((countTotal % pagesize == 0) ? 0 : 1);
+
+        P paginacio;
+        try {
+            paginacio = classe.getConstructor().newInstance();
+        } catch (Throwable e) {
+            String msg = "Error instanciant un objecte de la classe " + classe + ": " + e.getMessage();
+            log.error(msg, e);
+            throw new I18NException("genapp.comodi", msg);
+        }
+        paginacio.setPagesize(pageSizeOutput);
+        paginacio.setPage(pageOutput);
+        paginacio.setTotalpages(totalPages);
+        paginacio.setTotalcount((int) countTotal);
+        paginacio.setData(llistat);
+        return paginacio;
+    }
+*/
 }

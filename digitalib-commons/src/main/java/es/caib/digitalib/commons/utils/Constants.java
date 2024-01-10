@@ -7,7 +7,9 @@ package es.caib.digitalib.commons.utils;
  */
 public interface Constants {
 
-  public static final String DIGITALIB_PROPERTY_BASE="es.caib.digitalib.";
+    public static final String DIGITALIB_APP_NAME = "digitalib";
+    
+    public static final String DIGITALIB_PROPERTY_BASE="es.caib.digitalib.";
 
     public static final String MAIL_SERVICE = "java:/es.caib.digitalib.mail";
 

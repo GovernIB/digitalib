@@ -2,6 +2,7 @@
 
 # TransaccioInfo
 
+Elements retornats
 
 ## Properties
 

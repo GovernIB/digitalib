@@ -30,12 +30,40 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * Transaccions
  */
 @JsonPropertyOrder({
-  Transaccions.JSON_PROPERTY_RESULTAT
+  Transaccions.JSON_PROPERTY_RESULTAT,
+  Transaccions.JSON_PROPERTY_PAGE,
+  Transaccions.JSON_PROPERTY_PAGE_SIZE,
+  Transaccions.JSON_PROPERTY_TOTAL_PAGES,
+  Transaccions.JSON_PROPERTY_TOTAL_COUNT,
+  Transaccions.JSON_PROPERTY_ITEMS_RETURNED,
+  Transaccions.JSON_PROPERTY_NEXT,
+  Transaccions.JSON_PROPERTY_DATE_DOWNLOAD
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class Transaccions {
   public static final String JSON_PROPERTY_RESULTAT = "resultat";
-  private List<TransaccioInfo> resultat;
+  private List<TransaccioInfo> resultat = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_PAGE = "page";
+  private Integer page;
+
+  public static final String JSON_PROPERTY_PAGE_SIZE = "page-size";
+  private Integer pageSize;
+
+  public static final String JSON_PROPERTY_TOTAL_PAGES = "total-pages";
+  private Integer totalPages;
+
+  public static final String JSON_PROPERTY_TOTAL_COUNT = "total-count";
+  private Integer totalCount;
+
+  public static final String JSON_PROPERTY_ITEMS_RETURNED = "items-returned";
+  private Integer itemsReturned;
+
+  public static final String JSON_PROPERTY_NEXT = "next";
+  private String next;
+
+  public static final String JSON_PROPERTY_DATE_DOWNLOAD = "date-download";
+  private String dateDownload;
 
   public Transaccions() {
   }
@@ -55,12 +83,12 @@ public class Transaccions {
   }
 
    /**
-   * Get resultat
+   * Elements retornats
    * @return resultat
   **/
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_RESULTAT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public List<TransaccioInfo> getResultat() {
     return resultat;
@@ -68,9 +96,191 @@ public class Transaccions {
 
 
   @JsonProperty(JSON_PROPERTY_RESULTAT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setResultat(List<TransaccioInfo> resultat) {
     this.resultat = resultat;
+  }
+
+
+  public Transaccions page(Integer page) {
+    
+    this.page = page;
+    return this;
+  }
+
+   /**
+   * Número pàgina. Comença per 1.
+   * @return page
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PAGE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public Integer getPage() {
+    return page;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_PAGE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setPage(Integer page) {
+    this.page = page;
+  }
+
+
+  public Transaccions pageSize(Integer pageSize) {
+    
+    this.pageSize = pageSize;
+    return this;
+  }
+
+   /**
+   * Mida de pàgina
+   * @return pageSize
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PAGE_SIZE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public Integer getPageSize() {
+    return pageSize;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_PAGE_SIZE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setPageSize(Integer pageSize) {
+    this.pageSize = pageSize;
+  }
+
+
+  public Transaccions totalPages(Integer totalPages) {
+    
+    this.totalPages = totalPages;
+    return this;
+  }
+
+   /**
+   * Número total de pàgines
+   * @return totalPages
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TOTAL_PAGES)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public Integer getTotalPages() {
+    return totalPages;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TOTAL_PAGES)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setTotalPages(Integer totalPages) {
+    this.totalPages = totalPages;
+  }
+
+
+  public Transaccions totalCount(Integer totalCount) {
+    
+    this.totalCount = totalCount;
+    return this;
+  }
+
+   /**
+   * Numero total d&#39;elements
+   * @return totalCount
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_TOTAL_COUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public Integer getTotalCount() {
+    return totalCount;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TOTAL_COUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setTotalCount(Integer totalCount) {
+    this.totalCount = totalCount;
+  }
+
+
+  public Transaccions itemsReturned(Integer itemsReturned) {
+    
+    this.itemsReturned = itemsReturned;
+    return this;
+  }
+
+   /**
+   * Numero d&#39;elements retornats
+   * @return itemsReturned
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_ITEMS_RETURNED)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public Integer getItemsReturned() {
+    return itemsReturned;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ITEMS_RETURNED)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setItemsReturned(Integer itemsReturned) {
+    this.itemsReturned = itemsReturned;
+  }
+
+
+  public Transaccions next(String next) {
+    
+    this.next = next;
+    return this;
+  }
+
+   /**
+   * Si hi ha més elements, llavors retorna la URL a la següent pàgina de dades.
+   * @return next
+  **/
+  @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_NEXT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getNext() {
+    return next;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_NEXT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setNext(String next) {
+    this.next = next;
+  }
+
+
+  public Transaccions dateDownload(String dateDownload) {
+    
+    this.dateDownload = dateDownload;
+    return this;
+  }
+
+   /**
+   * Data en que s&#39;han retornat les dades
+   * @return dateDownload
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_DATE_DOWNLOAD)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public String getDateDownload() {
+    return dateDownload;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_DATE_DOWNLOAD)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setDateDownload(String dateDownload) {
+    this.dateDownload = dateDownload;
   }
 
   @Override
@@ -82,12 +292,19 @@ public class Transaccions {
       return false;
     }
     Transaccions transaccions = (Transaccions) o;
-    return Objects.equals(this.resultat, transaccions.resultat);
+    return Objects.equals(this.resultat, transaccions.resultat) &&
+        Objects.equals(this.page, transaccions.page) &&
+        Objects.equals(this.pageSize, transaccions.pageSize) &&
+        Objects.equals(this.totalPages, transaccions.totalPages) &&
+        Objects.equals(this.totalCount, transaccions.totalCount) &&
+        Objects.equals(this.itemsReturned, transaccions.itemsReturned) &&
+        Objects.equals(this.next, transaccions.next) &&
+        Objects.equals(this.dateDownload, transaccions.dateDownload);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(resultat);
+    return Objects.hash(resultat, page, pageSize, totalPages, totalCount, itemsReturned, next, dateDownload);
   }
 
   @Override
@@ -95,6 +312,13 @@ public class Transaccions {
     StringBuilder sb = new StringBuilder();
     sb.append("class Transaccions {\n");
     sb.append("    resultat: ").append(toIndentedString(resultat)).append("\n");
+    sb.append("    page: ").append(toIndentedString(page)).append("\n");
+    sb.append("    pageSize: ").append(toIndentedString(pageSize)).append("\n");
+    sb.append("    totalPages: ").append(toIndentedString(totalPages)).append("\n");
+    sb.append("    totalCount: ").append(toIndentedString(totalCount)).append("\n");
+    sb.append("    itemsReturned: ").append(toIndentedString(itemsReturned)).append("\n");
+    sb.append("    next: ").append(toIndentedString(next)).append("\n");
+    sb.append("    dateDownload: ").append(toIndentedString(dateDownload)).append("\n");
     sb.append("}");
     return sb.toString();
   }

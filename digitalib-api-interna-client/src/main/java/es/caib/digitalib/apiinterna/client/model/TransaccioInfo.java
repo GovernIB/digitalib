@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * TransaccioInfo
+ * Elements retornats
  */
 @JsonPropertyOrder({
   TransaccioInfo.JSON_PROPERTY_TRANSACCIO_I_D,
