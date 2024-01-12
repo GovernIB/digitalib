@@ -195,6 +195,11 @@
         <put-attribute name="titol" value="perfil.perfil" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
     </definition>
+    
+    <definition name="transaccionsmassives_user" extends="user.fullview">
+        <put-attribute name="titol" value="transaccio.transaccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/transaccionsmassives.jsp" />
+    </definition>
 
 
     <!--  ===========  ADMIN  ================== -->

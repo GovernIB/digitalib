@@ -40,6 +40,7 @@ import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
 
 import es.caib.digitalib.back.controller.all.FirmaArxiuParametersPublicController;
+import es.caib.digitalib.back.controller.user.FirmaArxiuParametersUserController;
 import es.caib.digitalib.back.controller.user.ScanWebProcessControllerUser;
 import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.persistence.ApiSimpleJPA;
@@ -362,6 +363,9 @@ public abstract class AbstractScanWebProcessController {
     }
 
     protected boolean comprovarSiTotesTransaccionsSonCompletes(Map<Long, FitxerEscanejatInfo> infos, int usPerfil) {
+
+        
+        
         switch (usPerfil) {
 
             case Constants.PERFIL_US_CUSTODIA_INFO: {
@@ -393,7 +397,9 @@ public abstract class AbstractScanWebProcessController {
             case Constants.PERFIL_US_NOMES_ESCANEIG_INFO: {
 
                 for (FitxerEscanejatInfo info : infos.values()) {
-                    if (Utils.isEmpty(info.transaccio.getNom())) {
+                    TransaccioJPA trans = info.transaccio;
+                    if (Utils.isEmpty(trans.getNom())
+                           || Utils.isEmpty(trans.getInfoScanLanguageDoc())) {
                         return false;
                     }
                 }
@@ -1161,11 +1167,16 @@ public abstract class AbstractScanWebProcessController {
 
                 request.getSession().removeAttribute(SESSION_MASSIVE_INFO_BY_ID);
 
+                // Aqui rewrite de user  posar-ho a false
+                request.getSession().removeAttribute(FirmaArxiuParametersUserController.REWRITE_TILE_FORM_SESSION_ID);
+                
                 // ANAR A WAIT DE MASSIVE
                 String waitUrl = getContextWeb() + SCANWEB_CONTEXTPATH_WAIT_MASSIVE + "/"
                         + transaccions.get(0).getTransactionWebId();
                 ModelAndView mav = new ModelAndView(new RedirectView(waitUrl, true));
                 return mav;
+                
+                
             }
 
             pos = next;

@@ -45,7 +45,7 @@ public abstract class AbstractFirmaArxiuParametersController
     public static final String CONTEXTWEB_PUBLIC = "/public/firmaarxiuparameters";
 
     public static final String CONTEXTWEB_USER = "/user/firmaarxiuparameters";
-
+    
     @EJB(mappedName = es.caib.digitalib.ejb.PerfilService.JNDI_NAME)
     protected es.caib.digitalib.ejb.PerfilService perfilEjb;
 
@@ -85,8 +85,10 @@ public abstract class AbstractFirmaArxiuParametersController
         final int tipusPerfil = Math.abs(perfilEjb.executeQueryOne(PerfilFields.USPERFIL,
                 PerfilFields.PERFILID.equal(transaccioForm.getTransaccio().getPerfilID())));
 
-        // Tots excepte NOM
+        // Tots excepte NOM i IDOMA
         hiddenFields.remove(TransaccioFields.NOM);
+        hiddenFields.remove(TransaccioFields.INFOSCANLANGUAGEDOC);
+        
 
         // Copia Autentica
         if (tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA
@@ -111,7 +113,6 @@ public abstract class AbstractFirmaArxiuParametersController
                 transaccioForm.addReadOnlyField(TransaccioFields.SIGNPARAMFUNCIONARIDIR3);
             }
 
-            hiddenFields.remove(TransaccioFields.INFOSCANLANGUAGEDOC);
         }
 
         // Digitalitzacio
@@ -147,10 +148,11 @@ public abstract class AbstractFirmaArxiuParametersController
 
         }
         
-        
+        /*
         if (transaccioForm.getTransaccio().getInfoScanLanguageDoc() == null) {
             transaccioForm.getTransaccio().setInfoScanLanguageDoc(Configuracio.getDefaultLanguage());
         }
+        */
         
 
         transaccioForm.setTitleCode("dadesrequerides");
@@ -170,6 +172,8 @@ public abstract class AbstractFirmaArxiuParametersController
     @Override
     public void postValidate(HttpServletRequest request, TransaccioForm transaccioForm,
             BindingResult result) throws I18NException {
+        
+        log.info("XYZ ZZZ Passa per AbstractFirmaArxiuParametersController::postValidate() ..." );
         
         super.postValidate(request, transaccioForm, result);
 
@@ -408,18 +412,4 @@ public abstract class AbstractFirmaArxiuParametersController
         return false;
     }
 
-    
-    
-    public static void main(String[] args) {
-        String str =  "87654321X,12345678Z"; //,
-        
-        CheckNifResult result = NifUtils.validateNifsSeparatedByCommas(str);
-        
-        System.out.println(result.isValid());
-        
-        
-        
-        
-        
-    }
 }

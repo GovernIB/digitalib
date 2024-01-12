@@ -84,9 +84,9 @@ public class ApiMassiveScanWebSimpleApiTest {
         try {
             ApiMassiveScanWebSimpleApiTest test = new ApiMassiveScanWebSimpleApiTest();
 
-            //test.getAvailableProfilesTest();
+            test.getAvailableProfilesTest();
 
-            test.getSeparatorPageTest();
+            //test.getSeparatorPageTest();
 
             //test.fullTest();
 

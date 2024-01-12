@@ -13,7 +13,7 @@ public class ScanWebConfigForm {
 
   protected Set<String> flags;
 
-  // S => Sincon i A => Asincron
+  // S => Sincron i A => Asincron
   protected String mode;
   
   protected String langUI;
