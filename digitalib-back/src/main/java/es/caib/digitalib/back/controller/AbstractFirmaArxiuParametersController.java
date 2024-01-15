@@ -29,7 +29,6 @@ import es.caib.digitalib.logic.TransaccioPublicLogicaService;
 import es.caib.digitalib.logic.utils.ScanWebConfig;
 import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.TransaccioFields;
-import es.caib.digitalib.commons.utils.Configuracio;
 import es.caib.digitalib.commons.utils.Constants;
 import es.caib.digitalib.commons.utils.NifUtils;
 import es.caib.digitalib.commons.utils.NifUtils.CheckNifResult;
@@ -85,7 +84,7 @@ public abstract class AbstractFirmaArxiuParametersController
         final int tipusPerfil = Math.abs(perfilEjb.executeQueryOne(PerfilFields.USPERFIL,
                 PerfilFields.PERFILID.equal(transaccioForm.getTransaccio().getPerfilID())));
 
-        // Tots excepte NOM i IDOMA
+        // Tots excepte NOM i IDIOMA
         hiddenFields.remove(TransaccioFields.NOM);
         hiddenFields.remove(TransaccioFields.INFOSCANLANGUAGEDOC);
         

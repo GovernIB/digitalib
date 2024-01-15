@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.AbstractInfoCustodyController;
 import es.caib.digitalib.back.form.webdb.InfoCustodyFilterForm;
 import es.caib.digitalib.back.form.webdb.InfoCustodyForm;
-import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.persistence.InfoCustodyJPA;
 import es.caib.digitalib.logic.TransaccioLogicaService;
 import es.caib.digitalib.model.entity.Transaccio;
@@ -69,7 +68,7 @@ public class InfoCustodyUserController extends AbstractInfoCustodyController {
     InfoCustodyForm infoCForm = super.getInfoCustodyForm(_jpa, __isView, request,
         mav);
 
-    Utils.hideNullFields(infoCForm.getInfoCustody(), infoCForm,
+    InfoCustodyForm.hideNullFields(infoCForm.getInfoCustody(), infoCForm,
         ALL_INFOCUSTODY_FIELDS);
     
     infoCForm.addHiddenField(CSVGENERATIONDEFINITION);

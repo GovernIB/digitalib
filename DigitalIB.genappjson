@@ -5202,8 +5202,8 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "es": "Mensaje Error",
-            "ca": "Missatge Error"
+            "es": "Mensaje de Error",
+            "ca": "Missatge d\u0027Error"
           },
           "javaName": "estatMissatge",
           "javaType": "java.lang.String",
@@ -6851,6 +6851,6 @@
   ],
   "generateBack": true,
   "generateFront": false,
-  "generateApiInterna": false,
-  "generateApiExterna": true
+  "generateApiInterna": true,
+  "generateApiExterna": false
 }

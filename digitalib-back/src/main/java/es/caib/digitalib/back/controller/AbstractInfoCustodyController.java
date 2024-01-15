@@ -15,7 +15,6 @@ import es.caib.digitalib.back.controller.admin.InfoCustodyAdminController;
 import es.caib.digitalib.back.controller.user.InfoCustodyUserController;
 import es.caib.digitalib.back.controller.webdb.InfoCustodyController;
 import es.caib.digitalib.back.form.webdb.InfoCustodyForm;
-import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.persistence.InfoCustodyJPA;
 import es.caib.digitalib.logic.PluginArxiuLogicaService;
 import es.caib.digitalib.model.entity.InfoCustody;
@@ -116,7 +115,7 @@ public abstract class AbstractInfoCustodyController extends InfoCustodyControlle
             HttpServletRequest request, ModelAndView mav) throws I18NException {
         InfoCustodyForm infoCForm = super.getInfoCustodyForm(_jpa, __isView, request, mav);
 
-        Utils.hideNullFields(infoCForm.getInfoCustody(), infoCForm, ALL_INFOCUSTODY_FIELDS);
+        InfoCustodyForm.hideNullFields(infoCForm.getInfoCustody(), infoCForm, ALL_INFOCUSTODY_FIELDS);
 
         InfoCustody ic = infoCForm.getInfoCustody();
 

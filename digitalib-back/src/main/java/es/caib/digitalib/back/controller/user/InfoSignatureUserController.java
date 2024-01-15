@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.AbstractInfoSignatureController;
 import es.caib.digitalib.back.form.webdb.InfoSignaturaFilterForm;
 import es.caib.digitalib.back.form.webdb.InfoSignaturaForm;
-import es.caib.digitalib.back.utils.Utils;
+
 import es.caib.digitalib.persistence.InfoSignaturaJPA;
 import es.caib.digitalib.logic.TransaccioLogicaService;
 import es.caib.digitalib.model.entity.Transaccio;
@@ -68,7 +68,7 @@ public class InfoSignatureUserController extends AbstractInfoSignatureController
     InfoSignaturaForm infoSignaturaForm = super.getInfoSignaturaForm(_jpa, __isView, request,
         mav);
 
-    Utils.hideNullFields(infoSignaturaForm.getInfoSignatura(), infoSignaturaForm,
+    InfoSignaturaForm.hideNullFields(infoSignaturaForm.getInfoSignatura(), infoSignaturaForm,
         ALL_INFOSIGNATURA_FIELDS);
     infoSignaturaForm.setCancelButtonVisible(true);
 

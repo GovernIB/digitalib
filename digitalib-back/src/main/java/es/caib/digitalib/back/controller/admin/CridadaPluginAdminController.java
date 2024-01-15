@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.digitalib.back.controller.webdb.PluginCridadaController;
 import es.caib.digitalib.back.form.webdb.PluginCridadaFilterForm;
 import es.caib.digitalib.back.form.webdb.PluginCridadaForm;
-import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.persistence.PluginCridadaJPA;
 import es.caib.digitalib.model.entity.PluginCridada;
 import es.caib.digitalib.model.fields.TransaccioFields;
@@ -86,7 +85,7 @@ public class CridadaPluginAdminController extends PluginCridadaController {
       boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
      PluginCridadaForm pluginCridadaForm = super.getPluginCridadaForm(_jpa, __isView, request, mav);
      
-     Utils.hideNullFields(_jpa, pluginCridadaForm, ALL_PLUGINCRIDADA_FIELDS);
+     PluginCridadaForm.hideNullFields(_jpa, pluginCridadaForm, ALL_PLUGINCRIDADA_FIELDS);
      
      return pluginCridadaForm;
      

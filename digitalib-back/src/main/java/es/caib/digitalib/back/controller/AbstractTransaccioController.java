@@ -49,7 +49,6 @@ import es.caib.digitalib.back.controller.webdb.TransaccioController;
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.back.security.LoginInfo;
-import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.ejb.InfoCustodyService;
 import es.caib.digitalib.persistence.FitxerJPA;
 import es.caib.digitalib.persistence.InfoCustodyJPA;
@@ -162,63 +161,86 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
         if (__isView) {
 
-            form.setAttachedAdditionalJspCode(true);
-
-            // Ocultar tots els camps null
-            Utils.hideNullFields(_jpa, form, ALL_TRANSACCIO_FIELDS);
-
+            
             if (_jpa.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
+                
+                form.setAttachedAdditionalJspCode(true);
+    
+                // Ocultar tots els camps null
+                TransaccioForm.hideNullFields(_jpa, form, ALL_TRANSACCIO_FIELDS);
+    
+                
                 form.addHiddenField(ESTATCODI);
+                
+    
+                form.addHiddenField(INFOCUSTODYID);
+                form.addHiddenField(INFOSIGNATURAID);
+                form.addHiddenField(PERFILID);
+    
+                form.addHiddenField(VIEW);
+                form.addHiddenField(IP);
+                form.addHiddenField(USUARIPERSONAID);
+                form.addHiddenField(RETURNURL);
+    
+                // Afegir botos de info sign
+                if (_jpa.getInfoSignaturaID() != null) {
+                    form.addAdditionalButton(
+                            new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
+                                    INFOSIGNATURAID.fullName,
+                                    AbstractInfoSignatureController.getContextWeb(isAdmin())
+                                            + "/view" + "/" + _jpa.getInfoSignaturaID(),
+                                    "btn-info"));
+                }
+    
+                // Afegir botos de info cust
+                if (_jpa.getInfoCustodyID() != null) {
+                    form.addAdditionalButton(
+                            new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
+                                    INFOCUSTODYID.fullName,
+                                    AbstractInfoCustodyController.getContextWeb(isAdmin())
+                                            + "/view" + "/" + _jpa.getInfoCustodyID(),
+                                    "btn-info"));
+                }
+    
+                // Afegir Boto de Veure Perfil
+                if (isAdmin()) {
+                    form.addAdditionalButton(
+                            new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_USER), "transaccio.veureperfil",
+                                    getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(),
+                                    "btn-info"));
+                }
+            } else {
+                // Cancel·lat, Error, ...
+                Set<Field<?>> fields = new HashSet<Field<?>>(Arrays.asList(ALL_TRANSACCIO_FIELDS));
+                
+                fields.remove(NOM);
+                fields.remove(DATAINICI);
+                fields.remove(DATAFI);
+                fields.remove(ESTATCODI);
+                fields.remove(ESTATMISSATGE);
+                if (form.getTransaccio().getEstatExcepcio() != null) {
+                    fields.remove(ESTATEXCEPCIO);
+                }
+
+                form.setHiddenFields(fields);
+
             }
+        } else {
+            
+            // EDICIÓ
 
-            form.addHiddenField(INFOCUSTODYID);
-            form.addHiddenField(INFOSIGNATURAID);
-            form.addHiddenField(PERFILID);
+            // Ha d'escriure els DNIs, CIFs o NIFs de les persones interessades separats per coma.
+            String msgIn = I18NUtils.tradueix("transaccio.interessats.ajuda");
+            form.addHelpToField(ARXIUREQPARAMINTERESSATS, msgIn);
+            
+            
+            // Ha d'escriure la unitat DIR3 del funcionari. Pot esbrinar aquest codi accedint a la
+            // pàgina web
+            // https://intranet.caib.es/dir3caib i introduint les dades requerides.";
+            String msgFD3 = I18NUtils.tradueix("transaccio.fundacionaridir3.ajuda");
 
-            form.addHiddenField(IP);
-            form.addHiddenField(USUARIPERSONAID);
-            form.addHiddenField(RETURNURL);
-
-            // Afegir botos de info sign
-            if (_jpa.getInfoSignaturaID() != null) {
-                form.addAdditionalButton(
-                        new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
-                                INFOSIGNATURAID.fullName,
-                                AbstractInfoSignatureController.getContextWeb(isAdmin())
-                                        + "/view" + "/" + _jpa.getInfoSignaturaID(),
-                                "btn-info"));
-            }
-
-            // Afegir botos de info cust
-            if (_jpa.getInfoCustodyID() != null) {
-                form.addAdditionalButton(
-                        new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
-                                INFOCUSTODYID.fullName,
-                                AbstractInfoCustodyController.getContextWeb(isAdmin())
-                                        + "/view" + "/" + _jpa.getInfoCustodyID(),
-                                "btn-info"));
-            }
-
-            // Afegir Boto de Veure Perfil
-            if (isAdmin()) {
-                form.addAdditionalButton(
-                        new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_USER), "transaccio.veureperfil",
-                                getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(),
-                                "btn-info"));
-            }
+            form.addHelpToField(SIGNPARAMFUNCIONARIDIR3, msgFD3);
         }
-
-        // Ha d'escriure els DNIs, CIFs o NIFs de les persones interessades separats per coma.
-        String msgIn = I18NUtils.tradueix("transaccio.interessats.ajuda");
-
-        form.addHelpToField(ARXIUREQPARAMINTERESSATS, msgIn);
-
-        // Ha d'escriure la unitat DIR3 del funcionari. Pot esbrinar aquest codi accedint a la
-        // pàgina web
-        // https://intranet.caib.es/dir3caib i introduint les dades requerides.";
-        String msgFD3 = I18NUtils.tradueix("transaccio.fundacionaridir3.ajuda");
-
-        form.addHelpToField(SIGNPARAMFUNCIONARIDIR3, msgFD3);
 
         return form;
 

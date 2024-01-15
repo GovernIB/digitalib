@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.digitalib.back.form.webdb.PerfilFilterForm;
 import es.caib.digitalib.back.form.webdb.PerfilForm;
-import es.caib.digitalib.back.utils.Utils;
+
 import es.caib.digitalib.persistence.PerfilJPA;
 import es.caib.digitalib.commons.utils.Constants;
 
@@ -96,7 +96,7 @@ public class PerfilInfoTransaccioAdminController extends AbstractPerfilAdminCont
       break;
     }
     
-    Utils.hideNullFields(perfilForm.getPerfil(), perfilForm, ALL_PERFIL_FIELDS);
+    PerfilForm.hideNullFields(perfilForm.getPerfil(), perfilForm, ALL_PERFIL_FIELDS);
     perfilForm.setCancelButtonVisible(false);
 
     return perfilForm;

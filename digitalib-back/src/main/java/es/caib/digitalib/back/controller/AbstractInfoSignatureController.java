@@ -13,7 +13,6 @@ import es.caib.digitalib.back.controller.admin.InfoSignatureAdminController;
 import es.caib.digitalib.back.controller.user.InfoSignatureUserController;
 import es.caib.digitalib.back.controller.webdb.InfoSignaturaController;
 import es.caib.digitalib.back.form.webdb.InfoSignaturaForm;
-import es.caib.digitalib.back.utils.Utils;
 import es.caib.digitalib.persistence.InfoSignaturaJPA;
 
 /**
@@ -66,7 +65,7 @@ public abstract class AbstractInfoSignatureController extends InfoSignaturaContr
         InfoSignaturaForm infoSignaturaForm = super.getInfoSignaturaForm(_jpa, __isView,
                 request, mav);
 
-        Utils.hideNullFields(infoSignaturaForm.getInfoSignatura(), infoSignaturaForm,
+        InfoSignaturaForm.hideNullFields(infoSignaturaForm.getInfoSignatura(), infoSignaturaForm,
                 ALL_INFOSIGNATURA_FIELDS);
 
         return infoSignaturaForm;
