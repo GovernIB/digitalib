@@ -183,10 +183,6 @@ public class Configuracio implements Constants {
         return getProperty(DIGITALIB_PROPERTY_BASE + "filesystemmanagerclass");
     }
 
-    public static String getPublicCsvUrl() {
-        return getProperty(DIGITALIB_PROPERTY_BASE + "publiccsvurl");
-    }
-
     public static Long getMaxSizeForScannedDocument() {
         String strVal = getProperty(DIGITALIB_PROPERTY_BASE + "maxsizeforscanneddocument");
         if (strVal == null || strVal.trim().length() == 0) {
