@@ -545,11 +545,7 @@ public class ScanWebProcessControllerUser extends AbstractScanWebProcessControll
             {
                 String base = request.getContextPath() + "/user/transaccio/custodia";
                 if (countTransactions == 1) {
-                    if (Configuracio.isCAIB()) {
-                        r = base + "/list";
-                    } else {
-                        r = base + "/view/" + transaccio.getTransaccioID();
-                    }
+                    r = base + "/view/" + transaccio.getTransaccioID();
                 } else {
                     r = base + AbstractTransaccioController.AGRUPA_PER_TRANSACCIO_MULTIPLE
                             + "/" + transMultipleID;
