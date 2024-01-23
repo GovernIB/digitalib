@@ -5215,7 +5215,7 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 1
+            "webtype": 2
           },
           "foreignKeys": []
         },

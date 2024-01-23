@@ -153,7 +153,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
                     + I18NLogicUtils.getMessage(e1, locale);
 
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-            transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
+            transaccio.setEstatMissatge(StringUtils.truncate(msg, 2990));
             transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e1));
 
             return null;
@@ -542,7 +542,7 @@ public class PluginArxiuLogicaEJB extends AbstractPluginLogicaEJB<IArxiuPlugin>
             log.error("Error intenant enviar a API d'Arxiu: " + msg, e);
 
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-            transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
+            transaccio.setEstatMissatge(StringUtils.truncate(msg, 2990));
             transaccio.setEstatExcepcio(LogicUtils.exceptionToString(e));
 
             // Cridades de Plugin

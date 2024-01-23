@@ -66,9 +66,7 @@ public abstract class AbstractTransaccioUserController extends AbstractTransacci
     }
 
     wPerfil = Where.AND(TransaccioFields.USUARIPERSONAID.equal(usuariPersonaID), wPerfil);
-    if (Configuracio.isCAIB()) {
-      wPerfil = Where.AND(TransaccioFields.ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_OK), wPerfil);
-    }
+    
     return wPerfil;
   }
 

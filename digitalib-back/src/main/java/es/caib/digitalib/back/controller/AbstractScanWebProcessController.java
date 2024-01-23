@@ -312,7 +312,7 @@ public abstract class AbstractScanWebProcessController {
 
             case ScanWebStatus.STATUS_FINAL_ERROR: {
                 transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-                transaccio.setEstatMissatge(StringUtils.truncate(swc.getResult().getStatus().getErrorMsg(), 254));
+                transaccio.setEstatMissatge(StringUtils.truncate(swc.getResult().getStatus().getErrorMsg(), 2990));
                 // transaccio.setEstatExcepcio(swc.getStatus().getErrorException());
             }
             break;
@@ -945,7 +945,8 @@ public abstract class AbstractScanWebProcessController {
     protected void setError(TransaccioJPA transaccio, String msg) throws I18NException {
         log.error(msg);
 
-        transaccio.setEstatMissatge(StringUtils.truncate(msg, 254));
+        transaccio.setEstatMissatge(StringUtils.truncate(msg, 2990));
+        
         transaccio.setEstatCodi(MassiveScanWebSimpleStatus.STATUS_FINAL_ERROR);
 
         transaccioLogicaEjb.update(transaccio);

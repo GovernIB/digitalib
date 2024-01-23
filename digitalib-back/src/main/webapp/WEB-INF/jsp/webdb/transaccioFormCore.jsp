@@ -308,9 +308,30 @@
               </c:if>
             </td>
           <td id="transaccio_estatMissatge_columnvalueid">
-            <form:errors path="transaccio.estatMissatge" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATMISSATGE)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATMISSATGE)? ' uneditable-input' : ''}"  style="" maxlength="3000" path="transaccio.estatMissatge"   />
-
+              <form:errors path="transaccio.estatMissatge" cssClass="errorField alert alert-danger" />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,TransaccioFields.ESTATMISSATGE)? 'true' : 'false'}" path="transaccio.estatMissatge"  />
+   </td>
+   <td style="width:40px">
+      <div id="dropdownMenuButton_estatMissatge" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_estatMissatge" class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('transaccio.estatMissatge'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('transaccio.estatMissatge'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('transaccio.estatMissatge'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_estatMissatge').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_estatMissatge').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_estatMissatge').css('display', valor);
+                 return false;
+				});
+      </script>   </td>
+   </tr>
+   </table>
            </td>
         </tr>
         </c:if>

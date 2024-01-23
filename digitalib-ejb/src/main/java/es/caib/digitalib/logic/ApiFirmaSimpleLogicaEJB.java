@@ -100,7 +100,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
 
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
             transaccio.setEstatMissatge(StringUtils.truncate(
-                    "ApiFirmaSimple::Error durant instanciació de l'API de Firma Simple: " + e.getMessage(), 254));
+                    "ApiFirmaSimple::Error durant instanciació de l'API de Firma Simple: " + e.getMessage(), 2990));
             transaccio
                     .setEstatExcepcio(org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(e));
             log.error(transaccio.getEstatMissatge(), e);
@@ -149,7 +149,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
             transaccio.setEstatMissatge(
                     StringUtils.truncate("ApiFirmaSimple::Error durant la lectura del document a signar ("
-                            + source.getAbsolutePath() + "): " + e.getMessage(), 254));
+                            + source.getAbsolutePath() + "): " + e.getMessage(), 2990));
             transaccio
                     .setEstatExcepcio(ExceptionUtils.getStackTrace(e));
             log.error(transaccio.getEstatMissatge(), e);
@@ -183,7 +183,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
             transaccio.setEstatMissatge(
                     StringUtils.truncate("ApiFirmaSimple::Error durant la cridada a signar document: "
-                            + e.getMessage(),254));
+                            + e.getMessage(),2990));
             transaccio.setEstatExcepcio(getStackTrace(e));
             log.error(transaccio.getEstatMissatge(), e);
             return null;
@@ -344,7 +344,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
                     transaccio.setEstatMissatge(
                             StringUtils.truncate(
                             "ApiFirmaSimple::Error durant el processament dels resultats de la signatura en servidor: "
-                                    + msg, 254));
+                                    + msg, 2990));
                     transaccio.setEstatExcepcio(getStackTrace(e));
                     log.error(transaccio.getEstatMissatge(), e);
                     return null;
@@ -361,7 +361,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
 
         if (error != null) {
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-            transaccio.setEstatMissatge(StringUtils.truncate(error, 254));
+            transaccio.setEstatMissatge(StringUtils.truncate(error, 2990));
         }
 
         return fitxerSignat;

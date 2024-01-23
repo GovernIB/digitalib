@@ -160,9 +160,7 @@ public class BasePreparer implements ViewPreparer, Constants, InfoCustodyFields 
                     try {
                         Where w = Where.AND(TransaccioFields.USUARIPERSONAID.equal(usuariPersonaID),
                                 tqp.PERFIL().USPERFIL().equal(tipusPerfil));
-                        if (Configuracio.isCAIB()) {
-                            w = Where.AND(TransaccioFields.ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_OK), w);
-                        }
+                       
                         Long count = transaccioEjb.count(w);
 
                         request.put("transaccionsuser_" + tipusPerfil, count);

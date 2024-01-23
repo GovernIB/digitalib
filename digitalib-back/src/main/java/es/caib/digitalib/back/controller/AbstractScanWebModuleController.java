@@ -367,7 +367,7 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
       urlFinal = getRelativeURLBase(request);
     } else {
 
-      trans.setEstatMissatge(StringUtils.truncate(msg, 254));
+      trans.setEstatMissatge(StringUtils.truncate(msg, 2990));
 
       trans.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       if (th == null) {
