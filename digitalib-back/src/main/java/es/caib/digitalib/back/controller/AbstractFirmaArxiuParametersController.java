@@ -14,6 +14,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.fundaciobit.pluginsib.scanweb.api.ScanWebResult;
 import org.fundaciobit.pluginsib.scanweb.api.ScanWebStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
@@ -352,6 +353,12 @@ public abstract class AbstractFirmaArxiuParametersController
 
             ScanWebConfig swc;
             swc = scanWebModuleEjb.getScanWebConfig(request, transaccioWebId);
+            
+            if (swc.getResult() == null) {
+                ScanWebResult result = new ScanWebResult();
+                swc.setResult(result);
+            }
+            
 
             swc.getResult().getStatus().setStatus(ScanWebStatus.STATUS_CANCELLED);
 
