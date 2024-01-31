@@ -8,7 +8,7 @@
     <parent>
         <groupId>es.caib.digitalib</groupId>
         <artifactId>digitalib</artifactId>
-        <version>2.0.1</version>
+        <version>2.0.2</version>
     </parent>
 
     <name>DigitalIB - Ear</name>
@@ -373,7 +373,7 @@
         <dependency>
             <groupId>es.caib.digitalib</groupId>
             <artifactId>digitalib-api-interna</artifactId>
-            <version>2.0.1</version>
+            <version>2.0.2</version>
             <type>war</type>
         </dependency>
         <!-- API INTERNA END -->
