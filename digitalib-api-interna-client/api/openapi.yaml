@@ -30,30 +30,27 @@ paths:
     get:
       operationId: consulta
       parameters:
-      - description: Data d'inici de la consulta. Opcional. Format dd-mm-yyyy
-        example: 24-07-2023
+      - description: Data d'inici de la consulta. Opcional. Format yyyy-mm-dd (ISO
+          8601)
+        example: 2023-07-24
         explode: true
         in: query
         name: startdate
         required: false
         schema:
-          pattern: "^(?:(?:31(-)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(-)(?:0?[13-9]|1[0-2])\\\
-            2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(-)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\\
-            d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\\
-            d|2[0-8])(-)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$"
+          pattern: "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\\
+            d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29))$"
           type: string
         style: form
-      - description: Data final de la consulta. Opcional. Format dd-mm-yyyy
-        example: 31-12-2024
+      - description: Data final de la consulta. Opcional. Format yyyy-mm-dd (ISO 8601)
+        example: 2024-12-31
         explode: true
         in: query
         name: enddate
         required: false
         schema:
-          pattern: "^(?:(?:31(-)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(-)(?:0?[13-9]|1[0-2])\\\
-            2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(-)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\\
-            d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\\
-            d|2[0-8])(-)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$"
+          pattern: "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\\
+            d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29))$"
           type: string
         style: form
       - description: Username de l'app. Opcional. Només es pot elegir appname o usrname
@@ -101,6 +98,14 @@ paths:
         schema:
           format: int32
           type: integer
+        style: form
+      - description: Idioma en que retornar les dades. Opcional.
+        explode: true
+        in: query
+        name: language
+        required: false
+        schema:
+          type: string
         style: form
       responses:
         "200":
@@ -608,26 +613,26 @@ paths:
 components:
   schemas:
     TransaccioInfo:
-      description: Elements retornats
+      description: Informació bàsica d'una transacció d'escaneig a DigitalIB.
       example:
         codiDir3: codiDir3
         color: color
-        fitxerMidaBytes: 1
+        fitxerMidaBytes: 9
         idiomaDocument: idiomaDocument
         duplex: true
         origen: origen
         usrname: usrname
         missatgeError: missatgeError
         funcionariUsername: funcionariUsername
-        transaccioID: 0
+        transaccioID: 2
         appname: appname
-        dataCapturaISO8601: dataCapturaISO8601
-        transaccioMultipleID: 6
+        transaccioMultipleID: 7
         midaPaper: midaPaper
         estat: estat
         configuracioGrupNom: configuracioGrupNom
         tipusDocumental: tipusDocumental
-        resolucio: 5
+        resolucio: 3
+        dataCaptura: 2000-01-23T04:56:07.000+00:00
       properties:
         transaccioID:
           format: int64
@@ -645,15 +650,16 @@ components:
           format: int64
           type: integer
         color:
+          description: "Mode en que es va fer l'escaneig. Valors possibles: \"B/N\"\
+            ,\"Gris\" o \"Color\""
           type: string
         resolucio:
           format: int32
           type: integer
         midaPaper:
           type: string
-        dataCapturaISO8601:
-          type: string
         estat:
+          description: "Estat final de la transacció. Valors possibles: 'EXPIRAT','CANCELAT','ERROR','ID','ENPROGRES','OK'"
           type: string
         codiDir3:
           type: string
@@ -666,62 +672,67 @@ components:
         missatgeError:
           type: string
         origen:
+          description: "Origen del Document. Valors possibles: Ciudadano o Administració\
+            n en Castellà i Ciutadà o Administració en català"
           type: string
         tipusDocumental:
+          description: "Tipus Documental NTI. Valors possibles: 'TD01','TD02','TD03','TD04','TD05','TD06','TD07','TD08','TD09','TD10','TD11','TD12','TD13','TD14','TD15','TD16','TD17','TD18','TD19','TD20','TD51','TD52','TD53','TD54','TD55','TD56','TD57','TD58','TD59','TD60','TD61','TD62','TD63','TD64','TD65','TD66','TD67','TD68','TD69','TD99'"
           type: string
+        dataCaptura:
+          description: Data en que es va fer la transacció
+          format: date-time
+          pattern: yyyy-MM-dd'T'HH:mm:ss
+          type: string
+      required:
+      - dataCaptura
       type: object
     Transaccions:
       example:
         next: next
-        page-size: 2
-        total-count: 9
-        items-returned: 3
-        page: 5
-        total-pages: 7
-        resultat:
+        page-size: 6
+        data:
         - codiDir3: codiDir3
           color: color
-          fitxerMidaBytes: 1
+          fitxerMidaBytes: 9
           idiomaDocument: idiomaDocument
           duplex: true
           origen: origen
           usrname: usrname
           missatgeError: missatgeError
           funcionariUsername: funcionariUsername
-          transaccioID: 0
+          transaccioID: 2
           appname: appname
-          dataCapturaISO8601: dataCapturaISO8601
-          transaccioMultipleID: 6
+          transaccioMultipleID: 7
           midaPaper: midaPaper
           estat: estat
           configuracioGrupNom: configuracioGrupNom
           tipusDocumental: tipusDocumental
-          resolucio: 5
+          resolucio: 3
+          dataCaptura: 2000-01-23T04:56:07.000+00:00
         - codiDir3: codiDir3
           color: color
-          fitxerMidaBytes: 1
+          fitxerMidaBytes: 9
           idiomaDocument: idiomaDocument
           duplex: true
           origen: origen
           usrname: usrname
           missatgeError: missatgeError
           funcionariUsername: funcionariUsername
-          transaccioID: 0
+          transaccioID: 2
           appname: appname
-          dataCapturaISO8601: dataCapturaISO8601
-          transaccioMultipleID: 6
+          transaccioMultipleID: 7
           midaPaper: midaPaper
           estat: estat
           configuracioGrupNom: configuracioGrupNom
           tipusDocumental: tipusDocumental
-          resolucio: 5
+          resolucio: 3
+          dataCaptura: 2000-01-23T04:56:07.000+00:00
+        total-count: 5
+        items-returned: 5
+        page: 0
+        total-pages: 1
         date-download: date-download
       properties:
-        resultat:
-          description: Elements retornats
-          items:
-            $ref: '#/components/schemas/TransaccioInfo'
-          type: array
         page:
           description: Número pàgina. Comença per 1.
           format: int32
@@ -747,14 +758,22 @@ components:
             \ pàgina de dades."
           type: string
         date-download:
-          description: Data en que s'han retornat les dades
+          description: Data i hora en que s'han retornat les dades. Format ISO-8601
+          pattern: "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\\
+            d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\\
+            d|2[0-3]):[0-5]\\d:[0-5]\\d(?:Z|[+-][01]\\d:[0-5]\\d)$"
           type: string
+        data:
+          description: Elements retornats
+          items:
+            $ref: '#/components/schemas/TransaccioInfo'
+          type: array
       required:
+      - data
       - date-download
       - items-returned
       - page
       - page-size
-      - resultat
       - total-count
       - total-pages
       type: object

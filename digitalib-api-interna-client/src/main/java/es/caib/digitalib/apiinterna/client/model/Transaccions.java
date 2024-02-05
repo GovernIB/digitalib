@@ -30,20 +30,17 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * Transaccions
  */
 @JsonPropertyOrder({
-  Transaccions.JSON_PROPERTY_RESULTAT,
   Transaccions.JSON_PROPERTY_PAGE,
   Transaccions.JSON_PROPERTY_PAGE_SIZE,
   Transaccions.JSON_PROPERTY_TOTAL_PAGES,
   Transaccions.JSON_PROPERTY_TOTAL_COUNT,
   Transaccions.JSON_PROPERTY_ITEMS_RETURNED,
   Transaccions.JSON_PROPERTY_NEXT,
-  Transaccions.JSON_PROPERTY_DATE_DOWNLOAD
+  Transaccions.JSON_PROPERTY_DATE_DOWNLOAD,
+  Transaccions.JSON_PROPERTY_DATA
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class Transaccions {
-  public static final String JSON_PROPERTY_RESULTAT = "resultat";
-  private List<TransaccioInfo> resultat = new ArrayList<>();
-
   public static final String JSON_PROPERTY_PAGE = "page";
   private Integer page;
 
@@ -65,42 +62,11 @@ public class Transaccions {
   public static final String JSON_PROPERTY_DATE_DOWNLOAD = "date-download";
   private String dateDownload;
 
+  public static final String JSON_PROPERTY_DATA = "data";
+  private List<TransaccioInfo> data = new ArrayList<>();
+
   public Transaccions() {
   }
-
-  public Transaccions resultat(List<TransaccioInfo> resultat) {
-    
-    this.resultat = resultat;
-    return this;
-  }
-
-  public Transaccions addResultatItem(TransaccioInfo resultatItem) {
-    if (this.resultat == null) {
-      this.resultat = new ArrayList<>();
-    }
-    this.resultat.add(resultatItem);
-    return this;
-  }
-
-   /**
-   * Elements retornats
-   * @return resultat
-  **/
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_RESULTAT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public List<TransaccioInfo> getResultat() {
-    return resultat;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_RESULTAT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setResultat(List<TransaccioInfo> resultat) {
-    this.resultat = resultat;
-  }
-
 
   public Transaccions page(Integer page) {
     
@@ -265,7 +231,7 @@ public class Transaccions {
   }
 
    /**
-   * Data en que s&#39;han retornat les dades
+   * Data i hora en que s&#39;han retornat les dades. Format ISO-8601
    * @return dateDownload
   **/
   @javax.annotation.Nonnull
@@ -283,6 +249,40 @@ public class Transaccions {
     this.dateDownload = dateDownload;
   }
 
+
+  public Transaccions data(List<TransaccioInfo> data) {
+    
+    this.data = data;
+    return this;
+  }
+
+  public Transaccions addDataItem(TransaccioInfo dataItem) {
+    if (this.data == null) {
+      this.data = new ArrayList<>();
+    }
+    this.data.add(dataItem);
+    return this;
+  }
+
+   /**
+   * Elements retornats
+   * @return data
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_DATA)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public List<TransaccioInfo> getData() {
+    return data;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_DATA)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setData(List<TransaccioInfo> data) {
+    this.data = data;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -292,26 +292,25 @@ public class Transaccions {
       return false;
     }
     Transaccions transaccions = (Transaccions) o;
-    return Objects.equals(this.resultat, transaccions.resultat) &&
-        Objects.equals(this.page, transaccions.page) &&
+    return Objects.equals(this.page, transaccions.page) &&
         Objects.equals(this.pageSize, transaccions.pageSize) &&
         Objects.equals(this.totalPages, transaccions.totalPages) &&
         Objects.equals(this.totalCount, transaccions.totalCount) &&
         Objects.equals(this.itemsReturned, transaccions.itemsReturned) &&
         Objects.equals(this.next, transaccions.next) &&
-        Objects.equals(this.dateDownload, transaccions.dateDownload);
+        Objects.equals(this.dateDownload, transaccions.dateDownload) &&
+        Objects.equals(this.data, transaccions.data);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(resultat, page, pageSize, totalPages, totalCount, itemsReturned, next, dateDownload);
+    return Objects.hash(page, pageSize, totalPages, totalCount, itemsReturned, next, dateDownload, data);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Transaccions {\n");
-    sb.append("    resultat: ").append(toIndentedString(resultat)).append("\n");
     sb.append("    page: ").append(toIndentedString(page)).append("\n");
     sb.append("    pageSize: ").append(toIndentedString(pageSize)).append("\n");
     sb.append("    totalPages: ").append(toIndentedString(totalPages)).append("\n");
@@ -319,6 +318,7 @@ public class Transaccions {
     sb.append("    itemsReturned: ").append(toIndentedString(itemsReturned)).append("\n");
     sb.append("    next: ").append(toIndentedString(next)).append("\n");
     sb.append("    dateDownload: ").append(toIndentedString(dateDownload)).append("\n");
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }

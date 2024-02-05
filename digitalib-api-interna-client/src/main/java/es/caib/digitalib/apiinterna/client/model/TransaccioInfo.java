@@ -20,11 +20,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.time.OffsetDateTime;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * Elements retornats
+ * Informació bàsica d&#39;una transacció d&#39;escaneig a DigitalIB.
  */
 @JsonPropertyOrder({
   TransaccioInfo.JSON_PROPERTY_TRANSACCIO_I_D,
@@ -36,7 +37,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   TransaccioInfo.JSON_PROPERTY_COLOR,
   TransaccioInfo.JSON_PROPERTY_RESOLUCIO,
   TransaccioInfo.JSON_PROPERTY_MIDA_PAPER,
-  TransaccioInfo.JSON_PROPERTY_DATA_CAPTURA_I_S_O8601,
   TransaccioInfo.JSON_PROPERTY_ESTAT,
   TransaccioInfo.JSON_PROPERTY_CODI_DIR3,
   TransaccioInfo.JSON_PROPERTY_CONFIGURACIO_GRUP_NOM,
@@ -44,7 +44,8 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   TransaccioInfo.JSON_PROPERTY_DUPLEX,
   TransaccioInfo.JSON_PROPERTY_MISSATGE_ERROR,
   TransaccioInfo.JSON_PROPERTY_ORIGEN,
-  TransaccioInfo.JSON_PROPERTY_TIPUS_DOCUMENTAL
+  TransaccioInfo.JSON_PROPERTY_TIPUS_DOCUMENTAL,
+  TransaccioInfo.JSON_PROPERTY_DATA_CAPTURA
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class TransaccioInfo {
@@ -75,9 +76,6 @@ public class TransaccioInfo {
   public static final String JSON_PROPERTY_MIDA_PAPER = "midaPaper";
   private String midaPaper;
 
-  public static final String JSON_PROPERTY_DATA_CAPTURA_I_S_O8601 = "dataCapturaISO8601";
-  private String dataCapturaISO8601;
-
   public static final String JSON_PROPERTY_ESTAT = "estat";
   private String estat;
 
@@ -101,6 +99,9 @@ public class TransaccioInfo {
 
   public static final String JSON_PROPERTY_TIPUS_DOCUMENTAL = "tipusDocumental";
   private String tipusDocumental;
+
+  public static final String JSON_PROPERTY_DATA_CAPTURA = "dataCaptura";
+  private OffsetDateTime dataCaptura;
 
   public TransaccioInfo() {
   }
@@ -268,7 +269,7 @@ public class TransaccioInfo {
   }
 
    /**
-   * Get color
+   * Mode en que es va fer l&#39;escaneig. Valors possibles: \&quot;B/N\&quot;,\&quot;Gris\&quot; o \&quot;Color\&quot;
    * @return color
   **/
   @javax.annotation.Nullable
@@ -339,32 +340,6 @@ public class TransaccioInfo {
   }
 
 
-  public TransaccioInfo dataCapturaISO8601(String dataCapturaISO8601) {
-    
-    this.dataCapturaISO8601 = dataCapturaISO8601;
-    return this;
-  }
-
-   /**
-   * Get dataCapturaISO8601
-   * @return dataCapturaISO8601
-  **/
-  @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_DATA_CAPTURA_I_S_O8601)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getDataCapturaISO8601() {
-    return dataCapturaISO8601;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_DATA_CAPTURA_I_S_O8601)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDataCapturaISO8601(String dataCapturaISO8601) {
-    this.dataCapturaISO8601 = dataCapturaISO8601;
-  }
-
-
   public TransaccioInfo estat(String estat) {
     
     this.estat = estat;
@@ -372,7 +347,7 @@ public class TransaccioInfo {
   }
 
    /**
-   * Get estat
+   * Estat final de la transacció. Valors possibles: &#39;EXPIRAT&#39;,&#39;CANCELAT&#39;,&#39;ERROR&#39;,&#39;ID&#39;,&#39;ENPROGRES&#39;,&#39;OK&#39;
    * @return estat
   **/
   @javax.annotation.Nullable
@@ -528,7 +503,7 @@ public class TransaccioInfo {
   }
 
    /**
-   * Get origen
+   * Origen del Document. Valors possibles: Ciudadano o Administración en Castellà i Ciutadà o Administració en català
    * @return origen
   **/
   @javax.annotation.Nullable
@@ -554,7 +529,7 @@ public class TransaccioInfo {
   }
 
    /**
-   * Get tipusDocumental
+   * Tipus Documental NTI. Valors possibles: &#39;TD01&#39;,&#39;TD02&#39;,&#39;TD03&#39;,&#39;TD04&#39;,&#39;TD05&#39;,&#39;TD06&#39;,&#39;TD07&#39;,&#39;TD08&#39;,&#39;TD09&#39;,&#39;TD10&#39;,&#39;TD11&#39;,&#39;TD12&#39;,&#39;TD13&#39;,&#39;TD14&#39;,&#39;TD15&#39;,&#39;TD16&#39;,&#39;TD17&#39;,&#39;TD18&#39;,&#39;TD19&#39;,&#39;TD20&#39;,&#39;TD51&#39;,&#39;TD52&#39;,&#39;TD53&#39;,&#39;TD54&#39;,&#39;TD55&#39;,&#39;TD56&#39;,&#39;TD57&#39;,&#39;TD58&#39;,&#39;TD59&#39;,&#39;TD60&#39;,&#39;TD61&#39;,&#39;TD62&#39;,&#39;TD63&#39;,&#39;TD64&#39;,&#39;TD65&#39;,&#39;TD66&#39;,&#39;TD67&#39;,&#39;TD68&#39;,&#39;TD69&#39;,&#39;TD99&#39;
    * @return tipusDocumental
   **/
   @javax.annotation.Nullable
@@ -570,6 +545,32 @@ public class TransaccioInfo {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTipusDocumental(String tipusDocumental) {
     this.tipusDocumental = tipusDocumental;
+  }
+
+
+  public TransaccioInfo dataCaptura(OffsetDateTime dataCaptura) {
+    
+    this.dataCaptura = dataCaptura;
+    return this;
+  }
+
+   /**
+   * Data en que es va fer la transacció
+   * @return dataCaptura
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_DATA_CAPTURA)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public OffsetDateTime getDataCaptura() {
+    return dataCaptura;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_DATA_CAPTURA)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setDataCaptura(OffsetDateTime dataCaptura) {
+    this.dataCaptura = dataCaptura;
   }
 
   @Override
@@ -590,7 +591,6 @@ public class TransaccioInfo {
         Objects.equals(this.color, transaccioInfo.color) &&
         Objects.equals(this.resolucio, transaccioInfo.resolucio) &&
         Objects.equals(this.midaPaper, transaccioInfo.midaPaper) &&
-        Objects.equals(this.dataCapturaISO8601, transaccioInfo.dataCapturaISO8601) &&
         Objects.equals(this.estat, transaccioInfo.estat) &&
         Objects.equals(this.codiDir3, transaccioInfo.codiDir3) &&
         Objects.equals(this.configuracioGrupNom, transaccioInfo.configuracioGrupNom) &&
@@ -598,12 +598,13 @@ public class TransaccioInfo {
         Objects.equals(this.duplex, transaccioInfo.duplex) &&
         Objects.equals(this.missatgeError, transaccioInfo.missatgeError) &&
         Objects.equals(this.origen, transaccioInfo.origen) &&
-        Objects.equals(this.tipusDocumental, transaccioInfo.tipusDocumental);
+        Objects.equals(this.tipusDocumental, transaccioInfo.tipusDocumental) &&
+        Objects.equals(this.dataCaptura, transaccioInfo.dataCaptura);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(transaccioID, transaccioMultipleID, funcionariUsername, appname, usrname, fitxerMidaBytes, color, resolucio, midaPaper, dataCapturaISO8601, estat, codiDir3, configuracioGrupNom, idiomaDocument, duplex, missatgeError, origen, tipusDocumental);
+    return Objects.hash(transaccioID, transaccioMultipleID, funcionariUsername, appname, usrname, fitxerMidaBytes, color, resolucio, midaPaper, estat, codiDir3, configuracioGrupNom, idiomaDocument, duplex, missatgeError, origen, tipusDocumental, dataCaptura);
   }
 
   @Override
@@ -619,7 +620,6 @@ public class TransaccioInfo {
     sb.append("    color: ").append(toIndentedString(color)).append("\n");
     sb.append("    resolucio: ").append(toIndentedString(resolucio)).append("\n");
     sb.append("    midaPaper: ").append(toIndentedString(midaPaper)).append("\n");
-    sb.append("    dataCapturaISO8601: ").append(toIndentedString(dataCapturaISO8601)).append("\n");
     sb.append("    estat: ").append(toIndentedString(estat)).append("\n");
     sb.append("    codiDir3: ").append(toIndentedString(codiDir3)).append("\n");
     sb.append("    configuracioGrupNom: ").append(toIndentedString(configuracioGrupNom)).append("\n");
@@ -628,6 +628,7 @@ public class TransaccioInfo {
     sb.append("    missatgeError: ").append(toIndentedString(missatgeError)).append("\n");
     sb.append("    origen: ").append(toIndentedString(origen)).append("\n");
     sb.append("    tipusDocumental: ").append(toIndentedString(tipusDocumental)).append("\n");
+    sb.append("    dataCaptura: ").append(toIndentedString(dataCaptura)).append("\n");
     sb.append("}");
     return sb.toString();
   }

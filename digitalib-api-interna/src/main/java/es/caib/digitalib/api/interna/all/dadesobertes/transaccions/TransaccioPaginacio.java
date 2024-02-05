@@ -7,7 +7,7 @@ import org.fundaciobit.pluginsib.utils.rest.RestPagination;
 import es.caib.digitalib.model.entity.Transaccio;
 
 /**
- * 
+ * Només per ús intern. 
  * @author anadal
  *
  */

@@ -1,10 +1,14 @@
 package es.caib.digitalib.api.interna.all.dadesobertes.transaccions;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
  * 
  * @author anadal (u80067)
  *
  */
+@Schema(description = "Informació bàsica d'una transacció d'escaneig a DigitalIB.")
 public class TransaccioInfo {
     protected long transaccioID;
     protected Long transaccioMultipleID;
@@ -12,10 +16,22 @@ public class TransaccioInfo {
     protected String appname;
     protected String usrname;
     protected long fitxerMidaBytes;
-    protected String color; // 1,'B/N',8,'Gris',32,'Color'
+    @Schema(description = "Mode en que es va fer l'escaneig. Valors possibles: \"B/N\",\"Gris\" o \"Color\"")
+    protected String color;
     protected Integer resolucio; // infoscanresolucioppp
     protected String midaPaper;
-    protected String dataCapturaISO8601;
+
+    @Schema(
+            required = true,
+            description = "Data en que es va fer la transacció",
+            type = "string",
+            format = "date-time",
+            pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonProperty("dataCaptura")
+    protected java.sql.Timestamp dataCaptura;
+
+    @Schema(
+            description = "Estat final de la transacció. Valors possibles: 'EXPIRAT','CANCELAT','ERROR','ID','ENPROGRES','OK'")
     protected String estat;
 
     protected String codiDir3;
@@ -23,18 +39,21 @@ public class TransaccioInfo {
     protected String idiomaDocument;
     protected Boolean duplex;
     protected String missatgeError;
+    @Schema(
+            description = "Origen del Document. Valors possibles: Ciudadano o Administración en Castellà i Ciutadà o Administració en català")
     protected String origen;
+    @Schema(
+            description = "Tipus Documental NTI. Valors possibles: 'TD01','TD02','TD03','TD04','TD05','TD06','TD07','TD08','TD09','TD10','TD11','TD12','TD13','TD14','TD15','TD16','TD17','TD18','TD19','TD20','TD51','TD52','TD53','TD54','TD55','TD56','TD57','TD58','TD59','TD60','TD61','TD62','TD63','TD64','TD65','TD66','TD67','TD68','TD69','TD99'")
     protected String tipusDocumental;
 
     public TransaccioInfo() {
         super();
     }
 
-    public TransaccioInfo(long transaccioID, Long transaccioMultipleID,
-            String funcionariUsername, String appname, String usrname, long fitxerMidaBytes,
-            String color, Integer resolucio, String midaPaper, String dataCapturaISO8601,
-            String estat, String codiDir3, String configuracioGrupNom, String idiomaDocument,
-            Boolean duplex, String missatgeError, String origen, String tipusDocumental) {
+    public TransaccioInfo(long transaccioID, Long transaccioMultipleID, String funcionariUsername, String appname,
+            String usrname, long fitxerMidaBytes, String color, Integer resolucio, String midaPaper,
+            java.sql.Timestamp dataCapturaISO8601, String estat, String codiDir3, String configuracioGrupNom,
+            String idiomaDocument, Boolean duplex, String missatgeError, String origen, String tipusDocumental) {
         super();
         this.transaccioID = transaccioID;
         this.transaccioMultipleID = transaccioMultipleID;
@@ -45,7 +64,7 @@ public class TransaccioInfo {
         this.color = color;
         this.resolucio = resolucio;
         this.midaPaper = midaPaper;
-        this.dataCapturaISO8601 = dataCapturaISO8601;
+        this.dataCaptura = dataCapturaISO8601;
         this.estat = estat;
         this.codiDir3 = codiDir3;
         this.configuracioGrupNom = configuracioGrupNom;
@@ -128,12 +147,12 @@ public class TransaccioInfo {
         this.midaPaper = midaPaper;
     }
 
-    public String getDataCapturaISO8601() {
-        return dataCapturaISO8601;
+    public java.sql.Timestamp getDataCaptura() {
+        return dataCaptura;
     }
 
-    public void setDataCapturaISO8601(String dataCapturaISO8601) {
-        this.dataCapturaISO8601 = dataCapturaISO8601;
+    public void setDataCaptura(java.sql.Timestamp dataCaptura) {
+        this.dataCaptura = dataCaptura;
     }
 
     public Long getTransaccioMultipleID() {
