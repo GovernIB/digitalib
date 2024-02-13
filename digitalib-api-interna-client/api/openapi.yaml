@@ -727,12 +727,16 @@ components:
           tipusDocumental: tipusDocumental
           resolucio: 3
           dataCaptura: 2000-01-23T04:56:07.000+00:00
+        name: name
         total-count: 5
         items-returned: 5
         page: 0
         total-pages: 1
         date-download: date-download
       properties:
+        name:
+          description: Nom descriptiu del que s'està retornant
+          type: string
         page:
           description: Número pàgina. Comença per 1.
           format: int32
@@ -746,7 +750,7 @@ components:
           format: int32
           type: integer
         total-count:
-          description: Numero total d'elements
+          description: Número total d'elements
           format: int32
           type: integer
         items-returned:
@@ -764,14 +768,15 @@ components:
             d|2[0-3]):[0-5]\\d:[0-5]\\d(?:Z|[+-][01]\\d:[0-5]\\d)$"
           type: string
         data:
-          description: Elements retornats
+          description: Elements retornats. Pot retornar un null o una llista bida
+            si no hi ha elements.
           items:
             $ref: '#/components/schemas/TransaccioInfo'
           type: array
       required:
-      - data
       - date-download
       - items-returned
+      - name
       - page
       - page-size
       - total-count

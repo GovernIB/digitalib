@@ -953,9 +953,13 @@
         "description" : "Informació bàsica d'una transacció d'escaneig a DigitalIB."
       },
       "Transaccions" : {
-        "required" : [ "data", "date-download", "items-returned", "page", "page-size", "total-count", "total-pages" ],
+        "required" : [ "date-download", "items-returned", "name", "page", "page-size", "total-count", "total-pages" ],
         "type" : "object",
         "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Nom descriptiu del que s'està retornant"
+          },
           "page" : {
             "type" : "integer",
             "description" : "Número pàgina. Comença per 1.",
@@ -973,7 +977,7 @@
           },
           "total-count" : {
             "type" : "integer",
-            "description" : "Numero total d'elements",
+            "description" : "Número total d'elements",
             "format" : "int32"
           },
           "items-returned" : {
@@ -992,7 +996,7 @@
           },
           "data" : {
             "type" : "array",
-            "description" : "Elements retornats",
+            "description" : "Elements retornats. Pot retornar un null o una llista bida si no hi ha elements.",
             "items" : {
               "$ref" : "#/components/schemas/TransaccioInfo"
             }
