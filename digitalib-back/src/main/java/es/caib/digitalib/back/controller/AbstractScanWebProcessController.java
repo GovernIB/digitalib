@@ -214,7 +214,6 @@ public abstract class AbstractScanWebProcessController {
             final int auditType = Constants.AUDIT_TYPE_FINISH_SCAN;
             String additionalInfo = scanCodeToString(status, swc);
             auditoriaLogicaEjb.audita(transaccio, msg, additionalInfo, auditType, isApp);
-
         }
 
         switch (status) {
@@ -700,6 +699,8 @@ public abstract class AbstractScanWebProcessController {
         final Long maxBytes = Configuracio.getMaxSizeForScannedDocument();
 
         log.info("\n recuperarDocumentEscanejat:: maxBytes = " + maxBytes);
+        
+        
 
         if (transaccioOriginal.getTransaccioMultipleID() == null) {
 
@@ -816,7 +817,7 @@ public abstract class AbstractScanWebProcessController {
                 if (i == 0) {
                     // El primer fitxer el posam dins la transaccio original
 
-                    {
+                    
 
                         FitxerJPA fitxer = new FitxerJPA("", "application/pdf",
                                 /* transaccioOriginal.getTransactionWebId() + "_" + */ fitxers[i].file.getName(),
@@ -830,6 +831,10 @@ public abstract class AbstractScanWebProcessController {
                         transaccioOriginal.setNom(nomTransaccioOriginal + " " + (i + 1) + "/" + fitxers.length);
 
                         transaccioOriginal.setFitxerEscanejatID(fileID);
+                        
+                        
+                        // Parxe per poder ordenar les transaccions (https://github.com/GovernIB/digitalib/issues/226)
+                        transaccioOriginal.setDataFi(new Timestamp((i + 1) * 1000));
 
                         transaccioLogicaEjb.update(transaccioOriginal);
 
@@ -843,7 +848,7 @@ public abstract class AbstractScanWebProcessController {
 
                         allFiles.put(transaccioOriginal.getTransaccioID(), fei);
 
-                    }
+                    
 
                 } else {
 
@@ -853,6 +858,9 @@ public abstract class AbstractScanWebProcessController {
                     log.info("XYZ ZZZ  FITXER [" + i + "] : Per transaccio " + transaccioOriginal.getTransaccioID());
 
                     TransaccioJPA transaccio = transaccioLogicaEjb.cloneTransaccio(transaccioOriginal, nom);
+                    
+                    // Parxe per poder ordenar les transaccions (https://github.com/GovernIB/digitalib/issues/226)
+                    transaccio.setDataFi(new Timestamp((i + 1) * 1000));
 
                     {
                         // fer nou fitxer

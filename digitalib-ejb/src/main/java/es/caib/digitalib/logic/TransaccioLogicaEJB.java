@@ -417,13 +417,18 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
         List<Transaccio> list = this.select(
                 TransaccioFields.TRANSACCIOMULTIPLEID.equal(transaccioMultipleID),
-                new OrderBy(TRANSACCIOID));
+                new OrderBy(DATAFI, OrderType.ASC));
+        
+        
+        log.info("\n\n  -------------- searchMassiveTransaccioByTransaccioMultipleID -------------------");
 
         List<TransaccioJPA> listJPA = new ArrayList<TransaccioJPA>();
 
         for (Transaccio transaccio : list) {
 
             TransaccioJPA jpa = (TransaccioJPA) transaccio;
+            
+            log.info(jpa.getDataFi());
 
             Hibernate.initialize(jpa.getPerfil());
             Hibernate.initialize(jpa.getFitxerEscanejat());
