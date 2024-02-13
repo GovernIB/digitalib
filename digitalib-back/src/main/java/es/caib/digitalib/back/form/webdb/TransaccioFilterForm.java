@@ -642,7 +642,7 @@ public class TransaccioFilterForm extends DigitalIBBaseFilterForm implements Tra
   }
 
 
-  protected OrderBy[] defaultOrderBy = null;
+  protected OrderBy[] defaultOrderBy = new OrderBy[] {new OrderBy(DATAFI, org.fundaciobit.genapp.common.query.OrderType.DESC )};
 
 
   public OrderBy[] getDefaultOrderBy() {

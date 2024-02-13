@@ -270,8 +270,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
             filterForm.setHiddenFields(ocults);
 
-            filterForm.setOrderBy(TransaccioFields.TRANSACCIOID.fullName);
-
+            filterForm.setOrderBy(TransaccioFields.DATAFI.javaName);
             filterForm.setOrderAsc(false);
 
             filterForm.addAdditionalButtonForEachItem(

@@ -5058,7 +5058,7 @@
           "showInReferenceList": false,
           "transientField": false,
           "filter": false,
-          "orderBy": 0,
+          "orderBy": -1,
           "groupBy": true,
           "webFieldInfo": {
             "webtype": 7
