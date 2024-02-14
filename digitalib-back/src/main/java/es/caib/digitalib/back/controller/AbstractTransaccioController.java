@@ -30,8 +30,7 @@ import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.GroupByItem;
-import org.fundaciobit.genapp.common.query.OrderBy;
-import org.fundaciobit.genapp.common.query.OrderType;
+
 import org.fundaciobit.genapp.common.query.SelectMultipleKeyValue;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
@@ -270,8 +269,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
             filterForm.setHiddenFields(ocults);
 
-            filterForm.setOrderBy(TransaccioFields.DATAFI.javaName);
-            filterForm.setOrderAsc(false);
+            //filterForm.setOrderBy(TransaccioFields.DATAFI.javaName);
+            //filterForm.setOrderAsc(false);
 
             filterForm.addAdditionalButtonForEachItem(
                     new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_EYE), "transaccio.veuredetall",
@@ -972,8 +971,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         filterForm.setTransaccioMultipleIDFins(transaccioMultipleID);
         
         
-        filterForm.setOrderBy(DATAFI.fullName);
-        filterForm.setOrderAsc(true);
+        //filterForm.setOrderBy(DATAFI.fullName);
+        //filterForm.setOrderAsc(true);
 
         request.getSession().setAttribute(getSessionAttributeFilterForm(), filterForm);
 
