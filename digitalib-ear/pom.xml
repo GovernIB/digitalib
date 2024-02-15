@@ -21,7 +21,6 @@
     <dependencies>
 
         <!-- Internes -->
-
         <dependency>
             <groupId>es.caib.digitalib</groupId>
             <artifactId>digitalib-persistence</artifactId>
@@ -34,7 +33,6 @@
             <version>${project.version}</version>
             <type>ejb</type>
         </dependency>
-
 
         <dependency>
             <groupId>es.caib.digitalib</groupId>
@@ -68,7 +66,7 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
             <artifactId>pluginsib-scanweb-dynamicwebtwain</artifactId>
-            <version>4.0.4</version>
+            <version>4.0.5</version>
         </dependency>
 
         <dependency>
