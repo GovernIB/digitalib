@@ -11,13 +11,13 @@ import org.fundaciobit.pluginsib.utils.rest.ReuseDataPagination;
  * @author anadal (u80067)
  *
  */
-public class Transaccions extends ReuseDataPagination<TransaccioInfo> {
+public class LlistatDeTransaccionsPaginada extends ReuseDataPagination<TransaccioInfo> {
 
-    public Transaccions() {
+    public LlistatDeTransaccionsPaginada() {
         super();
     }
 
-    public Transaccions(List<TransaccioInfo> data, int page, int pagesize, int totalpages, int totalcount,
+    public LlistatDeTransaccionsPaginada(List<TransaccioInfo> data, int page, int pagesize, int totalpages, int totalcount,
             String nextUrl, String dateDownload, String name) {
         super(data, page, pagesize, totalpages, totalcount, nextUrl, dateDownload, name);
     }

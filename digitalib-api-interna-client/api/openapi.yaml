@@ -112,7 +112,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaccions'
+                $ref: '#/components/schemas/LlistatDeTransaccionsPaginada'
           description: Operació realitzada correctament
         "404":
           content:
@@ -612,81 +612,7 @@ paths:
       x-accepts: application/json
 components:
   schemas:
-    TransaccioInfo:
-      description: Informació bàsica d'una transacció d'escaneig a DigitalIB.
-      example:
-        codiDir3: codiDir3
-        color: color
-        fitxerMidaBytes: 9
-        idiomaDocument: idiomaDocument
-        duplex: true
-        origen: origen
-        usrname: usrname
-        missatgeError: missatgeError
-        funcionariUsername: funcionariUsername
-        transaccioID: 2
-        appname: appname
-        transaccioMultipleID: 7
-        midaPaper: midaPaper
-        estat: estat
-        configuracioGrupNom: configuracioGrupNom
-        tipusDocumental: tipusDocumental
-        resolucio: 3
-        dataCaptura: 2000-01-23T04:56:07.000+00:00
-      properties:
-        transaccioID:
-          format: int64
-          type: integer
-        transaccioMultipleID:
-          format: int64
-          type: integer
-        funcionariUsername:
-          type: string
-        appname:
-          type: string
-        usrname:
-          type: string
-        fitxerMidaBytes:
-          format: int64
-          type: integer
-        color:
-          description: "Mode en que es va fer l'escaneig. Valors possibles: \"B/N\"\
-            ,\"Gris\" o \"Color\""
-          type: string
-        resolucio:
-          format: int32
-          type: integer
-        midaPaper:
-          type: string
-        estat:
-          description: "Estat final de la transacció. Valors possibles: 'EXPIRAT','CANCELAT','ERROR','ID','ENPROGRES','OK'"
-          type: string
-        codiDir3:
-          type: string
-        configuracioGrupNom:
-          type: string
-        idiomaDocument:
-          type: string
-        duplex:
-          type: boolean
-        missatgeError:
-          type: string
-        origen:
-          description: "Origen del Document. Valors possibles: Ciudadano o Administració\
-            n en Castellà i Ciutadà o Administració en català"
-          type: string
-        tipusDocumental:
-          description: "Tipus Documental NTI. Valors possibles: 'TD01','TD02','TD03','TD04','TD05','TD06','TD07','TD08','TD09','TD10','TD11','TD12','TD13','TD14','TD15','TD16','TD17','TD18','TD19','TD20','TD51','TD52','TD53','TD54','TD55','TD56','TD57','TD58','TD59','TD60','TD61','TD62','TD63','TD64','TD65','TD66','TD67','TD68','TD69','TD99'"
-          type: string
-        dataCaptura:
-          description: Data en que es va fer la transacció
-          format: date-time
-          pattern: yyyy-MM-dd'T'HH:mm:ss
-          type: string
-      required:
-      - dataCaptura
-      type: object
-    Transaccions:
+    LlistatDeTransaccionsPaginada:
       example:
         next: next
         page-size: 6
@@ -781,6 +707,80 @@ components:
       - page-size
       - total-count
       - total-pages
+      type: object
+    TransaccioInfo:
+      description: Informació bàsica d'una transacció d'escaneig a DigitalIB.
+      example:
+        codiDir3: codiDir3
+        color: color
+        fitxerMidaBytes: 9
+        idiomaDocument: idiomaDocument
+        duplex: true
+        origen: origen
+        usrname: usrname
+        missatgeError: missatgeError
+        funcionariUsername: funcionariUsername
+        transaccioID: 2
+        appname: appname
+        transaccioMultipleID: 7
+        midaPaper: midaPaper
+        estat: estat
+        configuracioGrupNom: configuracioGrupNom
+        tipusDocumental: tipusDocumental
+        resolucio: 3
+        dataCaptura: 2000-01-23T04:56:07.000+00:00
+      properties:
+        transaccioID:
+          format: int64
+          type: integer
+        transaccioMultipleID:
+          format: int64
+          type: integer
+        funcionariUsername:
+          type: string
+        appname:
+          type: string
+        usrname:
+          type: string
+        fitxerMidaBytes:
+          format: int64
+          type: integer
+        color:
+          description: "Mode en que es va fer l'escaneig. Valors possibles: \"B/N\"\
+            ,\"Gris\" o \"Color\""
+          type: string
+        resolucio:
+          format: int32
+          type: integer
+        midaPaper:
+          type: string
+        estat:
+          description: "Estat final de la transacció. Valors possibles: 'EXPIRAT','CANCELAT','ERROR','ID','ENPROGRES','OK'"
+          type: string
+        codiDir3:
+          type: string
+        configuracioGrupNom:
+          type: string
+        idiomaDocument:
+          type: string
+        duplex:
+          type: boolean
+        missatgeError:
+          type: string
+        origen:
+          description: "Origen del Document. Valors possibles: Ciudadano o Administració\
+            n en Castellà i Ciutadà o Administració en català"
+          type: string
+        tipusDocumental:
+          description: "Tipus Documental NTI. Valors possibles: 'TD01','TD02','TD03','TD04','TD05','TD06','TD07','TD08','TD09','TD10','TD11','TD12','TD13','TD14','TD15','TD16','TD17','TD18','TD19','TD20','TD51','TD52','TD53','TD54','TD55','TD56','TD57','TD58','TD59','TD60','TD61','TD62','TD63','TD64','TD65','TD66','TD67','TD68','TD69','TD99'"
+          type: string
+        dataCaptura:
+          description: Data en que es va fer la transacció
+          format: date-time
+          pattern: yyyy-MM-dd'T'HH:mm:ss
+          type: string
+      required:
+      - dataCaptura
       type: object
     RestExceptionInfo:
       description: Estructura de dades utilitzada per passar informació d'un error

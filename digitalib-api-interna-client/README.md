@@ -132,6 +132,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [LlistatDeTransaccionsPaginada](docs/LlistatDeTransaccionsPaginada.md)
  - [MassiveScanWebSimpleArxiuInfo](docs/MassiveScanWebSimpleArxiuInfo.md)
  - [MassiveScanWebSimpleArxiuOptionalParameters](docs/MassiveScanWebSimpleArxiuOptionalParameters.md)
  - [MassiveScanWebSimpleArxiuRequiredParameters](docs/MassiveScanWebSimpleArxiuRequiredParameters.md)
@@ -154,7 +155,6 @@ Class | Method | HTTP request | Description
  - [MassiveScanWebSimpleValidationInfo](docs/MassiveScanWebSimpleValidationInfo.md)
  - [RestExceptionInfo](docs/RestExceptionInfo.md)
  - [TransaccioInfo](docs/TransaccioInfo.md)
- - [Transaccions](docs/Transaccions.md)
 
 
 <a id="documentation-for-authorization"></a>

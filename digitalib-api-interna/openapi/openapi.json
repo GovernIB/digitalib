@@ -114,7 +114,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Transaccions"
+                  "$ref" : "#/components/schemas/LlistatDeTransaccionsPaginada"
                 }
               }
             }
@@ -880,6 +880,57 @@
   },
   "components" : {
     "schemas" : {
+      "LlistatDeTransaccionsPaginada" : {
+        "required" : [ "date-download", "items-returned", "name", "page", "page-size", "total-count", "total-pages" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Nom descriptiu del que s'està retornant"
+          },
+          "page" : {
+            "type" : "integer",
+            "description" : "Número pàgina. Comença per 1.",
+            "format" : "int32"
+          },
+          "page-size" : {
+            "type" : "integer",
+            "description" : "Mida de pàgina",
+            "format" : "int32"
+          },
+          "total-pages" : {
+            "type" : "integer",
+            "description" : "Número total de pàgines",
+            "format" : "int32"
+          },
+          "total-count" : {
+            "type" : "integer",
+            "description" : "Número total d'elements",
+            "format" : "int32"
+          },
+          "items-returned" : {
+            "type" : "integer",
+            "description" : "Numero d'elements retornats",
+            "format" : "int32"
+          },
+          "next" : {
+            "type" : "string",
+            "description" : "Si hi ha més elements, llavors retorna la URL a la següent pàgina de dades."
+          },
+          "date-download" : {
+            "pattern" : "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:Z|[+-][01]\\d:[0-5]\\d)$",
+            "type" : "string",
+            "description" : "Data i hora en que s'han retornat les dades. Format ISO-8601"
+          },
+          "data" : {
+            "type" : "array",
+            "description" : "Elements retornats. Pot retornar un null o una llista bida si no hi ha elements.",
+            "items" : {
+              "$ref" : "#/components/schemas/TransaccioInfo"
+            }
+          }
+        }
+      },
       "TransaccioInfo" : {
         "required" : [ "dataCaptura" ],
         "type" : "object",
@@ -951,57 +1002,6 @@
           }
         },
         "description" : "Informació bàsica d'una transacció d'escaneig a DigitalIB."
-      },
-      "Transaccions" : {
-        "required" : [ "date-download", "items-returned", "name", "page", "page-size", "total-count", "total-pages" ],
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "Nom descriptiu del que s'està retornant"
-          },
-          "page" : {
-            "type" : "integer",
-            "description" : "Número pàgina. Comença per 1.",
-            "format" : "int32"
-          },
-          "page-size" : {
-            "type" : "integer",
-            "description" : "Mida de pàgina",
-            "format" : "int32"
-          },
-          "total-pages" : {
-            "type" : "integer",
-            "description" : "Número total de pàgines",
-            "format" : "int32"
-          },
-          "total-count" : {
-            "type" : "integer",
-            "description" : "Número total d'elements",
-            "format" : "int32"
-          },
-          "items-returned" : {
-            "type" : "integer",
-            "description" : "Numero d'elements retornats",
-            "format" : "int32"
-          },
-          "next" : {
-            "type" : "string",
-            "description" : "Si hi ha més elements, llavors retorna la URL a la següent pàgina de dades."
-          },
-          "date-download" : {
-            "pattern" : "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:Z|[+-][01]\\d:[0-5]\\d)$",
-            "type" : "string",
-            "description" : "Data i hora en que s'han retornat les dades. Format ISO-8601"
-          },
-          "data" : {
-            "type" : "array",
-            "description" : "Elements retornats. Pot retornar un null o una llista bida si no hi ha elements.",
-            "items" : {
-              "$ref" : "#/components/schemas/TransaccioInfo"
-            }
-          }
-        }
       },
       "RestExceptionInfo" : {
         "required" : [ "code", "errorMessage" ],

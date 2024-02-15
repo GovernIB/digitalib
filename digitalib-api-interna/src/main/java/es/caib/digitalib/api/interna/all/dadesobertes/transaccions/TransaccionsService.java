@@ -1,8 +1,6 @@
 package es.caib.digitalib.api.interna.all.dadesobertes.transaccions;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -16,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -25,8 +24,9 @@ import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.utils.Utils;
-
-import org.fundaciobit.pluginsib.utils.rest.GenAppPaginationUtils;
+import org.fundaciobit.pluginsib.utils.rest.GenAppEntityConverter;
+import org.fundaciobit.pluginsib.utils.rest.GenAppRangeOfDates;
+import org.fundaciobit.pluginsib.utils.rest.GenAppRestUtils;
 import org.fundaciobit.pluginsib.utils.rest.RestException;
 import org.fundaciobit.pluginsib.utils.rest.RestExceptionInfo;
 import org.fundaciobit.pluginsib.utils.rest.RestUtils;
@@ -95,7 +95,7 @@ public class TransaccionsService extends RestUtils {
                             description = "Operació realitzada correctament",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
-                                    schema = @Schema(implementation = Transaccions.class))),
+                                    schema = @Schema(implementation = LlistatDeTransaccionsPaginada.class))),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Paràmetres incorrectes",
@@ -108,7 +108,7 @@ public class TransaccionsService extends RestUtils {
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON,
                                     schema = @Schema(implementation = RestExceptionInfo.class))) })
-    public Transaccions consultaTransaccions(
+    public LlistatDeTransaccionsPaginada consultaTransaccions(
             @Parameter(
                     name = "startdate",
                     description = "Data d'inici de la consulta. Opcional. Format yyyy-mm-dd (ISO 8601)",
@@ -186,15 +186,17 @@ public class TransaccionsService extends RestUtils {
                 pageSize = DEFAULT_ITEMS_PER_PAGE;
             }
 
-            // Convertir Dates a tipus Date, check de dates i check de rang
-            Date startDate;
-            Date endDate;
-            {
-                Date[] dates = checkRangeOfOnlyDates(startdate, "startdate", enddate, "enddate", language);
-                startDate = dates[0];
-                endDate = dates[1];
-            }
+            StringBuilder nextQuery = new StringBuilder(
+                    (Configuracio.getBackUrl().replace(Constants.DIGITALIB_APP_NAME + "back", "")
+                            + request.getContextPath()).replace("//", "/") + PATH + "/consulta?" + "page=" + (page + 1)
+                            + "&page-size=" + pageSize);
 
+            // Convertir Dates a tipus Date, check de dates i check de rang
+            GenAppRangeOfDates grod;
+            grod = GenAppRestUtils.checkRangeOfOnlyDates(startdate, "startdate", enddate, "enddate",
+                    TransaccioFields.DATAINICI, language);
+
+            // Check Status
             final Integer status;
             if (estat == null) {
                 status = null;
@@ -216,7 +218,90 @@ public class TransaccionsService extends RestUtils {
                 }
             }
 
-            return consulta(startDate, endDate, appname, usrname, status, page, pageSize, request, language);
+            Where wUsr;
+            if (usrname == null) {
+                wUsr = null;
+            } else {
+                Long usrID = usuariPersonaEjb.executeQueryOne(UsuariPersonaFields.USUARIPERSONAID,
+                        UsuariPersonaFields.USERNAME.equal(usrname));
+
+                if (usrID == null) {
+                    String msg;
+                    if ("es".equalsIgnoreCase(language)) {
+                        msg = "No hay ningún usuario persona con nombre ]" + usrname + "[";
+                    } else {
+                        msg = "No hi ha cap usuari persona amb nom ]" + usrname + "[";
+                    }
+                    throw new RestException(msg, Status.BAD_REQUEST);
+                }
+
+                wUsr = UsuariPersonaFields.USUARIPERSONAID.equal(usrID);
+                nextQuery.append("&usrname=" + usrname);
+            }
+
+            Where wApp;
+            if (appname == null) {
+                wApp = null; // XYZ ZZZ ZZZ USUARIAPLICACIOID.isNotNull();
+            } else {
+                Long appID = usuariAplicacioEjb.executeQueryOne(UsuariAplicacioFields.USUARIAPLICACIOID,
+                        UsuariAplicacioFields.USERNAME.equal(appname));
+
+                if (appID == null) {
+                    String msg;
+                    if ("es".equalsIgnoreCase(language)) {
+                        msg = "No hay ningún usuario aplicación con nombre ]" + appname + "[";
+                    } else {
+                        msg = "No hi ha cap usuari aplicació amb nom ]" + appname + "[";
+                    }
+                    throw new RestException(msg, Status.BAD_REQUEST);
+                }
+
+                wApp = UsuariAplicacioFields.USUARIAPLICACIOID.equal(appID);
+                nextQuery.append("&appname=" + appname);
+            }
+
+            if (wApp != null && wUsr != null) {
+                // TODO XYZ ZZZ Traduir
+                String msg;
+                if ("es".equalsIgnoreCase(language)) {
+                    msg = "No puede elegir appname y usrname a la vez.";
+                } else {
+                    msg = "No pot elegir appname i usrname a la vegada.";
+                }
+                throw new RestException(msg, Status.BAD_REQUEST);
+            }
+
+            // Check status
+
+            Where wStatus = null;
+            if (estat != null) {
+                wStatus = TransaccioFields.ESTATCODI.equal(status);
+                nextQuery.append("&estat=" + estat);
+            }
+
+            Where where = Where.AND(grod.getWhere(), wApp, wUsr, wStatus);
+
+            log.info("Where: " + ((where == null) ? "--NULL--" : where.toSQL()));
+
+            final OrderBy orderBy = new OrderBy(TransaccioFields.DATAINICI, OrderType.DESC);
+
+            final boolean searchUsrApp = (wApp == null && wUsr == null);
+
+            TransaccioToTransaccioConverter converter = new TransaccioToTransaccioConverter(language, searchUsrApp,
+                    usrname, appname);
+
+            final String name;
+            if ("es".equals(language)) {
+                name = "Lista de escaneos realizados utilizando DigitalIB";
+            } else {
+                name = "Llista d'escanejos realitzats emprant DigitalIB";
+            }
+
+            LlistatDeTransaccionsPaginada paginacio = GenAppRestUtils.createRestPagination(
+                    LlistatDeTransaccionsPaginada.class, this.transaccioLogicaEjb, (int) page, (int) pageSize, where,
+                    orderBy, converter, name, nextQuery);
+
+            return paginacio;
 
         } catch (RestException re) {
             throw re;
@@ -231,9 +316,9 @@ public class TransaccionsService extends RestUtils {
             }
 
             if ("es".equalsIgnoreCase(language)) {
-                msg = "Error en la consulta d'estadistiques: " + msg;
+                msg = "Error en la consulta d'estadístiques: " + msg;
             } else {
-                msg = "Error en la consulta de estadisticas: " + msg;
+                msg = "Error en la consulta de estadísticas: " + msg;
             }
 
             log.error(msg, th);
@@ -244,99 +329,27 @@ public class TransaccionsService extends RestUtils {
 
     /**
      * 
-     * @param startDate
-     * @param endDate
-     * @param appName
-     * @param usrName
-     * @param estat
-     * @param page
-     * @param pageSize
-     * @param request
-     * @return
-     * @throws I18NException
+     * @author anadal
+     *
      */
-    protected Transaccions consulta(Date startDate, Date endDate, String appName, String usrName, Integer estat,
-            int page, int pageSize, HttpServletRequest request, String language) throws I18NException {
+    public class TransaccioToTransaccioConverter implements GenAppEntityConverter<Transaccio, TransaccioInfo> {
 
-        StringBuilder nextQuery = new StringBuilder("page=" + (page + 1) + "&page-size=" + pageSize);
+        protected final String language;
 
-        List<Transaccio> transaccions;
+        protected final boolean searchUsrApp;
 
-        Where usr;
-        if (usrName == null) {
-            usr = null;
-        } else {
-            Long usrID = usuariPersonaEjb.executeQueryOne(UsuariPersonaFields.USUARIPERSONAID,
-                    UsuariPersonaFields.USERNAME.equal(usrName));
+        protected Map<String, String> usuaris = null;
+        protected Map<String, String> aplicacions = null;
 
-            if (usrID == null) {
-                throw new RestException("No hi ha cap usuari persona amb nom ]" + appName + "[", 404);
-            }
+        final Map<String, String> configuracioGrupMapByUsrName = new HashMap<String, String>();
 
-            usr = UsuariPersonaFields.USUARIPERSONAID.equal(usrID);
-            nextQuery.append("&usrname=" + usrName);
-        }
+        protected String u = null;
+        protected String a = null;
 
-        Where app;
-        if (appName == null) {
-            app = null; // XYZ ZZZ ZZZ USUARIAPLICACIOID.isNotNull();
-        } else {
-            Long appID = usuariAplicacioEjb.executeQueryOne(UsuariAplicacioFields.USUARIAPLICACIOID,
-                    UsuariAplicacioFields.USERNAME.equal(appName));
-
-            if (appID == null) {
-                throw new RestException("No hi ha cap usuari aplicació amb nom ]" + appName + "[", 404);
-            }
-
-            app = UsuariAplicacioFields.USUARIAPLICACIOID.equal(appID);
-            nextQuery.append("&appname=" + appName);
-        }
-
-        if (app != null && usr != null) {
-            throw new RestException("No pot elegir appname i usrname a la vegada.", 404);
-        }
-
-        TransaccioPaginacio paginacio;
-        {
-            Where sd = null;
-            if (startDate != null) {
-                sd = TransaccioFields.DATAINICI.greaterThanOrEqual(new Timestamp(startDate.getTime()));
-                nextQuery.append("&startdate=" + convertDateToOnlyDateISO8601(startDate));
-            }
-            Where ed = null;
-            if (endDate != null) {
-                ed = TransaccioFields.DATAINICI.lessThanOrEqual(new Timestamp(endDate.getTime()));
-                nextQuery.append("&enddate=" + convertDateToOnlyDateISO8601(endDate));
-            }
-
-            Where status = null;
-            if (estat != null) {
-                status = TransaccioFields.ESTATCODI.equal(estat);
-                nextQuery.append("&estat=" + estat);
-            }
-
-            Where where = Where.AND(sd, ed, app, usr, status);
-
-            log.info("Where: " + ((where == null) ? "--NULL--" : where.toSQL()));
-
-            final OrderBy orderBy = new OrderBy(TransaccioFields.DATAINICI, OrderType.DESC);
-
-            paginacio = GenAppPaginationUtils.createRestPagination(TransaccioPaginacio.class, this.transaccioLogicaEjb,
-                    (int) page, (int) pageSize, where, orderBy);
-
-            transaccions = paginacio.getData();
-        }
-
-        List<TransaccioInfo> resultat = new ArrayList<TransaccioInfo>();
-
-        if (transaccions != null && transaccions.size() != 0) {
-
-            final boolean searchUsrApp = (app == null && usr == null);
-
-            Map<String, String> usuaris = null;
-            Map<String, String> aplicacions = null;
-            String u = null;
-            String a = null;
+        public TransaccioToTransaccioConverter(String language, final boolean searchUsrApp, String usrName,
+                String appName) throws I18NException {
+            this.language = language;
+            this.searchUsrApp = searchUsrApp;
 
             if (searchUsrApp) {
                 {
@@ -363,147 +376,144 @@ public class TransaccionsService extends RestUtils {
                 a = appName;
             }
 
-            final Map<String, String> configuracioGrupMapByUsrName = new HashMap<String, String>();
+        }
 
-            for (Transaccio transaccio : transaccions) {
+        @Override
+        public TransaccioInfo convert(Transaccio transaccio) throws RestException {
 
-                long transaccioID = transaccio.getTransaccioID();
-                String funcionariUsername = transaccio.getFuncionariUsername();
+            long transaccioID = transaccio.getTransaccioID();
+            String funcionariUsername = transaccio.getFuncionariUsername();
 
-                //String fitxerNom = null;
-                long fitxerMidaBytes = -1;
-                if (transaccio.getFitxerEscanejat() != null) {
-                    //fitxerNom = transaccio.getFitxerEscanejat().getNom();
-                    fitxerMidaBytes = transaccio.getFitxerEscanejat().getTamany();
-                }
+            //String fitxerNom = null;
+            long fitxerMidaBytes = -1;
+            if (transaccio.getFitxerEscanejat() != null) {
+                //fitxerNom = transaccio.getFitxerEscanejat().getNom();
+                fitxerMidaBytes = transaccio.getFitxerEscanejat().getTamany();
+            }
 
-                String color = null;
-                {
-                    Integer pixel = transaccio.getInfoScanPixelType();
+            String color = null;
+            {
+                Integer pixel = transaccio.getInfoScanPixelType();
 
-                    if (pixel != null) {
+                if (pixel != null) {
 
-                        if (pixel < 8) {
-                            color = "B/N";
-                        } else if (pixel < 32) {
-                            color = "Gris";
-                        } else {
-                            color = "Color";
-                        }
+                    if (pixel < 8) {
+                        color = "B/N";
+                    } else if (pixel < 32) {
+                        color = "Gris";
+                    } else {
+                        color = "Color";
                     }
                 }
+            }
 
-                Integer resolucio = transaccio.getInfoScanResolucioPpp();
-                String midaPaper = transaccio.getInfoScanPaperSize();
-                Timestamp dataCaptura = transaccio.getInfoScanDataCaptura();
-                if (dataCaptura == null) {
-                    dataCaptura = new Timestamp(transaccio.getDataInici().getTime());
-                }
+            Integer resolucio = transaccio.getInfoScanResolucioPpp();
+            String midaPaper = transaccio.getInfoScanPaperSize();
+            Timestamp dataCaptura = transaccio.getInfoScanDataCaptura();
+            if (dataCaptura == null) {
+                dataCaptura = new Timestamp(transaccio.getDataInici().getTime());
+            }
 
-                if (searchUsrApp) {
-                    a = aplicacions.get(String.valueOf(transaccio.getUsuariAplicacioId()));
-                    u = usuaris.get(String.valueOf(transaccio.getUsuariPersonaId()));
-                }
+            if (searchUsrApp) {
+                a = aplicacions.get(String.valueOf(transaccio.getUsuariAplicacioId()));
+                u = usuaris.get(String.valueOf(transaccio.getUsuariPersonaId()));
+            }
 
-                String e;
+            String e;
 
-                int status = transaccio.getEstatCodi(); // TODO
+            int status = transaccio.getEstatCodi(); // TODO
 
-                switch (status) {
-                    case Constants.TRANSACCIO_ESTAT_CODI_EXPIRAT:
-                        e = "EXPIRAT";
-                    break;
+            switch (status) {
+                case Constants.TRANSACCIO_ESTAT_CODI_EXPIRAT:
+                    e = "EXPIRAT";
+                break;
 
-                    case Constants.TRANSACCIO_ESTAT_CODI_CANCELAT:
-                        e = "CANCELAT";
-                    break;
+                case Constants.TRANSACCIO_ESTAT_CODI_CANCELAT:
+                    e = "CANCELAT";
+                break;
 
-                    case Constants.TRANSACCIO_ESTAT_CODI_ERROR:
-                        e = "ERROR";
-                    break;
+                case Constants.TRANSACCIO_ESTAT_CODI_ERROR:
+                    e = "ERROR";
+                break;
 
-                    case Constants.TRANSACCIO_ESTAT_CODI_ID:
-                        e = "ID";
-                    break;
+                case Constants.TRANSACCIO_ESTAT_CODI_ID:
+                    e = "ID";
+                break;
 
-                    case Constants.TRANSACCIO_ESTAT_CODI_ENPROGRES:
-                        e = "ENPROGRES";
-                    break;
+                case Constants.TRANSACCIO_ESTAT_CODI_ENPROGRES:
+                    e = "ENPROGRES";
+                break;
 
-                    case Constants.TRANSACCIO_ESTAT_CODI_OK:
-                        e = "OK";
-                    break;
+                case Constants.TRANSACCIO_ESTAT_CODI_OK:
+                    e = "OK";
+                break;
 
-                    default:
-                        e = null;
-
-                }
-
-                final Long transaccioMultipleID = transaccio.getTransaccioMultipleID();
-                final String codiDir3 = transaccio.getSignParamFuncionariDir3();
-
-                final String configuracioGrupNom;
-                if (u == null) {
-                    configuracioGrupNom = null;
-                } else {
-                    // 
-                    String cgn = configuracioGrupMapByUsrName.get(u);
-                    if (cgn == null) {
-                        UsuariPersonaQueryPath upqp = new UsuariPersonaQueryPath();
-                        cgn = usuariPersonaEjb.executeQueryOne(upqp.CONFIGURACIOGRUP().NOM(),
-                                UsuariPersonaFields.USERNAME.equal(u));
-
-                        configuracioGrupMapByUsrName.put(u, cgn);
-
-                    }
-                    configuracioGrupNom = cgn;
-                }
-
-                final String idiomaDocument = transaccio.getInfoScanLanguageDoc();
-                final Boolean duplex = transaccio.getInfoScanDuplex();
-                final String missatgeError = transaccio.getEstatMissatge();
-
-                final Integer origenInt = transaccio.getArxiuReqParamOrigen();
-
-                final String origen;
-                if (origenInt == null) {
-                    origen = null;
-                } else if (origenInt == Constants.ORIGEN_CIUTADA) {
-                    origen = "es".equals(language) ? "Ciudadano" : "Ciutadà";
-                } else if (origenInt == Constants.ORIGEN_ADMINISTRACIO) {
-                    origen = "es".equals(language) ? "Administración" : "Administració";
-                } else {
-                    log.error("Origen Desconegut " + origenInt + " per transaccióamb ID  " + transaccioID);
-                    origen = null;
-                }
-
-                final String tipusDocumental = transaccio.getInfoScanDocumentTipus();
-
-                resultat.add(new TransaccioInfo(transaccioID, transaccioMultipleID, funcionariUsername, a, u,
-                        fitxerMidaBytes, color, resolucio, midaPaper, dataCaptura, e, codiDir3, configuracioGrupNom,
-                        idiomaDocument, duplex, missatgeError, origen, tipusDocumental));
+                default:
+                    e = null;
 
             }
-        }
 
-        final String nextUrl;
-        if (page >= paginacio.getTotalpages()) {
-            nextUrl = null;
-        } else {
-            nextUrl = (Configuracio.getBackUrl().replace(Constants.DIGITALIB_APP_NAME + "back", "")
-                    + request.getContextPath() + PATH + "/consulta?" + nextQuery.toString()).replace("//", "/");
-        }
-        final String dateDownload = convertDateToDateTimeISO8601(new Date());
+            final Long transaccioMultipleID = transaccio.getTransaccioMultipleID();
+            final String codiDir3 = transaccio.getSignParamFuncionariDir3();
 
-        final String name;
-        if ("es".equals(language)) {
-            name = "Lista de escaneos realizados utilizando DigitalIB";
-        } else {
-            name = "Llista d'escanejos realitzats emprant DigitalIB";
-        }
+            final String configuracioGrupNom;
+            if (u == null) {
+                configuracioGrupNom = null;
+            } else {
+                // 
+                String cgn = configuracioGrupMapByUsrName.get(u);
+                if (cgn == null) {
+                    UsuariPersonaQueryPath upqp = new UsuariPersonaQueryPath();
+                    try {
+                        cgn = usuariPersonaEjb.executeQueryOne(upqp.CONFIGURACIOGRUP().NOM(),
+                                UsuariPersonaFields.USERNAME.equal(u));
+                    } catch (I18NException th) {
+                        String msg;
+                        I18NException ie = (I18NException) th;
+                        msg = I18NLogicUtils.getMessage(ie, new Locale(language));
 
-        return new Transaccions(resultat, paginacio.getPage(), paginacio.getPagesize(), paginacio.getTotalpages(),
-                paginacio.getTotalcount(), nextUrl, dateDownload, name);
+                        if ("es".equalsIgnoreCase(language)) {
+                            msg = "Error cercant la configuració de grup per l'usuari [" + u + "] :" + msg;
+                        } else {
+                            msg = "Error buscando la configuración de grupo para el usuario[" + u + "]: " + msg;
+                        }
+
+                        log.error(msg, th);
+
+                        throw new RestException(msg, th);
+                    }
+
+                    configuracioGrupMapByUsrName.put(u, cgn);
+
+                }
+                configuracioGrupNom = cgn;
+            }
+
+            final String idiomaDocument = transaccio.getInfoScanLanguageDoc();
+            final Boolean duplex = transaccio.getInfoScanDuplex();
+            final String missatgeError = transaccio.getEstatMissatge();
+
+            final Integer origenInt = transaccio.getArxiuReqParamOrigen();
+
+            final String origen;
+            if (origenInt == null) {
+                origen = null;
+            } else if (origenInt == Constants.ORIGEN_CIUTADA) {
+                origen = "es".equals(language) ? "Ciudadano" : "Ciutadà";
+            } else if (origenInt == Constants.ORIGEN_ADMINISTRACIO) {
+                origen = "es".equals(language) ? "Administración" : "Administració";
+            } else {
+                log.error("Origen Desconegut " + origenInt + " per transaccióamb ID  " + transaccioID);
+                origen = null;
+            }
+
+            final String tipusDocumental = transaccio.getInfoScanDocumentTipus();
+
+            return new TransaccioInfo(transaccioID, transaccioMultipleID, funcionariUsername, a, u, fitxerMidaBytes,
+                    color, resolucio, midaPaper, dataCaptura, e, codiDir3, configuracioGrupNom, idiomaDocument, duplex,
+                    missatgeError, origen, tipusDocumental);
+
+        }
 
     }
 
