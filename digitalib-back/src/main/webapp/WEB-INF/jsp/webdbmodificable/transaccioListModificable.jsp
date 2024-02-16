@@ -15,11 +15,11 @@
                     <fmt:message key="email.modal.labelemail" />
                 </p>
                 <input style="width: 97%" type="email" id="email" name="email" value=""
-                    placeholder="administrador@email.com,usuari@email.com">
+                    placeholder="administrador@caib.es,usuari@caib.es">
                 <p style="padding: 2% 0%; margin-top: 1%">
                     <fmt:message key="email.modal.labeladdicional" />
                 </p>
-                <textarea name="content" style="width: 97%" placeholder="Escriu aquí el contingut..."></textarea>
+                <textarea name="content" style="width: 97%" placeholder="Escriu el contingut..."></textarea>
                 <input type="hidden" id="transaccioID" name="transaccioID" value="">
             </div>
             <div class="modal-footer">
@@ -66,11 +66,11 @@
   function canviarDies() {
 
     let dies = prompt(
-        "Es mostraran les Transaccions amb més de X dies des de la seva creació:",
+        "Es mostraran les Transaccions amb mÃ©s de X dies des de la seva creaciÃ³:",
         "${canviarDies}");
 
     if (isNaN(dies)) {
-      alert("No és un numero correcte");
+      alert("No Ã©s un numero correcte");
     } else {
       if (dies < 30) {
         alert("El numero de dies ha de ser superior a 30");
