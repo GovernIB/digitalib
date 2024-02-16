@@ -194,7 +194,7 @@ public class TransaccionsService extends RestUtils {
             // Convertir Dates a tipus Date, check de dates i check de rang
             GenAppRangeOfDates grod;
             grod = GenAppRestUtils.checkRangeOfOnlyDates(startdate, "startdate", enddate, "enddate",
-                    TransaccioFields.DATAINICI, language);
+                    TransaccioFields.DATAINICI, nextQuery, language);
 
             // Check Status
             final Integer status;
