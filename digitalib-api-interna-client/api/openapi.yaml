@@ -694,7 +694,7 @@ components:
             d|2[0-3]):[0-5]\\d:[0-5]\\d(?:Z|[+-][01]\\d:[0-5]\\d)$"
           type: string
         data:
-          description: Elements retornats. Pot retornar un null o una llista bida
+          description: Elements retornats. Pot retornar un null o una llista buida
             si no hi ha elements.
           items:
             $ref: '#/components/schemas/TransaccioInfo'
@@ -985,6 +985,49 @@ components:
           description: Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES
           readOnly: true
           type: string
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF:
+          default: pdf
+          description: Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG:
+          default: jpg
+          description: Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF:
+          default: tif
+          description: Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG:
+          default: png
+          description: Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF:
+          default: gif
+          description: Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE:
+          default: 0
+          description: Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY:
+          default: 1
+          description: Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR:
+          default: 2
+          description: Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR
+          format: int32
+          readOnly: true
+          type: integer
       required:
       - MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES
       - MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_CF
@@ -998,6 +1041,14 @@ components:
       - MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY
       - MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN
       - MassiveScanWebSimpleGetTransactionIdRequest_VIEW_IFRAME
+      - MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF
+      - MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG
+      - MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF
+      - MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG
+      - MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF
+      - MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE
+      - MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR
+      - MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY
       - MassiveScanWebSimpleStatus_STATUS_CANCELLED
       - MassiveScanWebSimpleStatus_STATUS_EXPIRED
       - MassiveScanWebSimpleStatus_STATUS_FINAL_ERROR

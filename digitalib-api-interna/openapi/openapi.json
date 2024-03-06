@@ -924,7 +924,7 @@
           },
           "data" : {
             "type" : "array",
-            "description" : "Elements retornats. Pot retornar un null o una llista bida si no hi ha elements.",
+            "description" : "Elements retornats. Pot retornar un null o una llista buida si no hi ha elements.",
             "items" : {
               "$ref" : "#/components/schemas/TransaccioInfo"
             }
@@ -1104,7 +1104,7 @@
         }
       },
       "MassiveScanWebSimpleConstants" : {
-        "required" : [ "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_CF", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_DP", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_PR", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ORIGINAL", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_ADMINISTRACIO", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_CIUTADA", "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_ONLY_SCAN", "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE", "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY", "MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN", "MassiveScanWebSimpleGetTransactionIdRequest_VIEW_IFRAME", "MassiveScanWebSimpleStatus_STATUS_CANCELLED", "MassiveScanWebSimpleStatus_STATUS_EXPIRED", "MassiveScanWebSimpleStatus_STATUS_FINAL_ERROR", "MassiveScanWebSimpleStatus_STATUS_FINAL_OK", "MassiveScanWebSimpleStatus_STATUS_IN_PROGRESS", "MassiveScanWebSimpleStatus_STATUS_REQUESTED_ID" ],
+        "required" : [ "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_CF", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_DP", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_PR", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ORIGINAL", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_ADMINISTRACIO", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_CIUTADA", "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_ONLY_SCAN", "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE", "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY", "MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN", "MassiveScanWebSimpleGetTransactionIdRequest_VIEW_IFRAME", "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF", "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG", "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF", "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG", "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF", "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE", "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR", "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY", "MassiveScanWebSimpleStatus_STATUS_CANCELLED", "MassiveScanWebSimpleStatus_STATUS_EXPIRED", "MassiveScanWebSimpleStatus_STATUS_FINAL_ERROR", "MassiveScanWebSimpleStatus_STATUS_FINAL_OK", "MassiveScanWebSimpleStatus_STATUS_IN_PROGRESS", "MassiveScanWebSimpleStatus_STATUS_REQUESTED_ID" ],
         "type" : "object",
         "properties" : {
           "MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN" : {
@@ -1227,6 +1227,57 @@
             "description" : "Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES",
             "readOnly" : true,
             "default" : "EE99"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF",
+            "readOnly" : true,
+            "default" : "pdf"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG",
+            "readOnly" : true,
+            "default" : "jpg"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF",
+            "readOnly" : true,
+            "default" : "tif"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG",
+            "readOnly" : true,
+            "default" : "png"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF",
+            "readOnly" : true,
+            "default" : "gif"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 0
+          },
+          "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 1
+          },
+          "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 2
           }
         }
       },

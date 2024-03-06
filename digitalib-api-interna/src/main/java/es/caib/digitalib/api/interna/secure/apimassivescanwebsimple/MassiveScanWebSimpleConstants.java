@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
 import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleArxiuRequiredParameters;
 import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleAvailableProfile;
 import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleGetTransactionIdRequest;
+import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleScannedFileInfo;
 import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleStatus;
 
 /**
@@ -216,4 +217,79 @@ public class MassiveScanWebSimpleConstants {
             accessMode = AccessMode.READ_ONLY)
     public String MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES;
 
+    // -------------------------------------
+    //      MassiveScanWebSimpleScannedFileInfo 
+    // -------------------------------------
+
+    @Schema(
+            description = "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF",
+            nullable = false,
+            defaultValue = MassiveScanWebSimpleScannedFileInfo.FORMAT_FILE_PDF,
+            implementation = String.class,
+            required = true,
+            accessMode = AccessMode.READ_ONLY)
+    public String MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF;
+
+    @Schema(
+            description = "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG",
+            nullable = false,
+            defaultValue = MassiveScanWebSimpleScannedFileInfo.FORMAT_FILE_JPG,
+            implementation = String.class,
+            required = true,
+            accessMode = AccessMode.READ_ONLY)
+    public String MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG;
+
+    @Schema(
+            description = "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF",
+            nullable = false,
+            defaultValue = MassiveScanWebSimpleScannedFileInfo.FORMAT_FILE_TIFF,
+            implementation = String.class,
+            required = true,
+            accessMode = AccessMode.READ_ONLY)
+    public String MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF;
+
+    @Schema(
+            description = "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG",
+            nullable = false,
+            defaultValue = MassiveScanWebSimpleScannedFileInfo.FORMAT_FILE_PNG,
+            implementation = String.class,
+            required = true,
+            accessMode = AccessMode.READ_ONLY)
+    public String MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG;
+
+    @Schema(
+            description = "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF",
+            nullable = false,
+            defaultValue = MassiveScanWebSimpleScannedFileInfo.FORMAT_FILE_GIF,
+            implementation = String.class,
+            required = true,
+            accessMode = AccessMode.READ_ONLY)
+    public String MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF;
+
+    @Schema(
+            description = "Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE",
+            nullable = false,
+            defaultValue = "" + MassiveScanWebSimpleScannedFileInfo.PIXEL_TYPE_BLACK_WHITE,
+            implementation = Integer.class,
+            required = true,
+            accessMode = AccessMode.READ_ONLY)
+    public int MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE;
+
+    @Schema(
+            description = "Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY",
+            nullable = false,
+            defaultValue = "" + MassiveScanWebSimpleScannedFileInfo.PIXEL_TYPE_GRAY,
+            implementation = Integer.class,
+            required = true,
+            accessMode = AccessMode.READ_ONLY)
+    public int MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY;
+
+    @Schema(
+            description = "Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR",
+            nullable = false,
+            defaultValue = "" + MassiveScanWebSimpleScannedFileInfo.PIXEL_TYPE_COLOR,
+            implementation = Integer.class,
+            required = true,
+            accessMode = AccessMode.READ_ONLY)
+    public int MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR;
 }

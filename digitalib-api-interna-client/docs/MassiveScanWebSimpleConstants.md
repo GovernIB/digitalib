@@ -25,6 +25,14 @@
 |**massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIADP** | **String** | Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_DP |  [readonly] |
 |**massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIAPR** | **String** | Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_PR |  [readonly] |
 |**massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES** | **String** | Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES |  [readonly] |
+|**massiveScanWebSimpleScannedFileInfoFORMATFILEPDF** | **String** | Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF |  [readonly] |
+|**massiveScanWebSimpleScannedFileInfoFORMATFILEJPG** | **String** | Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG |  [readonly] |
+|**massiveScanWebSimpleScannedFileInfoFORMATFILETIFF** | **String** | Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF |  [readonly] |
+|**massiveScanWebSimpleScannedFileInfoFORMATFILEPNG** | **String** | Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG |  [readonly] |
+|**massiveScanWebSimpleScannedFileInfoFORMATFILEGIF** | **String** | Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF |  [readonly] |
+|**massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE** | **Integer** | Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE |  [readonly] |
+|**massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY** | **Integer** | Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY |  [readonly] |
+|**massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR** | **Integer** | Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR |  [readonly] |
 
 
 

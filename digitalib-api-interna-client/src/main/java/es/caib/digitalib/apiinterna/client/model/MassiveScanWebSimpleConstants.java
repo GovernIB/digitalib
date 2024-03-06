@@ -44,7 +44,15 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_C_O_P_I_A_C_F,
   MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_C_O_P_I_A_D_P,
   MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_C_O_P_I_A_P_R,
-  MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_A_L_T_R_E_S
+  MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_A_L_T_R_E_S,
+  MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_P_D_F,
+  MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_J_P_G,
+  MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_T_I_F_F,
+  MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_P_N_G,
+  MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_G_I_F,
+  MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_B_L_A_C_K_W_H_I_T_E,
+  MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_G_R_A_Y,
+  MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_C_O_L_O_R
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class MassiveScanWebSimpleConstants {
@@ -102,6 +110,30 @@ public class MassiveScanWebSimpleConstants {
   public static final String JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_A_L_T_R_E_S = "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES";
   private String massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES = "EE99";
 
+  public static final String JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_P_D_F = "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF";
+  private String massiveScanWebSimpleScannedFileInfoFORMATFILEPDF = "pdf";
+
+  public static final String JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_J_P_G = "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG";
+  private String massiveScanWebSimpleScannedFileInfoFORMATFILEJPG = "jpg";
+
+  public static final String JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_T_I_F_F = "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF";
+  private String massiveScanWebSimpleScannedFileInfoFORMATFILETIFF = "tif";
+
+  public static final String JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_P_N_G = "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG";
+  private String massiveScanWebSimpleScannedFileInfoFORMATFILEPNG = "png";
+
+  public static final String JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_G_I_F = "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF";
+  private String massiveScanWebSimpleScannedFileInfoFORMATFILEGIF = "gif";
+
+  public static final String JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_B_L_A_C_K_W_H_I_T_E = "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE";
+  private Integer massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE = 0;
+
+  public static final String JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_G_R_A_Y = "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY";
+  private Integer massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY = 1;
+
+  public static final String JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_C_O_L_O_R = "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR";
+  private Integer massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR = 2;
+
   public MassiveScanWebSimpleConstants() {
   }
 
@@ -124,7 +156,15 @@ public class MassiveScanWebSimpleConstants {
     @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_C_O_P_I_A_C_F) String massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIACF, 
     @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_C_O_P_I_A_D_P) String massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIADP, 
     @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_C_O_P_I_A_P_R) String massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIAPR, 
-    @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_A_L_T_R_E_S) String massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES
+    @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_ARXIU_REQUIRED_PARAMETERS_D_O_C_U_M_E_N_T_E_L_A_B_O_R_A_T_I_O_N_S_T_A_T_E_A_L_T_R_E_S) String massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES, 
+    @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_P_D_F) String massiveScanWebSimpleScannedFileInfoFORMATFILEPDF, 
+    @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_J_P_G) String massiveScanWebSimpleScannedFileInfoFORMATFILEJPG, 
+    @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_T_I_F_F) String massiveScanWebSimpleScannedFileInfoFORMATFILETIFF, 
+    @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_P_N_G) String massiveScanWebSimpleScannedFileInfoFORMATFILEPNG, 
+    @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_G_I_F) String massiveScanWebSimpleScannedFileInfoFORMATFILEGIF, 
+    @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_B_L_A_C_K_W_H_I_T_E) Integer massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE, 
+    @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_G_R_A_Y) Integer massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY, 
+    @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_C_O_L_O_R) Integer massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR
   ) {
     this();
     this.massiveScanWebSimpleGetTransactionIdRequestVIEWFULLSCREEN = massiveScanWebSimpleGetTransactionIdRequestVIEWFULLSCREEN;
@@ -145,6 +185,14 @@ public class MassiveScanWebSimpleConstants {
     this.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIADP = massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIADP;
     this.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIAPR = massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIAPR;
     this.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES = massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES;
+    this.massiveScanWebSimpleScannedFileInfoFORMATFILEPDF = massiveScanWebSimpleScannedFileInfoFORMATFILEPDF;
+    this.massiveScanWebSimpleScannedFileInfoFORMATFILEJPG = massiveScanWebSimpleScannedFileInfoFORMATFILEJPG;
+    this.massiveScanWebSimpleScannedFileInfoFORMATFILETIFF = massiveScanWebSimpleScannedFileInfoFORMATFILETIFF;
+    this.massiveScanWebSimpleScannedFileInfoFORMATFILEPNG = massiveScanWebSimpleScannedFileInfoFORMATFILEPNG;
+    this.massiveScanWebSimpleScannedFileInfoFORMATFILEGIF = massiveScanWebSimpleScannedFileInfoFORMATFILEGIF;
+    this.massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE = massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE;
+    this.massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY = massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY;
+    this.massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR = massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR;
   }
 
    /**
@@ -416,6 +464,126 @@ public class MassiveScanWebSimpleConstants {
 
 
 
+
+   /**
+   * Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF
+   * @return massiveScanWebSimpleScannedFileInfoFORMATFILEPDF
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_P_D_F)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public String getMassiveScanWebSimpleScannedFileInfoFORMATFILEPDF() {
+    return massiveScanWebSimpleScannedFileInfoFORMATFILEPDF;
+  }
+
+
+
+
+   /**
+   * Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG
+   * @return massiveScanWebSimpleScannedFileInfoFORMATFILEJPG
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_J_P_G)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public String getMassiveScanWebSimpleScannedFileInfoFORMATFILEJPG() {
+    return massiveScanWebSimpleScannedFileInfoFORMATFILEJPG;
+  }
+
+
+
+
+   /**
+   * Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF
+   * @return massiveScanWebSimpleScannedFileInfoFORMATFILETIFF
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_T_I_F_F)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public String getMassiveScanWebSimpleScannedFileInfoFORMATFILETIFF() {
+    return massiveScanWebSimpleScannedFileInfoFORMATFILETIFF;
+  }
+
+
+
+
+   /**
+   * Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG
+   * @return massiveScanWebSimpleScannedFileInfoFORMATFILEPNG
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_P_N_G)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public String getMassiveScanWebSimpleScannedFileInfoFORMATFILEPNG() {
+    return massiveScanWebSimpleScannedFileInfoFORMATFILEPNG;
+  }
+
+
+
+
+   /**
+   * Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF
+   * @return massiveScanWebSimpleScannedFileInfoFORMATFILEGIF
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_F_O_R_M_A_T_F_I_L_E_G_I_F)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public String getMassiveScanWebSimpleScannedFileInfoFORMATFILEGIF() {
+    return massiveScanWebSimpleScannedFileInfoFORMATFILEGIF;
+  }
+
+
+
+
+   /**
+   * Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE
+   * @return massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_B_L_A_C_K_W_H_I_T_E)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public Integer getMassiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE() {
+    return massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE;
+  }
+
+
+
+
+   /**
+   * Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY
+   * @return massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_G_R_A_Y)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public Integer getMassiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY() {
+    return massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY;
+  }
+
+
+
+
+   /**
+   * Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR
+   * @return massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR
+  **/
+  @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_C_O_L_O_R)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public Integer getMassiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR() {
+    return massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR;
+  }
+
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -442,12 +610,20 @@ public class MassiveScanWebSimpleConstants {
         Objects.equals(this.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIACF, massiveScanWebSimpleConstants.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIACF) &&
         Objects.equals(this.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIADP, massiveScanWebSimpleConstants.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIADP) &&
         Objects.equals(this.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIAPR, massiveScanWebSimpleConstants.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIAPR) &&
-        Objects.equals(this.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES, massiveScanWebSimpleConstants.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES);
+        Objects.equals(this.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES, massiveScanWebSimpleConstants.massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES) &&
+        Objects.equals(this.massiveScanWebSimpleScannedFileInfoFORMATFILEPDF, massiveScanWebSimpleConstants.massiveScanWebSimpleScannedFileInfoFORMATFILEPDF) &&
+        Objects.equals(this.massiveScanWebSimpleScannedFileInfoFORMATFILEJPG, massiveScanWebSimpleConstants.massiveScanWebSimpleScannedFileInfoFORMATFILEJPG) &&
+        Objects.equals(this.massiveScanWebSimpleScannedFileInfoFORMATFILETIFF, massiveScanWebSimpleConstants.massiveScanWebSimpleScannedFileInfoFORMATFILETIFF) &&
+        Objects.equals(this.massiveScanWebSimpleScannedFileInfoFORMATFILEPNG, massiveScanWebSimpleConstants.massiveScanWebSimpleScannedFileInfoFORMATFILEPNG) &&
+        Objects.equals(this.massiveScanWebSimpleScannedFileInfoFORMATFILEGIF, massiveScanWebSimpleConstants.massiveScanWebSimpleScannedFileInfoFORMATFILEGIF) &&
+        Objects.equals(this.massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE, massiveScanWebSimpleConstants.massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE) &&
+        Objects.equals(this.massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY, massiveScanWebSimpleConstants.massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY) &&
+        Objects.equals(this.massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR, massiveScanWebSimpleConstants.massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(massiveScanWebSimpleGetTransactionIdRequestVIEWFULLSCREEN, massiveScanWebSimpleGetTransactionIdRequestVIEWIFRAME, massiveScanWebSimpleAvailableProfilePROFILETYPEONLYSCAN, massiveScanWebSimpleAvailableProfilePROFILETYPESCANANDSIGNATURE, massiveScanWebSimpleAvailableProfilePROFILETYPESCANANDSIGNATUREANDCUSTODY, massiveScanWebSimpleStatusSTATUSREQUESTEDID, massiveScanWebSimpleStatusSTATUSINPROGRESS, massiveScanWebSimpleStatusSTATUSFINALOK, massiveScanWebSimpleStatusSTATUSFINALERROR, massiveScanWebSimpleStatusSTATUSCANCELLED, massiveScanWebSimpleStatusSTATUSEXPIRED, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTORIGENCIUTADA, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTORIGENADMINISTRACIO, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEORIGINAL, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIACF, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIADP, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIAPR, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES);
+    return Objects.hash(massiveScanWebSimpleGetTransactionIdRequestVIEWFULLSCREEN, massiveScanWebSimpleGetTransactionIdRequestVIEWIFRAME, massiveScanWebSimpleAvailableProfilePROFILETYPEONLYSCAN, massiveScanWebSimpleAvailableProfilePROFILETYPESCANANDSIGNATURE, massiveScanWebSimpleAvailableProfilePROFILETYPESCANANDSIGNATUREANDCUSTODY, massiveScanWebSimpleStatusSTATUSREQUESTEDID, massiveScanWebSimpleStatusSTATUSINPROGRESS, massiveScanWebSimpleStatusSTATUSFINALOK, massiveScanWebSimpleStatusSTATUSFINALERROR, massiveScanWebSimpleStatusSTATUSCANCELLED, massiveScanWebSimpleStatusSTATUSEXPIRED, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTORIGENCIUTADA, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTORIGENADMINISTRACIO, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEORIGINAL, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIACF, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIADP, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIAPR, massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES, massiveScanWebSimpleScannedFileInfoFORMATFILEPDF, massiveScanWebSimpleScannedFileInfoFORMATFILEJPG, massiveScanWebSimpleScannedFileInfoFORMATFILETIFF, massiveScanWebSimpleScannedFileInfoFORMATFILEPNG, massiveScanWebSimpleScannedFileInfoFORMATFILEGIF, massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE, massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY, massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR);
   }
 
   @Override
@@ -472,6 +648,14 @@ public class MassiveScanWebSimpleConstants {
     sb.append("    massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIADP: ").append(toIndentedString(massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIADP)).append("\n");
     sb.append("    massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIAPR: ").append(toIndentedString(massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATECOPIAPR)).append("\n");
     sb.append("    massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES: ").append(toIndentedString(massiveScanWebSimpleArxiuRequiredParametersDOCUMENTELABORATIONSTATEALTRES)).append("\n");
+    sb.append("    massiveScanWebSimpleScannedFileInfoFORMATFILEPDF: ").append(toIndentedString(massiveScanWebSimpleScannedFileInfoFORMATFILEPDF)).append("\n");
+    sb.append("    massiveScanWebSimpleScannedFileInfoFORMATFILEJPG: ").append(toIndentedString(massiveScanWebSimpleScannedFileInfoFORMATFILEJPG)).append("\n");
+    sb.append("    massiveScanWebSimpleScannedFileInfoFORMATFILETIFF: ").append(toIndentedString(massiveScanWebSimpleScannedFileInfoFORMATFILETIFF)).append("\n");
+    sb.append("    massiveScanWebSimpleScannedFileInfoFORMATFILEPNG: ").append(toIndentedString(massiveScanWebSimpleScannedFileInfoFORMATFILEPNG)).append("\n");
+    sb.append("    massiveScanWebSimpleScannedFileInfoFORMATFILEGIF: ").append(toIndentedString(massiveScanWebSimpleScannedFileInfoFORMATFILEGIF)).append("\n");
+    sb.append("    massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE: ").append(toIndentedString(massiveScanWebSimpleScannedFileInfoPIXELTYPEBLACKWHITE)).append("\n");
+    sb.append("    massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY: ").append(toIndentedString(massiveScanWebSimpleScannedFileInfoPIXELTYPEGRAY)).append("\n");
+    sb.append("    massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR: ").append(toIndentedString(massiveScanWebSimpleScannedFileInfoPIXELTYPECOLOR)).append("\n");
     sb.append("}");
     return sb.toString();
   }
