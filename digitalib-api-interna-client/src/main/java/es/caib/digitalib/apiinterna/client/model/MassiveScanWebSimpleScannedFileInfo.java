@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleScannedFileInfo.JSON_PROPERTY_DOCUMENT_LANGUAGE,
   MassiveScanWebSimpleScannedFileInfo.JSON_PROPERTY_DOCUMENT_TYPE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleScannedFileInfo {
   public static final String JSON_PROPERTY_TRANSACTION_NAME = "transactionName";
   private String transactionName;

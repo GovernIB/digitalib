@@ -1,0 +1,298 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API REST INTERNA de DigitalIB",
+    "description" : "Conjunt de Serveis REST de DigitalIB per ser accedits des de l'interior",
+    "contact" : {
+      "name" : "Departament de Govern Digital a la Fundació Bit",
+      "url" : "http://otae.fundaciobit.org",
+      "email" : "otae@fundaciobit.org"
+    },
+    "license" : {
+      "name" : "License Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "version" : "1.0.0"
+  },
+  "externalDocs" : {
+    "description" : "Java Client (GovernIB Github)",
+    "url" : "https://github.com/GovernIB/digitalib/tree/digitalib-1.0/digitalib-api-interna-client"
+  },
+  "servers" : [ {
+    "url" : "/digitalibapi/interna"
+  }, {
+    "url" : "http://localhost:8080/digitalibapi/interna"
+  }, {
+    "url" : "https://dev.caib.es/digitalibapi/interna"
+  }, {
+    "url" : "https://proves.caib.es/digitalibapi/interna"
+  }, {
+    "url" : "https://se.caib.es/digitalibapi/interna"
+  }, {
+    "url" : "https://www.caib.es/digitalibapi/interna"
+  } ],
+  "tags" : [ {
+    "name" : "Transaccions",
+    "description" : "Servei de informació d'estadístiques de Transaccions d'Accés Públic"
+  } ],
+  "paths" : {
+    "/public/dadesobertes/transaccions/consulta" : {
+      "get" : {
+        "tags" : [ "Transaccions" ],
+        "summary" : "Retorna estadístiques de les transaccions a DigitalIB",
+        "operationId" : "consulta",
+        "parameters" : [ {
+          "name" : "startdate",
+          "in" : "query",
+          "description" : "Data d'inici de la consulta. Opcional. Format yyyy-mm-dd (ISO 8601)",
+          "schema" : {
+            "pattern" : "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29))$",
+            "type" : "string"
+          },
+          "example" : "2023-07-24"
+        }, {
+          "name" : "enddate",
+          "in" : "query",
+          "description" : "Data final de la consulta. Opcional. Format yyyy-mm-dd (ISO 8601)",
+          "schema" : {
+            "pattern" : "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29))$",
+            "type" : "string"
+          },
+          "example" : "2024-12-31"
+        }, {
+          "name" : "appname",
+          "in" : "query",
+          "description" : "Username de l'app. Opcional. Només es pot elegir appname o usrname a la vegada",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "usrname",
+          "in" : "query",
+          "description" : "Username de la persona. Opcional. Només es pot elegir appname o usrname a la vegada",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "estat",
+          "in" : "query",
+          "description" : "Estat en que es troba la transacció.  Opcional. Valors possibles són: \"EXPIRAT\",\"CANCELAT\",\"ERROR\",\"ID\",\"ENPROGRES\",\"OK\"",
+          "schema" : {
+            "pattern" : "^(EXPIRAT|CANCELAT|ERROR|ID|ENPROGRES|OK)$",
+            "type" : "string"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Numero de pàgina quan el llistat és paginat. Per defecte 1.",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page-size",
+          "in" : "query",
+          "description" : "Número d'elements a retornar per pàgina. Per defecte 50",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "language",
+          "in" : "query",
+          "description" : "Idioma en que retornar les dades. Opcional.",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LlistatDeTransaccionsPaginada"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "LlistatDeTransaccionsPaginada" : {
+        "required" : [ "date-download", "items-returned", "name", "page", "page-size", "total-count", "total-pages" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Nom descriptiu del que s'està retornant"
+          },
+          "page" : {
+            "type" : "integer",
+            "description" : "Número pàgina. Comença per 1.",
+            "format" : "int32"
+          },
+          "page-size" : {
+            "type" : "integer",
+            "description" : "Mida de pàgina",
+            "format" : "int32"
+          },
+          "total-pages" : {
+            "type" : "integer",
+            "description" : "Número total de pàgines",
+            "format" : "int32"
+          },
+          "total-count" : {
+            "type" : "integer",
+            "description" : "Número total d'elements",
+            "format" : "int32"
+          },
+          "items-returned" : {
+            "type" : "integer",
+            "description" : "Numero d'elements retornats",
+            "format" : "int32"
+          },
+          "next" : {
+            "type" : "string",
+            "description" : "Si hi ha més elements, llavors retorna la URL a la següent pàgina de dades."
+          },
+          "date-download" : {
+            "pattern" : "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:Z|[+-][01]\\d:[0-5]\\d)$",
+            "type" : "string",
+            "description" : "Data i hora en que s'han retornat les dades. Format ISO-8601"
+          },
+          "data" : {
+            "type" : "array",
+            "description" : "Elements retornats. Pot retornar un null o una llista buida si no hi ha elements.",
+            "items" : {
+              "$ref" : "#/components/schemas/TransaccioInfo"
+            }
+          }
+        }
+      },
+      "TransaccioInfo" : {
+        "required" : [ "dataCaptura" ],
+        "type" : "object",
+        "properties" : {
+          "transaccioID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "transaccioMultipleID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "funcionariUsername" : {
+            "type" : "string"
+          },
+          "appname" : {
+            "type" : "string"
+          },
+          "usrname" : {
+            "type" : "string"
+          },
+          "fitxerMidaBytes" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "color" : {
+            "type" : "string",
+            "description" : "Mode en que es va fer l'escaneig. Valors possibles: \"B/N\",\"Gris\" o \"Color\""
+          },
+          "resolucio" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "midaPaper" : {
+            "type" : "string"
+          },
+          "estat" : {
+            "type" : "string",
+            "description" : "Estat final de la transacció. Valors possibles: 'EXPIRAT','CANCELAT','ERROR','ID','ENPROGRES','OK'"
+          },
+          "codiDir3" : {
+            "type" : "string"
+          },
+          "configuracioGrupNom" : {
+            "type" : "string"
+          },
+          "idiomaDocument" : {
+            "type" : "string"
+          },
+          "duplex" : {
+            "type" : "boolean"
+          },
+          "missatgeError" : {
+            "type" : "string"
+          },
+          "origen" : {
+            "type" : "string",
+            "description" : "Origen del Document. Valors possibles: Ciudadano o Administración en Castellà i Ciutadà o Administració en català"
+          },
+          "tipusDocumental" : {
+            "type" : "string",
+            "description" : "Tipus Documental NTI. Valors possibles: 'TD01','TD02','TD03','TD04','TD05','TD06','TD07','TD08','TD09','TD10','TD11','TD12','TD13','TD14','TD15','TD16','TD17','TD18','TD19','TD20','TD51','TD52','TD53','TD54','TD55','TD56','TD57','TD58','TD59','TD60','TD61','TD62','TD63','TD64','TD65','TD66','TD67','TD68','TD69','TD99'"
+          },
+          "dataCaptura" : {
+            "pattern" : "yyyy-MM-dd'T'HH:mm:ss",
+            "type" : "string",
+            "description" : "Data en que es va fer la transacció",
+            "format" : "date-time"
+          }
+        },
+        "description" : "Informació bàsica d'una transacció d'escaneig a DigitalIB."
+      },
+      "RestExceptionInfo" : {
+        "required" : [ "code", "errorMessage" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.",
+            "format" : "int32"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "Missatge de l'error"
+          },
+          "stackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció si n'hi hagués."
+          },
+          "causeException" : {
+            "type" : "string",
+            "description" : "Tipus de l'excepció origen (cause) si n'hi hagués."
+          },
+          "causeStackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció origen (cause) si n'hi hagués."
+          }
+        },
+        "description" : "Estructura de dades utilitzada per passar informació d'un error"
+      }
+    }
+  }
+}

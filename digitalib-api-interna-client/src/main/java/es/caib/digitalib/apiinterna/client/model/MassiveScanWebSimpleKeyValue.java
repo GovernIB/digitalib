@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleKeyValue.JSON_PROPERTY_KEY,
   MassiveScanWebSimpleKeyValue.JSON_PROPERTY_VALUE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleKeyValue {
   public static final String JSON_PROPERTY_KEY = "key";
   private String key;

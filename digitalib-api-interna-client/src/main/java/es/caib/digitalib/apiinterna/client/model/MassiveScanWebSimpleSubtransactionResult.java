@@ -30,6 +30,7 @@ import es.caib.digitalib.apiinterna.client.model.MassiveScanWebSimpleScannedFile
 import es.caib.digitalib.apiinterna.client.model.MassiveScanWebSimpleSignedFileInfo;
 import es.caib.digitalib.apiinterna.client.model.MassiveScanWebSimpleStatus;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -52,7 +53,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleSubtransactionResult.JSON_PROPERTY_ARXIU_OPTIONAL_PARAMETERS,
   MassiveScanWebSimpleSubtransactionResult.JSON_PROPERTY_ADDITIONAL_METADATAS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleSubtransactionResult {
   public static final String JSON_PROPERTY_TRANSACTION_I_D = "transactionID";
   private Long transactionID;

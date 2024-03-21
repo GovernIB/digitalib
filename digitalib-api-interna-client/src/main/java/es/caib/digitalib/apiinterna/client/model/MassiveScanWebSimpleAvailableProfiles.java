@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import es.caib.digitalib.apiinterna.client.model.MassiveScanWebSimpleAvailableProfile;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -32,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonPropertyOrder({
   MassiveScanWebSimpleAvailableProfiles.JSON_PROPERTY_AVAILABLE_PROFILES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleAvailableProfiles {
   public static final String JSON_PROPERTY_AVAILABLE_PROFILES = "availableProfiles";
   private List<MassiveScanWebSimpleAvailableProfile> availableProfiles;

@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -32,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleSubTransactionsOfTransaction.JSON_PROPERTY_TRANSACTION_I_D,
   MassiveScanWebSimpleSubTransactionsOfTransaction.JSON_PROPERTY_SUBTRANSACIONS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleSubTransactionsOfTransaction {
   public static final String JSON_PROPERTY_TRANSACTION_I_D = "transactionID";
   private String transactionID;

@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import es.caib.digitalib.apiinterna.client.model.MassiveScanWebSimpleKeyValue;
 import es.caib.digitalib.apiinterna.client.model.MassiveScanWebSimpleValidationInfo;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -47,7 +48,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleSignedFileInfo.JSON_PROPERTY_VALIDATION_INFO,
   MassiveScanWebSimpleSignedFileInfo.JSON_PROPERTY_ADDITION_INFORMATION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleSignedFileInfo {
   public static final String JSON_PROPERTY_SIGN_OPERATION = "signOperation";
   private Integer signOperation;

@@ -104,11 +104,24 @@
                             <outputFormat>JSON</outputFormat>
                             <resourcePackages>
                                 <package>es.caib.digitalib.api.interna.config</package>
-                                <!--
-                                <package>es.caib.digitalib.api.interna.all</package>
-                                <package>es.caib.digitalib.api.interna.secure</package>
-                                -->
                                 <package>es.caib.digitalib.api.interna.secure.apimassivescanwebsimple</package>
+                            </resourcePackages>
+                            <prettyPrint>TRUE</prettyPrint>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>openapi2</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>resolve</goal>
+                        </goals>
+                        <configuration>
+                            <contextId>openapi2</contextId>
+                            <outputFileName>openapi_dadesobertes</outputFileName>
+                            <outputPath>${project.basedir}/openapi/</outputPath>
+                            <outputFormat>JSON</outputFormat>
+                            <resourcePackages>
+                                <package>es.caib.digitalib.api.interna.config</package>
                                 <package>es.caib.digitalib.api.interna.all.dadesobertes.transaccions</package>
                             </resourcePackages>
                             <prettyPrint>TRUE</prettyPrint>
@@ -129,7 +142,7 @@
                 <!-- https://openapi-generator.tech/docs/generators/java/ -->
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>6.6.0</version>
+                <version>7.4.0</version>
 
                 <executions>
                     <execution>
@@ -141,7 +154,7 @@
                             
                             <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
                             <generatorName>java</generatorName>
-                            <skipValidateSpec>true</skipValidateSpec>
+                            <skipValidateSpec>false</skipValidateSpec>
                             <library>resteasy</library>
                             <!-- ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA*** --> 
                             <!-- <configHelp>true</configHelp> -->
@@ -152,9 +165,8 @@
                             <invokerPackage>${client.default.package}.services</invokerPackage>
                             <generateModelTests>false</generateModelTests>
                             
-                            <languageSpecificPrimitives>boolean,int</languageSpecificPrimitives>
+                            <languageSpecificPrimitives>boolean,int</languageSpecificPrimitives>                            
                             
-                            <apisToGenerate>ApiMassiveScanWebSimple</apisToGenerate>
                             <!--
                                <enablePostProcessFile>true</enablePostProcessFile>
                                Terminal => set JAVA_POST_PROCESS_FILE=postprocessfile.bat
@@ -164,7 +176,7 @@
                                 <groupId>es.caib.digitalib</groupId>
                                 <artifactId>digitalib-api-interna-client</artifactId>
                                 <artifactVersion>2.0</artifactVersion>
-                                <artifactDescription>digitalib - API Rest - Interna Client</artifactDescription>
+                                <artifactDescription>Digitalib - API Rest - Interna Client</artifactDescription>
                                 <dateLibrary>java8</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
@@ -217,8 +229,8 @@
                     <file>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist/index.html</file>
                     <replacements>
                         <replacement>
-                            <token>https://petstore.swagger.io/v2/swagger.json</token>
-                            <value>./openapi.json</value>
+                             <token>url: "https://petstore.swagger.io/v2/swagger.json"</token>
+                            <value>urls: [{url: "./openapi.json", name: "ApiMassiveScanWebSimple"},{url: "./openapi_dadesobertes.json", name: "Dades Obertes"}]</value>
                         </replacement>
                     </replacements>
                 </configuration>

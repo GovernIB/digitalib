@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleAvailableProfile.JSON_PROPERTY_DESCRIPTION,
   MassiveScanWebSimpleAvailableProfile.JSON_PROPERTY_PROFILE_TYPE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleAvailableProfile {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;

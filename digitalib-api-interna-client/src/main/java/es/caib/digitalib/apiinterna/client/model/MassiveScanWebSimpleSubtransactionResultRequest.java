@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleSubtransactionResultRequest.JSON_PROPERTY_RETURN_SCANNED_FILE,
   MassiveScanWebSimpleSubtransactionResultRequest.JSON_PROPERTY_RETURN_SIGNED_FILE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleSubtransactionResultRequest {
   public static final String JSON_PROPERTY_SUBTRANSACTION_I_D = "subtransactionID";
   private String subtransactionID;

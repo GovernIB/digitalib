@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleSignatureParameters.JSON_PROPERTY_FUNCTIONARY_ADMINISTRATION_I_D,
   MassiveScanWebSimpleSignatureParameters.JSON_PROPERTY_FUNCTIONAY_D_I_R3_UNIT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleSignatureParameters {
   public static final String JSON_PROPERTY_FUNCTIONARY_FULL_NAME = "functionaryFullName";
   private String functionaryFullName;

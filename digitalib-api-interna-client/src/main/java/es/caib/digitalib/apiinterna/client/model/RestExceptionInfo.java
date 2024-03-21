@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   RestExceptionInfo.JSON_PROPERTY_CAUSE_EXCEPTION,
   RestExceptionInfo.JSON_PROPERTY_CAUSE_STACK_TRACE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class RestExceptionInfo {
   public static final String JSON_PROPERTY_CODE = "code";
   private Integer code;

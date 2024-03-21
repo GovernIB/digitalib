@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleGetTransactionIdRequest.JSON_PROPERTY_ARXIU_REQUIRED_PARAMETERS,
   MassiveScanWebSimpleGetTransactionIdRequest.JSON_PROPERTY_ARXIU_OPTIONAL_PARAMETERS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleGetTransactionIdRequest {
   public static final String JSON_PROPERTY_SCAN_WEB_PROFILE = "scanWebProfile";
   private String scanWebProfile;

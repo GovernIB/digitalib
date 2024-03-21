@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleArxiuOptionalParameters.JSON_PROPERTY_DOCUMENTARY_SERIE,
   MassiveScanWebSimpleArxiuOptionalParameters.JSON_PROPERTY_CUSTODY_I_D_OR_EXPEDIENT_I_D
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleArxiuOptionalParameters {
   public static final String JSON_PROPERTY_PROCEDURE_NAME = "procedureName";
   private String procedureName;

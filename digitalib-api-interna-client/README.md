@@ -4,6 +4,8 @@ API REST INTERNA de DigitalIB
 
 - API version: 1.0.0
 
+- Generator version: 7.4.0
+
 Conjunt de Serveis REST de DigitalIB per ser accedits des de l'interior
 
   For more information, please visit [http://otae.fundaciobit.org](http://otae.fundaciobit.org)
@@ -132,7 +134,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [LlistatDeTransaccionsPaginada](docs/LlistatDeTransaccionsPaginada.md)
  - [MassiveScanWebSimpleArxiuInfo](docs/MassiveScanWebSimpleArxiuInfo.md)
  - [MassiveScanWebSimpleArxiuOptionalParameters](docs/MassiveScanWebSimpleArxiuOptionalParameters.md)
  - [MassiveScanWebSimpleArxiuRequiredParameters](docs/MassiveScanWebSimpleArxiuRequiredParameters.md)
@@ -154,7 +155,6 @@ Class | Method | HTTP request | Description
  - [MassiveScanWebSimpleSubtransactionResultRequest](docs/MassiveScanWebSimpleSubtransactionResultRequest.md)
  - [MassiveScanWebSimpleValidationInfo](docs/MassiveScanWebSimpleValidationInfo.md)
  - [RestExceptionInfo](docs/RestExceptionInfo.md)
- - [TransaccioInfo](docs/TransaccioInfo.md)
 
 
 <a id="documentation-for-authorization"></a>

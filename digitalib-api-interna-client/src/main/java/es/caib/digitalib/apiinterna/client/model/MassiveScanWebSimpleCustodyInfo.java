@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleCustodyInfo.JSON_PROPERTY_VALIDATION_FILE_URL,
   MassiveScanWebSimpleCustodyInfo.JSON_PROPERTY_CUSTODY_I_D
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleCustodyInfo {
   public static final String JSON_PROPERTY_CSV = "csv";
   private String csv;

@@ -16,8 +16,10 @@ package es.caib.digitalib.apiinterna.client.services;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class ApiException extends Exception {
+    private static final long serialVersionUID = 1L;
+
     private int code = 0;
     private Map<String, List<String>> responseHeaders = null;
     private String responseBody = null;

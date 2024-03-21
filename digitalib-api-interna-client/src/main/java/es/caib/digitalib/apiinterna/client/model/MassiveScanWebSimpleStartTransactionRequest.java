@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleStartTransactionRequest.JSON_PROPERTY_TRANSACTION_I_D,
   MassiveScanWebSimpleStartTransactionRequest.JSON_PROPERTY_RETURN_URL
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleStartTransactionRequest {
   public static final String JSON_PROPERTY_TRANSACTION_I_D = "transactionID";
   private String transactionID;

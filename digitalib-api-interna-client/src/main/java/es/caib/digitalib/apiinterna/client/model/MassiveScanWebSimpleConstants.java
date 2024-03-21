@@ -54,7 +54,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_G_R_A_Y,
   MassiveScanWebSimpleConstants.JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_SCANNED_FILE_INFO_P_I_X_E_L_T_Y_P_E_C_O_L_O_R
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleConstants {
   public static final String JSON_PROPERTY_MASSIVE_SCAN_WEB_SIMPLE_GET_TRANSACTION_ID_REQUEST_V_I_E_W_F_U_L_L_S_C_R_E_E_N = "MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN";
   private Integer massiveScanWebSimpleGetTransactionIdRequestVIEWFULLSCREEN = 0;

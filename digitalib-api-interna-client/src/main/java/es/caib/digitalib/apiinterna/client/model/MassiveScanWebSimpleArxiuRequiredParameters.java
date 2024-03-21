@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -36,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleArxiuRequiredParameters.JSON_PROPERTY_INTERESTED_PERSONS,
   MassiveScanWebSimpleArxiuRequiredParameters.JSON_PROPERTY_AFFECTED_ORGANISMS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleArxiuRequiredParameters {
   public static final String JSON_PROPERTY_CITIZEN_ADMINISTRATION_I_D = "citizenAdministrationID";
   private String citizenAdministrationID;

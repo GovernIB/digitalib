@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleProfileRequest.JSON_PROPERTY_PROFILE_CODE,
   MassiveScanWebSimpleProfileRequest.JSON_PROPERTY_LOCALE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleProfileRequest {
   public static final String JSON_PROPERTY_PROFILE_CODE = "profileCode";
   private String profileCode;

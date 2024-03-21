@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleFile.JSON_PROPERTY_MIME,
   MassiveScanWebSimpleFile.JSON_PROPERTY_DATA
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleFile {
   public static final String JSON_PROPERTY_NOM = "nom";
   private String nom;

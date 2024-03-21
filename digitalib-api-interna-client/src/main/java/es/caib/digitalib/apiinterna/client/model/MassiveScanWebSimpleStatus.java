@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleStatus.JSON_PROPERTY_ERROR_MESSAGE,
   MassiveScanWebSimpleStatus.JSON_PROPERTY_ERROR_STACK_TRACE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleStatus {
   public static final String JSON_PROPERTY_STATUS = "status";
   private Integer status = 0;

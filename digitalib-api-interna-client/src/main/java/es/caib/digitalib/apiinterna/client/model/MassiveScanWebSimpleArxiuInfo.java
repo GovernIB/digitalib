@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   MassiveScanWebSimpleArxiuInfo.JSON_PROPERTY_EXPEDIENT_I_D,
   MassiveScanWebSimpleArxiuInfo.JSON_PROPERTY_DOCUMENT_I_D
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.4.0")
 public class MassiveScanWebSimpleArxiuInfo {
   public static final String JSON_PROPERTY_CSV = "csv";
   private String csv;
