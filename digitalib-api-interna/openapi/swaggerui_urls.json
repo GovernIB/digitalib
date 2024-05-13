@@ -1,0 +1,16 @@
+[
+    {
+        "url": "./openapi_apimassivescanwebsimple.json",
+        "name": "Api Massive Scanweb Simple"
+    }
+,
+    {
+        "url": "./openapi_versio.json",
+        "name": "Info Versió"
+    }
+,
+    {
+        "url": "./openapi_dadesobertes.json",
+        "name": "Dades Obertes - Transaccions"
+    }
+]

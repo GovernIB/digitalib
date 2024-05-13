@@ -1,0 +1,1283 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: otae@fundaciobit.org
+    name: Departament de Govern Digital a la Fundació Bit
+    url: https://governdigital.fundaciobit.org
+  description: Conjunt de Serveis REST de DigitalIB per la realització remota d'escanejos
+  license:
+    name: European Union Public Licence (EUPL v1.2)
+    url: https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_es.pdf
+  title: API REST INTERNA de DigitalIB - ApiMassiveScanWebSimple
+  version: 1.0-SNAPSHOT
+externalDocs:
+  description: Java Client ApiMassiveScanWebSimple (GovernIB Github)
+  url: https://github.com/GovernIB/digitalib/tree/digitalib-2.0/digitalib-api-interna-client-apimassivescanwebsimple-v1
+servers:
+- url: /digitalibapi/interna
+- url: http://localhost:8080/digitalibapi/interna
+- url: https://dev.caib.es/digitalibapi/interna
+- url: https://proves.caib.es/digitalibapi/interna
+- url: https://se.caib.es/digitalibapi/interna
+- url: https://www.caib.es/digitalibapi/interna
+tags:
+- description: ApiMassiveScanWebSimple
+  name: ApiMassiveScanWebSimple
+paths:
+  /secure/apimassivescanwebsimple/v1/closeTransaction:
+    post:
+      operationId: closeTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: transactionWebID
+      responses:
+        "200":
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Tanca una transacció a partir del seu transaccionWebID
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
+  /secure/apimassivescanwebsimple/v1/getAvailableProfiles:
+    post:
+      operationId: getAvailableProfiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: Idioma. Valors permesos 'es' o 'ca'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveScanWebSimpleAvailableProfiles'
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna els Perfils Disponibles per aquest usuari aplicacio
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
+  /secure/apimassivescanwebsimple/v1/getMassiveTransactionStatus:
+    post:
+      operationId: getMassiveTransactionStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: Id de la transacció WEB
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveScanWebSimpleStatus'
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna l'estat d'una transacció massiva
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
+  /secure/apimassivescanwebsimple/v1/getProfile:
+    post:
+      operationId: getProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MassiveScanWebSimpleProfileRequest'
+        description: Idioma. Valors permesos 'es' o 'ca'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveScanWebSimpleAvailableProfile'
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna el PDF que s'ha de ficar entre els diferents documents a escanejar
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
+  /secure/apimassivescanwebsimple/v1/getSeparatorPage:
+    post:
+      operationId: getSeparatorPage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: Idioma. Valors permesos 'es' o 'ca'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveScanWebSimpleFile'
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+        "510":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveScanWebSimpleConstants'
+          description: Només s'utilitza per crear fitxer de constants...
+      security:
+      - BasicAuth: []
+      summary: Retorna el PDF que s'ha de ficar entre els diferents documents a escanejar
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
+  /secure/apimassivescanwebsimple/v1/getSubTransactionResult:
+    post:
+      operationId: getSubTransactionResult
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MassiveScanWebSimpleSubtransactionResultRequest'
+        description: Idioma. Valors permesos 'es' o 'ca'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveScanWebSimpleSubtransactionResult'
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna els resultats d'una subtransacció.
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
+  /secure/apimassivescanwebsimple/v1/getSubTransactionStatus:
+    post:
+      operationId: getSubTransactionStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: subTransactionID
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveScanWebSimpleStatus'
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna l'estat d'una subtransacció.
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
+  /secure/apimassivescanwebsimple/v1/getSubTransactionsOfTransaction:
+    post:
+      operationId: getSubTransactionsOfTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: transactionWebID
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveScanWebSimpleSubTransactionsOfTransaction'
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+        "510":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MassiveScanWebSimpleConstants'
+          description: Només s'utilitza per crear fitxer de constants...
+      security:
+      - BasicAuth: []
+      summary: Retorna el PDF que s'ha de ficar entre els diferents documents a escanejar
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
+  /secure/apimassivescanwebsimple/v1/getTransactionID:
+    post:
+      operationId: getTransactionID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MassiveScanWebSimpleGetTransactionIdRequest'
+        description: Dades de la petició
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna una transacció a partir de l'identificador
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
+  /secure/apimassivescanwebsimple/v1/startTransaction:
+    post:
+      operationId: startTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MassiveScanWebSimpleStartTransactionRequest'
+        description: Dades necessàries per posa en marxa una transacció
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Operació realitzada correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Posa en marxa una transacció
+      tags:
+      - ApiMassiveScanWebSimple
+      x-content-type: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    RestExceptionInfo:
+      description: Estructura de dades utilitzada per passar informació d'un error
+      example:
+        code: 0
+        causeStackTrace: causeStackTrace
+        causeException: causeException
+        errorMessage: errorMessage
+        stackTrace: stackTrace
+      properties:
+        code:
+          description: Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
+          format: int32
+          type: integer
+        errorMessage:
+          description: Missatge de l'error
+          type: string
+        stackTrace:
+          description: Stacktrace de l'excepció si n'hi hagués.
+          type: string
+        causeException:
+          description: Tipus de l'excepció origen (cause) si n'hi hagués.
+          type: string
+        causeStackTrace:
+          description: Stacktrace de l'excepció origen (cause) si n'hi hagués.
+          type: string
+      required:
+      - code
+      - errorMessage
+      type: object
+    MassiveScanWebSimpleAvailableProfile:
+      example:
+        code: code
+        profileType: 0
+        name: name
+        description: description
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        profileType:
+          format: int32
+          type: integer
+      type: object
+    MassiveScanWebSimpleAvailableProfiles:
+      example:
+        availableProfiles:
+        - code: code
+          profileType: 0
+          name: name
+          description: description
+        - code: code
+          profileType: 0
+          name: name
+          description: description
+      properties:
+        availableProfiles:
+          items:
+            $ref: '#/components/schemas/MassiveScanWebSimpleAvailableProfile'
+          type: array
+      type: object
+    MassiveScanWebSimpleStatus:
+      example:
+        errorStackTrace: errorStackTrace
+        errorMessage: errorMessage
+        status: 0
+      properties:
+        status:
+          default: 0
+          format: int32
+          type: integer
+        errorMessage:
+          type: string
+        errorStackTrace:
+          type: string
+      required:
+      - status
+      type: object
+    MassiveScanWebSimpleProfileRequest:
+      example:
+        profileCode: profileCode
+        locale: locale
+      properties:
+        profileCode:
+          type: string
+        locale:
+          type: string
+      type: object
+    MassiveScanWebSimpleFile:
+      example:
+        data: data
+        mime: mime
+        nom: nom
+      properties:
+        nom:
+          type: string
+        mime:
+          type: string
+        data:
+          format: byte
+          type: string
+      type: object
+    MassiveScanWebSimpleConstants:
+      example:
+        MassiveScanWebSimpleStatus_STATUS_FINAL_OK: 9
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_DP: EE03
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG: jpg
+        MassiveScanWebSimpleStatus_STATUS_IN_PROGRESS: 7
+        MassiveScanWebSimpleStatus_STATUS_CANCELLED: 2
+        MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY: 5
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ORIGINAL: EE01
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_CF: EE02
+        MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE: 5
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_ADMINISTRACIO: 1
+        MassiveScanWebSimpleStatus_STATUS_EXPIRED: 4
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF: tif
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES: EE99
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF: gif
+        MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN: 0
+        MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_ONLY_SCAN: 1
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG: png
+        MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR: 6
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_CIUTADA: 7
+        MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE: 1
+        MassiveScanWebSimpleStatus_STATUS_FINAL_ERROR: 3
+        MassiveScanWebSimpleGetTransactionIdRequest_VIEW_IFRAME: 6
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF: pdf
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_PR: EE04
+        MassiveScanWebSimpleStatus_STATUS_REQUESTED_ID: 2
+        MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY: 1
+      properties:
+        MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN:
+          default: 0
+          description: Constant MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleGetTransactionIdRequest_VIEW_IFRAME:
+          default: 1
+          description: Constant MassiveScanWebSimpleGetTransactionIdRequest_VIEW_IFRAME
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_ONLY_SCAN:
+          default: 1
+          description: Constant MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_ONLY_SCAN
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE:
+          default: 2
+          description: Constant MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY:
+          default: 3
+          description: Constant MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleStatus_STATUS_REQUESTED_ID:
+          default: 0
+          description: Constant MassiveScanWebSimpleStatus_STATUS_REQUESTED_ID
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleStatus_STATUS_IN_PROGRESS:
+          default: 1
+          description: Constant MassiveScanWebSimpleStatus_STATUS_IN_PROGRESS
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleStatus_STATUS_FINAL_OK:
+          default: 2
+          description: Constant MassiveScanWebSimpleStatus_STATUS_FINAL_OK
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleStatus_STATUS_FINAL_ERROR:
+          default: -1
+          description: Constant MassiveScanWebSimpleStatus_STATUS_FINAL_ERROR
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleStatus_STATUS_CANCELLED:
+          default: -2
+          description: Constant MassiveScanWebSimpleStatus_STATUS_CANCELLED
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleStatus_STATUS_EXPIRED:
+          default: -3
+          description: Constant MassiveScanWebSimpleStatus_STATUS_EXPIRED
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_CIUTADA:
+          default: 0
+          description: Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_CIUTADA
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_ADMINISTRACIO:
+          default: 1
+          description: Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_ADMINISTRACIO
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ORIGINAL:
+          default: EE01
+          description: Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ORIGINAL
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_CF:
+          default: EE02
+          description: Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_CF
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_DP:
+          default: EE03
+          description: Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_DP
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_PR:
+          default: EE04
+          description: Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_PR
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES:
+          default: EE99
+          description: Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF:
+          default: pdf
+          description: Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG:
+          default: jpg
+          description: Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF:
+          default: tif
+          description: Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG:
+          default: png
+          description: Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF:
+          default: gif
+          description: Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF
+          readOnly: true
+          type: string
+        MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE:
+          default: 0
+          description: Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY:
+          default: 1
+          description: Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY
+          format: int32
+          readOnly: true
+          type: integer
+        MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR:
+          default: 2
+          description: Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR
+          format: int32
+          readOnly: true
+          type: integer
+      required:
+      - MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES
+      - MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_CF
+      - MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_DP
+      - MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_PR
+      - MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ORIGINAL
+      - MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_ADMINISTRACIO
+      - MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_CIUTADA
+      - MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_ONLY_SCAN
+      - MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE
+      - MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY
+      - MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN
+      - MassiveScanWebSimpleGetTransactionIdRequest_VIEW_IFRAME
+      - MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF
+      - MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG
+      - MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF
+      - MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG
+      - MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF
+      - MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE
+      - MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR
+      - MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY
+      - MassiveScanWebSimpleStatus_STATUS_CANCELLED
+      - MassiveScanWebSimpleStatus_STATUS_EXPIRED
+      - MassiveScanWebSimpleStatus_STATUS_FINAL_ERROR
+      - MassiveScanWebSimpleStatus_STATUS_FINAL_OK
+      - MassiveScanWebSimpleStatus_STATUS_IN_PROGRESS
+      - MassiveScanWebSimpleStatus_STATUS_REQUESTED_ID
+      type: object
+    MassiveScanWebSimpleSubtransactionResultRequest:
+      example:
+        returnScannedFile: true
+        returnSignedFile: true
+        subtransactionID: subtransactionID
+      properties:
+        subtransactionID:
+          type: string
+        returnScannedFile:
+          type: boolean
+        returnSignedFile:
+          type: boolean
+      type: object
+    MassiveScanWebSimpleArxiuInfo:
+      example:
+        validationFileUrl: validationFileUrl
+        expedientID: expedientID
+        csv: csv
+        printableFileURL: printableFileURL
+        csvValidationWeb: csvValidationWeb
+        documentID: documentID
+        originalFileURL: originalFileURL
+        eniFileURL: eniFileURL
+        csvGenerationDefinition: csvGenerationDefinition
+      properties:
+        csv:
+          type: string
+        originalFileURL:
+          type: string
+        printableFileURL:
+          type: string
+        eniFileURL:
+          type: string
+        csvValidationWeb:
+          type: string
+        csvGenerationDefinition:
+          type: string
+        validationFileUrl:
+          type: string
+        expedientID:
+          type: string
+        documentID:
+          type: string
+      type: object
+    MassiveScanWebSimpleArxiuOptionalParameters:
+      example:
+        procedureCode: procedureCode
+        procedureName: procedureName
+        documentarySerie: documentarySerie
+        custodyIDOrExpedientID: custodyIDOrExpedientID
+      properties:
+        procedureName:
+          type: string
+        procedureCode:
+          type: string
+        documentarySerie:
+          type: string
+        custodyIDOrExpedientID:
+          type: string
+      type: object
+    MassiveScanWebSimpleArxiuRequiredParameters:
+      example:
+        interestedPersons:
+        - interestedPersons
+        - interestedPersons
+        affectedOrganisms:
+        - affectedOrganisms
+        - affectedOrganisms
+        citizenAdministrationID: citizenAdministrationID
+        citizenFullName: citizenFullName
+        documentElaborationState: documentElaborationState
+        documentOrigen: 7
+      properties:
+        citizenAdministrationID:
+          type: string
+        citizenFullName:
+          type: string
+        documentElaborationState:
+          type: string
+        documentOrigen:
+          format: int32
+          type: integer
+        interestedPersons:
+          items:
+            type: string
+          type: array
+        affectedOrganisms:
+          items:
+            type: string
+          type: array
+      type: object
+    MassiveScanWebSimpleCustodyInfo:
+      example:
+        validationFileUrl: validationFileUrl
+        custodyID: custodyID
+        csv: csv
+        printableFileURL: printableFileURL
+        csvValidationWeb: csvValidationWeb
+        originalFileURL: originalFileURL
+        eniFileURL: eniFileURL
+        csvGenerationDefinition: csvGenerationDefinition
+      properties:
+        csv:
+          type: string
+        originalFileURL:
+          type: string
+        printableFileURL:
+          type: string
+        eniFileURL:
+          type: string
+        csvValidationWeb:
+          type: string
+        csvGenerationDefinition:
+          type: string
+        validationFileUrl:
+          type: string
+        custodyID:
+          type: string
+      type: object
+    MassiveScanWebSimpleKeyValue:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    MassiveScanWebSimpleScannedFileInfo:
+      example:
+        pppResolution: 1
+        documentLanguage: documentLanguage
+        formatFile: formatFile
+        documentType: documentType
+        duplex: true
+        pixelType: 6
+        transactionName: transactionName
+        paperSize: paperSize
+        scanDate: 2000-01-23T04:56:07.000+00:00
+        ocr: true
+      properties:
+        transactionName:
+          type: string
+        scanDate:
+          format: date-time
+          type: string
+        pixelType:
+          format: int32
+          type: integer
+        pppResolution:
+          format: int32
+          type: integer
+        formatFile:
+          type: string
+        ocr:
+          type: boolean
+        duplex:
+          type: boolean
+        paperSize:
+          type: string
+        documentLanguage:
+          type: string
+        documentType:
+          type: string
+      type: object
+    MassiveScanWebSimpleSignedFileInfo:
+      example:
+        signaturesTableLocation: 2
+        eniPerfilFirma: eniPerfilFirma
+        validationInfo:
+          checkDocumentModifications: true
+          checkValidationSignature: true
+          checkAdministrationIDOfSigner: true
+        signMode: 5
+        eniSignerAdministrationId: eniSignerAdministrationId
+        eniRolFirma: eniRolFirma
+        signOperation: 5
+        additionInformation:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        eniTipoFirma: eniTipoFirma
+        eniSignerName: eniSignerName
+        signType: signType
+        signAlgorithm: signAlgorithm
+        eniSignLevel: eniSignLevel
+        timeStampIncluded: true
+        policyIncluded: true
+      properties:
+        signOperation:
+          format: int32
+          type: integer
+        signType:
+          type: string
+        signAlgorithm:
+          type: string
+        signMode:
+          format: int32
+          type: integer
+        signaturesTableLocation:
+          format: int32
+          type: integer
+        timeStampIncluded:
+          type: boolean
+        policyIncluded:
+          type: boolean
+        eniTipoFirma:
+          type: string
+        eniPerfilFirma:
+          type: string
+        eniRolFirma:
+          type: string
+        eniSignerName:
+          type: string
+        eniSignerAdministrationId:
+          type: string
+        eniSignLevel:
+          type: string
+        validationInfo:
+          $ref: '#/components/schemas/MassiveScanWebSimpleValidationInfo'
+        additionInformation:
+          items:
+            $ref: '#/components/schemas/MassiveScanWebSimpleKeyValue'
+          type: array
+      type: object
+    MassiveScanWebSimpleSubtransactionResult:
+      example:
+        arxiuInfo:
+          validationFileUrl: validationFileUrl
+          expedientID: expedientID
+          csv: csv
+          printableFileURL: printableFileURL
+          csvValidationWeb: csvValidationWeb
+          documentID: documentID
+          originalFileURL: originalFileURL
+          eniFileURL: eniFileURL
+          csvGenerationDefinition: csvGenerationDefinition
+        arxiuRequiredParameters:
+          interestedPersons:
+          - interestedPersons
+          - interestedPersons
+          affectedOrganisms:
+          - affectedOrganisms
+          - affectedOrganisms
+          citizenAdministrationID: citizenAdministrationID
+          citizenFullName: citizenFullName
+          documentElaborationState: documentElaborationState
+          documentOrigen: 7
+        additionalMetadatas:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        signedFile:
+          data: data
+          mime: mime
+          nom: nom
+        detachedSignatureFile:
+          data: data
+          mime: mime
+          nom: nom
+        transactionID: 0
+        transactionWebID: transactionWebID
+        scannedFileInfo:
+          pppResolution: 1
+          documentLanguage: documentLanguage
+          formatFile: formatFile
+          documentType: documentType
+          duplex: true
+          pixelType: 6
+          transactionName: transactionName
+          paperSize: paperSize
+          scanDate: 2000-01-23T04:56:07.000+00:00
+          ocr: true
+        custodyInfo:
+          validationFileUrl: validationFileUrl
+          custodyID: custodyID
+          csv: csv
+          printableFileURL: printableFileURL
+          csvValidationWeb: csvValidationWeb
+          originalFileURL: originalFileURL
+          eniFileURL: eniFileURL
+          csvGenerationDefinition: csvGenerationDefinition
+        signedFileInfo:
+          signaturesTableLocation: 2
+          eniPerfilFirma: eniPerfilFirma
+          validationInfo:
+            checkDocumentModifications: true
+            checkValidationSignature: true
+            checkAdministrationIDOfSigner: true
+          signMode: 5
+          eniSignerAdministrationId: eniSignerAdministrationId
+          eniRolFirma: eniRolFirma
+          signOperation: 5
+          additionInformation:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          eniTipoFirma: eniTipoFirma
+          eniSignerName: eniSignerName
+          signType: signType
+          signAlgorithm: signAlgorithm
+          eniSignLevel: eniSignLevel
+          timeStampIncluded: true
+          policyIncluded: true
+        scannedFile:
+          data: data
+          mime: mime
+          nom: nom
+        arxiuOptionalParameters:
+          procedureCode: procedureCode
+          procedureName: procedureName
+          documentarySerie: documentarySerie
+          custodyIDOrExpedientID: custodyIDOrExpedientID
+        status:
+          errorStackTrace: errorStackTrace
+          errorMessage: errorMessage
+          status: 0
+      properties:
+        transactionID:
+          format: int64
+          type: integer
+        transactionWebID:
+          type: string
+        status:
+          $ref: '#/components/schemas/MassiveScanWebSimpleStatus'
+        scannedFile:
+          $ref: '#/components/schemas/MassiveScanWebSimpleFile'
+        scannedFileInfo:
+          $ref: '#/components/schemas/MassiveScanWebSimpleScannedFileInfo'
+        signedFile:
+          $ref: '#/components/schemas/MassiveScanWebSimpleFile'
+        detachedSignatureFile:
+          $ref: '#/components/schemas/MassiveScanWebSimpleFile'
+        signedFileInfo:
+          $ref: '#/components/schemas/MassiveScanWebSimpleSignedFileInfo'
+        custodyInfo:
+          $ref: '#/components/schemas/MassiveScanWebSimpleCustodyInfo'
+        arxiuInfo:
+          $ref: '#/components/schemas/MassiveScanWebSimpleArxiuInfo'
+        arxiuRequiredParameters:
+          $ref: '#/components/schemas/MassiveScanWebSimpleArxiuRequiredParameters'
+        arxiuOptionalParameters:
+          $ref: '#/components/schemas/MassiveScanWebSimpleArxiuOptionalParameters'
+        additionalMetadatas:
+          items:
+            $ref: '#/components/schemas/MassiveScanWebSimpleKeyValue'
+          type: array
+      type: object
+    MassiveScanWebSimpleValidationInfo:
+      example:
+        checkDocumentModifications: true
+        checkValidationSignature: true
+        checkAdministrationIDOfSigner: true
+      properties:
+        checkAdministrationIDOfSigner:
+          type: boolean
+        checkDocumentModifications:
+          type: boolean
+        checkValidationSignature:
+          type: boolean
+      type: object
+    MassiveScanWebSimpleSubTransactionsOfTransaction:
+      example:
+        subtransacions:
+        - subtransacions
+        - subtransacions
+        transactionID: transactionID
+      properties:
+        transactionID:
+          type: string
+        subtransacions:
+          items:
+            type: string
+          type: array
+      type: object
+    MassiveScanWebSimpleGetTransactionIdRequest:
+      example:
+        view: 0
+        funcionariUsername: funcionariUsername
+        scanWebProfile: scanWebProfile
+        arxiuRequiredParameters:
+          interestedPersons:
+          - interestedPersons
+          - interestedPersons
+          affectedOrganisms:
+          - affectedOrganisms
+          - affectedOrganisms
+          citizenAdministrationID: citizenAdministrationID
+          citizenFullName: citizenFullName
+          documentElaborationState: documentElaborationState
+          documentOrigen: 7
+        languageUI: ca
+        signatureParameters:
+          functionayDIR3Unit: functionayDIR3Unit
+          functionaryAdministrationID: functionaryAdministrationID
+          functionaryFullName: functionaryFullName
+        transactionName: transactionName
+        arxiuOptionalParameters:
+          procedureCode: procedureCode
+          procedureName: procedureName
+          documentarySerie: documentarySerie
+          custodyIDOrExpedientID: custodyIDOrExpedientID
+      properties:
+        scanWebProfile:
+          description: Perfil d'escaneig
+          type: string
+        view:
+          default: 1
+          description: Tipus de Vista. Veure MassiveScanWebSimpleConstants.
+          format: int32
+          type: integer
+        languageUI:
+          default: ca
+          description: Idioma del document en ISO 639-1. Valors permesos 'ca' i 'es'
+          example: ca
+          pattern: ^(ca|es)$
+          type: string
+        transactionName:
+          description: Nom descriptiu de la transacció d'escaneig.
+          type: string
+        funcionariUsername:
+          description: Username del funcionari.
+          type: string
+        signatureParameters:
+          $ref: '#/components/schemas/MassiveScanWebSimpleSignatureParameters'
+        arxiuRequiredParameters:
+          $ref: '#/components/schemas/MassiveScanWebSimpleArxiuRequiredParameters'
+        arxiuOptionalParameters:
+          $ref: '#/components/schemas/MassiveScanWebSimpleArxiuOptionalParameters'
+      required:
+      - funcionariUsername
+      - languageUI
+      - scanWebProfile
+      - transactionName
+      - view
+      type: object
+    MassiveScanWebSimpleSignatureParameters:
+      example:
+        functionayDIR3Unit: functionayDIR3Unit
+        functionaryAdministrationID: functionaryAdministrationID
+        functionaryFullName: functionaryFullName
+      properties:
+        functionaryFullName:
+          type: string
+        functionaryAdministrationID:
+          type: string
+        functionayDIR3Unit:
+          type: string
+      type: object
+    MassiveScanWebSimpleStartTransactionRequest:
+      example:
+        returnUrl: returnUrl
+        transactionID: transactionID
+      properties:
+        transactionID:
+          type: string
+        returnUrl:
+          type: string
+      type: object
+  securitySchemes:
+    BasicAuth:
+      scheme: basic
+      type: http
+

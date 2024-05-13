@@ -1,0 +1,131 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API REST INTERNA de DigitalIB - Versió",
+    "description" : "Conjunt de Serveis REST de DigitalIB per consultar la Versióde l'Aplicació.",
+    "contact" : {
+      "name" : "Departament de Govern Digital a la Fundació Bit",
+      "url" : "https://governdigital.fundaciobit.org",
+      "email" : "otae@fundaciobit.org"
+    },
+    "license" : {
+      "name" : "European Union Public Licence (EUPL v1.2)",
+      "url" : "https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_es.pdf"
+    },
+    "version" : "1.0-SNAPSHOT"
+  },
+  "externalDocs" : {
+    "description" : "Api Rest Interna (GovernIB Github)",
+    "url" : "https://github.com/GovernIB/digitalib/tree/digitalib-2.0/digitalib-api-interna-versio-v1"
+  },
+  "servers" : [ {
+    "url" : "/digitalibapi/interna"
+  }, {
+    "url" : "http://localhost:8080/digitalibapi/interna"
+  }, {
+    "url" : "https://dev.caib.es/digitalibapi/interna"
+  }, {
+    "url" : "https://proves.caib.es/digitalibapi/interna"
+  }, {
+    "url" : "https://se.caib.es/digitalibapi/interna"
+  }, {
+    "url" : "https://www.caib.es/digitalibapi/interna"
+  } ],
+  "tags" : [ {
+    "name" : "Versio",
+    "description" : "Servei JSON d'accés Públic que retorna informació de la versió"
+  } ],
+  "paths" : {
+    "/public/versio/versio" : {
+      "get" : {
+        "tags" : [ "Versio" ],
+        "summary" : "Versio de l'Aplicació",
+        "operationId" : "versio",
+        "parameters" : [ {
+          "name" : "language",
+          "in" : "query",
+          "description" : "Codi de l'idioma",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "ca"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Versió de l'Aplicació DigitalIB",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Versio"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat en el servidor",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Versio" : {
+        "type" : "object",
+        "properties" : {
+          "versio" : {
+            "type" : "string"
+          },
+          "language" : {
+            "type" : "string"
+          },
+          "caib" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "Informació de la Versió de DigitalIB"
+      },
+      "RestExceptionInfo" : {
+        "required" : [ "code", "errorMessage" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.",
+            "format" : "int32"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "Missatge de l'error"
+          },
+          "stackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció si n'hi hagués."
+          },
+          "causeException" : {
+            "type" : "string",
+            "description" : "Tipus de l'excepció origen (cause) si n'hi hagués."
+          },
+          "causeStackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció origen (cause) si n'hi hagués."
+          }
+        },
+        "description" : "Estructura de dades utilitzada per passar informació d'un error"
+      }
+    }
+  }
+}

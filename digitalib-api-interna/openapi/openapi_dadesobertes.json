@@ -1,22 +1,22 @@
 {
   "openapi" : "3.0.1",
   "info" : {
-    "title" : "API REST INTERNA de DigitalIB",
-    "description" : "Conjunt de Serveis REST de DigitalIB per ser accedits des de l'interior",
+    "title" : "API REST INTERNA de DigitalIB - Dades Obertes - Transaccions",
+    "description" : "Conjunt de Serveis REST de DigitalIB per la realització de consultes dad dades obertes de Transaccions",
     "contact" : {
       "name" : "Departament de Govern Digital a la Fundació Bit",
-      "url" : "http://otae.fundaciobit.org",
+      "url" : "https://governdigital.fundaciobit.org",
       "email" : "otae@fundaciobit.org"
     },
     "license" : {
-      "name" : "License Apache 2.0",
-      "url" : "http://www.apache.org/licenses/LICENSE-2.0"
+      "name" : "European Union Public Licence (EUPL v1.2)",
+      "url" : "https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_es.pdf"
     },
-    "version" : "1.0.0"
+    "version" : "1.0-SNAPSHOT"
   },
   "externalDocs" : {
-    "description" : "Java Client (GovernIB Github)",
-    "url" : "https://github.com/GovernIB/digitalib/tree/digitalib-1.0/digitalib-api-interna-client"
+    "description" : "Api Rest Interna (GovernIB Github)",
+    "url" : "https://github.com/GovernIB/digitalib/tree/digitalib-2.0/digitalib-api-interna"
   },
   "servers" : [ {
     "url" : "/digitalibapi/interna"
@@ -36,7 +36,7 @@
     "description" : "Servei de informació d'estadístiques de Transaccions d'Accés Públic"
   } ],
   "paths" : {
-    "/public/dadesobertes/transaccions/consulta" : {
+    "/public/dadesobertes/transaccions/v1/consulta" : {
       "get" : {
         "tags" : [ "Transaccions" ],
         "summary" : "Retorna estadístiques de les transaccions a DigitalIB",

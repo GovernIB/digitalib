@@ -1,0 +1,1431 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API REST INTERNA de DigitalIB - ApiMassiveScanWebSimple",
+    "description" : "Conjunt de Serveis REST de DigitalIB per la realització remota d'escanejos",
+    "contact" : {
+      "name" : "Departament de Govern Digital a la Fundació Bit",
+      "url" : "https://governdigital.fundaciobit.org",
+      "email" : "otae@fundaciobit.org"
+    },
+    "license" : {
+      "name" : "European Union Public Licence (EUPL v1.2)",
+      "url" : "https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_es.pdf"
+    },
+    "version" : "1.0-SNAPSHOT"
+  },
+  "externalDocs" : {
+    "description" : "Java Client ApiMassiveScanWebSimple (GovernIB Github)",
+    "url" : "https://github.com/GovernIB/digitalib/tree/digitalib-2.0/digitalib-api-interna-client-apimassivescanwebsimple-v1"
+  },
+  "servers" : [ {
+    "url" : "/digitalibapi/interna"
+  }, {
+    "url" : "http://localhost:8080/digitalibapi/interna"
+  }, {
+    "url" : "https://dev.caib.es/digitalibapi/interna"
+  }, {
+    "url" : "https://proves.caib.es/digitalibapi/interna"
+  }, {
+    "url" : "https://se.caib.es/digitalibapi/interna"
+  }, {
+    "url" : "https://www.caib.es/digitalibapi/interna"
+  } ],
+  "tags" : [ {
+    "name" : "ApiMassiveScanWebSimple",
+    "description" : "ApiMassiveScanWebSimple"
+  } ],
+  "paths" : {
+    "/secure/apimassivescanwebsimple/v1/closeTransaction" : {
+      "post" : {
+        "tags" : [ "ApiMassiveScanWebSimple" ],
+        "summary" : "Tanca una transacció a partir del seu transaccionWebID",
+        "operationId" : "closeTransaction",
+        "requestBody" : {
+          "description" : "transactionWebID",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament"
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/apimassivescanwebsimple/v1/getAvailableProfiles" : {
+      "post" : {
+        "tags" : [ "ApiMassiveScanWebSimple" ],
+        "summary" : "Retorna els Perfils Disponibles per aquest usuari aplicacio",
+        "operationId" : "getAvailableProfiles",
+        "requestBody" : {
+          "description" : "Idioma. Valors permesos 'es' o 'ca'",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MassiveScanWebSimpleAvailableProfiles"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/apimassivescanwebsimple/v1/getMassiveTransactionStatus" : {
+      "post" : {
+        "tags" : [ "ApiMassiveScanWebSimple" ],
+        "summary" : "Retorna l'estat d'una transacció massiva",
+        "operationId" : "getMassiveTransactionStatus",
+        "requestBody" : {
+          "description" : "Id de la transacció WEB",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MassiveScanWebSimpleStatus"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/apimassivescanwebsimple/v1/getProfile" : {
+      "post" : {
+        "tags" : [ "ApiMassiveScanWebSimple" ],
+        "summary" : "Retorna el PDF que s'ha de ficar entre els diferents documents a escanejar",
+        "operationId" : "getProfile",
+        "requestBody" : {
+          "description" : "Idioma. Valors permesos 'es' o 'ca'",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MassiveScanWebSimpleProfileRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MassiveScanWebSimpleAvailableProfile"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/apimassivescanwebsimple/v1/getSeparatorPage" : {
+      "post" : {
+        "tags" : [ "ApiMassiveScanWebSimple" ],
+        "summary" : "Retorna el PDF que s'ha de ficar entre els diferents documents a escanejar",
+        "operationId" : "getSeparatorPage",
+        "requestBody" : {
+          "description" : "Idioma. Valors permesos 'es' o 'ca'",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MassiveScanWebSimpleFile"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "510" : {
+            "description" : "Només s'utilitza per crear fitxer de constants...",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MassiveScanWebSimpleConstants"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/apimassivescanwebsimple/v1/getSubTransactionResult" : {
+      "post" : {
+        "tags" : [ "ApiMassiveScanWebSimple" ],
+        "summary" : "Retorna els resultats d'una subtransacció.",
+        "operationId" : "getSubTransactionResult",
+        "requestBody" : {
+          "description" : "Idioma. Valors permesos 'es' o 'ca'",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MassiveScanWebSimpleSubtransactionResultRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MassiveScanWebSimpleSubtransactionResult"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/apimassivescanwebsimple/v1/getSubTransactionStatus" : {
+      "post" : {
+        "tags" : [ "ApiMassiveScanWebSimple" ],
+        "summary" : "Retorna l'estat d'una subtransacció.",
+        "operationId" : "getSubTransactionStatus",
+        "requestBody" : {
+          "description" : "subTransactionID",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MassiveScanWebSimpleStatus"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/apimassivescanwebsimple/v1/getSubTransactionsOfTransaction" : {
+      "post" : {
+        "tags" : [ "ApiMassiveScanWebSimple" ],
+        "summary" : "Retorna el PDF que s'ha de ficar entre els diferents documents a escanejar",
+        "operationId" : "getSubTransactionsOfTransaction",
+        "requestBody" : {
+          "description" : "transactionWebID",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MassiveScanWebSimpleSubTransactionsOfTransaction"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "510" : {
+            "description" : "Només s'utilitza per crear fitxer de constants...",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MassiveScanWebSimpleConstants"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/apimassivescanwebsimple/v1/getTransactionID" : {
+      "post" : {
+        "tags" : [ "ApiMassiveScanWebSimple" ],
+        "summary" : "Retorna una transacció a partir de l'identificador",
+        "operationId" : "getTransactionID",
+        "requestBody" : {
+          "description" : "Dades de la petició",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MassiveScanWebSimpleGetTransactionIdRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/apimassivescanwebsimple/v1/startTransaction" : {
+      "post" : {
+        "tags" : [ "ApiMassiveScanWebSimple" ],
+        "summary" : "Posa en marxa una transacció",
+        "operationId" : "startTransaction",
+        "requestBody" : {
+          "description" : "Dades necessàries per posa en marxa una transacció",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MassiveScanWebSimpleStartTransactionRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operació realitzada correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "RestExceptionInfo" : {
+        "required" : [ "code", "errorMessage" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.",
+            "format" : "int32"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "Missatge de l'error"
+          },
+          "stackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció si n'hi hagués."
+          },
+          "causeException" : {
+            "type" : "string",
+            "description" : "Tipus de l'excepció origen (cause) si n'hi hagués."
+          },
+          "causeStackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció origen (cause) si n'hi hagués."
+          }
+        },
+        "description" : "Estructura de dades utilitzada per passar informació d'un error"
+      },
+      "MassiveScanWebSimpleAvailableProfile" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "profileType" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "MassiveScanWebSimpleAvailableProfiles" : {
+        "type" : "object",
+        "properties" : {
+          "availableProfiles" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MassiveScanWebSimpleAvailableProfile"
+            }
+          }
+        }
+      },
+      "MassiveScanWebSimpleStatus" : {
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 0
+          },
+          "errorMessage" : {
+            "type" : "string"
+          },
+          "errorStackTrace" : {
+            "type" : "string"
+          }
+        }
+      },
+      "MassiveScanWebSimpleProfileRequest" : {
+        "type" : "object",
+        "properties" : {
+          "profileCode" : {
+            "type" : "string"
+          },
+          "locale" : {
+            "type" : "string"
+          }
+        }
+      },
+      "MassiveScanWebSimpleFile" : {
+        "type" : "object",
+        "properties" : {
+          "nom" : {
+            "type" : "string"
+          },
+          "mime" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "string",
+            "format" : "byte"
+          }
+        }
+      },
+      "MassiveScanWebSimpleConstants" : {
+        "required" : [ "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_CF", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_DP", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_PR", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ORIGINAL", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_ADMINISTRACIO", "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_CIUTADA", "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_ONLY_SCAN", "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE", "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY", "MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN", "MassiveScanWebSimpleGetTransactionIdRequest_VIEW_IFRAME", "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF", "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG", "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF", "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG", "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF", "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE", "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR", "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY", "MassiveScanWebSimpleStatus_STATUS_CANCELLED", "MassiveScanWebSimpleStatus_STATUS_EXPIRED", "MassiveScanWebSimpleStatus_STATUS_FINAL_ERROR", "MassiveScanWebSimpleStatus_STATUS_FINAL_OK", "MassiveScanWebSimpleStatus_STATUS_IN_PROGRESS", "MassiveScanWebSimpleStatus_STATUS_REQUESTED_ID" ],
+        "type" : "object",
+        "properties" : {
+          "MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleGetTransactionIdRequest_VIEW_FULLSCREEN",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 0
+          },
+          "MassiveScanWebSimpleGetTransactionIdRequest_VIEW_IFRAME" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleGetTransactionIdRequest_VIEW_IFRAME",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 1
+          },
+          "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_ONLY_SCAN" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_ONLY_SCAN",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 1
+          },
+          "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 2
+          },
+          "MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleAvailableProfile_PROFILE_TYPE_SCAN_AND_SIGNATURE_AND_CUSTODY",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 3
+          },
+          "MassiveScanWebSimpleStatus_STATUS_REQUESTED_ID" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleStatus_STATUS_REQUESTED_ID",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 0
+          },
+          "MassiveScanWebSimpleStatus_STATUS_IN_PROGRESS" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleStatus_STATUS_IN_PROGRESS",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 1
+          },
+          "MassiveScanWebSimpleStatus_STATUS_FINAL_OK" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleStatus_STATUS_FINAL_OK",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 2
+          },
+          "MassiveScanWebSimpleStatus_STATUS_FINAL_ERROR" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleStatus_STATUS_FINAL_ERROR",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : -1
+          },
+          "MassiveScanWebSimpleStatus_STATUS_CANCELLED" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleStatus_STATUS_CANCELLED",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : -2
+          },
+          "MassiveScanWebSimpleStatus_STATUS_EXPIRED" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleStatus_STATUS_EXPIRED",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : -3
+          },
+          "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_CIUTADA" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_CIUTADA",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 0
+          },
+          "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_ADMINISTRACIO" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTORIGEN_ADMINISTRACIO",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 1
+          },
+          "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ORIGINAL" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ORIGINAL",
+            "readOnly" : true,
+            "default" : "EE01"
+          },
+          "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_CF" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_CF",
+            "readOnly" : true,
+            "default" : "EE02"
+          },
+          "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_DP" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_DP",
+            "readOnly" : true,
+            "default" : "EE03"
+          },
+          "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_PR" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_COPIA_PR",
+            "readOnly" : true,
+            "default" : "EE04"
+          },
+          "MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleArxiuRequiredParameters_DOCUMENTELABORATIONSTATE_ALTRES",
+            "readOnly" : true,
+            "default" : "EE99"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PDF",
+            "readOnly" : true,
+            "default" : "pdf"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_JPG",
+            "readOnly" : true,
+            "default" : "jpg"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_TIFF",
+            "readOnly" : true,
+            "default" : "tif"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_PNG",
+            "readOnly" : true,
+            "default" : "png"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF" : {
+            "type" : "string",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_FORMAT_FILE_GIF",
+            "readOnly" : true,
+            "default" : "gif"
+          },
+          "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_BLACK_WHITE",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 0
+          },
+          "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_GRAY",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 1
+          },
+          "MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR" : {
+            "type" : "integer",
+            "description" : "Constant MassiveScanWebSimpleScannedFileInfo_PIXEL_TYPE_COLOR",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 2
+          }
+        }
+      },
+      "MassiveScanWebSimpleSubtransactionResultRequest" : {
+        "type" : "object",
+        "properties" : {
+          "subtransactionID" : {
+            "type" : "string"
+          },
+          "returnScannedFile" : {
+            "type" : "boolean"
+          },
+          "returnSignedFile" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "MassiveScanWebSimpleArxiuInfo" : {
+        "type" : "object",
+        "properties" : {
+          "csv" : {
+            "type" : "string"
+          },
+          "originalFileURL" : {
+            "type" : "string"
+          },
+          "printableFileURL" : {
+            "type" : "string"
+          },
+          "eniFileURL" : {
+            "type" : "string"
+          },
+          "csvValidationWeb" : {
+            "type" : "string"
+          },
+          "csvGenerationDefinition" : {
+            "type" : "string"
+          },
+          "validationFileUrl" : {
+            "type" : "string"
+          },
+          "expedientID" : {
+            "type" : "string"
+          },
+          "documentID" : {
+            "type" : "string"
+          }
+        }
+      },
+      "MassiveScanWebSimpleArxiuOptionalParameters" : {
+        "type" : "object",
+        "properties" : {
+          "procedureName" : {
+            "type" : "string"
+          },
+          "procedureCode" : {
+            "type" : "string"
+          },
+          "documentarySerie" : {
+            "type" : "string"
+          },
+          "custodyIDOrExpedientID" : {
+            "type" : "string"
+          }
+        }
+      },
+      "MassiveScanWebSimpleArxiuRequiredParameters" : {
+        "type" : "object",
+        "properties" : {
+          "citizenAdministrationID" : {
+            "type" : "string"
+          },
+          "citizenFullName" : {
+            "type" : "string"
+          },
+          "documentElaborationState" : {
+            "type" : "string"
+          },
+          "documentOrigen" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "interestedPersons" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "affectedOrganisms" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "MassiveScanWebSimpleCustodyInfo" : {
+        "type" : "object",
+        "properties" : {
+          "csv" : {
+            "type" : "string"
+          },
+          "originalFileURL" : {
+            "type" : "string"
+          },
+          "printableFileURL" : {
+            "type" : "string"
+          },
+          "eniFileURL" : {
+            "type" : "string"
+          },
+          "csvValidationWeb" : {
+            "type" : "string"
+          },
+          "csvGenerationDefinition" : {
+            "type" : "string"
+          },
+          "validationFileUrl" : {
+            "type" : "string"
+          },
+          "custodyID" : {
+            "type" : "string"
+          }
+        }
+      },
+      "MassiveScanWebSimpleKeyValue" : {
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          }
+        }
+      },
+      "MassiveScanWebSimpleScannedFileInfo" : {
+        "type" : "object",
+        "properties" : {
+          "transactionName" : {
+            "type" : "string"
+          },
+          "scanDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "pixelType" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pppResolution" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "formatFile" : {
+            "type" : "string"
+          },
+          "ocr" : {
+            "type" : "boolean"
+          },
+          "duplex" : {
+            "type" : "boolean"
+          },
+          "paperSize" : {
+            "type" : "string"
+          },
+          "documentLanguage" : {
+            "type" : "string"
+          },
+          "documentType" : {
+            "type" : "string"
+          }
+        }
+      },
+      "MassiveScanWebSimpleSignedFileInfo" : {
+        "type" : "object",
+        "properties" : {
+          "signOperation" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "signType" : {
+            "type" : "string"
+          },
+          "signAlgorithm" : {
+            "type" : "string"
+          },
+          "signMode" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "signaturesTableLocation" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "timeStampIncluded" : {
+            "type" : "boolean"
+          },
+          "policyIncluded" : {
+            "type" : "boolean"
+          },
+          "eniTipoFirma" : {
+            "type" : "string"
+          },
+          "eniPerfilFirma" : {
+            "type" : "string"
+          },
+          "eniRolFirma" : {
+            "type" : "string"
+          },
+          "eniSignerName" : {
+            "type" : "string"
+          },
+          "eniSignerAdministrationId" : {
+            "type" : "string"
+          },
+          "eniSignLevel" : {
+            "type" : "string"
+          },
+          "validationInfo" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleValidationInfo"
+          },
+          "additionInformation" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MassiveScanWebSimpleKeyValue"
+            }
+          }
+        }
+      },
+      "MassiveScanWebSimpleSubtransactionResult" : {
+        "type" : "object",
+        "properties" : {
+          "transactionID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "transactionWebID" : {
+            "type" : "string"
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleStatus"
+          },
+          "scannedFile" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleFile"
+          },
+          "scannedFileInfo" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleScannedFileInfo"
+          },
+          "signedFile" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleFile"
+          },
+          "detachedSignatureFile" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleFile"
+          },
+          "signedFileInfo" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleSignedFileInfo"
+          },
+          "custodyInfo" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleCustodyInfo"
+          },
+          "arxiuInfo" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleArxiuInfo"
+          },
+          "arxiuRequiredParameters" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleArxiuRequiredParameters"
+          },
+          "arxiuOptionalParameters" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleArxiuOptionalParameters"
+          },
+          "additionalMetadatas" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MassiveScanWebSimpleKeyValue"
+            }
+          }
+        }
+      },
+      "MassiveScanWebSimpleValidationInfo" : {
+        "type" : "object",
+        "properties" : {
+          "checkAdministrationIDOfSigner" : {
+            "type" : "boolean"
+          },
+          "checkDocumentModifications" : {
+            "type" : "boolean"
+          },
+          "checkValidationSignature" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "MassiveScanWebSimpleSubTransactionsOfTransaction" : {
+        "type" : "object",
+        "properties" : {
+          "transactionID" : {
+            "type" : "string"
+          },
+          "subtransacions" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "MassiveScanWebSimpleGetTransactionIdRequest" : {
+        "required" : [ "funcionariUsername", "languageUI", "scanWebProfile", "transactionName", "view" ],
+        "type" : "object",
+        "properties" : {
+          "scanWebProfile" : {
+            "type" : "string",
+            "description" : "Perfil d'escaneig"
+          },
+          "view" : {
+            "type" : "integer",
+            "description" : "Tipus de Vista. Veure MassiveScanWebSimpleConstants.",
+            "format" : "int32",
+            "default" : 1
+          },
+          "languageUI" : {
+            "pattern" : "^(ca|es)$",
+            "type" : "string",
+            "description" : "Idioma del document en ISO 639-1. Valors permesos 'ca' i 'es'",
+            "example" : "ca",
+            "default" : "ca"
+          },
+          "transactionName" : {
+            "type" : "string",
+            "description" : "Nom descriptiu de la transacció d'escaneig."
+          },
+          "funcionariUsername" : {
+            "type" : "string",
+            "description" : "Username del funcionari."
+          },
+          "signatureParameters" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleSignatureParameters"
+          },
+          "arxiuRequiredParameters" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleArxiuRequiredParameters"
+          },
+          "arxiuOptionalParameters" : {
+            "$ref" : "#/components/schemas/MassiveScanWebSimpleArxiuOptionalParameters"
+          }
+        }
+      },
+      "MassiveScanWebSimpleSignatureParameters" : {
+        "type" : "object",
+        "properties" : {
+          "functionaryFullName" : {
+            "type" : "string"
+          },
+          "functionaryAdministrationID" : {
+            "type" : "string"
+          },
+          "functionayDIR3Unit" : {
+            "type" : "string"
+          }
+        }
+      },
+      "MassiveScanWebSimpleStartTransactionRequest" : {
+        "type" : "object",
+        "properties" : {
+          "transactionID" : {
+            "type" : "string"
+          },
+          "returnUrl" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "BasicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}
