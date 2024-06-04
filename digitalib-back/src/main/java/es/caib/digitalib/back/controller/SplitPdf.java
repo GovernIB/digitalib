@@ -16,6 +16,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.multipdf.Splitter;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -47,7 +48,7 @@ public class SplitPdf {
     public static final SplitInfo[] detectPagesWithQR(File destDir, final File pdfToSplit,
             String baseName, Integer resolucio) throws Exception {
 
-        final PDDocument document = PDDocument.load(pdfToSplit);
+        final PDDocument document = Loader.loadPDF(pdfToSplit);
         
         final InputStream originalFileIS = new FileInputStream(pdfToSplit);
         try {
@@ -71,7 +72,7 @@ public class SplitPdf {
 
     public static final SplitInfo[] detectPagesWithQR(File destDir, final byte[] pdfToSplit,
             String baseName, Integer resolucio, File debugDir) throws Exception {
-        final PDDocument document = PDDocument.load(pdfToSplit);
+        final PDDocument document = Loader.loadPDF(pdfToSplit);
         final InputStream originalFileIS = new ByteArrayInputStream(pdfToSplit);
         try {
             return detectPagesWithQR(destDir, document, baseName, originalFileIS, resolucio,
@@ -382,7 +383,7 @@ public class SplitPdf {
     }
 
     public static void removeFirstPage(File fileOrig, File fileDest) throws Exception {
-        PDDocument document = PDDocument.load(fileOrig);
+        PDDocument document = Loader.loadPDF(fileOrig);
 
         // Removing the pages
         document.removePage(0);

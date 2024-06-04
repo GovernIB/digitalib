@@ -34,7 +34,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import es.caib.digitalib.back.security.LoginInfo;
-import es.caib.digitalib.commons.utils.Configuracio;
 import es.caib.digitalib.commons.utils.Constants;
 
 /**

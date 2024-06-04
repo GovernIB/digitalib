@@ -17,7 +17,6 @@ import es.caib.digitalib.persistence.TransaccioJPA;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.model.fields.TransaccioQueryPath;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
-import es.caib.digitalib.commons.utils.Configuracio;
 import es.caib.digitalib.commons.utils.Constants;
 
 /**

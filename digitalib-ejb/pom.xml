@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>digitalib-ejb</artifactId>
@@ -13,7 +15,7 @@
     <name>DigitalIB - EJB</name>
 
     <dependencies>
-    
+
         <!-- Anotacions de documentació de openapi -->
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
@@ -41,17 +43,22 @@
 
 
         <!-- Split PDF -->
-
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
-            <version>2.0.21</version>
+            <version>3.0.2</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox-tools</artifactId>
-            <version>2.0.21</version>
+            <version>3.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>jbig2-imageio</artifactId>
+            <version>3.0.2</version>
         </dependency>
 
 
@@ -161,7 +168,7 @@
             </exclusions>
         </dependency>
 
-<!--
+        <!--
         <dependency>
             <artifactId>apiscanwebsimple-api</artifactId>
             <groupId>org.fundaciobit.apisib.apiscanwebsimple</groupId>

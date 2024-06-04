@@ -1,8 +1,5 @@
 package es.caib.digitalib.back.controller;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -15,13 +12,10 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.ejb.EJB;
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.PDFRenderer;
 
 import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.KeyValue;
@@ -50,6 +44,7 @@ import es.caib.digitalib.back.controller.webdb.TransaccioController;
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
 import es.caib.digitalib.back.security.LoginInfo;
+import es.caib.digitalib.back.utils.ThumbnailPdfGenerator;
 import es.caib.digitalib.ejb.InfoCustodyService;
 import es.caib.digitalib.persistence.FitxerJPA;
 import es.caib.digitalib.persistence.InfoCustodyJPA;
@@ -110,7 +105,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     @EJB(mappedName = es.caib.digitalib.ejb.UsuariAplicacioService.JNDI_NAME)
     protected es.caib.digitalib.ejb.UsuariAplicacioService usuariAplicacioEjb;
-    
+
     @EJB(mappedName = TransaccioPublicLogicaService.JNDI_NAME)
     protected TransaccioPublicLogicaService transaccioPublicEjb;
 
@@ -139,8 +134,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public TransaccioForm getTransaccioForm(TransaccioJPA _jpa, boolean __isView,
-            HttpServletRequest request, ModelAndView mav) throws I18NException {
+    public TransaccioForm getTransaccioForm(TransaccioJPA _jpa, boolean __isView, HttpServletRequest request,
+            ModelAndView mav) throws I18NException {
         TransaccioForm form = super.getTransaccioForm(_jpa, __isView, request, mav);
 
         {
@@ -162,58 +157,50 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
         if (__isView) {
 
-            
             if (_jpa.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
-                
+
                 form.setAttachedAdditionalJspCode(true);
-    
+
                 // Ocultar tots els camps null
                 TransaccioForm.hideNullFields(_jpa, form, ALL_TRANSACCIO_FIELDS);
-    
-                
+
                 form.addHiddenField(ESTATCODI);
-                
-    
+
                 form.addHiddenField(INFOCUSTODYID);
                 form.addHiddenField(INFOSIGNATURAID);
                 form.addHiddenField(PERFILID);
-    
+
                 form.addHiddenField(VIEW);
                 form.addHiddenField(IP);
                 form.addHiddenField(USUARIPERSONAID);
                 form.addHiddenField(RETURNURL);
-    
+
                 // Afegir botos de info sign
                 if (_jpa.getInfoSignaturaID() != null) {
-                    form.addAdditionalButton(
-                            new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
-                                    INFOSIGNATURAID.fullName,
-                                    AbstractInfoSignatureController.getContextWeb(isAdmin())
-                                            + "/view" + "/" + _jpa.getInfoSignaturaID(),
-                                    "btn-info"));
+                    form.addAdditionalButton(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
+                            INFOSIGNATURAID.fullName, AbstractInfoSignatureController.getContextWeb(isAdmin()) + "/view"
+                                    + "/" + _jpa.getInfoSignaturaID(),
+                            "btn-info"));
                 }
-    
+
                 // Afegir botos de info cust
                 if (_jpa.getInfoCustodyID() != null) {
-                    form.addAdditionalButton(
-                            new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
-                                    INFOCUSTODYID.fullName,
-                                    AbstractInfoCustodyController.getContextWeb(isAdmin())
-                                            + "/view" + "/" + _jpa.getInfoCustodyID(),
-                                    "btn-info"));
+                    form.addAdditionalButton(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
+                            INFOCUSTODYID.fullName, AbstractInfoCustodyController.getContextWeb(isAdmin()) + "/view"
+                                    + "/" + _jpa.getInfoCustodyID(),
+                            "btn-info"));
                 }
-    
+
                 // Afegir Boto de Veure Perfil
                 if (isAdmin()) {
                     form.addAdditionalButton(
                             new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_USER), "transaccio.veureperfil",
-                                    getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(),
-                                    "btn-info"));
+                                    getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(), "btn-info"));
                 }
             } else {
                 // Cancel·lat, Error, ...
                 Set<Field<?>> fields = new HashSet<Field<?>>(Arrays.asList(ALL_TRANSACCIO_FIELDS));
-                
+
                 fields.remove(NOM);
                 fields.remove(DATAINICI);
                 fields.remove(DATAFI);
@@ -227,14 +214,13 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
             }
         } else {
-            
+
             // EDICIÓ
 
             // Ha d'escriure els DNIs, CIFs o NIFs de les persones interessades separats per coma.
             String msgIn = I18NUtils.tradueix("transaccio.interessats.ajuda");
             form.addHelpToField(ARXIUREQPARAMINTERESSATS, msgIn);
-            
-            
+
             // Ha d'escriure la unitat DIR3 del funcionari. Pot esbrinar aquest codi accedint a la
             // pàgina web
             // https://intranet.caib.es/dir3caib i introduint les dades requerides.";
@@ -248,15 +234,14 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public TransaccioFilterForm getTransaccioFilterForm(Integer pagina, ModelAndView mav,
-            HttpServletRequest request) throws I18NException {
+    public TransaccioFilterForm getTransaccioFilterForm(Integer pagina, ModelAndView mav, HttpServletRequest request)
+            throws I18NException {
 
         TransaccioFilterForm filterForm = super.getTransaccioFilterForm(pagina, mav, request);
 
         if (filterForm.isNou()) {
 
-            Set<Field<?>> ocults = new HashSet<Field<?>>(
-                    Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
+            Set<Field<?>> ocults = new HashSet<Field<?>>(Arrays.asList(TransaccioFields.ALL_TRANSACCIO_FIELDS));
 
             ocults.remove(TransaccioFields.TRANSACCIOID);
             ocults.remove(TransaccioFields.TRANSACCIOMULTIPLEID);
@@ -272,14 +257,13 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             //filterForm.setOrderBy(TransaccioFields.DATAFI.javaName);
             //filterForm.setOrderAsc(false);
 
-            filterForm.addAdditionalButtonForEachItem(
-                    new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_EYE), "transaccio.veuredetall",
-                            getContextWeb() + "/view/{0}", "btn-primary"));
+            filterForm.addAdditionalButtonForEachItem(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_EYE),
+                    "transaccio.veuredetall", getContextWeb() + "/view/{0}", "btn-primary"));
             if (isAdmin()) {
                 if (getPerfilInfoContextWeb() != null) {
-                    filterForm.addAdditionalButtonForEachItem(new AdditionalButton(
-                            IconUtils.getWhite(IconUtils.ICON_EYE), "transaccio.veureperfil",
-                            getContextWeb() + "/viewperfil/{0}", "btn-info"));
+                    filterForm
+                            .addAdditionalButtonForEachItem(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_EYE),
+                                    "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", "btn-info"));
                 }
             }
 
@@ -323,28 +307,24 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             }
 
             filterForm.setGroupByFields(campsFiltre);
-            
 
         }
-        
+
         filterForm.setVisibleMultipleSelection(false);
         filterForm.setAddButtonVisible(false);
         filterForm.setDeleteButtonVisible(false);
         filterForm.setEditButtonVisible(false);
 
-
         return filterForm;
     }
 
     @RequestMapping(value = "/viewperfil/{transaccioID}", method = RequestMethod.GET)
-    public ModelAndView veurePerfilGet(
-            @PathVariable("transaccioID") java.lang.Long transaccioID,
+    public ModelAndView veurePerfilGet(@PathVariable("transaccioID") java.lang.Long transaccioID,
             HttpServletRequest request, HttpServletResponse response) throws I18NException {
         Long perfilID = transaccioEjb.executeQueryOne(TransaccioFields.PERFILID,
                 TransaccioFields.TRANSACCIOID.equal(transaccioID));
 
-        return new ModelAndView(
-                new RedirectView(getPerfilInfoContextWeb() + "/view/" + perfilID, true));
+        return new ModelAndView(new RedirectView(getPerfilInfoContextWeb() + "/view/" + perfilID, true));
     }
 
     @Override
@@ -373,8 +353,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request,
-            ModelAndView mav, Where where) throws I18NException {
+    public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request, ModelAndView mav, Where where)
+            throws I18NException {
 
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
         __tmp.add(new StringKeyValue(String.valueOf(ScanWebSimpleStatus.STATUS_EXPIRED),
@@ -393,8 +373,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForArxiuReqParamDocEstatElabora(
-            HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+    public List<StringKeyValue> getReferenceListForArxiuReqParamDocEstatElabora(HttpServletRequest request,
+            ModelAndView mav, Where where) throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
 
         __tmp.add(new StringKeyValue("EE01", I18NUtils.tradueix("estatelaboracio.ee01")));
@@ -407,8 +387,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForInfoScanDocumentTipus(
-            HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+    public List<StringKeyValue> getReferenceListForInfoScanDocumentTipus(HttpServletRequest request, ModelAndView mav,
+            Where where) throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
 
         __tmp.add(new StringKeyValue("TD01", I18NUtils.tradueix("documenttipus.td01")));
@@ -437,17 +417,18 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForArxiuReqParamOrigen(
-            HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+    public List<StringKeyValue> getReferenceListForArxiuReqParamOrigen(HttpServletRequest request, ModelAndView mav,
+            Where where) throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
         __tmp.add(new StringKeyValue(String.valueOf(Constants.ORIGEN_CIUTADA), I18NUtils.tradueix("origen.ciutada")));
-        __tmp.add(new StringKeyValue(String.valueOf(Constants.ORIGEN_ADMINISTRACIO), I18NUtils.tradueix("origen.administracio")));
+        __tmp.add(new StringKeyValue(String.valueOf(Constants.ORIGEN_ADMINISTRACIO),
+                I18NUtils.tradueix("origen.administracio")));
         return __tmp;
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForInfoScanLanguageDoc(
-            HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+    public List<StringKeyValue> getReferenceListForInfoScanLanguageDoc(HttpServletRequest request, ModelAndView mav,
+            Where where) throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
         __tmp.add(new StringKeyValue("ca", I18NUtils.tradueix("idiomadoc.catala")));
         __tmp.add(new StringKeyValue("es", I18NUtils.tradueix("idiomadoc.castella")));
@@ -462,8 +443,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForInfoScanPixelType(
-            HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+    public List<StringKeyValue> getReferenceListForInfoScanPixelType(HttpServletRequest request, ModelAndView mav,
+            Where where) throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
         __tmp.add(new StringKeyValue("1", "BW"));
         __tmp.add(new StringKeyValue("8", "GRAY"));
@@ -473,9 +454,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     @RequestMapping(value = "/enviaremail")
     public String enviaremail(@RequestParam("transaccioID") java.lang.Long transaccioID,
-            @RequestParam("email") String email,
-            @RequestParam("content") String contingutExtra, HttpServletRequest request,
-            HttpServletResponse response) {
+            @RequestParam("email") String email, @RequestParam("content") String contingutExtra,
+            HttpServletRequest request, HttpServletResponse response) {
 
         try {
 
@@ -523,8 +503,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                 // XYZ ZZZ TRA Configurable per part de Grup
                 // up.getNom()).append(" ").append(up.getLlinatges()) .append(" li envia la
                 // referència al següent fitxer:"
-                stb.append(I18NLogicUtils.tradueix(loc, "email.custody.common",
-                        up.getNom() + " " + up.getLlinatges())).append("<br/>");
+                stb.append(I18NLogicUtils.tradueix(loc, "email.custody.common", up.getNom() + " " + up.getLlinatges()))
+                        .append("<br/>");
 
                 InfoCustody info = transaccio.getInfoCustody();
 
@@ -534,19 +514,17 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
                     // email.custody.validateurl=Pot accedir a tota la informació del document
                     // a través de la següent adreça {0}
-                    String msg = I18NLogicUtils.tradueix(loc, "email.custody.validateurl",
-                            info.getValidationFileUrl());
+                    String msg = I18NLogicUtils.tradueix(loc, "email.custody.validateurl", info.getValidationFileUrl());
                     stb.append("<li>").append(msg).append("</li></ul>");
                     message = stb.toString();
                     fitxer = null;
 
-                } else if (!StringUtils.isEmpty(info.getCsv())
-                        && !StringUtils.isEmpty(info.getCsvValidationWeb())) {
+                } else if (!StringUtils.isEmpty(info.getCsv()) && !StringUtils.isEmpty(info.getCsvValidationWeb())) {
 
                     // email.custody.csv=Pot accedir al document a traves de la següent adreça
                     // {0} indicant el següent CSV {1}
-                    String msg = I18NLogicUtils.tradueix(loc, "email.custody.csv",
-                     info.getCsvValidationWeb(), info.getCsv());
+                    String msg = I18NLogicUtils.tradueix(loc, "email.custody.csv", info.getCsvValidationWeb(),
+                            info.getCsv());
                     //String msg = I18NLogicUtils.tradueix(loc, "email.custody.csvurl",
                     //        "<a href=\"" + Configuracio.getPublicCsvUrl() + "view.xhtml?hash="
                     //                + info.getCsv() + "\">aquí</a>");
@@ -561,14 +539,12 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     if (!StringUtils.isEmpty(info.getOriginalFileUrl())) {
                         // email.custody.original=Pot accedir al document original a través de
                         // la següent adreça {0}
-                        msg = I18NLogicUtils.tradueix(loc, "email.custody.original",
-                                info.getOriginalFileUrl());
+                        msg = I18NLogicUtils.tradueix(loc, "email.custody.original", info.getOriginalFileUrl());
                     }
                     if (!StringUtils.isEmpty(info.getPrintableFileUrl())) {
                         // email.custody.printable=Pot accedir a la versió imprimible del
                         // document a través de la següent adreça {0}
-                        msg = msg + I18NLogicUtils.tradueix(loc, "email.custody.printable",
-                                info.getPrintableFileUrl());
+                        msg = msg + I18NLogicUtils.tradueix(loc, "email.custody.printable", info.getPrintableFileUrl());
                     }
 
                     stb.append("<li>").append(msg).append("</li></ul>");
@@ -576,8 +552,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     fitxer = null;
 
                 } else if (transaccio.getFitxerSignaturaID() != null) {
-                    message = I18NLogicUtils.tradueix(loc, "email.document",
-                            up.getNom() + " " + up.getLlinatges());
+                    message = I18NLogicUtils.tradueix(loc, "email.document", up.getNom() + " " + up.getLlinatges());
 
                     fitxer = transaccio.getFitxerSignatura();
                 } else {
@@ -586,15 +561,14 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     if (info.getCustodyId() != null) {
                         // email.custody.error.custody=No es té informació suficient per enviar
                         // el document amb custodyID {0}. Consulti amb el seu administrador.
-                        msg = I18NLogicUtils.tradueix(loc, " email.custody.error.custody",
-                                info.getCustodyId());
+                        msg = I18NLogicUtils.tradueix(loc, " email.custody.error.custody", info.getCustodyId());
 
                     } else {
                         // email.custody.error.arxiu=No es té informació suficient per enviar
                         // el document amb ExpedientID {0} i UUID de document {1}. Consulti amb
                         // el seu administrador
-                        msg = I18NLogicUtils.tradueix(loc, "email.custody.error.arxiu",
-                                info.getArxiuExpedientId(), info.getArxiuDocumentId());
+                        msg = I18NLogicUtils.tradueix(loc, "email.custody.error.arxiu", info.getArxiuExpedientId(),
+                                info.getArxiuDocumentId());
                     }
                     HtmlUtils.saveMessageError(request, msg);
                     return getRedirectWhenCancel(request, transaccioID);
@@ -603,19 +577,16 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             } else {
                 // XYZ ZZZ Configurable per part de Grup
                 // {0} li envia el document adjunt.
-                message = I18NLogicUtils.tradueix(loc, "email.document",
-                        up.getNom() + " " + up.getLlinatges());
+                message = I18NLogicUtils.tradueix(loc, "email.document", up.getNom() + " " + up.getLlinatges());
 
-                fitxer = transaccio.getFitxerSignaturaID() == null
-                        ? transaccio.getFitxerEscanejat()
+                fitxer = transaccio.getFitxerSignaturaID() == null ? transaccio.getFitxerEscanejat()
                         : transaccio.getFitxerSignatura();
 
             }
 
             StringBuffer bff = new StringBuffer(
                     "<br/>----------------------------------------------------------------------------------------"
-                            + "<br><br>" + I18NUtils.tradueix("email.addicional")
-                            + "<br><br>   ");
+                            + "<br><br>" + I18NUtils.tradueix("email.addicional") + "<br><br>   ");
             contingutExtra = bff.toString() + "\"" + contingutExtra;
             bff = new StringBuffer(
                     "<br><br/>----------------------------------------------------------------------------------------");
@@ -626,17 +597,14 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             for (String em : emails) {
                 em = em.trim();
 
-                EmailUtil.postMail(subject, message, isHtml, Configuracio.getAppEmail(),
-                        fitxer, em);
-                HtmlUtils.saveMessageSuccess(request,
-                        I18NLogicUtils.tradueix(loc, "email.custody.success", em));
+                EmailUtil.postMail(subject, message, isHtml, Configuracio.getAppEmail(), fitxer, em);
+                HtmlUtils.saveMessageSuccess(request, I18NLogicUtils.tradueix(loc, "email.custody.success", em));
             }
 
             return getRedirectWhenCancel(request, transaccioID);
 
         } catch (Throwable e) {
-            String msg = I18NUtils.tradueix("transaccio.mail.enviar.error.desconegut",
-                    e.getMessage());
+            String msg = I18NUtils.tradueix("transaccio.mail.enviar.error.desconegut", e.getMessage());
             log.error(msg, e);
             HtmlUtils.saveMessageError(request, msg);
             return getRedirectWhenCancel(request, transaccioID);
@@ -653,25 +621,22 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @RequestMapping(value = "/descarregar/{transaccioID}", method = RequestMethod.GET)
-    public void descarregarFitxer(@PathVariable("transaccioID") java.lang.Long transaccioID,
-            HttpServletRequest request, HttpServletResponse response) throws I18NException {
+    public void descarregarFitxer(@PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
+            HttpServletResponse response) throws I18NException {
 
         TransaccioJPA trans = transaccioEjb.findByPrimaryKey(transaccioID);
 
         FitxerJPA fitxer = trans.getFitxerEscanejat();
-        FileDownloadController.fullDownload(fitxer.getFitxerID(), fitxer.getNom(),
-                fitxer.getMime(), response);
+        FileDownloadController.fullDownload(fitxer.getFitxerID(), fitxer.getNom(), fitxer.getMime(), response);
     }
 
     @RequestMapping(value = "/descarregarfirmat/{transaccioID}", method = RequestMethod.GET)
-    public void descarregarFitxerFirmat(
-            @PathVariable("transaccioID") java.lang.Long transaccioID,
+    public void descarregarFitxerFirmat(@PathVariable("transaccioID") java.lang.Long transaccioID,
             HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         TransaccioJPA trans = transaccioEjb.findByPrimaryKey(transaccioID);
         FitxerJPA fitxer = trans.getFitxerSignatura();
-        FileDownloadController.fullDownload(fitxer.getFitxerID(), fitxer.getNom(),
-                fitxer.getMime(), response);
+        FileDownloadController.fullDownload(fitxer.getFitxerID(), fitxer.getNom(), fitxer.getMime(), response);
     }
 
     protected enum TipusFile {
@@ -680,8 +645,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     @RequestMapping(value = "/descarregaroriginal/{transaccioID}", method = RequestMethod.GET)
     public void descarregarOriginal(@PathVariable("transaccioID") java.lang.Long transaccioID,
-            HttpServletRequest request, HttpServletResponse response)
-            throws I18NException, IOException {
+            HttpServletRequest request, HttpServletResponse response) throws I18NException, IOException {
 
         final String format = PDF;
         TipusFile tipusFile = TipusFile.ORIGINAL;
@@ -689,8 +653,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         internalDownload(transaccioID, response, format, tipusFile);
     }
 
-    protected void internalDownload(java.lang.Long transaccioID, HttpServletResponse response,
-            final String format, TipusFile tipusFile) throws I18NException, IOException {
+    protected void internalDownload(java.lang.Long transaccioID, HttpServletResponse response, final String format,
+            TipusFile tipusFile) throws I18NException, IOException {
 
         if (transaccioID == null) {
             return;
@@ -698,33 +662,28 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
         TransaccioJPA transaccio = transaccioLogicaEjb.findByPrimaryKeyFull(transaccioID);
 
-        InfoCustodyJPA infoCustody = infoCustodyEjb
-                .findByPrimaryKey(transaccio.getInfoCustodyID());
+        InfoCustodyJPA infoCustody = infoCustodyEjb.findByPrimaryKey(transaccio.getInfoCustodyID());
         Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
 
         int tipusCustodia = perfil.getTipusCustodia();
 
         switch (tipusCustodia) {
             case Constants.TIPUS_CUSTODIA_ARXIU:
-                IArxiuPlugin arxiuPlugin = pluginArxiuLogicaEjb
-                        .getInstanceByPluginID(perfil.getPluginArxiuID());
+                IArxiuPlugin arxiuPlugin = pluginArxiuLogicaEjb.getInstanceByPluginID(perfil.getPluginArxiuID());
                 byte[] data = null;
                 switch (tipusFile) {
                     case ORIGINAL:
-                        Document original = arxiuPlugin
-                                .documentDetalls(infoCustody.getArxiuDocumentId(), null, true);
+                        Document original = arxiuPlugin.documentDetalls(infoCustody.getArxiuDocumentId(), null, true);
                         data = original.getContingut().getContingut();
                     break;
 
                     case ENI_DOC:
-                        String enidoc = arxiuPlugin
-                                .documentExportarEni(infoCustody.getArxiuDocumentId());
+                        String enidoc = arxiuPlugin.documentExportarEni(infoCustody.getArxiuDocumentId());
                         data = enidoc.getBytes();
                     break;
 
                     case VERSIO_IMPRIMIBLE:
-                        DocumentContingut imprimible = arxiuPlugin
-                                .documentImprimible(infoCustody.getArxiuDocumentId());
+                        DocumentContingut imprimible = arxiuPlugin.documentImprimible(infoCustody.getArxiuDocumentId());
                         data = imprimible.getContingut();
                     break;
 
@@ -760,25 +719,22 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                 try {
                     response.sendRedirect(urlStr);
                 } catch (IOException e) {
-                    throw new I18NException("genapp.comodi",
-                            "Error reenviant la petició a " + urlStr);
+                    throw new I18NException("genapp.comodi", "Error reenviant la petició a " + urlStr);
                 }
 
             break;
 
             case Constants.TIPUS_CUSTODIA_SENSE:
                 // XYZ ZZZ TRA
-                throw new I18NException("genapp.comodi",
-                        "Aquesta transacció no ha realitzat custòdia !!!! ");
+                throw new I18NException("genapp.comodi", "Aquesta transacció no ha realitzat custòdia !!!! ");
 
         }
 
     }
 
     @RequestMapping(value = "/descarregarenidoc/{transaccioID}", method = RequestMethod.GET)
-    public void descarregarEnidoc(@PathVariable("transaccioID") java.lang.Long transaccioID,
-            HttpServletRequest request, HttpServletResponse response)
-            throws I18NException, IOException {
+    public void descarregarEnidoc(@PathVariable("transaccioID") java.lang.Long transaccioID, HttpServletRequest request,
+            HttpServletResponse response) throws I18NException, IOException {
 
         final String format = ENI;
         TipusFile tipusFile = TipusFile.ENI_DOC;
@@ -788,10 +744,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @RequestMapping(value = "/descarregarimprimible/{transaccioID}", method = RequestMethod.GET)
-    public void descarregarVersioImprible(
-            @PathVariable("transaccioID") java.lang.Long transaccioID,
-            HttpServletRequest request, HttpServletResponse response)
-            throws I18NException, IOException {
+    public void descarregarVersioImprible(@PathVariable("transaccioID") java.lang.Long transaccioID,
+            HttpServletRequest request, HttpServletResponse response) throws I18NException, IOException {
 
         final String format = PDF;
         TipusFile tipusFile = TipusFile.VERSIO_IMPRIMIBLE;
@@ -800,8 +754,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     }
 
-    private void prepareAndDownload(byte[] data, HttpServletResponse response,
-            TransaccioJPA transaccio, String format) {
+    private void prepareAndDownload(byte[] data, HttpServletResponse response, TransaccioJPA transaccio,
+            String format) {
 
         // s'eliminen els espais en el cas de noms de transaccions amb més d'una paraula, així
         // queda només el nom amb una paraula
@@ -839,11 +793,9 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public void postList(HttpServletRequest request, ModelAndView mav,
-            TransaccioFilterForm filterForm, List<Transaccio> list) throws I18NException {
+    public void postList(HttpServletRequest request, ModelAndView mav, TransaccioFilterForm filterForm,
+            List<Transaccio> list) throws I18NException {
 
-
-        
         // Afegir boto d'esborrar per transaccions buides
         filterForm.getAdditionalButtonsByPK().clear();
         boolean delete;
@@ -863,102 +815,78 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                 switch (perfil.getUsPerfil()) {
                     case Constants.PERFIL_US_CUSTODIA_INFO:
                         AdditionalButton addOriginalButton = new AdditionalButton(
-                                IconUtils.getWhite(IconUtils.ICON_FILE_DOWNLOAD),
-                                "transaccio.descarregar.firmat",
-                                getContextWeb() + "/descarregaroriginal/{0}",
-                                "btn-success\" target=\"_blank");
+                                IconUtils.getWhite(IconUtils.ICON_FILE_DOWNLOAD), "transaccio.descarregar.firmat",
+                                getContextWeb() + "/descarregaroriginal/{0}", "btn-success\" target=\"_blank");
                         AdditionalButton addImprimibleButton = new AdditionalButton(
                                 IconUtils.getWhite(IconUtils.ICON_PRINT), "transaccio.descarregar.imprimible",
-                                getContextWeb() + "/descarregarimprimible/{0}",
+                                getContextWeb() + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
+
+                        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addOriginalButton);
+                        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addImprimibleButton);
+
+                        //                        if (isAdmin) {
+                        AdditionalButton addEniButton = new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_FILE),
+                                "transaccio.descarregar.enidoc", getContextWeb() + "/descarregarenidoc/{0}",
                                 "btn-success\" target=\"_blank");
 
-                        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(),
-                                addOriginalButton);
-                        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(),
-                                addImprimibleButton);
-
-//                        if (isAdmin) {
-                            AdditionalButton addEniButton = new AdditionalButton(
-                                    IconUtils.getWhite(IconUtils.ICON_FILE), "transaccio.descarregar.enidoc",
-                                    getContextWeb() + "/descarregarenidoc/{0}",
-                                    "btn-success\" target=\"_blank");
-
-                            filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(),
-                                    addEniButton);
-//                        }
+                        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addEniButton);
+                    //                        }
                     break;
                     case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
                         AdditionalButton addFirmatButton = new AdditionalButton(
-                                IconUtils.getWhite(IconUtils.ICON_FILE_DOWNLOAD),
-                                "transaccio.descarregar.firmat",
+                                IconUtils.getWhite(IconUtils.ICON_FILE_DOWNLOAD), "transaccio.descarregar.firmat",
                                 getContextWeb() + "/descarregarfirmat/{0}", "btn-success");
-                        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(),
-                                addFirmatButton);
+                        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addFirmatButton);
 
                     break;
                     default: // cas de PERFIL_US_NOMES_ESCANEIG_INFO
                         AdditionalButton addEscaneigButton = new AdditionalButton(
-                                IconUtils.getWhite(IconUtils.ICON_FILE_DOWNLOAD),
-                                "transaccio.descarregar.escaneig",
+                                IconUtils.getWhite(IconUtils.ICON_FILE_DOWNLOAD), "transaccio.descarregar.escaneig",
                                 getContextWeb() + "/descarregar/{0}", "btn-success");
-                        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(),
-                                addEscaneigButton);
+                        filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addEscaneigButton);
                     break;
                 }
 
             }
 
             if (delete) {
-                AdditionalButton additionalButton = new AdditionalButton(
-                        IconUtils.getWhite(IconUtils.ICON_TRASH), "genapp.delete",
-                        "javascript:openModal('" + request.getContextPath() + getContextWeb()
-                                + "/" + transaccio.getTransaccioID() + "/delete','show');",
+                AdditionalButton additionalButton = new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_TRASH),
+                        "genapp.delete", "javascript:openModal('" + request.getContextPath() + getContextWeb() + "/"
+                                + transaccio.getTransaccioID() + "/delete','show');",
                         "btn-danger");
 
-                filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(),
-                        additionalButton);
-            } 
+                filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), additionalButton);
+            }
 
             if (!isAdmin && transaccio.getEstatCodi() == ScanWebSimpleStatus.STATUS_FINAL_OK) {
 
-                AdditionalButton additionalButton = new AdditionalButton(
-                        IconUtils.getWhite(IconUtils.ICON_ENVELOPE), "enviar.email",
-                        "javascript:enviarEmail(" + transaccio.getTransaccioID() + ", 'show')",
+                AdditionalButton additionalButton = new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_ENVELOPE),
+                        "enviar.email", "javascript:enviarEmail(" + transaccio.getTransaccioID() + ", 'show')",
                         "btn-warning");
 
-                filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(),
-                        additionalButton);
+                filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), additionalButton);
 
             }
-            
-            
 
         }
-        
+
         postListNomPersonaAplicacio(request, filterForm, list, isAdmin);
-        
-        
-       
 
     }
 
-    protected void postListNomPersonaAplicacio(HttpServletRequest request,
-            TransaccioFilterForm filterForm, List<Transaccio> list, final boolean isAdmin)
-            throws I18NException {
+    protected void postListNomPersonaAplicacio(HttpServletRequest request, TransaccioFilterForm filterForm,
+            List<Transaccio> list, final boolean isAdmin) throws I18NException {
 
     }
 
     public static final String AGRUPA_PER_TRANSACCIO_MULTIPLE = "/transaccionsMultiples";
 
-    @RequestMapping(value = AGRUPA_PER_TRANSACCIO_MULTIPLE
-            + "/{transaccioMultipleID}", method = RequestMethod.GET)
-    public ModelAndView agrupaPerTransaccioMultiple(HttpServletRequest request,
-            HttpServletResponse response,
+    @RequestMapping(value = AGRUPA_PER_TRANSACCIO_MULTIPLE + "/{transaccioMultipleID}", method = RequestMethod.GET)
+    public ModelAndView agrupaPerTransaccioMultiple(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("transaccioMultipleID") java.lang.Long transaccioMultipleID)
             throws IOException, I18NException {
 
-        log.info(" XYZ ZZZ ENTRA A AGRUPA_PER_TRANSACCIO_MULTIPLE ... [" + transaccioMultipleID
-                + "] ");
+        log.info(" XYZ ZZZ ENTRA A AGRUPA_PER_TRANSACCIO_MULTIPLE ... [" + transaccioMultipleID + "] ");
 
         TransaccioFilterForm filterForm = getTransaccioFilterForm(null, null, request);
 
@@ -969,8 +897,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
         filterForm.setTransaccioMultipleIDDesde(transaccioMultipleID);
         filterForm.setTransaccioMultipleIDFins(transaccioMultipleID);
-        
-        
+
         //filterForm.setOrderBy(DATAFI.fullName);
         //filterForm.setOrderAsc(true);
 
@@ -981,9 +908,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @RequestMapping(value = "/listreset", method = RequestMethod.GET)
-    public ModelAndView llistatInicialSenseAgrupaPerTransaccioMultiple(
-            HttpServletRequest request, HttpServletResponse response)
-            throws IOException, I18NException {
+    public ModelAndView llistatInicialSenseAgrupaPerTransaccioMultiple(HttpServletRequest request,
+            HttpServletResponse response) throws IOException, I18NException {
 
         TransaccioFilterForm filterForm = getTransaccioFilterForm(null, null, request);
 
@@ -998,7 +924,6 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
     }
 
-
     /**
      * 
      * @param isAdmin
@@ -1007,18 +932,16 @@ public abstract class AbstractTransaccioController extends TransaccioController 
      */
     protected boolean canBeDeleted(final boolean isAdmin, Transaccio transaccio) {
 
-        final int codi = transaccio.getEstatCodi(); 
-        if (codi == ScanWebSimpleStatus.STATUS_CANCELLED
-           || codi == ScanWebSimpleStatus.STATUS_EXPIRED
-           || codi == ScanWebSimpleStatus.STATUS_FINAL_ERROR) {
+        final int codi = transaccio.getEstatCodi();
+        if (codi == ScanWebSimpleStatus.STATUS_CANCELLED || codi == ScanWebSimpleStatus.STATUS_EXPIRED
+                || codi == ScanWebSimpleStatus.STATUS_FINAL_ERROR) {
             return true;
         }
-        
-        if (codi == ScanWebSimpleStatus.STATUS_IN_PROGRESS
-           || codi == ScanWebSimpleStatus.STATUS_REQUESTED_ID) {
-            
+
+        if (codi == ScanWebSimpleStatus.STATUS_IN_PROGRESS || codi == ScanWebSimpleStatus.STATUS_REQUESTED_ID) {
+
             final long ONE_DAY_IN_MS = 86_400_000;
-            
+
             if (System.currentTimeMillis() - transaccio.getDataInici().getTime() > ONE_DAY_IN_MS) {
                 return true;
             }
@@ -1038,9 +961,8 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForUsuariAplicacioId(
-            HttpServletRequest request, ModelAndView mav, TransaccioForm transaccioForm,
-            Where where) throws I18NException {
+    public List<StringKeyValue> getReferenceListForUsuariAplicacioId(HttpServletRequest request, ModelAndView mav,
+            TransaccioForm transaccioForm, Where where) throws I18NException {
         if (transaccioForm.isHiddenField(USUARIAPLICACIOID)) {
             return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
         }
@@ -1053,8 +975,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForUsuariAplicacioId(
-            HttpServletRequest request, ModelAndView mav,
+    public List<StringKeyValue> getReferenceListForUsuariAplicacioId(HttpServletRequest request, ModelAndView mav,
             TransaccioFilterForm transaccioFilterForm, List<Transaccio> list,
             Map<Field<?>, GroupByItem> _groupByItemsMap, Where where) throws I18NException {
         if (transaccioFilterForm.isHiddenField(USUARIAPLICACIOID)
@@ -1063,8 +984,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
         }
 
         Where _w = null;
-        List<StringKeyValue> l = getReferenceListForUsuariAplicacioId(request, mav,
-                Where.AND(where, _w));
+        List<StringKeyValue> l = getReferenceListForUsuariAplicacioId(request, mav, Where.AND(where, _w));
 
         if (l.size() != list.size()) {
             Map<String, String> map = org.fundaciobit.genapp.common.utils.Utils.listToMap(l);
@@ -1085,28 +1005,25 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForUsuariAplicacioId(
-            HttpServletRequest request, ModelAndView mav, Where where) throws I18NException {
+    public List<StringKeyValue> getReferenceListForUsuariAplicacioId(HttpServletRequest request, ModelAndView mav,
+            Where where) throws I18NException {
 
         SelectMultipleKeyValue<Long> select = new SelectMultipleKeyValue<Long>(
-                UsuariAplicacioFields.USUARIAPLICACIOID.select,
-                UsuariAplicacioFields.USERNAME.select);
+                UsuariAplicacioFields.USUARIAPLICACIOID.select, UsuariAplicacioFields.USERNAME.select);
         List<KeyValue<Long>> list = this.usuariAplicacioEjb.executeQuery(select, where);
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
         for (KeyValue<Long> keyValue : list) {
             String value = keyValue.getValue();
             String key = String.valueOf(keyValue.getKey());
-            __tmp.add(new StringKeyValue(key,
-                    (value == null || (value.trim().length() == 0)) ? key : value));
+            __tmp.add(new StringKeyValue(key, (value == null || (value.trim().length() == 0)) ? key : value));
         }
 
         return __tmp;
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForUsuariPersonaId(HttpServletRequest request,
-            ModelAndView mav, TransaccioForm transaccioForm, Where where)
-            throws I18NException {
+    public List<StringKeyValue> getReferenceListForUsuariPersonaId(HttpServletRequest request, ModelAndView mav,
+            TransaccioForm transaccioForm, Where where) throws I18NException {
         if (transaccioForm.isHiddenField(USUARIPERSONAID)) {
             return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
         }
@@ -1119,16 +1036,15 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForUsuariPersonaId(HttpServletRequest request,
-            ModelAndView mav, TransaccioFilterForm transaccioFilterForm, List<Transaccio> list,
+    public List<StringKeyValue> getReferenceListForUsuariPersonaId(HttpServletRequest request, ModelAndView mav,
+            TransaccioFilterForm transaccioFilterForm, List<Transaccio> list,
             Map<Field<?>, GroupByItem> _groupByItemsMap, Where where) throws I18NException {
         if (transaccioFilterForm.isHiddenField(USUARIPERSONAID)
                 && !transaccioFilterForm.isGroupByField(USUARIPERSONAID)) {
             return EMPTY_STRINGKEYVALUE_LIST_UNMODIFIABLE;
         }
         Where _w = null;
-        List<StringKeyValue> l = getReferenceListForUsuariPersonaId(request, mav,
-                Where.AND(where, _w));
+        List<StringKeyValue> l = getReferenceListForUsuariPersonaId(request, mav, Where.AND(where, _w));
 
         if (l.size() != list.size()) {
             Map<String, String> map = org.fundaciobit.genapp.common.utils.Utils.listToMap(l);
@@ -1149,101 +1065,44 @@ public abstract class AbstractTransaccioController extends TransaccioController 
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForUsuariPersonaId(HttpServletRequest request,
-            ModelAndView mav, Where where) throws I18NException {
+    public List<StringKeyValue> getReferenceListForUsuariPersonaId(HttpServletRequest request, ModelAndView mav,
+            Where where) throws I18NException {
         SelectMultipleKeyValue<Long> select = new SelectMultipleKeyValue<Long>(
-                UsuariPersonaFields.USUARIPERSONAID.select,
-                UsuariPersonaFields.USERNAME.select);
+                UsuariPersonaFields.USUARIPERSONAID.select, UsuariPersonaFields.USERNAME.select);
         List<KeyValue<Long>> list = this.usuariPersonaEjb.executeQuery(select, where);
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
         for (KeyValue<Long> keyValue : list) {
             String value = keyValue.getValue();
             String key = String.valueOf(keyValue.getKey());
-            __tmp.add(new StringKeyValue(key,
-                    (value == null || (value.trim().length() == 0)) ? key : value));
+            __tmp.add(new StringKeyValue(key, (value == null || (value.trim().length() == 0)) ? key : value));
         }
 
         return __tmp;
     }
-    
-    
-    
+
     @Override
-    public void postValidate(HttpServletRequest request, TransaccioForm transaccioForm,
-            BindingResult result) throws I18NException {
-        
+    public void postValidate(HttpServletRequest request, TransaccioForm transaccioForm, BindingResult result)
+            throws I18NException {
+
         super.postValidate(request, transaccioForm, result);
 
-
     }
-    
-    
 
     @RequestMapping(value = THUMBNAIL_PDF_MASSIVE + "/{transaccioWebID}", method = RequestMethod.GET)
     public void createThumbnailPdf(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("transaccioWebID") String transaccioWebID) throws Exception, I18NException {
 
         long fitxerID = transaccioPublicEjb.executeQueryOne(FITXERESCANEJATID, TRANSACTIONWEBID.equal(transaccioWebID));
+        File file = FileSystemManager.getFile(fitxerID);
 
-        PDDocument document = null;
-        try {
-            File file = FileSystemManager.getFile(fitxerID);
-            document = PDDocument.load(file);
-            PDFRenderer pdfRenderer = new PDFRenderer(document);
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setDateHeader("Expires", -1); // Proxies.
 
-            BufferedImage bim = pdfRenderer.renderImage(0, 0.5f);
+        OutputStream os = response.getOutputStream();
 
-            BufferedImage scaled = scale(bim, 350);
-
-            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-            response.setDateHeader("Expires", -1); // Proxies.
-
-            ImageIO.write(scaled, "PNG", response.getOutputStream());
-
-        } finally {
-            if (document != null) {
-                document.close();
-            }
-        }
+        ThumbnailPdfGenerator.thumbnailPDF(file, os);
 
     }
-
-    public static BufferedImage scale(BufferedImage image, int max) {
-
-        int width = image.getWidth(null);
-        int height = image.getHeight(null);
-        double dWidth = 0;
-        double dHeight = 0;
-        if (width == height) {
-            dWidth = max;
-            dHeight = max;
-        } else if (width > height) {
-            dWidth = max;
-            dHeight = ((double) height / (double) width) * max;
-        } else {
-            dHeight = max;
-            dWidth = ((double) width / (double) height) * max;
-        }
-        Image scaled = image.getScaledInstance((int) dWidth, (int) dHeight, Image.SCALE_SMOOTH);
-
-        return toBufferedImage(scaled);
-
-    }
-
-    public static BufferedImage toBufferedImage(Image img) {
-        if (img instanceof BufferedImage) {
-            return (BufferedImage) img;
-        }
-
-        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D bGr = bimage.createGraphics();
-        bGr.drawImage(img, 0, 0, null);
-        bGr.dispose();
-
-        return bimage;
-    }
-
 
 }
