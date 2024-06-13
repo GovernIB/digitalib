@@ -52,8 +52,8 @@ public class NetejaFitxersSheduler {
     }
     
     
-    //@Scheduled(cron = "0 */10 5 * * *") // Cada dia cada 10 minuts entre les 05:00h i les 5:59h 
-    @Scheduled(cron = "0 */3 * * * *") // Cada 3 minuts
+    @Scheduled(cron = "0 */10 5 * * *") // Cada dia cada 10 minuts entre les 05:00h i les 5:59h 
+    //@Scheduled(cron = "0 */3 * * * *") // Cada 3 minuts
     public void netejarFitxersPersona() {
 
         try {
