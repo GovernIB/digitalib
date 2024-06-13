@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.LocaleResolver;
@@ -34,6 +35,7 @@ import org.springframework.web.util.UrlPathHelper;
 @Configuration
 @ComponentScan(basePackages = {"es.caib.digitalib"})
 @EnableWebMvc
+@EnableScheduling
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean

@@ -929,9 +929,12 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             Where w = Where.AND(w1, w2);
             OrderBy order = new OrderBy(DATAINICI, OrderType.ASC);
-            List<Long> list = this.executeQuery(TransaccioFields.TRANSACCIOID, w, order);
+            List<Long> listSQL = this.executeQuery(TransaccioFields.TRANSACCIOID, w, order);
+            
+            Set<Long> list = new HashSet<Long>(listSQL);
 
-            final long TIMEOUT_MS =  (TransaccioLogicaService.THREE_MINUTS_IN_SECONDS - 1L * 60L) * 1000L;
+            // La meitat de temps per BBDD i l'altre per esborrar fitxers
+            final long TIMEOUT_MS =  (TransaccioLogicaService.THREE_MINUTS_IN_SECONDS/2) * 1000L;
             
             int processats = 0;
             

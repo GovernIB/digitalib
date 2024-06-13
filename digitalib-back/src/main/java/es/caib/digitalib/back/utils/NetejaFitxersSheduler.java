@@ -17,6 +17,9 @@ import javax.ejb.EJB;
 /**
  * 
  * @author anadal (u80067)
+ * 
+ * 
+ * @EnableScheduling
  * Per funcionar requereix afegir al /digitalib-back/src/main/webapp/WEB-INF/digitalibback-servlet.xml 
  * la següent entrada <task:annotation-driven/> conjuntament amb els beans
  *        xmlns:task="http://www.springframework.org/schema/task"
@@ -36,6 +39,7 @@ public class NetejaFitxersSheduler {
     //@Scheduled(cron = "0 * * ? * *") // Cada minut
     public void netejarFitxersAplicacio() {
 
+        log.info(" ============   Netejar fitxers Aplicacio =============");
         try {
             transaccioLogicaEjb.netejaDeFitxersNocturnAplicacio();
         } catch (I18NException e) {
@@ -48,8 +52,8 @@ public class NetejaFitxersSheduler {
     }
     
     
-    @Scheduled(cron = "0 */10 5 * * *") // Cada dia cada 10 minuts entre les 05:00h i les 5:59h 
-    //@Scheduled(cron = "0 * * ? * *") // Cada minut
+    //@Scheduled(cron = "0 */10 5 * * *") // Cada dia cada 10 minuts entre les 05:00h i les 5:59h 
+    @Scheduled(cron = "0 */3 * * * *") // Cada 3 minuts
     public void netejarFitxersPersona() {
 
         try {
