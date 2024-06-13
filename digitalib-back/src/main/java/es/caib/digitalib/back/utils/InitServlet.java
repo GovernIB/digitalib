@@ -45,22 +45,39 @@ public class InitServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
 
+        // Propietat incorrecte
+
+        //es.caib.digitalib.configuraciogruppereefecteEL
+        String prop = Configuracio.getDigitalIBProperties()
+                .getProperty(Constants.DIGITALIB_PROPERTY_BASE + "configuraciogruppereefecteEL");
+        if (prop != null) {
+
+            String msg = "Propietat mal escrita (te dues ee): " + Constants.DIGITALIB_PROPERTY_BASE
+                    + "configuraciogruppereefecteEL.\n"
+                    + "Del fitxer digitalib.properties arreglar la paraula 'defecte': configuraciogrupperdefecteEL.\n"
+                    + "Mentre no arregli aquest error DigitalIB no es posarà en marxa.";
+
+            log.error("\n\n\n ========================================" + msg
+                    + "\n =========================================\n\n\n");
+
+            throw new ServletException(msg);
+        }
+
         // Sistema de Fitxers
         try {
-            
+
             String fileManagerClass = Configuracio.getFileSystemManager();
             if (fileManagerClass != null) {
                 Class<?> clazz = Class.forName(fileManagerClass);
-                IFileSystemManager fsm = (IFileSystemManager)clazz.getDeclaredConstructor().newInstance();
+                IFileSystemManager fsm = (IFileSystemManager) clazz.getDeclaredConstructor().newInstance();
                 FileSystemManager.setFileSystemManager(fsm);
                 log.info("FileSystemManager class = " + fsm.getClass().getName());
             }
-            
-            
+
             File fd = Configuracio.getFilesDirectory();
             if (fd == null) {
                 throw new Exception("No s'ha definit la propietat de la ubicació dels fitxers ("
-                        +  "es.caib.digitalib.filesdirectory)") ;
+                        + "es.caib.digitalib.filesdirectory)");
             }
             if (!fd.exists()) {
                 throw new Exception("El directori " + fd.getAbsolutePath() + " no existeix.");
@@ -72,8 +89,6 @@ public class InitServlet extends HttpServlet {
             }
             FileSystemManager.setFilesPath(fd);
             log.info("FileSystemManager path = " + FileSystemManager.getFilesPath().getAbsolutePath());
-            
-            
 
         } catch (Throwable th) {
             final String msg = "Error inicialitzant el sistema de sistema de fitxers: " + th.getMessage();
@@ -118,7 +133,7 @@ public class InitServlet extends HttpServlet {
                     "org.fundaciobit.plugins.exportdata.ods.ODSPlugin",
                     "org.fundaciobit.plugins.exportdata.excel.ExcelPlugin" };
             plugins = new HashSet<Class<? extends IExportDataPlugin>>();
-            
+
             for (String str : classes) {
                 try {
                     Class<?> cls = Class.forName(str);
@@ -137,7 +152,8 @@ public class InitServlet extends HttpServlet {
                         log.warn("No s'ha pogut instanciar Plugin associat a la classe " + class1.getName());
                     } else {
                         log.warn("Registrant DataExporter: " + class1.getName());
-                        DataExporterManager.addDataExporter(new es.caib.digitalib.back.utils.DigitalIBDataExporter(edp));
+                        DataExporterManager
+                                .addDataExporter(new es.caib.digitalib.back.utils.DigitalIBDataExporter(edp));
                     }
                 }
             }

@@ -3,9 +3,8 @@ package es.caib.digitalib.commons.utils;
 import org.apache.log4j.Logger;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.util.Properties;
 
 /**
@@ -17,79 +16,74 @@ public class Configuracio implements Constants {
 
     public static final Logger log = Logger.getLogger(Configuracio.class);
 
-    private static final Properties fileProperties = new Properties();
+    private static Properties digitalibProperties;
 
-    private static final Properties fileAndSystemProperties = new Properties();
+    private static Properties digitalibSystemProperties;
 
-    /*
-     * Agafa els fitxers de propietats definits a l'standalone
-     *
-     * Seguim els estandars de la CAIB
-     */
-    public static Properties getFilesProperties() {
-
-        if (fileProperties.isEmpty()) {
-            // matches the property name as defined in the system-properties element in
-            // WildFly
-            String property = Constants.DIGITALIB_PROPERTY_BASE + "properties";
-            loadPropertyFile(property);
-
-            String propertySystem = Constants.DIGITALIB_PROPERTY_BASE + "system.properties";
-            loadPropertyFile(propertySystem);
+    public static Properties getDigitalIBProperties() {
+        if (digitalibProperties == null) {
+            digitalibProperties = loadPropertiesFromKey(Constants.DIGITALIB_PROPERTY_BASE + "properties");
         }
-
-        return fileProperties;
-
+        return digitalibProperties;
     }
 
-    public static void loadPropertyFile(String property) {
+    public static Properties getDigitalIBSystemProperties() {
+        if (digitalibSystemProperties == null) {
+            digitalibSystemProperties = loadPropertiesFromKey(Constants.DIGITALIB_PROPERTY_BASE + "system.properties");
+        }
+        return digitalibSystemProperties;
+    }
 
-        String propertyFile = System.getProperty(property);
+    private static Properties loadPropertiesFromKey(String key) {
+        String propertyFileName = System.getProperty(key);
 
-        if (propertyFile == null) {
-            String msg = "No existeix la propietat: " + property
-                    + " al fitxer standalone. S'hauria d'incloure aquesta propietat a l'etiqueta <system-properties> del fitxer standalone";
+        if (propertyFileName == null) {
+            String msg = "No existeix la propietat: " + key
+                    + " al fitxer standalone. S'hauria d'incloure aquesta propietat a l'etiqueta <system-properties> del fitxer standalone.";
             throw new RuntimeException(msg);
         }
 
-        if (propertyFile.trim().length() == 0) {
-            String msg = "La propietat: " + property
+        if (propertyFileName.trim().length() == 0) {
+            String msg = "La propietat: " + key
                     + " del fitxer standalone no té valor. Se li ha de posar el fitxer corresponent a la propietat al fitxer standalone";
             throw new RuntimeException(msg);
         }
 
-        File File = new File(propertyFile);
-        try {
-            fileProperties.load(new FileInputStream(File));
+        File file = new File(propertyFileName);
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("La propietat: " + property
-                    + " del fitxer standalone apunta a un fitxer que no existeix (" + propertyFile + ")");
+        if (!file.exists()) {
+            throw new RuntimeException("La propietat: " + key
+                    + " del fitxer standalone apunta a un fitxer que no existeix (" + propertyFileName + ")");
+        }
 
-        } catch (IOException e) {
-            throw new RuntimeException("La propietat: " + property + " del fitxer standalone apunta a un fitxer("
-                    + propertyFile + ") que no es pot llegir:" + e.getMessage(), e);
+        try (Reader reader = new FileReader(file)) {
+            Properties prop = new Properties();
+            prop.load(reader);
+            return prop;
+        } catch (Exception e) {
+            throw new RuntimeException("La propietat: " + key + " del fitxer standalone apunta a un fitxer("
+                    + propertyFileName + ") que no es pot llegir:" + e.getMessage(), e);
         }
     }
 
     public static Properties getSystemAndFileProperties() {
 
-        if (fileAndSystemProperties.isEmpty()) {
-            fileAndSystemProperties.putAll(getFilesProperties());
-            fileAndSystemProperties.putAll(System.getProperties());
-        }
-        return fileAndSystemProperties;
+        Properties properties = new Properties();
+        properties.putAll(System.getProperties());
+        properties.putAll(getDigitalIBSystemProperties());
+        properties.putAll(getDigitalIBProperties());
+        return properties;
     }
 
     public static String getProperty(String key) {
 
-        return getFilesProperties().getProperty(key);
+        return getDigitalIBProperties().getProperty(key);
 
     }
 
     public static String getProperty(String key, String def) {
 
-        return getFilesProperties().getProperty(key, def);
+        return getDigitalIBProperties().getProperty(key, def);
 
     }
 
@@ -135,7 +129,7 @@ public class Configuracio implements Constants {
     }
 
     public static File getFilesDirectory() {
-        String path = getProperty(DIGITALIB_PROPERTY_BASE + "filesdirectory");
+        String path = getDigitalIBSystemProperties().getProperty(DIGITALIB_PROPERTY_BASE + "filesdirectory");
         if (path == null) {
             throw new RuntimeException("No existeix la propietat '" + DIGITALIB_PROPERTY_BASE + "filesdirectory'"
                     + " al fitxer " + System.getProperty(DIGITALIB_PROPERTY_BASE + "system.properties")
@@ -307,7 +301,7 @@ public class Configuracio implements Constants {
     }
 
     public static String getConfiguracioGrupPerDefecteEL() {
-        return getProperty(DIGITALIB_PROPERTY_BASE + "configuraciogruppereefecteEL");
+        return getProperty(DIGITALIB_PROPERTY_BASE + "configuraciogrupperdefecteEL");
     }
 
 }

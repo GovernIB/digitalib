@@ -18,7 +18,6 @@ import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
 import org.fundaciobit.pluginsib.userinformation.UserInfo;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 import org.springframework.context.ApplicationListener;
-import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -179,7 +178,6 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
                         } catch (NumberFormatException nfe) {
                         }
-
                     }
 
                     necesitaConfigurar = true;
