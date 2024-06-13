@@ -150,7 +150,9 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                     usuariPersona.setLlinatges(llinatges);
 
                     usuariPersona.setUsername(username);
-                    usuariPersona.setNif(info.getAdministrationID().toUpperCase());
+                    if (info.getAdministrationID() != null) {
+                        usuariPersona.setNif(info.getAdministrationID().toUpperCase());
+                    }
 
                     Map<String, Object> parameters = new HashMap<String, Object>();
 
