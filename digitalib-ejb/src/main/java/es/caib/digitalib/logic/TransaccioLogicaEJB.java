@@ -924,7 +924,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 w2 = Where.AND(
                         Where.OR(TransaccioFields.FITXERESCANEJATID.isNotNull(),
                                 TransaccioFields.FITXERSIGNATURAID.isNotNull()),
-                        TransaccioFields.DATAINICI.lessThan(ts));
+                        TransaccioFields.DATAINICI.lessThanOrEqual(ts));
             }
 
             Where w = Where.AND(w1, w2);
