@@ -119,6 +119,12 @@
         </dependency>
 
         <dependency>
+            <artifactId>pluginsib-userinformation-api</artifactId>
+            <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+            <version>${pluginsib.userinformation.api.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
             <artifactId>pluginsib-utils-templateengine</artifactId>
             <version>2.0.1</version>
@@ -129,7 +135,6 @@
             <artifactId>freemarker</artifactId>
             <version>2.3.28</version>
         </dependency>
-
 
         <dependency>
             <artifactId>apifirmasimple-jersey</artifactId>
@@ -209,12 +214,6 @@
         </dependency>
 
         <dependency>
-            <artifactId>pluginsib-userinformation-api</artifactId>
-            <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-            <version>${pluginsib.userinformation.api.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
@@ -242,7 +241,6 @@
     <build>
 
         <finalName>${project.artifactId}-${project.version}</finalName>
-
 
         <plugins>
             <plugin>
