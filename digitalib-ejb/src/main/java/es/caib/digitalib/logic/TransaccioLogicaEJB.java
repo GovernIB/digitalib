@@ -58,6 +58,7 @@ import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioQueryPath;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.model.fields.TransaccioQueryPath;
 import es.caib.digitalib.commons.utils.Configuracio;
 import es.caib.digitalib.commons.utils.Constants;
 
@@ -99,8 +100,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     protected es.caib.digitalib.ejb.ConfiguracioGrupService configuracioGrupEjb;
 
     @Override
-    public Set<Long> deleteFull(Transaccio transaccio, String usernameApp,
-            String usernamePerson) throws I18NException {
+    public Set<Long> deleteFull(Transaccio transaccio, String usernameApp, String usernamePerson) throws I18NException {
 
         Set<Long> filesToDelete = new HashSet<Long>();
         if (transaccio == null) {
@@ -126,8 +126,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         // Cada transacció té les seves metadades
         final Long transaccioID = transaccio.getTransaccioID();
         {
-            metadadaLogicaEjb
-                    .delete(MetadadaFields.TRANSACCIOID.equal(transaccioID));
+            metadadaLogicaEjb.delete(MetadadaFields.TRANSACCIOID.equal(transaccioID));
         }
 
         delete(transaccioID);
@@ -154,7 +153,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             }
         }
 
-        cleanFilesOfTransaction(transaccio, filesToDelete, false);
+        cleanFilesOfTransaction(transaccio, filesToDelete, false, false);
 
         if (count <= 1 && transMultiple != null) {
             filesToDelete.addAll(deleteTransaccioMultipleFull(transMultiple));
@@ -165,18 +164,16 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             final String msg = "Esborrada transaccio " + transaccioID;
             final String additionalInfo = null;
             final int auditType = Constants.AUDIT_TYPE_DELETE_TRANSACTION;
-            auditoriaLogicaEjb.audita(transaccio, isApp, msg, additionalInfo, auditType,
-                    usernameApp, usernamePerson);
+            auditoriaLogicaEjb.audita(transaccio, isApp, msg, additionalInfo, auditType, usernameApp, usernamePerson);
         }
 
-        __tsRegistry.registerInterposedSynchronization(
-                new CleanFilesSynchronization(transaccioID, filesToDelete));
+        __tsRegistry.registerInterposedSynchronization(new CleanFilesSynchronization(transaccioID, filesToDelete));
 
         return filesToDelete;
     }
 
-    protected void cleanFilesOfTransaction(Transaccio transaccio, Set<Long> fitxers,
-            boolean updateTransaction) throws I18NException {
+    protected void cleanFilesOfTransaction(Transaccio transaccio, Set<Long> fitxers, boolean updateTransaction,
+            boolean cleanMultipleTransaction) throws I18NException {
         Long fe = transaccio.getFitxerEscanejatID();
         if (fe != null) {
             fitxers.add(fe);
@@ -193,35 +190,50 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             this.update(transaccio);
         }
 
+        // Transacció Multiple
+        if (cleanMultipleTransaction) {
+            if (transaccio.getTransaccioMultipleID() != null) {
+                TransaccioMultipleJPA tm = transaccioMultipleEjb.findByPrimaryKey(transaccio.getTransaccioMultipleID());
+                if (tm != null) {                    
+                    Long ftm = tm.getFitxerEscanejatID();
+                    if (ftm != null) {
+                        log.info("     - Netejant Transacció múltiple " + tm.getTransmultipleid() + " ...");
+                        tm.setFitxerEscanejatID(null);
+                        fitxers.add(ftm);
+                        transaccioMultipleEjb.update(tm);
+                    }
+                }
+            }
+        }
+
         // log.info("XYZ ZZZ FFF PRE esborrar fitxers ... " + esborrarFitxers);
         {
             // log.info("XYZ ZZZ FFF Entra a esborrar fitxers " +
             // Arrays.toString(fitxers.toArray()));
             for (Long fid : fitxers) {
                 try {
-                   fitxerEjb.delete(fid);
-                } catch(Throwable th) {
+                    fitxerEjb.delete(fid);
+                } catch (Throwable th) {
                     String msg;
                     if (th instanceof I18NException) {
-                        msg = I18NLogicUtils.getMessage((I18NException)th, new Locale("ca"));
+                        msg = I18NLogicUtils.getMessage((I18NException) th, new Locale("ca"));
                     } else {
                         msg = th.getMessage();
                     }
-                    
-                    log.error("Error desconegut esborrant fitxer amb ID " + fid + " de la transacció " + transaccio.getTransaccioID() + ": " + msg, th);                    
+
+                    log.error("Error desconegut esborrant fitxer amb ID " + fid + " de la transacció "
+                            + transaccio.getTransaccioID() + ": " + msg, th);
                 }
             }
 
         }
     }
 
-    
     @Override
     public MassiveScanWebSimpleFile getSeparator() throws Exception {
 
         byte[] data;
-        InputStream is = TransaccioLogicaEJB.class.getClassLoader()
-                .getResourceAsStream(SEPARADOR_ESCANEIG_MASSIU_NOM);
+        InputStream is = TransaccioLogicaEJB.class.getClassLoader().getResourceAsStream(SEPARADOR_ESCANEIG_MASSIU_NOM);
 
         if (is == null) {
             // XYZ ZZZ TRA
@@ -230,14 +242,12 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         data = FileUtils.toByteArray(is);
         is.close();
 
-        MassiveScanWebSimpleFile msf = new MassiveScanWebSimpleFile(SEPARADOR_ESCANEIG_MASSIU_NOM,
-                Constants.MIME_PDF, data);
-        
+        MassiveScanWebSimpleFile msf = new MassiveScanWebSimpleFile(SEPARADOR_ESCANEIG_MASSIU_NOM, Constants.MIME_PDF,
+                data);
+
         return msf;
     }
-    
-    
-    
+
     //@Resource(mappedName="java:jboss/TransactionSynchronizationRegistry")
     //protected TransactionSynchronizationRegistry transactionSynchronizationRegistry;
 
@@ -255,20 +265,20 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     protected void netejaFitxers(Transaccio t) throws I18NException {
         Set<Long> filesToDelete = new HashSet<Long>();
 
-        cleanFilesOfTransaction(t, filesToDelete, true);
+        cleanFilesOfTransaction(t, filesToDelete, true, true);
 
-        __tsRegistry.registerInterposedSynchronization(
-                new CleanFilesSynchronization(t.getTransaccioID(), filesToDelete));
+        __tsRegistry
+                .registerInterposedSynchronization(new CleanFilesSynchronization(t.getTransaccioID(), filesToDelete));
         // log.error("Passa per netejaFitxers => FINAL");
     }
 
     public class CleanFilesSynchronization implements javax.transaction.Synchronization {
 
         protected final Set<Long> filesToDelete;
-        
+
         protected final Long transactionID;
 
-        public CleanFilesSynchronization(Long transactionID, Set<Long> filesToDelete) {            
+        public CleanFilesSynchronization(Long transactionID, Set<Long> filesToDelete) {
             super();
             this.transactionID = transactionID;
             this.filesToDelete = filesToDelete;
@@ -299,8 +309,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
      * @return
      * @throws I18NException
      */
-    public Set<Long> deleteTransaccioMultipleFull(Long transaccioMultipleID)
-            throws I18NException {
+    public Set<Long> deleteTransaccioMultipleFull(Long transaccioMultipleID) throws I18NException {
 
         Set<Long> fitxers = new HashSet<Long>();
         if (transaccioMultipleID == null) {
@@ -340,11 +349,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     }
 
     @Override
-    public TransaccioJPA searchTransaccioByTransactionWebID(String transactionWebID)
-            throws I18NException {
+    public TransaccioJPA searchTransaccioByTransactionWebID(String transactionWebID) throws I18NException {
 
-        List<Transaccio> list = select(
-                TRANSACTIONWEBID.equal(transactionWebID));
+        List<Transaccio> list = select(TRANSACTIONWEBID.equal(transactionWebID));
 
         if (list == null || list.size() == 0) {
             return null;
@@ -358,20 +365,17 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     }
 
     @Override
-    public List<TransaccioJPA> searchMassiveTransaccioByTransactionWebID(
-            String transactionWebID) throws I18NException {
+    public List<TransaccioJPA> searchMassiveTransaccioByTransactionWebID(String transactionWebID) throws I18NException {
 
         // Recordau que la primera transacció conté l'ID de la transacció multiple i que l'ID
         // de la
         // transacció és igual a l'ID de la transacció multiple.
 
-        Long transaccioMultipleID = executeQueryOne(TRANSACCIOMULTIPLEID,
-                TRANSACTIONWEBID.equal(transactionWebID));
+        Long transaccioMultipleID = executeQueryOne(TRANSACCIOMULTIPLEID, TRANSACTIONWEBID.equal(transactionWebID));
 
         if (transaccioMultipleID == null) {
             throw new I18NException("comodi",
-                    "No s'ha trobat transaccio multiple per la transaccio web: "
-                            + transactionWebID);
+                    "No s'ha trobat transacció múltiple per la transaccio web: " + transactionWebID);
         }
 
         return searchMassiveTransaccioByTransaccioMultipleID(transaccioMultipleID);
@@ -379,8 +383,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     }
 
     @Override
-    public Long[] countTransaccionsByTransaccioMultipleID(long transaccioMultipleID)
-            throws I18NException {
+    public Long[] countTransaccionsByTransaccioMultipleID(long transaccioMultipleID) throws I18NException {
 
         List<Integer> estats = this.executeQuery(TransaccioFields.ESTATCODI,
                 TransaccioFields.TRANSACCIOMULTIPLEID.equal(transaccioMultipleID));
@@ -412,14 +415,12 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
      * @throws I18NException
      */
     @Override
-    public List<TransaccioJPA> searchMassiveTransaccioByTransaccioMultipleID(
-            long transaccioMultipleID) throws I18NException {
+    public List<TransaccioJPA> searchMassiveTransaccioByTransaccioMultipleID(long transaccioMultipleID)
+            throws I18NException {
 
-        List<Transaccio> list = this.select(
-                TransaccioFields.TRANSACCIOMULTIPLEID.equal(transaccioMultipleID),
+        List<Transaccio> list = this.select(TransaccioFields.TRANSACCIOMULTIPLEID.equal(transaccioMultipleID),
                 new OrderBy(DATAFI, OrderType.ASC));
-        
-        
+
         log.info("\n\n  -------------- searchMassiveTransaccioByTransaccioMultipleID -------------------");
 
         List<TransaccioJPA> listJPA = new ArrayList<TransaccioJPA>();
@@ -427,7 +428,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         for (Transaccio transaccio : list) {
 
             TransaccioJPA jpa = (TransaccioJPA) transaccio;
-            
+
             log.info(jpa.getDataFi());
 
             Hibernate.initialize(jpa.getPerfil());
@@ -464,9 +465,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
     @Override
     @PermitAll
-    public TransaccioJPA crearTransaccio(ScanWebSimpleGetTransactionIdRequest mrt,
-            UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String urlBase,
-            String returnURL, String ip) throws I18NException {
+    public TransaccioJPA crearTransaccio(ScanWebSimpleGetTransactionIdRequest mrt, UsuariAplicacioJPA usuariAplicacio,
+            UsuariPersonaJPA usuariPersona, String urlBase, String returnURL, String ip) throws I18NException {
 
         final String scanWebProfile = mrt.getScanWebProfile();
         final int view = mrt.getView();
@@ -494,13 +494,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                     if (usuariPersona.getConfiguracioGrupID() == null) {
                         // XYZ ZZZ
                         throw new I18NException("genapp.comodi",
-                                "L'usuari  " + usuariPersona.getUsername()
-                                        + " no te definida la Configuració de Grup");
+                                "L'usuari  " + usuariPersona.getUsername() + " no te definida la Configuració de Grup");
                     }
-                    functionaryDir3Unit = configuracioGrupEjb.executeQueryOne(
-                            ConfiguracioGrupFields.CODIDIR3PERDEFECTE,
-                            ConfiguracioGrupFields.CONFIGURACIOGRUPID
-                                    .equal(usuariPersona.getConfiguracioGrupID()));
+                    functionaryDir3Unit = configuracioGrupEjb.executeQueryOne(ConfiguracioGrupFields.CODIDIR3PERDEFECTE,
+                            ConfiguracioGrupFields.CONFIGURACIOGRUPID.equal(usuariPersona.getConfiguracioGrupID()));
                 } else {
                     functionaryDir3Unit = usuariPersona.getUnitatDir3();
                 }
@@ -511,8 +508,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 // log.info("\n\n\n FUNCIONARI DIR3 = " + functionaryDir3Unit + "\n\n\n");
             }
 
-            signatureParameters = new MassiveScanWebSimpleSignatureParameters(
-                    functionaryFullName, functionaryAdministrationID, functionaryDir3Unit);
+            signatureParameters = new MassiveScanWebSimpleSignatureParameters(functionaryFullName,
+                    functionaryAdministrationID, functionaryDir3Unit);
         }
 
         final MassiveScanWebSimpleArxiuRequiredParameters arxiuRequiredParameters;
@@ -535,9 +532,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             final List<String> affectedOrganisms = arp.getAffectedOrganisms();
 
-            arxiuRequiredParameters = new MassiveScanWebSimpleArxiuRequiredParameters(
-                    citizenAdministrationID, citizenFullName, documentElaborationState,
-                    documentOrigen, interestedPersons, affectedOrganisms);
+            arxiuRequiredParameters = new MassiveScanWebSimpleArxiuRequiredParameters(citizenAdministrationID,
+                    citizenFullName, documentElaborationState, documentOrigen, interestedPersons, affectedOrganisms);
         }
 
         final MassiveScanWebSimpleArxiuOptionalParameters arxiuOptionalParameters;
@@ -556,45 +552,42 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             final String custodyIDOrExpedientID = aop.getCustodyIDOrExpedientID();
 
-            arxiuOptionalParameters = new MassiveScanWebSimpleArxiuOptionalParameters(
-                    procedureName, procedureCode, documentarySerie, custodyIDOrExpedientID);
+            arxiuOptionalParameters = new MassiveScanWebSimpleArxiuOptionalParameters(procedureName, procedureCode,
+                    documentarySerie, custodyIDOrExpedientID);
 
         }
 
         final String transactionName = " "; // No posam buit per no fer petar en Oracle
         MassiveScanWebSimpleGetTransactionIdRequest requestTransaction;
 
-        requestTransaction = new MassiveScanWebSimpleGetTransactionIdRequest(transactionName,
-                scanWebProfile, view, languageUI, funcionariUsername, signatureParameters,
-                arxiuRequiredParameters, arxiuOptionalParameters);
+        requestTransaction = new MassiveScanWebSimpleGetTransactionIdRequest(transactionName, scanWebProfile, view,
+                languageUI, funcionariUsername, signatureParameters, arxiuRequiredParameters, arxiuOptionalParameters);
 
         // Original Value final boolean isMassive = false;
 
         final boolean isMassive = Configuracio.isAllowedMassiveScanInWeb();
 
-        return internalCrearTransaccio(requestTransaction, usuariAplicacio, usuariPersona,
-                urlBase, returnURL, ip, isMassive);
+        return internalCrearTransaccio(requestTransaction, usuariAplicacio, usuariPersona, urlBase, returnURL, ip,
+                isMassive);
 
     }
 
     @Override
     @PermitAll
-    public TransaccioJPA crearTransaccio(
-            MassiveScanWebSimpleGetTransactionIdRequest requestTransaction,
-            UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String urlBase,
-            String returnURL, String ip) throws I18NException {
+    public TransaccioJPA crearTransaccio(MassiveScanWebSimpleGetTransactionIdRequest requestTransaction,
+            UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String urlBase, String returnURL,
+            String ip) throws I18NException {
 
         final boolean isMassive = true;
 
-        return internalCrearTransaccio(requestTransaction, usuariAplicacio, usuariPersona,
-                urlBase, returnURL, ip, isMassive);
+        return internalCrearTransaccio(requestTransaction, usuariAplicacio, usuariPersona, urlBase, returnURL, ip,
+                isMassive);
 
     }
 
-    protected TransaccioJPA internalCrearTransaccio(
-            MassiveScanWebSimpleGetTransactionIdRequest requestTransaction,
-            UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String urlBase,
-            String returnURL, String ip, boolean isMassive) throws I18NException {
+    protected TransaccioJPA internalCrearTransaccio(MassiveScanWebSimpleGetTransactionIdRequest requestTransaction,
+            UsuariAplicacioJPA usuariAplicacio, UsuariPersonaJPA usuariPersona, String urlBase, String returnURL,
+            String ip, boolean isMassive) throws I18NException {
         String scanWebProfile = requestTransaction.getScanWebProfile();
 
         PerfilUsuariAplicacioQueryPath qp = new PerfilUsuariAplicacioQueryPath();
@@ -611,26 +604,22 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                                 qp.PERFIL().CODI().equal(scanWebProfile)));
             } catch (I18NException e1) {
                 // XYZ ZZZ YTraduir
-                throw new I18NException("genapp.comodi",
-                        "Error desconegut cercant perfil " + scanWebProfile + ": "
-                                + I18NLogicUtils.getMessage(e1, new Locale("ca")));
+                throw new I18NException("genapp.comodi", "Error desconegut cercant perfil " + scanWebProfile + ": "
+                        + I18NLogicUtils.getMessage(e1, new Locale("ca")));
             }
 
             if (perfilID == null) {
                 // XYZ ZZZ Traduir
-                throw new I18NException("genapp.comodi",
-                        "El perfil " + scanWebProfile + " no està assignat a usuari aplicacio "
-                                + usuariAplicacio.getUsername());
+                throw new I18NException("genapp.comodi", "El perfil " + scanWebProfile
+                        + " no està assignat a usuari aplicacio " + usuariAplicacio.getUsername());
             }
         } else {
 
-            perfilID = perfilEjb.executeQueryOne(PerfilFields.PERFILID,
-                    PerfilFields.CODI.equal(scanWebProfile));
+            perfilID = perfilEjb.executeQueryOne(PerfilFields.PERFILID, PerfilFields.CODI.equal(scanWebProfile));
 
             // XYZ ZZZ Traduir
             if (perfilID == null) {
-                throw new I18NException("genapp.comodi",
-                        "No puc trobar el perfil amb codi " + scanWebProfile);
+                throw new I18NException("genapp.comodi", "No puc trobar el perfil amb codi " + scanWebProfile);
             }
 
         }
@@ -685,11 +674,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
         int tipusPerfil = perfil.getUsPerfil();
 
-        if (tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA
-                || tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
+        if (tipusPerfil == Constants.PERFIL_US_COPIA_AUTENTICA || tipusPerfil == Constants.PERFIL_US_CUSTODIA) {
 
-            MassiveScanWebSimpleSignatureParameters signParams = requestTransaction
-                    .getSignatureParameters();
+            MassiveScanWebSimpleSignatureParameters signParams = requestTransaction.getSignatureParameters();
 
             // TOT AIXÒ s'OBTINDRA D'UNA PAGINA POSTERIOR A NO SER QUE JA ESTIGUI DEFINIT
             if (signParams != null) {
@@ -720,14 +707,11 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 // XYZ ZZZ
                 // arxiuReqParams.getOrigen() => Valor Valid
 
-                t.setArxiuReqParamDocEstatElabora(
-                        arxiuReqParams.getDocumentElaborationState());
+                t.setArxiuReqParamDocEstatElabora(arxiuReqParams.getDocumentElaborationState());
 
                 t.setArxiuReqParamOrigen(arxiuReqParams.getDocumentOrigen());
-                t.setArxiuReqParamInteressats(
-                        LogicUtils.listToString(arxiuReqParams.getInterestedPersons()));
-                t.setArxiuReqParamOrgans(
-                        LogicUtils.listToString(arxiuReqParams.getAffectedOrganisms()));
+                t.setArxiuReqParamInteressats(LogicUtils.listToString(arxiuReqParams.getInterestedPersons()));
+                t.setArxiuReqParamOrgans(LogicUtils.listToString(arxiuReqParams.getAffectedOrganisms()));
                 t.setArxiuReqParamCiutadaNif(arxiuReqParams.getCitizenAdministrationID());
                 t.setArxiuReqParamCiutadaNom(arxiuReqParams.getCitizenFullName());
 
@@ -738,8 +722,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             MassiveScanWebSimpleArxiuOptionalParameters arxiuOptParams = requestTransaction
                     .getArxiuOptionalParameters();
             if (arxiuOptParams != null) {
-                t.setArxiuOptParamCustodyOrExpedientId(
-                        arxiuOptParams.getCustodyIDOrExpedientID());
+                t.setArxiuOptParamCustodyOrExpedientId(arxiuOptParams.getCustodyIDOrExpedientID());
                 t.setArxiuOptParamProcedimentCodi(arxiuOptParams.getProcedureCode());
                 t.setArxiuOptParamProcedimentNom(arxiuOptParams.getProcedureName());
                 t.setArxiuOptParamSerieDocumental(arxiuOptParams.getDocumentarySerie());
@@ -770,16 +753,15 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             log.error("\n\n  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX NOM => |" + t.getNom() + "|");
 
-            TransaccioMultipleJPA traMul = new TransaccioMultipleJPA(transmultipleid,
-                    t.getNom());
+            TransaccioMultipleJPA traMul = new TransaccioMultipleJPA(transmultipleid, t.getNom());
             transaccioMultipleEjb.create(traMul);
 
             String var = getTableNameVariable();
 
             // Actialitzam IDmultiple de la subtransaccio
             String sql = "UPDATE " + getTableName() + " " + var + " SET " + var + "."
-                    + TransaccioFields.TRANSACCIOMULTIPLEID.javaName + " = ?1 " + "WHERE "
-                    + var + "." + TransaccioFields.TRANSACCIOID.javaName + " = ?2";
+                    + TransaccioFields.TRANSACCIOMULTIPLEID.javaName + " = ?1 " + "WHERE " + var + "."
+                    + TransaccioFields.TRANSACCIOID.javaName + " = ?2";
             javax.persistence.Query query = getEntityManager().createQuery(sql);
 
             query.setParameter(1, transmultipleid);
@@ -804,10 +786,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             long nanoTime = System.nanoTime();
 
-            transactionID = (nanoTime % 100000) + "" + System.currentTimeMillis()
-                    + (nanoTime / 100000);
-            transactionID = org.fundaciobit.pluginsib.core.utils.Base64.encode(transactionID)
-                    .toLowerCase();
+            transactionID = (nanoTime % 100000) + "" + System.currentTimeMillis() + (nanoTime / 100000);
+            transactionID = org.fundaciobit.pluginsib.core.utils.Base64.encode(transactionID).toLowerCase();
             transactionID = transactionID.replaceAll("=", "");
 
         }
@@ -820,22 +800,19 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
     @Override
     @PermitAll
-    public TransaccioMultiple findTransaccioMultipleByPrimaryKey(Long transaccioMultipleID)
-            throws I18NException {
+    public TransaccioMultiple findTransaccioMultipleByPrimaryKey(Long transaccioMultipleID) throws I18NException {
         return transaccioMultipleEjb.findByPrimaryKey(transaccioMultipleID);
     }
 
     @Override
     @PermitAll
-    public TransaccioMultiple updateTransaccioMultiple(TransaccioMultiple tm)
-            throws I18NException {
+    public TransaccioMultiple updateTransaccioMultiple(TransaccioMultiple tm) throws I18NException {
         return transaccioMultipleEjb.update(tm);
     }
 
     @Override
     @PermitAll
-    public TransaccioJPA cloneTransaccio(TransaccioJPA transaccioOriginal, String nom)
-            throws I18NException {
+    public TransaccioJPA cloneTransaccio(TransaccioJPA transaccioOriginal, String nom) throws I18NException {
         TransaccioJPA transaccio = TransaccioJPA.toJPA(transaccioOriginal);
 
         transaccio.setNom(nom);
@@ -855,8 +832,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         transaccio = (TransaccioJPA) this.create(transaccio);
 
         // Clone Metadatas
-        List<Metadada> metas = metadadaLogicaEjb.select(
-                MetadadaFields.TRANSACCIOID.equal(transaccioOriginal.getTransaccioID()));
+        List<Metadada> metas = metadadaLogicaEjb
+                .select(MetadadaFields.TRANSACCIOID.equal(transaccioOriginal.getTransaccioID()));
 
         for (Metadada metadada : metas) {
             MetadadaJPA metaJPA = MetadadaJPA.toJPA(metadada);
@@ -889,13 +866,11 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
     }
 
-    protected void netejaDeFitxersNocturn(boolean isUtilitzatPerAplicacio)
-            throws I18NException {
+    protected void netejaDeFitxersNocturn(boolean isUtilitzatPerAplicacio) throws I18NException {
 
         final long start = System.currentTimeMillis();
 
-        Integer days = isUtilitzatPerAplicacio
-                ? Configuracio.getDiesPerNetejaDeFitxersAplicacio()
+        Integer days = isUtilitzatPerAplicacio ? Configuracio.getDiesPerNetejaDeFitxersAplicacio()
                 : Configuracio.getDiesPerNetejaDeFitxersPersona();
 
         if (days == null) {
@@ -903,8 +878,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
         } else {
 
-            log.info("Neteja de fitxers de transaccions de tipus "
-                    + (isUtilitzatPerAplicacio ? "Aplicacio" : "Persona")
+            log.info("Neteja de fitxers de transaccions de tipus " + (isUtilitzatPerAplicacio ? "Aplicacio" : "Persona")
                     + " es realitzarà: propietat val " + days + " dies");
 
             Where w1;
@@ -921,23 +895,33 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 date.add(Calendar.DATE, -1 * days);
                 Timestamp ts = new Timestamp(date.getTimeInMillis());
 
-                w2 = Where.AND(
+                // Transaccions
+                Where w2_T = Where.AND(
                         Where.OR(TransaccioFields.FITXERESCANEJATID.isNotNull(),
                                 TransaccioFields.FITXERSIGNATURAID.isNotNull()),
                         TransaccioFields.DATAINICI.lessThanOrEqual(ts));
+
+                // Transaccions massives
+                TransaccioQueryPath tqp = new TransaccioQueryPath();
+                Where w2_TM = Where.AND(TransaccioFields.TRANSACCIOMULTIPLEID.isNotNull(),
+                        tqp.TRANSACCIOMULTIPLE().FITXERESCANEJATID().isNotNull(),
+                        TransaccioFields.DATAINICI.lessThanOrEqual(ts));
+
+                w2 = Where.OR(w2_T, w2_TM);
+
             }
 
             Where w = Where.AND(w1, w2);
             OrderBy order = new OrderBy(DATAINICI, OrderType.ASC);
             List<Long> listSQL = this.executeQuery(TransaccioFields.TRANSACCIOID, w, order);
-            
+
             Set<Long> list = new HashSet<Long>(listSQL);
 
             // La meitat de temps per BBDD i l'altre per esborrar fitxers
-            final long TIMEOUT_MS =  (TransaccioLogicaService.THREE_MINUTS_IN_SECONDS/2) * 1000L;
-            
+            final long TIMEOUT_MS = (TransaccioLogicaService.THREE_MINUTS_IN_SECONDS / 2) * 1000L;
+
             int processats = 0;
-            
+
             int error = 0;
 
             for (Long transaccioID : list) {
@@ -947,27 +931,29 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 long diff = start - ts.getTime();
 
                 long diffDays = diff / (1000 * 60 * 60 * 24);
-                log.info("Iniciant neteja dels fitxers de Transacció amb ID " + t.getTransaccioID() + " ("
-                        + diffDays + " dies)");
+                log.info("Iniciant neteja dels fitxers de Transacció amb ID " + t.getTransaccioID() + " (" + diffDays
+                        + " dies)");
 
                 try {
-                  netejaFitxers(t);
-                  log.info("Neteja dels fitxers de la Transacció amb ID " + t.getTransaccioID() + " realitzada correctment.");
-                  processats++;
+                    netejaFitxers(t);
+                    log.info("Neteja dels fitxers de la Transacció amb ID " + t.getTransaccioID()
+                            + " realitzada correctment.");
+                    processats++;
                 } catch (I18NException e) {
                     String msg = I18NLogicUtils.getMessage(e, new Locale("ca"));
                     log.error("Error cridant a netejarFitxers de la transaccio " + transaccioID + " : " + msg, e);
                     error++;
-                } catch(Throwable th) {
-                    log.error("Error cridant a netejarFitxers de la transaccio " + transaccioID + " : "+ th.getMessage(), th);
+                } catch (Throwable th) {
+                    log.error(
+                            "Error cridant a netejarFitxers de la transaccio " + transaccioID + " : " + th.getMessage(),
+                            th);
                     error++;
                 }
 
                 long now = System.currentTimeMillis();
 
                 if (now > start + TIMEOUT_MS) {
-                    log.warn(
-                            "Hem tardat massa temps en esborrar fitxers. Sortim i demà acabarem amb els pendents.");
+                    log.warn("Hem tardat massa temps en esborrar fitxers. Sortim i demà acabarem amb els pendents.");
                     break;
                 } else {
                     try {
