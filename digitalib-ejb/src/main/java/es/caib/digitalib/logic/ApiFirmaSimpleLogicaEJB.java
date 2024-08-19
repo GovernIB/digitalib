@@ -82,18 +82,18 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
         
           final Locale loc = new Locale("ca");
           
-          log.info(" =============================================");
-          log.info("URL PRE => " + apisimple.getUrl()); 
+          log.debug(" =============================================");
+          log.debug("URL PRE => " + apisimple.getUrl());
           String url = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getUrl(), map, loc);
-          log.info("URL POST => |" + url  + "|");
-          log.info("USERNAME PRE => " + apisimple.getUsername());
+          log.debug("URL POST => |" + url  + "|");
+          log.debug("USERNAME PRE => " + apisimple.getUsername());
           String username = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getUsername(), map, loc);
-          log.info("USERNAME POST => |" + username  + "|");
-          log.info("PASSWORD PRE => " + apisimple.getContrasenya());
+          log.debug("USERNAME POST => |" + username  + "|");
+          log.debug("PASSWORD PRE => " + apisimple.getContrasenya());
           String password = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getContrasenya(), map, loc);
-          log.info("PASSWORD POST => |" + password + "|");
+          log.debug("PASSWORD POST => |" + password + "|");
         
-          log.info(" =============================================");
+          log.debug(" =============================================");
         
           api = new ApiFirmaEnServidorSimpleJersey(url, username, password);
         } catch (Exception e) {
