@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import javax.ejb.Local;
 
-import org.fundaciobit.plugins.documentcustody.api.IDocumentCustodyPlugin;
+import org.fundaciobit.pluginsib.documentcustody.api.IDocumentCustodyPlugin;
 
 import es.caib.digitalib.persistence.InfoCustodyJPA;
 import es.caib.digitalib.persistence.TransaccioJPA;

@@ -62,7 +62,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             throw new LoginException("NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO");
         }
 
-        final boolean isDebug = log.isDebugEnabled();
+        //final boolean isDebug = log.isDebugEnabled();
 
         User user = (User) au.getPrincipal();
 

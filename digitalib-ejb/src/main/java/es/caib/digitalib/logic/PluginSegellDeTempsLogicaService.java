@@ -1,7 +1,7 @@
 package es.caib.digitalib.logic;
 
 import javax.ejb.Local;
-import org.fundaciobit.plugins.timestamp.api.ITimeStampPlugin;
+import org.fundaciobit.pluginsib.timestamp.api.ITimeStampPlugin;
 
 
 /**

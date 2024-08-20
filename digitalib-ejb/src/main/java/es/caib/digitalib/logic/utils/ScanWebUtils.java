@@ -7,7 +7,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.pluginsib.scanweb.api.ScanWebDocument;
 import org.fundaciobit.pluginsib.scanweb.api.ScanWebMode;
 import org.fundaciobit.pluginsib.scanweb.api.ScanWebRequest;
-import org.fundaciobit.pluginsib.core.utils.Metadata;
+import org.fundaciobit.pluginsib.core.v3.utils.Metadata;
 
 import es.caib.digitalib.persistence.TransaccioJPA;
 import es.caib.digitalib.commons.utils.Constants;

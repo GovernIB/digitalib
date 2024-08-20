@@ -51,14 +51,14 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
             <artifactId>pluginsib-userinformation-api</artifactId>
-            <version>${pluginsib.userinformation.api.version}</version>
+            <version>${pluginsib.userinformation.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <artifactId>pluginsib-utils-webutils</artifactId>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
-            <version>2.0.0</version>
+            <version>${pluginsib.utils.version}</version>
         </dependency>
 
         <dependency>
@@ -89,13 +89,11 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -114,14 +112,8 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
             <artifactId>pluginsib-exportdata-api</artifactId>
-            <version>2.0.0</version>
+            <version>${pluginsib.exportdata.version}</version>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.fundaciobit.pluginsib.core</groupId>
-                    <artifactId>pluginsib-core</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -306,6 +298,18 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <packagingExcludes>
+                        <!-- Requereix afegir mòdul 'org.apache.commons.beanutils' a jboss-deployment-structure.xml -->
+                         **/commons-beanutils*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.commons.collections' a jboss-deployment-structure.xml -->
+                         **/commons-collections*redhat*.jar,
+                    </packagingExcludes>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>

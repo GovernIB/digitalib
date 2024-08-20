@@ -9,7 +9,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.digitalib.persistence.InfoCustodyJPA;
 import es.caib.digitalib.persistence.TransaccioJPA;
 import es.caib.digitalib.model.entity.Fitxer;
-import es.caib.plugins.arxiu.api.IArxiuPlugin;
+import es.caib.pluginsib.arxiu.api.IArxiuPlugin;
 
 /**
  * 

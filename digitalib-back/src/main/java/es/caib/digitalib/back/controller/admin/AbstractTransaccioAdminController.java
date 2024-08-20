@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -65,7 +66,7 @@ public abstract class AbstractTransaccioAdminController extends AbstractTransacc
               IconUtils.getWhite("fa-solid fa-user"),
           "transaccio.veureauditoria", "/admin/auditoria/transaccio/"
               + (isUtilitzatPerAplicacio() ? "aplicacio" : "persona") + "/t/"
-              + _jpa.getTransaccioID(), "btn-info"));
+              + _jpa.getTransaccioID(), AdditionalButtonStyle.INFO));
     }
 
     return form;

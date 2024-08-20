@@ -17,17 +17,17 @@ import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.pluginsib.scanweb.api.ScanWebDocument;
-import org.fundaciobit.plugins.signature.api.CommonInfoSignature;
-import org.fundaciobit.plugins.signature.api.FileInfoSignature;
-import org.fundaciobit.plugins.signature.api.ITimeStampGenerator;
-import org.fundaciobit.plugins.signature.api.PdfVisibleSignature;
-import org.fundaciobit.plugins.signature.api.PolicyInfoSignature;
-import org.fundaciobit.plugins.signature.api.SecureVerificationCodeStampInfo;
-import org.fundaciobit.plugins.signature.api.SignaturesSet;
-import org.fundaciobit.plugins.signature.api.SignaturesTableHeader;
-import org.fundaciobit.plugins.signature.api.StatusSignature;
-import org.fundaciobit.plugins.signature.api.StatusSignaturesSet;
-import org.fundaciobit.plugins.signatureserver.api.ISignatureServerPlugin;
+import org.fundaciobit.pluginsib.signature.api.CommonInfoSignature;
+import org.fundaciobit.pluginsib.signature.api.FileInfoSignature;
+import org.fundaciobit.pluginsib.signature.api.ITimeStampGenerator;
+import org.fundaciobit.pluginsib.signature.api.PdfVisibleSignature;
+import org.fundaciobit.pluginsib.signature.api.PolicyInfoSignature;
+import org.fundaciobit.pluginsib.signature.api.SecureVerificationCodeStampInfo;
+import org.fundaciobit.pluginsib.signature.api.SignaturesSet;
+import org.fundaciobit.pluginsib.signature.api.SignaturesTableHeader;
+import org.fundaciobit.pluginsib.signature.api.StatusSignature;
+import org.fundaciobit.pluginsib.signature.api.StatusSignaturesSet;
+import org.fundaciobit.pluginsib.signatureserver.api.ISignatureServerPlugin;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 
@@ -152,6 +152,8 @@ public class PluginFirmaEnServidorLogicaEJB extends
 
       final String msg = "XYZ ZZZ Error Instanciant Plugin de Firma en Servidor: "
           + I18NLogicUtils.getMessage(e1, locale);
+      
+      log.error(msg,e1);
 
       transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
       transaccio.setEstatMissatge(StringUtils.truncate(msg, 2990));

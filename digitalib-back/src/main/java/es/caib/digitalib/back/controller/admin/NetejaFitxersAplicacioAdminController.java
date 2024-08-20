@@ -11,6 +11,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -96,11 +97,13 @@ public class NetejaFitxersAplicacioAdminController extends AbstractTransaccioAdm
                     
             // Netejar fitxers 
             filterForm.addAdditionalButton(new AdditionalButton("fas fa-file-excel",
-                    "netejarfitxers.button", "javascript:netejarSeleccionats()", "btn-danger"));
+                    "netejarfitxers.button", "javascript:netejarSeleccionats()", AdditionalButtonStyle.DANGER));
 
             // Canviar dies
             filterForm.addAdditionalButton(new AdditionalButton("fas fa-history",
-                    "canviardies.button", "javascript:canviarDies()", "btn-primary"));
+                    "canviardies.button", "javascript:canviarDies()", AdditionalButtonStyle.PRIMARY
+                    
+                    ));
 
             filterForm.setAttachedAdditionalJspCode(true);
 

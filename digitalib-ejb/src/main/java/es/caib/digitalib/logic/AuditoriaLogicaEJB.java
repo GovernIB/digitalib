@@ -77,14 +77,14 @@ public class AuditoriaLogicaEJB extends AuditoriaEJB implements AuditoriaLogicaS
                 msg = "";
                 log.warn("Missatge de Audita val null ...", new Exception());
             } else {
-                if (msg.length() > 254) {
-                    msg = msg.substring(254);
+                if (msg.length() > 253) {
+                    msg = msg.substring(0, 253);
                 }
             }
 
             if (additionalInfo != null) {
                 if (additionalInfo.length() > 2999) {
-                    additionalInfo = additionalInfo.substring(2999);
+                    additionalInfo = additionalInfo.substring(0, 2999);
                 }
             }
 

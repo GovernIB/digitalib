@@ -20,8 +20,8 @@ import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleArxiuRequi
 import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.plugins.signature.api.FileInfoSignature;
-import org.fundaciobit.pluginsib.core.utils.Metadata;
+import org.fundaciobit.pluginsib.signature.api.FileInfoSignature;
+import org.fundaciobit.pluginsib.core.v3.utils.Metadata;
 import org.hibernate.Hibernate;
 
 
@@ -38,24 +38,24 @@ import es.caib.digitalib.model.entity.Plugin;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.TransaccioFields;
 import es.caib.digitalib.commons.utils.Constants;
-import es.caib.plugins.arxiu.api.ArxiuException;
-import es.caib.plugins.arxiu.api.ArxiuNotFoundException;
-import es.caib.plugins.arxiu.api.ContingutArxiu;
-import es.caib.plugins.arxiu.api.ContingutOrigen;
-import es.caib.plugins.arxiu.api.Document;
-import es.caib.plugins.arxiu.api.DocumentContingut;
-import es.caib.plugins.arxiu.api.DocumentEstat;
-import es.caib.plugins.arxiu.api.DocumentEstatElaboracio;
-import es.caib.plugins.arxiu.api.DocumentExtensio;
-import es.caib.plugins.arxiu.api.DocumentFormat;
-import es.caib.plugins.arxiu.api.DocumentMetadades;
-import es.caib.plugins.arxiu.api.DocumentTipus;
-import es.caib.plugins.arxiu.api.Expedient;
-import es.caib.plugins.arxiu.api.ExpedientMetadades;
-import es.caib.plugins.arxiu.api.Firma;
-import es.caib.plugins.arxiu.api.FirmaPerfil;
-import es.caib.plugins.arxiu.api.FirmaTipus;
-import es.caib.plugins.arxiu.api.IArxiuPlugin;
+import es.caib.pluginsib.arxiu.api.ArxiuException;
+import es.caib.pluginsib.arxiu.api.ArxiuNotFoundException;
+import es.caib.pluginsib.arxiu.api.ContingutArxiu;
+import es.caib.pluginsib.arxiu.api.ContingutOrigen;
+import es.caib.pluginsib.arxiu.api.Document;
+import es.caib.pluginsib.arxiu.api.DocumentContingut;
+import es.caib.pluginsib.arxiu.api.DocumentEstat;
+import es.caib.pluginsib.arxiu.api.DocumentEstatElaboracio;
+import es.caib.pluginsib.arxiu.api.DocumentExtensio;
+import es.caib.pluginsib.arxiu.api.DocumentFormat;
+import es.caib.pluginsib.arxiu.api.DocumentMetadades;
+import es.caib.pluginsib.arxiu.api.DocumentTipus;
+import es.caib.pluginsib.arxiu.api.Expedient;
+import es.caib.pluginsib.arxiu.api.ExpedientMetadades;
+import es.caib.pluginsib.arxiu.api.Firma;
+import es.caib.pluginsib.arxiu.api.FirmaPerfil;
+import es.caib.pluginsib.arxiu.api.FirmaTipus;
+import es.caib.pluginsib.arxiu.api.IArxiuPlugin;
 
 /**
  *

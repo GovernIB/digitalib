@@ -17,6 +17,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.form.AdditionalField;
 import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -103,7 +104,7 @@ public class UsuariAplicacioAdminController extends UsuariAplicacioController {
 
 			usuariAplicacioFilterForm.addAdditionalButtonForEachItem(new AdditionalButton(
 					IconUtils.getWhite(IconUtils.ICON_PLUS_SIGN), "perfil.afegir",
-					UsuariAplicacioAdminController.CONTEXTWEB + "/createperfilusrapp/{0}", "btn-primary"));
+					UsuariAplicacioAdminController.CONTEXTWEB + "/createperfilusrapp/{0}", AdditionalButtonStyle.PRIMARY));
 
 			AdditionalField<Long, String> adfield4 = new AdditionalField<Long, String>();
 			adfield4.setCodeName("perfil.perfil.plural");

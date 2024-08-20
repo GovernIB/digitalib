@@ -15,6 +15,7 @@ import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
@@ -149,7 +150,7 @@ public class FitxersOrfesController extends FitxerController {
                         new AdditionalButton(
                                 IconUtils.getWhite(IconUtils.ICON_TRASH), //IconUtils.getWhite(IconUtils.ICON_TRASH),
                                 "esborrarfisicsnobbdd",
-                                getContextWeb() + "/esborrarfisicsnobbdd", "btn-danger"));
+                                getContextWeb() + "/esborrarfisicsnobbdd", AdditionalButtonStyle.DANGER));
             }
         } else {
 

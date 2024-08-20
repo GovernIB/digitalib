@@ -72,14 +72,15 @@
         <!-- ===== PLUGINS IB -->
 
         <dependency>
-            <groupId>org.fundaciobit.pluginsib.core</groupId>
+            <groupId>org.fundaciobit.pluginsib.core.v3</groupId>
             <artifactId>pluginsib-core</artifactId>
+            <version>${pluginsib.core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
             <artifactId>pluginsib-scanweb-api</artifactId>
-            <version>4.0.0</version>
+            <version>${pluginsib.scanweb.version}</version>
         </dependency>
 
         <dependency>
@@ -91,7 +92,7 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.documentcustody</groupId>
             <artifactId>pluginsib-documentcustody-api</artifactId>
-            <version>4.0.0</version>
+            <version>${pluginsib.documentcustody.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.freemarker</groupId>
@@ -115,26 +116,21 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
             <artifactId>pluginsib-timestamp-api</artifactId>
-            <version>2.0.0</version>
+            <version>${pluginsib.timestamp.version}</version>
         </dependency>
 
         <dependency>
             <artifactId>pluginsib-userinformation-api</artifactId>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-            <version>${pluginsib.userinformation.api.version}</version>
+            <version>${pluginsib.userinformation.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
             <artifactId>pluginsib-utils-templateengine</artifactId>
-            <version>2.0.1</version>
+            <version>${pluginsib.utils.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>2.3.28</version>
-        </dependency>
 
         <dependency>
             <artifactId>apifirmasimple-jersey</artifactId>
@@ -173,19 +169,7 @@
             </exclusions>
         </dependency>
 
-        <!--
-        <dependency>
-            <artifactId>apiscanwebsimple-api</artifactId>
-            <groupId>org.fundaciobit.apisib.apiscanwebsimple</groupId>
-            <version>1.0</version>
-        </dependency>
 
-        <dependency>
-            <artifactId>apimassivescanwebsimple-api</artifactId>
-            <groupId>org.fundaciobit.apisib.apimassivescanwebsimple</groupId>
-            <version>1.0</version>
-        </dependency>
--->
         <dependency>
             <groupId>es.caib.digitalib</groupId>
             <artifactId>digitalib-persistence</artifactId>

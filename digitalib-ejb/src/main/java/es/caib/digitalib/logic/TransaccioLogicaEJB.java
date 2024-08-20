@@ -33,7 +33,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.pluginsib.core.utils.FileUtils;
+import org.fundaciobit.pluginsib.core.v3.utils.FileUtils;
 import org.hibernate.Hibernate;
 import org.jboss.ejb3.annotation.TransactionTimeout;
 
@@ -787,7 +787,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             long nanoTime = System.nanoTime();
 
             transactionID = (nanoTime % 100000) + "" + System.currentTimeMillis() + (nanoTime / 100000);
-            transactionID = org.fundaciobit.pluginsib.core.utils.Base64.encode(transactionID).toLowerCase();
+            transactionID = org.fundaciobit.pluginsib.core.v3.utils.Base64.encode(transactionID).toLowerCase();
             transactionID = transactionID.replaceAll("=", "");
 
         }

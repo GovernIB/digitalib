@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>digitalib-ear</artifactId>
@@ -60,19 +61,19 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
             <artifactId>pluginsib-scanweb-iecisascanweb-plugin</artifactId>
-            <version>4.0.0</version>
+            <version>${pluginsib.scanweb.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
             <artifactId>pluginsib-scanweb-dynamicwebtwain</artifactId>
-            <version>4.0.6</version>
+            <version>${pluginsib.scanweb.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.scanweb</groupId>
             <artifactId>pluginsib-scanweb-file</artifactId>
-            <version>4.0.0</version>
+            <version>${pluginsib.scanweb.version}</version>
         </dependency>
 
 
@@ -83,19 +84,19 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
             <artifactId>pluginsib-timestamp-api</artifactId>
-            <version>2.0.0</version>
+            <version>${pluginsib.timestamp.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
             <artifactId>pluginsib-timestamp-catcertrfc</artifactId>
-            <version>2.0.0</version>
+            <version>${pluginsib.timestamp.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.timestamp</groupId>
             <artifactId>pluginsib-timestamp-afirmarfc-cliente_tsa_rfc</artifactId>
-            <version>2.0.0</version>
+            <version>${pluginsib.timestamp.version}</version>
         </dependency>
 
         <!-- ====================================== -->
@@ -104,18 +105,14 @@
         <dependency>
             <artifactId>pluginsib-userinformation-api</artifactId>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-            <version>${pluginsib.userinformation.api.version}</version>
+            <version>${pluginsib.userinformation.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
             <artifactId>pluginsib-userinformation-keycloak</artifactId>
-            <version>${pluginsib.userinformation.impl.version}</version>
+            <version>${pluginsib.userinformation.version}</version>
             <exclusions>
-                <exclusion>
-                    <groupId>org.fundaciobit.pluginsib.core</groupId>
-                    <artifactId>pluginsib-core</artifactId>
-                </exclusion>
                 <exclusion>
                     <groupId>org.jboss.resteasy</groupId>
                     <artifactId>resteasy-client</artifactId>
@@ -136,29 +133,32 @@
                     <groupId>org.jboss.resteasy</groupId>
                     <artifactId>resteasy-jackson2-provider</artifactId>
                 </exclusion>
+                <!-- Problemes de enforcer amb versió de pdfbox -->
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
+
+
+        <!-- Dependencia: pluginsib-userinformation-keycloak:  Problemes de enforcer amb versió de pdfbox -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
             <artifactId>pluginsib-userinformation-database</artifactId>
-            <version>${pluginsib.userinformation.impl.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.fundaciobit.pluginsib.core</groupId>
-                    <artifactId>pluginsib-core</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${pluginsib.userinformation.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
             <artifactId>pluginsib-userinformation-ldap</artifactId>
-            <version>${pluginsib.userinformation.impl.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.fundaciobit.pluginsib.core</groupId>
-                    <artifactId>pluginsib-core</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${pluginsib.userinformation.version}</version>
         </dependency>
 
         <!-- ============================================ -->
@@ -169,13 +169,7 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
             <artifactId>pluginsib-exportdata-api</artifactId>
-            <version>2.0.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.fundaciobit.pluginsib.core</groupId>
-                    <artifactId>pluginsib-core</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${pluginsib.exportdata.version}</version>
         </dependency>
 
 
@@ -183,51 +177,23 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
             <artifactId>pluginsib-exportdata-excel</artifactId>
-            <version>2.0.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.fundaciobit.pluginsib.core</groupId>
-                    <artifactId>pluginsib-core</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${pluginsib.exportdata.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.9</version>
-        </dependency>
 
         <!-- ODS Plugin -->
         <dependency>
             <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
             <artifactId>pluginsib-exportdata-ods</artifactId>
-            <version>2.0.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.fundaciobit.pluginsib.core</groupId>
-                    <artifactId>pluginsib-core</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${pluginsib.exportdata.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.jopendocument</groupId>
-            <artifactId>jOpenDocument</artifactId>
-            <version>1.3b1</version>
-        </dependency>
 
         <!-- CSV Plugin -->
         <dependency>
             <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
             <artifactId>pluginsib-exportdata-csv</artifactId>
-            <version>2.0.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.fundaciobit.pluginsib.core</groupId>
-                    <artifactId>pluginsib-core</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${pluginsib.exportdata.version}</version>
         </dependency>
 
         <!-- Commons Dependencies -->
@@ -297,9 +263,9 @@
                     <groupId>org.freemarker</groupId>
                     <artifactId>freemarker</artifactId>
                 </exclusion>
-                
+
                 <!--  XYZ ZZZ Esta a pluginsib-signatureserver-afirmaserver:3.1.0-SNAPSHOT -->
-                 <exclusion>
+                <exclusion>
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
@@ -315,22 +281,22 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.documentcustody</groupId>
             <artifactId>pluginsib-documentcustody-filesystem</artifactId>
-            <version>4.0.0</version>
+            <version>${pluginsib.documentcustody.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.documentcustody</groupId>
             <artifactId>pluginsib-documentcustody-arxiudigitalcaib</artifactId>
-            <version>4.0.0</version>
-            
-             <!-- Exclussions -->
+            <version>${pluginsib.documentcustody.version}</version>
+
+            <!-- Exclussions -->
             <exclusions>
                 <exclusion>
                     <groupId>com.sun.jersey</groupId>
                     <artifactId>jersey-client</artifactId>
                 </exclusion>
             </exclusions>
-            
+
         </dependency>
 
         <!-- Plugin d'Alfresco veure Profiles -->
@@ -352,11 +318,11 @@
                     <groupId>com.sun.jersey</groupId>
                     <artifactId>jersey-client</artifactId>
                 </exclusion>
-                
+
                 <exclusion>
                     <groupId>es.caib.arxiudigital</groupId>
                     <artifactId>arxiudigital-apirest</artifactId>
-                </exclusion>              
+                </exclusion>
             </exclusions>
 
         </dependency>
@@ -371,7 +337,7 @@
         <dependency>
             <groupId>es.caib.digitalib</groupId>
             <artifactId>digitalib-api-interna</artifactId>
-            <version>2.0.3</version>
+            <version>${project.version}</version>
             <type>war</type>
         </dependency>
         <!-- API INTERNA END -->
@@ -386,21 +352,6 @@
         </filters>
 
         <plugins>
-
-            <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <!-- Aquest bloc força a netejar sempre -->
-                <executions>
-                    <execution>
-                        <id>auto-clean</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -420,6 +371,148 @@
                     <!-- Nom mòduls d'acord amb punt 4.2 de l'Estàndard CAIB -->
                     <outputFileNameMapping>@{artifactId}@-@{version}@.@{extension}@</outputFileNameMapping>
                     <version>8</version>
+                    
+                     <packagingExcludes>
+                        <!-- Requereix afegir mòdul 'javax.activation.api' a jboss-deployment-structure.xml -->
+                         **/activation*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'asm.asm' a jboss-deployment-structure.xml -->
+                         **/asm*redhat*.jar,
+                         **/asm-util*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.bouncycastle' a jboss-deployment-structure.xml -->
+                         **/bcprov-jdk15on*redhat*.jar,
+                         **/bcmail-jdk15on*redhat*.jar,
+                         **/bcpkix-jdk15on*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.commons.codec' a jboss-deployment-structure.xml -->
+                         **/commons-codec*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.commons.io' a jboss-deployment-structure.xml -->
+                         **/commons-io*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.commons.lang3' a jboss-deployment-structure.xml -->
+                         **/commons-lang3*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.opensaml' a jboss-deployment-structure.xml -->
+                         **/opensaml-core*redhat*.jar,
+                         **/opensaml-profile-api*redhat*.jar,
+                         **/opensaml-saml-api*redhat*.jar,
+                         **/opensaml-saml-impl*redhat*.jar,
+                         **/opensaml-security-api*redhat*.jar,
+                         **/opensaml-security-impl*redhat*.jar,
+                         **/opensaml-soap-api*redhat*.jar,
+                         **/opensaml-xacml-api*redhat*.jar,
+                         **/opensaml-xacml-impl*redhat*.jar,
+                         **/opensaml-xacml-saml-api*redhat*.jar,
+                         **/opensaml-xacml-saml-impl*redhat*.jar,
+                         **/opensaml-xmlsec-api*redhat*.jar,
+                         **/opensaml-xmlsec-impl*redhat*.jar,
+                         **/cryptacular*redhat*.jar,
+                         **/java-support*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.cxf' a jboss-deployment-structure.xml -->
+                         **/cxf-core*redhat*.jar,
+                         **/cxf-rt-features-logging*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.cxf.impl' a jboss-deployment-structure.xml -->
+                         **/cxf-rt-bindings-coloc*redhat*.jar,
+                         **/cxf-rt-bindings-soap*redhat*.jar,
+                         **/cxf-rt-bindings-xml*redhat*.jar,
+                         **/cxf-rt-databinding-aegis*redhat*.jar,
+                         **/cxf-rt-databinding-jaxb*redhat*.jar,
+                         **/cxf-rt-features-clustering*redhat*.jar,
+                         **/cxf-rt-frontend-jaxws*redhat*.jar,
+                         **/cxf-rt-frontend-simple*redhat*.jar,
+                         **/cxf-rt-management*redhat*.jar,
+                         **/cxf-rt-security*redhat*.jar,
+                         **/cxf-rt-security-saml*redhat*.jar,
+                         **/cxf-rt-transports-http*redhat*.jar,
+                         **/cxf-rt-transports-http-hc*redhat*.jar,
+                         **/cxf-rt-transports-jms*redhat*.jar,
+                         **/cxf-rt-transports-local*redhat*.jar,
+                         **/cxf-rt-wsdl*redhat*.jar,
+                         **/cxf-rt-ws-addr*redhat*.jar,
+                         **/cxf-rt-ws-mex*redhat*.jar,
+                         **/cxf-rt-ws-policy*redhat*.jar,
+                         **/cxf-rt-ws-rm*redhat*.jar,
+                         **/cxf-tools-common*redhat*.jar,
+                         **/cxf-tools-java2ws*redhat*.jar,
+                         **/cxf-tools-validator*redhat*.jar,
+                         **/cxf-tools-wsdlto-core*redhat*.jar,
+                         **/cxf-tools-wsdlto-databinding-jaxb*redhat*.jar,
+                         **/cxf-tools-wsdlto-frontend-jaxws*redhat*.jar,
+                         **/cxf-services-ws-discovery-api*redhat*.jar,
+                         **/cxf-xjc-boolean*redhat*.jar,
+                         **/cxf-xjc-bug986*redhat*.jar,
+                         **/cxf-xjc-dv*redhat*.jar,
+                         **/cxf-xjc-ts*redhat*.jar,
+                         **/cxf-xjc-runtime*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.cxf.ws-security' a jboss-deployment-structure.xml -->
+                         **/cxf-rt-ws-security*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.google.guava' a jboss-deployment-structure.xml -->
+                         **/guava*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.httpcomponents.core' a jboss-deployment-structure.xml -->
+                         **/httpclient*redhat*.jar,
+                         **/httpcore*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.fasterxml.jackson.core.jackson-annotations' a jboss-deployment-structure.xml -->
+                         **/jackson-annotations*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.fasterxml.jackson.core.jackson-core' a jboss-deployment-structure.xml -->
+                         **/jackson-core*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-core-asl' a jboss-deployment-structure.xml -->
+                         **/jackson-core-asl*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.fasterxml.jackson.core.jackson-databind' a jboss-deployment-structure.xml -->
+                         **/jackson-databind*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-jaxrs' a jboss-deployment-structure.xml -->
+                         **/jackson-jaxrs*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-mapper-asl' a jboss-deployment-structure.xml -->
+                         **/jackson-mapper-asl*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-xc' a jboss-deployment-structure.xml -->
+                         **/jackson-xc*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.ws.security' a jboss-deployment-structure.xml -->
+                         **/wss4j-bindings*redhat*.jar,
+                         **/wss4j-policy*redhat*.jar,
+                         **/wss4j-ws-security-common*redhat*.jar,
+                         **/wss4j-ws-security-dom*redhat*.jar,
+                         **/wss4j-ws-security-policy-stax*redhat*.jar,
+                         **/wss4j-ws-security-stax*redhat*.jar,
+                         **/jasypt*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.persistence.api' a jboss-deployment-structure.xml -->
+                         **/javax.persistence-api*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.jaxen' a jboss-deployment-structure.xml -->
+                         **/jaxen*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.annotation.api' a jboss-deployment-structure.xml -->
+                         **/jboss-annotations-api_1.3_spec*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.xml.bind.api' a jboss-deployment-structure.xml -->
+                         **/jboss-jaxb-api_2.3_spec*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.xml.ws.api' a jboss-deployment-structure.xml -->
+                         **/jboss-jaxws-api_2.3_spec*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.jboss.logging' a jboss-deployment-structure.xml -->
+                         **/jboss-logging*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.jettison' a jboss-deployment-structure.xml -->
+                         **/jettison*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.joda.time' a jboss-deployment-structure.xml -->
+                         **/joda-time*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.jws.api' a jboss-deployment-structure.xml -->
+                         **/jsr181-api*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.lucene' a jboss-deployment-structure.xml -->
+                         **/lucene-analyzers-common*redhat*.jar,
+                         **/lucene-core*redhat*.jar,
+                         **/lucene-facet*redhat*.jar,
+                         **/lucene-queries*redhat*.jar,
+                         **/lucene-queryparser*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.neethi' a jboss-deployment-structure.xml -->
+                         **/neethi*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.sun.xml.messaging.saaj' a jboss-deployment-structure.xml -->
+                         **/saaj-impl*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.slf4j' a jboss-deployment-structure.xml -->
+                         **/slf4j-api*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.woodstox' a jboss-deployment-structure.xml -->
+                         **/woodstox-core*redhat*.jar,
+                         **/stax2-api*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.wsdl4j.api' a jboss-deployment-structure.xml -->
+                         **/wsdl4j*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.xml-resolver' a jboss-deployment-structure.xml -->
+                         **/xml-resolver*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.ws.xmlschema' a jboss-deployment-structure.xml -->
+                         **/xmlschema-core*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'nu.xom' a jboss-deployment-structure.xml -->
+                         **/xom*redhat*.jar,
+                         <!-- Requereix afegir mòdul 'org.apache.log4j' a jboss-deployment-structure.xml -->
+                         **/log4j-*.jar,
+                    </packagingExcludes>
 
                     <archive>
                         <manifest>

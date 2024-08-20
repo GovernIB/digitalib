@@ -4,7 +4,7 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import org.fundaciobit.plugins.timestamp.api.ITimeStampPlugin;
+import org.fundaciobit.pluginsib.timestamp.api.ITimeStampPlugin;
 
 
 import es.caib.digitalib.commons.utils.Constants;

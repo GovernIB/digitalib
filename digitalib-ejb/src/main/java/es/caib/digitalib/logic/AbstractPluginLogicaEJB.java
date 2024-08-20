@@ -11,8 +11,8 @@ import java.util.Properties;
 import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.pluginsib.core.IPlugin;
-import org.fundaciobit.pluginsib.core.utils.PluginsManager;
+import org.fundaciobit.pluginsib.core.v3.utils.PluginsManager;
+import org.fundaciobit.pluginsib.core.v3.IPluginIB;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import es.caib.digitalib.persistence.PluginJPA;
@@ -25,7 +25,7 @@ import es.caib.digitalib.commons.utils.Constants;
  * @author anadal
  *
  */
-public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginLogicaEJB
+public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends PluginLogicaEJB
         implements AbstractPluginLogicaLocal<I> {
 
     protected abstract int getTipusDePlugin();
@@ -53,7 +53,7 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
     @Override
     public I getInstanceByPluginID(long pluginID) throws I18NException {
 
-        IPlugin pluginInstance = getPluginFromCache(pluginID);
+        IPluginIB pluginInstance = getPluginFromCache(pluginID);
 
         if (pluginInstance == null) {
 
@@ -99,7 +99,7 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
                 }
             }
 
-            pluginInstance = (IPlugin) PluginsManager.instancePluginByClassName(plugin.getClasse(),
+            pluginInstance = (IPluginIB) PluginsManager.instancePluginByClassName(plugin.getClasse(),
                     Constants.DIGITALIB_PROPERTY_BASE, prop);
 
             if (pluginInstance == null) {

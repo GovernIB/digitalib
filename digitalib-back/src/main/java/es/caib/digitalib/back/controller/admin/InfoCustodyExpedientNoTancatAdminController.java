@@ -9,6 +9,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,7 +65,7 @@ public class InfoCustodyExpedientNoTancatAdminController extends InfoCustodyAdmi
 
             infoCustodyFilterForm.addAdditionalButtonForEachItem(
                     new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO), "genapp.viewtitle",
-                            getContextWeb() + "/view/{0}", "btn-info"));
+                            getContextWeb() + "/view/{0}", AdditionalButtonStyle.INFO));
         }
 
         return infoCustodyFilterForm;

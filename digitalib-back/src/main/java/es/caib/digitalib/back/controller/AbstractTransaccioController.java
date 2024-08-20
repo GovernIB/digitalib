@@ -29,6 +29,7 @@ import org.fundaciobit.genapp.common.query.SelectMultipleKeyValue;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -66,9 +67,9 @@ import es.caib.digitalib.model.fields.UsuariAplicacioFields;
 import es.caib.digitalib.model.fields.UsuariPersonaFields;
 import es.caib.digitalib.commons.utils.Configuracio;
 import es.caib.digitalib.commons.utils.Constants;
-import es.caib.plugins.arxiu.api.Document;
-import es.caib.plugins.arxiu.api.DocumentContingut;
-import es.caib.plugins.arxiu.api.IArxiuPlugin;
+import es.caib.pluginsib.arxiu.api.Document;
+import es.caib.pluginsib.arxiu.api.DocumentContingut;
+import es.caib.pluginsib.arxiu.api.IArxiuPlugin;
 
 /**
  * 
@@ -180,7 +181,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     form.addAdditionalButton(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
                             INFOSIGNATURAID.fullName, AbstractInfoSignatureController.getContextWeb(isAdmin()) + "/view"
                                     + "/" + _jpa.getInfoSignaturaID(),
-                            "btn-info"));
+                                    AdditionalButtonStyle.INFO));
                 }
 
                 // Afegir botos de info cust
@@ -188,14 +189,14 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     form.addAdditionalButton(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
                             INFOCUSTODYID.fullName, AbstractInfoCustodyController.getContextWeb(isAdmin()) + "/view"
                                     + "/" + _jpa.getInfoCustodyID(),
-                            "btn-info"));
+                                    AdditionalButtonStyle.INFO));
                 }
 
                 // Afegir Boto de Veure Perfil
                 if (isAdmin()) {
                     form.addAdditionalButton(
                             new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_USER), "transaccio.veureperfil",
-                                    getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(), "btn-info"));
+                                    getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(), AdditionalButtonStyle.INFO));
                 }
             } else {
                 // Cancel·lat, Error, ...
@@ -258,12 +259,12 @@ public abstract class AbstractTransaccioController extends TransaccioController 
             //filterForm.setOrderAsc(false);
 
             filterForm.addAdditionalButtonForEachItem(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_EYE),
-                    "transaccio.veuredetall", getContextWeb() + "/view/{0}", "btn-primary"));
+                    "transaccio.veuredetall", getContextWeb() + "/view/{0}", AdditionalButtonStyle.PRIMARY));
             if (isAdmin()) {
                 if (getPerfilInfoContextWeb() != null) {
                     filterForm
                             .addAdditionalButtonForEachItem(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_EYE),
-                                    "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", "btn-info"));
+                                    "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", AdditionalButtonStyle.INFO));
                 }
             }
 
@@ -816,10 +817,10 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     case Constants.PERFIL_US_CUSTODIA_INFO:
                         AdditionalButton addOriginalButton = new AdditionalButton(
                                 IconUtils.getWhite(IconUtils.ICON_FILE_DOWNLOAD), "transaccio.descarregar.firmat",
-                                getContextWeb() + "/descarregaroriginal/{0}", "btn-success\" target=\"_blank");
+                                getContextWeb() + "/descarregaroriginal/{0}", AdditionalButtonStyle.SUCCESS);
                         AdditionalButton addImprimibleButton = new AdditionalButton(
                                 IconUtils.getWhite(IconUtils.ICON_PRINT), "transaccio.descarregar.imprimible",
-                                getContextWeb() + "/descarregarimprimible/{0}", "btn-success\" target=\"_blank");
+                                getContextWeb() + "/descarregarimprimible/{0}", AdditionalButtonStyle.SUCCESS);
 
                         filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addOriginalButton);
                         filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addImprimibleButton);
@@ -827,7 +828,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                         //                        if (isAdmin) {
                         AdditionalButton addEniButton = new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_FILE),
                                 "transaccio.descarregar.enidoc", getContextWeb() + "/descarregarenidoc/{0}",
-                                "btn-success\" target=\"_blank");
+                                AdditionalButtonStyle.SUCCESS);
 
                         filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addEniButton);
                     //                        }
@@ -835,14 +836,14 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     case Constants.PERFIL_US_COPIA_AUTENTICA_INFO:
                         AdditionalButton addFirmatButton = new AdditionalButton(
                                 IconUtils.getWhite(IconUtils.ICON_FILE_DOWNLOAD), "transaccio.descarregar.firmat",
-                                getContextWeb() + "/descarregarfirmat/{0}", "btn-success");
+                                getContextWeb() + "/descarregarfirmat/{0}", AdditionalButtonStyle.SUCCESS);
                         filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addFirmatButton);
 
                     break;
                     default: // cas de PERFIL_US_NOMES_ESCANEIG_INFO
                         AdditionalButton addEscaneigButton = new AdditionalButton(
                                 IconUtils.getWhite(IconUtils.ICON_FILE_DOWNLOAD), "transaccio.descarregar.escaneig",
-                                getContextWeb() + "/descarregar/{0}", "btn-success");
+                                getContextWeb() + "/descarregar/{0}", AdditionalButtonStyle.SUCCESS);
                         filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), addEscaneigButton);
                     break;
                 }
@@ -853,7 +854,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                 AdditionalButton additionalButton = new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_TRASH),
                         "genapp.delete", "javascript:openModal('" + request.getContextPath() + getContextWeb() + "/"
                                 + transaccio.getTransaccioID() + "/delete','show');",
-                        "btn-danger");
+                                AdditionalButtonStyle.DANGER);
 
                 filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), additionalButton);
             }
@@ -862,7 +863,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
 
                 AdditionalButton additionalButton = new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_ENVELOPE),
                         "enviar.email", "javascript:enviarEmail(" + transaccio.getTransaccioID() + ", 'show')",
-                        "btn-warning");
+                        AdditionalButtonStyle.WARNING);
 
                 filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), additionalButton);
 

@@ -15,6 +15,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -110,7 +111,7 @@ public abstract class AbstractAuditoriaAdminController extends AuditoriaControll
      auditoriaForm.addAdditionalButton(new AdditionalButton(
          IconUtils.getWhite(IconUtils.ICON_INFO), // IconUtils.getWhite(IconUtils.ICON_INFO),
          "auditoria.veuretransaccio",
-         baseUrl +auditoria.getTransaccioId() , "btn-info"));
+         baseUrl +auditoria.getTransaccioId() , AdditionalButtonStyle.INFO));
    }
 
    if (auditoria.getUsernameAplicacio() != null) {
@@ -122,7 +123,7 @@ public abstract class AbstractAuditoriaAdminController extends AuditoriaControll
        auditoriaForm.addAdditionalButton(new AdditionalButton(
                IconUtils.getWhite(IconUtils.ICON_INFO), // IconUtils.getWhite(IconUtils.ICON_INFO)
                UsuariAplicacioFields._TABLE_TRANSLATION,
-           "/admin/usuariAplicacio/view/" + uaID , "btn-info"));
+           "/admin/usuariAplicacio/view/" + uaID , AdditionalButtonStyle.INFO));
      }
    }
    
@@ -136,7 +137,7 @@ public abstract class AbstractAuditoriaAdminController extends AuditoriaControll
        auditoriaForm.addAdditionalButton(new AdditionalButton(
                IconUtils.getWhite(IconUtils.ICON_INFO), // IconUtils.getWhite(IconUtils.ICON_INFO),
                UsuariPersonaFields._TABLE_TRANSLATION,
-           "/admin/usuariPersona/view/" + uaID  , "btn-info"));
+           "/admin/usuariPersona/view/" + uaID  , AdditionalButtonStyle.INFO));
      }
    }
 
@@ -168,7 +169,7 @@ public abstract class AbstractAuditoriaAdminController extends AuditoriaControll
         auditoriaFilterForm.addAdditionalButtonForEachItem(new AdditionalButton(
                 IconUtils.getWhite(IconUtils.ICON_INFO), // IconUtils.getWhite(IconUtils.ICON_INFO),
                  "genapp.viewtitle",
-            getContextWeb()  + "/view/{0}" , "btn-info"));
+            getContextWeb()  + "/view/{0}" , AdditionalButtonStyle.INFO));
         
         auditoriaFilterForm.setDeleteButtonVisible(false);
         auditoriaFilterForm.setAddButtonVisible(false);

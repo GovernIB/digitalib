@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import javax.ejb.Local;
 
-import org.fundaciobit.plugins.signatureserver.api.ISignatureServerPlugin;
+import org.fundaciobit.pluginsib.signatureserver.api.ISignatureServerPlugin;
 
 import es.caib.digitalib.persistence.TransaccioJPA;
 import es.caib.digitalib.model.entity.Fitxer;

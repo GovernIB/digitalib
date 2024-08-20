@@ -10,8 +10,8 @@ import javax.ejb.Stateless;
 
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.pluginsib.core.IPlugin;
 
+import org.fundaciobit.pluginsib.core.v3.IPluginIB;
 
 import es.caib.digitalib.ejb.PluginEJB;
 import es.caib.digitalib.model.entity.Plugin;
@@ -25,7 +25,7 @@ import es.caib.digitalib.model.entity.Plugin;
 
 public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
 
-  private static Map<Long, IPlugin> pluginsCache = new HashMap<Long, IPlugin>();
+  private static Map<Long, IPluginIB> pluginsCache = new HashMap<Long, IPluginIB>();
 
   
   @Override
@@ -57,13 +57,13 @@ public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
   }
   
   
-  public void addPluginToCache(Long pluginID, IPlugin pluginInstance) { 
+  public void addPluginToCache(Long pluginID, IPluginIB pluginInstance) { 
     synchronized (pluginsCache) {
       pluginsCache.put(pluginID, pluginInstance);  
     }
   }
   
-  public IPlugin getPluginFromCache(Long pluginID) {
+  public IPluginIB getPluginFromCache(Long pluginID) {
     synchronized (pluginsCache) {
       return  pluginsCache.get(pluginID);  
     }

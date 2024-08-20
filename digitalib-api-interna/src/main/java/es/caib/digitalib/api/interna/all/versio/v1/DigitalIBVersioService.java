@@ -2,7 +2,6 @@ package es.caib.digitalib.api.interna.all.versio.v1;
 
 import java.util.Locale;
 
-import javax.validation.constraints.Pattern;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

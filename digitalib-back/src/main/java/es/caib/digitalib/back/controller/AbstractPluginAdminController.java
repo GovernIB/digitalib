@@ -15,6 +15,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -109,10 +110,10 @@ public abstract class AbstractPluginAdminController extends PluginController {
     } else {
       if (p.isActiu()) {
         pluginForm.addAdditionalButton(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_BAN_CIRCLE), "plugin.desactivar",
-            getContextWebPlugin() + "/desactivarplugin/" + p.getPluginID()  , "btn-warning"));
+            getContextWebPlugin() + "/desactivarplugin/" + p.getPluginID()  , AdditionalButtonStyle.WARNING));
       } else {
         pluginForm.addAdditionalButton(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_OK_CIRCLE), "plugin.activar",
-            getContextWebPlugin() + "/activarplugin/" + p.getPluginID()  , "btn-success"));
+            getContextWebPlugin() + "/activarplugin/" + p.getPluginID()  , AdditionalButtonStyle.SUCCESS));
       }
     }
 

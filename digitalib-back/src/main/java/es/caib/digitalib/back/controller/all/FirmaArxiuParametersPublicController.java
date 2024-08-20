@@ -15,6 +15,7 @@ import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -132,7 +133,7 @@ public class FirmaArxiuParametersPublicController extends AbstractFirmaArxiuPara
                         } else {
                             if (fei.firstPageEmpty) {
                                 transaccioForm.addAdditionalButton(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_TRASH),
-                                        "esborrarprimerapagina", "javascript:eliminarPrimeraPagina();", "btn-warning"));
+                                        "esborrarprimerapagina", "javascript:eliminarPrimeraPagina();", AdditionalButtonStyle.WARNING));
                             }
                         }
                     }

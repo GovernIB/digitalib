@@ -33,8 +33,8 @@ import org.fundaciobit.apisib.core.exceptions.AbstractApisIBException;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.plugins.signature.api.FileInfoSignature;
-import org.fundaciobit.pluginsib.core.utils.FileUtils;
+import org.fundaciobit.pluginsib.signature.api.FileInfoSignature;
+import org.fundaciobit.pluginsib.core.v3.utils.FileUtils;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.common.hash.Hashing;

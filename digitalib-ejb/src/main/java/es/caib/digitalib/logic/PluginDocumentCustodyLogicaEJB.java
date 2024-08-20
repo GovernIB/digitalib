@@ -16,15 +16,15 @@ import org.apache.log4j.Logger;
 import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.plugins.documentcustody.api.CustodyException;
-import org.fundaciobit.plugins.documentcustody.api.DocumentCustody;
-import org.fundaciobit.plugins.documentcustody.api.IDocumentCustodyPlugin;
-import org.fundaciobit.plugins.documentcustody.api.NotSupportedCustodyException;
-import org.fundaciobit.plugins.documentcustody.api.SignatureCustody;
-import org.fundaciobit.plugins.signature.api.FileInfoSignature;
-import org.fundaciobit.pluginsib.core.utils.Metadata;
-import org.fundaciobit.pluginsib.core.utils.MetadataConstants;
-import org.fundaciobit.pluginsib.core.utils.MetadataFormatException;
+import org.fundaciobit.pluginsib.documentcustody.api.CustodyException;
+import org.fundaciobit.pluginsib.documentcustody.api.DocumentCustody;
+import org.fundaciobit.pluginsib.documentcustody.api.IDocumentCustodyPlugin;
+import org.fundaciobit.pluginsib.documentcustody.api.NotSupportedCustodyException;
+import org.fundaciobit.pluginsib.documentcustody.api.SignatureCustody;
+import org.fundaciobit.pluginsib.signature.api.FileInfoSignature;
+import org.fundaciobit.pluginsib.core.v3.utils.Metadata;
+import org.fundaciobit.pluginsib.core.v3.utils.MetadataConstants;
+import org.fundaciobit.pluginsib.core.v3.utils.MetadataFormatException;
 
 
 import es.caib.digitalib.persistence.FitxerJPA;

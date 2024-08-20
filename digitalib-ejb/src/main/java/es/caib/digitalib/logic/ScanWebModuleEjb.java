@@ -76,11 +76,12 @@ public class ScanWebModuleEjb implements ScanWebModuleService {
             }
 
             // 2.- Passa el filtre ...
-            if (scanWebPlugin.filter(request, scanWebConfig.getRequest())) {
+            String error = scanWebPlugin.filter(request, scanWebConfig.getRequest());
+            if (error == null) {
                 pluginsFiltered.add(pluginDeScanWeb);
             } else {
                 // Exclude Plugin
-                log.info("Exclos plugin [" + pluginDeScanWeb.getNom() + "]: NO PASSA FILTRE");
+                log.info("Exclos plugin [" + pluginDeScanWeb.getNom() + "]: " + error);
             }
 
         }
