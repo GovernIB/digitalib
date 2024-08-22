@@ -63,11 +63,21 @@
             <module name="org.apache.xml-resolver" export="TRUE"/>
             <module name="org.apache.ws.xmlschema" export="TRUE"/>
             <module name="nu.xom" export="TRUE"/>
-            
-            
-            <module name="org.apache.commons.beanutils" export="TRUE"/>
-            <module name="org.apache.commons.collections" export="TRUE"/> 
-            
+            <module name="org.jboss.logging.commons.logging" export="TRUE"/>
         </dependencies>
     </deployment>
+
+   <sub-deployment name="digitalib-back.war">
+        <dependencies>
+            <module name="org.apache.commons.beanutils" export="TRUE"/>
+            <module name="org.apache.commons.collections" export="TRUE"/>
+        </dependencies>
+   </sub-deployment>
+
+    <sub-deployment name="digitalib-api-interna.war">
+        <dependencies>
+            <module name="com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider" export="TRUE"/>
+            <module name="javax.ws.rs.api" export="TRUE"/>
+        </dependencies>
+   </sub-deployment>
 </jboss-deployment-structure>

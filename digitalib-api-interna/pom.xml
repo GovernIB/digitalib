@@ -290,12 +290,12 @@
                         </resource>
                     </webResources>
                     <packagingExcludes>
-                        <!-- Requereix afegir mòdul 'javax.ws.rs.api' a jboss-deployment-structure.xml -->
-                         **/jboss-jaxrs-api_2.1_spec*redhat*.jar,
                         <!-- Requereix afegir mòdul 'com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider' a jboss-deployment-structure.xml -->
                          **/jackson-jaxrs-json-provider*redhat*.jar,
                          **/jackson-jaxrs-base*redhat*.jar,
                          **/jackson-module-jaxb-annotations*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.ws.rs.api' a jboss-deployment-structure.xml -->
+                         **/jboss-jaxrs-api_2.1_spec*redhat*.jar,
                     </packagingExcludes>
                 </configuration>
             </plugin>

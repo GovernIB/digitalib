@@ -512,6 +512,8 @@
                          **/xom*redhat*.jar,
                          <!-- Requereix afegir mòdul 'org.apache.log4j' a jboss-deployment-structure.xml -->
                          **/log4j-*.jar,
+                         <!-- Requereix afegir mòdul 'org.jboss.logging.commons.logging' a jboss-deployment-structure.xml -->
+                         **/commons-logging-jboss-logging*redhat*.jar,
                     </packagingExcludes>
 
                     <archive>

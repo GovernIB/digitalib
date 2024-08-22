@@ -85,11 +85,11 @@ public class ApiMassiveScanWebSimpleApiTest {
         try {
             ApiMassiveScanWebSimpleApiTest test = new ApiMassiveScanWebSimpleApiTest();
 
-            test.getAvailableProfilesTest();
+            //test.getAvailableProfilesTest();
 
             //test.getSeparatorPageTest();
 
-            //test.fullTest();
+            test.fullTest();
 
         } catch (Exception e) {
             e.printStackTrace();
