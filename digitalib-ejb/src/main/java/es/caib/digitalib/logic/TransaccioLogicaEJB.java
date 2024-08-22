@@ -927,6 +927,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             for (Long transaccioID : list) {
 
                 Transaccio t = this.findByPrimaryKey(transaccioID);
+                if (t == null) {
+                    log.error("No he trobat la transacció amb ID " + transaccioID);
+                    continue;
+                }
                 Timestamp ts = t.getDataInici();
                 long diff = start - ts.getTime();
 
