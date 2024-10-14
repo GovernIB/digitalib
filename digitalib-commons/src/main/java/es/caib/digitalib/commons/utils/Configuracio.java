@@ -75,15 +75,23 @@ public class Configuracio implements Constants {
         return properties;
     }
 
+    public static Properties getAllFileProperties() {
+
+        Properties properties = new Properties();
+        properties.putAll(getDigitalIBSystemProperties());
+        properties.putAll(getDigitalIBProperties());
+        return properties;
+    }
+
     public static String getProperty(String key) {
 
-        return getDigitalIBProperties().getProperty(key);
+        return getAllFileProperties().getProperty(key);
 
     }
 
     public static String getProperty(String key, String def) {
 
-        return getDigitalIBProperties().getProperty(key, def);
+        return getAllFileProperties().getProperty(key, def);
 
     }
 

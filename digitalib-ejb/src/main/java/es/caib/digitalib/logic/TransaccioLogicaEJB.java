@@ -194,7 +194,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         if (cleanMultipleTransaction) {
             if (transaccio.getTransaccioMultipleID() != null) {
                 TransaccioMultipleJPA tm = transaccioMultipleEjb.findByPrimaryKey(transaccio.getTransaccioMultipleID());
-                if (tm != null) {                    
+                if (tm != null) {
                     Long ftm = tm.getFitxerEscanejatID();
                     if (ftm != null) {
                         log.info("     - Netejant Transacció múltiple " + tm.getTransmultipleid() + " ...");
@@ -638,6 +638,12 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         clonedPerfil.setPerfilID(0);
         clonedPerfil.setUsPerfil(-1 * clonedPerfil.getUsPerfil());
         clonedPerfil.setUtilitzatPerAplicacio(usuariAplicacio != null);
+
+        clonedPerfil.setTipusFirma(perfil.getTipusFirma());
+        clonedPerfil.setTipusCustodia(perfil.getTipusCustodia());
+        clonedPerfil.setApiSimpleID(perfil.getApiSimpleID());
+        clonedPerfil.setPluginArxiuID(perfil.getPluginArxiuID());
+
         clonedPerfil.setNomID(null);
         clonedPerfil.setDescripcioID(null);
         if (urlBase != null) {

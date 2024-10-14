@@ -14,7 +14,6 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-
     <modules>
         <module>digitalib-model</module>
         <module>digitalib-persistence</module>
@@ -99,65 +98,10 @@
             <artifactId>log4j</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-
-
-        <!--  REST SERVICES -->
-        <!-- Anotacions de documentació de openapi -->
-<!--
-        <dependency>
-            <groupId>com.github.fge</groupId>
-            <artifactId>jackson-coreutils</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-base</artifactId>
-
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-json-provider</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jaxb-annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-multipart-provider</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxb-provider</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-        </dependency>
--->
 
     </dependencies>
     <!-- Referència al sistema de control de versions, ja sigui GIT, SVN, CVS... -->
@@ -172,16 +116,17 @@
         <!-- Versions de les llibreries emprades dins els mòduls -->
 
         <mp-openapi.version>1.0.1</mp-openapi.version>
+        <!--
         <jaxb-api.version>2.3.1</jaxb-api.version>
+        -->
         <slf4j.version>1.7.30</slf4j.version>
         <keycloak.version>8.0.1</keycloak.version>
-        <cxf.version>3.2.5.redhat-00001</cxf.version>
         <spring.version>4.3.30.RELEASE</spring.version>
         <springsecurity.version>4.2.20.RELEASE</springsecurity.version>
         <spring-data-jpa>1.6.6.RELEASE</spring-data-jpa>
         <tiles.version>3.0.8</tiles.version>
-        <!-- XYZ ZZZ -->
-        <global.version>${project.version}</global.version>
+        <!-- XYZ ZZZ 
+        <global.version>${project.version}</global.version>-->
         <cglib.version>2.2.2</cglib.version>
         <!-- XYZ ZZZ S'ha de fer la substitució -->
         <genapp.version>2.0.0-SNAPSHOT</genapp.version>
@@ -249,18 +194,7 @@
                         <shortRevisionLength>8</shortRevisionLength>
                     </configuration>
                 </plugin>
-                <!-- Plugin per permetre desplegar l'aplicació a un sevidor d'aplicacions 
-                    local -->
-                <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven2-plugin</artifactId>
-                    <version>1.7.8</version>
-                    <configuration>
-                        <!-- Només estarà activat als mòduls que volem que es despleguin, com 
-                            l'EAR -->
-                        <skip>true</skip>
-                    </configuration>
-                </plugin>
+               
             </plugins>
         </pluginManagement>
         <plugins>
@@ -306,7 +240,6 @@
             </plugin>
 
             <plugin>
-
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.12</version>

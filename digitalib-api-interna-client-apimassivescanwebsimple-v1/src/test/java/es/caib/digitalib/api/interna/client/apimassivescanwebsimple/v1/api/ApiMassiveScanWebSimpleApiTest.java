@@ -8,9 +8,6 @@
  */
 package es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.api;
 
-import es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.services.ApiClient;
-import es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.services.ApiException;
-
 import es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.model.MassiveScanWebSimpleArxiuOptionalParameters;
 import es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.model.MassiveScanWebSimpleArxiuRequiredParameters;
 import es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.model.MassiveScanWebSimpleAvailableProfile;
@@ -25,6 +22,7 @@ import es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.model.Mas
 import es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.model.MassiveScanWebSimpleSubTransactionsOfTransaction;
 import es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.model.MassiveScanWebSimpleSubtransactionResult;
 import es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.model.MassiveScanWebSimpleSubtransactionResultRequest;
+import es.caib.digitalib.api.interna.client.apimassivescanwebsimple.v1.services.ApiClient;
 
 import java.awt.Desktop;
 import java.io.BufferedReader;
@@ -52,7 +50,6 @@ import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
 
-
 /**
  * API tests for ApiMassiveScanWebSimpleApi
  * @author anadal
@@ -60,6 +57,21 @@ import org.apache.commons.io.FileUtils;
 public class ApiMassiveScanWebSimpleApiTest {
 
     public static final MassiveScanWebSimpleConstants CONSTANTS = new MassiveScanWebSimpleConstants();
+
+    public static void main(String[] args) {
+        try {
+            ApiMassiveScanWebSimpleApiTest test = new ApiMassiveScanWebSimpleApiTest();
+
+            //test.getAvailableProfilesTest();
+
+            //test.getSeparatorPageTest();
+
+            test.fullTest();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private ApiMassiveScanWebSimpleApi getApi() throws Exception {
 
@@ -81,28 +93,13 @@ public class ApiMassiveScanWebSimpleApiTest {
 
     }
 
-    public static void main(String[] args) {
-        try {
-            ApiMassiveScanWebSimpleApiTest test = new ApiMassiveScanWebSimpleApiTest();
-
-            //test.getAvailableProfilesTest();
-
-            //test.getSeparatorPageTest();
-
-            test.fullTest();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * Retorna els Perfils Disponibles per aquest usuari
      *
      * @throws ApiException
      *          if the Api call fails
      */
-    
+
     public void getAvailableProfilesTest() throws Exception {
 
         ApiMassiveScanWebSimpleApi api = getApi();
@@ -113,7 +110,6 @@ public class ApiMassiveScanWebSimpleApiTest {
         System.out.println(response);
     }
 
-    
     public void getSeparatorPageTest() throws Exception {
 
         ApiMassiveScanWebSimpleApi api = getApi();

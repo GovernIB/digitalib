@@ -12,7 +12,6 @@
     <packaging>war</packaging>
     <name>DigitalIB - API Rest - Interna Server</name>
     <properties>
-        <auth.method>BASIC</auth.method>
         <client.default.package>es.caib.digitalib.api.interna.client</client.default.package>
     </properties>
 
@@ -104,8 +103,7 @@
                             <outputFileName>openapi_apimassivescanwebsimple</outputFileName>
                             <resourcePackages>
                                 <package>es.caib.digitalib.api.interna.config</package>
-                                <package>
-                                    es.caib.digitalib.api.interna.secure.apimassivescanwebsimple.v1</package>
+                                <package>es.caib.digitalib.api.interna.secure.apimassivescanwebsimple.v1</package>
                             </resourcePackages>
                         </configuration>
                     </execution>
@@ -121,8 +119,7 @@
                             <outputFileName>openapi_versio</outputFileName>
                             <resourcePackages>
                                 <package>es.caib.digitalib.api.interna.config</package>
-                                <package>
-                                    es.caib.digitalib.api.interna.all.versio.v1</package>
+                                <package>es.caib.digitalib.api.interna.all.versio.v1</package>
                             </resourcePackages>
                         </configuration>
                     </execution>
@@ -138,8 +135,7 @@
                             <outputFileName>openapi_dadesobertes</outputFileName>
                             <resourcePackages>
                                 <package>es.caib.digitalib.api.interna.config</package>
-                                <package>
-                                    es.caib.digitalib.api.interna.all.dadesobertes.transaccions.v1</package>
+                                <package>es.caib.digitalib.api.interna.all.dadesobertes.transaccions.v1</package>
                             </resourcePackages>
                         </configuration>
                     </execution>
@@ -162,8 +158,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>
-                                ${project.basedir}/openapi/openapi_apimassivescanwebsimple.json</inputSpec>
+                            <inputSpec>${project.basedir}/openapi/openapi_apimassivescanwebsimple.json</inputSpec>
                             <generatorName>java</generatorName>
                             <skipValidateSpec>false</skipValidateSpec>
                             <library>resteasy</library>
@@ -186,14 +181,13 @@
                                 <artifactId>
                                     digitalib-api-interna-client-apimassivescanwebsimple-v1</artifactId>
                                 <artifactVersion>1.0-SNAPSHOT</artifactVersion>
-                                <artifactDescription>DigitalIB - API Rest -
-                                    Interna Client - ApiMassiveScanWebSimple v1</artifactDescription>
+                                <artifactDescription>
+                                    DigitalIB - API Rest - Interna Client - ApiMassiveScanWebSimple v1</artifactDescription>
                                 <dateLibrary>java8</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
                                 <java11>true</java11>
                                 <booleanGetterPrefix>is</booleanGetterPrefix>
-
                             </configOptions>
                         </configuration>
                     </execution>
@@ -205,33 +199,26 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-
-                            <inputSpec>
-                                ${project.basedir}/openapi/openapi_versio.json</inputSpec>
+                            <inputSpec>${project.basedir}/openapi/openapi_versio.json</inputSpec>
                             <generatorName>java</generatorName>
                             <skipValidateSpec>false</skipValidateSpec>
                             <library>resteasy</library>
                             <!-- ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA*** -->
                             <!-- <configHelp>true</configHelp> -->
                             <addCompileSourceRoot>false</addCompileSourceRoot>
-                            <output>
-                                ${project.basedir}/../digitalib-api-interna-client-versio-v1</output>
+                            <output>${project.basedir}/../digitalib-api-interna-client-versio-v1</output>
                             <apiPackage>${client.default.package}.versio.v1.api</apiPackage>
-                            <modelPackage>
-                                ${client.default.package}.versio.v1.model</modelPackage>
-                            <invokerPackage>
-                                ${client.default.package}.versio.v1.services</invokerPackage>
+                            <modelPackage>${client.default.package}.versio.v1.model</modelPackage>
+                            <invokerPackage>${client.default.package}.versio.v1.services</invokerPackage>
                             <generateModelTests>false</generateModelTests>
 
                             <languageSpecificPrimitives>boolean,int</languageSpecificPrimitives>
 
                             <configOptions>
                                 <groupId>es.caib.digitalib</groupId>
-                                <artifactId>
-                                    digitalib-api-interna-client-versio-v1</artifactId>
+                                <artifactId>digitalib-api-interna-client-versio-v1</artifactId>
                                 <artifactVersion>1.0-SNAPSHOT</artifactVersion>
-                                <artifactDescription>DigitalIB - API Rest -
-                                    Interna Client - Versio v1</artifactDescription>
+                                <artifactDescription>DigitalIB - API Rest - Interna Client - Versio v1</artifactDescription>
                                 <dateLibrary>java8</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
@@ -290,14 +277,43 @@
                         </resource>
                     </webResources>
                     <packagingExcludes>
-                        <!-- Requereix afegir mòdul 'com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider' a jboss-deployment-structure.xml -->
-                         **/jackson-jaxrs-json-provider*redhat*.jar,
-                         **/jackson-jaxrs-base*redhat*.jar,
-                         **/jackson-module-jaxb-annotations*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider' a
+                        jboss-deployment-structure.xml --> 
+                        **/jackson-jaxrs-json-provider*redhat*.jar, **/jackson-jaxrs-base*redhat*.jar,
+                        **/jackson-module-jaxb-annotations*redhat*.jar, 
                         <!-- Requereix afegir mòdul 'javax.ws.rs.api' a jboss-deployment-structure.xml -->
-                         **/jboss-jaxrs-api_2.1_spec*redhat*.jar,
+                        **/jboss-jaxrs-api_2.1_spec*redhat*.jar
                     </packagingExcludes>
                 </configuration>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>
+                                        ${basedir}/../digitalib-ejb/src/main/resources</directory>
+                                    <includes>
+                                        <include>logicmissatges_*.properties</include>
+                                        <include>genapp_*.properties</include>
+                                        <include>digitalib_genapp_*.properties</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <overwrite>true</overwrite>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
 

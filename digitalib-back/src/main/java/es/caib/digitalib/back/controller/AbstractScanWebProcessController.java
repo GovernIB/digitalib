@@ -1022,9 +1022,11 @@ public abstract class AbstractScanWebProcessController {
 
         PerfilJPA perfil = transaccio.getPerfil();
 
-        log.info("AbstractScanWebProcessController:firmarFitxer():: PERFIL PRE = " + perfil);
+        log.info("AbstractScanWebProcessController:firmarFitxer():: PERFIL PRE = " + perfil.getCodi());
 
         final boolean isApiFirmaSimple = (perfil.getTipusFirma() == Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE);
+        
+        log.info("AbstractScanWebProcessController:firmarFitxer()::perfil.getTipusFirma() = " + perfil.getTipusFirma());
 
         final boolean isApp = isPublic();
         final String additionalInfo = null;

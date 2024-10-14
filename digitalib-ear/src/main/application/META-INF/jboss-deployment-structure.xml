@@ -1,83 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2">
-    <!--
-    Permet introduïr configuracions relacionades amb el desplegament.
-    Com ara ignorar mòduls del servidor si el nostre EAR conté versions més recents.
-    -->
-	<deployment>
+    <!-- Permet introduïr configuracions relacionades amb el desplegament. Com ara ignorar mòduls del servidor si el nostre EAR conté versions 
+        més recents. -->
+    <deployment>
         <dependencies>
-            <module name="org.hibernate" slot="5.3" export="true"/>
+            <module name="org.hibernate" slot="5.3" export="true" />
 
             <module name="org.apache.xerces" />
-            <module name="org.apache.santuario.xmlsec" export="true"/>
-			<module name="org.keycloak.keycloak-core" optional="TRUE"/>
-			<module name="org.keycloak.keycloak-adapter-spi" optional="TRUE"/>
-			<module name="org.keycloak.keycloak-adapter-subsystem" optional="TRUE"/>
-			<module name="org.keycloak.keycloak-authz-client" optional="TRUE"/>
-			<module name="org.keycloak.keycloak-common" optional="TRUE"/>
-			<module name="org.keycloak.keycloak-jboss-adapter-core" optional="TRUE"/>
-			<module name="org.keycloak.keycloak-undertow-adapter" optional="TRUE"/>
-			<module name="org.keycloak.keycloak-wildfly-adapter" optional="TRUE"/>
-			<module name="org.keycloak.keycloak-wildfly-elytron-oidc-adapter" optional="TRUE"/>
-			<module name="org.keycloak.keycloak-wildfly-subsystem" optional="TRUE"/>
-            
-            
-            
-            <module name="org.apache.log4j" export="TRUE"/>
-            
-            <module name="javax.activation.api" export="TRUE"/>
-            <module name="asm.asm" export="TRUE"/>
-            <module name="org.bouncycastle" export="TRUE"/>
-            <module name="org.apache.commons.codec" export="TRUE"/>
-            <module name="org.apache.commons.io" export="TRUE"/>
-            <module name="org.apache.commons.lang3" export="TRUE"/>
-            <module name="org.opensaml" export="TRUE"/>
-            <module name="org.apache.cxf" export="TRUE"/>
-            <module name="org.apache.cxf.impl" export="TRUE"/>
-            <module name="org.apache.cxf.ws-security" export="TRUE"/>
-            <module name="com.google.guava" export="TRUE"/>
-            <module name="org.apache.httpcomponents.core" export="TRUE"/>
-            <module name="com.fasterxml.jackson.core.jackson-annotations" export="TRUE"/>
-            <module name="com.fasterxml.jackson.core.jackson-core" export="TRUE"/>
-            <module name="org.codehaus.jackson.jackson-core-asl" export="TRUE"/>
-            <module name="com.fasterxml.jackson.core.jackson-databind" export="TRUE"/>
-            <module name="org.codehaus.jackson.jackson-jaxrs" export="TRUE"/>
-            <module name="org.codehaus.jackson.jackson-mapper-asl" export="TRUE"/>
-            <module name="org.codehaus.jackson.jackson-xc" export="TRUE"/>
-            <module name="org.apache.ws.security" export="TRUE"/>
-            <module name="javax.persistence.api" export="TRUE"/>
-            <module name="org.jaxen" export="TRUE"/>
-            <module name="javax.annotation.api" export="TRUE"/>
-            <module name="javax.xml.bind.api" export="TRUE"/>
-            <module name="javax.xml.ws.api" export="TRUE"/>
-            <module name="org.jboss.logging" export="TRUE"/>
-            <module name="org.codehaus.jettison" export="TRUE"/>
-            <module name="org.joda.time" export="TRUE"/>
-            <module name="javax.jws.api" export="TRUE"/>
-            <module name="org.apache.lucene" export="TRUE"/>
-            <module name="org.apache.neethi" export="TRUE"/>
-            <module name="com.sun.xml.messaging.saaj" export="TRUE"/>
-            <module name="org.slf4j" export="TRUE"/>
-            <module name="org.codehaus.woodstox" export="TRUE"/>
-            <module name="javax.wsdl4j.api" export="TRUE"/>
-            <module name="org.apache.xml-resolver" export="TRUE"/>
-            <module name="org.apache.ws.xmlschema" export="TRUE"/>
-            <module name="nu.xom" export="TRUE"/>
-            <module name="org.jboss.logging.commons.logging" export="TRUE"/>
+            <module name="org.apache.santuario.xmlsec" export="true" />
+            <module name="org.keycloak.keycloak-core" optional="TRUE" />
+            <module name="org.keycloak.keycloak-adapter-spi" optional="TRUE" />
+            <module name="org.keycloak.keycloak-adapter-subsystem" optional="TRUE" />
+            <module name="org.keycloak.keycloak-authz-client" optional="TRUE" />
+            <module name="org.keycloak.keycloak-common" optional="TRUE" />
+            <module name="org.keycloak.keycloak-jboss-adapter-core" optional="TRUE" />
+            <module name="org.keycloak.keycloak-undertow-adapter" optional="TRUE" />
+            <module name="org.keycloak.keycloak-wildfly-adapter" optional="TRUE" />
+            <module name="org.keycloak.keycloak-wildfly-elytron-oidc-adapter" optional="TRUE" />
+            <module name="org.keycloak.keycloak-wildfly-subsystem" optional="TRUE" />
+
+
+
+            <module name="org.apache.log4j" export="TRUE" />
+
+            <module name="javax.activation.api" export="TRUE" />
+            <module name="asm.asm" export="TRUE" />
+            <module name="org.bouncycastle" export="TRUE" />
+            <module name="org.apache.commons.codec" export="TRUE" />
+            <module name="org.apache.commons.io" export="TRUE" />
+            <module name="org.apache.commons.lang3" export="TRUE" />
+            <module name="org.opensaml" export="TRUE" />
+            <module name="org.apache.cxf" export="TRUE" />
+            <module name="org.apache.cxf.impl" export="TRUE" />
+            <module name="org.apache.cxf.ws-security" export="TRUE" />
+            <module name="com.google.guava" export="TRUE" />
+            <module name="org.apache.httpcomponents.core" export="TRUE" />
+            <module name="com.fasterxml.jackson.core.jackson-annotations" export="TRUE" />
+            <module name="com.fasterxml.jackson.core.jackson-core" export="TRUE" />
+            <module name="org.codehaus.jackson.jackson-core-asl" export="TRUE" />
+            <module name="com.fasterxml.jackson.core.jackson-databind" export="TRUE" />
+            <module name="org.codehaus.jackson.jackson-jaxrs" export="TRUE" />
+            <module name="org.codehaus.jackson.jackson-mapper-asl" export="TRUE" />
+            <module name="org.codehaus.jackson.jackson-xc" export="TRUE" />
+            <module name="org.apache.ws.security" export="TRUE" />
+            <module name="javax.persistence.api" export="TRUE" />
+            <module name="org.jaxen" export="TRUE" />
+            <module name="javax.annotation.api" export="TRUE" />
+            <module name="javax.xml.bind.api" export="TRUE" />
+            <module name="javax.xml.ws.api" export="TRUE" />
+            <module name="org.jboss.logging" export="TRUE" />
+            <module name="org.codehaus.jettison" export="TRUE" />
+            <module name="org.joda.time" export="TRUE" />
+            <module name="javax.jws.api" export="TRUE" />
+            <module name="org.apache.lucene" export="TRUE" />
+            <module name="org.apache.neethi" export="TRUE" />
+            <module name="com.sun.xml.messaging.saaj" export="TRUE" />
+            <module name="org.slf4j" export="TRUE" />
+            <module name="org.codehaus.woodstox" export="TRUE" />
+            <module name="javax.wsdl4j.api" export="TRUE" />
+            <module name="org.apache.xml-resolver" export="TRUE" />
+            <module name="org.apache.ws.xmlschema" export="TRUE" />
+            <module name="nu.xom" export="TRUE" />
+            <module name="org.jboss.logging.commons.logging" export="TRUE" />
         </dependencies>
+        <!-- Per evitar problemes amb els Bindings de les APIs RestEasy -->
+        <!-- Així suporten tipus especials com byte[], timestamp, ... -->
+        <exclusions>
+            <module name="org.jboss.resteasy.resteasy-json-binding-provider" />
+        </exclusions>
     </deployment>
 
-   <sub-deployment name="digitalib-back.war">
+    <sub-deployment name="digitalib-back.war">
         <dependencies>
-            <module name="org.apache.commons.beanutils" export="TRUE"/>
-            <module name="org.apache.commons.collections" export="TRUE"/>
+            <module name="org.apache.commons.beanutils" export="TRUE" />
+            <module name="org.apache.commons.collections" export="TRUE" />
         </dependencies>
-   </sub-deployment>
+        <!-- Per evitar problemes amb els Bindings de les APIs RestEasy -->
+        <!-- Així suporten tipus especials com byte[], timestamp, ... -->
+        <exclusions>
+            <module name="org.jboss.resteasy.resteasy-json-binding-provider" />
+        </exclusions>
+    </sub-deployment>
 
     <sub-deployment name="digitalib-api-interna.war">
         <dependencies>
-            <module name="com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider" export="TRUE"/>
-            <module name="javax.ws.rs.api" export="TRUE"/>
+            <module name="com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider" export="TRUE" />
+            <module name="javax.ws.rs.api" export="TRUE" />
         </dependencies>
-   </sub-deployment>
+        <!-- Per evitar problemes amb els Bindings de les APIs RestEasy -->
+        <!-- Així suporten tipus especials com byte[], timestamp, ... -->
+        <exclusions>
+            <module name="org.jboss.resteasy.resteasy-json-binding-provider" />
+        </exclusions>
+    </sub-deployment>
 </jboss-deployment-structure>
