@@ -978,5 +978,32 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         }
 
     }
+    
+    
+    @PermitAll
+    @Override
+    public List<Transaccio> expiraTransaccionsCaducades() throws I18NException {
+        
+        final Where w1 = Where.OR(ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_ENPROGRES),
+                ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_ID));
+        Timestamp fa3hores = new Timestamp(System.currentTimeMillis() - 1 * 60 * 60 * 1000);
+        final Where w2 = DATAINICI.lessThan(fa3hores);
+        List<Transaccio> transaccions = this.select(Where.AND(w1, w2));
+
+        for (Transaccio transaccio : transaccions) {
+            log.info("Transaccio Caducada => " + transaccio.getNom() + " " + transaccio.getEstatCodi() + "  "
+                    + transaccio.getDataInici());
+            
+            transaccio.setEstatCodi(Constants.TRANSACCIO_ESTAT_CODI_EXPIRAT);
+            transaccio.setDataFi(new Timestamp(System.currentTimeMillis()));
+            transaccio.setEstatMissatge("Transacció caducada. Marcada com expirada.");
+            
+            this.update(transaccio);
+        }
+        
+        return transaccions;
+    }
+    
+    
 
 }

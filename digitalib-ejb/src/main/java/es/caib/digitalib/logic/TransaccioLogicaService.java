@@ -165,4 +165,10 @@ public interface TransaccioLogicaService extends es.caib.digitalib.ejb.Transacci
      * @throws I18NException
      */
     public void netejaDeFitxersNocturnPersona() throws I18NException;
+    
+    /**
+     * 
+     * @throws I18NException
+     */
+    public List<Transaccio> expiraTransaccionsCaducades() throws I18NException;
 }

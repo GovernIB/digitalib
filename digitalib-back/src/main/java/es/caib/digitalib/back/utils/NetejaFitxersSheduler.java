@@ -50,12 +50,10 @@ public class NetejaFitxersSheduler {
         }
 
     }
-    
-    
+
     @Scheduled(cron = "0 */10 5 * * *") // Cada dia cada 10 minuts entre les 05:00h i les 5:59h 
     //@Scheduled(cron = "0 */3 * * * *") // Cada 3 minuts
     public void netejarFitxersPersona() {
-
         try {
             transaccioLogicaEjb.netejaDeFitxersNocturnPersona();
         } catch (I18NException e) {
@@ -64,6 +62,20 @@ public class NetejaFitxersSheduler {
         }  catch(Throwable th) {
             log.error("Error cridant a netejarFitxers Persona: " + th.getMessage(), th);
         }
-
     }
+
+    @Scheduled(cron = "0 0 6 * * *") // Cada dia a les 06:00h   
+    //@Scheduled(cron = "0 */3 * * * *") // Cada 3 min
+    public void netejarTransaccionsCaducades() {
+        log.info(" Entra a neteja de transaccions caducades");
+        try {
+            transaccioLogicaEjb.expiraTransaccionsCaducades();
+        } catch (I18NException e) {
+            String msg = I18NLogicUtils.getMessage(e, new Locale("ca"));
+            log.error("Error controlat cridant a expiraTransaccionsCaducades: " + msg, e);
+        }  catch(Throwable th) {
+            log.error("Error desconegut cridant a expiraTransaccionsCaducades: " + th.getMessage(), th);
+        }
+    }
+    
 }

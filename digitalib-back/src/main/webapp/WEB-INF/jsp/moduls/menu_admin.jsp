@@ -16,7 +16,6 @@
 
     <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
-
     <li style="list-style-type: disc; list-style-position: inside;"><a
       href="<c:url value="/admin/pluginfirmaenservidor/list"/>"> <span
         style="${(fn:contains(url, 'pluginfirmaenservidor/'))? "font-weight:bold;" : ""}"><fmt:message
@@ -102,6 +101,13 @@
 
     </a></li>
     
+   <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/admin/netejartransaccionscaducades"/>"> <span
+        style="${(fn:contains(url, '/admin/netejartransaccionscaducades'))? "font-weight:bold;" : ""}"><fmt:message
+            key="netejartransaccionscaducades" /></span>
+    </a></li>
    
     
 </div>

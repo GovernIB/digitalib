@@ -383,6 +383,11 @@
     </definition>
     
     
+    <definition name="netejartransaccionscaducades" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/moduls/blanc.jsp" />
+    </definition>
+    
+    
     
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
