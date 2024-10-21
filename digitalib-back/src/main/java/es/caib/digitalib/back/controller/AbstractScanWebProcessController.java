@@ -37,7 +37,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.common.hash.Hashing;
-import com.google.common.io.Files;
 
 import es.caib.digitalib.back.controller.all.FirmaArxiuParametersPublicController;
 import es.caib.digitalib.back.controller.user.FirmaArxiuParametersUserController;
@@ -363,8 +362,6 @@ public abstract class AbstractScanWebProcessController {
 
     protected boolean comprovarSiTotesTransaccionsSonCompletes(Map<Long, FitxerEscanejatInfo> infos, int usPerfil) {
 
-        
-        
         switch (usPerfil) {
 
             case Constants.PERFIL_US_CUSTODIA_INFO: {
@@ -397,8 +394,7 @@ public abstract class AbstractScanWebProcessController {
 
                 for (FitxerEscanejatInfo info : infos.values()) {
                     TransaccioJPA trans = info.transaccio;
-                    if (Utils.isEmpty(trans.getNom())
-                           || Utils.isEmpty(trans.getInfoScanLanguageDoc())) {
+                    if (Utils.isEmpty(trans.getNom()) || Utils.isEmpty(trans.getInfoScanLanguageDoc())) {
                         return false;
                     }
                 }
@@ -699,8 +695,6 @@ public abstract class AbstractScanWebProcessController {
         final Long maxBytes = Configuracio.getMaxSizeForScannedDocument();
 
         log.info("\n recuperarDocumentEscanejat:: maxBytes = " + maxBytes);
-        
-        
 
         if (transaccioOriginal.getTransaccioMultipleID() == null) {
 
@@ -728,6 +722,19 @@ public abstract class AbstractScanWebProcessController {
                         + transaccioOriginal.getTransaccioID());
 
                 transaccioOriginal.setFitxerEscanejat(fitxer);
+
+                try {
+                    transaccioOriginal.setHashEscaneig(
+                            Hashing.sha256()
+                                    .hashBytes(
+                                            FileSystemManager.getFileContent(transaccioOriginal.getFitxerEscanejatID()))
+                                    .toString()
+
+                    );
+                } catch (IOException e) {
+                    log.error("transaccioOriginal: Error desconegut creant HASH del fitxer " + fileID + ":"
+                            + e.getMessage(), e);
+                }
 
                 allFiles.put(transaccioOriginal.getTransaccioID(),
                         new FitxerEscanejatInfo(transaccioOriginal, fitxer, data));
@@ -817,38 +824,45 @@ public abstract class AbstractScanWebProcessController {
                 if (i == 0) {
                     // El primer fitxer el posam dins la transaccio original
 
+                    FitxerJPA fitxer = new FitxerJPA("", "application/pdf",
+                            /* transaccioOriginal.getTransactionWebId() + "_" + */ fitxers[i].file.getName(),
+                            fitxers[i].file.length());
+                    fitxer = (FitxerJPA) fitxerLogicaEjb.create(fitxer);
+
+                    final long fileID = fitxer.getFitxerID();
+
+                    FileSystemManager.sobreescriureFitxer(file, fileID);
+
+                    transaccioOriginal.setNom(nomTransaccioOriginal + " " + (i + 1) + "/" + fitxers.length);
+
+                    transaccioOriginal.setFitxerEscanejatID(fileID);
+
+                    // Parxe per poder ordenar les transaccions (https://github.com/GovernIB/digitalib/issues/226)
+                    transaccioOriginal.setDataFi(new Timestamp((i + 1) * 1000));
                     
-
-                        FitxerJPA fitxer = new FitxerJPA("", "application/pdf",
-                                /* transaccioOriginal.getTransactionWebId() + "_" + */ fitxers[i].file.getName(),
-                                fitxers[i].file.length());
-                        fitxer = (FitxerJPA) fitxerLogicaEjb.create(fitxer);
-
-                        final long fileID = fitxer.getFitxerID();
-
-                        FileSystemManager.sobreescriureFitxer(file, fileID);
-
-                        transaccioOriginal.setNom(nomTransaccioOriginal + " " + (i + 1) + "/" + fitxers.length);
-
-                        transaccioOriginal.setFitxerEscanejatID(fileID);
-                        
-                        
-                        // Parxe per poder ordenar les transaccions (https://github.com/GovernIB/digitalib/issues/226)
-                        transaccioOriginal.setDataFi(new Timestamp((i + 1) * 1000));
-
-                        transaccioLogicaEjb.update(transaccioOriginal);
-
-                        log.info("XYZ ZZZ  PRIMER FITXER : " + fitxer + " Per transaccio "
-                                + transaccioOriginal.getTransaccioID());
-
-                        transaccioOriginal.setFitxerEscanejat(fitxer);
-
-                        FitxerEscanejatInfo fei = new FitxerEscanejatInfo(transaccioOriginal, fitxer,
-                                FileSystemManager.getFile(fitxer.getFitxerID()), fitxers[i].firstPageEmpty);
-
-                        allFiles.put(transaccioOriginal.getTransaccioID(), fei);
-
                     
+                    try {
+                        transaccioOriginal.setHashEscaneig(Hashing.sha256()
+                                        .hashBytes(
+                                                FileSystemManager.getFileContent(transaccioOriginal.getFitxerEscanejatID()))
+                                        .toString()
+
+                        );
+                    } catch (IOException e) {
+                        log.error(" Error desconegut creant HASH del fitxer " + fileID + ":" + e.getMessage(), e);
+                    }
+
+                    transaccioLogicaEjb.update(transaccioOriginal);
+
+                    log.info("XYZ ZZZ  PRIMER FITXER : " + fitxer + " Per transaccio "
+                            + transaccioOriginal.getTransaccioID());
+
+                    transaccioOriginal.setFitxerEscanejat(fitxer);
+
+                    FitxerEscanejatInfo fei = new FitxerEscanejatInfo(transaccioOriginal, fitxer,
+                            FileSystemManager.getFile(fitxer.getFitxerID()), fitxers[i].firstPageEmpty);
+
+                    allFiles.put(transaccioOriginal.getTransaccioID(), fei);
 
                 } else {
 
@@ -858,7 +872,7 @@ public abstract class AbstractScanWebProcessController {
                     log.info("XYZ ZZZ  FITXER [" + i + "] : Per transaccio " + transaccioOriginal.getTransaccioID());
 
                     TransaccioJPA transaccio = transaccioLogicaEjb.cloneTransaccio(transaccioOriginal, nom);
-                    
+
                     // Parxe per poder ordenar les transaccions (https://github.com/GovernIB/digitalib/issues/226)
                     transaccio.setDataFi(new Timestamp((i + 1) * 1000));
 
@@ -883,12 +897,12 @@ public abstract class AbstractScanWebProcessController {
                         // Charset.forName("UTF-8")).toString();
 
                         try {
-                            transaccio.setHashEscaneig(
-                                    //deprecated Files.hash(FileSystemManager.getFile(fileID), Hashing.sha256())
+                            transaccio.setHashEscaneig(Hashing.sha256()
+                                            .hashBytes(
+                                                    FileSystemManager.getFileContent(transaccio.getFitxerEscanejatID()))
+                                            .toString()
 
-                                    Files.asByteSource(FileSystemManager.getFile(fileID)).hash(Hashing.sha256())
-
-                                            .toString());
+                            );
                         } catch (IOException e) {
                             log.error(" Error desconegut creant HASH del fitxer " + fileID + ":" + e.getMessage(), e);
                         }
@@ -954,7 +968,7 @@ public abstract class AbstractScanWebProcessController {
         log.error(msg);
 
         transaccio.setEstatMissatge(StringUtils.truncate(msg, 2990));
-        
+
         transaccio.setEstatCodi(MassiveScanWebSimpleStatus.STATUS_FINAL_ERROR);
 
         transaccioLogicaEjb.update(transaccio);
@@ -1025,7 +1039,7 @@ public abstract class AbstractScanWebProcessController {
         log.info("AbstractScanWebProcessController:firmarFitxer():: PERFIL PRE = " + perfil.getCodi());
 
         final boolean isApiFirmaSimple = (perfil.getTipusFirma() == Constants.TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE);
-        
+
         log.info("AbstractScanWebProcessController:firmarFitxer()::perfil.getTipusFirma() = " + perfil.getTipusFirma());
 
         final boolean isApp = isPublic();
@@ -1138,11 +1152,11 @@ public abstract class AbstractScanWebProcessController {
                 && transaction.getNom().trim().length() != 0) {
             urlToRequestFirmaArxiuParameters = urlToSelectPluginPage;
         } else {
-            log.info("\n\n\n ===>   PASSA PER startScanWebProcess "  + "\n\n\n");
+            log.info("\n\n\n ===>   PASSA PER startScanWebProcess " + "\n\n\n");
             urlToRequestFirmaArxiuParameters = urlBase
                     + (isPublic ? AbstractFirmaArxiuParametersController.CONTEXTWEB_PUBLIC
                             : AbstractFirmaArxiuParametersController.CONTEXTWEB_USER)
-                    + "/" + transaction.getTransaccioID() + "/edit"; 
+                    + "/" + transaction.getTransaccioID() + "/edit";
         }
 
         mav.addObject("urlToSelectPluginPage", urlToRequestFirmaArxiuParameters);
@@ -1180,14 +1194,13 @@ public abstract class AbstractScanWebProcessController {
 
                 // Aqui rewrite de user  posar-ho a false
                 request.getSession().removeAttribute(FirmaArxiuParametersUserController.REWRITE_TILE_FORM_SESSION_ID);
-                
+
                 // ANAR A WAIT DE MASSIVE
                 String waitUrl = getContextWeb() + SCANWEB_CONTEXTPATH_WAIT_MASSIVE + "/"
                         + transaccions.get(0).getTransactionWebId();
                 ModelAndView mav = new ModelAndView(new RedirectView(waitUrl, true));
                 return mav;
-                
-                
+
             }
 
             pos = next;
@@ -1196,11 +1209,11 @@ public abstract class AbstractScanWebProcessController {
         request.getSession().setAttribute(SESSION_MASIVE_POINTER_POST_SCAN, pos);
 
         {
-            log.info("\n\n\n ===>   PASSA PER demanarInformacioPeticioMassivaGet "  + "\n\n\n");
-            
+            log.info("\n\n\n ===>   PASSA PER demanarInformacioPeticioMassivaGet " + "\n\n\n");
+
             String cp = isPublic() ? FirmaArxiuParametersPublicController.CONTEXTWEB_PUBLIC
                     : FirmaArxiuParametersPublicController.CONTEXTWEB_USER;
-            String redirect = cp + "/" + transaccions.get(pos).getTransaccioID() + "/edit"; 
+            String redirect = cp + "/" + transaccions.get(pos).getTransaccioID() + "/edit";
 
             log.info(" XYZ ZZZ   Redireccionam a " + redirect);
 

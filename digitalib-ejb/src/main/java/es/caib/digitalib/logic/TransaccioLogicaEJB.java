@@ -37,7 +37,7 @@ import org.fundaciobit.pluginsib.core.v3.utils.FileUtils;
 import org.hibernate.Hibernate;
 import org.jboss.ejb3.annotation.TransactionTimeout;
 
-//import org.jboss.ejb3.annotation.TransactionTimeout;
+import com.google.common.hash.Hashing;
 
 import es.caib.digitalib.ejb.FitxerService;
 import es.caib.digitalib.ejb.TransaccioEJB;
@@ -978,32 +978,81 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         }
 
     }
-    
-    
+
+    @Override
+    public Where getWhereForExpiredTransactions() throws I18NException {
+        final Where w1 = Where.OR(ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_ENPROGRES),
+                ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_ID));
+        Timestamp fa1hores = new Timestamp(System.currentTimeMillis() - 1 * 60 * 60 * 1000);
+        final Where w2 = DATAINICI.lessThan(fa1hores);
+        return Where.AND(w1, w2);
+    }
+
     @PermitAll
     @Override
     public List<Transaccio> expiraTransaccionsCaducades() throws I18NException {
-        
-        final Where w1 = Where.OR(ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_ENPROGRES),
-                ESTATCODI.equal(Constants.TRANSACCIO_ESTAT_CODI_ID));
-        Timestamp fa3hores = new Timestamp(System.currentTimeMillis() - 1 * 60 * 60 * 1000);
-        final Where w2 = DATAINICI.lessThan(fa3hores);
-        List<Transaccio> transaccions = this.select(Where.AND(w1, w2));
+        return expiraTransaccionsCaducadesInternal(getWhereForExpiredTransactions());
+    }
+
+    @Override
+    public List<Transaccio> expiraTransaccionsCaducades(List<Long> transactionsID) throws I18NException {
+        return expiraTransaccionsCaducadesInternal(TRANSACCIOID.in(transactionsID));
+    }
+
+    private List<Transaccio> expiraTransaccionsCaducadesInternal(Where w) throws I18NException {
+        List<Transaccio> transaccions = this.select(w);
 
         for (Transaccio transaccio : transaccions) {
             log.info("Transaccio Caducada => " + transaccio.getNom() + " " + transaccio.getEstatCodi() + "  "
                     + transaccio.getDataInici());
-            
+
             transaccio.setEstatCodi(Constants.TRANSACCIO_ESTAT_CODI_EXPIRAT);
             transaccio.setDataFi(new Timestamp(System.currentTimeMillis()));
             transaccio.setEstatMissatge("Transacció caducada. Marcada com expirada.");
-            
+
             this.update(transaccio);
         }
-        
+
         return transaccions;
     }
-    
-    
+
+    @PermitAll
+    @Override
+    public List<Transaccio> regenerarTransaccionsSenseHashDeFitxer(List<Long> transactionsID) throws I18NException {
+
+        List<Transaccio> transaccions = this.select(TRANSACCIOID.in(transactionsID));
+
+        for (Transaccio transaccio : transaccions) {
+            log.info("Transaccio Sense algun Fitxer de Hash  => " + transaccio.getNom() + " "
+                    + transaccio.getEstatCodi() + "  " + transaccio.getDataInici());
+            try {
+                if (transaccio.getHashFirma() == null && transaccio.getFitxerSignaturaID() != null) {
+                    String hash;
+
+                    hash = Hashing.sha256()
+                            .hashBytes(FileSystemManager.getFileContent(transaccio.getFitxerSignaturaID())).toString();
+                    transaccio.setHashFirma(hash);
+
+                }
+
+                if (transaccio.getHashEscaneig() == null && transaccio.getFitxerEscanejatID() != null) {
+                    String hash = Hashing.sha256()
+                            .hashBytes(FileSystemManager.getFileContent(transaccio.getFitxerEscanejatID())).toString();
+                    transaccio.setHashEscaneig(hash);
+                }
+
+                this.update(transaccio);
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                log.error("Error regenerant hash de fitxer de la transacció " + transaccio.getTransaccioID(), e);
+                e.printStackTrace();
+            }
+
+        }
+
+        return transaccions;
+
+    }
 
 }

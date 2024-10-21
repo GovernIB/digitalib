@@ -388,6 +388,25 @@
     </definition>
     
     
+    <definition name="transaccioFormSenseHashFitxer" extends="admin">
+        <put-attribute name="titol" value="transaccio.transaccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioForm.jsp" />
+    </definition>
+    
+    <definition name="transaccioListSenseHashFitxer" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioList.jsp" />
+    </definition>
+    
+    <definition name="expiraTransaccioCaducadaForm" extends="admin">
+        <put-attribute name="titol" value="transaccio.transaccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioForm.jsp" />
+    </definition>
+    
+    <definition name="expiraTransaccioCaducadaList" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioList.jsp" />
+    </definition>
+    
+    
     
     <!--  ===========  DESENVOLUPAMENT ================== -->
     

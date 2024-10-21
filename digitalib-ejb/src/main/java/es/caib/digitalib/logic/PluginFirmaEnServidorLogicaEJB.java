@@ -2,7 +2,6 @@ package es.caib.digitalib.logic;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -11,6 +10,7 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleSignedFileInfo;
 import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleStatus;
@@ -330,8 +330,7 @@ public class PluginFirmaEnServidorLogicaEJB extends AbstractPluginLogicaEJB<ISig
 
             transaccio.setFitxerSignaturaID(fitxerSignat.getFitxerID());
 
-            String hashSignatura = Hashing.sha256()
-                    .hashString(String.valueOf(transaccio.getFitxerSignaturaID()), Charset.forName("UTF-8")).toString();
+            String hashSignatura = Hashing.sha256().hashBytes(FileUtils.readFileToByteArray(dest)).toString();
 
             transaccio.setHashFirma(hashSignatura);
             log.info("XYZ ZZZ Guardada Firma a " + dest.getAbsolutePath());

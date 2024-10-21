@@ -104,11 +104,21 @@
    <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
     <li style="list-style-type: disc; list-style-position: inside;"><a
-      href="<c:url value="/admin/netejartransaccionscaducades"/>"> <span
+      href="<c:url value="/admin/transaccionscaducades/list"/>"> <span
         style="${(fn:contains(url, '/admin/netejartransaccionscaducades'))? "font-weight:bold;" : ""}"><fmt:message
-            key="netejartransaccionscaducades" /></span>
+            key="netejartransaccionscaducades.plural" /></span>
     </a></li>
-   
+    
+    
+    <li style="list-style-type: disc; list-style-position: inside;"><a
+      href="<c:url value="/admin/transaccionssensehashdefitxer/list"/>"> <span
+        style="${(fn:contains(url, '/admin/transaccionssensehashdefitxer'))? "font-weight:bold;" : ""}"><fmt:message
+            key="transaccionssensehashdefitxer.plural" /></span>
+
+    </a></li>
+    
+    
+    
     
 </div>
 </div>

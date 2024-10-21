@@ -9,6 +9,7 @@ import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSi
 import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleGetTransactionIdRequest;
 import es.caib.digitalib.logic.apiscanwebsimple.v1.beans.ScanWebSimpleGetTransactionIdRequest;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
 
 import es.caib.digitalib.persistence.TransaccioJPA;
 import es.caib.digitalib.persistence.UsuariAplicacioJPA;
@@ -29,14 +30,14 @@ public interface TransaccioLogicaService extends es.caib.digitalib.ejb.Transacci
     public static final int THREE_MINUTS_IN_SECONDS = 3 * 60;
 
     public static final String SEPARADOR_ESCANEIG_MASSIU_NOM = "separador_escanig_massiu.pdf";
-    
+
     /**
      * 
      * @return
      * @throws Exception
      */
     public MassiveScanWebSimpleFile getSeparator() throws Exception;
-    
+
     /**
      * 
      * @param transaccio
@@ -165,10 +166,31 @@ public interface TransaccioLogicaService extends es.caib.digitalib.ejb.Transacci
      * @throws I18NException
      */
     public void netejaDeFitxersNocturnPersona() throws I18NException;
-    
+
+    /**
+     * 
+     * @return
+     * @throws I18NException
+     */
+    public Where getWhereForExpiredTransactions() throws I18NException;
+
     /**
      * 
      * @throws I18NException
      */
     public List<Transaccio> expiraTransaccionsCaducades() throws I18NException;
+
+    /**
+     * 
+     * @throws I18NException
+     */
+    public List<Transaccio> expiraTransaccionsCaducades(List<Long> transactionsID) throws I18NException;
+
+    /**
+     * 
+     * @param transactionsID
+     * @return
+     * @throws I18NException
+     */
+    public List<Transaccio> regenerarTransaccionsSenseHashDeFitxer(List<Long> transactionsID) throws I18NException;
 }

@@ -181,7 +181,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     form.addAdditionalButton(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
                             INFOSIGNATURAID.fullName, AbstractInfoSignatureController.getContextWeb(isAdmin()) + "/view"
                                     + "/" + _jpa.getInfoSignaturaID(),
-                                    AdditionalButtonStyle.INFO));
+                            AdditionalButtonStyle.INFO));
                 }
 
                 // Afegir botos de info cust
@@ -189,14 +189,14 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     form.addAdditionalButton(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_INFO),
                             INFOCUSTODYID.fullName, AbstractInfoCustodyController.getContextWeb(isAdmin()) + "/view"
                                     + "/" + _jpa.getInfoCustodyID(),
-                                    AdditionalButtonStyle.INFO));
+                            AdditionalButtonStyle.INFO));
                 }
 
                 // Afegir Boto de Veure Perfil
                 if (isAdmin()) {
-                    form.addAdditionalButton(
-                            new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_USER), "transaccio.veureperfil",
-                                    getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(), AdditionalButtonStyle.INFO));
+                    form.addAdditionalButton(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_USER),
+                            "transaccio.veureperfil", getContextWeb() + "/viewperfil/" + _jpa.getTransaccioID(),
+                            AdditionalButtonStyle.INFO));
                 }
             } else {
                 // Cancel·lat, Error, ...
@@ -262,9 +262,9 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                     "transaccio.veuredetall", getContextWeb() + "/view/{0}", AdditionalButtonStyle.PRIMARY));
             if (isAdmin()) {
                 if (getPerfilInfoContextWeb() != null) {
-                    filterForm
-                            .addAdditionalButtonForEachItem(new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_EYE),
-                                    "transaccio.veureperfil", getContextWeb() + "/viewperfil/{0}", AdditionalButtonStyle.INFO));
+                    filterForm.addAdditionalButtonForEachItem(
+                            new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_EYE), "transaccio.veureperfil",
+                                    getContextWeb() + "/viewperfil/{0}", AdditionalButtonStyle.INFO));
                 }
             }
 
@@ -854,7 +854,7 @@ public abstract class AbstractTransaccioController extends TransaccioController 
                 AdditionalButton additionalButton = new AdditionalButton(IconUtils.getWhite(IconUtils.ICON_TRASH),
                         "genapp.delete", "javascript:openModal('" + request.getContextPath() + getContextWeb() + "/"
                                 + transaccio.getTransaccioID() + "/delete','show');",
-                                AdditionalButtonStyle.DANGER);
+                        AdditionalButtonStyle.DANGER);
 
                 filterForm.addAdditionalButtonByPK(transaccio.getTransaccioID(), additionalButton);
             }

@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -252,10 +251,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
 
                     transaccio.setFitxerSignaturaID(fitxerSignat.getFitxerID());
 
-                    String hashSignatura = Hashing.sha256()
-                            .hashString(String.valueOf(transaccio.getFitxerSignaturaID()),
-                                    Charset.forName("UTF-8"))
-                            .toString();
+                    String hashSignatura = Hashing.sha256().hashBytes(fsf.getData()).toString();
 
                     transaccio.setHashFirma(hashSignatura);
                     log.info("XYZ ZZZ Guardada Firma a " + dest.getAbsolutePath());
