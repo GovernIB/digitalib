@@ -20,14 +20,16 @@ import es.caib.digitalib.commons.utils.Constants;
  */
 public abstract class AbstractTransaccioAdminController extends AbstractTransaccioController {
 
+    public abstract String getPipella();
+
     @Override
     public String getTileForm() {
-        return "transaccioFormAdmin";
+        return "transaccioFormAdmin" + getPipella();
     }
 
     @Override
     public String getTileList() {
-        return "transaccioListAdmin";
+        return "transaccioListAdmin" + getPipella();
     }
 
     @Override

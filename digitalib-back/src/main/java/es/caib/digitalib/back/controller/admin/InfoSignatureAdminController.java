@@ -24,23 +24,22 @@ import es.caib.digitalib.persistence.InfoSignaturaJPA;
 @SessionAttributes(types = { InfoSignaturaForm.class, InfoSignaturaFilterForm.class })
 public class InfoSignatureAdminController extends AbstractInfoSignatureController {
 
-  public static final String CONTEXT_WEB_ADMIN_INFO_SIGNATURE = "/admin/infoSignatura";
+    public static final String CONTEXT_WEB_ADMIN_INFO_SIGNATURE = "/admin/infoSignatura";
 
-  @Override
-  public boolean isAdmin() {
-    return true;
-  }
-  
-  @Override
-  public InfoSignaturaForm getInfoSignaturaForm(InfoSignaturaJPA _jpa, boolean __isView,
-      HttpServletRequest request, ModelAndView mav) throws I18NException {
-    InfoSignaturaForm infoSignaturaForm = super.getInfoSignaturaForm(_jpa, __isView, request,
-        mav);
+    @Override
+    public boolean isAdmin() {
+        return true;
+    }
 
-    infoSignaturaForm.setCancelButtonVisible(false);
+    @Override
+    public InfoSignaturaForm getInfoSignaturaForm(InfoSignaturaJPA _jpa, boolean __isView, HttpServletRequest request,
+            ModelAndView mav) throws I18NException {
+        InfoSignaturaForm infoSignaturaForm = super.getInfoSignaturaForm(_jpa, __isView, request, mav);
 
-    return infoSignaturaForm;
+        infoSignaturaForm.setCancelButtonVisible(false);
 
-  }
+        return infoSignaturaForm;
+
+    }
 
 }

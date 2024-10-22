@@ -51,12 +51,16 @@ public abstract class AbstractPerfilAdminController extends PerfilController {
 
 	@Override
 	public String getTileForm() {
-		return "perfilForm" + (isRoleAdmin()?"Admin":"_user");
+	    if (isRoleAdmin()) {
+		    return "perfilFormAdmin" + (isUtilitzatPerAplicacio()?"Integracions": "DigitalIB");
+	    } else {
+	        return "perfilForm_user";
+	    }
 	}
 
 	@Override
 	public String getTileList() {
-		return "perfilListAdmin";
+		return "perfilListAdmin" + (isUtilitzatPerAplicacio()?"Integracions": "DigitalIB");
 	}
 
 	@Override

@@ -87,10 +87,18 @@ Long countNoTancats = (Long) request.getAttribute("adminwarning");
             class="badge badge-danger"><%=countNoTancats%></span> <%
  }
  %> </a></li>
-      </sec:authorize>
 
-      <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <li class="nav-item"><a
+              <li class="nav-item"><a
+                    class="nav-link ${(pipella eq 'admindigitalib')?'active' : '' }"
+                    href="<c:url value="/canviarPipella/admindigitalib"/>">
+                        <fmt:message key="administrador.digitalib.rol" /></a></li>
+
+              <li class="nav-item"><a
+                    class="nav-link ${(pipella eq 'adminintegracions')?'active' : '' }"
+                    href="<c:url value="/canviarPipella/adminintegracions"/>">
+                        <fmt:message key="administrador.integracions.rol" /></a></li>
+
+               <li class="nav-item"><a
                     class="nav-link ${(pipella eq 'webdb')?'active' : '' }"
                     href="<c:url value="/canviarPipella/webdb"/>">
                         WebDatabase</a></li>

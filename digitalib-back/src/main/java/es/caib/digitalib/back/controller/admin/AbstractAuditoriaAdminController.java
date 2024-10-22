@@ -56,15 +56,17 @@ public abstract class AbstractAuditoriaAdminController extends AuditoriaControll
   public abstract boolean isAplicacio();
   
   public abstract boolean isFilterByTransaccio();
+  
+  public abstract String getPipella();
 
   @Override
   public String getTileForm() {
-    return "auditoriaFormAdmin";
+    return "auditoriaFormAdmin" + getPipella();
   }
 
   @Override
   public String getTileList() {
-    return "auditoriaListAdmin";
+    return "auditoriaListAdmin" + getPipella();
   }
 
   @Override

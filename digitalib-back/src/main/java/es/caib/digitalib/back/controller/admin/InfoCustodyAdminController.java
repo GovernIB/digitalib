@@ -24,22 +24,21 @@ import es.caib.digitalib.persistence.InfoCustodyJPA;
 @SessionAttributes(types = { InfoCustodyForm.class, InfoCustodyFilterForm.class })
 public class InfoCustodyAdminController extends AbstractInfoCustodyController {
 
-  public static final String CONTEXT_WEB_ADMIN_INFO_CUSTODY = "/admin/infoCustody";
+    public static final String CONTEXT_WEB_ADMIN_INFO_CUSTODY = "/admin/infoCustody";
 
-  @Override
-  public boolean isAdmin() {
-    return true;
-  }
+    @Override
+    public boolean isAdmin() {
+        return true;
+    }
 
-  @Override
-  public InfoCustodyForm getInfoCustodyForm(InfoCustodyJPA _jpa, boolean __isView,
-      HttpServletRequest request, ModelAndView mav) throws I18NException {
-    InfoCustodyForm infoCForm = super.getInfoCustodyForm(_jpa, __isView, request,
-        mav);
+    @Override
+    public InfoCustodyForm getInfoCustodyForm(InfoCustodyJPA _jpa, boolean __isView, HttpServletRequest request,
+            ModelAndView mav) throws I18NException {
+        InfoCustodyForm infoCForm = super.getInfoCustodyForm(_jpa, __isView, request, mav);
 
-    infoCForm.setCancelButtonVisible(false);
+        infoCForm.setCancelButtonVisible(false);
 
-    return infoCForm;
+        return infoCForm;
 
-  }
+    }
 }

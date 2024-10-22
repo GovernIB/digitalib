@@ -1,6 +1,5 @@
 package es.caib.digitalib.back.controller.admin.general;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import es.caib.digitalib.back.form.webdb.TransaccioFilterForm;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
-import es.caib.digitalib.commons.utils.Constants;
 import es.caib.digitalib.model.entity.Transaccio;
 
 /**

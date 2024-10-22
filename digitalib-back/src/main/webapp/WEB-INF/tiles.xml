@@ -264,46 +264,18 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginList.jsp" />
     </definition>
     
-   <definition name="perfilFormAdmin" extends="admin">
-        <put-attribute name="titol" value="perfil.perfil" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
-    </definition>
-    
-    <definition name="perfilListAdmin" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
-    </definition>
 
-   <definition name="usuariAplicacioFormAdmin" extends="admin">
-        <put-attribute name="titol" value="usuariAplicacio.usuariAplicacio" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariAplicacioForm.jsp" />
-    </definition>
-    
-    <definition name="usuariAplicacioListAdmin" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariAplicacioList.jsp" />
-    </definition>
+
+
     
     <definition name="perfilUsuariAplicacioFormAdmin" extends="admin">
         <put-attribute name="titol" value="perfilUsuariAplicacio.perfilUsuariAplicacio" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilUsuariAplicacioForm.jsp" />
     </definition>
     
-    <definition name="configuracioGrupFormAdmin" extends="admin">
-        <put-attribute name="titol" value="configuracioGrup.configuracioGrup" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioGrupForm.jsp" />
-    </definition>
+
     
-    <definition name="configuracioGrupListAdmin" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioGrupList.jsp" />
-    </definition>
-    
-    <definition name="usuariPersonaFormAdmin" extends="admin">
-        <put-attribute name="titol" value="usuariPersona.usuariPersona" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariPersonaForm.jsp" />
-    </definition>
-    
-    <definition name="usuariPersonaListAdmin" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariPersonaList.jsp" />
-    </definition>
+
     
     <definition name="transaccioFormAdmin" extends="admin">
         <put-attribute name="titol" value="transaccio.transaccio" />
@@ -342,14 +314,7 @@
     </definition>
     
     
-    <definition name="auditoriaFormAdmin" extends="admin">
-        <put-attribute name="titol" value="auditoria.auditoria" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaForm.jsp" />
-    </definition>
-    
-    <definition name="auditoriaListAdmin" extends="admin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaList.jsp" />
-    </definition>
+
     
     <definition name="pluginCridadaFormAdmin" extends="admin">
         <put-attribute name="titol" value="pluginCridada.pluginCridada" />
@@ -408,6 +373,108 @@
     
     
     
+    <!--  ============================================== -->
+    <!--              MENU ADMIN DIGITALIB (WEB)         -->
+    <!--  ============================================== -->
+    
+    <definition name="admindigitalib" extends="base.definition">
+        <put-attribute name="menu" value="/WEB-INF/jsp/moduls/menu_admin_digitalib.jsp" />
+        <put-attribute name="pipella" value="admindigitalib" />
+    </definition>
+    
+   <definition name="usuariPersonaFormAdmin" extends="admindigitalib">
+        <put-attribute name="titol" value="usuariPersona.usuariPersona" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariPersonaForm.jsp" />
+    </definition>
+    
+    <definition name="usuariPersonaListAdmin" extends="admindigitalib">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariPersonaList.jsp" />
+    </definition>
+    
+        <definition name="configuracioGrupFormAdmin" extends="admindigitalib">
+        <put-attribute name="titol" value="configuracioGrup.configuracioGrup" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioGrupForm.jsp" />
+    </definition>
+    
+    <definition name="configuracioGrupListAdmin" extends="admindigitalib">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/configuracioGrupList.jsp" />
+    </definition>
+    
+    <definition name="transaccioFormAdminDigitalIB" extends="admindigitalib">
+        <put-attribute name="titol" value="transaccio.transaccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioForm.jsp" />
+    </definition>
+    
+    <definition name="transaccioListAdminDigitalIB" extends="admindigitalib">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioList.jsp" />
+    </definition>
+    
+    <definition name="auditoriaFormAdminDigitalIB" extends="admindigitalib">
+        <put-attribute name="titol" value="auditoria.auditoria" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaForm.jsp" />
+    </definition>
+    
+    <definition name="auditoriaListAdminDigitalIB" extends="admindigitalib">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaList.jsp" />
+    </definition>
+    
+    <definition name="perfilFormAdminDigitalIB" extends="admindigitalib">
+        <put-attribute name="titol" value="perfil.perfil" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
+    </definition>
+    
+    <definition name="perfilListAdminDigitalIB" extends="admindigitalib">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
+    </definition>
+
+
+    <!--  ============================================== -->
+    <!--              MENU ADMIN INTEGRACIONS            -->
+    <!--  ============================================== -->
+    
+    <definition name="adminintegracions" extends="base.definition">
+        <put-attribute name="menu" value="/WEB-INF/jsp/moduls/menu_admin_integracions.jsp" />
+        <put-attribute name="pipella" value="adminintegracions" />
+    </definition>
+    
+    <definition name="usuariAplicacioFormAdmin" extends="adminintegracions">
+        <put-attribute name="titol" value="usuariAplicacio.usuariAplicacio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariAplicacioForm.jsp" />
+    </definition>
+    
+    <definition name="usuariAplicacioListAdmin" extends="adminintegracions">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariAplicacioList.jsp" />
+    </definition>
+    
+    <definition name="transaccioFormAdminIntegracions" extends="adminintegracions">
+        <put-attribute name="titol" value="transaccio.transaccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioForm.jsp" />
+    </definition>
+    
+    <definition name="transaccioListAdminIntegracions" extends="adminintegracions">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioList.jsp" />
+    </definition>
+    
+        <definition name="auditoriaFormAdminIntegracions" extends="adminintegracions">
+        <put-attribute name="titol" value="auditoria.auditoria" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaForm.jsp" />
+    </definition>
+    
+    <definition name="auditoriaListAdminIntegracions" extends="adminintegracions">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaList.jsp" />
+    </definition>
+    
+    
+       <definition name="perfilFormAdminIntegracions" extends="adminintegracions">
+        <put-attribute name="titol" value="perfil.perfil" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilForm.jsp" />
+    </definition>
+    
+    <definition name="perfilListAdminIntegracions" extends="adminintegracions">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
+    </definition>
+
+
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">

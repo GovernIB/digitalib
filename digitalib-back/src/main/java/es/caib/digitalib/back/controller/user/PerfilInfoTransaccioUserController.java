@@ -4,8 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-
-
 import es.caib.digitalib.back.controller.admin.PerfilInfoTransaccioAdminController;
 import es.caib.digitalib.back.form.webdb.PerfilFilterForm;
 import es.caib.digitalib.back.form.webdb.PerfilForm;
@@ -17,20 +15,19 @@ import es.caib.digitalib.back.form.webdb.PerfilForm;
  */
 @Controller
 @RequestMapping(value = PerfilInfoTransaccioUserController.CONTEXTWEB)
-@SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class }) 
+@SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class })
 public class PerfilInfoTransaccioUserController extends PerfilInfoTransaccioAdminController {
-  
-  public static final String CONTEXTWEB = "/user/perfilinfotransaccio";
 
-  
-  @Override
-  public boolean isUtilitzatPerAplicacio() {    
-    return false;
-  }
-  
-  @Override
-  public boolean isRoleAdmin() {
-    return false;
-  };
-  
+    public static final String CONTEXTWEB = "/user/perfilinfotransaccio";
+
+    @Override
+    public boolean isUtilitzatPerAplicacio() {
+        return false;
+    }
+
+    @Override
+    public boolean isRoleAdmin() {
+        return false;
+    };
+
 }

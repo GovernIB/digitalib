@@ -78,6 +78,16 @@ public class PrincipalController {
         return new ModelAndView(new RedirectView("/admin/pluginscanweb/list", true));
       }
       
+      if ("admindigitalib".equals(pipella)) {
+          return new ModelAndView(new RedirectView("/admin/usuariPersona/list", true));
+        }
+      
+      
+      if ("adminintegracions".equals(pipella)) {
+          return new ModelAndView(new RedirectView("/admin/usuariAplicacio/list", true));
+        }
+      
+      
       if ("user".equals(pipella)) {
         return new ModelAndView(new RedirectView("/user/llistatperfilsdisponibles", true));
       }
