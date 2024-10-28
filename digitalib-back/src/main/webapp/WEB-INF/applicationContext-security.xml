@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-  <context:component-scan base-package="es.caib.digitalib.back" />
+
   <sec:http create-session="never" use-expressions="true"
     auto-config="false" entry-point-ref="preAuthenticatedProcessingFilterEntryPoint">
 

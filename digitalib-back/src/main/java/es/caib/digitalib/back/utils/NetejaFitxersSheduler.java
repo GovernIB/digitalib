@@ -65,7 +65,7 @@ public class NetejaFitxersSheduler {
     }
 
     @Scheduled(cron = "0 0 6 * * *") // Cada dia a les 06:00h   
-    //@Scheduled(cron = "0 */3 * * * *") // Cada 3 min
+    //@Scheduled(cron = "0 */2 * * * *") // Cada 2 minuts
     public void netejarTransaccionsCaducades() {
         log.info(" Entra a neteja de transaccions caducades");
         try {
