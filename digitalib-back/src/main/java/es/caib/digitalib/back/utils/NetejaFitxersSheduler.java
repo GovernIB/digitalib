@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
+import java.util.TimerTask;
 
 import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
@@ -28,7 +29,7 @@ import javax.ejb.EJB;
  */
 @Service
 @RunAs(Constants.DIB_ADMIN)
-public class NetejaFitxersSheduler {
+public class NetejaFitxersSheduler extends TimerTask {
 
     protected final Logger log = Logger.getLogger(getClass());
 
@@ -76,6 +77,12 @@ public class NetejaFitxersSheduler {
         }  catch(Throwable th) {
             log.error("Error desconegut cridant a expiraTransaccionsCaducades: " + th.getMessage(), th);
         }
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        
     }
     
 }

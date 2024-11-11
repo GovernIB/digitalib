@@ -3,6 +3,7 @@ package es.caib.digitalib.back.controller.admin.integracio;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -161,11 +162,15 @@ public class NetejaFitxersAplicacioAdminController extends AbstractTransaccioAdm
             @ModelAttribute TransaccioFilterForm filterForm) throws Exception {
 
         String[] seleccionats = filterForm.getSelectedItems();
+        
 
         if (seleccionats != null && seleccionats.length != 0) {
+            
+            TreeSet<Long> transaccionsMultiplesJaProcessades = new TreeSet<Long>();
+            
             for (int i = 0; i < seleccionats.length; i++) {
                 try {
-                    transaccioLogicaEjb.netejaFitxers(Long.parseLong(seleccionats[i]));
+                    transaccioLogicaEjb.netejaFitxers(Long.parseLong(seleccionats[i]), transaccionsMultiplesJaProcessades);
                     HtmlUtils.saveMessageInfo(request,
                             "Netejats fitxers de la Transaccio amb ID " + seleccionats[i]);
                 } catch (I18NException i18n) {

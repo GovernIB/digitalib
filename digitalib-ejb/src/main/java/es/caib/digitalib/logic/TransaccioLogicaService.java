@@ -2,6 +2,7 @@ package es.caib.digitalib.logic;
 
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.ejb.Local;
 
@@ -53,7 +54,7 @@ public interface TransaccioLogicaService extends es.caib.digitalib.ejb.Transacci
      * @param transaccioID
      * @throws I18NException
      */
-    public void netejaFitxers(Long transaccioID) throws I18NException;
+    public void netejaFitxers(Long transaccioID, TreeSet<Long> transaccionsMultiplesJaProcessades) throws I18NException;
 
     /**
      * 
