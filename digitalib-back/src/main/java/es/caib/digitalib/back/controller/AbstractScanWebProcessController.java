@@ -750,7 +750,7 @@ public abstract class AbstractScanWebProcessController {
             log.info("\n recuperarDocumentEscanejat::ES UNA TRANSACCIO MASSIVA ");
 
             // Split del document !!!!!
-            File destDir = new File(FileSystemManager.getFilesPath(), "MASSIVE_TRANSACCTIONS");
+            File destDir = new File(FileSystemManager.getFilesPath(), TransaccioLogicaService.MASSIVE_TRANSACCTIONS_FOLDER);
             destDir.mkdirs();
             SplitInfo[] fitxers;
             try {
@@ -900,9 +900,7 @@ public abstract class AbstractScanWebProcessController {
                             transaccio.setHashEscaneig(Hashing.sha256()
                                             .hashBytes(
                                                     FileSystemManager.getFileContent(transaccio.getFitxerEscanejatID()))
-                                            .toString()
-
-                            );
+                                            .toString());
                         } catch (IOException e) {
                             log.error(" Error desconegut creant HASH del fitxer " + fileID + ":" + e.getMessage(), e);
                         }

@@ -103,9 +103,7 @@ public class NetejaFitxersAplicacioAdminController extends AbstractTransaccioAdm
 
             // Canviar dies
             filterForm.addAdditionalButton(new AdditionalButton("fas fa-history",
-                    "canviardies.button", "javascript:canviarDies()", AdditionalButtonStyle.PRIMARY
-                    
-                    ));
+                    "canviardies.button", "javascript:canviarDies()", AdditionalButtonStyle.PRIMARY));
 
             filterForm.setAttachedAdditionalJspCode(true);
 

@@ -31,6 +31,8 @@ public interface TransaccioLogicaService extends es.caib.digitalib.ejb.Transacci
     public static final int THREE_MINUTS_IN_SECONDS = 3 * 60;
 
     public static final String SEPARADOR_ESCANEIG_MASSIU_NOM = "separador_escanig_massiu.pdf";
+    
+    public static final String MASSIVE_TRANSACCTIONS_FOLDER = "MASSIVE_TRANSACCTIONS";
 
     /**
      * 
@@ -194,4 +196,11 @@ public interface TransaccioLogicaService extends es.caib.digitalib.ejb.Transacci
      * @throws I18NException
      */
     public List<Transaccio> regenerarTransaccionsSenseHashDeFitxer(List<Long> transactionsID) throws I18NException;
+    
+    
+    /**
+     * 
+     * @throws I18NException
+     */
+    public void netejarDirectoriMassiveTransactions() throws I18NException;
 }

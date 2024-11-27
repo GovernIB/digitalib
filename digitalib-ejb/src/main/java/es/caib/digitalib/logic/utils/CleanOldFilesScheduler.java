@@ -68,4 +68,19 @@ public class CleanOldFilesScheduler {
         }
     }
 
+    //@Schedule(minute = "*/2", hour = "*", persistent = false) // Cada 2 minuts
+    @Schedule(minute = "0", hour = "1", persistent = false) // Cada dia a la 01:00h
+    public void netejarDirectoriMassiveTransactions() {
+        log.info("Entra a netejar Directori MassiveTransactions ...");
+        try {
+            transaccioLogicaEjb.netejarDirectoriMassiveTransactions();
+            log.info("Final de netejar Directori MassiveTransactions ...");
+        } catch (I18NException e) {
+            String msg = I18NLogicUtils.getMessage(e, new Locale("ca"));
+            log.error("Error controlat cridant a netejarDirectoriMassiveTransactions: " + msg, e);
+        } catch (Throwable th) {
+            log.error("Error desconegut cridant a netejarDirectoriMassiveTransactions: " + th.getMessage(), th);
+        }
+    }
+
 }

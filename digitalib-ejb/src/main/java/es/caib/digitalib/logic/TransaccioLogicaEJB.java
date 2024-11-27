@@ -1,5 +1,7 @@
 package es.caib.digitalib.logic;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -1140,5 +1143,46 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         return transaccions;
 
     }
+    
+    @Override
+    public void netejarDirectoriMassiveTransactions() throws I18NException {
+        File destDir = new File(FileSystemManager.getFilesPath(), TransaccioLogicaService.MASSIVE_TRANSACCTIONS_FOLDER);
+        
+        if (destDir.exists()) {
+            
+            // Fer net tots els fitxers excepte els d'avui
+            File[] files = destDir.listFiles(new FileFilterOneHour());
+            
+            for (File file : files) {
+                if (!file.delete()) {
+                    log.error("No s´ha pogut esborrar el fitxer " + file.getAbsolutePath());
+                };
+            }
+        
+        }
+        
+    }
+    
+    
+    
+    protected class FileFilterOneHour implements FileFilter {
+        
+        private final long limitTime = System.currentTimeMillis() - 60 * 60 * 1000L;
+        
+        
+        
+        
+        @Override
+        public boolean accept(File pathname) {
+            long creationMs = pathname.lastModified();
+            
+            return creationMs < limitTime;
+        }
+    }
+    
+    
+    
+
+    
 
 }
