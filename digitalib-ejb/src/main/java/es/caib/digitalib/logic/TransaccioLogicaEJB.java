@@ -5,9 +5,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -59,6 +61,7 @@ import es.caib.digitalib.model.fields.PerfilFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioFields;
 import es.caib.digitalib.model.fields.PerfilUsuariAplicacioQueryPath;
 import es.caib.digitalib.model.fields.TransaccioFields;
+import es.caib.digitalib.model.fields.TransaccioMultipleFields;
 import es.caib.digitalib.model.fields.TransaccioQueryPath;
 import es.caib.digitalib.commons.utils.Configuracio;
 import es.caib.digitalib.commons.utils.Constants;
@@ -179,24 +182,30 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         if (fe != null) {
             fitxers.add(fe);
             transaccio.setFitxerEscanejatID(null);
+            this.update(FITXERESCANEJATID, null, TRANSACCIOID.equal(transaccio.getTransaccioID()));
         }
 
         Long fs = transaccio.getFitxerSignaturaID();
         if (fs != null) {
             fitxers.add(fs);
             transaccio.setFitxerSignaturaID(null);
+            this.update(FITXERSIGNATURAID, null, TRANSACCIOID.equal(transaccio.getTransaccioID()));
         }
 
+        /*
         if (updateTransaction && (fe != null || fs != null)) {
             this.update(transaccio);
         }
+        */
 
         // Transacció Multiple
         if (cleanMultipleTransaction) {
             Long transaccioMultipleID = transaccio.getTransaccioMultipleID();
             if (transaccioMultipleID != null) {
-                if (!transaccionsMultiplesJaProcessades.contains(transaccioMultipleID)) {
-
+                if (transaccionsMultiplesJaProcessades.contains(transaccioMultipleID)) {
+                    log.info("     - No netejam transacció múltiple " + transaccioMultipleID
+                            + " (Ja s'ha netejat anteriorment) ...");
+                } else {
                     TransaccioMultipleJPA tm = transaccioMultipleEjb.findByPrimaryKey(transaccioMultipleID);
                     if (tm != null) {
                         Long ftm = tm.getFitxerEscanejatID();
@@ -204,10 +213,11 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                             log.info("     - Netejant Transacció múltiple " + tm.getTransmultipleid() + " ...");
                             tm.setFitxerEscanejatID(null);
                             fitxers.add(ftm);
-                            transaccioMultipleEjb.update(tm);
+                            //transaccioMultipleEjb.update(tm);
+                            transaccioMultipleEjb.update(TransaccioMultipleFields.FITXERESCANEJATID, null,
+                                    TransaccioMultipleFields.TRANSMULTIPLEID.equal(transaccioMultipleID));
                         }
                     }
-
                     transaccionsMultiplesJaProcessades.add(transaccioMultipleID);
                 }
             }
@@ -259,25 +269,33 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     //protected TransactionSynchronizationRegistry transactionSynchronizationRegistry;
 
     @Override
-    public void netejaFitxers(Long transaccioID, TreeSet<Long> transaccionsMultiplesJaProcessades) throws I18NException {
+    public void netejaFitxers(Long transaccioID, TreeSet<Long> transaccionsMultiplesJaProcessades)
+            throws I18NException {
 
         // log.error("Passa per cleanFiles => INICI");
 
         Transaccio t = this.findByPrimaryKey(transaccioID);
 
-        netejaFitxers(t, transaccionsMultiplesJaProcessades);
-
-    }
-
-    protected void netejaFitxers(Transaccio t, TreeSet<Long> transaccionsMultiplesJaProcessades) throws I18NException {
         Set<Long> filesToDelete = new HashSet<Long>();
 
         cleanFilesOfTransaction(t, filesToDelete, true, true, transaccionsMultiplesJaProcessades);
 
         __tsRegistry
                 .registerInterposedSynchronization(new CleanFilesSynchronization(t.getTransaccioID(), filesToDelete));
+
+    }
+
+    /*
+    protected void netejaFitxers(Transaccio t, TreeSet<Long> transaccionsMultiplesJaProcessades) throws I18NException {
+        Set<Long> filesToDelete = new HashSet<Long>();
+    
+        cleanFilesOfTransaction(t, filesToDelete, true, true, transaccionsMultiplesJaProcessades);
+    
+        __tsRegistry
+                .registerInterposedSynchronization(new CleanFilesSynchronization(t.getTransaccioID(), filesToDelete));
         // log.error("Passa per netejaFitxers => FINAL");
     }
+    */
 
     public class CleanFilesSynchronization implements javax.transaction.Synchronization {
 
@@ -298,13 +316,60 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         @Override
         public void afterCompletion(int status) {
             if (status == Status.STATUS_COMMITTED) {
-                if (!FileSystemManager.eliminarArxius(filesToDelete)) {
+                log.info("Iniciant neteja de documents de Sistema de Fitxers (" + this.transactionID + ") ...");
+                boolean resultOK = FileSystemManager.eliminarArxius(filesToDelete);
+                if (!resultOK) {
                     log.error("No s'ha pogut esborrar alguns dels següents fitxers: "
                             + Arrays.toString(filesToDelete.toArray()));
                 }
+                log.info("Final de neteja de documents de Sistema de Fitxers (" + this.transactionID + ")...");
             } else {
                 log.error("Passa per CleanFilesSynchronization::afterCompletion(" + status
                         + "): Estat final no commit de la transaccio " + this.transactionID);
+            }
+        }
+    }
+
+    /**
+     * 
+     * @author anadal
+     * 27 nov 2024 10:56:35
+     */
+    public class CleanFilesSynchronizationMultiple implements javax.transaction.Synchronization {
+
+        protected final Map<Long, Set<Long>> filesToDeleteByTransaction = new HashMap<Long, Set<Long>>();
+
+        public CleanFilesSynchronizationMultiple() {
+        }
+
+        @Override
+        public void beforeCompletion() {
+        }
+
+        public void addFilesToDelete(Long transactionID, Set<Long> filesToDelete) {
+            filesToDeleteByTransaction.put(transactionID, filesToDelete);
+        }
+
+        @Override
+        public void afterCompletion(int status) {
+            if (status == Status.STATUS_COMMITTED) {
+                log.error(
+                        "Passa per CleanFilesSynchronizationMultiple::afterCompletion(" + status + "): Estat final COMMITTED");
+                for (Map.Entry<Long, Set<Long>> entry : filesToDeleteByTransaction.entrySet()) {
+                    Long transactionID = entry.getKey();
+                    Set<Long> filesToDelete = entry.getValue();
+                    log.info("Iniciant neteja de documents al disc fisic per TransID=" + transactionID + " ...");
+                    boolean resultOK = FileSystemManager.eliminarArxius(filesToDelete);
+                    if (!resultOK) {
+                        log.error("No s'ha pogut esborrar alguns dels següents fitxers: "
+                                + Arrays.toString(filesToDelete.toArray()));
+                    }
+                    log.info("Final de neteja de documents al disc fisic per TransID=" + transactionID + "...");
+                }
+
+            } else {
+                log.error(
+                        "Passa per CleanFilesSynchronizationMultiple::afterCompletion(" + status + "): Estat final NO COMMIT");
             }
         }
     }
@@ -936,8 +1001,12 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             int processats = 0;
 
             int error = 0;
-            
+
             TreeSet<Long> transaccionsMultiplesJaProcessades = new TreeSet<Long>();
+
+            CleanFilesSynchronizationMultiple cleanFilesSynchronizationMultiple = new CleanFilesSynchronizationMultiple();
+
+            __tsRegistry.registerInterposedSynchronization(cleanFilesSynchronizationMultiple);
 
             for (Long transaccioID : list) {
 
@@ -954,7 +1023,15 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                         + " dies)");
 
                 try {
-                    netejaFitxers(t, transaccionsMultiplesJaProcessades);
+                    //netejaFitxers(t, transaccionsMultiplesJaProcessades);
+
+                    Set<Long> filesToDelete = new HashSet<Long>();
+
+                    cleanFilesOfTransaction(t, filesToDelete, true, true, transaccionsMultiplesJaProcessades);
+
+                    // neteja el documents fisicament del disc dur només si la transacció ha finalitzat correctament
+                    cleanFilesSynchronizationMultiple.addFilesToDelete(t.getTransaccioID(), filesToDelete);
+
                     log.info("Neteja dels fitxers de la Transacció amb ID " + t.getTransaccioID()
                             + " realitzada correctment.");
                     processats++;

@@ -1,65 +1,61 @@
-package es.caib.digitalib.back.utils;
+package es.caib.digitalib.logic.utils;
 
+import java.util.Locale;
+
+import javax.annotation.security.RunAs;
+import javax.ejb.EJB;
+import javax.ejb.Schedule;
+import javax.ejb.Singleton;
+
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.jboss.logging.Logger;
 
 import es.caib.digitalib.commons.utils.Constants;
-import org.springframework.stereotype.Service;
-import java.util.TimerTask;
-import javax.annotation.security.RunAs;
+import es.caib.digitalib.logic.TransaccioLogicaService;
 
 /**
  * 
- * @author anadal (u80067)
- * 
- * 
- * @EnableScheduling
- * Per funcionar requereix afegir al /digitalib-back/src/main/webapp/WEB-INF/digitalibback-servlet.xml 
- * la següent entrada <task:annotation-driven/> conjuntament amb els beans
- *        xmlns:task="http://www.springframework.org/schema/task"
- *        xsi:schemaLocation=" ... http://www.springframework.org/schema/task/spring-task.xsd">
- *
+ * @author anadal
+ * 27 nov 2024 9:23:06
  */
-@Service
 @RunAs(Constants.DIB_ADMIN)
-public class NetejaFitxersSheduler extends TimerTask {
-/*
-    protected final Logger log = Logger.getLogger(getClass());
+@Singleton
+public class CleanOldFilesScheduler {
+
+    public Logger log = Logger.getLogger(CleanOldFilesScheduler.class);
 
     @EJB(mappedName = TransaccioLogicaService.JNDI_NAME)
     protected TransaccioLogicaService transaccioLogicaEjb;
-*/
-//    @Scheduled(cron = "0 */10 4 * * *") // Cada dia cada 10 minuts entre les 04:00h i les 4:59h 
-    //@Scheduled(cron = "0 * * ? * *") // Cada minut
-/*    public void netejarFitxersAplicacio() {
 
+    //@Schedule(minute = "*/3", hour = "*", persistent = false) // Cada 3 minuts
+    @Schedule(minute = "*/10", hour = "4", persistent = false) // Cada dia cada 10 minuts entre les 04:00h i les 4:59h 
+    public void netejarFitxersAplicacio() {
         log.info(" ============   Netejar fitxers Aplicacio =============");
         try {
             transaccioLogicaEjb.netejaDeFitxersNocturnAplicacio();
         } catch (I18NException e) {
             String msg = I18NLogicUtils.getMessage(e, new Locale("ca"));
             log.error("Error cridant a netejarFitxers Aplicacio: " + msg, e);
-        } catch(Throwable th) {
+        } catch (Throwable th) {
             log.error("Error cridant a netejarFitxers Aplicacio: " + th.getMessage(), th);
         }
-
     }
-*/
-//    @Scheduled(cron = "0 */10 5 * * *") // Cada dia cada 10 minuts entre les 05:00h i les 5:59h 
-    //@Scheduled(cron = "0 */3 * * * *") // Cada 3 minuts
-    /*
+
+    //@Schedule(minute = "*/3", hour = "*", persistent = false) // Cada 3 minuts
+    @Schedule(minute = "*/10", hour = "5", persistent = false) // Cada dia cada 10 minuts entre les 05:00h i les 5:59h
     public void netejarFitxersPersona() {
+        log.info(" ============   Netejar fitxers Persona =============");
         try {
             transaccioLogicaEjb.netejaDeFitxersNocturnPersona();
         } catch (I18NException e) {
             String msg = I18NLogicUtils.getMessage(e, new Locale("ca"));
             log.error("Error cridant a netejarFitxers Persona: " + msg, e);
-        }  catch(Throwable th) {
+        } catch (Throwable th) {
             log.error("Error cridant a netejarFitxers Persona: " + th.getMessage(), th);
         }
     }
-*/
-    //@Scheduled(cron = "0 0 6 * * *") // Cada dia a les 06:00h   
-    //@Scheduled(cron = "0 */2 * * * *") // Cada 2 minuts
-    /*
+
+    @Schedule(minute = "*/10", hour = "6", persistent = false) // Cada dia cada 10 minuts entre les 05:00h i les 5:59h 
     public void netejarTransaccionsCaducades() {
         log.info(" Entra a neteja de transaccions caducades");
         try {
@@ -67,16 +63,9 @@ public class NetejaFitxersSheduler extends TimerTask {
         } catch (I18NException e) {
             String msg = I18NLogicUtils.getMessage(e, new Locale("ca"));
             log.error("Error controlat cridant a expiraTransaccionsCaducades: " + msg, e);
-        }  catch(Throwable th) {
+        } catch (Throwable th) {
             log.error("Error desconegut cridant a expiraTransaccionsCaducades: " + th.getMessage(), th);
         }
     }
-    */
 
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-        
-    }
-    
 }
