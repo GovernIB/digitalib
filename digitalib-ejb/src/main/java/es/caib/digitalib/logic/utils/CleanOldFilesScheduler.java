@@ -41,7 +41,7 @@ public class CleanOldFilesScheduler {
         }
     }
 
-    //@Schedule(minute = "*/3", hour = "*", persistent = false) // Cada 3 minuts
+    //@Schedule(minute = "*/2", hour = "*", persistent = false) // Cada 2 minuts
     @Schedule(minute = "*/10", hour = "5", persistent = false) // Cada dia cada 10 minuts entre les 05:00h i les 5:59h
     public void netejarFitxersPersona() {
         log.info(" ============   Netejar fitxers Persona =============");

@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -55,6 +54,7 @@ import es.caib.digitalib.persistence.UsuariAplicacioJPA;
 import es.caib.digitalib.persistence.UsuariPersonaJPA;
 import es.caib.digitalib.logic.utils.I18NLogicUtils;
 import es.caib.digitalib.logic.utils.LogicUtils;
+import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.model.entity.Metadada;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.entity.TransaccioMultiple;
@@ -179,9 +179,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         return filesToDelete;
     }
 
-    protected void cleanFilesOfTransaction(Transaccio transaccio, Set<Long> fitxers, boolean updateTransaction,
+    protected void cleanFilesOfTransaction(Transaccio transaccio, Set<Long> fitxersGlobals, boolean updateTransaction,
             boolean cleanMultipleTransaction, TreeSet<Long> transaccionsMultiplesJaProcessades) throws I18NException {
         Long fe = transaccio.getFitxerEscanejatID();
+        Set<Long> fitxers = new HashSet<Long>();
         if (fe != null) {
             fitxers.add(fe);
             transaccio.setFitxerEscanejatID(null);
@@ -232,7 +233,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             // Arrays.toString(fitxers.toArray()));
             for (Long fid : fitxers) {
                 try {
-                    fitxerEjb.delete(fid);
+                    Fitxer f =  fitxerEjb.findByPrimaryKey(fid);                    
+                    if (f != null) {
+                        fitxerEjb.delete(f);
+                    }
                 } catch (Throwable th) {
                     String msg;
                     if (th instanceof I18NException) {
@@ -247,6 +251,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             }
 
         }
+        fitxersGlobals.addAll(fitxers);
     }
 
     @Override
@@ -996,7 +1001,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             OrderBy order = new OrderBy(DATAINICI, OrderType.ASC);
             List<Long> listSQL = this.executeQuery(TransaccioFields.TRANSACCIOID, w, order);
 
-            Set<Long> list = new HashSet<Long>(listSQL);
+            //Set<Long> list = new HashSet<Long>(listSQL);
 
             // La meitat de temps per BBDD i l'altre per esborrar fitxers
             final long TIMEOUT_MS = (TransaccioLogicaService.THREE_MINUTS_IN_SECONDS / 2) * 1000L;
@@ -1011,7 +1016,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             __tsRegistry.registerInterposedSynchronization(cleanFilesSynchronizationMultiple);
 
-            for (Long transaccioID : list) {
+            for (Long transaccioID : listSQL) {
 
                 Transaccio t = this.findByPrimaryKey(transaccioID);
                 if (t == null) {
