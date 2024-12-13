@@ -172,6 +172,18 @@ public interface TransaccioLogicaService extends es.caib.digitalib.ejb.Transacci
 
     /**
      * 
+     * @param transaccio
+     * @param fitxersGlobals
+     * @param updateTransaction
+     * @param cleanMultipleTransaction
+     * @param transaccionsMultiplesJaProcessades
+     * @throws I18NException
+     */
+    public void cleanFilesOfTransactionWithInternalTX(Transaccio transaccio, Set<Long> fitxersGlobals, boolean updateTransaction,
+            boolean cleanMultipleTransaction, TreeSet<Long> transaccionsMultiplesJaProcessades) throws I18NException;
+    
+    /**
+     * 
      * @return
      * @throws I18NException
      */

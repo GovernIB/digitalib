@@ -6,6 +6,8 @@ import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.jboss.logging.Logger;

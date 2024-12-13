@@ -173,7 +173,7 @@
             </exclusions>
         </dependency>
 
-        <!-- Problema amb enforcer -->
+        <!-- Problema amb enforcer de spring-core -->
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
@@ -303,11 +303,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <packagingExcludes>
-                        <!-- Requereix afegir mòdul 'org.apache.commons.beanutils' a jboss-deployment-structure.xml -->
-                         **/commons-beanutils*redhat*.jar,
-                        <!-- Requereix afegir mòdul 'org.apache.commons.collections' a jboss-deployment-structure.xml -->
-                         **/commons-collections*redhat*.jar,
-                    </packagingExcludes>
+                        <!-- Requereix afegir mòdul 'org.apache.commons.beanutils' a jboss-deployment-structure.xml --> **/commons-beanutils*redhat*.jar, <!-- Requereix afegir mòdul 'org.apache.commons.collections' a jboss-deployment-structure.xml --> **/commons-collections*redhat*.jar, </packagingExcludes>
                 </configuration>
             </plugin>
             <plugin>

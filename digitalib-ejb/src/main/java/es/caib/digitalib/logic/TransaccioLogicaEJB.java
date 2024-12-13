@@ -20,6 +20,9 @@ import javax.annotation.security.RolesAllowed;
 import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.persistence.EntityTransaction;
 import javax.transaction.Status;
 
 import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleArxiuOptionalParameters;
@@ -174,11 +177,13 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             auditoriaLogicaEjb.audita(transaccio, isApp, msg, additionalInfo, auditType, usernameApp, usernamePerson);
         }
 
+        
         __tsRegistry.registerInterposedSynchronization(new CleanFilesSynchronization(transaccioID, filesToDelete));
 
         return filesToDelete;
     }
 
+    
     protected void cleanFilesOfTransaction(Transaccio transaccio, Set<Long> fitxersGlobals, boolean updateTransaction,
             boolean cleanMultipleTransaction, TreeSet<Long> transaccionsMultiplesJaProcessades) throws I18NException {
         Long fe = transaccio.getFitxerEscanejatID();
@@ -188,20 +193,20 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             transaccio.setFitxerEscanejatID(null);
             this.update(FITXERESCANEJATID, null, TRANSACCIOID.equal(transaccio.getTransaccioID()));
         }
-
+    
         Long fs = transaccio.getFitxerSignaturaID();
         if (fs != null) {
             fitxers.add(fs);
             transaccio.setFitxerSignaturaID(null);
             this.update(FITXERSIGNATURAID, null, TRANSACCIOID.equal(transaccio.getTransaccioID()));
         }
-
-        /*
-        if (updateTransaction && (fe != null || fs != null)) {
-            this.update(transaccio);
-        }
-        */
-
+    
+        
+    //        if (updateTransaction && (fe != null || fs != null)) {
+    //            this.update(transaccio);
+    //        }
+        
+    
         // Transacció Multiple
         if (cleanMultipleTransaction) {
             Long transaccioMultipleID = transaccio.getTransaccioMultipleID();
@@ -226,14 +231,14 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 }
             }
         }
-
+    
         // log.info("XYZ ZZZ FFF PRE esborrar fitxers ... " + esborrarFitxers);
         {
             // log.info("XYZ ZZZ FFF Entra a esborrar fitxers " +
             // Arrays.toString(fitxers.toArray()));
             for (Long fid : fitxers) {
                 try {
-                    Fitxer f =  fitxerEjb.findByPrimaryKey(fid);                    
+                    Fitxer f = fitxerEjb.findByPrimaryKey(fid);
                     if (f != null) {
                         fitxerEjb.delete(f);
                     }
@@ -244,14 +249,110 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                     } else {
                         msg = th.getMessage();
                     }
-
+    
                     log.error("Error desconegut esborrant fitxer amb ID " + fid + " de la transacció "
                             + transaccio.getTransaccioID() + ": " + msg, th);
                 }
             }
-
+    
         }
         fitxersGlobals.addAll(fitxers);
+    }
+    
+
+    @TransactionAttribute(TransactionAttributeType.NEVER)
+    @Override
+    public void cleanFilesOfTransactionWithInternalTX(Transaccio transaccio, Set<Long> fitxersGlobals,
+            boolean updateTransaction, boolean cleanMultipleTransaction,
+            TreeSet<Long> transaccionsMultiplesJaProcessades) throws I18NException {
+
+        EntityTransaction tx = null;
+
+        try {
+
+            tx = this.getEntityManager().getTransaction();
+
+            tx.begin();
+
+            Long fe = transaccio.getFitxerEscanejatID();
+            Set<Long> fitxers = new HashSet<Long>();
+            if (fe != null) {
+                fitxers.add(fe);
+                transaccio.setFitxerEscanejatID(null);
+                this.update(FITXERESCANEJATID, null, TRANSACCIOID.equal(transaccio.getTransaccioID()));
+            }
+
+            Long fs = transaccio.getFitxerSignaturaID();
+            if (fs != null) {
+                fitxers.add(fs);
+                transaccio.setFitxerSignaturaID(null);
+                this.update(FITXERSIGNATURAID, null, TRANSACCIOID.equal(transaccio.getTransaccioID()));
+            }
+
+            /*
+            if (updateTransaction && (fe != null || fs != null)) {
+            this.update(transaccio);
+            }
+            */
+
+            // Transacció Multiple
+            if (cleanMultipleTransaction) {
+                Long transaccioMultipleID = transaccio.getTransaccioMultipleID();
+                if (transaccioMultipleID != null) {
+                    if (transaccionsMultiplesJaProcessades.contains(transaccioMultipleID)) {
+                        log.info("     - No netejam transacció múltiple " + transaccioMultipleID
+                                + " (Ja s'ha netejat anteriorment) ...");
+                    } else {
+                        TransaccioMultipleJPA tm = transaccioMultipleEjb.findByPrimaryKey(transaccioMultipleID);
+                        if (tm != null) {
+                            Long ftm = tm.getFitxerEscanejatID();
+                            if (ftm != null) {
+                                log.info("     - Netejant Transacció múltiple " + tm.getTransmultipleid() + " ...");
+                                tm.setFitxerEscanejatID(null);
+                                fitxers.add(ftm);
+                                //transaccioMultipleEjb.update(tm);
+                                transaccioMultipleEjb.update(TransaccioMultipleFields.FITXERESCANEJATID, null,
+                                        TransaccioMultipleFields.TRANSMULTIPLEID.equal(transaccioMultipleID));
+                            }
+                        }
+                        transaccionsMultiplesJaProcessades.add(transaccioMultipleID);
+                    }
+                }
+            }
+
+            // log.info("XYZ ZZZ FFF PRE esborrar fitxers ... " + esborrarFitxers);
+            {
+                // log.info("XYZ ZZZ FFF Entra a esborrar fitxers " +
+                // Arrays.toString(fitxers.toArray()));
+                for (Long fid : fitxers) {
+                    try {
+                        Fitxer f = fitxerEjb.findByPrimaryKey(fid);
+                        if (f != null) {
+                            fitxerEjb.delete(f);
+                        }
+                    } catch (Throwable th) {
+                        String msg;
+                        if (th instanceof I18NException) {
+                            msg = I18NLogicUtils.getMessage((I18NException) th, new Locale("ca"));
+                        } else {
+                            msg = th.getMessage();
+                        }
+
+                        log.error("Error desconegut esborrant fitxer amb ID " + fid + " de la transacció "
+                                + transaccio.getTransaccioID() + ": " + msg, th);
+                    }
+                }
+
+            }
+            fitxersGlobals.addAll(fitxers);
+
+            tx.commit();
+
+        } catch (Exception e) {
+            log.error("Error al netejar els fitxers de la Transacció " + transaccio.getTransaccioID() + ": "
+                    + e.getMessage(), e);
+            tx.rollback();
+        }
     }
 
     @Override
@@ -276,6 +377,12 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     //@Resource(mappedName="java:jboss/TransactionSynchronizationRegistry")
     //protected TransactionSynchronizationRegistry transactionSynchronizationRegistry;
 
+    /*
+     * Este atributo lo que establece es que se tiene la garantía que el método no será ejecutado dentro de una
+     * transacción. Si el invocador lo hace teniendo una transacción abierta, esta es suspendida; luego se ejecuta
+     * el método y posteriormente se continua la transacción del invocador.
+     */
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     @Override
     public void netejaFitxers(Long transaccioID, TreeSet<Long> transaccionsMultiplesJaProcessades)
             throws I18NException {
@@ -286,10 +393,14 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
         Set<Long> filesToDelete = new HashSet<Long>();
 
-        cleanFilesOfTransaction(t, filesToDelete, true, true, transaccionsMultiplesJaProcessades);
+        cleanFilesOfTransactionWithInternalTX(t, filesToDelete, true, true, transaccionsMultiplesJaProcessades);
+        
+        FileSystemManager.eliminarArxius(filesToDelete);
 
-        __tsRegistry
-                .registerInterposedSynchronization(new CleanFilesSynchronization(t.getTransaccioID(), filesToDelete));
+        /*
+         * __tsRegistry
+        .registerInterposedSynchronization(new CleanFilesSynchronization(t.getTransaccioID(), filesToDelete));
+        */
 
     }
 
@@ -305,6 +416,10 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     }
     */
 
+    /**
+     *
+     */
+    
     public class CleanFilesSynchronization implements javax.transaction.Synchronization {
 
         protected final Set<Long> filesToDelete;
@@ -343,26 +458,27 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
      * @author anadal
      * 27 nov 2024 10:56:35
      */
+    /*
     public class CleanFilesSynchronizationMultiple implements javax.transaction.Synchronization {
-
+    
         protected final Map<Long, Set<Long>> filesToDeleteByTransaction = new HashMap<Long, Set<Long>>();
-
+    
         public CleanFilesSynchronizationMultiple() {
         }
-
+    
         @Override
         public void beforeCompletion() {
         }
-
+    
         public void addFilesToDelete(Long transactionID, Set<Long> filesToDelete) {
             filesToDeleteByTransaction.put(transactionID, filesToDelete);
         }
-
+    
         @Override
         public void afterCompletion(int status) {
             if (status == Status.STATUS_COMMITTED) {
-                log.error(
-                        "Passa per CleanFilesSynchronizationMultiple::afterCompletion(" + status + "): Estat final COMMITTED");
+                log.error("Passa per CleanFilesSynchronizationMultiple::afterCompletion(" + status
+                        + "): Estat final COMMITTED");
                 for (Map.Entry<Long, Set<Long>> entry : filesToDeleteByTransaction.entrySet()) {
                     Long transactionID = entry.getKey();
                     Set<Long> filesToDelete = entry.getValue();
@@ -374,13 +490,13 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                     }
                     log.info("Final de neteja de documents al disc fisic per TransID=" + transactionID + "...");
                 }
-
+    
             } else {
-                log.error(
-                        "Passa per CleanFilesSynchronizationMultiple::afterCompletion(" + status + "): Estat final NO COMMIT");
+                log.error("Passa per CleanFilesSynchronizationMultiple::afterCompletion(" + status
+                        + "): Estat final NO COMMIT");
             }
         }
-    }
+    }*/
 
     /**
      * 
@@ -934,22 +1050,30 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
     }
 
     // Timeout de transacion
-    @TransactionTimeout(value = TransaccioLogicaService.THREE_MINUTS_IN_SECONDS) // Units segons
+    //@TransactionTimeout(value = TransaccioLogicaService.THREE_MINUTS_IN_SECONDS) // Units segons
+    /*
+     * Este atributo lo que establece es que se tiene la garantía que el método no será ejecutado dentro de una
+     * transacción. Si el invocador lo hace teniendo una transacción abierta, esta es suspendida; luego se ejecuta
+     * el método y posteriormente se continua la transacción del invocador.
+     */
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     @Override
     @PermitAll
     public void netejaDeFitxersNocturnAplicacio() throws I18NException {
-
         netejaDeFitxersNocturn(true);
-
     }
 
-    @TransactionTimeout(value = TransaccioLogicaService.THREE_MINUTS_IN_SECONDS) // Units segons
+    //@TransactionTimeout(value = TransaccioLogicaService.THREE_MINUTS_IN_SECONDS) // Units segons
+    /*
+     * Este atributo lo que establece es que se tiene la garantía que el método no será ejecutado dentro de una
+     * transacción. Si el invocador lo hace teniendo una transacción abierta, esta es suspendida; luego se ejecuta
+     * el método y posteriormente se continua la transacción del invocador.
+     */
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     @Override
     @PermitAll
     public void netejaDeFitxersNocturnPersona() throws I18NException {
-
         netejaDeFitxersNocturn(false);
-
     }
 
     protected void netejaDeFitxersNocturn(boolean isUtilitzatPerAplicacio) throws I18NException {
@@ -1003,8 +1127,8 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             //Set<Long> list = new HashSet<Long>(listSQL);
 
-            // La meitat de temps per BBDD i l'altre per esborrar fitxers
-            final long TIMEOUT_MS = (TransaccioLogicaService.THREE_MINUTS_IN_SECONDS / 2) * 1000L;
+            // Com que ara Neteja Transaccions i fitxers de HDD a la vegada no importa repartir el temps 
+            final long TIMEOUT_MS = (long) (TransaccioLogicaService.THREE_MINUTS_IN_SECONDS * 0.8) * 1000L;
 
             int processats = 0;
 
@@ -1012,9 +1136,9 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             TreeSet<Long> transaccionsMultiplesJaProcessades = new TreeSet<Long>();
 
-            CleanFilesSynchronizationMultiple cleanFilesSynchronizationMultiple = new CleanFilesSynchronizationMultiple();
+            //CleanFilesSynchronizationMultiple cleanFilesSynchronizationMultiple = new CleanFilesSynchronizationMultiple();
 
-            __tsRegistry.registerInterposedSynchronization(cleanFilesSynchronizationMultiple);
+            //__tsRegistry.registerInterposedSynchronization(cleanFilesSynchronizationMultiple);
 
             for (Long transaccioID : listSQL) {
 
@@ -1035,10 +1159,16 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
                     Set<Long> filesToDelete = new HashSet<Long>();
 
-                    cleanFilesOfTransaction(t, filesToDelete, true, true, transaccionsMultiplesJaProcessades);
+                    cleanFilesOfTransactionWithInternalTX(t, filesToDelete, true, true,
+                            transaccionsMultiplesJaProcessades);
+
+                    // XYZ ZZZ ADD
+                    if (filesToDelete.size() != 0) {
+                        FileSystemManager.eliminarArxius(filesToDelete);
+                    }
 
                     // neteja el documents fisicament del disc dur només si la transacció ha finalitzat correctament
-                    cleanFilesSynchronizationMultiple.addFilesToDelete(t.getTransaccioID(), filesToDelete);
+                    //cleanFilesSynchronizationMultiple.addFilesToDelete(t.getTransaccioID(), filesToDelete);
 
                     log.info("Neteja dels fitxers de la Transacció amb ID " + t.getTransaccioID()
                             + " realitzada correctment.");
@@ -1057,11 +1187,11 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
                 long now = System.currentTimeMillis();
 
                 if (now > start + TIMEOUT_MS) {
-                    log.warn("Hem tardat massa temps en esborrar fitxers. Sortim i demà acabarem amb els pendents.");
+                    log.warn("Hem tardat massa temps en la neteja. Sortim i en la proper execució continuarem.");
                     break;
                 } else {
                     try {
-                        Thread.sleep(300); // Aturam 300ms per no saturar
+                        Thread.sleep(50); // Aturam 50ms per no saturar
                     } catch (InterruptedException e) {
                     }
                 }
@@ -1148,46 +1278,37 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         return transaccions;
 
     }
-    
+
     @Override
     public void netejarDirectoriMassiveTransactions() throws I18NException {
         File destDir = new File(FileSystemManager.getFilesPath(), TransaccioLogicaService.MASSIVE_TRANSACCTIONS_FOLDER);
-        
+
         if (destDir.exists()) {
-            
+
             // Fer net tots els fitxers excepte els d'avui
             File[] files = destDir.listFiles(new FileFilterOneHour());
-            
+
             for (File file : files) {
                 if (!file.delete()) {
                     log.error("No s´ha pogut esborrar el fitxer " + file.getAbsolutePath());
-                };
+                }
+                ;
             }
-        
+
         }
-        
+
     }
-    
-    
-    
+
     protected class FileFilterOneHour implements FileFilter {
-        
+
         private final long limitTime = System.currentTimeMillis() - 60 * 60 * 1000L;
-        
-        
-        
-        
+
         @Override
         public boolean accept(File pathname) {
             long creationMs = pathname.lastModified();
-            
+
             return creationMs < limitTime;
         }
     }
-    
-    
-    
-
-    
 
 }
