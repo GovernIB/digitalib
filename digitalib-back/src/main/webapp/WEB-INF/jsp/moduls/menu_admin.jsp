@@ -49,9 +49,7 @@
  if (countNoTancats != null && countNoTancats != 0) {
  %> &nbsp; <span class="badge badge-danger"><%=countNoTancats%></span> <%
  }
- %>
-
-                </span>
+ %> </span>
             </a></li>
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
@@ -87,10 +85,18 @@
             </a></li>
 
 
-        <li style="list-style-type: disc; list-style-position: inside;"><a
-                href="<c:url value="/admin/transaccionssensehashdefitxer/list"/>">
+        <li style="list-style-type: disc; list-style-position: inside;">
+        <a  href="<c:url value="/admin/transaccionssensehashdefitxer/list"/>">
                 <span style="${(fn:contains(url, '/admin/transaccionssensehashdefitxer'))? "font-weight:bold;" : ""}"><fmt:message
                         key="transaccionssensehashdefitxer.plural" /></span>
+
+            </a></li>
+
+        <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/actualitzarusername/new"/>">
+                <span style="${(fn:contains(url, '/admin/actualitzarusername/'))? "font-weight:bold;" : ""}"><fmt:message
+                        key="updateusername.title" /></span>
 
             </a></li>
 

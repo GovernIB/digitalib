@@ -370,9 +370,12 @@
     <definition name="expiraTransaccioCaducadaList" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/transaccioList.jsp" />
     </definition>
-    
-    
-    
+
+    <definition name="actualitzarUsernameAdmin" extends="admin">
+        <put-attribute name="titol" value="fitxer.fitxer" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/fitxerForm.jsp" />
+    </definition>
+
     <!--  ============================================== -->
     <!--              MENU ADMIN DIGITALIB (WEB)         -->
     <!--  ============================================== -->
