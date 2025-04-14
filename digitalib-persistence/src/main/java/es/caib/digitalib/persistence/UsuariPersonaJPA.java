@@ -211,18 +211,18 @@ public class UsuariPersonaJPA implements UsuariPersona {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof UsuariPersona) {
-      UsuariPersona __instance = (UsuariPersona)__obj;
-      __result = true;
-      __result = __result && (this.getUsuariPersonaID() == __instance.getUsuariPersonaID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof UsuariPersona) {
+            UsuariPersona __instance = (UsuariPersona)__obj;
+            __result = true;
+            __result = __result && (this.getUsuariPersonaID() == __instance.getUsuariPersonaID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // IMP Field:idiomaid | Table: dib_idioma | Type: 1  
 

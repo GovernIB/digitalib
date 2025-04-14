@@ -82,18 +82,18 @@ public class TransaccioMultipleJPA implements TransaccioMultiple {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof TransaccioMultiple) {
-      TransaccioMultiple __instance = (TransaccioMultiple)__obj;
-      __result = true;
-      __result = __result && (this.getTransmultipleid() == __instance.getTransmultipleid()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof TransaccioMultiple) {
+            TransaccioMultiple __instance = (TransaccioMultiple)__obj;
+            __result = true;
+            __result = __result && (this.getTransmultipleid() == __instance.getTransmultipleid()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // EXP  Field:transmultipleid | Table: dib_transaccio | Type: 0  
 

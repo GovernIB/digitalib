@@ -18,7 +18,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 import es.caib.digitalib.back.form.webdb.*;
 import es.caib.digitalib.back.form.webdb.PerfilForm;
@@ -36,6 +36,11 @@ import es.caib.digitalib.back.validator.webdb.PerfilWebValidator;
 import es.caib.digitalib.persistence.PerfilJPA;
 import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.fields.*;
+import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
+import org.fundaciobit.genapp.common.web.tiles.Tile;
+import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
+import org.fundaciobit.genapp.common.web.tiles.TileType;
+import es.caib.digitalib.back.utils.Tab;
 
 /**
  * Controller per gestionar un Perfil
@@ -43,9 +48,14 @@ import es.caib.digitalib.model.fields.*;
  * 
  * @author GenApp
  */
+@MenuOption(labelCode="perfil.perfil.plural", order=110, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/perfil")
 @SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class })
+@Tile(name="perfilFormWebDB", contentJsp="/WEB-INF/jsp/webdb/perfilForm.jsp", extendsTile=Tab.MENU_WEBDB,
+      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="perfil.perfil")})
+@Tile(name="perfilListWebDB", contentJsp="/WEB-INF/jsp/webdb/perfilList.jsp", extendsTile=Tab.MENU_WEBDB,
+       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="perfil.perfil") })
 public class PerfilController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<Perfil, java.lang.Long> implements PerfilFields {
 
@@ -617,7 +627,6 @@ public class PerfilController
 
     if (perfil == null) {
       createMessageWarning(request, "error.notfound", perfilID);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, perfilID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -1395,12 +1404,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getTileForm() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_FORM) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileForm: " + e.getMessage(), e);
+        }
     return "perfilFormWebDB";
   }
 
-  public String getTileList() {
-    return "perfilListWebDB";
-  }
+    public String getTileList() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_LIST) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileList: " + e.getMessage(), e);
+        }
+        return "perfilListWebDB";
+    }
 
   public String getSessionAttributeFilterForm() {
     return "Perfil_FilterForm_" + this.getClass().getName();

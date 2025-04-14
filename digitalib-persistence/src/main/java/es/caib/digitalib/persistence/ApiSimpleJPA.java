@@ -132,18 +132,18 @@ public class ApiSimpleJPA implements ApiSimple {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof ApiSimple) {
-      ApiSimple __instance = (ApiSimple)__obj;
-      __result = true;
-      __result = __result && (this.getApiSimpleID() == __instance.getApiSimpleID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof ApiSimple) {
+            ApiSimple __instance = (ApiSimple)__obj;
+            __result = true;
+            __result = __result && (this.getApiSimpleID() == __instance.getApiSimpleID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // EXP  Field:apisimpleid | Table: dib_perfil | Type: 0  
 

@@ -314,18 +314,18 @@ opcional incluso cuando se genera una firma EPES. */
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof ConfiguracioFirma) {
-      ConfiguracioFirma __instance = (ConfiguracioFirma)__obj;
-      __result = true;
-      __result = __result && (this.getConfiguracioFirmaID() == __instance.getConfiguracioFirmaID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof ConfiguracioFirma) {
+            ConfiguracioFirma __instance = (ConfiguracioFirma)__obj;
+            __result = true;
+            __result = __result && (this.getConfiguracioFirmaID() == __instance.getConfiguracioFirmaID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // EXP  Field:configuraciofirmaid | Table: dib_perfil | Type: 0  
 

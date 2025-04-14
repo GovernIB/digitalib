@@ -187,18 +187,18 @@ public class InfoCustodyJPA implements InfoCustody {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof InfoCustody) {
-      InfoCustody __instance = (InfoCustody)__obj;
-      __result = true;
-      __result = __result && (this.getInfoCustodyID() == __instance.getInfoCustodyID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof InfoCustody) {
+            InfoCustody __instance = (InfoCustody)__obj;
+            __result = true;
+            __result = __result && (this.getInfoCustodyID() == __instance.getInfoCustodyID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // EXP  Field:infocustodyid | Table: dib_transaccio | Type: 0  
 

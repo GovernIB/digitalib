@@ -303,18 +303,18 @@ public class PerfilJPA implements Perfil {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof Perfil) {
-      Perfil __instance = (Perfil)__obj;
-      __result = true;
-      __result = __result && (this.getPerfilID() == __instance.getPerfilID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof Perfil) {
+            Perfil __instance = (Perfil)__obj;
+            __result = true;
+            __result = __result && (this.getPerfilID() == __instance.getPerfilID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // EXP  Field:perfilcopiaautentica2id | Table: dib_configuraciogrup | Type: 0  
 

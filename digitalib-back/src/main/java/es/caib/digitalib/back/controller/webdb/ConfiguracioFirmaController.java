@@ -18,7 +18,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 import es.caib.digitalib.back.form.webdb.*;
 import es.caib.digitalib.back.form.webdb.ConfiguracioFirmaForm;
@@ -36,6 +36,11 @@ import es.caib.digitalib.back.validator.webdb.ConfiguracioFirmaWebValidator;
 import es.caib.digitalib.persistence.ConfiguracioFirmaJPA;
 import es.caib.digitalib.model.entity.ConfiguracioFirma;
 import es.caib.digitalib.model.fields.*;
+import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
+import org.fundaciobit.genapp.common.web.tiles.Tile;
+import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
+import org.fundaciobit.genapp.common.web.tiles.TileType;
+import es.caib.digitalib.back.utils.Tab;
 
 /**
  * Controller per gestionar un ConfiguracioFirma
@@ -43,9 +48,14 @@ import es.caib.digitalib.model.fields.*;
  * 
  * @author GenApp
  */
+@MenuOption(labelCode="configuracioFirma.configuracioFirma.plural", order=30, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/configuracioFirma")
 @SessionAttributes(types = { ConfiguracioFirmaForm.class, ConfiguracioFirmaFilterForm.class })
+@Tile(name="configuracioFirmaFormWebDB", contentJsp="/WEB-INF/jsp/webdb/configuracioFirmaForm.jsp", extendsTile=Tab.MENU_WEBDB,
+      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="configuracioFirma.configuracioFirma")})
+@Tile(name="configuracioFirmaListWebDB", contentJsp="/WEB-INF/jsp/webdb/configuracioFirmaList.jsp", extendsTile=Tab.MENU_WEBDB,
+       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="configuracioFirma.configuracioFirma") })
 public class ConfiguracioFirmaController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<ConfiguracioFirma, java.lang.Long> implements ConfiguracioFirmaFields {
 
@@ -512,7 +522,6 @@ public class ConfiguracioFirmaController
 
     if (configuracioFirma == null) {
       createMessageWarning(request, "error.notfound", configuracioFirmaID);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, configuracioFirmaID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -1090,12 +1099,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getTileForm() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_FORM) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileForm: " + e.getMessage(), e);
+        }
     return "configuracioFirmaFormWebDB";
   }
 
-  public String getTileList() {
-    return "configuracioFirmaListWebDB";
-  }
+    public String getTileList() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_LIST) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileList: " + e.getMessage(), e);
+        }
+        return "configuracioFirmaListWebDB";
+    }
 
   public String getSessionAttributeFilterForm() {
     return "ConfiguracioFirma_FilterForm_" + this.getClass().getName();

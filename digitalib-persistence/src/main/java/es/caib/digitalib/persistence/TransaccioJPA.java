@@ -650,18 +650,18 @@ public class TransaccioJPA implements Transaccio {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof Transaccio) {
-      Transaccio __instance = (Transaccio)__obj;
-      __result = true;
-      __result = __result && (this.getTransaccioID() == __instance.getTransaccioID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof Transaccio) {
+            Transaccio __instance = (Transaccio)__obj;
+            __result = true;
+            __result = __result && (this.getTransaccioID() == __instance.getTransaccioID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // EXP  Field:transaccioid | Table: dib_metadada | Type: 0  
 

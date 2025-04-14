@@ -18,7 +18,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 import es.caib.digitalib.back.form.webdb.*;
 import es.caib.digitalib.back.form.webdb.TransaccioForm;
@@ -39,6 +39,11 @@ import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import es.caib.digitalib.persistence.TransaccioJPA;
 import es.caib.digitalib.model.entity.Transaccio;
 import es.caib.digitalib.model.fields.*;
+import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
+import org.fundaciobit.genapp.common.web.tiles.Tile;
+import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
+import org.fundaciobit.genapp.common.web.tiles.TileType;
+import es.caib.digitalib.back.utils.Tab;
 
 /**
  * Controller per gestionar un Transaccio
@@ -46,9 +51,14 @@ import es.caib.digitalib.model.fields.*;
  * 
  * @author GenApp
  */
+@MenuOption(labelCode="transaccio.transaccio.plural", order=170, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/transaccio")
 @SessionAttributes(types = { TransaccioForm.class, TransaccioFilterForm.class })
+@Tile(name="transaccioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/transaccioForm.jsp", extendsTile=Tab.MENU_WEBDB,
+      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="transaccio.transaccio")})
+@Tile(name="transaccioListWebDB", contentJsp="/WEB-INF/jsp/webdb/transaccioList.jsp", extendsTile=Tab.MENU_WEBDB,
+       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="transaccio.transaccio") })
 public class TransaccioController
     extends es.caib.digitalib.back.controller.DigitalIBFilesBaseController<Transaccio, java.lang.Long, TransaccioForm> implements TransaccioFields {
 
@@ -598,7 +608,6 @@ public class TransaccioController
 
     if (transaccio == null) {
       createMessageWarning(request, "error.notfound", transaccioID);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, transaccioID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -1417,12 +1426,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getTileForm() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_FORM) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileForm: " + e.getMessage(), e);
+        }
     return "transaccioFormWebDB";
   }
 
-  public String getTileList() {
-    return "transaccioListWebDB";
-  }
+    public String getTileList() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_LIST) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileList: " + e.getMessage(), e);
+        }
+        return "transaccioListWebDB";
+    }
 
   public String getSessionAttributeFilterForm() {
     return "Transaccio_FilterForm_" + this.getClass().getName();

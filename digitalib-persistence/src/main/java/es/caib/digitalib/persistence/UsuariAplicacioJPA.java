@@ -167,18 +167,18 @@ public class UsuariAplicacioJPA implements UsuariAplicacio {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof UsuariAplicacio) {
-      UsuariAplicacio __instance = (UsuariAplicacio)__obj;
-      __result = true;
-      __result = __result && (this.getUsuariAplicacioID() == __instance.getUsuariAplicacioID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof UsuariAplicacio) {
+            UsuariAplicacio __instance = (UsuariAplicacio)__obj;
+            __result = true;
+            __result = __result && (this.getUsuariAplicacioID() == __instance.getUsuariAplicacioID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // EXP  Field:usuariaplicacioid | Table: dib_perfilusrapp | Type: 0  
 

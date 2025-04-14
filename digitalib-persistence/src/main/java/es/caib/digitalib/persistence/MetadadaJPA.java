@@ -93,18 +93,18 @@ public class MetadadaJPA implements Metadada {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof Metadada) {
-      Metadada __instance = (Metadada)__obj;
-      __result = true;
-      __result = __result && (this.getMetadadaid() == __instance.getMetadadaid()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof Metadada) {
+            Metadada __instance = (Metadada)__obj;
+            __result = true;
+            __result = __result && (this.getMetadadaid() == __instance.getMetadadaid()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // IMP Field:transaccioid | Table: dib_transaccio | Type: 1  
 

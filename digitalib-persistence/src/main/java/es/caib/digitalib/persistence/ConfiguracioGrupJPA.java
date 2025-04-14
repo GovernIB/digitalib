@@ -265,18 +265,18 @@ public class ConfiguracioGrupJPA implements ConfiguracioGrup {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof ConfiguracioGrup) {
-      ConfiguracioGrup __instance = (ConfiguracioGrup)__obj;
-      __result = true;
-      __result = __result && (this.getConfiguracioGrupID() == __instance.getConfiguracioGrupID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof ConfiguracioGrup) {
+            ConfiguracioGrup __instance = (ConfiguracioGrup)__obj;
+            __result = true;
+            __result = __result && (this.getConfiguracioGrupID() == __instance.getConfiguracioGrupID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // EXP  Field:configgrupid | Table: dib_avis | Type: 0  
 

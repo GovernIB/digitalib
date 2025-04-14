@@ -267,18 +267,18 @@ public class InfoSignaturaJPA implements InfoSignatura {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof InfoSignatura) {
-      InfoSignatura __instance = (InfoSignatura)__obj;
-      __result = true;
-      __result = __result && (this.getInfoSignaturaID() == __instance.getInfoSignaturaID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof InfoSignatura) {
+            InfoSignatura __instance = (InfoSignatura)__obj;
+            __result = true;
+            __result = __result && (this.getInfoSignaturaID() == __instance.getInfoSignaturaID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // EXP  Field:infosignaturaid | Table: dib_transaccio | Type: 0  
 
