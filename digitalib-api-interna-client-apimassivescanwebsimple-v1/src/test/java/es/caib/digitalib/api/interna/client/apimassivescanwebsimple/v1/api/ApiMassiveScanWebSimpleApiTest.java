@@ -153,7 +153,7 @@ public class ApiMassiveScanWebSimpleApiTest {
                 final int view = CONSTANTS.getMassiveScanWebSimpleGetTransactionIdRequestVIEWIFRAME();
                 // CONSTANTS.getMassiveScanWebSimpleGetTransactionIdRequestVIEWFULLSCREEN()
 
-                final String transactionName = "Transaccio Exemple " + System.currentTimeMillis();
+                final String transactionName = "Transaccio Exemple il·legal?? " + System.currentTimeMillis();
 
                 String funcionariUsername = "u00666";
 

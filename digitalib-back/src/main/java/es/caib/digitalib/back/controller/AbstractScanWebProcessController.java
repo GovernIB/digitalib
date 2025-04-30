@@ -757,7 +757,7 @@ public abstract class AbstractScanWebProcessController {
                 fitxers = SplitPdf.detectPagesWithQR(destDir, data,
                         // transaccioOriginal.getTransaccioID() + "_" +
                         // transaccioOriginal.getTransactionWebId()
-                        transaccioOriginal.getNom().replace(' ', '_').replace('\\', '_').replace('/', '_'),
+                        cleanFileName(transaccioOriginal.getNom().replace(' ', '_').replace('\\', '_').replace('/', '_')),
                         transaccioOriginal.getInfoScanResolucioPpp());
             } catch (Exception e) {
 
@@ -925,6 +925,20 @@ public abstract class AbstractScanWebProcessController {
         return allFiles;
 
     }
+    
+    
+    public static String cleanFileName(String badFileName) {
+        StringBuilder cleanName = new StringBuilder();
+        for (char c : badFileName.toCharArray()) {
+            if (c == ' ' || c == '.' || Character.isJavaIdentifierPart(c))
+                cleanName.append(c);
+            else
+                cleanName.append('_');
+        }
+        return cleanName.toString();
+    }
+    
+    
 
     protected void setErrorExceededTheMaximumLength(TransaccioJPA transaccio, Long maxBytes, long fileSize,
             List<Integer> bigDocuments) throws I18NException {
