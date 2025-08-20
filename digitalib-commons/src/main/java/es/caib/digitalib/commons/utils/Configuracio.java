@@ -193,6 +193,10 @@ public class Configuracio implements Constants {
             return Long.valueOf(strVal);
         }
     }
+    
+    public static String getContentSecurityPolicyFrameAncestors() {
+        return getProperty(DIGITALIB_PROPERTY_BASE + "csp-frame-ancestors", "");
+    }
 
     public static String getSignReasonEL() {
         return getProperty(DIGITALIB_PROPERTY_BASE + "signreasonEL");

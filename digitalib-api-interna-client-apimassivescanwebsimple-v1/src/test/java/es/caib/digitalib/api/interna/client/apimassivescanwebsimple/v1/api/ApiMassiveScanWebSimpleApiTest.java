@@ -62,9 +62,9 @@ public class ApiMassiveScanWebSimpleApiTest {
         try {
             ApiMassiveScanWebSimpleApiTest test = new ApiMassiveScanWebSimpleApiTest();
 
-            //test.getAvailableProfilesTest();
+            test.getAvailableProfilesTest();
 
-            //test.getSeparatorPageTest();
+            test.getSeparatorPageTest();
 
             test.fullTest();
 
@@ -145,13 +145,17 @@ public class ApiMassiveScanWebSimpleApiTest {
             msspr.setProfileCode(scanWebProfileSelected.getCode());
 
             scanWebProfileSelected = api.getProfile(msspr);
+            
+            Properties props = new Properties();
+            props.load(new FileInputStream("test.properties"));
+            String useiframe = props.getProperty("useiframe");
+            final boolean showInIframe = "true".equalsIgnoreCase(useiframe); 
 
             // Recuperar un ID de transacció
             {
 
                 final String profileCode = scanWebProfileSelected.getCode();
-                final int view = CONSTANTS.getMassiveScanWebSimpleGetTransactionIdRequestVIEWIFRAME();
-                // CONSTANTS.getMassiveScanWebSimpleGetTransactionIdRequestVIEWFULLSCREEN()
+                final int view = CONSTANTS.getMassiveScanWebSimpleGetTransactionIdRequestVIEWFULLSCREEN();
 
                 final String transactionName = "Transaccio Exemple il·legal?? " + System.currentTimeMillis();
 
@@ -221,7 +225,7 @@ public class ApiMassiveScanWebSimpleApiTest {
             Random r = new Random();
             int low = 1900;
             int high = 2000;
-            final int port = r.nextInt(high - low) + low;
+            final int port = 1900; //r.nextInt(high - low) + low;
 
             final String returnUrl = "http://" + host + ":" + port + "/returnurl/" + transactionID;
 
@@ -234,14 +238,42 @@ public class ApiMassiveScanWebSimpleApiTest {
             String redirectUrl = api.startTransaction(startTransactionInfo);
 
             System.out.println("RedirectUrl = " + redirectUrl);
-
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().browse(new URI(redirectUrl));
+            
+            if (showInIframe) {
+                final String iframeUrl = "http://" + host + ":" + (port+1) + "/iframe/";
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().browse(new URI(iframeUrl));
+                } else {
+                    System.out.println("Per favor obri un Navegador i copia-li la URL " + iframeUrl);
+                }
+                String htmlIframe = "<div style=\"\n"
+                        + "        background-color: red;\n"
+                        + "        width: 100%;\n"
+                        + "        height: 100%;\n"
+                        + "        display: flex;\n"
+                        + "        justify-content: center;\n"
+                        + "        align-items: center;\n"
+                        + "    \">\n"
+                        + "        <div style=\"width: calc(100% - 200px); height: calc(100% - 200px);\">\n"
+                        + "            Iframe atacant URL: " + iframeUrl + "...<br/>\n"
+                        + "            <iframe \n"
+                        + "                src=\"" + redirectUrl + "\" \n"
+                        + "                style=\"width: 100%; height: 100%; border: none;\"\n"
+                        + "            ></iframe>\n"
+                        + "        </div>\n"
+                        + "    </div>";
+                
+                readFromSocket(port + 1, htmlIframe);
+                System.out.println("Algun navegador ha llegit html amb iframe ...");
             } else {
-                System.out.println("Per favor obri un Navegador i copia-li la URL anterior ...");
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().browse(new URI(redirectUrl));
+                } else {
+                    System.out.println("Per favor obri un Navegador i copia-li la URL "+  redirectUrl);
+                }
             }
 
-            readFromSocket(port);
+            readFromSocket(port, "OK (Revisi consola per saber l'estat final del proc&eacute;s)");
 
             System.out.println(" Cridant a getSubTransactionsOfTransaction(" + transactionID + ") ...");
             MassiveScanWebSimpleSubTransactionsOfTransaction subs = api.getSubTransactionsOfTransaction(transactionID);
@@ -523,7 +555,7 @@ public class ApiMassiveScanWebSimpleApiTest {
         return signatureParameters;
     }
 
-    public static void readFromSocket(int port) throws Exception {
+    public static void readFromSocket(int port, String htmlCode) throws Exception {
 
         ServerSocket serverSocket = new ServerSocket(port);
         System.err.println("Servidor escoltant al PORT: " + port);
@@ -546,7 +578,7 @@ public class ApiMassiveScanWebSimpleApiTest {
             out.println("HTTP/1.0 200 OK");
             out.println("Content-Type: text/html");
             out.println("\r\n");
-            out.println("<html><body>OK (Revisi consola per saber l'estat final del proc&eacute;s)</body></html>");
+            out.println("<html><body>" + htmlCode + "</body></html>");
 
             System.err.println("Connexio amb el client finalitzada.");
             out.flush();
