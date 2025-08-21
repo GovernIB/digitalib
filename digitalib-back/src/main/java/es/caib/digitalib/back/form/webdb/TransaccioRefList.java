@@ -22,22 +22,23 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
  * 
  */
 @Component
-public class TransaccioRefList extends RefListBase
-    implements TransaccioFields {
+public class TransaccioRefList extends RefListBase implements TransaccioFields {
 
-  @EJB(mappedName = TransaccioService.JNDI_NAME)
-  private TransaccioService transaccioEjb;
+    @EJB(mappedName = TransaccioService.JNDI_NAME)
+    private TransaccioService transaccioEjb;
 
-  public TransaccioRefList(TransaccioRefList __clone) {
-    super(__clone);
-    this.transaccioEjb = __clone.transaccioEjb;
-  }
-  public TransaccioRefList() {
-    setSelects(new Select<?>[] { TRANSACCIOID.select, NOM.select, TRANSACTIONWEBID.select });
-  }
-  public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
-    Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());
-    List<StringKeyValue> list = transaccioEjb.executeQuery(select, where, (orderBy==null || orderBy.length == 0) ? getOrderBy() : orderBy);
+    public TransaccioRefList(TransaccioRefList __clone) {
+        super(__clone);
+        this.transaccioEjb = __clone.transaccioEjb;
+    }
+
+    public TransaccioRefList() {
+        setSelects(new Select<?>[] { TRANSACCIOID.select, NOM.select, TRANSACTIONWEBID.select });
+    }
+
+    public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
+        Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());
+        List<StringKeyValue> list = transaccioEjb.executeQuery(select, where, (orderBy==null || orderBy.length == 0) ? getOrderBy() : orderBy);
     return list;
-  }
+    }
 }

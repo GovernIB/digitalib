@@ -375,6 +375,15 @@
         <put-attribute name="titol" value="fitxer.fitxer" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/fitxerForm.jsp" />
     </definition>
+    
+    
+    <definition name="keyvalueAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/keyvalue.jsp" />
+    </definition>
+    
+    <definition name="editpropertiesAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/admin/editproperties.jsp" />
+    </definition>
 
     <!--  ============================================== -->
     <!--              MENU ADMIN DIGITALIB (WEB)         -->

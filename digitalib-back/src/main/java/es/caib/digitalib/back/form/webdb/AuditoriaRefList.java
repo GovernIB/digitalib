@@ -22,22 +22,23 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
  * 
  */
 @Component
-public class AuditoriaRefList extends RefListBase
-    implements AuditoriaFields {
+public class AuditoriaRefList extends RefListBase implements AuditoriaFields {
 
-  @EJB(mappedName = AuditoriaService.JNDI_NAME)
-  private AuditoriaService auditoriaEjb;
+    @EJB(mappedName = AuditoriaService.JNDI_NAME)
+    private AuditoriaService auditoriaEjb;
 
-  public AuditoriaRefList(AuditoriaRefList __clone) {
-    super(__clone);
-    this.auditoriaEjb = __clone.auditoriaEjb;
-  }
-  public AuditoriaRefList() {
-    setSelects(new Select<?>[] { AUDITORIAID.select });
-  }
-  public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
-    Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());
-    List<StringKeyValue> list = auditoriaEjb.executeQuery(select, where, (orderBy==null || orderBy.length == 0) ? getOrderBy() : orderBy);
+    public AuditoriaRefList(AuditoriaRefList __clone) {
+        super(__clone);
+        this.auditoriaEjb = __clone.auditoriaEjb;
+    }
+
+    public AuditoriaRefList() {
+        setSelects(new Select<?>[] { AUDITORIAID.select });
+    }
+
+    public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
+        Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());
+        List<StringKeyValue> list = auditoriaEjb.executeQuery(select, where, (orderBy==null || orderBy.length == 0) ? getOrderBy() : orderBy);
     return list;
-  }
+    }
 }

@@ -85,8 +85,8 @@
             </a></li>
 
 
-        <li style="list-style-type: disc; list-style-position: inside;">
-        <a  href="<c:url value="/admin/transaccionssensehashdefitxer/list"/>">
+        <li style="list-style-type: disc; list-style-position: inside;"><a
+                href="<c:url value="/admin/transaccionssensehashdefitxer/list"/>">
                 <span style="${(fn:contains(url, '/admin/transaccionssensehashdefitxer'))? "font-weight:bold;" : ""}"><fmt:message
                         key="transaccionssensehashdefitxer.plural" /></span>
 
@@ -99,6 +99,27 @@
                         key="updateusername.title" /></span>
 
             </a></li>
+
+        <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/properties"/>">
+                <span style="${(fn:contains(url, '/admin/properties'))? "font-weight:bold;" : ""}">Contingut de digitalib.properties</span>
+            </a></li>
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/systemproperties"/>">
+                <span style="${(fn:contains(url, '/admin/systemproperties'))? "font-weight:bold;" : ""}">Contingut de
+                    digitalib.system.properties</span>
+            </a></li>
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/reloadproperties"/>">
+                <span style="${(fn:contains(url, '/admin/reloadproperties'))? "font-weight:bold;" : ""}">Recarregar fitxers de
+                    properties</span>
+            </a></li>
+            
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/editproperties"/>">
+            <span style="${(fn:contains(url, '/admin/editproperties'))? "font-weight:bold;" : ""}">Editar fitxer digitalib.properties</span>
+        </a></li>
+
 
     </ul>
 </div>

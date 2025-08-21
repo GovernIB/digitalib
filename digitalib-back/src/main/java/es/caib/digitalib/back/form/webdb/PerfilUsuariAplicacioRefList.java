@@ -22,22 +22,23 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
  * 
  */
 @Component
-public class PerfilUsuariAplicacioRefList extends RefListBase
-    implements PerfilUsuariAplicacioFields {
+public class PerfilUsuariAplicacioRefList extends RefListBase implements PerfilUsuariAplicacioFields {
 
-  @EJB(mappedName = PerfilUsuariAplicacioService.JNDI_NAME)
-  private PerfilUsuariAplicacioService perfilUsuariAplicacioEjb;
+    @EJB(mappedName = PerfilUsuariAplicacioService.JNDI_NAME)
+    private PerfilUsuariAplicacioService perfilUsuariAplicacioEjb;
 
-  public PerfilUsuariAplicacioRefList(PerfilUsuariAplicacioRefList __clone) {
-    super(__clone);
-    this.perfilUsuariAplicacioEjb = __clone.perfilUsuariAplicacioEjb;
-  }
-  public PerfilUsuariAplicacioRefList() {
-    setSelects(new Select<?>[] { PERFILID.select, USUARIAPLICACIOID.select });
-  }
-  public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
-    Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());
-    List<StringKeyValue> list = perfilUsuariAplicacioEjb.executeQuery(select, where, (orderBy==null || orderBy.length == 0) ? getOrderBy() : orderBy);
+    public PerfilUsuariAplicacioRefList(PerfilUsuariAplicacioRefList __clone) {
+        super(__clone);
+        this.perfilUsuariAplicacioEjb = __clone.perfilUsuariAplicacioEjb;
+    }
+
+    public PerfilUsuariAplicacioRefList() {
+        setSelects(new Select<?>[] { PERFILID.select, USUARIAPLICACIOID.select });
+    }
+
+    public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
+        Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());
+        List<StringKeyValue> list = perfilUsuariAplicacioEjb.executeQuery(select, where, (orderBy==null || orderBy.length == 0) ? getOrderBy() : orderBy);
     return list;
-  }
+    }
 }

@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 /**
@@ -19,6 +20,12 @@ public class Configuracio implements Constants {
     private static Properties digitalibProperties;
 
     private static Properties digitalibSystemProperties;
+    
+    
+    public static final String getPathToDigitalIBProperties() {
+        return System.getProperty(Constants.DIGITALIB_PROPERTY_BASE + "properties");
+    }
+    
 
     public static Properties getDigitalIBProperties() {
         if (digitalibProperties == null) {
@@ -56,7 +63,7 @@ public class Configuracio implements Constants {
                     + " del fitxer standalone apunta a un fitxer que no existeix (" + propertyFileName + ")");
         }
 
-        try (Reader reader = new FileReader(file)) {
+        try (Reader reader = new FileReader(file, Charset.forName("UTF-8"))) {
             Properties prop = new Properties();
             prop.load(reader);
             return prop;
@@ -64,6 +71,11 @@ public class Configuracio implements Constants {
             throw new RuntimeException("La propietat: " + key + " del fitxer standalone apunta a un fitxer("
                     + propertyFileName + ") que no es pot llegir:" + e.getMessage(), e);
         }
+    }
+    
+    public static void reloadProperties() {
+        digitalibProperties = null;
+        digitalibSystemProperties = null;
     }
 
     public static Properties getSystemAndFileProperties() {
