@@ -98,6 +98,11 @@ public class FirmaArxiuParametersPublicController extends AbstractFirmaArxiuPara
                 transaccioForm.setTitleCode("documentescanejat");
                 Integer pos = (Integer) request.getSession()
                         .getAttribute(AbstractScanWebProcessController.SESSION_MASIVE_POINTER_POST_SCAN);
+                
+                if (pos == null) {
+                    pos = 0;
+                }
+                
                 transaccioForm.setTitleParam(String.valueOf(pos + 1));
 
                 transaccioForm.setCancelButtonVisible(false);
