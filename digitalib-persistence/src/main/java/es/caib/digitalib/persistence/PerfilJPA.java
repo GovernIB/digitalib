@@ -52,8 +52,8 @@ public class PerfilJPA implements Perfil {
     java.lang.String urlBase;
 
   /** PDF,JPG,PNG, GIF, TIFF */
-    @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="scanformatfitxer",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("0")
     int scanFormatFitxer = 0;
 
   /** Punts per pulgada (ppp) */
@@ -69,8 +69,8 @@ public class PerfilJPA implements Perfil {
     @Column(name="pluginscanweb2id",length = 19)
     java.lang.Long pluginScanWeb2ID;
 
-    @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="tipusfirma",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("0")
     int tipusFirma = 0;
 
     @Column(name="apisimpleid",length = 19)
@@ -79,8 +79,8 @@ public class PerfilJPA implements Perfil {
     @Column(name="configuraciofirmaid",length = 19)
     java.lang.Long configuracioFirmaID;
 
-    @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="tipuscustodia",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("0")
     int tipusCustodia = 0;
 
     @Column(name="pluginarxiuid",length = 19)
@@ -90,8 +90,8 @@ public class PerfilJPA implements Perfil {
     java.lang.Long pluginDocCustodyID;
 
   /** Quin us es farà del perfil: plantilla o informacio perfil en transaccio */
-    @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="usperfil",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("0")
     int usPerfil = 0;
 
     @Column(name="utilitzatperaplicacio",length = 1)

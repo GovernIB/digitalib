@@ -55,10 +55,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/avis")
 @SessionAttributes(types = { AvisForm.class, AvisFilterForm.class })
-@Tile(name="avisFormWebDB", contentJsp="/WEB-INF/jsp/webdb/avisForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="avis.avis")})
-@Tile(name="avisListWebDB", contentJsp="/WEB-INF/jsp/webdb/avisList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="avis.avis") })
+@Tile(name="avisFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/avisForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="avis.avis")})
+@Tile(name="avisListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/avisList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="avis.avis")})
 public class AvisController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<Avis, java.lang.Long> implements AvisFields {
 

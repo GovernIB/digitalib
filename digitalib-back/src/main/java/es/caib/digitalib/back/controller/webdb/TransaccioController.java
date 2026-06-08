@@ -58,10 +58,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/transaccio")
 @SessionAttributes(types = { TransaccioForm.class, TransaccioFilterForm.class })
-@Tile(name="transaccioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/transaccioForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="transaccio.transaccio")})
-@Tile(name="transaccioListWebDB", contentJsp="/WEB-INF/jsp/webdb/transaccioList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="transaccio.transaccio") })
+@Tile(name="transaccioFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/transaccioForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="transaccio.transaccio")})
+@Tile(name="transaccioListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/transaccioList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="transaccio.transaccio")})
 public class TransaccioController
     extends es.caib.digitalib.back.controller.DigitalIBFilesBaseController<Transaccio, java.lang.Long, TransaccioForm> implements TransaccioFields {
 

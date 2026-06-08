@@ -55,10 +55,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/perfil")
 @SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class })
-@Tile(name="perfilFormWebDB", contentJsp="/WEB-INF/jsp/webdb/perfilForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="perfil.perfil")})
-@Tile(name="perfilListWebDB", contentJsp="/WEB-INF/jsp/webdb/perfilList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="perfil.perfil") })
+@Tile(name="perfilFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/perfilForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="perfil.perfil")})
+@Tile(name="perfilListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/perfilList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="perfil.perfil")})
 public class PerfilController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<Perfil, java.lang.Long> implements PerfilFields {
 

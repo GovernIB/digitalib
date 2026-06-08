@@ -55,10 +55,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/configuracioFirma")
 @SessionAttributes(types = { ConfiguracioFirmaForm.class, ConfiguracioFirmaFilterForm.class })
-@Tile(name="configuracioFirmaFormWebDB", contentJsp="/WEB-INF/jsp/webdb/configuracioFirmaForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="configuracioFirma.configuracioFirma")})
-@Tile(name="configuracioFirmaListWebDB", contentJsp="/WEB-INF/jsp/webdb/configuracioFirmaList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="configuracioFirma.configuracioFirma") })
+@Tile(name="configuracioFirmaFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/configuracioFirmaForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="configuracioFirma.configuracioFirma")})
+@Tile(name="configuracioFirmaListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/configuracioFirmaList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="configuracioFirma.configuracioFirma")})
 public class ConfiguracioFirmaController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<ConfiguracioFirma, java.lang.Long> implements ConfiguracioFirmaFields {
 

@@ -53,10 +53,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/infoCustody")
 @SessionAttributes(types = { InfoCustodyForm.class, InfoCustodyFilterForm.class })
-@Tile(name="infoCustodyFormWebDB", contentJsp="/WEB-INF/jsp/webdb/infoCustodyForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="infoCustody.infoCustody")})
-@Tile(name="infoCustodyListWebDB", contentJsp="/WEB-INF/jsp/webdb/infoCustodyList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="infoCustody.infoCustody") })
+@Tile(name="infoCustodyFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/infoCustodyForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="infoCustody.infoCustody")})
+@Tile(name="infoCustodyListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/infoCustodyList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="infoCustody.infoCustody")})
 public class InfoCustodyController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<InfoCustody, java.lang.Long> implements InfoCustodyFields {
 

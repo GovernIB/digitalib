@@ -58,10 +58,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/configuracioGrup")
 @SessionAttributes(types = { ConfiguracioGrupForm.class, ConfiguracioGrupFilterForm.class })
-@Tile(name="configuracioGrupFormWebDB", contentJsp="/WEB-INF/jsp/webdb/configuracioGrupForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="configuracioGrup.configuracioGrup")})
-@Tile(name="configuracioGrupListWebDB", contentJsp="/WEB-INF/jsp/webdb/configuracioGrupList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="configuracioGrup.configuracioGrup") })
+@Tile(name="configuracioGrupFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/configuracioGrupForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="configuracioGrup.configuracioGrup")})
+@Tile(name="configuracioGrupListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/configuracioGrupList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="configuracioGrup.configuracioGrup")})
 public class ConfiguracioGrupController
     extends es.caib.digitalib.back.controller.DigitalIBFilesBaseController<ConfiguracioGrup, java.lang.Long, ConfiguracioGrupForm> implements ConfiguracioGrupFields {
 

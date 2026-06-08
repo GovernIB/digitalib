@@ -32,8 +32,8 @@ public class AvisJPA implements Avis {
     @Column(name="descripcioid",nullable = false,length = 19)
     long descripcioID;
 
-    @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="tipus",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("0")
     int tipus = 0;
 
     @Column(name="datainici",length = 29,precision = 6)

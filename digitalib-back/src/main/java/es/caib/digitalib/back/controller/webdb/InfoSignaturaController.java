@@ -55,10 +55,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/infoSignatura")
 @SessionAttributes(types = { InfoSignaturaForm.class, InfoSignaturaFilterForm.class })
-@Tile(name="infoSignaturaFormWebDB", contentJsp="/WEB-INF/jsp/webdb/infoSignaturaForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="infoSignatura.infoSignatura")})
-@Tile(name="infoSignaturaListWebDB", contentJsp="/WEB-INF/jsp/webdb/infoSignaturaList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="infoSignatura.infoSignatura") })
+@Tile(name="infoSignaturaFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/infoSignaturaForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="infoSignatura.infoSignatura")})
+@Tile(name="infoSignaturaListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/infoSignaturaList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="infoSignatura.infoSignatura")})
 public class InfoSignaturaController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<InfoSignatura, java.lang.Long> implements InfoSignaturaFields {
 

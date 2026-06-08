@@ -50,8 +50,8 @@ public class ConfiguracioFirmaJPA implements ConfiguracioFirma {
     java.lang.Long pluginSegellatID;
 
   /** 0 firma, 1 contrafirma 2, cofirma */
-    @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="tipusoperaciofirma",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("0")
     int tipusOperacioFirma = 0;
 
     @Column(name="tipusfirmaid",nullable = false,length = 10)
@@ -64,8 +64,8 @@ public class ConfiguracioFirmaJPA implements ConfiguracioFirma {
     boolean modeDeFirma;
 
   /** -1=> usar politica de firma de l'entitat, 0 => no usar politica de firma,  1=> usar politica d'aquesta configuracio, 2 => L'usuari web o usuari-app elegeixen la politica de firma */
-    @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="uspoliticadefirma",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("0")
     int usPoliticaDeFirma = 0;
 
   /** Identificador de la política de firma. Si es defineix aquest valors llavorses generaran 
@@ -90,8 +90,8 @@ opcional incluso cuando se genera una firma EPES. */
     java.lang.String policyUrlDocument;
 
   /**  Valors: SENSETAULA = 0; PRIMERAPAGINA = 1; DARRERAPAGINA = -1 */
-    @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="posiciotaulafirmesid",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("0")
     int posicioTaulaFirmesID = 0;
 
     @Column(name="firmatperformatid",length = 19)

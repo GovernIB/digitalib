@@ -60,8 +60,8 @@ public class TransaccioJPA implements Transaccio {
     @Column(name="usuaripersonaid",length = 19)
     java.lang.Long usuariPersonaId;
 
-    @org.hibernate.annotations.ColumnDefault("'10.215.216.175'")
     @Column(name="ip",nullable = false,length = 50)
+    @org.hibernate.annotations.ColumnDefault("10.215.216.175")
     java.lang.String ip = "10.215.216.175";
 
     @Column(name="returnurl",length = 255)

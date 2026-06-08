@@ -39,8 +39,8 @@ public class ApiSimpleJPA implements ApiSimple {
     @Column(name="contrasenya",nullable = false,length = 255)
     java.lang.String contrasenya;
 
-    @org.hibernate.annotations.ColumnDefault("' '")
     @Column(name="perfil",nullable = false,length = 255)
+    @org.hibernate.annotations.ColumnDefault(" ")
     java.lang.String perfil = " ";
 
     @Column(name="configdefirma",length = 100)

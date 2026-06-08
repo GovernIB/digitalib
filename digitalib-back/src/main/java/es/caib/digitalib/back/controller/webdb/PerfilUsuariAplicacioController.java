@@ -55,10 +55,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/perfilUsuariAplicacio")
 @SessionAttributes(types = { PerfilUsuariAplicacioForm.class, PerfilUsuariAplicacioFilterForm.class })
-@Tile(name="perfilUsuariAplicacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/perfilUsuariAplicacioForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="perfilUsuariAplicacio.perfilUsuariAplicacio")})
-@Tile(name="perfilUsuariAplicacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/perfilUsuariAplicacioList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="perfilUsuariAplicacio.perfilUsuariAplicacio") })
+@Tile(name="perfilUsuariAplicacioFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/perfilUsuariAplicacioForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="perfilUsuariAplicacio.perfilUsuariAplicacio")})
+@Tile(name="perfilUsuariAplicacioListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/perfilUsuariAplicacioList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="perfilUsuariAplicacio.perfilUsuariAplicacio")})
 public class PerfilUsuariAplicacioController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<PerfilUsuariAplicacio, java.lang.Long> implements PerfilUsuariAplicacioFields {
 

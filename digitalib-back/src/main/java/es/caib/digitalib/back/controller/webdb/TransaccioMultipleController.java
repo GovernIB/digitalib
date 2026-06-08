@@ -56,10 +56,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/transaccioMultiple")
 @SessionAttributes(types = { TransaccioMultipleForm.class, TransaccioMultipleFilterForm.class })
-@Tile(name="transaccioMultipleFormWebDB", contentJsp="/WEB-INF/jsp/webdb/transaccioMultipleForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="transaccioMultiple.transaccioMultiple")})
-@Tile(name="transaccioMultipleListWebDB", contentJsp="/WEB-INF/jsp/webdb/transaccioMultipleList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="transaccioMultiple.transaccioMultiple") })
+@Tile(name="transaccioMultipleFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/transaccioMultipleForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="transaccioMultiple.transaccioMultiple")})
+@Tile(name="transaccioMultipleListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/transaccioMultipleList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="transaccioMultiple.transaccioMultiple")})
 public class TransaccioMultipleController
     extends es.caib.digitalib.back.controller.DigitalIBFilesBaseController<TransaccioMultiple, java.lang.Long, TransaccioMultipleForm> implements TransaccioMultipleFields {
 

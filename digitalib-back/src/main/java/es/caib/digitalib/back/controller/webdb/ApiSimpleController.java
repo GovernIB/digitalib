@@ -53,10 +53,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/apiSimple")
 @SessionAttributes(types = { ApiSimpleForm.class, ApiSimpleFilterForm.class })
-@Tile(name="apiSimpleFormWebDB", contentJsp="/WEB-INF/jsp/webdb/apiSimpleForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="apiSimple.apiSimple")})
-@Tile(name="apiSimpleListWebDB", contentJsp="/WEB-INF/jsp/webdb/apiSimpleList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="apiSimple.apiSimple") })
+@Tile(name="apiSimpleFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/apiSimpleForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="apiSimple.apiSimple")})
+@Tile(name="apiSimpleListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/apiSimpleList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="apiSimple.apiSimple")})
 public class ApiSimpleController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<ApiSimple, java.lang.Long> implements ApiSimpleFields {
 

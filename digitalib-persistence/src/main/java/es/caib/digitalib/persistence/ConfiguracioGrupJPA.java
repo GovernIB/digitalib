@@ -58,14 +58,14 @@ public class ConfiguracioGrupJPA implements ConfiguracioGrup {
     @Column(name="logofooterid",nullable = false,length = 19)
     long logoFooterID;
 
-    @org.hibernate.annotations.ColumnDefault("'  '")
     @Column(name="adreza",nullable = false,length = 2147483647)
     @Lob
     @Type(type = "org.hibernate.type.TextType")
+    @org.hibernate.annotations.ColumnDefault("  ")
     java.lang.String adreza = "  ";
 
-    @org.hibernate.annotations.ColumnDefault("'A04003003'")
     @Column(name="codidir3perdefecte",nullable = false,length = 50)
+    @org.hibernate.annotations.ColumnDefault("A04003003")
     java.lang.String codiDir3PerDefecte = "A04003003";
 
     @Column(name="perfilnomesescaneigid",length = 19)

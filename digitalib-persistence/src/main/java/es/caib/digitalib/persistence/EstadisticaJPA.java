@@ -29,8 +29,8 @@ public class EstadisticaJPA implements Estadistica {
     @Column(name="data",nullable = false,length = 29,precision = 6)
     java.sql.Timestamp data;
 
-    @org.hibernate.annotations.ColumnDefault("1")
     @Column(name="valor",nullable = false,length = 17,precision = 17)
+    @org.hibernate.annotations.ColumnDefault("1")
     double valor = (double)1;
 
     @Column(name="parametres",length = 3000)

@@ -53,10 +53,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/usuariAplicacio")
 @SessionAttributes(types = { UsuariAplicacioForm.class, UsuariAplicacioFilterForm.class })
-@Tile(name="usuariAplicacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/usuariAplicacioForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="usuariAplicacio.usuariAplicacio")})
-@Tile(name="usuariAplicacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/usuariAplicacioList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="usuariAplicacio.usuariAplicacio") })
+@Tile(name="usuariAplicacioFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/usuariAplicacioForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="usuariAplicacio.usuariAplicacio")})
+@Tile(name="usuariAplicacioListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/usuariAplicacioList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="usuariAplicacio.usuariAplicacio")})
 public class UsuariAplicacioController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<UsuariAplicacio, java.lang.Long> implements UsuariAplicacioFields {
 

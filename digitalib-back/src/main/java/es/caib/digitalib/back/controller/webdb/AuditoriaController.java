@@ -55,10 +55,14 @@ import es.caib.digitalib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/auditoria")
 @SessionAttributes(types = { AuditoriaForm.class, AuditoriaFilterForm.class })
-@Tile(name="auditoriaFormWebDB", contentJsp="/WEB-INF/jsp/webdb/auditoriaForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="auditoria.auditoria")})
-@Tile(name="auditoriaListWebDB", contentJsp="/WEB-INF/jsp/webdb/auditoriaList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="auditoria.auditoria") })
+@Tile(name="auditoriaFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/auditoriaForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="auditoria.auditoria")})
+@Tile(name="auditoriaListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/auditoriaList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="auditoria.auditoria")})
 public class AuditoriaController
     extends es.caib.digitalib.back.controller.DigitalIBBaseController<Auditoria, java.lang.Long> implements AuditoriaFields {
 
