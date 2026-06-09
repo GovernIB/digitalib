@@ -20,6 +20,76 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ApiSimpleFields.DESCRIPCIO)}">
+        <tr id="apiSimple_descripcio_rowid">
+          <td id="apiSimple_descripcio_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ApiSimpleFields.DESCRIPCIO])?'apiSimple.descripcio':__theForm.labels[ApiSimpleFields.DESCRIPCIO]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[ApiSimpleFields.DESCRIPCIO]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[ApiSimpleFields.DESCRIPCIO]}" ></i>
+              </c:if>
+            </td>
+          <td id="apiSimple_descripcio_columnvalueid">
+              <form:errors path="apiSimple.descripcio" cssClass="errorField alert alert-danger" />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,ApiSimpleFields.DESCRIPCIO)? 'true' : 'false'}" path="apiSimple.descripcio"  />
+   </td>
+   <td style="width:40px">
+      <div id="dropdownMenuButton_descripcio" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_descripcio" class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('apiSimple.descripcio'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('apiSimple.descripcio'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('apiSimple.descripcio'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_descripcio').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_descripcio').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_descripcio').css('display', valor);
+                 return false;
+				});
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,ApiSimpleFields.TIPUS)}">
+        <tr id="apiSimple_tipus_rowid">
+          <td id="apiSimple_tipus_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[ApiSimpleFields.TIPUS])?'apiSimple.tipus':__theForm.labels[ApiSimpleFields.TIPUS]}" /> &nbsp;(*)
+             </label>
+              <c:if test="${not empty __theForm.help[ApiSimpleFields.TIPUS]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[ApiSimpleFields.TIPUS]}" ></i>
+              </c:if>
+            </td>
+          <td id="apiSimple_tipus_columnvalueid">
+          <form:errors path="apiSimple.tipus" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,ApiSimpleFields.TIPUS)}" >
+          <form:hidden path="apiSimple.tipus"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.apiSimple.tipus,__theForm.listOfValuesForTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,ApiSimpleFields.TIPUS)}" >
+          <c:set var="containEmptyValue"  value="false" />
+          <form:select id="apiSimple_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-9-optional" path="apiSimple.tipus">
+            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,ApiSimpleFields.URL)}">
         <tr id="apiSimple_url_rowid">
           <td id="apiSimple_url_columnlabelid">

@@ -3,6 +3,7 @@ package es.caib.digitalib.back.form.webdb;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -50,6 +51,28 @@ public class ApiSimpleFilterForm extends DigitalIBBaseFilterForm implements ApiS
 
   public void setNom(java.lang.String nom) {
     this.nom = nom;
+  }
+
+
+  private java.lang.String descripcio;
+
+  public java.lang.String getDescripcio() {
+    return this.descripcio;
+  }
+
+  public void setDescripcio(java.lang.String descripcio) {
+    this.descripcio = descripcio;
+  }
+
+
+  private java.util.List<java.lang.Integer> tipusSelect;
+
+  public java.util.List<java.lang.Integer> getTipusSelect() {
+    return this.tipusSelect;
+  }
+
+  public void setTipusSelect(java.util.List<java.lang.Integer> tipusSelect) {
+    this.tipusSelect = tipusSelect;
   }
 
 
@@ -116,11 +139,14 @@ public class ApiSimpleFilterForm extends DigitalIBBaseFilterForm implements ApiS
     this.apiSimpleIDDesde = __toClone.apiSimpleIDDesde;
     this.apiSimpleIDFins = __toClone.apiSimpleIDFins;
     this.nom = __toClone.nom;
+    this.descripcio = __toClone.descripcio;
+    this.tipusSelect = __toClone.tipusSelect;
     this.url = __toClone.url;
     this.username = __toClone.username;
     this.contrasenya = __toClone.contrasenya;
     this.perfil = __toClone.perfil;
     this.configDeFirma = __toClone.configDeFirma;
+    this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
   }
   
   /* ========= UTILS ========== */
@@ -155,6 +181,18 @@ public class ApiSimpleFilterForm extends DigitalIBBaseFilterForm implements ApiS
    // -----------------------
    // Maps de referencies.
    // -----------------------
+  private Map<String, String> mapOfValuesForTipus;
+
+  public Map<String, String> getMapOfValuesForTipus() {
+    return this.mapOfValuesForTipus;
+  }
+
+  public void setMapOfValuesForTipus(Map<String, String> mapOfValuesForTipus) {
+    this.mapOfValuesForTipus = mapOfValuesForTipus;
+  }
+
+
+
 
    // --------------------------------
    // Camps traduibles de referencies.

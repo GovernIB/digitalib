@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -131,45 +132,6 @@
             <version>${pluginsib.utils.version}</version>
         </dependency>
 
-
-        <dependency>
-            <artifactId>apifirmasimple-jersey</artifactId>
-            <groupId>org.fundaciobit.apisib.apifirmasimple</groupId>
-            <version>1.0.3</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jaxb-impl</artifactId>
-                    <groupId>com.sun.xml.bind</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jaxb-api</artifactId>
-                    <groupId>com.sun.xml.bind</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-json</artifactId>
-            <version>1.19.4</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jaxb-impl</artifactId>
-                    <groupId>com.sun.xml.bind</groupId>
-                </exclusion>
-
-                <exclusion>
-                    <artifactId>jaxb-api</artifactId>
-                    <groupId>com.sun.xml.bind</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-
         <dependency>
             <groupId>es.caib.digitalib</groupId>
             <artifactId>digitalib-persistence</artifactId>
@@ -219,6 +181,70 @@
             <artifactId>jboss-ejb3-ext-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <!--  =====================================================================    -->
+        <!--  ========================  APIS FIRMA WS =============================    -->
+        <!--  =====================================================================    -->
+        
+        <!--  PORTAFIB -->
+        <dependency>
+            <artifactId>apifirmasimple-jersey</artifactId>
+            <groupId>org.fundaciobit.apisib.apifirmasimple</groupId>
+            <version>1.0.3</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jaxb-impl</artifactId>
+                    <groupId>com.sun.xml.bind</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jaxb-api</artifactId>
+                    <groupId>com.sun.xml.bind</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.19.4</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jaxb-impl</artifactId>
+                    <groupId>com.sun.xml.bind</groupId>
+                </exclusion>
+
+                <exclusion>
+                    <artifactId>jaxb-api</artifactId>
+                    <groupId>com.sun.xml.bind</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        
+        <!-- UtilitatsFirma - API Rest - Interna Client - Utilitats de Firma v2 -->
+        <dependency>
+            <groupId>es.caib.utilitatsfirma</groupId>
+            <artifactId>utilitatsfirma-api-interna-client-utilitatsfirma-v2</artifactId>
+            <version>2.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jsr305</artifactId>
+                    <groupId>com.google.code.findbugs</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jboss-jaxb-api_2.3_spec</artifactId>
+                    <groupId>org.jboss.spec.javax.xml.bind</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+
+
 
     </dependencies>
 

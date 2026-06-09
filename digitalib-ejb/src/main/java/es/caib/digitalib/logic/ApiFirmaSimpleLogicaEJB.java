@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -41,9 +42,22 @@ import com.google.common.hash.Hashing;
 import es.caib.digitalib.persistence.ApiSimpleJPA;
 import es.caib.digitalib.persistence.InfoSignaturaJPA;
 import es.caib.digitalib.persistence.TransaccioJPA;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.api.UtilitatsFirmaV2Api;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.CommonInfo;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.ProcessStatus;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.SignDocumentRequest;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.SignedDocumentInformation;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.SignedDocumentResponseMultipart;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.SignedFileInfo;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.SignerInfo;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.StatusConstants;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.ValidationInfo;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.services.ApiException;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.servicesforutilitatsfirma.ApiClientWithJsonSupport;
 import es.caib.digitalib.model.bean.FitxerBean;
 import es.caib.digitalib.model.entity.Fitxer;
 import es.caib.digitalib.commons.utils.Configuracio;
+import es.caib.digitalib.commons.utils.Constants;
 import es.caib.digitalib.ejb.InfoSignaturaService;
 
 /**
@@ -70,38 +84,71 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
      * 
      */
     @Override
-    public Fitxer signUsingApiFirmaSimple(TransaccioJPA transaccio, ApiSimpleJPA apisimple,
-            Fitxer fitxer)  {
+    public Fitxer signUsingApiFirmaSimple(TransaccioJPA transaccio, ApiSimpleJPA apisimple, Fitxer fitxer) {
 
-        ApiFirmaEnServidorSimple api; 
+        switch (apisimple.getTipus()) {
+            case Constants.TIPUS_API_FIRMA_SIMPLE_PORTAFIB: // Firma en Servidor Utilitats Firma
+                return signUsingApiFirmaSimplePortafib(transaccio, apisimple, fitxer);
+
+            case Constants.TIPUS_API_FIRMA_EN_SERVIDOR_UTILITATSFIRMA: // Firma en Servidor Portafib
+                return signUsingApiFirmaEnServidorUtilitatsFirma(transaccio, apisimple, fitxer);
+
+            default:
+                transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+                transaccio.setEstatMissatge(StringUtils
+                        .truncate("ApiFirmaSimple::Tipus de Firma Simple desconegut: " + apisimple.getTipus(), 2990));
+                log.error(transaccio.getEstatMissatge());
+                return null;
+        }
+
+    }
+
+    public static final String PDF_MIME_TYPE = "application/pdf";
+
+    protected Fitxer signUsingApiFirmaEnServidorUtilitatsFirma(TransaccioJPA transaccio, ApiSimpleJPA apisimple,
+            Fitxer fitxer) {
+
+        String languageUI = transaccio.getLanguageUI();
+
+        UtilitatsFirmaV2Api api;
         try {
-        
-          final Map<String, Object> map = new HashMap<String, Object>();
-          map.put("SP", Configuracio.getSystemAndFileProperties());
-        
-          final Locale loc = new Locale("ca");
-          
-          log.debug(" =============================================");
-          log.debug("URL PRE => " + apisimple.getUrl());
-          String url = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getUrl(), map, loc);
-          log.debug("URL POST => |" + url  + "|");
-          log.debug("USERNAME PRE => " + apisimple.getUsername());
-          String username = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getUsername(), map, loc);
-          log.debug("USERNAME POST => |" + username  + "|");
-          log.debug("PASSWORD PRE => " + apisimple.getContrasenya());
-          String password = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getContrasenya(), map, loc);
-          log.debug("PASSWORD POST => |" + password + "|");
-        
-          log.debug(" =============================================");
-        
-          api = new ApiFirmaEnServidorSimpleJersey(url, username, password);
+
+            final Map<String, Object> map = new HashMap<String, Object>();
+            map.put("SP", Configuracio.getSystemAndFileProperties());
+
+            final Locale loc = new Locale("ca");
+
+            log.debug(" =============================================");
+            log.debug("URL PRE => " + apisimple.getUrl());
+            String url = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getUrl(), map, loc);
+            log.debug("URL POST => |" + url + "|");
+            log.debug("USERNAME PRE => " + apisimple.getUsername());
+            String username = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getUsername(), map, loc);
+            log.debug("USERNAME POST => |" + username + "|");
+            log.debug("PASSWORD PRE => " + apisimple.getContrasenya());
+            String password = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getContrasenya(), map,
+                    loc);
+            log.debug("PASSWORD POST => |" + password + "|");
+
+            log.debug(" =============================================");
+
+            ApiClientWithJsonSupport client = new ApiClientWithJsonSupport();
+            client.setBasePath(url);
+            client.setUsername(username);
+            client.setPassword(password);
+
+            client.setDebugging(true);
+
+            client.addDefaultHeader("Accept-Language", languageUI);
+
+            api = new UtilitatsFirmaV2Api(client);
+
         } catch (Exception e) {
 
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
             transaccio.setEstatMissatge(StringUtils.truncate(
                     "ApiFirmaSimple::Error durant instanciació de l'API de Firma Simple: " + e.getMessage(), 2990));
-            transaccio
-                    .setEstatExcepcio(org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(e));
+            transaccio.setEstatExcepcio(org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(e));
             log.error(transaccio.getEstatMissatge(), e);
             return null;
         }
@@ -131,8 +178,290 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
                 try {
                     tipusDocumentalID = Long.parseLong(tipusStr.replace("TD", ""));
                 } catch (NumberFormatException nfe) {
-                    log.error("Error parsejant tipus documental ]" + tipusStr + "[:"
-                            + nfe.getMessage(), nfe);
+                    log.error("Error parsejant tipus documental ]" + tipusStr + "[:" + nfe.getMessage(), nfe);
+                    tipusDocumentalID = 99;
+                }
+            }
+        }
+
+        File file = FileSystemManager.getFile(fitxer.getFitxerID());
+
+        //FirmaSimpleFile fileToSign = new FirmaSimpleFile(fitxer.getNom(), fitxer.getMime(), data);
+
+        //FileInfoSignature fileInfoSignature = new FileInfoSignature(fileToSign, signID, name,
+        //        reason, location, signNumber, languageSign, tipusDocumentalID);
+
+        // Es la configuració del Servidor
+        final String username = apisimple.getConfigDeFirma();
+        final String administrationID = null;
+
+        // (perfil, idiomaUI, certificat, nif, evi.getPersonaEmail());
+        CommonInfo commonInfo;
+        commonInfo = new CommonInfo().signProfile(apisimple.getPerfil()).languageUI(languageUI).username(username)
+                .administrationID(administrationID).signerEmail(signerEmail);
+
+        // fileToSign, signID, name,   reason, location, signNumber, languageSign, tipusDocumentalID
+        es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.FileInfoSignature fileInfoSignature;
+        fileInfoSignature = new es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.FileInfoSignature()
+                .signID(signID).name(name).reason(reason).location(location).signNumber(signNumber)
+                .languageSign(languageSign).documentType(tipusDocumentalID);
+
+        // TODO
+        // XYZ DEBUG
+        //fileInfoSignature.setUseTimeStamp(getUseTimestamp());
+
+        SignDocumentRequest signature;
+        signature = new SignDocumentRequest().commonInfo(commonInfo).fileInfoSignature(fileInfoSignature);
+
+        SignedDocumentResponseMultipart allResults;
+        try {
+            log.info(" Cridant a signDocument() ... ");
+            allResults = api.signdocument(signature, file, null);
+        } catch (ApiException e) {
+            transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+            transaccio.setEstatMissatge(StringUtils
+                    .truncate("ApiFirmaSimple::Error durant la cridada a signar document: " + e.getMessage(), 2990));
+            transaccio.setEstatExcepcio(getStackTrace(e));
+            log.error(transaccio.getEstatMissatge(), e);
+            return null;
+        }
+
+        SignedDocumentInformation fullResults = allResults.getSignedDocumentInformation();
+
+        ProcessStatus transactionStatus = fullResults.getStatus();
+
+        int status = transactionStatus.getStatus();
+
+        Fitxer fitxerSignat = null;
+        String error = null;
+
+        StatusConstants statusEnum = StatusConstants.fromValue(status);
+
+        switch (statusEnum) {
+
+            case STATUS_INITIALIZING: // = 0;
+                error = "El Procés de Firma ha finalitzat en un estat Initializing, que es un estat inconsistent.";
+            break;
+
+            case STATUS_IN_PROGRESS: // = 1;
+                error = "El Procés de Firma ha finalitzat en un estat In Progres, que es un estat inconsistent.";
+            break;
+
+            case STATUS_FINAL_ERROR: // = -1;
+
+                error = "Error durant la realització de la firma: " + transactionStatus.getErrorMessage();
+                String desc = transactionStatus.getErrorStackTrace();
+                if (desc != null) {
+                    log.error(error + "\n" + desc);
+                }
+            break;
+
+            case STATUS_CANCELLED: // = -2;
+                error = "El Procés de Firma s'ha cancel·lat.";
+            break;
+
+            case STATUS_FINAL_OK: // = 2;
+            {
+                try {
+
+                    File data = allResults.getSignedFile();
+
+                    /*
+                     * FileOutputStream fos = new FileOutputStream(fsf.getNom());
+                     * fos.write(fsf.getData()); fos.flush(); fos.close();
+                     */
+
+                    String nom = fitxer.getNom();
+
+                    int punt = nom.lastIndexOf('.');
+
+                    if (punt == -1) {
+                        nom = nom + ".signed";
+                    } else {
+                        nom = nom.substring(0, punt) + "-signed" + nom.substring(punt);
+                    }
+
+                    fitxerSignat = new FitxerBean("", PDF_MIME_TYPE, nom, data.length());
+
+                    fitxerSignat = fitxerLogicaEjb.create(fitxerSignat);
+
+                    File dest = FileSystemManager.crearFitxer(data, fitxerSignat.getFitxerID());
+
+                    transaccio.setFitxerSignaturaID(fitxerSignat.getFitxerID());
+
+                    String hashSignatura = com.google.common.io.Files.asByteSource(data).hash(Hashing.sha256())
+                            .toString();
+
+                    transaccio.setHashFirma(hashSignatura);
+                    log.info("XYZ ZZZ Guardada Firma a " + dest.getAbsolutePath());
+
+                    transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_OK);
+
+                    SignedFileInfo sfi = fullResults.getSignedFileInfo();
+
+                    // XYZ ZZZ Afegir Informacio de la Firma
+
+                    // XYZ ZZZ FALTA INFO
+                    java.lang.String eniTipoFirma = sfi.getEniTipoFirma();
+                    java.lang.String eniPerfilFirma = sfi.getEniPerfilFirma();
+
+                    log.info("\n\n\n eniTipoFirma = " + sfi.getEniTipoFirma() + "\neniPerfilFirma = "
+                            + sfi.getEniPerfilFirma() + "\n\n\n");
+
+                    if (eniPerfilFirma == null) {
+                        eniPerfilFirma = FirmaSimpleSignedFileInfo.SIGNPROFILE_BES;
+                        log.warn("eniPerfilFirma es NULL. Posam per defecte " + eniPerfilFirma + "!!!!!");
+                    }
+
+                    java.lang.String eniRolFirma = null;
+
+                    String eniSignerName = null;
+                    String eniSignerAdministrationId = null;
+                    String eniSignLevel = null;
+
+                    List<SignerInfo> signerInfoList = sfi.getSigners();
+                    if (signerInfoList != null && signerInfoList.size() > 0) {
+
+                        SignerInfo signerInfo = signerInfoList.get(0);
+
+                        eniSignerName = signerInfo.getEniSignerName();
+                        eniSignerAdministrationId = signerInfo.getEniSignerAdministrationId();
+                        eniSignLevel = signerInfo.getEniSignLevel();
+                    }
+
+                    Boolean checkAdministrationIdOfSigner = null;
+                    Boolean checkDocumentModifications = null;
+                    Boolean checkValidationSignature = null;
+
+                    ValidationInfo vi = sfi.getValidationInfo();
+                    if (vi != null) {
+                        checkAdministrationIdOfSigner = vi.getCheckAdministrationIDOfSigner();
+                        checkDocumentModifications = vi.getCheckDocumentModifications();
+                        checkValidationSignature = vi.getCheckValidationSignature();
+                    }
+
+                    int signOperation = sfi.getSignOperation();
+                    String signType = sfi.getSignType();
+                    String signAlgorithm = sfi.getSignAlgorithm();
+
+                    Integer signMode = sfi.getSignMode();
+
+                    Integer signaturesTableLocation = sfi.getSignaturesTableLocation();
+
+                    Boolean timestampIncluded = sfi.getTimeStampIncluded();
+
+                    Boolean policyIncluded = sfi.getPolicyIncluded();
+
+                    InfoSignaturaJPA infoSign = new InfoSignaturaJPA(signOperation, signType, signAlgorithm, signMode,
+                            signaturesTableLocation, timestampIncluded, policyIncluded, eniTipoFirma, eniPerfilFirma,
+                            eniRolFirma, eniSignerName, eniSignerAdministrationId, eniSignLevel,
+                            checkAdministrationIdOfSigner, checkDocumentModifications, checkValidationSignature);
+
+                    infoSign = (InfoSignaturaJPA) infoSignaturaEjb.create(infoSign);
+
+                    transaccio.setInfoSignaturaID(infoSign.getInfoSignaturaID());
+
+                    log.info("XYZ ZZZ Assignant  Info Signatura a Transaccio: " + infoSign);
+
+                    transaccio.setInfoSignatura(infoSign);
+
+                } catch (Throwable e) {
+
+                    String msg;
+                    if (e instanceof I18NException) {
+                        msg = I18NCommonUtils.getMessage((I18NException) e, new Locale(transaccio.getLanguageUI()));
+                    } else {
+                        msg = e.getMessage();
+                    }
+
+                    transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+                    transaccio.setEstatMissatge(StringUtils.truncate(
+                            "ApiFirmaSimple::Error durant el processament dels resultats de la signatura en servidor: "
+                                    + msg,
+                            2990));
+                    transaccio.setEstatExcepcio(getStackTrace(e));
+                    log.error(transaccio.getEstatMissatge(), e);
+                    return null;
+                }
+
+            } // Final Case Firma OK
+            break;
+
+            default:
+
+                error = "Error durant la realització de la firma emprant UtilitatsFirma. Estat desconegut " + status;
+
+        } // Final Switch Firma
+
+        if (error != null) {
+            transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+            transaccio.setEstatMissatge(StringUtils.truncate(error, 2990));
+        }
+
+        return fitxerSignat;
+    }
+
+    protected Fitxer signUsingApiFirmaSimplePortafib(TransaccioJPA transaccio, ApiSimpleJPA apisimple, Fitxer fitxer) {
+
+        ApiFirmaEnServidorSimple api;
+        try {
+
+            final Map<String, Object> map = new HashMap<String, Object>();
+            map.put("SP", Configuracio.getSystemAndFileProperties());
+
+            final Locale loc = new Locale("ca");
+
+            log.debug(" =============================================");
+            log.debug("URL PRE => " + apisimple.getUrl());
+            String url = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getUrl(), map, loc);
+            log.debug("URL POST => |" + url + "|");
+            log.debug("USERNAME PRE => " + apisimple.getUsername());
+            String username = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getUsername(), map, loc);
+            log.debug("USERNAME POST => |" + username + "|");
+            log.debug("PASSWORD PRE => " + apisimple.getContrasenya());
+            String password = TemplateEngine.processExpressionLanguageSquareBrackets(apisimple.getContrasenya(), map,
+                    loc);
+            log.debug("PASSWORD POST => |" + password + "|");
+
+            log.debug(" =============================================");
+
+            api = new ApiFirmaEnServidorSimpleJersey(url, username, password);
+        } catch (Exception e) {
+
+            transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
+            transaccio.setEstatMissatge(StringUtils.truncate(
+                    "ApiFirmaSimple::Error durant instanciació de l'API de Firma Simple: " + e.getMessage(), 2990));
+            transaccio.setEstatExcepcio(org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(e));
+            log.error(transaccio.getEstatMissatge(), e);
+            return null;
+        }
+
+        String signID = "1";
+        String name = transaccio.getNom();
+
+        String reason = templateEngine(Configuracio.getSignReasonEL(), transaccio);
+
+        log.info("\n\n  getSignReasonEL => ]" + reason + "[\n\n");
+
+        String location = templateEngine(Configuracio.getSignLocationEL(), transaccio);
+        String signerEmail = templateEngine(Configuracio.getSignerEmailEL(), transaccio);
+
+        int signNumber = 1;
+        String languageSign = transaccio.getInfoScanLanguageDoc();
+        if (languageSign == null || languageSign.trim().length() == 0) {
+            languageSign = Configuracio.getDefaultLanguage();
+        }
+
+        long tipusDocumentalID;
+        {
+            String tipusStr = transaccio.getInfoScanDocumentTipus();
+            if (tipusStr == null || tipusStr.trim().length() == 0) {
+                tipusDocumentalID = 99; // =TD99
+            } else {
+                try {
+                    tipusDocumentalID = Long.parseLong(tipusStr.replace("TD", ""));
+                } catch (NumberFormatException nfe) {
+                    log.error("Error parsejant tipus documental ]" + tipusStr + "[:" + nfe.getMessage(), nfe);
                     tipusDocumentalID = 99;
                 }
             }
@@ -149,18 +478,15 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
             transaccio.setEstatMissatge(
                     StringUtils.truncate("ApiFirmaSimple::Error durant la lectura del document a signar ("
                             + source.getAbsolutePath() + "): " + e.getMessage(), 2990));
-            transaccio
-                    .setEstatExcepcio(ExceptionUtils.getStackTrace(e));
+            transaccio.setEstatExcepcio(ExceptionUtils.getStackTrace(e));
             log.error(transaccio.getEstatMissatge(), e);
             return null;
         }
 
-        FirmaSimpleFile fileToSign = new FirmaSimpleFile(fitxer.getNom(), fitxer.getMime(),
-                data);
+        FirmaSimpleFile fileToSign = new FirmaSimpleFile(fitxer.getNom(), fitxer.getMime(), data);
 
-        FirmaSimpleFileInfoSignature fileInfoSignature = new FirmaSimpleFileInfoSignature(
-                fileToSign, signID, name, reason, location, signNumber, languageSign,
-                tipusDocumentalID);
+        FirmaSimpleFileInfoSignature fileInfoSignature = new FirmaSimpleFileInfoSignature(fileToSign, signID, name,
+                reason, location, signNumber, languageSign, tipusDocumentalID);
 
         String languageUI = transaccio.getLanguageUI();
         // Es la configuració del Servidor
@@ -168,8 +494,8 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
         String administrationID = null;
 
         FirmaSimpleCommonInfo commonInfo;
-        commonInfo = new FirmaSimpleCommonInfo(apisimple.getPerfil(), languageUI, username,
-                administrationID, signerEmail);
+        commonInfo = new FirmaSimpleCommonInfo(apisimple.getPerfil(), languageUI, username, administrationID,
+                signerEmail);
 
         FirmaSimpleSignDocumentRequest signature;
         signature = new FirmaSimpleSignDocumentRequest(commonInfo, fileInfoSignature);
@@ -180,9 +506,8 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
             fullResults = api.signDocument(signature);
         } catch (AbstractApisIBException e) {
             transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-            transaccio.setEstatMissatge(
-                    StringUtils.truncate("ApiFirmaSimple::Error durant la cridada a signar document: "
-                            + e.getMessage(),2990));
+            transaccio.setEstatMissatge(StringUtils
+                    .truncate("ApiFirmaSimple::Error durant la cridada a signar document: " + e.getMessage(), 2990));
             transaccio.setEstatExcepcio(getStackTrace(e));
             log.error(transaccio.getEstatMissatge(), e);
             return null;
@@ -207,8 +532,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
 
             case FirmaSimpleStatus.STATUS_FINAL_ERROR: // = -1;
 
-                error = "Error durant la realització de la firma: "
-                        + transactionStatus.getErrorMessage();
+                error = "Error durant la realització de la firma: " + transactionStatus.getErrorMessage();
                 String desc = transactionStatus.getErrorStackTrace();
                 if (desc != null) {
                     log.error(error + "\n" + desc);
@@ -240,13 +564,11 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
                         nom = nom.substring(0, punt) + "-signed" + nom.substring(punt);
                     }
 
-                    fitxerSignat = new FitxerBean("", FileInfoSignature.PDF_MIME_TYPE, nom,
-                            fsf.getData().length);
+                    fitxerSignat = new FitxerBean("", FileInfoSignature.PDF_MIME_TYPE, nom, fsf.getData().length);
 
                     fitxerSignat = fitxerLogicaEjb.create(fitxerSignat);
 
-                    File dest = FileSystemManager.crearFitxer(
-                            new ByteArrayInputStream(fsf.getData()),
+                    File dest = FileSystemManager.crearFitxer(new ByteArrayInputStream(fsf.getData()),
                             fitxerSignat.getFitxerID());
 
                     transaccio.setFitxerSignaturaID(fitxerSignat.getFitxerID());
@@ -266,13 +588,12 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
                     java.lang.String eniTipoFirma = sfi.getEniTipoFirma();
                     java.lang.String eniPerfilFirma = sfi.getEniPerfilFirma();
 
-                    log.info("\n\n\n eniTipoFirma = " + sfi.getEniTipoFirma()
-                            + "\neniPerfilFirma = " + sfi.getEniPerfilFirma() + "\n\n\n");
+                    log.info("\n\n\n eniTipoFirma = " + sfi.getEniTipoFirma() + "\neniPerfilFirma = "
+                            + sfi.getEniPerfilFirma() + "\n\n\n");
 
                     if (eniPerfilFirma == null) {
                         eniPerfilFirma = FirmaSimpleSignedFileInfo.SIGNPROFILE_BES;
-                        log.warn("eniPerfilFirma es NULL. Posam per defecte " + eniPerfilFirma
-                                + "!!!!!");
+                        log.warn("eniPerfilFirma es NULL. Posam per defecte " + eniPerfilFirma + "!!!!!");
                     }
 
                     java.lang.String eniRolFirma = null;
@@ -311,12 +632,10 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
 
                     Boolean policyIncluded = sfi.isPolicyIncluded();
 
-                    InfoSignaturaJPA infoSign = new InfoSignaturaJPA(signOperation, signType,
-                            signAlgorithm, signMode, signaturesTableLocation,
-                            timestampIncluded, policyIncluded, eniTipoFirma, eniPerfilFirma,
-                            eniRolFirma, eniSignerName, eniSignerAdministrationId,
-                            eniSignLevel, checkAdministrationIdOfSigner,
-                            checkDocumentModifications, checkValidationSignature);
+                    InfoSignaturaJPA infoSign = new InfoSignaturaJPA(signOperation, signType, signAlgorithm, signMode,
+                            signaturesTableLocation, timestampIncluded, policyIncluded, eniTipoFirma, eniPerfilFirma,
+                            eniRolFirma, eniSignerName, eniSignerAdministrationId, eniSignLevel,
+                            checkAdministrationIdOfSigner, checkDocumentModifications, checkValidationSignature);
 
                     infoSign = (InfoSignaturaJPA) infoSignaturaEjb.create(infoSign);
 
@@ -330,17 +649,16 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
 
                     String msg;
                     if (e instanceof I18NException) {
-                        msg = I18NCommonUtils.getMessage((I18NException) e,
-                                new Locale(transaccio.getLanguageUI()));
+                        msg = I18NCommonUtils.getMessage((I18NException) e, new Locale(transaccio.getLanguageUI()));
                     } else {
                         msg = e.getMessage();
                     }
 
                     transaccio.setEstatCodi(ScanWebSimpleStatus.STATUS_FINAL_ERROR);
-                    transaccio.setEstatMissatge(
-                            StringUtils.truncate(
+                    transaccio.setEstatMissatge(StringUtils.truncate(
                             "ApiFirmaSimple::Error durant el processament dels resultats de la signatura en servidor: "
-                                    + msg, 2990));
+                                    + msg,
+                            2990));
                     transaccio.setEstatExcepcio(getStackTrace(e));
                     log.error(transaccio.getEstatMissatge(), e);
                     return null;
@@ -351,7 +669,7 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
 
             default:
 
-                error = "Error durant la realització de la firma. Estat desconegut " + status;
+                error = "Error durant la realització de la firma emprant Firma de PortaFIB. Estat desconegut " + status;
 
         } // Final Switch Firma
 

@@ -63,6 +63,13 @@ public class ApiSimpleAdminController extends ApiSimpleController {
 		
 		apiSimpleForm.addHelpToField(CONFIGDEFIRMA, I18NUtils.tradueix("apisimple.configdefirma.help"));
 		
+		apiSimpleForm.setSubTitleCode("apisimple.ajuda");
+		
+		
+		if (!apiSimpleForm.isNou()) {
+		    apiSimpleForm.addReadOnlyField(TIPUS);
+		}
+		
 
 		return apiSimpleForm;
 	}

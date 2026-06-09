@@ -81,6 +81,46 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ApiSimpleFields.DESCRIPCIO)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="apiSimple.descripcio" var="descripcio" />
+              <fmt:message key="genapp.form.searchby" var="cercaperdescripcio" >                
+                 <fmt:param value="${descripcio}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${descripcio}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperdescripcio}" path="descripcio" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,ApiSimpleFields.TIPUS)}">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+              <%-- FILTRE NUMERO SELECT MULTIPLE --%>
+              <div class="input-group-prepend" style="padding-top: 5px;padding-right: 5px;">
+                 <span class="add-on"><fmt:message key="apiSimple.tipus" />:</span>
+              </div>
+
+              <div class="input-group-prepend" style="min-width:200px">
+                <form:select id="apisimple_tipus_select" path="tipusSelect" cssClass="search-query input-medium form-control select2 select2-hidden-accessible" multiple="true" style="width:100%;" tabindex="-1" aria-hidden="true">
+                    <c:forEach var="_entry" items="${__theFilterForm.mapOfValuesForTipus}">
+                      <option value="${_entry.key}" ${fn:contains(__theFilterForm.tipusSelect, _entry.key)?'selected':''} >${_entry.value}</option>
+                    </c:forEach>
+                </form:select>
+              </div>
+
+              <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#apisimple_tipus_select').select2({
+                        closeOnSelect: false
+                    });
+                    $('.select2-selection__rendered').css('padding-bottom','5px');
+                });
+              </script>
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,ApiSimpleFields.URL)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">

@@ -30,6 +30,13 @@ public class ApiSimpleJPA implements ApiSimple {
     @Column(name="nom",nullable = false,length = 255)
     java.lang.String nom;
 
+    @Column(name="descripcio",length = 255)
+    java.lang.String descripcio;
+
+    @Column(name="tipus",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("0")
+    int tipus = 0;
+
     @Column(name="url",nullable = false,length = 255)
     java.lang.String url;
 
@@ -53,9 +60,11 @@ public class ApiSimpleJPA implements ApiSimple {
   }
 
   /** Constructor amb tots els camps  */
-  public ApiSimpleJPA(long apiSimpleID , java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil , java.lang.String configDeFirma) {
+  public ApiSimpleJPA(long apiSimpleID , java.lang.String nom , java.lang.String descripcio , int tipus , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil , java.lang.String configDeFirma) {
     this.apiSimpleID=apiSimpleID;
     this.nom=nom;
+    this.descripcio=descripcio;
+    this.tipus=tipus;
     this.url=url;
     this.username=username;
     this.contrasenya=contrasenya;
@@ -63,17 +72,31 @@ public class ApiSimpleJPA implements ApiSimple {
     this.configDeFirma=configDeFirma;
 }
   /** Constructor sense valors autoincrementals */
-  public ApiSimpleJPA(java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil , java.lang.String configDeFirma) {
+  public ApiSimpleJPA(java.lang.String nom , java.lang.String descripcio , int tipus , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil , java.lang.String configDeFirma) {
     this.nom=nom;
+    this.descripcio=descripcio;
+    this.tipus=tipus;
     this.url=url;
     this.username=username;
     this.contrasenya=contrasenya;
     this.perfil=perfil;
     this.configDeFirma=configDeFirma;
 }
+  /** Constructor dels valors Not Null */
+  public ApiSimpleJPA(long apiSimpleID , java.lang.String nom , int tipus , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil) {
+    this.apiSimpleID=apiSimpleID;
+    this.nom=nom;
+    this.tipus=tipus;
+    this.url=url;
+    this.username=username;
+    this.contrasenya=contrasenya;
+    this.perfil=perfil;
+}
   public ApiSimpleJPA(ApiSimple __bean) {
     this.setApiSimpleID(__bean.getApiSimpleID());
     this.setNom(__bean.getNom());
+    this.setDescripcio(__bean.getDescripcio());
+    this.setTipus(__bean.getTipus());
     this.setUrl(__bean.getUrl());
     this.setUsername(__bean.getUsername());
     this.setContrasenya(__bean.getContrasenya());
@@ -93,6 +116,20 @@ public class ApiSimpleJPA implements ApiSimple {
 	};
 	public void setNom(java.lang.String _nom_) {
 		this.nom = _nom_;
+	};
+
+	public java.lang.String getDescripcio() {
+		return(descripcio);
+	};
+	public void setDescripcio(java.lang.String _descripcio_) {
+		this.descripcio = _descripcio_;
+	};
+
+	public int getTipus() {
+		return(tipus);
+	};
+	public void setTipus(int _tipus_) {
+		this.tipus = _tipus_;
 	};
 
 	public java.lang.String getUrl() {
@@ -165,6 +202,8 @@ public class ApiSimpleJPA implements ApiSimple {
     ApiSimpleJPA __tmp = new ApiSimpleJPA();
     __tmp.setApiSimpleID(__bean.getApiSimpleID());
     __tmp.setNom(__bean.getNom());
+    __tmp.setDescripcio(__bean.getDescripcio());
+    __tmp.setTipus(__bean.getTipus());
     __tmp.setUrl(__bean.getUrl());
     __tmp.setUsername(__bean.getUsername());
     __tmp.setContrasenya(__bean.getContrasenya());

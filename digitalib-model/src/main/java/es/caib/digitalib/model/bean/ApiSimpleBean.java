@@ -10,6 +10,8 @@ public class ApiSimpleBean implements ApiSimple {
 
 	long apiSimpleID;// PK
 	java.lang.String nom;
+	java.lang.String descripcio;
+	int tipus;
 	java.lang.String url;
 	java.lang.String username;
 	java.lang.String contrasenya;
@@ -22,9 +24,11 @@ public class ApiSimpleBean implements ApiSimple {
   }
 
   /** Constructor amb tots els camps  */
-  public ApiSimpleBean(long apiSimpleID , java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil , java.lang.String configDeFirma) {
+  public ApiSimpleBean(long apiSimpleID , java.lang.String nom , java.lang.String descripcio , int tipus , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil , java.lang.String configDeFirma) {
     this.apiSimpleID=apiSimpleID;
     this.nom=nom;
+    this.descripcio=descripcio;
+    this.tipus=tipus;
     this.url=url;
     this.username=username;
     this.contrasenya=contrasenya;
@@ -32,17 +36,31 @@ public class ApiSimpleBean implements ApiSimple {
     this.configDeFirma=configDeFirma;
 }
   /** Constructor sense valors autoincrementals */
-  public ApiSimpleBean(java.lang.String nom , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil , java.lang.String configDeFirma) {
+  public ApiSimpleBean(java.lang.String nom , java.lang.String descripcio , int tipus , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil , java.lang.String configDeFirma) {
     this.nom=nom;
+    this.descripcio=descripcio;
+    this.tipus=tipus;
     this.url=url;
     this.username=username;
     this.contrasenya=contrasenya;
     this.perfil=perfil;
     this.configDeFirma=configDeFirma;
 }
+  /** Constructor dels valors Not Null */
+  public ApiSimpleBean(long apiSimpleID , java.lang.String nom , int tipus , java.lang.String url , java.lang.String username , java.lang.String contrasenya , java.lang.String perfil) {
+    this.apiSimpleID=apiSimpleID;
+    this.nom=nom;
+    this.tipus=tipus;
+    this.url=url;
+    this.username=username;
+    this.contrasenya=contrasenya;
+    this.perfil=perfil;
+}
   public ApiSimpleBean(ApiSimple __bean) {
     this.setApiSimpleID(__bean.getApiSimpleID());
     this.setNom(__bean.getNom());
+    this.setDescripcio(__bean.getDescripcio());
+    this.setTipus(__bean.getTipus());
     this.setUrl(__bean.getUrl());
     this.setUsername(__bean.getUsername());
     this.setContrasenya(__bean.getContrasenya());
@@ -62,6 +80,20 @@ public class ApiSimpleBean implements ApiSimple {
 	};
 	public void setNom(java.lang.String _nom_) {
 		this.nom = _nom_;
+	};
+
+	public java.lang.String getDescripcio() {
+		return(descripcio);
+	};
+	public void setDescripcio(java.lang.String _descripcio_) {
+		this.descripcio = _descripcio_;
+	};
+
+	public int getTipus() {
+		return(tipus);
+	};
+	public void setTipus(int _tipus_) {
+		this.tipus = _tipus_;
 	};
 
 	public java.lang.String getUrl() {
@@ -108,6 +140,8 @@ public class ApiSimpleBean implements ApiSimple {
     ApiSimpleBean __tmp = new ApiSimpleBean();
     __tmp.setApiSimpleID(__bean.getApiSimpleID());
     __tmp.setNom(__bean.getNom());
+    __tmp.setDescripcio(__bean.getDescripcio());
+    __tmp.setTipus(__bean.getTipus());
     __tmp.setUrl(__bean.getUrl());
     __tmp.setUsername(__bean.getUsername());
     __tmp.setContrasenya(__bean.getContrasenya());

@@ -176,8 +176,11 @@ public interface Constants {
     
     
     
-    // CONTEXTES WEB 
+    public static final int TIPUS_API_FIRMA_SIMPLE_PORTAFIB = 0;
+    public static final int TIPUS_API_FIRMA_EN_SERVIDOR_UTILITATSFIRMA= 1;
     
+    
+    // CONTEXTES WEB     
     public static final String SCANWEB_PROCESS_CONTROLLER_PUBLIC_CONTEXTPATH = "/public/scanweb";
     
     

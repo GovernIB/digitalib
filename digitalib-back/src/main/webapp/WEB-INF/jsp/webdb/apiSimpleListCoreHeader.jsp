@@ -18,6 +18,12 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.NOM)}">
         <th>${dib:getSortIcons(__theFilterForm,ApiSimpleFields.NOM)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.DESCRIPCIO)}">
+        <th>${dib:getSortIcons(__theFilterForm,ApiSimpleFields.DESCRIPCIO)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.TIPUS)}">
+        <th>${dib:getSortIcons(__theFilterForm,ApiSimpleFields.TIPUS)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.URL)}">
         <th>${dib:getSortIcons(__theFilterForm,ApiSimpleFields.URL)}</th>
         </c:if>

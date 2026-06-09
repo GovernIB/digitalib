@@ -19,6 +19,14 @@ public class ApiSimpleQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), ApiSimpleFields.NOM);
   }
 
+  public StringField DESCRIPCIO() {
+    return new StringField(getQueryPath(), ApiSimpleFields.DESCRIPCIO);
+  }
+
+  public IntegerField TIPUS() {
+    return new IntegerField(getQueryPath(), ApiSimpleFields.TIPUS);
+  }
+
   public StringField URL() {
     return new StringField(getQueryPath(), ApiSimpleFields.URL);
   }

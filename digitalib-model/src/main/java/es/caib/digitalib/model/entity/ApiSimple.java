@@ -8,6 +8,12 @@ public interface ApiSimple extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getNom();
 	public void setNom(java.lang.String _nom_);
 
+	public java.lang.String getDescripcio();
+	public void setDescripcio(java.lang.String _descripcio_);
+
+	public int getTipus();
+	public void setTipus(int _tipus_);
+
 	public java.lang.String getUrl();
 	public void setUrl(java.lang.String _url_);
 

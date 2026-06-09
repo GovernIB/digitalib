@@ -34,6 +34,19 @@
           ${apiSimple.nom}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.DESCRIPCIO)}">
+          <td>
+          ${apiSimple.descripcio}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.TIPUS)}">
+          <td>
+          <c:set var="tmp">${apiSimple.tipus}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForTipus[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,ApiSimpleFields.URL)}">
           <td>
                        <c:if test="${ not empty apiSimple.url}">

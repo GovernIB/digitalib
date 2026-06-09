@@ -34,6 +34,10 @@ public class ApiSimpleValidator<I extends ApiSimple>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,TIPUS, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUS)));
+
     __vr.rejectIfEmptyOrWhitespace(__target__,URL, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(URL)));
@@ -56,6 +60,14 @@ public class ApiSimpleValidator<I extends ApiSimple>
       if (__nom!= null && __nom.length() > 255) {
         __vr.rejectValue(NOM, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(DESCRIPCIO) == 0) {
+      java.lang.String __descripcio = __target__.getDescripcio();
+      if (__descripcio!= null && __descripcio.length() > 255) {
+        __vr.rejectValue(DESCRIPCIO, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DESCRIPCIO)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
 
