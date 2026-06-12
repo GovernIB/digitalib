@@ -18,6 +18,30 @@
                         key="configuraciogrup.gestio" /></span>
 
             </a></li>
+            
+             <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a
+                href="<c:url value="/admin/perfilnomesescaneig/perpersona/list"/>">
+                <span style="${(fn:contains(url, 'perfilnomesescaneig/perpersona'))? "font-weight:bold;" : ""}"> <fmt:message
+                        key="perfil.us.1.plural" />
+
+                </span>
+            </a></li>
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a
+                href="<c:url value="/admin/perfilcopiaautentica/perpersona/list"/>">
+                <span style="${(fn:contains(url, 'perfilcopiaautentica/perpersona'))? "font-weight:bold;" : ""}"> <fmt:message
+                        key="perfil.us.2.plural" />
+                </span>
+            </a></li>
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a
+                href="<c:url value="/admin/perfilcustodia/perpersona/list"/>">
+                <span style="${(fn:contains(url, 'perfilcustodia/perpersona'))? "font-weight:bold;" : ""}"> <fmt:message
+                        key="perfil.us.3.plural" />
+                </span>
+            </a></li>
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
@@ -45,30 +69,14 @@
                 <span style="${(fn:contains(url, '/admin/netejafitxerspersona'))? "font-weight:bold;" : ""}"><fmt:message
                         key="netejafitxerstransaccions" /></span>
             </a></li>
-
-        <hr style="margin-top: 6px; margin-bottom: 6px;" />
-
-        <li style="list-style-type: disc; list-style-position: inside;"><a
-                href="<c:url value="/admin/perfilnomesescaneig/perpersona/list"/>">
-                <span style="${(fn:contains(url, 'perfilnomesescaneig/perpersona'))? "font-weight:bold;" : ""}"> <fmt:message
-                        key="perfil.us.1.plural" />
-
-                </span>
+            
+            
+              <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/estadisticagraficaweb/"/>">
+                <span style="${(fn:contains(url, '/admin/estadisticagraficaweb/'))? "font-weight:bold;" : ""}"><fmt:message
+                        key="estadisticagrafica" /></span>
             </a></li>
 
-        <li style="list-style-type: disc; list-style-position: inside;"><a
-                href="<c:url value="/admin/perfilcopiaautentica/perpersona/list"/>">
-                <span style="${(fn:contains(url, 'perfilcopiaautentica/perpersona'))? "font-weight:bold;" : ""}"> <fmt:message
-                        key="perfil.us.2.plural" />
-                </span>
-            </a></li>
-
-        <li style="list-style-type: disc; list-style-position: inside;"><a
-                href="<c:url value="/admin/perfilcustodia/perpersona/list"/>">
-                <span style="${(fn:contains(url, 'perfilcustodia/perpersona'))? "font-weight:bold;" : ""}"> <fmt:message
-                        key="perfil.us.3.plural" />
-                </span>
-            </a></li>
+       
 
     </ul>
 </div>

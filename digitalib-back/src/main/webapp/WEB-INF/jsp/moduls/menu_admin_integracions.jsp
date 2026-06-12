@@ -14,6 +14,33 @@
 
             </a></li>
 
+
+        <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a
+                href="<c:url value="/admin/perfilnomesescaneig/peraplicacio/list"/>">
+                <span style="${(fn:contains(url, 'perfilnomesescaneig/peraplicacio'))? "font-weight:bold;" : ""}"> <fmt:message
+                        key="perfil.us.1.plural" />
+                </span>
+            </a></li>
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a
+                href="<c:url value="/admin/perfilcopiaautentica/peraplicacio/list"/>">
+                <span style="${(fn:contains(url, 'perfilcopiaautentica/peraplicacio'))? "font-weight:bold;" : ""}"> <fmt:message
+                        key="perfil.us.2.plural" />
+                </span>
+            </a></li>
+
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a
+                href="<c:url value="/admin/perfilcustodia/peraplicacio/list"/>">
+                <span style="${(fn:contains(url, 'perfilcustodia/peraplicacio'))? "font-weight:bold;" : ""}"> <fmt:message
+                        key="perfil.us.3.plural" />
+                </span>
+            </a></li>
+
+
+
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 
@@ -41,28 +68,10 @@
                         key="netejafitxerstransaccions" /></span>
             </a></li>
 
-        <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
-        <li style="list-style-type: disc; list-style-position: inside;"><a
-                href="<c:url value="/admin/perfilnomesescaneig/peraplicacio/list"/>">
-                <span style="${(fn:contains(url, 'perfilnomesescaneig/peraplicacio'))? "font-weight:bold;" : ""}"> <fmt:message
-                        key="perfil.us.1.plural" />
-                </span>
-            </a></li>
-
-        <li style="list-style-type: disc; list-style-position: inside;"><a
-                href="<c:url value="/admin/perfilcopiaautentica/peraplicacio/list"/>">
-                <span style="${(fn:contains(url, 'perfilcopiaautentica/peraplicacio'))? "font-weight:bold;" : ""}"> <fmt:message
-                        key="perfil.us.2.plural" />
-                </span>
-            </a></li>
-
-
-        <li style="list-style-type: disc; list-style-position: inside;"><a
-                href="<c:url value="/admin/perfilcustodia/peraplicacio/list"/>">
-                <span style="${(fn:contains(url, 'perfilcustodia/peraplicacio'))? "font-weight:bold;" : ""}"> <fmt:message
-                        key="perfil.us.3.plural" />
-                </span>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/estadisticagraficaapp/"/>">
+                <span style="${(fn:contains(url, '/admin/estadisticagraficaapp/'))? "font-weight:bold;" : ""}"><fmt:message
+                        key="estadisticagrafica" /></span>
             </a></li>
 
     </ul>

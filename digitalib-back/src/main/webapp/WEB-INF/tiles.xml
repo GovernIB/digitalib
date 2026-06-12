@@ -438,6 +438,12 @@
     <definition name="perfilListAdminDigitalIB" extends="admindigitalib">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
     </definition>
+    
+    <definition name="estadisticagraficaAdminDigitalIB" extends="admindigitalib">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/admin/estadisticagrafica.jsp" />
+    </definition>
+
+    
 
 
     <!--  ============================================== -->
@@ -484,6 +490,11 @@
     
     <definition name="perfilListAdminIntegracions" extends="adminintegracions">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/perfilList.jsp" />
+    </definition>
+    
+    
+    <definition name="estadisticagraficaAdminIntegracions" extends="adminintegracions">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/admin/estadisticagrafica.jsp" />
     </definition>
 
 

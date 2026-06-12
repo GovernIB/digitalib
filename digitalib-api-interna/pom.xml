@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -70,6 +71,29 @@
             <artifactId>pluginsib-utils-swagger-ui-configurable-webjar</artifactId>
             <version>${pluginsib.utils.version}</version>
         </dependency>
+
+ 
+        <!--   COMANDA -->
+        <dependency>
+            <groupId>es.caib.comanda</groupId>
+            <artifactId>comanda-api-server-monitoring</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+            <!--  Exclude com.google.code.findbugs:jsr305 -->
+                <exclusion>
+                    <groupId>com.google.code.findbugs</groupId>
+                    <artifactId>jsr305</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>es.caib.comanda</groupId>
+            <artifactId>comanda-api-utils</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -278,7 +302,7 @@
                     </webResources>
                     <packagingExcludes>
                         <!-- Requereix afegir mòdul 'com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider' a
-                        jboss-deployment-structure.xml --> 
+                        jboss-deployment-structure.xml -->
                         **/jackson-jaxrs-json-provider*redhat*.jar, **/jackson-jaxrs-base*redhat*.jar,
                         **/jackson-module-jaxb-annotations*redhat*.jar, 
                         <!-- Requereix afegir mòdul 'javax.ws.rs.api' a jboss-deployment-structure.xml -->
@@ -286,7 +310,7 @@
                     </packagingExcludes>
                 </configuration>
             </plugin>
-            
+
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>

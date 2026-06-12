@@ -7,11 +7,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -43,7 +41,6 @@ import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.pluginsib.core.v3.utils.FileUtils;
 import org.hibernate.Hibernate;
-import org.jboss.ejb3.annotation.TransactionTimeout;
 
 import com.google.common.hash.Hashing;
 

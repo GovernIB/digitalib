@@ -1,5 +1,8 @@
 package es.caib.digitalib.commons.utils;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author anadal
@@ -8,29 +11,28 @@ package es.caib.digitalib.commons.utils;
 public interface Constants {
 
     public static final String DIGITALIB_APP_NAME = "digitalib";
-    
-    public static final String DIGITALIB_PROPERTY_BASE="es.caib.digitalib.";
+
+    public static final String DIGITALIB_PROPERTY_BASE = "es.caib.digitalib.";
 
     public static final String MAIL_SERVICE = "java:/es.caib.digitalib.mail";
 
     // TRUE ROLES
-    public static final String DIB_ADMIN="DIB_ADMIN";
-    public static final String DIB_USER="DIB_USER";
-    public static final String DIB_WS="DIB_WS";
+    public static final String DIB_ADMIN = "DIB_ADMIN";
+    public static final String DIB_USER = "DIB_USER";
+    public static final String DIB_WS = "DIB_WS";
 
     // VIRTUAL SECURITY ROLES
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_USER = "ROLE_USER";
-    
+
     // EJB HIGH LEVEL ROLES
-    public static final String ROLE_EJB_FULL_ACCESS  = DIB_ADMIN;
+    public static final String ROLE_EJB_FULL_ACCESS = DIB_ADMIN;
     public static final String ROLE_EJB_BASIC_ACCESS = DIB_USER;
     public static final String ROLE_EJB_WS_ACCESS = DIB_WS;
-    
+
     public static final String PREFIX = "DIB";
 
     public static final String MIME_PDF = "application/pdf";
-
 
     // ROLE SCAN
     public static final String ROLE_SCAN = "ROLE_SCAN";
@@ -83,14 +85,14 @@ public interface Constants {
     public static final int TIPUS_CUSTODIA_DOCUMENTCUSTODY = 2;
 
     public static final int[] TIPUS_CUSTODIA = { TIPUS_CUSTODIA_SENSE, TIPUS_CUSTODIA_ARXIU,
-        TIPUS_CUSTODIA_DOCUMENTCUSTODY };
+            TIPUS_CUSTODIA_DOCUMENTCUSTODY };
 
     public static final int TIPUS_FIRMA_EN_SERVIDOR_SENSE = 0;
     public static final int TIPUS_FIRMA_EN_SERVIDOR_PLUGIN = 1;
     public static final int TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE = 2;
 
-    public static final int[] TIPUS_FIRMA_EN_SERVIDOR = { TIPUS_FIRMA_EN_SERVIDOR_SENSE,
-        TIPUS_FIRMA_EN_SERVIDOR_PLUGIN, TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE };
+    public static final int[] TIPUS_FIRMA_EN_SERVIDOR = { TIPUS_FIRMA_EN_SERVIDOR_SENSE, TIPUS_FIRMA_EN_SERVIDOR_PLUGIN,
+            TIPUS_FIRMA_EN_SERVIDOR_APISIMPLE };
 
     public static final int FORMAT_FILE_PDF = 0; // "pdf";
 
@@ -112,8 +114,7 @@ public interface Constants {
 
     public static final int PIXEL_TYPE_COLOR = 2;
 
-    public static final int[] PIXEL_TYPE = { PIXEL_TYPE_BLACK_WHITE, PIXEL_TYPE_GRAY,
-        PIXEL_TYPE_COLOR };
+    public static final int[] PIXEL_TYPE = { PIXEL_TYPE_BLACK_WHITE, PIXEL_TYPE_GRAY, PIXEL_TYPE_COLOR };
 
     // public static final int PERFIL_US_TRANSACCIO_INFO = 0;
 
@@ -127,10 +128,10 @@ public interface Constants {
     public static final int PERFIL_US_COPIA_AUTENTICA = 2;
     public static final int PERFIL_US_CUSTODIA = 3;
 
-    public static final int[] PERFIL_US = { PERFIL_US_NOMES_ESCANEIG_INFO,
-        PERFIL_US_COPIA_AUTENTICA_INFO, PERFIL_US_CUSTODIA_INFO,
+    public static final int[] PERFIL_US = { PERFIL_US_NOMES_ESCANEIG_INFO, PERFIL_US_COPIA_AUTENTICA_INFO,
+            PERFIL_US_CUSTODIA_INFO,
 
-        PERFIL_US_NOMES_ESCANEIG, PERFIL_US_COPIA_AUTENTICA, PERFIL_US_CUSTODIA };
+            PERFIL_US_NOMES_ESCANEIG, PERFIL_US_COPIA_AUTENTICA, PERFIL_US_CUSTODIA };
 
     public static final int TIPUS_OPERACIO_FIRMA_FIRMAR = 0;
     public static final int TIPUS_OPERACIO_FIRMA_COFIRMAR = 1;
@@ -154,8 +155,8 @@ public interface Constants {
     public static final int TAULADEFIRMES_PRIMERAPAGINA = 1;
     public static final int TAULADEFIRMES_DARRERAPAGINA = -1;
 
-    public static final int[] TAULADEFIRMES = { TAULADEFIRMES_SENSETAULA,
-        TAULADEFIRMES_PRIMERAPAGINA, TAULADEFIRMES_DARRERAPAGINA };
+    public static final int[] TAULADEFIRMES = { TAULADEFIRMES_SENSETAULA, TAULADEFIRMES_PRIMERAPAGINA,
+            TAULADEFIRMES_DARRERAPAGINA };
 
     // 0 => no usar politica de firma,
     public static final int US_POLITICA_DE_FIRMA_NO_USAR = 0;
@@ -170,18 +171,47 @@ public interface Constants {
     public static final int TRANSACCIO_ESTAT_CODI_ENPROGRES = 1;
     public static final int TRANSACCIO_ESTAT_CODI_OK = 2;
 
-
-    public static final int ORIGEN_CIUTADA = 0; 
+    public static final int ORIGEN_CIUTADA = 0;
     public static final int ORIGEN_ADMINISTRACIO = 1;
-    
-    
-    
+
     public static final int TIPUS_API_FIRMA_SIMPLE_PORTAFIB = 0;
-    public static final int TIPUS_API_FIRMA_EN_SERVIDOR_UTILITATSFIRMA= 1;
-    
-    
+    public static final int TIPUS_API_FIRMA_EN_SERVIDOR_UTILITATSFIRMA = 1;
+
     // CONTEXTES WEB     
     public static final String SCANWEB_PROCESS_CONTROLLER_PUBLIC_CONTEXTPATH = "/public/scanweb";
-    
-    
+
+    public static final String TIPUS_OK = "TRANSACCIO_OK";
+
+    public static final String TIPUS_CANCEL = "TRANSACCIO_CANCEL";
+
+    public static final String TIPUS_ERROR = "TRANSACCIO_ERROR";
+
+    public static final String TIPUS_EN_PROCES = "TRANSACCIO_EN_PROCES";
+
+    public static final Map<String, String> ALL_TIPUS = Map.of(
+            // 
+            TIPUS_OK, "Transaccions finalitzades correctament",
+            // 
+            TIPUS_CANCEL, "Transaccions cancel·lades",
+            //
+            TIPUS_ERROR, "Transaccions finalitzades amb error",
+            // 
+            TIPUS_EN_PROCES, "Transaccions en procés de creació, escanejant, firmant o arxivant");
+
+    public static final Map<String, List<Integer>> ESTATS_PER_TIPUS = Map.of(
+            //
+            TIPUS_OK, List.of(Constants.TRANSACCIO_ESTAT_CODI_OK),
+            // 
+            TIPUS_CANCEL, List.of(Constants.TRANSACCIO_ESTAT_CODI_CANCELAT),
+            //
+            TIPUS_ERROR, List.of(Constants.TRANSACCIO_ESTAT_CODI_EXPIRAT, Constants.TRANSACCIO_ESTAT_CODI_ERROR),
+            //
+            TIPUS_EN_PROCES, List.of(Constants.TRANSACCIO_ESTAT_CODI_ID, Constants.TRANSACCIO_ESTAT_CODI_ENPROGRES)
+
+    );
+
+    public static final String CATEGORIA_PETICIONS = "PETICIONS";
+
+    public static final String[] CATEGORIES = { CATEGORIA_PETICIONS };
+
 }
