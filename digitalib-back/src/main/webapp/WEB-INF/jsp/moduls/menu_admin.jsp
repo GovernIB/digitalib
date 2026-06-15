@@ -67,15 +67,28 @@
                         key="monitor.integracions" /></span>
             </a></li>
 
-        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/fitxersorfes/list"/>">
-                <span style="${(fn:contains(url, '/admin/fitxersorfes'))? "font-weight:bold;" : ""}"><fmt:message key="fitxers.orfes" /></span>
-
-            </a></li>
 
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/avis/list"/>">
                 <span style="${(fn:contains(url, '/admin/avis'))? "font-weight:bold;" : ""}"><fmt:message key="avis.avis.plural" /></span>
 
             </a></li>
+
+
+        <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/fitxersorfesdiscdur/list"/>">
+                <span style="${(fn:contains(url, '/admin/fitxersorfesdiscdur'))? "font-weight:bold;" : ""}"><fmt:message
+                        key="fitxers.orfes.discdur" /></span>
+
+            </a></li>
+
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/fitxersorfesbbdd/list"/>">
+                <span style="${(fn:contains(url, '/admin/fitxersorfesbbdd'))? "font-weight:bold;" : ""}"><fmt:message
+                        key="fitxers.orfes.bbdd" /></span>
+
+            </a></li>
+
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
@@ -115,10 +128,11 @@
                 <span style="${(fn:contains(url, '/admin/reloadproperties'))? "font-weight:bold;" : ""}">Recarregar fitxers de
                     properties</span>
             </a></li>
-            
+
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/editproperties"/>">
-            <span style="${(fn:contains(url, '/admin/editproperties'))? "font-weight:bold;" : ""}">Editar fitxer digitalib.properties</span>
-        </a></li>
+                <span style="${(fn:contains(url, '/admin/editproperties'))? "font-weight:bold;" : ""}">Editar fitxer
+                    digitalib.properties</span>
+            </a></li>
 
 
     </ul>
