@@ -380,14 +380,14 @@
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
             <li class="nav-item ">
-                 <a class="nav-link ${(counter.index == 0)? 'active':''}" href="#${counter.index}_tab_firmatPerFormat_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a>
+                 <a class="nav-link ${(counter.index == 0)? 'active':''}" href="#tab_${counter.index}_firmatPerFormat_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a>
             </li>
           </c:forEach>
            
          </ul>
          <div class="tab-content well well-white" style="padding:8px;margin:0px;">
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
-           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_firmatPerFormat_${idioma.idiomaID}">
+           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="tab_${counter.index}_firmatPerFormat_${idioma.idiomaID}">
                <form:errors path="configuracioFirma.firmatPerFormat.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
                <form:input path="configuracioFirma.firmatPerFormat.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.FIRMATPERFORMATID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.FIRMATPERFORMATID)}" maxlength="4000" />
            </div>
@@ -415,14 +415,14 @@
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
             <li class="nav-item ">
-                 <a class="nav-link ${(counter.index == 0)? 'active':''}" href="#${counter.index}_tab_motiuDelegacio_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a>
+                 <a class="nav-link ${(counter.index == 0)? 'active':''}" href="#tab_${counter.index}_motiuDelegacio_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a>
             </li>
           </c:forEach>
            
          </ul>
          <div class="tab-content well well-white" style="padding:8px;margin:0px;">
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
-           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_motiuDelegacio_${idioma.idiomaID}">
+           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="tab_${counter.index}_motiuDelegacio_${idioma.idiomaID}">
                <form:errors path="configuracioFirma.motiuDelegacio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
                <form:input path="configuracioFirma.motiuDelegacio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.MOTIUDELEGACIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,ConfiguracioFirmaFields.MOTIUDELEGACIOID)}" maxlength="4000" />
            </div>
