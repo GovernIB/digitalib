@@ -1,12 +1,10 @@
-<%@ page language="java" 
-%><%@ include file="/WEB-INF/jsp/moduls/includes.jsp" 
-%>
+<%@ page language="java"%><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <style>
 <%--
-    body{
-        background-color: #CEE3F6;
-    }
-    --%>
+    body {
+    background-color: #CEE3F6;
+}
+--%>
 </style>
 
 <br/>
@@ -18,7 +16,7 @@
   <%-- XYZ ZZZ
   <c:if test="fn:length(companies) eq 1" >
   <h6>
-     Si no voleu que aparegui aquesta pantalla quan només hi ha un plugin, llavors anau a la <br/>
+     Si no voleu que aparegui aquesta pantalla quan nomÃ©s hi ha un plugin, llavors anau a la <br/>
      classe <b><%= ScanWebModuleController.class.getName() %></b><br/>
      i editau el camp estatic stepSelectionWhenOnlyOnePlugin i assignau-li un valor true;
   </h6>
@@ -36,6 +34,15 @@
      </small>
      </button>
   </c:forEach>
+  
+  <%-- Afegir boto de cancel que accedeixi a ${scancontext}/cancel/${scanWebID} --%>
+  <br/>
+  
+  <button type="button" class="btn btn-large btn-block btn-secondary" onclick="location.href='<c:url value="${scancontext}/cancel/${scanWebID}"/>'">
+     <b><fmt:message key="genapp.cancel"/></b>
+  
+  
+  
   </div>
   
   <br/>
