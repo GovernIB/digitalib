@@ -110,13 +110,13 @@ public class FirmaArxiuParametersUserController extends AbstractFirmaArxiuParame
                     Map<Long, FitxerEscanejatInfo> infos = (Map<Long, FitxerEscanejatInfo>) request.getSession()
                             .getAttribute(AbstractScanWebProcessController.SESSION_MASSIVE_INFO_BY_ID);
                     if (infos == null) {
-                        log.error("\n\n\n ERROR infos val null. \n\n\n");
+                        log.error("ERROR infos val null.");
                     } else {
                         long id = transaccioForm.getTransaccio().getTransaccioID();
                         FitxerEscanejatInfo fei = infos.get(id);
                         if (fei == null) {
-                            log.error("\n\n\n infos[" + id + "] => " + fei + "  \n\n\n");
-                            log.error("\n\n\n IDs de Transaccions:");
+                            log.error("infos[" + id + "] => " + fei);
+                            log.error("IDs de Transaccions:");
                             for (Long ids : infos.keySet()) {
                                 log.info("     => " + ids);
                             }

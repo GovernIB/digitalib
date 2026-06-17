@@ -1492,7 +1492,7 @@ public class ApiMassiveScanWebSimpleV1Service {
             transactionWebID = transactionWebID.replace("\"", "");
         }
 
-        log.info("\n\n Entra a  " + methodName + "(" + transactionWebID + ")...\n\n");
+        log.info("Entra a  " + methodName + "(" + transactionWebID + ")...");
 
         String language = "ca";
 
@@ -1505,22 +1505,22 @@ public class ApiMassiveScanWebSimpleV1Service {
             Long transactionMultipleID = transaccioLogicaEjb.executeQueryOne(TransaccioFields.TRANSACCIOMULTIPLEID,
                     TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
 
-            log.info("\n\n transactionMultipleID = " + transactionMultipleID + "...\n\n");
+            log.info(" transactionMultipleID = " + transactionMultipleID + "...");
 
             if (transactionMultipleID == null) {
 
                 List<Transaccio> transaccions = transaccioLogicaEjb
                         .select(TransaccioFields.TRANSACTIONWEBID.equal(transactionWebID));
 
-                log.info("\n\n transaccions = " + transaccions + "...\n\n");
+                log.info("transaccions = " + transaccions + "...");
 
                 if (transaccions != null) {
-                    log.info("\n\n #transaccions = " + transaccions.size() + "...\n\n");
+                    log.info("#transaccions = " + transaccions.size() + "...");
 
                     if (transaccions.size() != 0) {
 
                         transactionMultipleID = transaccions.get(0).getTransaccioMultipleID();
-                        log.info("\n\n transactionMultipleID2 = " + transactionMultipleID + "...\n\n");
+                        log.info("transactionMultipleID2 = " + transactionMultipleID + "...");
                     }
                 }
 

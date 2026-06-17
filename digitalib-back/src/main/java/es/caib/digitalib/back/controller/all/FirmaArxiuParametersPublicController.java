@@ -125,15 +125,15 @@ public class FirmaArxiuParametersPublicController extends AbstractFirmaArxiuPara
                     Map<Long, FitxerEscanejatInfo> infos = (Map<Long, FitxerEscanejatInfo>) request.getSession()
                             .getAttribute(AbstractScanWebProcessController.SESSION_MASSIVE_INFO_BY_ID);
                     if (infos == null) {
-                        log.error("\n\n\n ERROR infos val null. \n\n\n");
+                        log.error("ERROR infos val null.");
                     } else {
                         long id = transaccioForm.getTransaccio().getTransaccioID();
                         FitxerEscanejatInfo fei = infos.get(id);
                         if (fei == null) {
-                            log.error("\n\n\n infos[" + id + "] => " + fei + "  \n\n\n");
-                            log.error("\n\n\n IDs de Transaccions:");
+                            log.error("infos[" + id + "] => " + fei);
+                            log.error("IDs de Transaccions:");
                             for (Long ids : infos.keySet()) {
-                                log.info("     => " + ids);
+                                log.error("     => " + ids);
                             }
                         } else {
                             if (fei.firstPageEmpty) {
@@ -159,28 +159,7 @@ public class FirmaArxiuParametersPublicController extends AbstractFirmaArxiuPara
     }
     
     
-    
-    /**
-     * 
-     * Parxe per evitar error de Invalid HTTP method: ]]]
-     */
-    
-/*
-    @RequestMapping(value = "/{transaccioID}/editget", method = { RequestMethod.DELETE,
-            RequestMethod.GET,RequestMethod.HEAD, RequestMethod.OPTIONS, RequestMethod.PATCH,
-            RequestMethod.POST, RequestMethod.PUT, RequestMethod.TRACE} )
-    //@Override
-    public ModelAndView editarTransaccioGet2(@PathVariable("transaccioID") java.lang.Long transaccioID,
-        HttpServletRequest request,
-        HttpServletResponse response) throws I18NException {
-
-        log.info("\n\n\n ===>   METHOD " + request.getMethod() + "\n\n\n");
-        
-        return editAndViewTransaccioGet(transaccioID,
-          request, response, false);
-    }
-    */
-    
+ 
     
     
 
@@ -201,23 +180,23 @@ public class FirmaArxiuParametersPublicController extends AbstractFirmaArxiuPara
             File f = FileSystemManager.getFile(fid);
 
             // XYZ ZZZ ZZZ
-            log.info("\n\n\n F = " + f.getAbsolutePath() + " [" + f.length() + "]\n\n\n");
+            log.info("F = " + f.getAbsolutePath() + " [" + f.length() + "]");
 
             File f2 = new File(f.getParentFile(), f.getName() + ".withoutfirstpage");
 
-            log.info("\n\n\n F2 PRE= " + f2.getAbsolutePath() + "\n\n\n");
+            log.info(" F2 PRE= " + f2.getAbsolutePath() + "");
 
             try {
                 SplitPdf.removeFirstPage(f, f2);
-                log.info("\n\n\n F2 POST= " + f2.getAbsolutePath() + " [" + f2.length() + "]\n\n\n");
+                log.info(" F2 POST= " + f2.getAbsolutePath() + " [" + f2.length() + "]");
 
                 if (!f.delete()) {
-                    log.info("\n\n\n F DELETE = false");
-                    log.error("\n\n\n F Hi ha algu que es deixa aquest fitxer obert: " + f.getAbsolutePath());
+                    log.info(" F DELETE = false");
+                    log.error(" F Hi ha algu que es deixa aquest fitxer obert: " + f.getAbsolutePath());
                 } else {
-                    log.info("\n\n\n F DELETE = " + f.delete());
-                    log.info("\n\n\n F2 RENAMETO = " + f2.renameTo(f));
-                    log.info("\n\n\n F2 DELETE = " + f2.delete());
+                    log.info(" F DELETE = " + f.delete());
+                    log.info(" F2 RENAMETO = " + f2.renameTo(f));
+                    log.info(" F2 DELETE = " + f2.delete());
 
                 }
 

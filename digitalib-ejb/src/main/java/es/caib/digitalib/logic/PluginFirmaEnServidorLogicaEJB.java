@@ -216,13 +216,13 @@ public class PluginFirmaEnServidorLogicaEJB extends AbstractPluginLogicaEJB<ISig
                 // XYZ hauria de cridar a l'altre
                 String absoluteURL = Configuracio.getBackUrl();
 
-                log.info("\n\n\n XYZ ZZZ absoluteURL ==> " + absoluteURL + "\n\n\n");
+                log.info(" XYZ ZZZ absoluteURL ==> " + absoluteURL + "");
 
                 // Segellat de temps
                 timestampUrlBase = SignatureUtils.getAbsoluteURLToTimeStampGeneratorPerFirmaEnServidor(absoluteURL,
                         confFirma.getPluginFirmaServidorID());
 
-                log.info("\n\n\n XYZ ZZZ timestampUrlBase ==> " + timestampUrlBase + "\n\n\n");
+                log.info(" XYZ ZZZ timestampUrlBase ==> " + timestampUrlBase + "");
 
                 timeStampGenerator = DigitalIBTimeStampGenerator.getInstance(pluginSegellDeTempsEjb,
                         confFirma.getPluginSegellatID());

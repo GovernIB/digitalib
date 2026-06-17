@@ -614,7 +614,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
         List<Transaccio> list = this.select(TransaccioFields.TRANSACCIOMULTIPLEID.equal(transaccioMultipleID),
                 new OrderBy(DATAFI, OrderType.ASC));
 
-        log.info("\n\n  -------------- searchMassiveTransaccioByTransaccioMultipleID -------------------");
+        log.info("Entra a searchMassiveTransaccioByTransaccioMultipleID ...");
 
         List<TransaccioJPA> listJPA = new ArrayList<TransaccioJPA>();
 
@@ -698,7 +698,6 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             if (functionaryDir3Unit == null) {
                 functionaryDir3Unit = Configuracio.getDefaultFuncionariDir3();
-                // log.info("\n\n\n FUNCIONARI DIR3 = " + functionaryDir3Unit + "\n\n\n");
             }
 
             signatureParameters = new MassiveScanWebSimpleSignatureParameters(functionaryFullName,
@@ -950,7 +949,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
             // A massiva posam el ID de la primera transacció
             long transmultipleid = t.getTransaccioID();
 
-            log.error("\n\n  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX NOM => |" + t.getNom() + "|");
+            log.error("NOM => |" + t.getNom() + "|");
 
             TransaccioMultipleJPA traMul = new TransaccioMultipleJPA(transmultipleid, t.getNom());
             transaccioMultipleEjb.create(traMul);
@@ -968,7 +967,7 @@ public class TransaccioLogicaEJB extends TransaccioEJB implements TransaccioLogi
 
             int updates = query.executeUpdate();
 
-            log.info(" XYZ ZZZ  Actualitzades " + updates + " entrades (hauria de ser 1)");
+            log.warn("Actualitzades " + updates + " entrades (hauria de ser 1)");
 
         }
 

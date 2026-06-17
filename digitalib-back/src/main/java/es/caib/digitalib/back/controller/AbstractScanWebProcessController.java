@@ -1164,7 +1164,7 @@ public abstract class AbstractScanWebProcessController {
                 && transaction.getNom().trim().length() != 0) {
             urlToRequestFirmaArxiuParameters = urlToSelectPluginPage;
         } else {
-            log.info("\n\n\n ===>   PASSA PER startScanWebProcess " + "\n\n\n");
+            log.info("===>   PASSA PER startScanWebProcess ...");
             urlToRequestFirmaArxiuParameters = urlBase
                     + (isPublic ? AbstractFirmaArxiuParametersController.CONTEXTWEB_PUBLIC
                             : AbstractFirmaArxiuParametersController.CONTEXTWEB_USER)
@@ -1221,7 +1221,7 @@ public abstract class AbstractScanWebProcessController {
         request.getSession().setAttribute(SESSION_MASIVE_POINTER_POST_SCAN, pos);
 
         {
-            log.info("\n\n\n ===>   PASSA PER demanarInformacioPeticioMassivaGet " + "\n\n\n");
+            log.info("===>   PASSA PER demanarInformacioPeticioMassivaGet ");
 
             String cp = isPublic() ? FirmaArxiuParametersPublicController.CONTEXTWEB_PUBLIC
                     : FirmaArxiuParametersPublicController.CONTEXTWEB_USER;

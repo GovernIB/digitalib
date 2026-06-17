@@ -305,8 +305,8 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
                     java.lang.String eniTipoFirma = sfi.getEniTipoFirma();
                     java.lang.String eniPerfilFirma = sfi.getEniPerfilFirma();
 
-                    log.info("\n\n\n eniTipoFirma = " + sfi.getEniTipoFirma() + "\neniPerfilFirma = "
-                            + sfi.getEniPerfilFirma() + "\n\n\n");
+                    log.info(" eniTipoFirma = " + sfi.getEniTipoFirma() + "\neniPerfilFirma = "
+                            + sfi.getEniPerfilFirma() + "");
 
                     if (eniPerfilFirma == null) {
                         eniPerfilFirma = FirmaSimpleSignedFileInfo.SIGNPROFILE_BES;
@@ -588,8 +588,8 @@ public class ApiFirmaSimpleLogicaEJB implements ApiFirmaSimpleLogicaService {
                     java.lang.String eniTipoFirma = sfi.getEniTipoFirma();
                     java.lang.String eniPerfilFirma = sfi.getEniPerfilFirma();
 
-                    log.info("\n\n\n eniTipoFirma = " + sfi.getEniTipoFirma() + "\neniPerfilFirma = "
-                            + sfi.getEniPerfilFirma() + "\n\n\n");
+                    log.info(" eniTipoFirma = " + sfi.getEniTipoFirma() + "\neniPerfilFirma = "
+                            + sfi.getEniPerfilFirma() + "");
 
                     if (eniPerfilFirma == null) {
                         eniPerfilFirma = FirmaSimpleSignedFileInfo.SIGNPROFILE_BES;

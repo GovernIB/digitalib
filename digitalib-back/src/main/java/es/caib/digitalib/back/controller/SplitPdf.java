@@ -91,7 +91,7 @@ public class SplitPdf {
 
         ArrayList<PDRectangle> crops = new ArrayList<PDRectangle>();
 
-        log.info("XYZ ZZZ ZZZZZ\n\n detectPagesWithQR:: ENTRAM => resolucio: " + resolucio);
+        log.info("XYZ ZZZ detectPagesWithQR:: ENTRAM => resolucio: " + resolucio);
 
         
         // XYZ ZZZ ZZZ
@@ -204,14 +204,14 @@ public class SplitPdf {
                 if (result.getBarcodeFormat().equals(BarcodeFormat.QR_CODE)) {
                     String text = result.getText();
                     if (text != null && text.startsWith(SEPARADOR_TEXT)) {
-                        log.info("   XYZ ZZZ ZZZZZ detectPagesWithQR:: TROBAT SEPARADOR => "
+                        log.info("XYZ ZZZ ZZZZZ detectPagesWithQR:: TROBAT SEPARADOR => "
                                 + page);
                         qrPages.add(page);
                         isSeparador = true;
                     }
                 }
             } catch (com.google.zxing.NotFoundException nfe) {
-                log.info("   XYZ ZZZ ZZZZZ detectPagesWithQR:: NO TROBAT");
+                log.info("XYZ ZZZ ZZZZZ detectPagesWithQR:: NO TROBAT");
             }
 
             if (isSeparador) {

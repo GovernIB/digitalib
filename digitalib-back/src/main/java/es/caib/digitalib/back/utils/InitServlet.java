@@ -59,8 +59,8 @@ public class InitServlet extends HttpServlet {
                     + "Del fitxer digitalib.properties arreglar la paraula 'defecte': configuraciogrupperdefecteEL.\n"
                     + "Mentre no arregli aquest error DigitalIB no es posarà en marxa.";
 
-            log.error("\n\n\n ========================================" + msg
-                    + "\n =========================================\n\n\n");
+            log.error("\n ========================================" + msg
+                    + "\n =========================================\n");
 
             throw new ServletException(msg);
         }

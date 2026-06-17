@@ -27,9 +27,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.WebUtils;
 
 import es.caib.digitalib.persistence.TransaccioJPA;
+import es.caib.digitalib.commons.utils.Configuracio;
+import es.caib.digitalib.commons.utils.Constants;
 import es.caib.digitalib.logic.PerfilLogicaService;
 import es.caib.digitalib.logic.ScanWebModuleService;
 import es.caib.digitalib.logic.TransaccioLogicaService;
+import es.caib.digitalib.logic.apimassivescanwebsimple.v1.beans.MassiveScanWebSimpleGetTransactionIdRequest;
 import es.caib.digitalib.model.entity.Perfil;
 import es.caib.digitalib.model.entity.Plugin;
 
@@ -124,7 +127,7 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     public static void setLanguageUI(HttpServletRequest request, HttpServletResponse response, String languageUI,
             String where) {
         // Establint idioma de la UI
-        log.info("\n\n" + where + " => " + languageUI + "\n\n");
+        log.info("setLanguageUI(" + where + " => " + languageUI + ")");
         Locale loc = new Locale(languageUI);
         if (response != null) {
             response.setLocale(loc);
@@ -138,11 +141,7 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
             @RequestParam("URL_FINAL")
             String urlFinal) throws Exception {
 
-        boolean isPublic = (CONTEXTWEB_PUBLIC.equals(getContextWeb()));
-
-        ModelAndView  mav = new ModelAndView(isPublic ? "public_wait" : "wait");
-
-        mav.addObject("finalURL", urlFinal);
+        ModelAndView mav = getModelAndViewToCallBackPage(null, urlFinal);
 
         return mav;
     }
@@ -185,7 +184,7 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
 
         Perfil perfil = perfilLogicaEjb.findByPrimaryKey(transaccio.getPerfilID());
 
-        log.info("XYZ ZZZ    \n\n Actualitzant PERFIL SCANE PLUGIN A " + pluginID + "\n\n");
+        log.info("XYZ ZZZ Actualitzant PERFIL SCANE PLUGIN A " + pluginID);
         perfil.setPluginScanWebID(pluginID);
         perfil.setPluginScanWeb2ID(null);
 
@@ -226,15 +225,32 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
 
             transaccioLogicaEjb.update(transaccio);
 
-            log.info("Transacció cancel·lada: " + transactionWebID);
+            log.info("Transaccio cancelada: " + transactionWebID);
+            
+            // XYZ DEBUG
+            HtmlUtils.saveMessageWarning(request, "Transacció Cancel·lada per l'USUARI.");            
 
             urlFinal = transaccio.getReturnUrl();
         }
+        
 
+
+        ModelAndView mav = getModelAndViewToCallBackPage(transaccio, urlFinal);
+
+        return mav;
+    }
+
+    protected  ModelAndView getModelAndViewToCallBackPage(TransaccioJPA transaccio, String urlFinal) {
         boolean isPublic = (CONTEXTWEB_PUBLIC.equals(getContextWeb()));
         ModelAndView  mav = new ModelAndView(isPublic ? "public_wait" : "wait");
+        boolean viewiframe;
+        if (transaccio == null) {
+            viewiframe = true;
+        } else {
+            viewiframe = (transaccio.getView() == MassiveScanWebSimpleGetTransactionIdRequest.VIEW_IFRAME);
+        }
         mav.addObject("finalURL", urlFinal);
-
+        mav.addObject("viewiframe", viewiframe);
         return mav;
     }
 
@@ -358,10 +374,8 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
 
         String urlFinal = processError(request, transaccio, msg, th);
 
-        boolean isPublic = (CONTEXTWEB_PUBLIC.equals(getContextWeb()));
-        ModelAndView  mav = new ModelAndView(isPublic ? "public_wait" : "wait");
-        mav.addObject("finalURL", urlFinal);
-
+        ModelAndView mav = getModelAndViewToCallBackPage(transaccio, urlFinal);
+        
         return mav;
     }
 
@@ -433,6 +447,11 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
     }
 
     protected static String getAbsoluteRequestPluginBasePath(String baseUrl, String webContext, String scanWebID) {
+        
+        if (baseUrl == null || baseUrl.trim().length() == 0) {
+            baseUrl = Configuracio.getBackUrl();
+        }
+        
 
         String base = baseUrl + webContext; // getAbsoluteControllerBase(request, webContext);
         return getRequestPluginBasePath(base, scanWebID);
