@@ -1,13 +1,9 @@
 package es.caib.digitalib.logic;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.ejb.Stateless;
-
-
-
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
@@ -25,48 +21,53 @@ import es.caib.digitalib.model.entity.Plugin;
 
 public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
 
-  private static Map<Long, IPluginIB> pluginsCache = new HashMap<Long, IPluginIB>();
+    private static Map<Long, IPluginIB> pluginsCache = new HashMap<Long, IPluginIB>();
 
-  
-  @Override
-  public Plugin update(Plugin instance) throws I18NException {
-    if (instance != null) {
-      synchronized (pluginsCache) {
-        pluginsCache.remove(instance.getPluginID());
-      }
+    @Override
+    public Plugin update(Plugin instance) throws I18NException {
+        if (instance != null) {
+            synchronized (pluginsCache) {
+                pluginsCache.remove(instance.getPluginID());
+            }
+        }
+        return super.update(instance);
     }
-    return super.update(instance);
-  }
 
-  
-  @Override
-  public void delete(Plugin instance) {
-    if (instance != null) {
-      synchronized (pluginsCache) {
-        pluginsCache.remove(instance.getPluginID());
-      }
+    @Override
+    public void delete(Plugin instance) {
+        if (instance != null) {
+            synchronized (pluginsCache) {
+                pluginsCache.remove(instance.getPluginID());
+            }
+        }
+        super.delete(instance);
     }
-    super.delete(instance);
-  }
-  
-  @Override
-  public void clearCache() {
-    synchronized (pluginsCache) {
-      pluginsCache.clear();
+
+    @Override
+    public boolean clearCache(Long pluginID) {
+        synchronized (pluginsCache) {
+            Object obj = pluginsCache.remove(pluginID);
+            return obj != null;
+        }
     }
-  }
-  
-  
-  public void addPluginToCache(Long pluginID, IPluginIB pluginInstance) { 
-    synchronized (pluginsCache) {
-      pluginsCache.put(pluginID, pluginInstance);  
+
+    @Override
+    public void clearCache() {
+        synchronized (pluginsCache) {
+            pluginsCache.clear();
+        }
     }
-  }
-  
-  public IPluginIB getPluginFromCache(Long pluginID) {
-    synchronized (pluginsCache) {
-      return  pluginsCache.get(pluginID);  
+
+    public void addPluginToCache(Long pluginID, IPluginIB pluginInstance) {
+        synchronized (pluginsCache) {
+            pluginsCache.put(pluginID, pluginInstance);
+        }
     }
-  }
-  
+
+    public IPluginIB getPluginFromCache(Long pluginID) {
+        synchronized (pluginsCache) {
+            return pluginsCache.get(pluginID);
+        }
+    }
+
 }
