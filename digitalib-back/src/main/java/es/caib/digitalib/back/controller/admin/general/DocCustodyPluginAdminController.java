@@ -1,8 +1,5 @@
 package es.caib.digitalib.back.controller.admin.general;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -11,7 +8,7 @@ import es.caib.digitalib.back.controller.AbstractPluginAdminController;
 import es.caib.digitalib.back.form.webdb.PluginFilterForm;
 import es.caib.digitalib.back.form.webdb.PluginForm;
 import es.caib.digitalib.commons.utils.Constants;
-import es.caib.digitalib.model.entity.Plugin;
+
 
 /**
  * 

@@ -12,10 +12,10 @@
             </a></li>
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
-        
-        
+
+
         <% if (!Configuracio.isOcultarPluginFirmaEnServidor()) { %>
-        
+
 
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/pluginfirmaenservidor/list"/>">
                 <span style="${(fn:contains(url, 'pluginfirmaenservidor/'))? "font-weight:bold;" : ""}"><fmt:message
@@ -33,7 +33,7 @@
             </a></li>
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
-        
+
         <% } %>
 
 
@@ -59,7 +59,7 @@
  %> </span>
             </a></li>
 
-<% if (!Configuracio.isOcultarDocumentCustody()) { %>
+        <% if (!Configuracio.isOcultarDocumentCustody()) { %>
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
@@ -68,8 +68,8 @@
                         key="doccustodyplugin.menu" /></span>
 
             </a></li>
-            
-<% } %>
+
+        <% } %>
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
@@ -100,6 +100,14 @@
 
             </a></li>
 
+
+        <hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/sizeofdatabasetables"/>">
+                <span style="${(fn:contains(url, '/admin/sizeofdatabasetables'))? "font-weight:bold;" : ""}">Size of database tables</span>
+
+            </a></li>
+            
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
