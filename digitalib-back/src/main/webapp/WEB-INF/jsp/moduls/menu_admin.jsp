@@ -1,3 +1,4 @@
+<%@page import="es.caib.digitalib.commons.utils.Configuracio"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <c:set var="url" value="${urlActual}" />
 <div>
@@ -11,6 +12,10 @@
             </a></li>
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
+        
+        
+        <% if (!Configuracio.isOcultarPluginFirmaEnServidor()) { %>
+        
 
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/pluginfirmaenservidor/list"/>">
                 <span style="${(fn:contains(url, 'pluginfirmaenservidor/'))? "font-weight:bold;" : ""}"><fmt:message
@@ -28,6 +33,8 @@
             </a></li>
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
+        
+        <% } %>
 
 
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/apisimple/list"/>">
@@ -52,6 +59,8 @@
  %> </span>
             </a></li>
 
+<% if (!Configuracio.isOcultarDocumentCustody()) { %>
+
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/admin/plugindoccustody/list"/>">
@@ -59,6 +68,8 @@
                         key="doccustodyplugin.menu" /></span>
 
             </a></li>
+            
+<% } %>
 
         <hr style="margin-top: 6px; margin-bottom: 6px;" />
 

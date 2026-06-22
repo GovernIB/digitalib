@@ -147,4 +147,10 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
 
     }
 
+    @Override
+    public Long countPlugins() throws I18NException {
+       return this.count(getWhere());
+        
+    }
+
 }

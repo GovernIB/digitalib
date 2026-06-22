@@ -2,6 +2,10 @@ package es.caib.digitalib.logic;
 
 import javax.ejb.Local;
 
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
+import es.caib.digitalib.model.entity.Plugin;
+
 /**
  * 
  * @author anadal
@@ -16,5 +20,7 @@ public interface PluginLogicaService extends es.caib.digitalib.ejb.PluginService
     public void clearCache();
 
     boolean clearCache(Long pluginID);
+
+    void deleteAndCheckPerfils(Plugin plugin, int tipusPlugin) throws I18NException;
 
 }

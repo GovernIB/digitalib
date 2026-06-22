@@ -20,16 +20,16 @@ import es.caib.digitalib.commons.utils.Constants;
 @SessionAttributes(types = { PerfilForm.class, PerfilFilterForm.class })
 public class PerfilCustodiaPerPersonaAdminController extends AbstractPerfilAdminController {
 
-	public static final String CONTEXTWEB = "/admin/perfilcustodia/perpersona";
-  
-	@Override
-	public int getTipusPerfil() {
-		return Constants.PERFIL_US_CUSTODIA;
-	}
+    public static final String CONTEXTWEB = "/admin/perfilcustodia/perpersona";
 
-  @Override
-  public boolean isUtilitzatPerAplicacio() {    
-    return false;
-  }
-	
+    @Override
+    public int getTipusPerfil() {
+        return Constants.PERFIL_US_CUSTODIA;
+    }
+
+    @Override
+    public boolean isUtilitzatPerAplicacio() {
+        return false;
+    }
+
 }

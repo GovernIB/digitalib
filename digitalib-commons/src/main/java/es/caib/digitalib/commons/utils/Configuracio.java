@@ -327,5 +327,27 @@ public class Configuracio implements Constants {
     public static String getConfiguracioGrupPerDefecteEL() {
         return getProperty(DIGITALIB_PROPERTY_BASE + "configuraciogrupperdefecteEL");
     }
+    
+    /**
+     * Propietat booleana que indica si volem ocultar tot lo de "Document Custody" a la web. 
+     * Per defecte val false, és a dir, es mostra.
+     * IMPORTANT: Per posar a true aquesta propietat ens hem d'assegurar de que no hi hagi cap perfil de custòdia que
+     * tengui definit el tipus Plugin de Document Custody, ja que sinó pot afectar al bon funcionament de l'aplicació.
+     */
+    public static boolean isOcultarDocumentCustody() {
+        return "true".equals(getProperty(DIGITALIB_PROPERTY_BASE + "ocultardocumentcustody"));
+    }
+    
+    
+    /**
+     * Propietat booleana que indica si volem ocultar tot lo de "PLugin de Firma En Servidor" a la web. 
+     * Per defecte val false, és a dir, es mostra.
+     * IMPORTANT: Per posar a true aquesta propietat ens hem d'assegurar de que no hi hagi cap perfil de firma o 
+     * de custòdia que tengui definit un Plugin de Firma en Servidor, ja que sinó pot afectar al bon funcionament de l'aplicació.
+     */
+    public static boolean isOcultarPluginFirmaEnServidor() {
+        return "true".equals(getProperty(DIGITALIB_PROPERTY_BASE + "ocultarpluginfirmaenservidor"));
+    }
+    
 
 }

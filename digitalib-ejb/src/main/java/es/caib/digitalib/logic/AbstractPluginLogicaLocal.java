@@ -7,7 +7,6 @@ import org.fundaciobit.genapp.common.query.Where;
 
 import es.caib.digitalib.model.entity.Plugin;
 
-
 /**
  * 
  * @author anadal
@@ -15,16 +14,17 @@ import es.caib.digitalib.model.entity.Plugin;
  */
 public interface AbstractPluginLogicaLocal<I> extends PluginLogicaService {
 
-  public List<Plugin> getAllPlugins() throws I18NException;
+    public List<Plugin> getAllPlugins() throws I18NException;
 
-  public I getInstanceByPluginID(long pluginID) throws I18NException;
+    public I getInstanceByPluginID(long pluginID) throws I18NException;
 
-  public List<I> getPluginInstancesByEntitatID() throws I18NException;
+    public List<I> getPluginInstancesByEntitatID() throws I18NException;
 
-  public List<I> getPluginInstancesBy(List<Long> filterByPluginID,
-      List<String> filterByPluginCode) throws I18NException;
-  
-  
-  public Where getWhere();
+    public List<I> getPluginInstancesBy(List<Long> filterByPluginID, List<String> filterByPluginCode)
+            throws I18NException;
+
+    public Where getWhere();
+
+    public Long countPlugins() throws I18NException;
 
 }
