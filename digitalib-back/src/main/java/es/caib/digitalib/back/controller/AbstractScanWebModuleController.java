@@ -227,7 +227,7 @@ public abstract class AbstractScanWebModuleController extends HttpServlet {
 
             log.info("Transaccio cancelada: " + transactionWebID);
             
-            // XYZ DEBUG
+            // XYZ ZZZ TRA
             HtmlUtils.saveMessageWarning(request, "Transacció Cancel·lada per l'USUARI.");            
 
             urlFinal = transaccio.getReturnUrl();
